@@ -1,0 +1,3 @@
+[submodule "b"]
+	path = b
+	url = git@github.com:veged/bem-b.git
