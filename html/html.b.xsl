@@ -1,12 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="1.0"
-    xmlns:x="http://www.yandex.ru/xscript"
-    xmlns:b="b"
-    xmlns:d-xsl="b:xsl"
-    xmlns:html="b:html"
-    extension-element-prefixes="x"
-    exclude-result-prefixes="b d-xsl html"
-    >
+    xmlns:bb="bem-b"
+    xmlns:d-xsl="bem-b:xsl:dynamic"
+    xmlns:html="bem-b:html"
+    exclude-result-prefixes="bb d-xsl html">
 
     <xsl:template match="html:*">
         <xsl:element name="{local-name()}">

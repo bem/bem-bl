@@ -9,7 +9,7 @@
 
     <tb:page>
         <mode:default>
-            <xsl:apply-templates select="." mode="b:content"/>
+            <xsl:apply-templates select="." mode="bb:content"/>
         </mode:default>
         <te:css>
             <mode:default>
