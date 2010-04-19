@@ -41,7 +41,7 @@
 
         <te:favicon>
             <mode:default>
-                <link rel="shortcut icon">
+                <link rel="icon">
                     <xsl:attribute name="href">
                         <xsl:apply-templates/>
                     </xsl:attribute>
