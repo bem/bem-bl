@@ -6,7 +6,6 @@
     xmlns:d-xsl="bem-b:xsl:dynamic"
     exclude-result-prefixes="bb d-xsl">
 
-
     <tb:page>
         <mode:default>
             <xsl:apply-templates select="." mode="bb:content"/>
