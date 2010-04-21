@@ -6,7 +6,6 @@
     xmlns:d-xsl="bem-b:xsl:dynamic"
     exclude-result-prefixes="bb d-xsl">
 
-    <!-- TODO: унести в _type_table -->
     <tb:layout>
 
         <mode:tag>table</mode:tag>

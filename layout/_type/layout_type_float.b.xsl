@@ -6,23 +6,16 @@
     xmlns:d-xsl="bem-b:xsl:dynamic"
     exclude-result-prefixes="bb d-xsl">
 
-    <!-- TODO: унести в _type_table -->
     <tb:layout>
 
-        <mode:tag>table</mode:tag>
-
-        <mode:content match="[not(e:row)]">
-            <e:row b="layout">
-                <xsl:apply-templates/>
-            </e:row>
-        </mode:content>
+        <mode:tag>div</mode:tag>
 
         <te:row>
-            <mode:tag>tr</mode:tag>
+            <mode:tag>div</mode:tag>
         </te:row>
 
         <te:column>
-            <mode:tag>td</mode:tag>
+            <mode:tag>div</mode:tag>
         </te:column>
 
     </tb:layout>
