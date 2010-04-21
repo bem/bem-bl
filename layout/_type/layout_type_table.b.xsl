@@ -7,23 +7,23 @@
     exclude-result-prefixes="bb d-xsl">
 
     <tb:layout>
+        <tm:type val="table">
+            <mode:tag>table</mode:tag>
 
-        <mode:tag>table</mode:tag>
+            <mode:content match="[not(e:row)]">
+                <e:row b="layout" tag="tr">
+                    <xsl:apply-templates/>
+                </e:row>
+            </mode:content>
 
-        <mode:content match="[not(e:row)]">
-            <e:row b="layout">
-                <xsl:apply-templates/>
-            </e:row>
-        </mode:content>
+            <te:row>
+                <mode:tag>tr</mode:tag>
+            </te:row>
 
-        <te:row>
-            <mode:tag>tr</mode:tag>
-        </te:row>
-
-        <te:column>
-            <mode:tag>td</mode:tag>
-        </te:column>
-
+            <te:column>
+                <mode:tag>td</mode:tag>
+            </te:column>
+        </tm:type>
     </tb:layout>
 
 </xsl:stylesheet>
