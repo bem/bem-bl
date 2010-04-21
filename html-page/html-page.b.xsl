@@ -69,6 +69,10 @@
 
         <te:js>
             <mode:default>
+                <script type="text/javascript">
+                    document.documentElement.id = "js";
+                </script>
+
                 <script type="text/javascript" charset="utf-8">
                     <xsl:copy-of select="@charset"/>
                     <d-xsl:attribute name="src">
