@@ -10,11 +10,11 @@
         <mode:tag>form</mode:tag>
         <mode:content>
             <b:layout m:type="table">
-                <e:column b="layout" m:side="input">
+                <e:column m:side="input">
                     <b:form-input/>
                 </e:column>
-                <e:column b="layout" m:side="button">
-                    <e:button/>
+                <e:column m:side="button">
+                    <e:button b="search"/>
                 </e:column>
             </b:layout>
         </mode:content>
