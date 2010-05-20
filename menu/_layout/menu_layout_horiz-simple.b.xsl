@@ -11,7 +11,7 @@
             <te:item>
                 <mode:default>
                     <xsl:apply-templates/>
-                    <e:separator/>
+                    <xsl:value-of select="../@separator"/>
                 </mode:default>
             </te:item>
 
