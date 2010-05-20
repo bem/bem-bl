@@ -11,7 +11,7 @@
             <mode:tag>table</mode:tag>
 
             <mode:content match="[not(e:row)]">
-                <e:row b="layout" tag="tr">
+                <e:row>
                     <xsl:apply-templates/>
                 </e:row>
             </mode:content>
