@@ -12,12 +12,12 @@
         </mode:default>
         <te:css>
             <mode:default>
-                <e:css b="html-page"><d-xsl:apply-templates/></e:css>
+                <e:css b="html-page" xsl-inline="yes"><xsl:apply-templates/></e:css>
             </mode:default>
         </te:css>
         <te:js>
             <mode:default>
-                <e:js b="html-page"><d-xsl:apply-templates/></e:js>
+                <e:js b="html-page" xsl-inline="yes"><xsl:apply-templates/></e:js>
             </mode:default>
         </te:js>
     </tb:page>

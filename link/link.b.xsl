@@ -12,9 +12,9 @@
         <mode:content>
             <!--<xsl:attribute name="target">_blank</xsl:attribute>-->
 
-            <d-xsl:attribute name="href">
+            <xsl:attribute name="href">
                 <xsl:apply-templates select="@url"/>
-            </d-xsl:attribute>
+            </xsl:attribute>
 
             <xsl:apply-templates/>
         </mode:content>

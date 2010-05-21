@@ -11,7 +11,7 @@
         <mode:default>
             <html id="nojs">
                 <xsl:apply-templates select="e:head"/>
-                <e:body>
+                <e:body xsl-inline="yes">
                     <xsl:apply-templates select="*[not(self::e:head)]"/>
                 </e:body>
             </html>
@@ -53,10 +53,10 @@
             <mode:default>
                 <xsl:comment>[if gt IE 7]&gt;&lt;!</xsl:comment>
                 <link rel="stylesheet">
-                    <d-xsl:attribute name="href">
+                    <xsl:attribute name="href">
                         <xsl:apply-templates/>
                         <xsl:text>.css</xsl:text>
-                    </d-xsl:attribute>
+                    </xsl:attribute>
                 </link>
                 <xsl:comment>&lt;![endif]</xsl:comment>
                 <xsl:comment>
@@ -75,10 +75,10 @@
 
                 <script type="text/javascript" charset="utf-8">
                     <xsl:copy-of select="@charset"/>
-                    <d-xsl:attribute name="src">
+                    <xsl:attribute name="src">
                         <xsl:apply-templates/>
                         <xsl:text>.js</xsl:text>
-                    </d-xsl:attribute>
+                    </xsl:attribute>
                 </script>
             </mode:default>
         </te:js>
