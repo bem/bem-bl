@@ -9,14 +9,14 @@
     <tb:search>
         <mode:tag>form</mode:tag>
         <mode:content>
-            <b:layout m:type="table">
+            <b:layout-table>
                 <e:column m:side="input">
                     <b:form-input/>
                 </e:column>
                 <e:column m:side="button">
                     <e:button b="search"/>
                 </e:column>
-            </b:layout>
+            </b:layout-table>
         </mode:content>
     </tb:search>
 

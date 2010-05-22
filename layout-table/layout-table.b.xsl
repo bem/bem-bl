@@ -6,24 +6,22 @@
     xmlns:d-xsl="bem-b:xsl:dynamic"
     exclude-result-prefixes="bb tb te tm mode b e m mix d-xsl">
 
-    <tb:layout>
-        <tm:type val="table">
-            <mode:tag>table</mode:tag>
+    <tb:layout-table>
+        <mode:tag>table</mode:tag>
 
-            <mode:content match="[not(e:row)]">
-                <e:row>
-                    <xsl:apply-templates/>
-                </e:row>
-            </mode:content>
+        <mode:content match="[not(e:row)]">
+            <e:row>
+                <xsl:apply-templates/>
+            </e:row>
+        </mode:content>
 
-            <te:row>
-                <mode:tag>tr</mode:tag>
-            </te:row>
+        <te:row>
+            <mode:tag>tr</mode:tag>
+        </te:row>
 
-            <te:column>
-                <mode:tag>td</mode:tag>
-            </te:column>
-        </tm:type>
-    </tb:layout>
+        <te:column>
+            <mode:tag>td</mode:tag>
+        </te:column>
+    </tb:layout-table>
 
 </xsl:stylesheet>
