@@ -11,23 +11,11 @@
             <te:item>
                 <mode:default>
                     <xsl:apply-templates/>
-                    <xsl:value-of select="../@separator"/>
+                    <xsl:if test="(@m:position and @m:position != 'last') or following-sibling::e:item">
+                        <xsl:value-of select="ancestor::b:menu/@separator"/>
+                    </xsl:if>
                 </mode:default>
             </te:item>
-
-            <te:separator>
-                <mode:default>
-                    qqq
-                </mode:default>
-            </te:separator>
-
-<!--
-            <te:item match="[not(following-sibling::e:item)]">
-                <mode:default>
-                    QQQ
-                </mode:default>
-            </te:item>
--->
         </tm:layout>
     </tb:menu>
 
