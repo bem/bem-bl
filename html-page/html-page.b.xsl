@@ -22,7 +22,6 @@
                 <head>
                     <e:meta name="MSSmartTagsPreventParsing" content="true"/>
                     <e:meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-                    <e:meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7"/>
                     <xsl:apply-templates/>
                 </head>
             </mode:default>
