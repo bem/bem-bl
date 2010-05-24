@@ -49,18 +49,28 @@
 
         <te:css>
             <mode:default>
+           <!-- index.css -->
                 <xsl:comment>[if gt IE 7]&gt;&lt;!</xsl:comment>
-                <link rel="stylesheet">
-                    <xsl:attribute name="href">
-                        <xsl:apply-templates/>
-                        <xsl:text>.css</xsl:text>
-                    </xsl:attribute>
-                </link>
+                    <link rel="stylesheet">
+                        <xsl:attribute name="href">
+                            <xsl:apply-templates/>
+                            <xsl:text>.css</xsl:text>
+                        </xsl:attribute>
+                    </link>
                 <xsl:comment>&lt;![endif]</xsl:comment>
+
+           <!-- index.ie7.css -->
                 <xsl:comment>
-                    <xsl:text>[if lt IE 8]&gt;&lt;link rel=stylesheet href="</xsl:text>
+                    <xsl:text>[if IE 7]&gt;&lt;link rel=stylesheet href="</xsl:text>
                     <xsl:apply-templates/>
-                    <xsl:text>.ie.css"&gt;&lt;![endif]</xsl:text>
+                    <xsl:text>.ie7.css"&gt;&lt;![endif]</xsl:text>
+                </xsl:comment>
+
+           <!-- index.ie6.css -->
+                <xsl:comment>
+                    <xsl:text>[if lt IE 7]&gt;&lt;link rel=stylesheet href="</xsl:text>
+                    <xsl:apply-templates/>
+                    <xsl:text>.ie6.css"&gt;&lt;![endif]</xsl:text>
                 </xsl:comment>
             </mode:default>
         </te:css>
