@@ -20,7 +20,6 @@
         <te:head>
             <mode:default>
                 <head>
-                    <e:meta name="MSSmartTagsPreventParsing" content="true"/>
                     <e:meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
                     <xsl:apply-templates/>
                 </head>
