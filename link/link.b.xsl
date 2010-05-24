@@ -11,13 +11,22 @@
 
         <mode:content>
             <!--<xsl:attribute name="target">_blank</xsl:attribute>-->
-
-            <xsl:attribute name="href">
-                <xsl:apply-templates select="@url"/>
-            </xsl:attribute>
-
-            <xsl:apply-templates/>
+            <xsl:apply-templates select="@url | node()"/>
         </mode:content>
+
+        <mode:default match="/@url">
+            <e:url>
+                <xsl:value-of select="."/>
+            </e:url>
+        </mode:default>
+
+        <te:url>
+            <mode:default>
+                <xsl:attribute name="href">
+                    <xsl:apply-templates/>
+                </xsl:attribute>
+            </mode:default>
+        </te:url>
     </tb:link>
 
 </xsl:stylesheet>
