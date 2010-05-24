@@ -68,7 +68,13 @@
         <te:js>
             <mode:default>
                 <script type="text/javascript">
-                    document.documentElement.id = "js";
+                    with (document.documentElement) {
+                        id = "js";
+                        /*@cc_on
+                            var n = /MSIE (\d)/.exec(navigator.userAgent);
+                            if (n) className += "ie" + n[1];
+                        @*/
+                    }
                 </script>
 
                 <script type="text/javascript" charset="utf-8">
