@@ -10,14 +10,25 @@
         <mode:tag>form</mode:tag>
         <mode:content>
             <b:layout-table>
-                <e:column m:side="input">
+                <e:column>
+                    <mix:mix><e:column b="search" m:side="input"/></mix:mix>
                     <b:form-input/>
                 </e:column>
-                <e:column m:side="button">
-                    <e:button b="search"/>
+                <e:column>
+                    <mix:mix><e:column b="search" m:side="button"/></mix:mix>
+                    <!-- TODO: ASK: veged: как правильно задавать текст, чтобы его можно было локализовать и задавать в XML -->
+                    <e:button b="search" text="Найти"/>
                 </e:column>
             </b:layout-table>
         </mode:content>
+
+        <te:button>
+            <mode:tag>input</mode:tag>
+            <mode:content>
+                <xsl:attribute name="type">submit</xsl:attribute>
+                <xsl:attribute name="value"><xsl:value-of select="@text"/></xsl:attribute>
+            </mode:content>
+        </te:button>
     </tb:search>
 
 </xsl:stylesheet>
