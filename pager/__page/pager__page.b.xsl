@@ -10,9 +10,7 @@ exclude-result-prefixes="bb tb te tm mode b e m mix d-xsl">
         <te:page>
             <mode:default>
                 <b:link>
-                    <xsl:attribute name="href">
-                        <xsl:value-of select="@url"/>
-                    </xsl:attribute>
+                    <e:url><xsl:value-of select="@url"/></e:url>
                     <xsl:apply-templates/>
                     <mix:mix><e:page b="pager"/></mix:mix>
                 </b:link>
