@@ -9,7 +9,7 @@ exclude-result-prefixes="bb tb te tm mode b e m mix d-xsl">
     <tb:pager>
         <te:page>
             <mode:default>
-                <b:link>
+                <b:link m:color="default">
                     <e:url><xsl:value-of select="@url"/></e:url>
                     <xsl:apply-templates/>
                     <mix:mix><e:page b="pager"/></mix:mix>

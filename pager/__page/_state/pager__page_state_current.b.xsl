@@ -10,7 +10,7 @@ exclude-result-prefixes="bb tb te tm mode b e m mix d-xsl">
         <te:page>
             <tm:state val="current">
                 <mode:default>
-                    <b:link>
+                    <b:link m:color="default">
                         <mix:mix><e:page b="pager" m:state="current"/></mix:mix>
                         <xsl:apply-templates/>
                     </b:link>
