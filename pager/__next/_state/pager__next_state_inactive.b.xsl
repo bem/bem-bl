@@ -12,7 +12,7 @@ exclude-result-prefixes="bb tb te tm mode b e m mix d-xsl">
                 <mode:tag>span</mode:tag>
                 <mode:content>
                     <!-- TODO: ASK: veged: m:color="default" надо подмешивать на следующем уровне переопределение -->
-                    <b:link m:color="default">
+                    <b:link>
                         <mix:mix><e:next-link b="pager" m:state="inactive"/></mix:mix>
                         <xsl:apply-templates/>
                     </b:link>

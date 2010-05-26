@@ -11,7 +11,7 @@ exclude-result-prefixes="bb tb te tm mode b e m mix d-xsl">
             <mode:tag>span</mode:tag>
             <mode:content>
                 <e:prev-key>&#8592;&#160;Ctrl</e:prev-key>
-                <b:link m:color="default">
+                <b:link>
                     <e:url><xsl:value-of select="@url"/></e:url>
                     <xsl:apply-templates/>
                     <mix:mix><e:prev-link b="pager"/></mix:mix>
