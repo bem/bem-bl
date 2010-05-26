@@ -11,11 +11,11 @@ exclude-result-prefixes="bb tb te tm mode b e m mix d-xsl">
             <mode:tag>span</mode:tag>
             <mode:content>
                 <b:link>
-                    <mix:mix><e:next-link b="pager"/></mix:mix>
                     <xsl:attribute name="href">
                         <xsl:value-of select="@url"/>
                     </xsl:attribute>
                     <xsl:apply-templates/>
+                    <mix:mix><e:next-link b="pager"/></mix:mix>
                 </b:link>
                 <e:next-key tag="span">Ctrl&#160;&#8594;</e:next-key>
             </mode:content>
