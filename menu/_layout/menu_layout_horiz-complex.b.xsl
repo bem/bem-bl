@@ -10,6 +10,7 @@
         <tm:layout val="horiz-complex">
             <mode:content>
                 <b:layout-table>
+                    <mix:mix><e:layout b="menu"/></mix:mix>
                     <xsl:apply-templates/>
                 </b:layout-table>
             </mode:content>
