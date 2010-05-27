@@ -13,8 +13,8 @@ exclude-result-prefixes="bb tb te tm mode b e m mix d-xsl">
                 <e:prev-key/>
                 <b:link>
                     <mix:mix><e:prev-link b="pager"/></mix:mix>
-                    <e:url><xsl:value-of select="@url"/></e:url>
-                    <xsl:apply-templates/>
+                    <e:url><xsl:apply-templates select="e:url"/></e:url>
+                    <xsl:text>предыдущая</xsl:text>
                 </b:link>
             </mode:content>
         </te:prev>

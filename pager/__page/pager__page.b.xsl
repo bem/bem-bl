@@ -11,8 +11,8 @@ exclude-result-prefixes="bb tb te tm mode b e m mix d-xsl">
             <mode:default>
                 <b:link>
                     <mix:mix><e:page b="pager"/></mix:mix>
-                    <e:url><xsl:value-of select="@url"/></e:url>
-                    <xsl:apply-templates/>
+                    <e:url><xsl:apply-templates select="e:url"/></e:url>
+                    <xsl:apply-templates select="*[not(self::e:url)]"/>
                 </b:link>
             </mode:default>
         </te:page>
