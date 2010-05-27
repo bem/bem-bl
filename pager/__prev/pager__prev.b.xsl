@@ -10,7 +10,7 @@ exclude-result-prefixes="bb tb te tm mode b e m mix d-xsl">
         <te:prev>
             <mode:tag>span</mode:tag>
             <mode:content>
-                <e:prev-key>&#8592;&#160;Ctrl</e:prev-key>
+                <e:prev-key/>
                 <b:link>
                     <mix:mix><e:prev-link b="pager"/></mix:mix>
                     <e:url><xsl:value-of select="@url"/></e:url>
@@ -21,6 +21,7 @@ exclude-result-prefixes="bb tb te tm mode b e m mix d-xsl">
 
         <te:prev-key>
             <mode:tag>span</mode:tag>
+            <mode:content>&#8592;&#160;Ctrl</mode:content>
         </te:prev-key>
     </tb:pager>
 

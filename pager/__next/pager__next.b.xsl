@@ -15,12 +15,13 @@ exclude-result-prefixes="bb tb te tm mode b e m mix d-xsl">
                     <e:url><xsl:value-of select="@url"/></e:url>
                     <xsl:apply-templates/>
                 </b:link>
-                <e:next-key tag="span">Ctrl&#160;&#8594;</e:next-key>
+                <e:next-key/>
             </mode:content>
         </te:next>
 
         <te:next-key>
             <mode:tag>span</mode:tag>
+            <mode:content>Ctrl&#160;&#8594;</mode:content>
         </te:next-key>
     </tb:pager>
 

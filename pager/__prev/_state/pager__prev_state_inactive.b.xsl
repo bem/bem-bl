@@ -9,9 +9,8 @@ exclude-result-prefixes="bb tb te tm mode b e m mix d-xsl">
     <tb:pager>
         <te:prev>
             <tm:state val="inactive">
-                <mode:tag>span</mode:tag>
                 <mode:content>
-                    <e:prev-key  m:state="inactive">&#8592;&#160;Ctrl</e:prev-key>
+                    <e:prev-key m:state="inactive"/>
                     <b:link>
                         <mix:mix><e:prev-link b="pager" m:state="inactive"/></mix:mix>
                         <xsl:apply-templates/>
@@ -19,10 +18,6 @@ exclude-result-prefixes="bb tb te tm mode b e m mix d-xsl">
                 </mode:content>
             </tm:state>
         </te:prev>
-
-        <te:prev-key>
-            <mode:tag>span</mode:tag>
-        </te:prev-key>
     </tb:pager>
 
 </xsl:stylesheet>

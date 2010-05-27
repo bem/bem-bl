@@ -8,9 +8,7 @@ exclude-result-prefixes="bb tb te tm mode b e m mix d-xsl">
 
     <tb:pager>
         <mode:content>
-            <xsl:apply-templates select="e:title"/>
-            <xsl:apply-templates select="e:prev"/>
-            <xsl:apply-templates select="e:next"/>
+            <xsl:apply-templates select="*[not(self::e:page)]"/>
             <e:pages>
                 <xsl:apply-templates select="e:page"/>
             </e:pages>
