@@ -1,3 +1,0 @@
-[submodule "b"]
-	path = b
-	url = git://github.com/bem/bem-b.git
