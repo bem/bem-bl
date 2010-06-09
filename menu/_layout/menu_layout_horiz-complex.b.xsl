@@ -11,7 +11,17 @@
             <mode:content>
                 <b:layout-table>
                     <mix:mix><e:layout b="menu"/></mix:mix>
-                    <xsl:apply-templates/>
+                    <xsl:choose>
+                        <!-- TODO: veged: подумать как проверять наличие row -->
+                        <xsl:when test="e:row | */e:row">
+                            <xsl:apply-templates/>
+                        </xsl:when>
+                        <xsl:otherwise>
+                            <e:row>
+                                <xsl:apply-templates/>
+                            </e:row>
+                        </xsl:otherwise>
+                    </xsl:choose>
                 </b:layout-table>
             </mode:content>
 
