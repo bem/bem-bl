@@ -7,18 +7,12 @@ xmlns:d-xsl="bem-b:xsl:dynamic"
 exclude-result-prefixes="bb tb te tm mode b e m mix d-xsl">
 
     <tb:pager>
-        <!--<mode:content match="[not(e:pages)]">-->
-            <!--<xsl:apply-templates select="*[not(self::e:page)]"/>-->
-            <!--<e:pages>-->
-                <!--<xsl:apply-templates select="e:page"/>-->
-            <!--</e:pages>-->
-        <!--</mode:content>-->
-
-        <te:url>
-            <mode:default>
-                <xsl:apply-templates/>
-            </mode:default>
-        </te:url>
+        <mode:content match="[not(e:pages)]">
+            <xsl:apply-templates select="*[not(self::e:page)]"/>
+            <e:pages>
+                <xsl:apply-templates select="e:page"/>
+            </e:pages>
+        </mode:content>
     </tb:pager>
 
 </xsl:stylesheet>
