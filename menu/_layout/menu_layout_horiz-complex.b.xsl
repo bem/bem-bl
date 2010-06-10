@@ -25,6 +25,14 @@
                 </b:layout-table>
             </mode:content>
 
+            <te:row>
+                <mode:default>
+                    <e:row b="layout-table">
+                        <xsl:apply-templates/>
+                    </e:row>
+                </mode:default>
+            </te:row>
+
             <te:item>
                 <mode:default>
                     <xsl:choose>
