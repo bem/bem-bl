@@ -14,9 +14,33 @@ exclude-result-prefixes="bb tb te tm mode b e m mix d-xsl">
                 <b:link>
                     <mix:mix><e:prev-link b="pager"/></mix:mix>
                     <e:url><xsl:apply-templates select="e:url"/></e:url>
-                    <xsl:text>предыдущая</xsl:text>
+                    <xsl:choose>
+                        <xsl:when test="text()">
+                            <xsl:value-of select="text()"/>
+                        </xsl:when>
+                        <xsl:otherwise>
+                            <xsl:text>предыдущая</xsl:text>
+                        </xsl:otherwise>
+                    </xsl:choose>
                 </b:link>
             </mode:content>
+            
+            <tm:state val="inactive">
+                <mode:content>
+                    <e:prev-key m:state="inactive"/>
+                    <b:link>
+                        <mix:mix><e:prev-link b="pager" m:state="inactive"/></mix:mix>
+                        <xsl:choose>
+                            <xsl:when test="text()">
+                                <xsl:value-of select="text()"/>
+                            </xsl:when>
+                            <xsl:otherwise>
+                                <xsl:text>предыдущая</xsl:text>
+                            </xsl:otherwise>
+                        </xsl:choose>
+                    </b:link>
+                </mode:content>
+            </tm:state>
         </te:prev>
 
         <te:prev-key>
