@@ -1,7 +1,14 @@
 #{$prefix}
   &form-input
     display: block
-  
+
+  .ie6 &form-input
+    zoom: 1
+
+  .ie6 &form-input,
+  .ie7 &form-input
+    margin-right: 6px; /* 2px border + 1px padding + 1px padding + 2px border */ /**/
+
     &__input
       font: 100% Arial, sans-serif
 
@@ -11,3 +18,8 @@
       -moz-box-sizing: border-box
       -webkit-box-sizing: border-box
       box-sizing: border-box
+
+    .ie6 &__input,
+    .ie7 &__input
+      /* Решает проблему http://vitaly.harisov.name/example/broken-input-width-computation-in-msie.html */ /**/
+      float: left;
