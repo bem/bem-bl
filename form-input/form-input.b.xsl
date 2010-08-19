@@ -12,9 +12,41 @@
             <e:input/>
         </mode:content>
 
+        <!-- TODO: посмотреть, зачем нужен wrap-input -->
         <te:input>
             <mode:tag>input</mode:tag>
         </te:input>
     </tb:form-input>
+<!--
+<xsl:template match="lego:b-form-input" mode="lego:js-params-content">
+    <xsl:apply-imports/>
+    <xsl:if test="@autofocus = 'yes'">,autoFocus:true</xsl:if>
+</xsl:template>
+
+<xsl:template match="lego:b-form-input" mode="lego:id-content">
+    <xsl:apply-templates select="." mode="lego:auto-id-content"/>
+</xsl:template>
+
+<xsl:template match="lego:b-form-input/lego:input">
+    <xsl:call-template name="lego:ie-wrapper">
+        <xsl:with-param name="content">
+            <input>
+                <xsl:apply-templates select="ancestor::lego:b-form-input[1]" mode="lego:input-attributes"/>
+                <xsl:apply-templates select="." mode="lego:block-attributes"/>
+            </input>
+        </xsl:with-param>
+    </xsl:call-template>
+</xsl:template>
+
+<xsl:template match="lego:b-bem-autocomplete[parent::lego:b-form-input]"/>
+
+<xsl:template match="lego:b-form-input[lego:b-bem-autocomplete]" mode="lego:js-params-mix">
+    <xsl:apply-templates select="lego:b-bem-autocomplete" mode="lego:js-params-for-mix"/>
+</xsl:template>
+
+<xsl:template match="lego:b-form-input[lego:b-bem-autocomplete]" mode="lego:block-class-mix">
+    <xsl:apply-templates select="lego:b-bem-autocomplete" mode="lego:block-class-for-mix"/>
+</xsl:template>
+-->
 
 </xsl:stylesheet>
