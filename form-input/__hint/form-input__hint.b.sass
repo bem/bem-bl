@@ -1,0 +1,16 @@
+#{$prefix}
+  &form-input
+    &__hint
+      position: absolute;
+      z-index: 1;
+      display: none;
+      margin: 0.3em 0.2em;
+      cursor: text;
+      color: #999;
+
+    /* TODO: надо разобраться почему или сделать по другому */ /**/
+    /* При использовании абсолютного позиционирования b-hint-input пропадает. Лечится вот так. */ /**/
+    .ie6#js &__hint
+      position: relative;
+      float: left;
+      margin: 0.15em 0 -1.5em 0.2em;

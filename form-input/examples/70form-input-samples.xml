@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<lego:page xmlns:lego="https://lego.yandex-team.ru" xmlns:xhtml="http://www.w3.org/1999/xhtml">
+    <xhtml:form action="/">
+        <xhtml:table class="mytable">
+            <xhtml:tr>
+                <xhtml:td class="mytable__td mytable__td_type_first">
+                    <xhtml:div class="mytable__i">
+                        <lego:b-form-input lego:isBEM="yes" autofocus="yes">
+                            <lego:label>Метка для инпута</lego:label>
+                            <lego:input/>
+                            <lego:message lego:type="error" lego:visibility="visible">Ошиблись, бывает</lego:message>
+                            <lego:samples>
+                                <lego:sample><lego:b-pseudo-link lego:isBEM="yes">пример 1</lego:b-pseudo-link></lego:sample>,
+                                <lego:sample><lego:b-pseudo-link lego:isBEM="yes">пример 2</lego:b-pseudo-link></lego:sample>
+                            </lego:samples>
+                        </lego:b-form-input>
+                    </xhtml:div>
+                </xhtml:td>
+
+                <xhtml:td class="mytable__td">
+                    <xhtml:div class="mytable__i">
+                        <lego:b-form-input lego:isBEM="yes" autofocus="yes">
+                            <lego:hint>Подсказка</lego:hint>
+                            <lego:input/>
+                            <lego:samples>
+                                <lego:sample>пример 1</lego:sample>,
+                                <lego:sample>пример 2</lego:sample>
+                            </lego:samples>
+                        </lego:b-form-input>
+                    </xhtml:div>
+                </xhtml:td>
+
+                <xhtml:td class="mytable__td mytable__td_type_last">
+                    <xhtml:div class="mytable__i">
+                        <lego:b-form-input lego:type="textarea" lego:isBEM="yes" autofocus="yes">
+                            <lego:label>Метка для текстовой области</lego:label>
+                            <lego:input/>
+                            <lego:samples>
+                                <lego:sample>пример 1</lego:sample>,
+                                <lego:sample>пример 2</lego:sample>
+                            </lego:samples>
+                        </lego:b-form-input>
+                    </xhtml:div>
+                </xhtml:td>
+            </xhtml:tr>
+        </xhtml:table>
+    </xhtml:form>
+</lego:page>
