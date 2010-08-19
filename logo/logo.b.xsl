@@ -30,7 +30,7 @@
                                 <xsl:value-of select="@img"/>
                             </xsl:when>
                             <!-- TODO: задавать это на следующем уровне переопределения -->
-                            <xsl:otherwise>//yandex.st/lego/_/X31pO5JJJKEifJ7sfvuf3mGeD_8.png</xsl:otherwise>
+                            <xsl:otherwise>/lego/blocks/head-logo/head-logo.png</xsl:otherwise>
                         </xsl:choose>
                     </xsl:attribute>
                     <xsl:attribute name="alt">
