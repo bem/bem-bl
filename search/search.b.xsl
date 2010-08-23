@@ -19,7 +19,7 @@
                     <mix:mix><e:column b="search" m:side="button"/></mix:mix>
 
                     <!-- TODO: ASK: veged: как правильно задавать текст, чтобы его можно было локализовать и задавать в XML -->
-                    <b:form-button type="submit" text="Найти"/>
+                    <b:form-button m:type="button" type="button" text="Найти"/>
                 </e:column>
             </b:layout-table>
         </mode:content>
