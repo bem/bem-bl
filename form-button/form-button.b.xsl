@@ -17,6 +17,7 @@
             </e:type>
         </mode:default>
 
+        <!-- TODO: не работает default на submit -->
         <te:type>
             <mode:default>
                 <xsl:attribute name="type">
