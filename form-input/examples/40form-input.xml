@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<lego:page xmlns:lego="https://lego.yandex-team.ru" xmlns:xhtml="http://www.w3.org/1999/xhtml">
-    <xhtml:div style="width: 400px; margin: 20px;">
-        <lego:b-form-input lego:isBEM="yes">
-            <lego:input/>
-            <lego:message lego:type="error" lego:visibility="visible">ошибка!</lego:message>
-        </lego:b-form-input>
-    </xhtml:div>
-</lego:page>
