@@ -1,0 +1,10 @@
+block b-link, mod pseudo yes {
+
+    tag: (this.ctx.url? 'a' : 'span')
+
+    js: true
+}
+
+block b-link, mod pseudo yes, attrs, !this.ctx.url: {
+    return {}
+}

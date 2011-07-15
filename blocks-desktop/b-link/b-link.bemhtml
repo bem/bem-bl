@@ -1,0 +1,14 @@
+block b-link {
+
+    tag: 'a'
+
+    attrs: {
+        var a = { href: this.ctx.url };
+        this.ctx.target && (a.target = this.ctx.target);
+        this.ctx.counter && (a.onmousedown = this.ctx.counter);
+        this.ctx.title && (a.title = this.ctx.title);
+
+        return a;
+    }
+
+}

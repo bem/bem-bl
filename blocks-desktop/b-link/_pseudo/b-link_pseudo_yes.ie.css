@@ -1,0 +1,13 @@
+#js .b-link_pseudo_yes,
+.b-link_pseudo_yes:link,
+.b-link_pseudo_yes:visited
+{
+    position: relative;
+
+    cursor: hand;
+}
+
+* html span.b-link_pseudo-hover_yes
+{
+    color: #f00 !important;
+}
