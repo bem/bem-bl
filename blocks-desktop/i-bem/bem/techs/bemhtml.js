@@ -12,7 +12,7 @@ exports.bemBuild = function (prefixes, outputDir, outputName) {
         .join('\n');
 
     try {
-        var bemhtml = require('../../lib/bemhtml.js'),
+        var bemhtml = require('../../__html/lib/bemhtml.js'),
             tree = bemhtml.BEMHTMLParser.matchAll(
                 sources,
                 'topLevel',
