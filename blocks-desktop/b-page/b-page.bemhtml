@@ -62,6 +62,22 @@ block b-page {
     elem css {
         bem: false,
         tag: 'style',
+        default, this.ctx.hasOwnProperty('ie'), !this.ctx._ieCommented: {
+            var hideRule = !this.ctx.ie ?
+                    ['gt IE 7', '<!-->', '<!--'] :
+                    [this.ctx.ie, '', ''];
+            local(
+                this._mode = '',
+                this.ctx._ieCommented = true,
+                this.ctx = [
+                    '<!--[if ' + hideRule[0] + ']>',
+                    hideRule[1],
+                    this.ctx,
+                    hideRule[2],
+                    '<![endif]-->'
+                ]
+            ) this.apply();
+        },
         this.ctx.url {
             tag: 'link',
             attrs: { rel: 'stylesheet', href: this.ctx.url }
