@@ -118,19 +118,16 @@ default: {
         var jsAttr;
         local(this._mode = 'jsAttr') jsAttr = this.apply();
         buf.push(
-            ' ', jsAttr || 'onclick', "='return ",
-            JSON.stringify(jsParams),
-            "'");
+            ' ', jsAttr || 'onclick', '="return ',
+            this._.attrEscape(JSON.stringify(jsParams)),
+            '"');
     }
 
     var attrs;
     local(this._mode = 'attrs') attrs = this.apply();
     attrs = this._.extend(attrs, v.attrs); // NOTE: возможно стоит делать массив, чтобы потом быстрее сериализовывать
-    if(attrs) {
-        var name; // TODO: поправить при апдейте ometa-js
-        for(name in attrs)
-            buf.push(' ', name, '="', attrs[name], '"'); // TODO: escaping!
-    }
+    if(attrs) for(var name in attrs)
+        buf.push(' ', name, '="', this._.attrEscape(attrs[name]), '"');
 
     if(this._.isShortTag(tag)) {
         buf.push('/>');
@@ -286,9 +283,8 @@ content: this.ctx.content
 
             var res = buffer || [];
 
-            if(mods) {
-                var modName; // TODO: поправить при апдейте ometa-js
-                for(modName in mods)
+            if(mods)
+                for(var modName in mods)
                     if(mods.hasOwnProperty(modName)) {
                         var modVal = mods[modName];
                         res.push(' ');
@@ -296,7 +292,6 @@ content: this.ctx.content
                             buildElemClass(block, elem, modName, modVal, res) :
                             buildBlockClass(block, modName, modVal, res);
                     }
-            }
 
             return buffer? res : res.join('');
 
@@ -329,7 +324,12 @@ content: this.ctx.content
 
     })(BEM);
 
-    var ctx = {
+    var buildEscape = (function() {
+            var ts = { '"': '&quot;', '&': '&amp;', '<': '&lt;', '>': '&gt;' },
+                f = function(t) { return ts[t] || t };
+            return function(r) { return function(s) { return ('' + s).replace(r, f) } }
+        })(),
+        ctx = {
             ctx: this,
             _start: true,
             apply: arguments.callee,
@@ -351,7 +351,9 @@ content: this.ctx.content
                     for(n in o1) o1.hasOwnProperty(n) && (res[n] = o1[n]);
                     for(n in o2) o2.hasOwnProperty(n) && (res[n] = o2[n]);
                     return res;
-                }
+                },
+                xmlEscape: buildEscape(/[&<>]/g),
+                attrEscape: buildEscape(/["&<>]/g)
             },
             BEM: BEM,
             isFirst: function() { return this.position === 1 },

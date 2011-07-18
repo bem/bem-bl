@@ -61,25 +61,17 @@ block b-page {
 
     elem css {
         bem: false,
-        tag: 'link',
-        attrs: {
-            rel: 'stylesheet',
-            href: this.ctx.url
-        }
-    }
-
-    elem style {
-        bem: false,
         tag: 'style',
-        content: this.ctx.content
+        this.ctx.url {
+            tag: 'link',
+            attrs: { rel: 'stylesheet', href: this.ctx.url }
+        }
     }
 
     elem js {
         bem: false,
         tag: 'script',
-        attrs: {
-            return this.ctx.url ? { src: this.ctx.url } : {};
-        }
+        attrs, this.ctx.url: { src: this.ctx.url }
     }
 
     elem favicon {
