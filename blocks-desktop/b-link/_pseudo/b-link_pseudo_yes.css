@@ -10,7 +10,7 @@ a.b-link_pseudo_yes:hover
     color: #f00 !important;
 }
 
-#js .b-link_pseudo_yes
+.i-ua_js_yes .b-link_pseudo_yes
 {
     cursor: pointer;
     text-decoration: none;
