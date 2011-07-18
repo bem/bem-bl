@@ -3,7 +3,7 @@
     title: 'b-link',
     head: [
         { elem: 'css', url: '_20_b-link_pseudo.css' },
-        { elem: 'css', url: '_20_b-link_pseudo.ie.css', condition: 'lte IE 7' },
+        { elem: 'css', url: '_20_b-link_pseudo.ie.css', ie: true },
         { elem : 'js', url: '//yandex.st/jquery/1.6.2/jquery.min.js' },
         { elem: 'js', url: '_20_b-link_pseudo.js' }
     ],

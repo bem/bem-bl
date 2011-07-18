@@ -12,7 +12,7 @@
             {
                 elem: 'css',
                 url: '_simple.ie.css',
-                condition: 'lte IE 7'
+                ie: true
             },
             { elem : 'js', url: '//yandex.st/jquery/1.6.2/jquery.min.js' },
             {
