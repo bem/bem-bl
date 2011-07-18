@@ -126,8 +126,11 @@ default: {
     var attrs;
     local(this._mode = 'attrs') attrs = this.apply();
     attrs = this._.extend(attrs, v.attrs); // NOTE: возможно стоит делать массив, чтобы потом быстрее сериализовывать
-    if(attrs) for(var name in attrs)
+    if(attrs) {
+        var name; // TODO: разобраться с OmetaJS и YUI Compressor
+        for(name in attrs)
         buf.push(' ', name, '="', this._.attrEscape(attrs[name]), '"');
+    }
 
     if(this._.isShortTag(tag)) {
         buf.push('/>');
@@ -283,8 +286,9 @@ content: this.ctx.content
 
             var res = buffer || [];
 
-            if(mods)
-                for(var modName in mods)
+            if(mods) {
+                var modName; // TODO: разобраться с OmetaJS и YUI Compressor
+                for(modName in mods)
                     if(mods.hasOwnProperty(modName)) {
                         var modVal = mods[modName];
                         res.push(' ');
@@ -292,6 +296,7 @@ content: this.ctx.content
                             buildElemClass(block, elem, modName, modVal, res) :
                             buildBlockClass(block, modName, modVal, res);
                     }
+            }
 
             return buffer? res : res.join('');
 
