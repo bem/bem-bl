@@ -5,6 +5,7 @@ block b-page {
             this._mode = '',
             this.ctx = {
                 tag: 'html',
+                attrs : { class: 'i-ua_js_no i-ua_css_standart'},
                 content: [
                     {
                         elem: 'head',
@@ -27,8 +28,7 @@ block b-page {
                             } : '',
                             this.ctx.meta,
                             {
-                                elem: 'js',
-                                content: 'document.documentElement.id="js";if(document.compatMode!="CSS1Compat")document.documentElement.className+=" quirks"'
+                                block: 'i-ua'
                             },
                             this.ctx.head
                         ]
