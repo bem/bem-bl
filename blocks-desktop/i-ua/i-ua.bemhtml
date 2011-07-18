@@ -1,0 +1,5 @@
+block i-ua {
+    tag: 'script',
+    bem: false,
+    content: 'document.documentElement.className=document.documentElement.className.replace("i-ua_js_no", "i-ua_js_yes");if(document.compatMode!="CSS1Compat")document.documentElement.className=document.documentElement.className.replace("i-ua_css_standart", "i-ua_css_quirks");'
+}
