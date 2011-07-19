@@ -1,0 +1,19 @@
+.b-link_pseudo_yes
+{
+    white-space: nowrap;
+
+    color: #1a3dc1;
+}
+
+a.b-link_pseudo_yes:hover
+{
+    color: #f00 !important;
+}
+
+.i-ua_js_yes .b-link_pseudo_yes
+{
+    cursor: pointer;
+    text-decoration: none;
+
+    border-bottom: 1px dotted;
+}
