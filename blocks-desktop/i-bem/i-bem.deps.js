@@ -6,8 +6,7 @@
             'identify',
             'is-empty-object',
             'debounce',
-            'observable',
-            'debounce'
+            'observable'
         ]
     },
     shouldDeps: { elem: 'internal' }
