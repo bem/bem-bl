@@ -63,10 +63,6 @@ default: {
     local(this._mode = 'tag') tag = this.apply();
     tag || (tag = v.tag || 'div');
 
-    var attrs;
-    local(this._mode = 'attrs') attrs = this.apply();
-    attrs = this._.extend(v.attrs, attrs);
-
     var jsParams, js;
     if(v.block && v.js !== false) {
         local(this._mode = 'js') js = this.apply();
