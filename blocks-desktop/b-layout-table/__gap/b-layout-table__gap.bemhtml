@@ -1,0 +1,14 @@
+block b-layout-table, elem gap {
+
+    tag: 'td'
+    attrs: {
+        var a = {};
+        this.ctx.colspan && (a.colspan = this.ctx.colspan);
+        this.ctx.rowspan && (a.rowspan = this.ctx.rowspan);
+
+        return a;
+    }
+
+    content: { elem: 'gap-i', tag: 'i' }
+}
+

@@ -1,0 +1,15 @@
+.b-layout-table
+{
+    font-size: 100%;
+
+    width: 100%;
+
+    border-collapse: collapse;
+}
+
+.b-layout-table__cell
+{
+    padding: 0;
+
+    vertical-align: top;
+}
