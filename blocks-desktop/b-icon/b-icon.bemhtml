@@ -1,0 +1,15 @@
+block b-icon {
+
+    tag: 'img'
+    attrs: {
+
+        var ctx = this.ctx,
+            a = { src: '//yandex.st/lego/_/La6qi18Z8LwgnZdsAr1qy1GwCwo.gif', alt: '' },
+            props = ['src', 'alt', 'width', 'height'], p;
+
+        while(p = props.shift()) ctx[p] && (a[p] = ctx[p]);
+
+        return a;
+    }
+
+}
