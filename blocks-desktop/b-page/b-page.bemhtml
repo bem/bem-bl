@@ -16,7 +16,7 @@ block b-page {
                             },
                             {
                                 tag: 'meta',
-                                attrs: { 'http-equiv': 'X-UA-Compatible', content: 'IE=EmulateIE7' }
+                                attrs: { 'http-equiv': 'X-UA-Compatible', content: 'IE=EmulateIE7, IE=edge' }
                             },
                             {
                                 tag: 'title',
