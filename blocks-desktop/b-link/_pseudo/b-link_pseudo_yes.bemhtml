@@ -7,5 +7,7 @@ block b-link, mod pseudo yes {
     attrs, !this.ctx.url: {
         return {}
     }
+
+    elem inner, tag: 'span'
 }
 

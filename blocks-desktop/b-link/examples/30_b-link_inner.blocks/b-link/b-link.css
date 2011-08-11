@@ -1,0 +1,11 @@
+.b-link:hover
+{
+    color: #f00;
+}
+
+.b-link__icon
+{
+    margin-right: 5px;
+
+    vertical-align: middle;
+}

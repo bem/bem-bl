@@ -1,0 +1,12 @@
+.b-link_pseudo_yes:hover
+{
+    color: #f00;
+}
+
+.b-link_pseudo_yes .b-link__icon
+{
+    position: relative;
+    top: 3px;
+
+    margin-right: 5px;
+}
