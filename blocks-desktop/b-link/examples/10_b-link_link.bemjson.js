@@ -3,12 +3,26 @@
     title: 'b-link',
     head: [
         { elem: 'css', url: '_10_b-link_link.css' },
-        { elem: 'css', url: '_10_b-link_link.ie.css', ie: true },
         { elem: 'js', url: '_10_b-link_link.js' }
     ],
-    content: {
-        block: 'b-link',
-        url : 'http://ya.ru',
-        content : 'Самая посещаемая страница Рунета'
-    }
+    content: [
+        {
+            block: 'b-link',
+            url: 'http://ya.ru',
+            content: 'Просто ссылка'
+        },
+        {
+            block: 'b-link',
+            url: 'http://ya.ru',
+            title: 'Заголовок',
+            target: '_blank',
+            content: 'Ссылка открывающаяся в новом окне'
+        },
+        {
+            block: 'b-link',
+            url: 'http://ya.ru',
+            counter: 'myCounter()',
+            content: 'Ссылка cо счетчиком'
+        }
+    ]
 })

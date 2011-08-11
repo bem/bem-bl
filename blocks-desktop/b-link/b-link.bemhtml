@@ -5,11 +5,11 @@ block b-link {
     attrs: {
 
         var ctx = this.ctx,
-            a = { href: ctx.url };
+            a = { href: ctx.url },
+            props = ['title', 'target'], p;
 
-        ctx.target && (a.target = ctx.target);
         ctx.counter && (a.onmousedown = ctx.counter);
-        ctx.title && (a.title = ctx.title);
+        while(p = props.shift()) ctx[p] && (a[p] = ctx[p]);
 
         return a;
 
