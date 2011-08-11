@@ -3,12 +3,16 @@ block b-link {
     tag: 'a'
 
     attrs: {
-        var a = { href: this.ctx.url };
-        this.ctx.target && (a.target = this.ctx.target);
-        this.ctx.counter && (a.onmousedown = this.ctx.counter);
-        this.ctx.title && (a.title = this.ctx.title);
+
+        var ctx = this.ctx,
+            a = { href: ctx.url },
+            props = ['title', 'target'], p;
+
+        ctx.counter && (a.onmousedown = ctx.counter);
+        while(p = props.shift()) ctx[p] && (a[p] = ctx[p]);
 
         return a;
+
     }
 
 }
