@@ -1,0 +1,22 @@
+block b-layout-table {
+
+    tag: 'table'
+
+    elem row, tag: 'tr'
+
+    elem cell {
+        tag: 'td'
+        attrs: {
+
+            var ctx = this.ctx,
+                a = {},
+                props = ['colspan', 'rowspan'], p;
+
+            while(p = props.shift()) ctx[p] && (a[p] = ctx[p]);
+
+            return a;
+        }
+    }
+
+}
+
