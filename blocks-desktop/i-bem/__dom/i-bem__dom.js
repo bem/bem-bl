@@ -316,7 +316,7 @@ var DOM = BEM.DOM = BEM.decl('i-bem__dom',/** @lends BEM.DOM.prototype */{
     findBlocksOutside : function(elem, block) {
 
         return this._doBlocksMethod(
-            this._buildFindBlocksParams('closest', elem, block));
+            this._buildFindBlocksParams('parents', elem, block));
 
     },
 
@@ -329,7 +329,8 @@ var DOM = BEM.DOM = BEM.decl('i-bem__dom',/** @lends BEM.DOM.prototype */{
      */
     findBlockOutside : function(elem, block) {
 
-        return this.findBlocksOutside(elem, block)[0];
+        return this._doBlocksMethod(
+            this._buildFindBlocksParams('closest', elem, block))[0];
 
     },
 
@@ -1213,6 +1214,7 @@ var DOM = BEM.DOM = BEM.decl('i-bem__dom',/** @lends BEM.DOM.prototype */{
                     if(nodeClassName.indexOf(' ' + className + ' ') > -1) {
                         var j = 0, fns = storage[className].fns, fn;
                         while(fn = fns[j++]) fn.fn.call($(node), e);
+                        if(e.isPropagationStopped()) return;
                         classNames.splice(--i, 1);
                     }
                 }
