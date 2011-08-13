@@ -41,6 +41,8 @@ BEM_BUILD=bem build \
 
 index.%.wiki:
 	touch $@
-	find blocks-desktop -name '*.$(*F).title.txt' | sort | sed 's#^[^/]*/\([^/]*\)/\(.*\)$$#\1#g' | uniq | sed 's#^\(.*\)# * ((blocks-desktop/\1/\1.$(*F).html \1))#g' > $@
+	cat $(patsubst index.%,index.desc.%,$@) >> $@
+	echo '\n\n' >> $@
+	find blocks-desktop -name '*.$(*F).title.txt' | sort | sed 's#^[^/]*/\([^/]*\)/\(.*\)$$#\1#g' | uniq | sed 's#^\(.*\)# * ((blocks-desktop/\1/\1.$(*F).html \1))#g' >> $@
 
 .PHONY: all
