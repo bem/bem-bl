@@ -3,7 +3,8 @@ var myPath = require('bem/lib/path');
 exports.techs = {
     'js': '../i-bem/bem/techs/js.js',
     'css': 'bem/lib/techs/css',
-    'bemhtml': '../i-bem/bem/techs/bemhtml.js'
+    'bemhtml': '../i-bem/bem/techs/bemhtml.js',
+    'decl.js' : '../../../bem-tools/lib/techs/decl.js'
 };
 
 for (var alias in exports.techs) {
