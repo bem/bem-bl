@@ -6,6 +6,10 @@
         },
         {
             block: 'i-ua'
+        },
+        {
+            block: 'i-jquery',
+            elem: 'core'
         }
     ]
 })
