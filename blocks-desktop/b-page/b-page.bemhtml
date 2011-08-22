@@ -12,7 +12,7 @@ block b-page {
                         content: [
                             {
                                 tag: 'meta',
-                                attrs: { 'http-equiv': 'content-type', content: 'text/html; charset=utf-8' }
+                                attrs: { charset: 'utf-8' }
                             },
                             {
                                 tag: 'meta',
@@ -27,9 +27,15 @@ block b-page {
                                 url: this.ctx.favicon
                             } : '',
                             this.ctx.meta,
-                            {
-                                block: 'i-ua'
-                            },
+                            [
+                                {
+                                    block: 'i-ua'
+                                },
+                                {
+                                    block: 'i-jquery',
+                                    elem: 'core'
+                                }
+                            ],
                             this.ctx.head
                         ]
                     },
