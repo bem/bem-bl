@@ -1,0 +1,29 @@
+%%html
+<lego:b-static-text xmlns:lego="https://lego.yandex-team.ru">
+%%
+
+== ##b-search##: Форма поиска
+
+%%html
+<lego:b-docs>
+%%
+
+
+
+=== Элементы блока
+
+%%html
+<a name="element.layout"></a>
+%%
+
+* **##layout##: **.
+ \\
+
+%%html
+</lego:b-docs>
+%%
+
+%%html
+</lego:b-static-text>
+%%
+

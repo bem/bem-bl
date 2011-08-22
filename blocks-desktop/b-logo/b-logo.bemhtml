@@ -1,0 +1,31 @@
+block b-logo {
+
+    js: true
+
+    elem link, default: {
+        var ctx = this.ctx;
+
+        local (
+            this._mode = '',
+            ctx.elem = undefined,
+            ctx.block = 'b-link',
+            ctx.mix = [ { block: 'b-logo', elem: 'link' } ]
+        ) this.apply();
+
+    }
+}
+
+block b-link {
+    elem icon, default: {
+        var ctx = this.ctx;
+
+        local (
+            this._mode = '',
+            ctx.elem = undefined,
+            ctx.block = 'b-icon',
+            ctx.mix = [ { block: 'b-logo', elem: 'icon' } ]
+        ) this.apply();
+    }
+}
+
+

@@ -1,0 +1,205 @@
+==DOM (i-bem_~_dom.js)
+===Поля
+  * **domElem**^^##protected##^^ ##{jQuery}## DOM-элементы блока
+===Методы
+====buildSelector([elem], [modName], [modVal])
+Строит CSS-селектор, соответствующий блоку/элементу и модификатору
+  * **elem** ##{String}## имя элемент
+  * **modName** ##{String}## имя модификатора
+  * **modVal** ##{String}## значение модификатора
+====destruct([keepDOM])
+Удаляет блок вместе с его DOM-нодами
+  * **keepDOM** ##{Boolean}## нужно ли оставлять DOM-ноды блока в документе
+====findBlocksInside([elem], block)^^##protected##^^
+Находит блоки внутри (включая контекст) текущего блока или его элементов
+  * **elem** ##{String|jQuery}## элемент блока
+  * **block** ##{String|Object}## имя или описание (blockName,modName,modVal) искомого блока
+====findBlockInside([elem], block)^^##protected##^^
+Находит первый блок внутри (включая контекст) текущего блока или его элементов
+  * **elem** ##{String|jQuery}## элемент блока
+  * **block** ##{String|Object}## имя или описание (blockName,modName,modVal) искомого блока
+====findBlocksOutside([elem], block)^^##protected##^^
+Находит блоки снаружи (включая контекст) текущего блока или его элементов
+  * **elem** ##{String|jQuery}## элемент блока
+  * **block** ##{String|Object}## имя или описание (blockName,modName,modVal) искомого блока
+====findBlockOutside([elem], block)^^##protected##^^
+Находит первый блок снаружи (включая контекст) текущего блока или его элементов
+  * **elem** ##{String|jQuery}## элемент блока
+  * **block** ##{String|Object}## имя или описание (blockName,modName,modVal) искомого блока
+====findBlocksOn([elem], block)^^##protected##^^
+Находит блоки на DOM-элементах текущего блока или его элементов
+  * **elem** ##{String|jQuery}## элемент блока
+  * **block** ##{String|Object}## имя или описание (blockName,modName,modVal) искомого блока
+====findBlockOn([elem], block)^^##protected##^^
+Находит первый блок на DOM-элементах текущего блока или его элементов
+  * **elem** ##{String|jQuery}## элемент блока
+  * **block** ##{String|Object}## имя или описание (blockName,modName,modVal) искомого блока
+====doBlocksMethodInside([elem], block, method, [args])^^##protected##^^
+Выполняет метод блоков внутри (включая контекст) текущего блока или его элементов
+  * **elem** ##{String|jQuery}## элемент блока
+  * **block** ##{String|Object}## имя или описание (blockName,modName,modVal) искомого блока
+  * **method** ##{String}## имя метода
+  * **args** ##{Array}## параметры метода
+====doBlocksMethodOutside([elem], block, method, [args])^^##protected##^^
+Выполняет метод блоков снаружи (включая контекст) текущего блока или его элементов
+  * **elem** ##{String|jQuery}## элемент блока
+  * **block** ##{String|Object}## имя или описание (blockName,modName,modVal) искомого блока
+  * **method** ##{String}## имя метода
+  * **args** ##{Array}## параметры метода
+====doBlocksMethodOn([elem], block, method, [args])^^##protected##^^
+Выполняет метод блоков на DOM-элементах текущего блока или его элементов
+  * **elem** ##{String|jQuery}## элемент блока
+  * **block** ##{String|Object}## имя или описание (blockName,modName,modVal) искомого блока
+  * **method** ##{String}## имя метода
+  * **args** ##{Array}## параметры метода
+====doBlocksMethod(blocks, method, [args])^^##protected##^^
+Выполняет метод блоков
+  * **blocks** ##{BEM[]}## блоки
+  * **method** ##{String}## имя метода
+  * **args** ##{Array}## параметры метода
+====bindToDomElem(domElem, event, fn)^^##protected##^^
+Добавляет обработчик события произвольного DOM-элемента
+  * **domElem** ##{jQuery}## DOM-элемент, на котором будет слушаться событие
+  * **event** ##{String|Object}## имя события или объект события
+  * **fn** ##{Function}## функция-обработчик, будет выполнена в контексте блока
+====bindToDoc(event, fn)^^##protected##^^
+Добавляет обработчик события на document
+  * **event** ##{String}## имя события
+  * **fn** ##{Function}## функция-обработчик, будет выполнена в контексте блока
+====bindToWin(event, fn)^^##protected##^^
+Добавляет обработчик события на window
+  * **event** ##{String}## имя события
+  * **fn** ##{Function}## функция-обработчик, будет выполнена в контексте блока
+====bindTo([elem], event, fn)^^##protected##^^
+Добавляет обработчик события на основные DOM-элементы блока или его вложенные элементы
+  * **elem** ##{jQuery|String}## элемент
+  * **event** ##{String}## имя события
+  * **fn** ##{Function}## функция-обработчик, будет выполнена в контексте блока
+====unbindFromDomElem(domElem, event)^^##protected##^^
+Удаляет обработчики события произвольного DOM-элемента
+  * **domElem** ##{jQuery}## DOM-элемент, на котором будет слушаться событие
+  * **event** ##{String}## имя события
+====unbindFromDoc(event)^^##protected##^^
+Удаляет обработчик события у document
+  * **event** ##{String}## имя события
+====unbindFromWin(event)^^##protected##^^
+Удаляет обработчик события у document
+  * **event** ##{String}## имя события
+====unbindFrom([elem], event)^^##protected##^^
+Удаляет обработчики события из основных DOM-элементы блока или его вложенных элементов
+  * **elem** ##{jQuery|String}## вложенный элемент
+  * **event** ##{String}## имя события
+====trigger(e, [data])^^##protected##^^
+Запускает обработчики события у блока и обработчики live-событий
+  * **e** ##{String}## имя события
+  * **data** ##{Object}## дополнительные данные
+====setMod([elem], modName, modVal)^^##protected##^^
+Устанавливает модификатор у блока/вложенного элемента
+  * **elem** ##{jQuery}## вложенный элемент
+  * **modName** ##{String}## имя модификатора
+  * **modVal** ##{String}## значение модификатора
+====findElem(names, [modName], [modVal], modVal)^^##protected##^^
+Находит вложенные в блок элементы
+  * **names** ##{String}## имя (или через пробел имена) вложенного элемента
+  * **modName** ##{String}## имя модификатора
+  * **modVal** ##{String}## значение модификатора
+  * **modVal**
+====elem(names, [modName], [modVal])^^##protected##^^
+Ленивый поиск вложенных в блок элементы (результат кэшируется)
+  * **names** ##{String}## имя (или через пробел имена) вложенных элементов
+  * **modName** ##{String}## имя модификатора
+  * **modVal** ##{String}## значение модификатора
+====dropElemCache(names, [modName], [modVal])^^##protected##^^
+Сброс кэша для элементов
+  * **names** ##{String}## имя (или через пробел имена) вложенных элементов
+  * **modName** ##{String}## имя модификатора
+  * **modVal** ##{String}## значение модификатора
+====containsDomElem(domElem)^^##protected##^^
+Проверяет, находится ли DOM-элемент в блоке
+  * **domElem** ##{jQuery}## DOM-элемент
+===Статические поля
+  * **extractParams** ##{Object}## Извлекает параметры блока из DOM-элемента
+  * **doc**^^##protected##^^ ##{jQuery}## Шорткат для документа
+  * **win**^^##protected##^^ ##{jQuery}## Шорткат для window
+===Статические методы
+====buildSelector([elem], [modName], [modVal])
+Строит CSS-селектор, соответствующий блоку/элементу и модификатору
+  * **elem** ##{String}## имя элемент
+  * **modName** ##{String}## имя модификатора
+  * **modVal** ##{String}## значение модификатора
+====getWindowSize()
+Возвращает размер текущего окна
+====init([ctx], [callback], [callbackCtx])^^##protected##^^
+Инициализирует блоки на фрагменте DOM-дерева
+  * **ctx** ##{jQuery}## корневая DOM-нода
+  * **callback** ##{Function}## обработчик, вызываемый после инициализации
+  * **callbackCtx** ##{Object}## контекст обработчика
+====destruct([keepDOM], ctx, [excludeSelf])^^##protected##^^
+Уничтожает блоки на фрагменте DOM-дерева
+  * **keepDOM** ##{Boolean}## нужно ли оставлять DOM-ноды в документе
+  * **ctx** ##{jQuery}## корневая DOM-нода
+  * **excludeSelf** ##{Boolean}## не учитывать контекст
+====update(ctx, content, [callback], [callbackCtx])^^##protected##^^
+Заменяет фрагмент DOM-дерева внутри контекста, уничтожая старые блоки и инициализируя новые
+  * **ctx** ##{jQuery}## корневая DOM-нода
+  * **content** ##{jQuery|String}## новый контент
+  * **callback** ##{Function}## обработчик, вызываемый после инициализации
+  * **callbackCtx** ##{Object}## контекст обработчика
+====liveInitOnEvent([elemName], event, callback)^^##protected##^^
+Хелпер для live-инициализации по событию на DOM-элементах блока или его элементов
+  * **elemName** ##{String}## имя элемента или элементов (через пробел)
+  * **event** ##{String}## имя события
+  * **callback** ##{Function}## обработчик, вызываемый после успешной инициализации
+====liveBindTo([to], event, callback, invokeOnInit)^^##protected##^^
+Хелпер для подписки на live-события на DOM-элементах блока или его элементов
+  * **to** ##{String|Object}## описание (объект с modName, modVal, elemName) или имя элемента или элементов (через пробел)
+  * **event** ##{String}## имя события
+  * **callback** ##{Function}## обработчик
+  * **invokeOnInit**
+====liveUnbindFrom([elemName], event, [callback])^^##protected##^^
+Хелпер для отписки от live-событий на DOM-элементах блока или его элементов
+  * **elemName** ##{String}## имя элемента или элементов (через пробел)
+  * **event** ##{String}## имя события
+  * **callback** ##{Function}## обработчик
+====liveInitOnBlockInit(blockName, callback)^^##protected##^^
+Хелпер для live-инициализации по инициализации другого блока на DOM-элементе текущего
+  * **blockName** ##{String}## имя блока, на инициализацию которого нужно реагировать
+  * **callback** ##{Function}## обработчик, вызываемый после успешной инициализации в контексте нового блока
+====liveInitOnBlockInsideInit(blockName, [callback])^^##protected##^^
+Хелпер для live-инициализации по инициализации другого блока внутри текущего
+  * **blockName** ##{String}## имя блока, на инициализацию которого нужно реагировать
+  * **callback** ##{Function}## обработчик, вызываемый после успешной инициализации в контексте нового блока
+====on([ctx], e, [data], fn, [fnCtx])^^##protected##^^
+Добавляет обработчик live-события на блок, с учётом заданного элемента,
+внутри которого будет слушаться событие
+  * **ctx** ##{jQuery}## элемент, внутри которого будет слушаться событие
+  * **e** ##{String}## имя события
+  * **data** ##{Object}## дополнительные данные, приходящие в обработчик как e.data
+  * **fn** ##{Function}## обработчик
+  * **fnCtx** ##{Object}## контекст обработчика
+====un([ctx], e, [fn], [fnCtx])^^##protected##^^
+Удаляет обработчик live-события у блока, с учётом заданного элемента,
+внутри которого слушалось событие
+  * **ctx** ##{jQuery}## элемент, внутри которого слушалось событие
+  * **e** ##{String}## имя события
+  * **fn** ##{Function}## обработчик
+  * **fnCtx** ##{Object}## контекст обработчика
+====liveCtxBind(ctx, e, [data], fn, [fnCtx])^^##protected##^^
+**deprecated** использовать on
+
+Добавляет обработчик live-события на блок, с учётом заданного элемента,
+внутри которого будет слушаться событие
+  * **ctx** ##{jQuery}## элемент, внутри которого будет слушаться событие
+  * **e** ##{String}## имя события
+  * **data** ##{Object}## дополнительные данные, приходящие в обработчик как e.data
+  * **fn** ##{Function}## обработчик
+  * **fnCtx** ##{Object}## контекст обработчика
+====liveCtxUnbind(ctx, e, [fn], [fnCtx])^^##protected##^^
+**deprecated** использовать un
+
+Удаляет обработчик live-события у блока, с учётом заданного элемента,
+внутри которого слушалось событие
+  * **ctx** ##{jQuery}## элемент, внутри которого слушалось событие
+  * **e** ##{String}## имя события
+  * **fn** ##{Function}## обработчик
+  * **fnCtx** ##{Object}## контекст обработчика

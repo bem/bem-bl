@@ -6,8 +6,17 @@ block b-link, mod pseudo yes {
 
     attrs, !this.ctx.url: {
         return {}
-    }
+    },
 
-    elem inner, tag: 'span'
+    content, !this.ctx._wrap, !this.mods.inner: {
+        local(
+            this._mode = '',
+            this.ctx = {
+                elem: 'inner',
+                content: this.ctx.content,
+                _wrap: true
+            }
+        ) this.apply();
+    }
 }
 
