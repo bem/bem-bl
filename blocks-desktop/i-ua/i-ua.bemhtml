@@ -9,5 +9,5 @@ block i-ua {
                 'document.documentElement.className=',
                 'document.documentElement.className',
                 '.replace("i-ua_css_standart", "i-ua_css_quirks");'
-            ].join('');
+            ].join('')
 }
