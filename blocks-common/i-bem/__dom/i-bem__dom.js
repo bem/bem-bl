@@ -61,9 +61,12 @@ function init(domElem, uniqInitId) {
     $.each(getParams(domNode), function(blockName, params) {
         processParams(params, domNode, blockName, uniqInitId);
         var block = uniqIdToBlock[params.uniqId];
-        block?
-            block._addDomElem(domElem) :
+        if(block) {
+            block.domElem = block.domElem.add(domElem);
+            $.extend(block.params, params);
+        } else {
             initBlock(blockName, domElem, params);
+        }
     });
 
 }
@@ -253,17 +256,6 @@ var DOM = BEM.DOM = BEM.decl('i-bem__dom',/** @lends BEM.DOM.prototype */{
         this._needSpecialUnbind = false;
 
         this.__base(null, params, initImmediately);
-
-    },
-
-    /**
-     * Добавляет DOM-элемент в блок (для блоков на нескольких элементах)
-     * @private
-     * @param {jQuery} domElem
-     */
-    _addDomElem : function(domElem) {
-
-        this.domElem = this.domElem.add(domElem);
 
     },
 
