@@ -1,0 +1,20 @@
+%%html
+<lego:b-static-text xmlns:lego="https://lego.yandex-team.ru">
+%%
+
+== ##b-logo##: Обертка для логотипа
+
+%%html
+<lego:b-docs>
+%%
+
+
+
+%%html
+</lego:b-docs>
+%%
+
+%%html
+</lego:b-static-text>
+%%
+
