@@ -37,6 +37,8 @@ BEM_BUILD=bem build \
 	$(call BEM_BUILD,js)
 
 %.bemjson.js: %.wiki
+	#TODO : bem create block -l blocks-desktop/ -T decl.js b-link
+	# Строить файловую структуру и собирать wiki для всего блока b-myblock.full.ru.wiki
 	node lib/wiki2html.js $(patsubst %.bemjson.js,%.wiki,$@) $@
 
 index.%.wiki:
