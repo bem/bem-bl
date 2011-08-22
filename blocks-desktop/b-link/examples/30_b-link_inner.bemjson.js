@@ -24,8 +24,24 @@
                     content: 'Ссылка с иконкой'
                 }
             ]
+        },
+        {
+            block: 'b-link',
+            mods: { pseudo: 'yes', inner: 'yes' },
+            url: 'http://ya.ru',
+            content: [
+                {
+                    block: 'b-icon',
+                    mix: [ { block: 'b-link', elem: 'icon'} ],
+                    url: 'http://yandex.st/lego/_/Kx6F6RQnQFitm0qRxX7vpvfP0K0.png',
+                    alt: 'Иконка Серпа'
+                },
+                {
+                    elem: 'inner',
+                    content: 'Псевдо-ссылка с иконкой'
+                }
+            ]
         }
-
     ]
 
 })

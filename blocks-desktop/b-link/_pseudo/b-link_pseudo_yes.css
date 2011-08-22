@@ -11,7 +11,8 @@
 
 .i-ua_js_yes .b-link_pseudo_yes .b-link__inner
 {
-    color: inherit;
+    text-decoration: none;
 
+    color: inherit;
     border-bottom: 1px dotted;
 }
