@@ -16,7 +16,7 @@ BEM_BUILD=bem build \
 	lib/bemjson2html.js $(patsubst %.html,%.bemhtml.js,$@) $(patsubst %.html,%.bemjson.js,$@) $@
 
 %.bemhtml.js: %.deps.js
-	$(call BEM_BUILD,blocks-desktop/i-bem/bem/techs/bemhtml.js)
+	$(call BEM_BUILD,blocks-common/i-bem/bem/techs/bemhtml.js)
 
 %.deps.js: %.bemdecl.js
 	$(call BEM_BUILD,deps.js)
