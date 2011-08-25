@@ -1,6 +1,6 @@
 all:: html
 
-html: $(shell ls -d blocks-*/*)
+html: $(shell ls -d blocks-*/*) index.ru.html index.en.html
 
 blocks-desktop/% blocks-common/%:
 	BEMTECH_locales_techs="`pwd`/lib/bem/techs/full.wiki.js" BEMTECH_locales_locales="ru en" bem create block -T lib/bem/techs/locales.js -l blocks-desktop $(*F)
@@ -81,6 +81,52 @@ blocks-desktop/% blocks-common/%:
 	lib/bemjson2html.js $@/$(*F).ru.bemhtml.js $@/$(*F).ru.bemjson.js $@/$(*F).ru.html
 	lib/bemjson2html.js $@/$(*F).en.bemhtml.js $@/$(*F).en.bemjson.js $@/$(*F).en.html
 	rm -f $@/$(*F).*.deps.js $@/$(*F).*.bemdecl.js $@/$(*F).*.bemjson.js $@/$(*F).*.bemhtml.js $@/$(*F).*.full.wiki
+
+index.%.html:
+	rm -f index.$(*F).full.wiki
+	cat index.$(*F).wiki >> index.$(*F).full.wiki
+	echo '\n\n' >> index.$(*F).full.wiki
+	find blocks-common -name '*.$(*F).title.txt' | sort | sed 's#^[^/]*/\([^/]*\)/\(.*\)$$#\1#g' | uniq | sed 's#^\(.*\)# * ((blocks-common/\1/\1.$(*F).html \1))#g' >> index.$(*F).full.wiki
+	find blocks-desktop -name '*.$(*F).title.txt' | sort | sed 's#^[^/]*/\([^/]*\)/\(.*\)$$#\1#g' | uniq | sed 's#^\(.*\)# * ((blocks-desktop/\1/\1.$(*F).html \1))#g' >> index.$(*F).full.wiki
+	node lib/wiki2html.js index.$(*F).full.wiki index.$(*F).bemjson.js
+	node lib/bemjson2bemdecl.js index.$(*F).bemjson.js
+	bem build -l blocks-common \
+			  -l blocks-desktop \
+			  -l blocks \
+			  -d index.$(*F).bemdecl.js \
+			  -t deps.js \
+			  -n index.$(*F) \
+			  -o ./
+	bem build -l blocks-common \
+			  -l blocks-desktop \
+			  -l blocks \
+			  -d index.$(*F).deps.js \
+			  -t js \
+			  -n index.$(*F) \
+			  -o ./
+	bem build -l blocks-common \
+			  -l blocks-desktop \
+			  -l blocks \
+			  -d index.$(*F).deps.js \
+			  -t css \
+			  -n index.$(*F) \
+			  -o ./
+	bem build -l blocks-common \
+			  -l blocks-desktop \
+			  -l blocks \
+			  -d index.$(*F).deps.js \
+			  -t ie.css \
+			  -n index.$(*F) \
+			  -o ./
+	bem build -l blocks-common \
+			  -l blocks-desktop \
+			  -l blocks \
+			  -d index.$(*F).deps.js \
+			  -t blocks-common/i-bem/bem/techs/bemhtml.js \
+			  -n index.$(*F) \
+			  -o ./
+	lib/bemjson2html.js index.$(*F).bemhtml.js index.$(*F).bemjson.js index.$(*F).html
+	rm -f index.$(*F).deps.js index.$(*F).bemdecl.js index.$(*F).bemjson.js index.$(*F).bemhtml.js index.$(*F).full.wiki
 
 .PHONY: all
 
