@@ -5,8 +5,9 @@ block b-icon {
 
         var ctx = this.ctx,
             a = { src: '//yandex.st/lego/_/La6qi18Z8LwgnZdsAr1qy1GwCwo.gif', alt: '' },
-            props = ['src', 'alt', 'width', 'height'], p;
+            props = ['alt', 'width', 'height'], p;
 
+        ctx.url && (a.src = ctx.url);
         while(p = props.shift()) ctx[p] && (a[p] = ctx[p]);
 
         return a;

@@ -1,0 +1,14 @@
+.b-search__input
+{
+    width: 100%;
+    margin: 0;
+
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+.b-search__button
+{
+    margin: 0;
+}

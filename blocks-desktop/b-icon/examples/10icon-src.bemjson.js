@@ -7,7 +7,7 @@
     ],
     content: {
         block: 'b-icon',
-        src: 'http://yandex.st/lego/_/Kx6F6RQnQFitm0qRxX7vpvfP0K0.png',
+        url: 'http://yandex.st/lego/_/Kx6F6RQnQFitm0qRxX7vpvfP0K0.png',
         alt: 'Иконка Серпа'
     }
 })

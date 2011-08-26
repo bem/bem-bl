@@ -1,0 +1,13 @@
+.b-search__layout-input
+{
+    width: 100%;
+
+    vertical-align: middle;
+}
+
+.b-search__layout-button
+{
+    padding-left: 6px;
+
+    vertical-align: middle;
+}

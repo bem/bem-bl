@@ -11,20 +11,14 @@
         {
             block: 'b-link',
             mods: { pseudo: 'yes' },
-            content: {
-                elem: 'inner',
-                content: 'Псевдо-спан'
-            }
+            content: 'Псевдо-спан'
         },
         {
             block: 'b-link',
             mods: { pseudo: 'yes' },
             url: '#',
             target: '_blank',
-            content: {
-                elem: 'inner',
-                content: 'Псевдо-ссылка с таргетом'
-            }
+            content: 'Псевдо-ссылка с таргетом'
         },
         {
             block: 'b-link',
@@ -32,53 +26,24 @@
             url: '#',
             target: '_blank',
             title: 'Title у псевдо-ссылки',
-            content: {
-                elem: 'inner',
-                content: 'Псевдо-ссылка с тайтлом и таргетом'
-            }
+            content: 'Псевдо-ссылка с тайтлом и таргетом'
         },
         {
             block: 'b-link',
             mods: { pseudo:'yes', disabled: 'yes' },
-            content: {
-                elem: 'inner',
-                content: 'Залоченный псевдо-спан'
-            }
+            content: 'Залоченный псевдо-спан'
         },
         {
             block: 'b-link',
             mods: { pseudo: 'yes' },
             url: 'http://ya.ru',
-            content: {
-                elem: 'inner',
-                content: 'Псевдо-ссылка со ссылкой'
-            }
+            content: 'Псевдо-ссылка со ссылкой'
         },
         {
             block: 'b-link',
             mods: { pseudo: 'yes', disabled: 'yes' },
             url: 'http://ya.ru',
-            content: {
-                elem: 'inner',
-                content: 'Залоченная псевдо-ссылка'
-            }
-        },
-        {
-            block: 'b-link',
-            mods: { pseudo: 'yes' },
-            url: 'http://ya.ru',
-            content: [
-                {
-                    block: 'b-icon',
-                    mix: [ { block: 'b-link', elem: 'icon'} ],
-                    url: 'http://yandex.st/lego/_/Kx6F6RQnQFitm0qRxX7vpvfP0K0.png',
-                    alt: 'Иконка Серпа'
-                },
-                {
-                    elem: 'inner',
-                    content: 'Псевдо-ссылка с иконкой'
-                }
-            ]
+            content: 'Залоченная псевдо-ссылка'
         }
     ]
 })
