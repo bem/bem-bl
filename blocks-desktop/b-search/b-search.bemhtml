@@ -1,0 +1,71 @@
+block b-search {
+
+    tag: 'form'
+    js: true
+
+    attrs, !this.elem, !this.ctx._attr: {
+
+        var attrs,
+            default_attrs = {};
+
+        this.ctx.attrs && this.ctx.attrs.action;
+
+        local(this.ctx._attr = true)
+            attrs = this.apply() || {};
+
+        return this._.extend(default_attrs, attrs);
+
+    }
+
+    content, this.ctx.input, this.ctx.button: {
+        this.ctx.input.block = 'b-search';
+        this.ctx.button.block = 'b-search';
+
+        var c = {
+            block: 'b-layout-table',
+            mix: [ { block: 'b-search', elem: 'layout'} ],
+            content: [
+                {
+                    elem: 'row',
+                    content: [
+                        {
+                            elem: 'cell',
+                            mix: [ { block: 'b-search', elem: 'layout-input' } ],
+                            content: this.ctx.input
+                        },
+                        {
+                            elem: 'cell',
+                            mix: [ { block: 'b-search', elem: 'layout-button' } ],
+                            content: this.ctx.button
+                        }
+                    ]
+                }
+            ]
+        }
+        this.ctx.under && c.content.push(
+            {
+                elem: 'row',
+                  content: [
+                      {
+                          elem: 'cell',
+                          colspan: 2,
+                          content: this.ctx.under
+                      }
+                  ]
+            });
+
+        return c;
+    }
+
+    elem input {
+        tag: 'input',
+        attrs: { name: 'text' }
+    }
+
+    elem button {
+        tag: 'input',
+        attrs: { type: 'submit', value: 'Найти' }
+    }
+
+}
+

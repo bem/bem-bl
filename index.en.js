@@ -1,5 +1,5 @@
 /* 
-blocks-desktop/i-jquery/__inherit/i-jquery__inherit.js
+blocks-common/i-jquery/__inherit/i-jquery__inherit.js
 : begin */ /**/
 /**
  * Inheritance plugin
@@ -112,11 +112,11 @@ $.inheritSelf = function(base, props, staticProps) {
 
 })(jQuery);
 /* 
-blocks-desktop/i-jquery/__inherit/i-jquery__inherit.js
+blocks-common/i-jquery/__inherit/i-jquery__inherit.js
 : end */ /**/
 
 /* 
-blocks-desktop/i-jquery/__identify/i-jquery__identify.js
+blocks-common/i-jquery/__identify/i-jquery__identify.js
 : begin */ /**/
 /**
  * Identify plugin
@@ -152,11 +152,11 @@ $.identify = function(obj, onlyGet) {
 
 })(jQuery);
 /* 
-blocks-desktop/i-jquery/__identify/i-jquery__identify.js
+blocks-common/i-jquery/__identify/i-jquery__identify.js
 : end */ /**/
 
 /* 
-blocks-desktop/i-jquery/__is-empty-object/i-jquery__is-empty-object.js
+blocks-common/i-jquery/__is-empty-object/i-jquery__is-empty-object.js
 : begin */ /**/
 (function($) {
 
@@ -168,11 +168,11 @@ $.isEmptyObject || ($.isEmptyObject = function(obj) {
 })(jQuery);
 
 /* 
-blocks-desktop/i-jquery/__is-empty-object/i-jquery__is-empty-object.js
+blocks-common/i-jquery/__is-empty-object/i-jquery__is-empty-object.js
 : end */ /**/
 
 /* 
-blocks-desktop/i-jquery/__debounce/i-jquery__debounce.js
+blocks-common/i-jquery/__debounce/i-jquery__debounce.js
 : begin */ /**/
 /**
  * Debounce and throttle function's decorator plugin 1.0.6
@@ -244,11 +244,11 @@ $.extend({
 
 })(jQuery);
 /* 
-blocks-desktop/i-jquery/__debounce/i-jquery__debounce.js
+blocks-common/i-jquery/__debounce/i-jquery__debounce.js
 : end */ /**/
 
 /* 
-blocks-desktop/i-jquery/__observable/i-jquery__observable.js
+blocks-common/i-jquery/__observable/i-jquery__observable.js
 : begin */ /**/
 /**
  * Observable plugin
@@ -449,11 +449,11 @@ $.observable = $.inherit(Observable, Observable);
 
 })(jQuery);
 /* 
-blocks-desktop/i-jquery/__observable/i-jquery__observable.js
+blocks-common/i-jquery/__observable/i-jquery__observable.js
 : end */ /**/
 
 /* 
-blocks-desktop/i-bem/i-bem.js
+blocks-common/i-bem/i-bem.js
 : begin */ /**/
 /** @requires jquery.inherit */
 /** @requires jquery.isEmptyObject */
@@ -1170,11 +1170,11 @@ this.BEM = $.inherit($.observable, /** @lends BEM.prototype */ {
 })(jQuery);
 
 /* 
-blocks-desktop/i-bem/i-bem.js
+blocks-common/i-bem/i-bem.js
 : end */ /**/
 
 /* 
-blocks-desktop/i-bem/__internal/i-bem__internal.js
+blocks-common/i-bem/__internal/i-bem__internal.js
 : begin */ /**/
 /** @fileOverview модуль для внутренних BEM-хелперов */
 /** @requires BEM */
@@ -1329,11 +1329,11 @@ BEM.INTERNAL = {
 
 })(BEM, jQuery);
 /* 
-blocks-desktop/i-bem/__internal/i-bem__internal.js
+blocks-common/i-bem/__internal/i-bem__internal.js
 : end */ /**/
 
 /* 
-blocks-desktop/i-jquery/__stringify/i-jquery__stringify.js
+blocks-common/i-jquery/__stringify/i-jquery__stringify.js
 : begin */ /**/
 /**
  * Stringify plugin 1.0.0
@@ -1387,6 +1387,6 @@ blocks-desktop/i-jquery/__stringify/i-jquery__stringify.js
 })(jQuery);
 
 /* 
-blocks-desktop/i-jquery/__stringify/i-jquery__stringify.js
+blocks-common/i-jquery/__stringify/i-jquery__stringify.js
 : end */ /**/
 
