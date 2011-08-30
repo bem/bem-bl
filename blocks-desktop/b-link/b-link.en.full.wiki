@@ -1,0 +1,19 @@
+##{"block":"b-link"}##
+
+===Block Modificators
+ * pseudo
+   * yes
+ * disabled
+   * yes
+ * inner
+   * yes
+===Block Elements
+ * inner
+##{"mods":{"pseudo":"yes"}}##
+
+##{"mods":{"disabled":"yes"}}##
+
+##{"mods":{"inner":"yes"}}##
+
+##{"elem":"inner"}##
+

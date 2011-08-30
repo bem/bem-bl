@@ -1,0 +1,6 @@
+##{"block":"b-search"}##
+
+===Элементы блока
+ * layout
+##{"elem":"layout"}##
+
