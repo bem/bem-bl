@@ -1,0 +1,32 @@
+##{"block":"i-jquery"}##
+
+===Block Modificators
+ * dummy
+   * no
+   * yes
+===Block Elements
+ * inherit
+ * identify
+ * is-empty-object
+ * stringify
+ * observable
+ * leftclick
+ * debounce
+##{"mods":{"dummy":"no"}}##
+
+##{"mods":{"dummy":"yes"}}##
+
+##{"elem":"inherit"}##
+
+##{"elem":"identify"}##
+
+##{"elem":"is-empty-object"}##
+
+##{"elem":"stringify"}##
+
+##{"elem":"observable"}##
+
+##{"elem":"leftclick"}##
+
+##{"elem":"debounce"}##
+
