@@ -1,1 +1,0 @@
-([{block: 'b-page',title: 'заголовок',head: [{ elem: 'css', url: 'en.css', ie: false},{ elem: 'css', url: 'en.ie.css', ie: 'lt IE 8'},{ elem: 'js', url: 'en.js'}],content: []}])
