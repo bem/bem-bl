@@ -1,0 +1,63 @@
+#BEMTECH_locales_tech="`pwd`/../../../lib/bem/techs/full.wiki.js" BEMTECH_locales_locales="ru en" bem build -d i-jquery.bemdecl.js -t ../../../lib/bem/techs/locales.js -l ../../../blocks-common -l ../../../blocks-desktop -n i-jquery
+
+all: blocks
+
+blocks: $(foreach block,$(wildcard ../../blocks-*/*),$(notdir $(block))/$(notdir $(block)).ru.html $(notdir $(block))/$(notdir $(block)).en.html)
+	echo $^
+
+%.html: %.bemhtml.js %.bemjson.js
+	echo $@
+#	BEMTECH_locales_tech="html" \
+	BEMTECH_locales_locales="ru en" \
+	bem create block \
+	-T ../../blocks-common/i-bem/bem/techs/html.js \
+	-b $(*D)
+
+%.bemjson.js: %.full.wiki
+	echo 'bemjson'
+
+%.full.wiki: %.blockdecl.js
+	echo 'full2'
+	echo $(*F)
+	BEMTECH_locales_tech="`pwd`/../../lib/bem/techs/full.wiki.js" \
+	BEMTECH_locales_locales="ru en" \
+	bem build -d $(*D)/$(*D).blockdecl.js \
+	-t ../../lib/bem/techs/locales.js \
+	-l ../../blocks-common -l ../../blocks-desktop \
+	-n $(*D) \
+	-o $(*D)
+
+%.blockdecl.js:
+	echo 'bemdecl'
+	echo $@
+	mkdir -p $(*D)
+	echo 'exports.blocks = [{ name: "$(*D)"}]' > $@
+
+#################################
+.SECONDEXPANSION:
+i-%/ b-%/: $$(@D)/$$(@D).ru.full.wiki
+	echo 'block'
+	echo $^
+
+.SECONDEXPANSION:
+%.ru.full.wiki: %.bemdecl.js
+	echo 'full'
+	echo $^
+#	BEMTECH_locales_tech="`pwd`/../../lib/bem/techs/full.wiki.js" \
+	BEMTECH_locales_locales="ru en" \
+	bem build -d $(*D)/$(*D).bemdecl.js \
+	-t ../../lib/bem/techs/locales.js \
+	-l ../../blocks-common -l ../../blocks-desktop \
+	-n $(*D) \
+	-o $(*D)
+
+#	node ../../lib/wiki2html.js $(@D)/$(@D).en.full.wiki $(@D)/$(@D).en.bemjson.js
+
+
+%.bemdecl.js:
+	echo 'bemdecl'
+	echo $@
+	mkdir -p $(*D)
+	echo 'exports.blocks = [{ name: "$(*D)"}]' > $@
+
+.PHONY: all blocks
