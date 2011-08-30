@@ -26,6 +26,16 @@ blocks: $(foreach block,$(wildcard ../../blocks-*/*),$(notdir $(block))/$(notdir
 		-n $(*F) \
 		-o $(@D)
 
+%.deps.js: %.bemdecl.js
+	touch $@
+	bem build \
+		-l ../../blocks-common \
+		-l ../../blocks-desktop \
+		-d $*.bemdecl.js \
+		-t deps.js \
+		-n $(*F) \
+		-o $(@D)
+
 .PRECIOUS: %.css
 %.css: %.deps.js
 	touch $@
@@ -56,16 +66,6 @@ blocks: $(foreach block,$(wildcard ../../blocks-*/*),$(notdir $(block))/$(notdir
 		-l ../../blocks-desktop \
 		-d $*.deps.js \
 		-t css \
-		-n $(*F) \
-		-o $(@D)
-
-%.deps.js: %.bemdecl.js
-	touch $@
-	bem build \
-		-l ../../blocks-common \
-		-l ../../blocks-desktop \
-		-d $*.bemdecl.js \
-		-t deps.js \
 		-n $(*F) \
 		-o $(@D)
 
