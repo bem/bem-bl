@@ -1,0 +1,2 @@
+([{block: 'b-page',title: 'заголовок',head: [{ elem: 'css', url: 'index.full.wiki.css', ie: false},{ elem: 'css', url: 'index.full.wiki.ie.css', ie: 'lt IE 8'},{ elem: 'js', url: 'index.full.wiki.js'}],content: [{"block":"b-text","content":[{"elem":"h1","content":["BEM BL"]},{"elem":"ul","content":[{"elem":"li","content":[{"block":"b-link","url":"index.en.html","content":["English"]}]},{"elem":"li","content":[{"block":"b-link","url":"index.ru.html","content":["Русский"]}]}]}]}
+]}])
