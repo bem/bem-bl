@@ -20,7 +20,7 @@
                         {
                             elem: 'cell',
                             colspan: '2',
-                            content:  'q'
+                            content:  'Первая строка'
                         }
                     ]
                 },
@@ -29,11 +29,11 @@
                     content: [
                         {
                             elem: 'cell',
-                            content:  'q'
+                            content:  'Вторая строка'
                         },
                         {
                             elem: 'cell',
-                            content:  'вторая колонка'
+                            content:  'Вторая строка'
                         }
                     ]
                 }
