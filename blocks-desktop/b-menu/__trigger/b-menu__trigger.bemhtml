@@ -1,0 +1,15 @@
+block b-menu, elem trigger, default: {
+
+    var ctx = this.ctx;
+
+    local (
+        this._mode = '',
+        ctx.elem = undefined,
+        ctx.block = 'b-link',
+        ctx.mods = { pseudo: 'yes' },
+        ctx.mix = [ { block: 'b-menu', elem: 'trigger' } ]
+    ) this.apply();
+
+ }
+
+
