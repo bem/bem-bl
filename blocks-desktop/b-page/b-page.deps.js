@@ -1,15 +1,8 @@
 ({
     mustDeps: [
-        {
-            block: 'i-bem',
-            elem: 'html'
-        },
-        {
-            block: 'i-ua'
-        },
-        {
-            block: 'i-jquery',
-            elem: 'core'
-        }
+        { block: 'i-bem', elems: 'html' },
+        { block: 'i-ua' },
+        { block: 'i-jquery', elems: 'core' },
+        { block: 'i-global' }
     ]
 })
