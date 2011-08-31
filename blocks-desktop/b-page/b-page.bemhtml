@@ -27,15 +27,9 @@ block b-page {
                                 url: this.ctx.favicon
                             } : '',
                             this.ctx.meta,
-                            [
-                                {
-                                    block: 'i-ua'
-                                },
-                                {
-                                    block: 'i-jquery',
-                                    elem: 'core'
-                                }
-                            ],
+                            {
+                                block: 'i-ua'
+                            },
                             this.ctx.head
                         ]
                     },
