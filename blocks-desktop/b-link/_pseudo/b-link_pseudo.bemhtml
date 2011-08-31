@@ -1,4 +1,4 @@
-block b-link, mod pseudo yes {
+block b-link, this.mods.pseudo {
 
     tag: (this.ctx.url? 'a' : 'span')
 
