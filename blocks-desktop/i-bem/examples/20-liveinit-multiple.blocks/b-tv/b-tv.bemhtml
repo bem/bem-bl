@@ -1,0 +1,15 @@
+block b-tv {
+
+    js: true
+
+    elem click {
+        tag: 'input'
+        attrs: { type: 'button', value: 'Кликать' }
+    }
+
+    elem over {
+        tag: 'input'
+        attrs: { type: 'button', value: 'Наводить' }
+    }
+
+}
