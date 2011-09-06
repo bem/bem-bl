@@ -1,0 +1,9 @@
+.b-menu-vert__layout,
+.b-menu-vert__separator,
+.b-menu-vert__layout-unit
+{
+    margin: 0;
+    padding: 0;
+
+    list-style: none;
+}
