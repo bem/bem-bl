@@ -1,27 +1,28 @@
-block b-menu, mod layout horiz {
+block b-menu-vert {
+
+    js: true
 
     content: [
         this.ctx.title,
         {
             elem: 'layout',
             content: this.ctx.content
-    }]
+        }
+    ]
 
     elem layout, tag: 'ul'
 
     elem item, default, !this.ctx._wrap: {
-
-        var content = [{
-            elem: 'layout-unit',
-            content: this.ctx
-        }];
-
         local(
             this._mode = '',
             this.ctx._wrap = true,
             this.position = this.position - 1,
-            this.ctx = content
+            this.ctx = {
+                elem: 'layout-unit',
+                content: [ this.ctx, this.ctx['item-content'] ]
+            }
         ) this.apply();
+
     }
 
     elem layout-unit {
