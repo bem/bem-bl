@@ -1,20 +1,20 @@
 ({
     block: 'b-page',
-    title: 'b-menu',
+    title: 'b-menu-horiz',
     head: [
-        { elem: 'css', url: '_10_b-menu-horiz.css' },
+        { elem: 'css', url: '_20-b-menu-horiz_complex.css' },
         { elem: 'js', url: '//yandex.st/jquery/1.6.2/jquery.min.js' },
-        { elem: 'js', url: '_10_b-menu-horiz.js' }
+        { elem: 'js', url: '_20-b-menu-horiz_complex.js' }
     ],
     content: [
         {
-            block: 'b-menu',
-            mods: { layout: 'horiz' },
-            title: {
-                elem: 'title',
-                content: 'Заголовок:'
-            },
+            block: 'b-menu-horiz',
+            mods: { layout: 'complex' },
             content: [
+                {
+                    elem: 'title',
+                    content: 'Заголовок:'
+                },
                 {
                     elem: 'item',
                     elemMods: { state: 'current' },

@@ -1,4 +1,4 @@
-block b-menu, elem trigger, default: {
+block b-menu-vert, elem trigger, default: {
 
     var ctx = this.ctx;
 
@@ -7,9 +7,7 @@ block b-menu, elem trigger, default: {
         ctx.elem = undefined,
         ctx.block = 'b-link',
         ctx.mods = { pseudo: 'yes' },
-        ctx.mix = [ { block: 'b-menu', elem: 'trigger' } ]
+        ctx.mix = [ { block: 'b-menu-vert', elem: 'trigger' } ]
     ) this.apply();
 
  }
-
-

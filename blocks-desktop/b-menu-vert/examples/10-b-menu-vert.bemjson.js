@@ -1,20 +1,19 @@
 ({
     block: 'b-page',
-    title: 'b-menu',
+    title: 'b-menu-vert',
     head: [
-        { elem: 'css', url: '_20_b-menu-vert.css' },
+        { elem: 'css', url: '_10-b-menu-vert.css' },
         { elem: 'js', url: '//yandex.st/jquery/1.6.2/jquery.min.js' },
-        { elem: 'js', url: '_20_b-menu-vert.js' }
+        { elem: 'js', url: '_10-b-menu-vert.js' }
     ],
     content: [
         {
-            block: 'b-menu',
-            mods: { layout: 'vert' },
+            block: 'b-menu-vert',
+            title: {
+                elem: 'title',
+                content: 'Заголовок:'
+            },
             content: [
-                {
-                    elem: 'title',
-                    content: 'Заголовок: '
-                },
                 {
                     elem: 'item',
                     elemMods: { state: 'current' },
@@ -22,28 +21,27 @@
                 },
                 {
                     elem: 'item',
-                    content: [
-                        {
-                            elem: 'trigger',
-                            url: '/',
-                            content: 'Элемент Триггер'
-                        },
-                        {
-                            elem: 'item-content',
+                    content: {
+                        elem: 'trigger',
+                        content: 'Элемент Триггер'
+
+                    },
+                    'item-content': {
+                        elem: 'item-content',
+                        content: {
+                            block: 'b-menu-vert',
                             content: [
                                 {
-                                    block: 'b-menu',
-                                    mods: { layout: 'vert' },
-                                    content: [
-                                        {
-                                            elem: 'item',
-                                            content: 'Вложенное меню'
-                                        }
-                                    ]
+                                    elem: 'item',
+                                    content: 'Пункт вложенного меню'
+                                },
+                                {
+                                    elem: 'item',
+                                    content: 'Еще один'
                                 }
                             ]
                         }
-                    ]
+                    }
                 },
                 {
                     elem: 'item',
@@ -52,6 +50,9 @@
                         url: '/',
                         content: 'Поиск'
                     }
+                },
+                {
+                    elem: 'separator'
                 },
                 {
                     elem: 'item',
