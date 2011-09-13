@@ -6,7 +6,7 @@ block b-menu-vert, elem trigger, default: {
         this._mode = '',
         ctx.elem = undefined,
         ctx.block = 'b-link',
-        ctx.mods = { pseudo: 'yes' },
+        ctx.mods = { pseudo: 'yes', inner: 'yes' },
         ctx.mix = [ { block: 'b-menu-vert', elem: 'trigger' } ]
     ) this.apply();
 

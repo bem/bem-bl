@@ -1,0 +1,15 @@
+.b-menu-vert__item
+{
+    padding: 0.3em 0.3em 0.3em 23px;
+}
+
+.b-menu-vert .b-icon
+{
+    margin: 2px 3px -2px -18px;
+}
+
+.b-menu-vert__item_state_current .b-menu-vert__item-selector .b-link__inner
+{
+    color: #000 !important;
+    border-bottom: none !important;
+}
