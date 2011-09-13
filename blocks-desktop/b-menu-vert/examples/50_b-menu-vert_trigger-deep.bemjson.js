@@ -1,29 +1,25 @@
 ({
     block: 'b-page',
-    title: 'b-menu-vert',
+    title: 'Меню с глубоко вложенным триггером',
     head: [
-        { elem: 'css', url: '_10-b-menu-vert.css' },
+        { elem: 'css', url: '_50_b-menu-vert_trigger-deep.css' },
         { elem: 'js', url: '//yandex.st/jquery/1.6.2/jquery.min.js' },
-        { elem: 'js', url: '_10-b-menu-vert.js' }
+        { elem: 'js', url: '_50_b-menu-vert_trigger-deep.js' }
     ],
     content: [
         {
             block: 'b-menu-vert',
+            js: true,
             title: {
                 elem: 'title',
-                content: 'Заголовок:'
+                content: 'Меню с глубоко вложенным триггером:'
             },
             content: [
                 {
                     elem: 'item',
-                    elemMods: { state: 'current' },
-                    content: 'Главная'
-                },
-                {
-                    elem: 'item',
                     content: {
                         elem: 'trigger',
-                        content: 'Элемент Триггер'
+                        content: 'trigger1'
 
                     },
                     'item-content': {
@@ -33,11 +29,23 @@
                             content: [
                                 {
                                     elem: 'item',
-                                    content: 'Пункт вложенного меню'
+                                    content: 'Submenu point 1'
+                                },
+                                {
+                                elem: 'item',
+                                    content: {
+                                        elem: 'trigger',
+                                        content: 'trigger2'
+
+                                    },
+                                    'item-content' : {
+                                        elem: 'item-content',
+                                        content: 'Content'
+                                    }
                                 },
                                 {
                                     elem: 'item',
-                                    content: 'Еще один'
+                                    content: 'Submenu point 2'
                                 }
                             ]
                         }
@@ -45,21 +53,11 @@
                 },
                 {
                     elem: 'item',
+                    elemMods: { state: 'current'},
                     content: {
                         block: 'b-link',
                         url: '/',
-                        content: 'Поиск'
-                    }
-                },
-                {
-                    elem: 'separator'
-                },
-                {
-                    elem: 'item',
-                    content: {
-                        block: 'b-link',
-                        url: '/',
-                        content: 'О проекте'
+                        content: 'Second point'
                     }
                 }
             ]

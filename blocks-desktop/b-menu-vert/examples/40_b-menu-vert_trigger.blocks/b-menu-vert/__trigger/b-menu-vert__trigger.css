@@ -1,0 +1,19 @@
+.b-menu-vert__trigger
+{
+    margin-left: -18px;
+}
+
+.b-menu-vert__trigger-icon
+{
+    margin: 1px 0 -1px;
+    padding: 9px 0 0 16px;
+
+    cursor: pointer;
+
+    background: url(b-menu-vert__trigger.gif) no-repeat;
+}
+
+.b-menu-vert__trigger_state_opened .b-menu-vert__trigger-icon
+{
+    background-position: -16px 0;
+}

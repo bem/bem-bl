@@ -12,20 +12,49 @@
             mods: { layout: 'complex' },
             content: [
                 {
-                    elem: 'title',
-                    content: 'Заголовок:'
-                },
-                {
                     elem: 'item',
                     elemMods: { state: 'current' },
-                    content: 'Первая ячейка'
+                    content: [
+                            {
+                                block: 'b-icon',
+                                mods: { type: 'compose'},
+                                alt: 'Compose'
+                            },
+                        'Compose'
+                    ]
+                },
+                {
+                    elem: 'item',
+                    content: {
+                        block: 'b-link',
+                        mix: [{ block: 'b-menu-horiz', elem : 'item-selector' }],
+                        url: '/',
+                        content: [
+                            {
+                                block: 'b-icon',
+                                mods: { type: 'check'},
+                                alt: 'Check'
+                            },
+                            'Check&nbsp;mail'
+                        ]
+                    }
+                },
+                {
+                    elem: 'separator'
                 },
                 {
                     elem: 'item',
                     content: {
                         block: 'b-link',
                         url: '/',
-                        content: 'Находки'
+                        content: [
+                            {
+                                block: 'b-icon',
+                                mods: { type: 'forward'},
+                                alt: 'forward'
+                            },
+                            'Forward'
+                        ]
                     }
                 },
                 {
@@ -33,15 +62,62 @@
                     content: {
                         block: 'b-link',
                         url: '/',
-                        content: 'Поиск'
+                        content: [
+                            {
+                                block: 'b-icon',
+                                mods: { type: 'delete'},
+                                alt: 'Delete'
+                            },
+                            'Delete'
+                        ]
                     }
+                },
+                {
+                    elem: 'item',
+                    elemMods: { state: 'disabled'},
+                    content: [
+                        {
+                            block: 'b-icon',
+                            mods: { type: 'spam'},
+                            alt: 'Spam'
+                        },
+                        'Spam!'
+                    ]
                 },
                 {
                     elem: 'item',
                     content: {
                         block: 'b-link',
                         url: '/',
-                        content: 'О проекте'
+                        content: [
+                            {
+                                block: 'b-icon',
+                                mods: { type: 'read'},
+                                alt: 'Read'
+                            },
+                            'Read'
+                        ]
+                    }
+                },
+                {
+                    elem: 'gap'
+                },
+                {
+                    elem: 'item',
+                    elemMods: { type: 'bottom'},
+                    content: {
+                        block: 'b-link',
+                        url: '/',
+                        content: 'Mark&nbsp;as'
+                    }
+                },
+                {
+                    elem: 'item',
+                    elemMods: { type: 'bottom'},
+                    content: {
+                        block: 'b-link',
+                        url: '/',
+                        content: 'Move&nbsp;to&nbsp;folder'
                     }
                 }
             ]

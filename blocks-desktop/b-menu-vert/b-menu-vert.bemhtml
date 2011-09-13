@@ -1,7 +1,5 @@
 block b-menu-vert {
 
-    js: true
-
     content: [
         this.ctx.title,
         {
@@ -36,5 +34,9 @@ block b-menu-vert {
             return mix;
         }
     }
+
+    elem 'item-selector', tag: 'span'
+
+    elem submenu, tag: 'ul'
 
 }

@@ -1,0 +1,33 @@
+.b-menu-horiz__item
+{
+    margin: 0 0.3em;
+    padding: 0.3em 0.5em;
+}
+
+.b-menu-horiz__item_state_current
+{
+    border-radius: 3px;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+
+    background: #eee;
+    background: -webkit-gradient(linear,left top,left bottom,color-stop(10%,#FFFFFF),color-stop(100%,#C1C1C1));
+    background: -moz-linear-gradient(top,#FFFFFF 10%,#C1C1C1 100%);
+    background: -o-linear-gradient(top,#FFFFFF 10%,#C1C1C1 100%);
+
+    -moz-box-shadow: inset 0 2px 5px rgba(0,0,0,0.57);
+    -webkit-box-shadow: inset 0 2px 5px rgba(0,0,0,0.57);
+    box-shadow: inset 0 2px 5px rgba(0,0,0,0.57);
+}
+
+.b-menu-horiz__item_state_current .b-menu-horiz__item-selector
+{
+    cursor: default !important;
+
+    color: #000;
+}
+
+.b-menu-horiz__item-selector .b-link__inner
+{
+    border-bottom: 0 !important;
+}

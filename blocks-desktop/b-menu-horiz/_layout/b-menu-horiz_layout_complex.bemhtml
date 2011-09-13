@@ -3,36 +3,15 @@ block b-menu-horiz, mod layout complex {
     content: [
         {
             elem: 'layout',
-            content: this.ctx.content
+            tag: 'table',
+            content: {
+                elem: 'layout-row',
+                tag: 'tr',
+                content: this.ctx.content
+            }
     }]
 
-    elem layout, tag: 'table'
-
-    this.elem === 'item' || this.elem === 'title', default, !this.ctx._wrap: {
-
-        var content = [{
-            elem: 'layout-unit',
-            content: this.ctx
-        }];
-
-        local(
-            this._mode = '',
-            this.ctx._wrap = true,
-            this.position = this.position - 1,
-            this.ctx = content
-        ) this.apply();
-    }
-
-    elem layout-unit {
-        tag: 'td',
-        mix: {
-            var mix = [];
-
-            this.isFirst() && mix.push({ elemMods: { position: 'first' } });
-            this.isLast() && mix.push({ elemMods: { position: 'last' } });
-
-            return mix;
-        }
-    }
-
+    this.elem === 'layout-unit' ||
+    this.elem === 'separator' ||
+    this.elem === 'gap', tag: 'td'
 }

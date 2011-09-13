@@ -1,6 +1,7 @@
 ({
     mustDeps: [
         { elem: 'title' },
-        { elem: 'item-content' }
+        { elem: 'item-content' },
+        { block: 'i-menu' }
     ]
 })
