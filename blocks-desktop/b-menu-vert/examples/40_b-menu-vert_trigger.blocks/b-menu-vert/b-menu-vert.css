@@ -1,0 +1,27 @@
+.b-menu-vert
+{
+    width: 180px;
+}
+
+.b-menu-vert__title
+{
+    font-size: 100%;
+
+    margin: 5px 5px 5px 23px;
+}
+
+.b-menu-vert__item
+{
+    padding: 3px 5px 3px 23px;
+}
+
+.b-menu-vert_type_submenu .b-menu-vert__item
+{
+    margin-left: 20px;
+}
+
+.b-menu-vert__separator
+{
+    width: 130px;
+    margin: 4px 0 4px 8px;
+}

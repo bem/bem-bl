@@ -1076,7 +1076,10 @@ var DOM = BEM.DOM = BEM.decl('i-bem__dom',/** @lends BEM.DOM.prototype */{
             init($(this), uniqInitId);
         });
 
-        callback && this.afterCurrentEvent(callback, callbackCtx);
+        callback && this.afterCurrentEvent(
+            function() {
+                callback.call(callbackCtx || this, ctx);
+            });
 
     },
 
