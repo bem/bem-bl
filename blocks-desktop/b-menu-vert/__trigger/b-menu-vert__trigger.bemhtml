@@ -1,13 +1,1 @@
-block b-menu-vert, elem trigger, default: {
-
-    var ctx = this.ctx;
-
-    local (
-        this._mode = '',
-        ctx.elem = undefined,
-        ctx.block = 'b-link',
-        ctx.mods = { pseudo: 'yes', inner: 'yes' },
-        ctx.mix = [ { block: 'b-menu-vert', elem: 'trigger' } ]
-    ) this.apply();
-
- }
+block b-menu-vert, elem trigger, tag: 'span'
