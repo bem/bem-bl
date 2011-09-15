@@ -1,7 +1,5 @@
 block b-logo {
 
-    js: true
-
     elem link, default: {
         var ctx = this.ctx;
 
@@ -9,13 +7,13 @@ block b-logo {
             this._mode = '',
             ctx.elem = undefined,
             ctx.block = 'b-link',
+            ctx.icon.block = 'b-logo',
+            ctx.content = ctx.icon,
             ctx.mix = [ { block: 'b-logo', elem: 'link' } ]
         ) this.apply();
 
     }
-}
 
-block b-link {
     elem icon, default: {
         var ctx = this.ctx;
 
