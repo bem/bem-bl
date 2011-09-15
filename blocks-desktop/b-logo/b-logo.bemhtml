@@ -1,14 +1,16 @@
 block b-logo {
 
     elem link, default: {
-        var ctx = this.ctx;
+        var ctx = this.ctx,
+            content = ctx.content || ctx.icon;
+
+        ctx.icon && (ctx.icon.block = 'b-logo');
 
         local (
             this._mode = '',
             ctx.elem = undefined,
             ctx.block = 'b-link',
-            ctx.icon.block = 'b-logo',
-            ctx.content = ctx.icon,
+            ctx.content = content,
             ctx.mix = [ { block: 'b-logo', elem: 'link' } ]
         ) this.apply();
 
@@ -25,5 +27,3 @@ block b-logo {
         ) this.apply();
     }
 }
-
-
