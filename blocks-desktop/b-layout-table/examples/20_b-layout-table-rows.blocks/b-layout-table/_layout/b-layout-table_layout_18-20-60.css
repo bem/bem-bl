@@ -1,0 +1,35 @@
+.b-layout-table_layout_18-20-60 .b-layout-table__cell
+{
+    padding: 0.4em 0;
+    
+    background: #00cbbd;
+}
+
+.b-layout-table_layout_18-20-60 .b-layout-table__cell_position_l
+{
+    width: 18%;
+
+    background: #9c0;
+}
+
+.b-layout-table_layout_18-20-60 .b-layout-table__cell_position_m
+{
+    width: 20%;
+
+    background: #dc143c;
+}
+
+.b-layout-table_layout_18-20-60 .b-layout-table__cell_position_r
+{
+    width: 60%;
+
+    background: #f3a828;
+}
+
+.b-layout-table_layout_18-20-60 .b-layout-table__gap
+{
+    width: 2%;
+    padding-left: 20px;
+
+    background: #ccc;
+}

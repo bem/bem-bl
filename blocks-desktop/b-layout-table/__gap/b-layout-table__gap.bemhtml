@@ -1,1 +1,0 @@
-block b-layout-table, elem gap, content: { elem: 'gap-i', tag: 'i' }
