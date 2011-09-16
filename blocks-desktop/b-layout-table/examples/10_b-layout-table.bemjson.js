@@ -3,41 +3,26 @@
     title: 'b-layout-table',
     head: [
         { elem: 'css', url: '_10_b-layout-table.css' },
-        { elem: 'css', url: '_10_b-layout-table.ie.css', ie: true },
         { elem: 'js', url: '_10_b-layout-table.js' }
     ],
     content: [
         {
             block: 'b-layout-table',
-            content: [
-                {
-                    elem: 'row',
-                    content: [
-                        {
-                            elem: 'gap',
-                            rowspan: '2'
-                        },
-                        {
-                            elem: 'cell',
-                            colspan: '2',
-                            content:  'Первая строка'
-                        }
-                    ]
-                },
-                {
-                    elem: 'row',
-                    content: [
-                        {
-                            elem: 'cell',
-                            content:  'Вторая строка'
-                        },
-                        {
-                            elem: 'cell',
-                            content:  'Вторая строка'
-                        }
-                    ]
-                }
-            ]
+            mods: { layout: '60-40'},
+            content: {
+                elem: 'row',
+                content: [
+                    {
+                        elem: 'cell',
+                        content: 'First cell'
+                    },
+                    {
+                        elem: 'cell',
+                        elemMods: { position: 'r'},
+                        content: 'Second cell'
+                    }
+                ]
+            }
         }
     ]
 })
