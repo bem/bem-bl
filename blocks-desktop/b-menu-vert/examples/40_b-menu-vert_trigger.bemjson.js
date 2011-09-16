@@ -23,7 +23,9 @@
                 {
                     elem: 'item',
                     content: {
-                        elem: 'trigger',
+                        block: 'b-link',
+                        mods: { pseudo: 'yes', inner: 'yes'},
+                        mix: [{ block: 'b-menu-vert', elem: 'trigger', elemMods: { state: 'opened' }}],
                         content: [
                             {
                                 block: 'b-icon',
@@ -38,6 +40,7 @@
                     },
                     'item-content': {
                         elem: 'item-content',
+                        elemMods: { visibility: 'visible'},
                         content: {
                             block: 'b-menu-vert',
                             mods: { 'type' : 'submenu' },
