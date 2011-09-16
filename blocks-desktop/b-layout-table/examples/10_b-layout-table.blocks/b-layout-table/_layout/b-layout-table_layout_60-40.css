@@ -1,0 +1,14 @@
+.b-layout-table_layout_60-40 .b-layout-table__cell
+{
+    width: 60%;
+    padding: 0.4em 0;
+
+    background: #9c0;
+}
+
+.b-layout-table_layout_60-40 .b-layout-table__cell_position_r
+{
+    width: 40%;
+
+    background: #f3a828;
+}
