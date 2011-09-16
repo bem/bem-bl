@@ -28,8 +28,9 @@
                 {
                     elem: 'item',
                     content: {
-                            elem: 'trigger',
-                            content: '+'
+                        elem: 'trigger',
+                        mix: [{ block: 'b-menu-vert', elem: 'item-selector'}],
+                        content: '+ Images'
                     },
                     'item-content': {
                         elem: 'item-content',

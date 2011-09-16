@@ -19,33 +19,60 @@
                     elem: 'item',
                     content: {
                         elem: 'trigger',
-                        content: 'trigger1'
-
+                        content: [
+                            {
+                                block: 'b-icon',
+                                mix: [{ block: 'b-menu-vert', elem: 'trigger-icon' }],
+                                alt: 'trigger'
+                            },'trigger 1'
+                        ]
                     },
                     'item-content': {
                         elem: 'item-content',
                         content: {
                             block: 'b-menu-vert',
+                            mods: { type: 'submenu'},
                             content: [
                                 {
                                     elem: 'item',
-                                    content: 'Submenu point 1'
-                                },
-                                {
-                                elem: 'item',
                                     content: {
-                                        elem: 'trigger',
-                                        content: 'trigger2'
-
-                                    },
-                                    'item-content' : {
-                                        elem: 'item-content',
-                                        content: 'Content'
+                                        block: 'b-link',
+                                        url: '/',
+                                        content: {
+                                            block: 'b-link',
+                                            url: '/',
+                                            content: 'Submenu point 1'
+                                        }
                                     }
                                 },
                                 {
                                     elem: 'item',
-                                    content: 'Submenu point 2'
+                                    content: {
+                                        elem: 'trigger',
+                                        content: [
+                                            {
+                                                block: 'b-icon',
+                                                mix: [{ block: 'b-menu-vert', elem: 'trigger-icon' }],
+                                                alt: 'trigger'
+                                            },'trigger 2'
+                                        ]
+                                    },
+                                    'item-content': {
+                                        elem: 'item-content',
+                                        content: {
+                                            block: 'b-link',
+                                            url: '/',
+                                            content: 'Content'
+                                        }
+                                    }
+                                },
+                                {
+                                    elem: 'item',
+                                    content: {
+                                        block: 'b-link',
+                                        url: '/',
+                                        content: 'Submenu point 2'
+                                    }
                                 }
                             ]
                         }
