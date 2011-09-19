@@ -50,6 +50,22 @@ var win = $(window),
     buildClass = INTERNAL.buildClass;
 
 /**
+ * Создает jquery объект с дополнительным свойством "block"
+ * в нем будет находиться инстанс блока
+ * @private
+ * @param {Object} block инстанс блока
+ * @param {JQuery element} [elem] объект в который нужно добавить дополнительное свойство 
+ */
+
+function makeJQuery(block, elem) {
+    elem = elem || "";
+    var node = BEM.jQuery( elem );
+    node.block = block;
+
+    return node;
+}
+
+/**
  * Инициализирует блоки на DOM-элементе
  * @private
  * @param {jQuery} domElem DOM-элемент
@@ -890,7 +906,7 @@ var DOM = BEM.DOM = BEM.decl('i-bem__dom',/** @lends BEM.DOM.prototype */{
                 $.map(names.split(' '), function(name) {
                     return buildClass(_self._name, name, modName, modVal);
                 }).join(',.');
-        return findDomElem(ctx, selector);
+        return makeJQuery( this, findDomElem(ctx, selector) );
 
     },
 
@@ -923,7 +939,7 @@ var DOM = BEM.DOM = BEM.decl('i-bem__dom',/** @lends BEM.DOM.prototype */{
             return this._elem(names, modName, modVal);
         }
 
-        var res = $([]),
+        var res = makeJQuery(this),
             _this = this;
         $.each(names.split(' '), function() {
             res = res.add(_this._elem(this, modName, modVal));
@@ -1611,5 +1627,39 @@ var DOM = BEM.DOM = BEM.decl('i-bem__dom',/** @lends BEM.DOM.prototype */{
     }
 
 });
+
+BEM.jQuery = BEM.$ = jQuery.sub();
+
+(function($) {
+    var plugins = {
+            findBlocksIn : true, findBlocksInside : true, findBlockIn : true, findBlockInside : true, 
+            findBlocksOn : true, findBlockOn : true, findBlockOutside : true, findBlocksOut : true, findBlocksOutside : true,
+
+            doBlocksMethodInside :  false, doBlocksMethodOutside :  false,
+            doBlocksMethodIn :  false, doBlocksMethodOut :  false, doBlocksMethodOn :  false,
+
+            getMod :  false, setMod :  false, toggleMod :  false, delMod :  false, hasMod : true, 
+            buildSelector :  false, bindTo :  false, unbindFrom : false
+    },
+    facade = function(block, instance, method, args) {
+
+        var result = block[ method ].apply( block, [ instance ].concat( Array.prototype.slice.call( args ) ) );
+
+        if ( plugins[ method ] === true ) {
+            return result;
+        }
+
+        return instance;
+
+    };
+
+    $.each( plugins, function(name) {
+           
+        ($.fn[ name ] = function plugin() {
+                return facade(this.block, this, plugin.method, arguments);
+        }).method = name;
+    });
+
+})( BEM.jQuery );
 
 })(BEM, jQuery);
