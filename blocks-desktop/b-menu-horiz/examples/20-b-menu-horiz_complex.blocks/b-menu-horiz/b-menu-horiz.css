@@ -1,0 +1,130 @@
+.b-menu-horiz_layout_complex
+{
+    height: 3em;
+}
+
+.b-menu-horiz_layout_complex .b-menu-horiz__item,
+.b-menu-horiz_layout_complex .b-menu-horiz__layout,
+.b-menu-horiz_layout_complex .b-menu-horiz__separator,
+.b-menu-horiz_layout_complex .b-menu-horiz__layout-unit
+{
+    height: 100%;
+}
+
+.b-menu-horiz_layout_complex .b-menu-horiz__item
+{
+    padding: 0.3em 0.5em;
+
+    text-align: center;
+}
+
+.b-menu-horiz_layout_complex .b-menu-horiz__item_state_current
+{
+    font-weight: 400;
+}
+
+.b-menu-horiz_layout_complex .b-menu-horiz__item_type_bottom .b-link:link,
+.b-menu-horiz_layout_complex .b-menu-horiz__item_type_bottom .b-link:visited
+{
+    font-size: 90%;
+
+    margin-top: 36px;
+    
+    text-decoration: underline;
+    
+    color: #00f;
+}
+
+.b-menu-horiz_layout_complex .b-menu-horiz__item_type_bottom .b-link:hover
+{
+    color: #000;
+}
+
+.b-menu-horiz_layout_complex .b-link
+{
+    display: block;
+}
+
+.b-menu-horiz_layout_complex .b-menu-horiz__separator
+{
+    border-left: 1px dotted #333;
+}
+
+.b-menu-horiz_layout_complex .b-link:link,
+.b-menu-horiz_layout_complex .b-link:hover,
+.b-menu-horiz_layout_complex .b-link:visited
+{
+    text-decoration: none;
+
+    color: #000;
+}
+
+.b-menu-horiz_layout_complex .b-link:hover .b-icon,
+.b-menu-horiz_layout_complex .b-menu-horiz__item_state_current .b-icon
+{
+    opacity: 1;
+}
+
+.b-menu-horiz_layout_complex .b-icon
+{
+    display: block;
+
+    margin: 0 auto 0.3em;
+    padding: 33px 51px 0 0;
+
+    opacity: 0.7;
+
+    background: url("//mailstatic.yandex.net/neo2/_/BXke5ArUmJ_5iqkPPY_Jq0PeU_w.png");
+}
+
+.b-menu-horiz_layout_complex .b-icon_type_check
+{
+    padding-right: 37px;
+
+    background-position: -52px 3px;
+}
+
+.b-menu-horiz_layout_complex .b-icon_type_forward
+{
+    padding-right: 31px;
+
+    background-position: -155px 6px;
+}
+
+.b-menu-horiz_layout_complex .b-icon_type_delete
+{
+    padding-right: 25px;
+
+    background-position: -187px 7px;
+}
+
+.b-menu-horiz_layout_complex .b-icon_type_spam
+{
+    padding-right: 35px;
+    
+    background-position: -213px 0;
+}
+
+.b-menu-horiz_layout_complex .b-icon_type_read
+{
+    padding-right: 31px;
+
+    background-position: -529px 8px;
+}
+
+.b-menu-horiz_layout_complex .b-menu-horiz__item_state_disabled
+{
+    cursor: default;
+
+    color: #ccc !important;
+}
+
+.b-menu-horiz_layout_complex .b-menu-horiz__item_state_disabled .b-link:link .b-icon
+{
+    opacity: 0.7;
+}
+
+.b-menu-horiz_layout_complex .b-menu-horiz__item_state_disabled .b-icon_type_spam
+{
+    background-position: -213px -34px;
+}

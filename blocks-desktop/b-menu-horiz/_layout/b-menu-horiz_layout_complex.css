@@ -1,0 +1,23 @@
+.b-menu-horiz_layout_complex .b-menu-horiz__layout
+{
+    font-size: 100%;
+
+    width: 100%;
+    padding: 0;
+
+    border-collapse: collapse;
+}
+
+.b-menu-horiz_layout_complex .b-menu-horiz__gap,
+.b-menu-horiz_layout_complex .b-menu-horiz__separator,
+.b-menu-horiz_layout_complex .b-menu-horiz__layout-unit
+{
+    padding: 0;
+
+    border-collapse: collapse;
+}
+
+.b-menu-horiz_layout_complex .b-menu-horiz__gap
+{
+    width: 100%;
+}

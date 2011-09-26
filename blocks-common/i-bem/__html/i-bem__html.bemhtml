@@ -90,18 +90,22 @@ default: {
             local(this._mode = 'mix') mix = this.apply();
             v.mix && (mix = mix? mix.concat(v.mix) : v.mix);
 
-            mix && mix.forEach(function(mix) {
-                var hasItem = mix.block || mix.elem,
-                    block = mix.block || _this.block;
-                hasItem && buf.push(' ');
-                BEM.INTERNAL[hasItem? 'buildClasses' : 'buildModsClasses'](
-                    block,
-                    mix.elem || (mix.block ? undefined : _this.elem),
-                    mix.elemMods || mix.mods,
-                    buf);
-                mix.js && ((jsParams || (jsParams = {}))[block] = mix.js === true? {} : mix.js);
-            });
+			if(mix) {
+				var i = 0, l = mix.length, mixItem, hasItem, block;
+				while(i < l) {
+					mixItem = mix[i++];
+					hasItem = mixItem.block || mixItem.elem,
+                    block = mixItem.block || _this.block;
 
+					hasItem && buf.push(' ');
+                	BEM.INTERNAL[hasItem? 'buildClasses' : 'buildModsClasses'](
+						block,
+						mixItem.elem || (mixItem.block ? undefined : _this.elem),
+						mixItem.elemMods || mixItem.mods,
+						buf);
+					mixItem.js && ((jsParams || (jsParams = {}))[block] = mixItem.js === true? {} : mixItem.js);
+				}
+			}
         }
 
         cls && buf.push(isBEM? ' ' : '', cls);
@@ -328,7 +332,10 @@ content: this.ctx.content
     var buildEscape = (function() {
             var ts = { '"': '&quot;', '&': '&amp;', '<': '&lt;', '>': '&gt;' },
                 f = function(t) { return ts[t] || t };
-            return function(r) { return function(s) { return ('' + s).replace(r, f) } }
+            return function(r) {
+                r = new RegExp(r, 'g');
+                return function(s) { return ('' + s).replace(r, f) }
+            }
         })(),
         ctx = {
             ctx: this,
@@ -353,8 +360,8 @@ content: this.ctx.content
                     for(n in o2) o2.hasOwnProperty(n) && (res[n] = o2[n]);
                     return res;
                 },
-                xmlEscape: buildEscape(/[&<>]/g),
-                attrEscape: buildEscape(/["&<>]/g)
+                xmlEscape: buildEscape('[&<>]'),
+                attrEscape: buildEscape('["&<>]')
             },
             BEM: BEM,
             isFirst: function() { return this.position === 1 },
