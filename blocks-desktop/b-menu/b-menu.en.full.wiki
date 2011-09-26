@@ -1,17 +1,2 @@
 ##{"block":"b-menu"}##
 
-===Block Modificators
- * layout
-   * horiz
-   * vert
-===Block Elements
- * trigger
- * title
-##{"mods":{"layout":"horiz"}}##
-
-##{"mods":{"layout":"vert"}}##
-
-##{"elem":"trigger"}##
-
-##{"elem":"title"}##
-

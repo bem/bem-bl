@@ -1,0 +1,14 @@
+##{"block":"b-menu-horiz"}##
+
+===Модификаторы блока
+ * layout
+   * complex
+   * horiz
+===Элементы блока
+ * title
+##{"mods":{"layout":"complex"}}##
+
+##{"mods":{"layout":"horiz"}}##
+
+##{"elem":"title"}##
+
