@@ -22,7 +22,6 @@
         {
             block: 'b-link',
             url: 'http://ya.ru',
-            counter: 'myCounter()',
             content: 'Ссылка cо счетчиком'
         }
     ]

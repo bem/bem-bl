@@ -1,0 +1,27 @@
+block b-menu-horiz, this.mods {
+
+    elem item, default, !this.ctx._wrap: {
+
+        local(
+            this._mode = '',
+            this.ctx._wrap = true,
+            this.position = this.position - 1,
+            this.ctx = {
+                elem: 'layout-unit',
+                content: this.ctx
+            }
+        ) this.apply();
+    }
+
+    elem layout-unit, mix: {
+        var mix = [];
+
+        this.isFirst() && mix.push({ elemMods: { position: 'first' } });
+        this.isLast() && mix.push({ elemMods: { position: 'last' } });
+
+        return mix;
+    }
+
+    elem 'item-selector', tag: 'span'
+
+}
