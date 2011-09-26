@@ -1076,7 +1076,10 @@ var DOM = BEM.DOM = BEM.decl('i-bem__dom',/** @lends BEM.DOM.prototype */{
             init($(this), uniqInitId);
         });
 
-        callback && this.afterCurrentEvent(callback, callbackCtx);
+        callback && this.afterCurrentEvent(
+            function() {
+                callback.call(callbackCtx || this, ctx);
+            });
 
     },
 
@@ -1147,12 +1150,11 @@ var DOM = BEM.DOM = BEM.decl('i-bem__dom',/** @lends BEM.DOM.prototype */{
             });
         }
         else {
-            var liveE = _this._buildCtxEventName(e),
-                storage = liveClassEventStorage[liveE],
+            var storage = liveClassEventStorage[e],
                 uniqId = $.identify(callback);
 
             if(!storage) {
-                storage = liveClassEventStorage[liveE] = {};
+                storage = liveClassEventStorage[e] = {};
                 doc.bind(e, _this.changeThis(_this._liveClassTrigger, _this));
             }
 
@@ -1170,9 +1172,7 @@ var DOM = BEM.DOM = BEM.decl('i-bem__dom',/** @lends BEM.DOM.prototype */{
 
     _liveClassUnbind : function(className, e, callback) {
 
-        var liveE = this._buildCtxEventName(e),
-            storage = liveClassEventStorage[liveE];
-
+        var storage = liveClassEventStorage[e];
         if(storage) {
             if(callback) {
                 if(storage = storage[className]) {
@@ -1196,7 +1196,7 @@ var DOM = BEM.DOM = BEM.decl('i-bem__dom',/** @lends BEM.DOM.prototype */{
 
     _liveClassTrigger : function(e) {
 
-        var storage = liveClassEventStorage[this._buildCtxEventName(e.type)];
+        var storage = liveClassEventStorage[e.type];
         if(storage) {
             var node = e.target, classNames = [];
             for(var className in storage) storage.hasOwnProperty(className) && classNames.push(className);

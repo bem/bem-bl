@@ -1,0 +1,42 @@
+block b-menu-vert {
+
+    content: [
+        this.ctx.title,
+        {
+            elem: 'layout',
+            content: this.ctx.content
+        }
+    ]
+
+    elem layout, tag: 'ul'
+
+    elem item, default, !this.ctx._wrap: {
+        local(
+            this._mode = '',
+            this.ctx._wrap = true,
+            this.position = this.position - 1,
+            this.ctx = {
+                elem: 'layout-unit',
+                content: [ this.ctx, this.ctx['item-content'] ]
+            }
+        ) this.apply();
+
+    }
+
+    elem layout-unit {
+        tag: 'li',
+        mix: {
+            var mix = [];
+
+            this.isFirst() && mix.push({ elemMods: { position: 'first' } });
+            this.isLast() && mix.push({ elemMods: { position: 'last' } });
+
+            return mix;
+        }
+    }
+
+    elem 'item-selector', tag: 'span'
+
+    elem submenu, tag: 'ul'
+
+}

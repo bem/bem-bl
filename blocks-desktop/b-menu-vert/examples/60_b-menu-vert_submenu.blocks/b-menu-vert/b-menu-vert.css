@@ -1,0 +1,19 @@
+.b-menu-vert__title
+{
+    font-size: 100%;
+
+    margin: 5px 5px 5px 23px;
+}
+
+.b-menu-vert__item
+{
+    display: inline-block;
+
+    margin-left: 23px;
+    padding: 3px 5px;
+}
+
+.b-menu-vert__item_state_current
+{
+    background-color: yellow;
+}

@@ -1,0 +1,20 @@
+##{"block":"b-menu-vert"}##
+
+===Элементы блока
+ * item-content
+   * Модификаторы элемента
+
+     * item-content
+ * separator
+ * trigger
+ * title
+##{"elem":"item-content"}##
+
+##{"elem":"item-content","elemMods":{"visibility":"visible"}}##
+
+##{"elem":"separator"}##
+
+##{"elem":"trigger"}##
+
+##{"elem":"title"}##
+

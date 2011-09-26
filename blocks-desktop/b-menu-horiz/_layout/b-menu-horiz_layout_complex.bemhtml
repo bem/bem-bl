@@ -1,0 +1,17 @@
+block b-menu-horiz, mod layout complex {
+
+    content: [
+        {
+            elem: 'layout',
+            tag: 'table',
+            content: {
+                elem: 'layout-row',
+                tag: 'tr',
+                content: this.ctx.content
+            }
+    }]
+
+    this.elem === 'layout-unit' ||
+    this.elem === 'separator' ||
+    this.elem === 'gap', tag: 'td'
+}

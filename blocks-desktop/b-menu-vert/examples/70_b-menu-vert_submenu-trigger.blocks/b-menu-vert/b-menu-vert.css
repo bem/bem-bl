@@ -1,0 +1,21 @@
+.b-menu-vert
+{
+    width: 330px;
+}
+
+.b-menu-vert__title
+{
+    font-size: 100%;
+
+    margin: 5px 5px 5px 23px;
+}
+
+.b-menu-vert__item
+{
+    padding: 3px 5px 3px 23px;
+}
+
+.b-menu-vert__item_state_current
+{
+    background-color: lightblue;
+}

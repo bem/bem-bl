@@ -8,7 +8,6 @@ block b-link {
             a = { href: ctx.url },
             props = ['title', 'target'], p;
 
-        ctx.counter && (a.onmousedown = ctx.counter);
         while(p = props.shift()) ctx[p] && (a[p] = ctx[p]);
 
         return a;
