@@ -56,12 +56,12 @@
         padding: 0;
     }
 
-    .b-text_type_global ol .b-text_type_global li
+    .b-text_type_global ol li
     {
         list-style: decimal;
     }
 
-    .b-text_type_global ul .b-text_type_global li
+    .b-text_type_global ul li
     {
         list-style: disc;
     }
