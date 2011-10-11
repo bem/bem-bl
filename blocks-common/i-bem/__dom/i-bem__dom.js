@@ -869,6 +869,7 @@ var DOM = BEM.DOM = BEM.decl('i-bem__dom',/** @lends BEM.DOM.prototype */{
     /**
      * Находит вложенные в блок элементы
      * @protected
+     * @param {String|jQuery} [ctx=this.domElem] элемент, на котором проходит поиск
      * @param {String} names имя (или через пробел имена) вложенного элемента
      * @param {String} [modName] имя модификатора
      * @param {String} [modVal] значение модификатора
@@ -1428,35 +1429,41 @@ var DOM = BEM.DOM = BEM.decl('i-bem__dom',/** @lends BEM.DOM.prototype */{
      */
     _liveCtxBind : function(ctx, e, data, fn, fnCtx) {
 
-        if($.isFunction(data)) {
-            fnCtx = fn;
-            fn = data;
-            data = undefined;
-        }
-
         var _this = this;
 
-        if(e.indexOf(' ') > -1) {
-            $.each(e.split(' '), function(i, e) {
-                _this._liveCtxBind(ctx, e, data, fn, fnCtx);
-            });
-        } else {
-            var ctxE = _this._buildCtxEventName(e),
-                storage = liveEventCtxStorage[ctxE] ||
-                    (liveEventCtxStorage[ctxE] = { counter : 0, ctxs : {} });
+        if(typeof e == 'string') {
+            if($.isFunction(data)) {
+                fnCtx = fn;
+                fn = data;
+                data = undefined;
+            }
 
-            ctx.each(function() {
-                var ctxId = $.identify(this),
-                    ctxStorage = storage.ctxs[ctxId];
-                if(!ctxStorage) {
-                    ctxStorage = storage.ctxs[ctxId] = {};
-                    ++storage.counter;
-                }
-                ctxStorage[$.identify(fn) + (fnCtx? $.identify(fnCtx) : '')] = {
-                    fn   : fn,
-                    data : data,
-                    ctx  : fnCtx
-                };
+            if(e.indexOf(' ') > -1) {
+                $.each(e.split(' '), function(i, e) {
+                    _this._liveCtxBind(ctx, e, data, fn, fnCtx);
+                });
+            } else {
+                var ctxE = _this._buildCtxEventName(e),
+                    storage = liveEventCtxStorage[ctxE] ||
+                        (liveEventCtxStorage[ctxE] = { counter : 0, ctxs : {} });
+
+                ctx.each(function() {
+                    var ctxId = $.identify(this),
+                        ctxStorage = storage.ctxs[ctxId];
+                    if(!ctxStorage) {
+                        ctxStorage = storage.ctxs[ctxId] = {};
+                        ++storage.counter;
+                    }
+                    ctxStorage[$.identify(fn) + (fnCtx? $.identify(fnCtx) : '')] = {
+                        fn   : fn,
+                        data : data,
+                        ctx  : fnCtx
+                    };
+                });
+            }
+        } else {
+            $.each(e, function(e, fn) {
+                _this._liveCtxBind(ctx, e, fn, data);
             });
         }
 
