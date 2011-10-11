@@ -29,6 +29,9 @@
         if(val === null) {
             return 'null';
         }
+        if(typeof val === 'undefined') {
+            return undefined;
+        }
         switch(_toString.call(val)) {
             case '[object String]':
                 return '"' +
@@ -61,9 +64,5 @@
             default:
                 return undefined;
         }
-    };
-
-    window.JSON = {
-        stringify: $.stringify
     };
 })(jQuery);
