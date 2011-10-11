@@ -12,7 +12,7 @@
             mods: { layout: 'horiz' },
             title: {
                 elem: 'title',
-                content: 'Title:'
+                content: 'Navigation:'
             },
             content: [
                 {
