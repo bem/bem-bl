@@ -88,10 +88,12 @@ blocks: $(foreach block,$(wildcard ../../blocks-*/*),$(notdir $(block))/$(notdir
 	-n $(*D) \
 	-o $(*D)
 
-%.title.txt:
+.SECONDEXPANSION:
+%.title.txt: %.blockdecl.js
 	# TODO: take the lastest existed title
 	touch $@
-	find ../../blocks-desktop/$(*D) -type f -name $(@F) -exec cp {} $@ \;
+	if [ -f ../../blocks-common/$@ ]; then cp ../../blocks-common/$@ $@; fi
+	if [ -f ../../blocks-desktop/$@ ]; then cp ../../blocks-desktop/$@ $@; fi
 
 %.blockdecl.js:
 	mkdir -p $(*D)
