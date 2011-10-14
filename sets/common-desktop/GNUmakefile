@@ -21,6 +21,7 @@ blocks: $(foreach block,$(wildcard ../../blocks-*/*),$(notdir $(block))/$(notdir
 	touch $@
 	bem build -l ../../blocks-common \
 		-l ../../blocks-desktop \
+		-l ../../blocks \
 		-d $*.deps.js \
 		-t ../../blocks-common/i-bem/bem/techs/bemhtml.js \
 		-n $(*F) \
@@ -31,6 +32,7 @@ blocks: $(foreach block,$(wildcard ../../blocks-*/*),$(notdir $(block))/$(notdir
 	bem build \
 		-l ../../blocks-common \
 		-l ../../blocks-desktop \
+		-l ../../blocks \
 		-d $*.bemdecl.js \
 		-t deps.js \
 		-n $(*F) \
@@ -42,6 +44,7 @@ blocks: $(foreach block,$(wildcard ../../blocks-*/*),$(notdir $(block))/$(notdir
 	bem build \
 		-l ../../blocks-common \
 		-l ../../blocks-desktop \
+		-l ../../blocks \
 		-d $*.deps.js \
 		-t css \
 		-n $(*F) \
@@ -64,6 +67,7 @@ blocks: $(foreach block,$(wildcard ../../blocks-*/*),$(notdir $(block))/$(notdir
 	bem build \
 		-l ../../blocks-common \
 		-l ../../blocks-desktop \
+		-l ../../blocks \
 		-d $*.deps.js \
 		-t css \
 		-n $(*F) \
@@ -80,6 +84,7 @@ blocks: $(foreach block,$(wildcard ../../blocks-*/*),$(notdir $(block))/$(notdir
 	bem build -d $*.blockdecl.js \
 	-t ../../lib/bem/techs/locales.js \
 	-l ../../blocks-common -l ../../blocks-desktop \
+	-l ../../blocks \
 	-n $(*D) \
 	-o $(*D)
 
