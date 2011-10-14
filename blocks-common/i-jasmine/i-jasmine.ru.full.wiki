@@ -1,0 +1,16 @@
+##{"block":"i-jasmine"}##
+
+===Элементы блока
+ * runner
+ * reporter
+   * Модификаторы элемента
+
+     * reporter
+##{"elem":"runner"}##
+
+##{"elem":"reporter"}##
+
+##{"elem":"reporter","elemMods":{"type":"html"}}##
+
+##{"elem":"reporter","elemMods":{"type":"console"}}##
+

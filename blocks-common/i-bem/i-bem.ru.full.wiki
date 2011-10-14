@@ -927,6 +927,7 @@ BEM.DOM.decl('b-pseudo-link-example', {
 ===Элементы блока
  * internal
  * html
+ * test
  * dom
    * Модификаторы элемента
 
@@ -936,6 +937,8 @@ BEM.DOM.decl('b-pseudo-link-example', {
 
 ===Реализация html-представления блоков.
 ##{"elem":"html"}##
+
+##{"elem":"test"}##
 
 ===Хелперы для работы с DOM-представлением
 ##{"elem":"dom"}##
