@@ -12,7 +12,7 @@ blocks: $(foreach block,$(wildcard ../../blocks-*/*),$(notdir $(block))/$(notdir
 	bem create block -T ../../lib/bem/techs/locales.js \
 	$(*D)
 
-%.bemjson.js: %.full.wiki
+%.bemjson.js: %.full.wiki %.title.txt
 	touch $@
 	node ../../lib/wiki2bemjson.js $*.full.wiki $*.bemjson.js
 
@@ -87,6 +87,9 @@ blocks: $(foreach block,$(wildcard ../../blocks-*/*),$(notdir $(block))/$(notdir
 	-l ../../blocks \
 	-n $(*D) \
 	-o $(*D)
+
+%.title.txt:
+	cp ../../blocks-desktop/$@ $@
 
 %.blockdecl.js:
 	mkdir -p $(*D)
