@@ -1,2 +1,7 @@
+@import url(../../../blocks/i-global/i-global.css);
+@import url(../../../blocks/i-reset/i-reset.css);
+@import url(../../../blocks/b-page/b-page.css);
+@import url(../../../blocks/b-page-title/b-page-title.css);
 @import url(../../../blocks-desktop/b-text/b-text.css);
+@import url(../../../blocks/b-text/b-text.css);
 @import url(../../../blocks-desktop/b-link/b-link.css);
