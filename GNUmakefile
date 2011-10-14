@@ -29,7 +29,7 @@ index: index.ru.html index.en.html index.html
 
 %.bemjson.js: %.full.wiki
 	touch $@
-	node lib/wiki2html.js $(*F).full.wiki $@
+	node lib/wiki2bemjson.js $(*F).full.wiki $@
 
 %.bemhtml.js: %.deps.js
 	mkdir -p $(*D)
