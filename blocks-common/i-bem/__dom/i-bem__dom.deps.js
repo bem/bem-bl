@@ -1,9 +1,5 @@
 ({
     mustDeps: [
-        { block: 'i-bem', elems: 'html' },
-        {
-            block: 'i-jquery',
-            elems: [ 'leftclick', 'stringify' ]
-        }
+        { block: 'i-bem', elems: 'html' }
     ]
 })
