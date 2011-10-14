@@ -29,7 +29,7 @@ index: index.ru.html index.en.html index.html
 
 %.bemjson.js: %.full.wiki
 	touch $@
-	node lib/wiki2html.js $(*F).full.wiki $@
+	node lib/wiki2bemjson.js $(*F).full.wiki $@ index
 
 %.bemhtml.js: %.deps.js
 	mkdir -p $(*D)
@@ -37,6 +37,7 @@ index: index.ru.html index.en.html index.html
 	bem build \
 		-l blocks-common \
 		-l blocks-desktop \
+		-l blocks \
 		-d $*.deps.js \
 		-t blocks-common/i-bem/bem/techs/bemhtml.js \
 		-n $(*F) \
@@ -56,6 +57,7 @@ index.%.full.wiki:
 	bem build \
 		-l blocks-common \
 		-l blocks-desktop \
+		-l blocks \
 		-d $*.bemdecl.js \
 		-t deps.js \
 		-n $(*F) \
@@ -70,6 +72,7 @@ index.%.full.wiki:
 	bem build \
 		-l ../../blocks-common \
 		-l ../../blocks-desktop \
+		-l blocks \
 		-d $*.deps.js \
 		-t css \
 		-n $(*F) \
@@ -81,6 +84,7 @@ index.%.full.wiki:
 	bem build \
 		-l ../../blocks-common \
 		-l ../../blocks-desktop \
+		-l blocks \
 		-d $*.deps.js \
 		-t ie.css \
 		-n $(*F) \
@@ -92,6 +96,7 @@ index.%.full.wiki:
 	bem build \
 		-l ../../blocks-common \
 		-l ../../blocks-desktop \
+		-l blocks \
 		-d $*.deps.js \
 		-t css \
 		-n $(*F) \

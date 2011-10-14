@@ -1,0 +1,14 @@
+.b-description_layout_inline
+{
+    font-family: 'PT Serif';
+    font-style: italic;
+
+    white-space: normal;
+
+    color: #7f7e7e;
+}
+
+.b-description_layout_inline:before
+{
+    content: " —\a0";
+}

@@ -12,15 +12,16 @@ blocks: $(foreach block,$(wildcard ../../blocks-*/*),$(notdir $(block))/$(notdir
 	bem create block -T ../../lib/bem/techs/locales.js \
 	$(*D)
 
-%.bemjson.js: %.full.wiki
+%.bemjson.js: %.full.wiki %.title.txt
 	touch $@
-	node ../../lib/wiki2html.js $*.full.wiki $*.bemjson.js
+	node ../../lib/wiki2bemjson.js $*.full.wiki $*.bemjson.js block
 
 %.bemhtml.js: %.deps.js
 	mkdir -p $(*D)
 	touch $@
 	bem build -l ../../blocks-common \
 		-l ../../blocks-desktop \
+		-l ../../blocks \
 		-d $*.deps.js \
 		-t ../../blocks-common/i-bem/bem/techs/bemhtml.js \
 		-n $(*F) \
@@ -31,6 +32,7 @@ blocks: $(foreach block,$(wildcard ../../blocks-*/*),$(notdir $(block))/$(notdir
 	bem build \
 		-l ../../blocks-common \
 		-l ../../blocks-desktop \
+		-l ../../blocks \
 		-d $*.bemdecl.js \
 		-t deps.js \
 		-n $(*F) \
@@ -42,6 +44,7 @@ blocks: $(foreach block,$(wildcard ../../blocks-*/*),$(notdir $(block))/$(notdir
 	bem build \
 		-l ../../blocks-common \
 		-l ../../blocks-desktop \
+		-l ../../blocks \
 		-d $*.deps.js \
 		-t css \
 		-n $(*F) \
@@ -64,6 +67,7 @@ blocks: $(foreach block,$(wildcard ../../blocks-*/*),$(notdir $(block))/$(notdir
 	bem build \
 		-l ../../blocks-common \
 		-l ../../blocks-desktop \
+		-l ../../blocks \
 		-d $*.deps.js \
 		-t css \
 		-n $(*F) \
@@ -80,8 +84,16 @@ blocks: $(foreach block,$(wildcard ../../blocks-*/*),$(notdir $(block))/$(notdir
 	bem build -d $*.blockdecl.js \
 	-t ../../lib/bem/techs/locales.js \
 	-l ../../blocks-common -l ../../blocks-desktop \
+	-l ../../blocks \
 	-n $(*D) \
 	-o $(*D)
+
+.SECONDEXPANSION:
+%.title.txt: %.blockdecl.js
+	# TODO: take the lastest existed title
+	touch $@
+	if [ -f ../../blocks-common/$@ ]; then cp ../../blocks-common/$@ $@; fi
+	if [ -f ../../blocks-desktop/$@ ]; then cp ../../blocks-desktop/$@ $@; fi
 
 %.blockdecl.js:
 	mkdir -p $(*D)

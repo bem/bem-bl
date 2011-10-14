@@ -1,0 +1,4 @@
+block b-example {
+    tag: 'iframe',
+    attrs: { src: this.ctx.url }
+}

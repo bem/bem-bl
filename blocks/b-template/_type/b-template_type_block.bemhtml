@@ -1,0 +1,39 @@
+block b-template, mod type block {
+    tag: '',
+    content: {
+        block: 'b-page',
+        elem: 'i',
+        content: {
+            elem: 'i',
+            content: [{
+                block: 'b-breadcrumbs',
+                content: {
+                    block: 'b-menu-horiz',
+                    mods: { layout: 'horiz' },
+                    content: [
+                        {
+                            elem: 'item',
+                            content: {
+                                block: 'b-link',
+                                url: '/',
+                                content: 'Список блоков'
+                            }
+                        },
+                        {
+                            elem: 'item',
+                            elemMods: { state: 'current' },
+                            content: {
+                                block: 'b-page-title',
+                                mods: { page: 'inner' },
+                                content: this.ctx.title
+                            }
+                        }
+                    ]
+                }
+            },{
+                block: 'b-blocks-desc',
+                content: this.ctx.text
+            }]
+        }
+    }
+}

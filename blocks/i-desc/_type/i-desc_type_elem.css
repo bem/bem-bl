@@ -1,0 +1,4 @@
+.i-desc_type_elem .b-text__li:before
+{
+    content: '__'
+}
