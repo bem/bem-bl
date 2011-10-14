@@ -10,6 +10,7 @@
  * inherit
  * identify
  * is-empty-object
+ * cookie
  * stringify
  * observable
  * leftclick
@@ -28,6 +29,8 @@
 
 ===Плагин, реализующий $.isEmptyObject для jQuery < 1.4
 ##{"elem":"is-empty-object"}##
+
+##{"elem":"cookie"}##
 
 ===Плагин для сериализации объектов в JSON-строку
 ##{"elem":"stringify"}##
