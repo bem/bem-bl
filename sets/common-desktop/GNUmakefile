@@ -14,7 +14,7 @@ blocks: $(foreach block,$(wildcard ../../blocks-*/*),$(notdir $(block))/$(notdir
 
 %.bemjson.js: %.full.wiki %.title.txt
 	touch $@
-	node ../../lib/wiki2bemjson.js $*.full.wiki $*.bemjson.js
+	node ../../lib/wiki2bemjson.js $*.full.wiki $*.bemjson.js block
 
 %.bemhtml.js: %.deps.js
 	mkdir -p $(*D)
