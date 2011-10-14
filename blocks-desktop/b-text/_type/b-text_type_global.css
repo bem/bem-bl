@@ -1,6 +1,6 @@
-.b-text__h1,
-.b-text__h2,
-.b-text__h3
+.b-text_type_global h1,
+.b-text_type_global h2,
+.b-text_type_global h3
 {
     font-size: 1.8em;
     font-weight: normal;
@@ -9,14 +9,14 @@
     padding: 0;
 }
 
-.b-text__h3
+.b-text_type_global h3
 {
     font-size: 1.6em;
 
     margin: 1em 0 0.5em 0;
 }
 
-.b-text__h4
+.b-text_type_global h4
 {
     font-size: 1.4em;
     font-weight: 400;
@@ -25,43 +25,43 @@
     padding: 0;
 }
 
-.b-text__p
+.b-text_type_global p
 {
     margin: 0 0 0.8em;
 
     line-height: 1.4em;
 }
 
-.b-text__pre,
-.b-text__tt
+.b-text_type_global pre,
+.b-text_type_global tt
 {
     font: 100% Monaco, Consolas, "Courier New", monospace;
 }
 
-.b-text__pre
+.b-text_type_global pre
 {
     margin: 0 0 0.8em;
 }
 
-.b-text__ul,
-.b-text__ol
+.b-text_type_global ul,
+.b-text_type_global ol
 {
     margin: 0 0 1em;
     padding: 0;
 }
 
-.b-text__li
+.b-text_type_global li
 {
     margin: 0 0.2em 0.3em 2.5em;
     padding: 0;
 }
 
-.b-text__ol .b-text__li
+.b-text_type_global ol li
 {
     list-style: decimal;
 }
 
-.b-text__ul .b-text__li
+.b-text_type_global ul li
 {
     list-style: disc;
 }
