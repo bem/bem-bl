@@ -1,6 +1,5 @@
 /** @requires BEM */
 /** @requires BEM.INTERNAL */
-/** @requires jquery.leftclick */
 
 (function(BEM, $, undefined) {
 
