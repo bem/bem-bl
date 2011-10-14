@@ -1,0 +1,23 @@
+.b-blocks-desc
+{
+    margin-top: 40px;
+}
+
+.b-blocks-desc .b-text__ul,
+.b-blocks-desc .b-text__li
+{
+    list-style: none !important;
+    margin-left: 0;
+}
+
+.b-blocks-desc .b-text__li
+{
+    font-weight: bold;
+}
+
+.b-blocks-desc .b-text__li .b-text__li
+{
+    font-weight: 400;
+
+    margin-left: 1em;
+}

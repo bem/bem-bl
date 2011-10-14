@@ -1,0 +1,4 @@
+block b-page-title, mod page inner {
+    tag: 'span',
+    content: ['/ ', this.ctx.content]
+}
