@@ -14,7 +14,10 @@
                 content: [
                     {
                         elem: 'cell',
-                        content: 'First cell'
+                        content: {
+                            elem: 'inner',
+                            content: 'First cell'
+                        }
                     },
                     {
                         elem: 'cell',
