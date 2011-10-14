@@ -3,6 +3,7 @@
 ===Block Elements
  * internal
  * html
+ * test
  * dom
    * Element Modificators
 
@@ -10,6 +11,8 @@
 ##{"elem":"internal"}##
 
 ##{"elem":"html"}##
+
+##{"elem":"test"}##
 
 ##{"elem":"dom"}##
 
