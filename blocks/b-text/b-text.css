@@ -1,0 +1,18 @@
+.b-text__pre,
+.b-text__code
+{
+    font: 12px Monaco, Consolas, "Courier New", monospace;
+
+    white-space: normal;
+
+    color: #060;
+}
+
+.b-text__h1,
+.b-text__h2,
+.b-text__h3,
+.b-text__h4,
+.b-text__h5
+{
+    font-family: 'PT Serif', serif;
+}
