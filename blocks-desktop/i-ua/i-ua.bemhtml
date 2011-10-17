@@ -2,7 +2,7 @@ block i-ua {
     tag: 'script',
     bem: false,
     content: [
-                ';(function(d,e,c){',
+                ';(function(d,e,c,r){',
                     'e=d.documentElement;',
                     'c="className";',
                     'r="replace";',
