@@ -1,0 +1,35 @@
+block b-blocks-list {
+
+    default, !this._bBlocksList: {
+        local (
+            this._bBlocksList = {{BlocksList}}
+        )
+        this.apply();
+    }
+    content: {
+        var _list = [];
+        for(var i in this._bBlocksList) {
+            var b = this._bBlocksList[i];
+            _list.push({
+                elem: 'item',
+                content: [
+                    {
+                        block: 'b-link',
+                        url: '#',
+                        content: b.name
+                    },
+                    {
+                        block: 'b-desctription',
+                        mods: { layout: 'inline' },
+                        content: b.title
+                    }
+                ]
+            });
+        }
+
+        return {
+        block: 'b-menu-vert',
+        content: _list
+        }
+    }
+}
