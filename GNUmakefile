@@ -50,7 +50,8 @@ index.%.full.wiki:
 	rm -f index.$(*F).full.wiki
 	cat index.$(*F).wiki >> index.$(*F).full.wiki
 	echo -e '\n\n' >> index.$(*F).full.wiki
-	find blocks-common blocks-desktop -name '*.$(*F).title.txt' | sort | sed 's#^[^/]*/\([^/]*\)/\(.*\)$$#\1#g' | uniq | sed 's#^\(.*\)# * ((sets/common-desktop/\1/\1.$(*F).html \1))#g' >> index.$(*F).full.wiki
+	node lib/blocks-list.js $(*F)
+	#find blocks-common blocks-desktop -name '*.$(*F).title.txt' | sort | sed 's#^[^/]*/\([^/]*\)/\(.*\)$$#\1#g' | uniq | sed 's#^\(.*\)# * ((sets/common-desktop/\1/\1.$(*F).html \1))#g' >> index.$(*F).full.wiki
 
 %.deps.js: %.bemdecl.js
 	touch $@
