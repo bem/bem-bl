@@ -24,6 +24,9 @@
             "mods": {"page": ["inner"]}
         },
         {
+            block: 'b-blocks-list'
+        },
+        {
             "block": "b-blocks-desc"
         },
         {

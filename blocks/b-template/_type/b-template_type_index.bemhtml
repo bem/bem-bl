@@ -11,6 +11,9 @@ block b-template, mod type index {
                 block: 'b-description',
                 mods: { layout: 'block' },
                 content: this.ctx.text
+            },
+            {
+                block: 'b-blocks-list'
             }
         ]
     }
