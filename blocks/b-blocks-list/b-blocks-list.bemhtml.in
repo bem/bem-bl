@@ -19,7 +19,7 @@ block b-blocks-list {
                         content: b.name
                     },
                     {
-                        block: 'b-desctription',
+                        block: 'b-description',
                         mods: { layout: 'inline' },
                         content: b.title
                     }
