@@ -17,6 +17,10 @@
             "mods": {"layout": ["horiz"]}
         },
         {
+            block: 'b-menu-vert',
+            elems: ['item-content']
+        },
+        {
             "block": "b-link"
         },
         {
