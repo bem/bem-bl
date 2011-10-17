@@ -21,6 +21,10 @@
             elems: ['item-content']
         },
         {
+            block: 'b-description',
+            mods: { layout: ['inline']}
+        },
+        {
             "block": "b-link"
         },
         {
