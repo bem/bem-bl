@@ -45,7 +45,7 @@
                         {
                             elem: 'cell',
                             elemMods: { position: 'r'},
-                            content: 'First row'
+                            content: 'Second row'
                         }
                     ]
                 }
