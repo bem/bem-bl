@@ -15,7 +15,7 @@ block b-blocks-list {
                 content: [
                     {
                         block: 'b-link',
-                        url: '#',
+                        url: b.url,
                         content: b.name
                     },
                     {
