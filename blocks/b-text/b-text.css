@@ -1,5 +1,6 @@
 .b-text__pre,
-.b-text__code
+.b-text__code,
+.b-text tt
 {
     font: 12px Monaco, Consolas, "Courier New", monospace;
 

@@ -12,3 +12,8 @@
 
     background: #f3a828;
 }
+
+.b-layout-table_layout_60-40 .b-layout-table__inner
+{
+    margin-right: 20px;
+}

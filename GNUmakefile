@@ -27,6 +27,10 @@ index: index.ru.html index.en.html index.html
 %.html: %.bemjson.js %.bemhtml.js %.css %.ie.css %.js
 	lib/bemjson2html.js $(*F).bemhtml.js $(*F).bemjson.js $(*F).html
 
+index.bemjson.js : index.full.wiki
+	touch $@
+	node lib/wiki2bemjson.js index.full.wiki index.bemjson.js front
+
 %.bemjson.js: %.full.wiki
 	touch $@
 	node lib/wiki2bemjson.js $(*F).full.wiki $@ index
@@ -50,7 +54,7 @@ index.%.full.wiki:
 	rm -f index.$(*F).full.wiki
 	cat index.$(*F).wiki >> index.$(*F).full.wiki
 	echo -e '\n\n' >> index.$(*F).full.wiki
-	find blocks-common blocks-desktop -name '*.$(*F).title.txt' | sort | sed 's#^[^/]*/\([^/]*\)/\(.*\)$$#\1#g' | uniq | sed 's#^\(.*\)# * ((sets/common-desktop/\1/\1.$(*F).html \1))#g' >> index.$(*F).full.wiki
+	node lib/blocks-list.js $(*F)
 
 %.deps.js: %.bemdecl.js
 	touch $@
