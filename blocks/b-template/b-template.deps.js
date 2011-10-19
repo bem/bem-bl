@@ -17,11 +17,22 @@
             "mods": {"layout": ["horiz"]}
         },
         {
+            block: 'b-menu-vert',
+            elems: ['item-content']
+        },
+        {
+            block: 'b-description',
+            mods: { layout: ['inline']}
+        },
+        {
             "block": "b-link"
         },
         {
             "block": "b-page-title",
             "mods": {"page": ["inner"]}
+        },
+        {
+            block: 'b-blocks-list'
         },
         {
             "block": "b-blocks-desc"
