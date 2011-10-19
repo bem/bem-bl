@@ -61,81 +61,84 @@ default: {
         tag;
 
     local(this._mode = 'tag') tag = this.apply();
-    tag || (tag = v.tag || 'div');
+    typeof tag != 'undefined' || (tag = v.tag);
+    typeof tag != 'undefined' || (tag = 'div');
 
-    var jsParams, js;
-    if(v.block && v.js !== false) {
-        local(this._mode = 'js') js = this.apply();
-        js = js? this._.extend(v.js, js === true? {} : js) : v.js === true? {} : v.js;
-        js && ((jsParams = {})[v.block] = js);
-    }
-
-    buf.push('<', tag);
-
-    var isBEM;
-    local(this._mode = 'bem') isBEM = this.apply();
-    typeof isBEM != 'undefined' || (isBEM = typeof v.bem != 'undefined' ? v.bem : v.block || v.elem);
-
-    var cls;
-    local(this._mode = 'cls') cls = this.apply();
-    cls || (cls = v.cls);
-
-    if(isBEM || cls) {
-        buf.push(' class="');
-        if(isBEM) {
-
-            BEM.INTERNAL.buildClasses(this.block, v.elem, v.elemMods || v.mods, buf);
-
-            var mix;
-            local(this._mode = 'mix') mix = this.apply();
-            v.mix && (mix = mix? mix.concat(v.mix) : v.mix);
-
-			if(mix) {
-				var i = 0, l = mix.length, mixItem, hasItem, block;
-				while(i < l) {
-					mixItem = mix[i++];
-					hasItem = mixItem.block || mixItem.elem,
-                    block = mixItem.block || _this.block;
-
-					hasItem && buf.push(' ');
-                	BEM.INTERNAL[hasItem? 'buildClasses' : 'buildModsClasses'](
-						block,
-						mixItem.elem || (mixItem.block ? undefined : _this.elem),
-						mixItem.elemMods || mixItem.mods,
-						buf);
-					mixItem.js && ((jsParams || (jsParams = {}))[block] = mixItem.js === true? {} : mixItem.js);
-				}
-			}
+    if(tag) {
+        var jsParams, js;
+        if(v.block && v.js !== false) {
+            local(this._mode = 'js') js = this.apply();
+            js = js? this._.extend(v.js, js === true? {} : js) : v.js === true? {} : v.js;
+            js && ((jsParams = {})[v.block] = js);
         }
 
-        cls && buf.push(isBEM? ' ' : '', cls);
+        buf.push('<', tag);
 
-        jsParams && buf.push(' i-bem');
-        buf.push('"');
-    }
+        var isBEM;
+        local(this._mode = 'bem') isBEM = this.apply();
+        typeof isBEM != 'undefined' || (isBEM = typeof v.bem != 'undefined' ? v.bem : v.block || v.elem);
 
-    if(jsParams) {
-        var jsAttr;
-        local(this._mode = 'jsAttr') jsAttr = this.apply();
-        buf.push(
-            ' ', jsAttr || 'onclick', '="return ',
-            this._.attrEscape(JSON.stringify(jsParams)),
-            '"');
-    }
+        var cls;
+        local(this._mode = 'cls') cls = this.apply();
+        cls || (cls = v.cls);
 
-    var attrs;
-    local(this._mode = 'attrs') attrs = this.apply();
-    attrs = this._.extend(attrs, v.attrs); // NOTE: возможно стоит делать массив, чтобы потом быстрее сериализовывать
-    if(attrs) {
-        var name; // TODO: разобраться с OmetaJS и YUI Compressor
-        for(name in attrs)
-        buf.push(' ', name, '="', this._.attrEscape(attrs[name]), '"');
+        if(isBEM || cls) {
+            buf.push(' class="');
+            if(isBEM) {
+
+                BEM.INTERNAL.buildClasses(this.block, v.elem, v.elemMods || v.mods, buf);
+
+                var mix;
+                local(this._mode = 'mix') mix = this.apply();
+                v.mix && (mix = mix? mix.concat(v.mix) : v.mix);
+
+                if(mix) {
+                    var i = 0, l = mix.length, mixItem, hasItem, block;
+                    while(i < l) {
+                        mixItem = mix[i++];
+                        hasItem = mixItem.block || mixItem.elem,
+                        block = mixItem.block || _this.block;
+
+                        hasItem && buf.push(' ');
+                        BEM.INTERNAL[hasItem? 'buildClasses' : 'buildModsClasses'](
+                            block,
+                            mixItem.elem || (mixItem.block ? undefined : _this.elem),
+                            mixItem.elemMods || mixItem.mods,
+                            buf);
+                        mixItem.js && ((jsParams || (jsParams = {}))[block] = mixItem.js === true? {} : mixItem.js);
+                    }
+                }
+            }
+
+            cls && buf.push(isBEM? ' ' : '', cls);
+
+            jsParams && buf.push(' i-bem');
+            buf.push('"');
+        }
+
+        if(jsParams) {
+            var jsAttr;
+            local(this._mode = 'jsAttr') jsAttr = this.apply();
+            buf.push(
+                ' ', jsAttr || 'onclick', '="return ',
+                this._.attrEscape(JSON.stringify(jsParams)),
+                '"');
+        }
+
+        var attrs;
+        local(this._mode = 'attrs') attrs = this.apply();
+        attrs = this._.extend(attrs, v.attrs); // NOTE: возможно стоит делать массив, чтобы потом быстрее сериализовывать
+        if(attrs) {
+            var name; // TODO: разобраться с OmetaJS и YUI Compressor
+            for(name in attrs)
+            buf.push(' ', name, '="', this._.attrEscape(attrs[name]), '"');
+        }
     }
 
     if(this._.isShortTag(tag)) {
         buf.push('/>');
     } else {
-        buf.push('>');
+        tag && buf.push('>');
 
         var content;
         local(this._mode = 'content') content = this.apply();
@@ -149,7 +152,7 @@ default: {
                 this._mode = '') this.apply();
         }
 
-        buf.push('</', tag, '>');
+        tag && buf.push('</', tag, '>');
     }
 }
 

@@ -1,0 +1,7 @@
+block i-bem, elem test {
+
+    cls: 'i-bem',
+    attrs: { onclick: 'return ' + JSON.stringify({'i-bem__test':{tests:this.ctx.content||[]}}).replace(/"/g, '\'')}
+    content: null
+
+}
