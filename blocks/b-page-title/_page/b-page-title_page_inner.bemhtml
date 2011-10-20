@@ -1,0 +1,3 @@
+block b-page-title, mod page inner {
+    content: ['/ ', this.ctx.content]
+}
