@@ -49,9 +49,10 @@ blocks: $(foreach block,$(wildcard ../../blocks-*/*),$(notdir $(block))/$(notdir
 		-t css \
 		-n $(*F) \
 		-o $(@D)
+	borschik -t css -i $@ -o $(@D)/_$(@F)
 
 .PRECIOUS: %.ie.css
-%.ie.css: %.deps.js
+%.ie.css: %.css %.deps.js
 	touch $@
 	bem build \
 		-l ../../blocks-common \
@@ -60,6 +61,7 @@ blocks: $(foreach block,$(wildcard ../../blocks-*/*),$(notdir $(block))/$(notdir
 		-t ie.css \
 		-n $(*F) \
 		-o $(@D)
+	borschik -t css -i $@ -o $(@D)/_$(@F)
 
 .PRECIOUS: %.js
 %.js: %.deps.js

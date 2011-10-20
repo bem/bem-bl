@@ -81,9 +81,10 @@ index.%.full.wiki:
 		-t css \
 		-n $(*F) \
 		-o ./
+	borschik -t css -i $@ -o $(@D)/_$(@F)
 
 .PRECIOUS: %.ie.css
-%.ie.css: %.deps.js
+%.ie.css: %.css %.deps.js
 	touch $@
 	bem build \
 		-l ../../blocks-common \
@@ -93,6 +94,7 @@ index.%.full.wiki:
 		-t ie.css \
 		-n $(*F) \
 		-o ./
+	borschik -t css -i $@ -o $(@D)/_$(@F)
 
 .PRECIOUS: %.js
 %.js: %.deps.js
