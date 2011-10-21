@@ -20,14 +20,6 @@ var afterCurrentEventFns = [],
     blocks = {},
 
 /**
- * Хранилище для блоков по уникальному ключу
- * @static
- * @private
- * @type Object
- */
-    uniqIdToBlock = {},
-
-/**
  * Каналы сообщений
  * @static
  * @private
@@ -111,15 +103,6 @@ this.BEM = $.inherit($.observable, /** @lends BEM.prototype */ {
          */
         _this.params = $.extend(_this.getDefaultParams(), params);
 
-        /**
-         * уникальный идентификатор блока
-         * @private
-         * @type String
-         */
-        _this._uniqId = _this.params.uniqId || $.identify(_this);
-
-        uniqIdToBlock[_this._uniqId] = _this;
-
         initImmediately !== false?
             _this._init() :
             _this.afterCurrentEvent(_this._init);
@@ -133,7 +116,7 @@ this.BEM = $.inherit($.observable, /** @lends BEM.prototype */ {
     _init : function() {
 
         var _this = this;
-        if('_uniqId' in _this && !_this.hasMod('js', 'inited'))
+        if('_modCache' in _this && !_this.hasMod('js', 'inited'))
             _this
                 .setMod('js', 'inited')
                 .trigger('init');
@@ -482,8 +465,7 @@ this.BEM = $.inherit($.observable, /** @lends BEM.prototype */ {
      */
     destruct : function() {
 
-       delete uniqIdToBlock[this.un()._uniqId];
-       delete this._uniqId;
+        delete this._modCache;
 
     }
 
@@ -498,24 +480,6 @@ this.BEM = $.inherit($.observable, /** @lends BEM.prototype */ {
      * @type Object
      */
     blocks : blocks,
-
-    /**
-     * Хранилище для блоков по уникальному ключу
-     * @static
-     * @private
-     * @type Object
-     */
-    _uniqIdToBlock : uniqIdToBlock,
-
-    /**
-     * Возвращает инстанс блока по уникальному идентификатору
-     * @param {String} [uniqId]
-     */
-    getBlockByUniqId : function(uniqId) {
-
-        return uniqIdToBlock[uniqId];
-
-    },
 
     /**
      * Декларатор блоков, создает класс блока
