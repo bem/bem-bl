@@ -66,10 +66,10 @@ default: {
 
     if(tag) {
         var jsParams, js;
-        if(v.block && v.js !== false) {
+        if(this.block && v.js !== false) {
             local(this._mode = 'js') js = this.apply();
             js = js? this._.extend(v.js, js === true? {} : js) : v.js === true? {} : v.js;
-            js && ((jsParams = {})[v.block] = js);
+            js && ((jsParams = {})[BEM.INTERNAL.buildClass(this.block, v.elem)] = js);
         }
 
         buf.push('<', tag);
@@ -105,14 +105,14 @@ default: {
                             mixItem.elem || (mixItem.block ? undefined : _this.elem),
                             mixItem.elemMods || mixItem.mods,
                             buf);
-                        mixItem.js && ((jsParams || (jsParams = {}))[block] = mixItem.js === true? {} : mixItem.js);
+                        mixItem.js && ((jsParams || (jsParams = {}))[BEM.INTERNAL.buildClass(block, mixItem.elem)] = mixItem.js === true? {} : mixItem.js);
                     }
                 }
             }
 
             cls && buf.push(isBEM? ' ' : '', cls);
 
-            jsParams && buf.push(' i-bem');
+            v.block && jsParams && buf.push(' i-bem');
             buf.push('"');
         }
 
