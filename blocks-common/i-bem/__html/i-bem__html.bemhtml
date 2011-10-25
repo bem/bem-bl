@@ -82,6 +82,7 @@ default: {
         local(this._mode = 'cls') cls = this.apply();
         cls || (cls = v.cls);
 
+        var addJSInitClass = v.block && jsParams;
         if(isBEM || cls) {
             buf.push(' class="');
             if(isBEM) {
@@ -105,14 +106,17 @@ default: {
                             mixItem.elem || (mixItem.block ? undefined : _this.elem),
                             mixItem.elemMods || mixItem.mods,
                             buf);
-                        mixItem.js && ((jsParams || (jsParams = {}))[BEM.INTERNAL.buildClass(block, mixItem.elem)] = mixItem.js === true? {} : mixItem.js);
+                        if(mixItem.js) {
+                            (jsParams || (jsParams = {}))[BEM.INTERNAL.buildClass(block, mixItem.elem)] = mixItem.js === true? {} : mixItem.js;
+                            addJSInitClass || (addJSInitClass = block && !mixItem.elem);
+                        }
                     }
                 }
             }
 
             cls && buf.push(isBEM? ' ' : '', cls);
 
-            v.block && jsParams && buf.push(' i-bem');
+            addJSInitClass && buf.push(' i-bem');
             buf.push('"');
         }
 
