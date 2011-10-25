@@ -66,10 +66,10 @@ default: {
 
     if(tag) {
         var jsParams, js;
-        if(v.block && v.js !== false) {
+        if(this.block && v.js !== false) {
             local(this._mode = 'js') js = this.apply();
             js = js? this._.extend(v.js, js === true? {} : js) : v.js === true? {} : v.js;
-            js && ((jsParams = {})[v.block] = js);
+            js && ((jsParams = {})[BEM.INTERNAL.buildClass(this.block, v.elem)] = js);
         }
 
         buf.push('<', tag);
@@ -82,6 +82,7 @@ default: {
         local(this._mode = 'cls') cls = this.apply();
         cls || (cls = v.cls);
 
+        var addJSInitClass = v.block && jsParams;
         if(isBEM || cls) {
             buf.push(' class="');
             if(isBEM) {
@@ -105,14 +106,17 @@ default: {
                             mixItem.elem || (mixItem.block ? undefined : _this.elem),
                             mixItem.elemMods || mixItem.mods,
                             buf);
-                        mixItem.js && ((jsParams || (jsParams = {}))[block] = mixItem.js === true? {} : mixItem.js);
+                        if(mixItem.js) {
+                            (jsParams || (jsParams = {}))[BEM.INTERNAL.buildClass(block, mixItem.elem)] = mixItem.js === true? {} : mixItem.js;
+                            addJSInitClass || (addJSInitClass = block && !mixItem.elem);
+                        }
                     }
                 }
             }
 
             cls && buf.push(isBEM? ' ' : '', cls);
 
-            jsParams && buf.push(' i-bem');
+            addJSInitClass && buf.push(' i-bem');
             buf.push('"');
         }
 

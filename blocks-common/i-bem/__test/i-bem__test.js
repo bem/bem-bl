@@ -34,7 +34,7 @@ BEM.TEST = {
     add : function(blocks) {
 
         blocks?
-            $.each(blocks, function(i, desc) {
+            $.each($.makeArray(blocks), function(i, desc) {
                 var testName = buildTestName(desc);
                 if(!decls[testName])
                     throw('undefined test ' + testName);

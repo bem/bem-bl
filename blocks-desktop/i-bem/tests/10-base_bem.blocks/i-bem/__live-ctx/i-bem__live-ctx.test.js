@@ -1,7 +1,5 @@
 BEM.TEST.decl({ block : 'i-bem', elem : 'live-ctx' }, function() {
 
-    BEM.DOM.decl('b-foo', {});
-
     it('should be callback called once', function() {
         var testElem = $('#once-test'),
             childBlock = testElem.find('.b-foo').bem('b-foo'),
