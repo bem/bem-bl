@@ -5,8 +5,9 @@
 
 .i-ua_js_yes .b-link_pseudo_yes
 {
-    cursor: pointer;
     text-decoration: none;
+
+    cursor: pointer;
 }
 
 .i-ua_js_yes .b-link_pseudo_yes .b-link__inner
