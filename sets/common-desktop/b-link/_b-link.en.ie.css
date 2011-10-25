@@ -149,10 +149,6 @@
     content: " —\a0";
 }
 
-.b-link:link
-{
-}
-
 .b-page-title
 {
     font: 60px 'PT Serif', serif;
@@ -312,4 +308,5 @@
 {
     content: '__'
 }
+
 
