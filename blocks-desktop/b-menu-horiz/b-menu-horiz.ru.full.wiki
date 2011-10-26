@@ -9,11 +9,15 @@
    * complex
    * horiz
 ===Элементы блока
+ * item
  * title
 ##{"mods":{"layout":"complex"}}##
 
 ====Горизонтальное меню списком
 ##{"mods":{"layout":"horiz"}}##
+
+===Элемент меню
+##{"elem":"item"}##
 
 ===Заголовок меню
 ##{"elem":"title"}##

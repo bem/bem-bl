@@ -5,14 +5,23 @@
    * Element Modificators
 
      * item-content
+ * item-selector
  * separator
+ * submenu
+ * item
  * trigger
  * title
 ##{"elem":"item-content"}##
 
 ##{"elem":"item-content","elemMods":{"visibility":"visible"}}##
 
+##{"elem":"item-selector"}##
+
 ##{"elem":"separator"}##
+
+##{"elem":"submenu"}##
+
+##{"elem":"item"}##
 
 ##{"elem":"trigger"}##
 
