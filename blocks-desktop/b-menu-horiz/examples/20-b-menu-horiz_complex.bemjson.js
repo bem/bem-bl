@@ -9,6 +9,7 @@
     content: [
         {
             block: 'b-menu-horiz',
+            js: false,
             mods: { layout: 'complex' },
             content: [
                 {

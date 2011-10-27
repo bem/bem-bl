@@ -9,7 +9,6 @@
     content: [
         {
             block: 'b-menu-horiz',
-            js: true,
             mods: { layout: 'horiz' },
             title: {
                 elem: 'title',
