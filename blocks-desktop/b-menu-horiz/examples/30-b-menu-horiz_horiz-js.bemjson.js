@@ -28,6 +28,7 @@
                 },
                 {
                     elem: 'item',
+                    elemMods: { state: 'disabled' },
                     content: {
                         block: 'b-link',
                         mods: { 'pseudo' : 'yes' },
