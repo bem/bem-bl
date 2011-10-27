@@ -10,6 +10,7 @@
         {
             block: 'b-menu-horiz',
             mods: { layout: 'horiz' },
+            js: false,
             title: {
                 elem: 'title',
                 content: 'Navigation:'

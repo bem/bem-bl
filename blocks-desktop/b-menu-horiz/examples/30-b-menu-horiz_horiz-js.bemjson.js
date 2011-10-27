@@ -9,7 +9,6 @@
     content: [
         {
             block: 'b-menu-horiz',
-            js: true,
             mods: { layout: 'horiz' },
             title: {
                 elem: 'title',
@@ -29,6 +28,7 @@
                 },
                 {
                     elem: 'item',
+                    elemMods: { state: 'disabled' },
                     content: {
                         block: 'b-link',
                         mods: { 'pseudo' : 'yes' },
