@@ -4,3 +4,6 @@ b
 .*.xsl
 .*.xsl.*
 sets/
+
+.idea
+*.iml
