@@ -1,6 +1,6 @@
 ({
     block: 'b-page',
-    title: 'b-menu-horiz_simple',
+    title: 'A horizontal menu using links',
     head: [
         { elem: 'css', url: '_05-b-menu-horiz_simple.css' },
         { elem: 'js', url: '//yandex.st/jquery/1.6.2/jquery.min.js' },

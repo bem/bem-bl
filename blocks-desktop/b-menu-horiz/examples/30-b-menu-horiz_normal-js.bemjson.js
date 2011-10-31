@@ -1,6 +1,6 @@
 ({
     block: 'b-page',
-    title: 'Переключающееся горизонтальное меню',
+    title: 'Switching horizontal menu using a list',
     head: [
         { elem: 'css', url: '_30-b-menu-horiz_normal-js.css' },
         { elem: 'js', url: '//yandex.st/jquery/1.6.2/jquery.min.js' },
