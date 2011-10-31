@@ -2,14 +2,14 @@
     block: 'b-page',
     title: 'Переключающееся горизонтальное меню',
     head: [
-        { elem: 'css', url: '_30-b-menu-horiz_horiz-js.css' },
+        { elem: 'css', url: '_30-b-menu-horiz_normal-js.css' },
         { elem: 'js', url: '//yandex.st/jquery/1.6.2/jquery.min.js' },
-        { elem: 'js', url: '_30-b-menu-horiz_horiz-js.js' }
+        { elem: 'js', url: '_30-b-menu-horiz_normal-js.js' }
     ],
     content: [
         {
             block: 'b-menu-horiz',
-            mods: { layout: 'horiz' },
+            mods: { layout: 'normal' },
             title: {
                 elem: 'title',
                 content: 'Navigation:'
