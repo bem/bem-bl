@@ -1,0 +1,31 @@
+.b-menu-horiz_layout_normal .b-menu-horiz__title
+{
+    margin-right: 10px;
+}
+
+.b-menu-horiz_layout_normal .b-menu-horiz__item
+{
+    margin: 0 0.3em;
+    padding: 0.3em 0.5em;
+}
+
+.b-menu-horiz_layout_normal .b-menu-horiz__item_state_current
+{
+    border-radius: 3px;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+
+    background: #ff1900;
+}
+
+.b-menu-horiz_layout_normal .b-menu-horiz__item_state_current .b-menu-horiz__item-selector
+{
+    cursor: default !important;
+
+    color: #fff;
+}
+
+.b-menu-horiz_layout_normal .b-menu-horiz__item-selector .b-link__inner
+{
+    border-bottom: 0 !important;
+}
