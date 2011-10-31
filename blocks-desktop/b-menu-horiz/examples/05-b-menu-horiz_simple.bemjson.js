@@ -1,38 +1,26 @@
 ({
     block: 'b-page',
-    title: 'Переключающееся горизонтальное меню',
+    title: 'b-menu-horiz_simple',
     head: [
-        { elem: 'css', url: '_30-b-menu-horiz_horiz-js.css' },
+        { elem: 'css', url: '_05-b-menu-horiz_simple.css' },
         { elem: 'js', url: '//yandex.st/jquery/1.6.2/jquery.min.js' },
-        { elem: 'js', url: '_30-b-menu-horiz_horiz-js.js' }
+        { elem: 'js', url: '_05-b-menu-horiz_simple.js' }
     ],
     content: [
         {
             block: 'b-menu-horiz',
-            mods: { layout: 'horiz' },
-            title: {
-                elem: 'title',
-                content: 'Navigation:'
-            },
+            mods: { layout: 'simple' },
+            separator: ' | ',
             content: [
                 {
                     elem: 'item',
                     elemMods: { state: 'current' },
-                    content: {
-                        block: 'b-link',
-                        mods: { 'pseudo': 'yes' },
-                        mix: [{ block: 'b-menu-horiz', elem : 'item-selector' }],
-                        url: '/',
-                        content: 'Home'
-                    }
+                    content: 'Home'
                 },
                 {
                     elem: 'item',
-                    elemMods: { state: 'disabled' },
                     content: {
                         block: 'b-link',
-                        mods: { 'pseudo' : 'yes' },
-                        mix: [{ block: 'b-menu-horiz', elem : 'item-selector' }],
                         url: '/',
                         content: 'Products'
                     }
@@ -41,8 +29,6 @@
                     elem: 'item',
                     content: {
                         block: 'b-link',
-                        mods: { 'pseudo' : 'yes' },
-                        mix: [{ block: 'b-menu-horiz', elem : 'item-selector' }],
                         url: '/',
                         content: 'Services'
                     }
@@ -51,8 +37,6 @@
                     elem: 'item',
                     content: {
                         block: 'b-link',
-                        mods: { 'pseudo' : 'yes' },
-                        mix: [{ block: 'b-menu-horiz', elem : 'item-selector' }],
                         url: '/',
                         content: 'Support'
                     }
@@ -61,8 +45,6 @@
                     elem: 'item',
                     content: {
                         block: 'b-link',
-                        mods: { 'pseudo' : 'yes' },
-                        mix: [{ block: 'b-menu-horiz', elem : 'item-selector' }],
                         url: '/',
                         content: 'Company'
                     }
