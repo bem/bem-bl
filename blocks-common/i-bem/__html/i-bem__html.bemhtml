@@ -15,7 +15,7 @@
             (this.block || this.elem) ?
                 (this.position = (this.position || 0) + 1) :
                 this._listLength--;
-            this.apply();
+            apply();
         }
     }
 
@@ -36,7 +36,7 @@
         this._notNewList = true;
 
         while(i < l)
-            local(this.ctx = v[i++]) this.apply();
+            apply(this.ctx = v[i++]);
 
         prevNotNewList || (this.position = prevPos);
     }
@@ -60,26 +60,24 @@ default: {
         buf = this._buf,
         tag;
 
-    local(this._mode = 'tag') tag = this.apply();
+    tag = apply(this._mode = 'tag');
     typeof tag != 'undefined' || (tag = v.tag);
     typeof tag != 'undefined' || (tag = 'div');
 
     if(tag) {
         var jsParams, js;
         if(this.block && v.js !== false) {
-            local(this._mode = 'js') js = this.apply();
+            js = apply(this._mode = 'js');
             js = js? this._.extend(v.js, js === true? {} : js) : v.js === true? {} : v.js;
             js && ((jsParams = {})[BEM.INTERNAL.buildClass(this.block, v.elem)] = js);
         }
 
         buf.push('<', tag);
 
-        var isBEM;
-        local(this._mode = 'bem') isBEM = this.apply();
+        var isBEM = apply(this._mode = 'bem');
         typeof isBEM != 'undefined' || (isBEM = typeof v.bem != 'undefined' ? v.bem : v.block || v.elem);
 
-        var cls;
-        local(this._mode = 'cls') cls = this.apply();
+        var cls = apply(this._mode = 'cls');
         cls || (cls = v.cls);
 
         var addJSInitClass = v.block && jsParams;
@@ -89,8 +87,7 @@ default: {
 
                 BEM.INTERNAL.buildClasses(this.block, v.elem, v.elemMods || v.mods, buf);
 
-                var mix;
-                local(this._mode = 'mix') mix = this.apply();
+                var mix = apply(this._mode = 'mix');
                 v.mix && (mix = mix? mix.concat(v.mix) : v.mix);
 
                 if(mix) {
@@ -121,16 +118,14 @@ default: {
         }
 
         if(jsParams) {
-            var jsAttr;
-            local(this._mode = 'jsAttr') jsAttr = this.apply();
+            var jsAttr = apply(this._mode = 'jsAttr');
             buf.push(
                 ' ', jsAttr || 'onclick', '="return ',
                 this._.attrEscape(JSON.stringify(jsParams)),
                 '"');
         }
 
-        var attrs;
-        local(this._mode = 'attrs') attrs = this.apply();
+        var attrs = apply(this._mode = 'attrs');
         attrs = this._.extend(attrs, v.attrs); // NOTE: возможно стоит делать массив, чтобы потом быстрее сериализовывать
         if(attrs) {
             var name; // TODO: разобраться с OmetaJS и YUI Compressor
@@ -144,16 +139,15 @@ default: {
     } else {
         tag && buf.push('>');
 
-        var content;
-        local(this._mode = 'content') content = this.apply();
+        var content = apply(this._mode = 'content');
         if(content || content === 0) {
             var isBEM = this.block || this.elem;
-            local(
+            apply(
                 this._notNewList = false,
                 this.position = isBEM ? 1 : this.position,
                 this._listLength = isBEM ? 1 : this._listLength,
                 this.ctx = content,
-                this._mode = '') this.apply();
+                this._mode = '');
         }
 
         tag && buf.push('</', tag, '>');
@@ -347,7 +341,7 @@ content: this.ctx.content
         ctx = {
             ctx: this,
             _start: true,
-            apply: this.apply,
+            apply: apply,
             _buf: [],
             _: {
                 isArray: function(obj) {
