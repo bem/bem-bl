@@ -1,6 +1,6 @@
 ({
     block: 'b-page',
-    title: 'b-menu-horiz',
+    title: 'A horizontal menu using a table',
     head: [
         { elem: 'css', url: '_20-b-menu-horiz_complex.css' },
         { elem: 'js', url: '//yandex.st/jquery/1.6.2/jquery.min.js' },
@@ -9,6 +9,7 @@
     content: [
         {
             block: 'b-menu-horiz',
+            js: false,
             mods: { layout: 'complex' },
             content: [
                 {

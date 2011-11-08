@@ -35,9 +35,11 @@ block b-page {
                     },
                     {
                         elem: 'body',
-                        mix: [
-                            this.ctx
-                        ],
+                        mix: [{
+                            block: this.ctx.block,
+                            mods: this.ctx.mods,
+                            mix: this.ctx.mix
+                        }],
                         content: [
                             this.ctx.content
                         ]

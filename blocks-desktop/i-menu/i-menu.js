@@ -11,7 +11,9 @@ BEM.DOM.decl('i-menu', {
 
             'state': {
 
-                'current' : function(elem) {
+                'current' : function(elem, modName, modVal, oldModVal) {
+
+                    if (oldModVal == 'disabled') return false;
 
                     var prev = this.elem('item', 'state', 'current');
                     this
@@ -27,7 +29,7 @@ BEM.DOM.decl('i-menu', {
     onItemSelectorClick : function(e) {
 
         var item = this._getItemByEvent(e);
-        this.hasMod(item, 'state', 'disabled') || this.setMod(item, 'state', 'current');
+        this.setMod(item, 'state', 'current');
 
     },
 

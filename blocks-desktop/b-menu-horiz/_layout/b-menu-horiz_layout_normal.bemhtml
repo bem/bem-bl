@@ -1,4 +1,4 @@
-block b-menu-horiz, mod layout horiz {
+block b-menu-horiz, mod layout normal {
 
     content: [
         this.ctx.title,

@@ -1,16 +1,15 @@
 ({
     block: 'b-page',
-    title: 'Переключающееся горизонтальное меню',
+    title: 'Switching horizontal menu using a list',
     head: [
-        { elem: 'css', url: '_30-b-menu-horiz_horiz-js.css' },
+        { elem: 'css', url: '_30-b-menu-horiz_normal-js.css' },
         { elem: 'js', url: '//yandex.st/jquery/1.6.2/jquery.min.js' },
-        { elem: 'js', url: '_30-b-menu-horiz_horiz-js.js' }
+        { elem: 'js', url: '_30-b-menu-horiz_normal-js.js' }
     ],
     content: [
         {
             block: 'b-menu-horiz',
-            js: true,
-            mods: { layout: 'horiz' },
+            mods: { layout: 'normal' },
             title: {
                 elem: 'title',
                 content: 'Navigation:'
@@ -29,6 +28,7 @@
                 },
                 {
                     elem: 'item',
+                    elemMods: { state: 'disabled' },
                     content: {
                         block: 'b-link',
                         mods: { 'pseudo' : 'yes' },
