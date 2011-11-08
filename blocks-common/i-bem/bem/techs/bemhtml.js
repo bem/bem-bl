@@ -53,7 +53,14 @@ exports.bemBuild = function (prefixes, outputDir, outputName) {
           { encoding: 'utf8' }
         );
 
-        out.write('var BEMHTML = ' + xjstJS + ';BEMHTML = BEMHTML.apply;');
+        if (process.env.BEMHTML_ENV == 'development') {
+          try {
+              xjstJS = require('vm').runInThisContext(xjstJS).apply;
+          } catch(e) { console.log(e) }
+          out.write('var BEMHTML = ' + xjstJS.apply);
+        } else {
+          out.write('var BEMHTML = ' + xjstJS + ';BEMHTML = BEMHTML.apply;');
+        }
 
     } catch (e) {
         e.errorPos != undefined &&

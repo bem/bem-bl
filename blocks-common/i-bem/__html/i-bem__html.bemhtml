@@ -337,39 +337,37 @@ content: this.ctx.content
                 r = new RegExp(r, 'g');
                 return function(s) { return ('' + s).replace(r, f) }
             }
-        })();
-
-      local({
-        ctx: this,
-        _start: true,
-        apply: apply,
-        _buf: [],
-        _: {
-            isArray: function(obj) {
-                return toString.call(obj) === "[object Array]";
+        })(),
+        ctx = {
+            ctx: this,
+            _start: true,
+            apply: apply,
+            _buf: [],
+            _: {
+                isArray: function(obj) {
+                    return toString.call(obj) === "[object Array]";
+                },
+                isSimple: function(obj) {
+                    var t = typeof obj;
+                    return t === 'string' || t === 'number';
+                },
+                isShortTag: function(t) {
+                    return SHORT_TAGS.hasOwnProperty(t);
+                },
+                extend: function(o1, o2) {
+                    if(!o1 || !o2) return o1 || o2;
+                    var res = {}, n;
+                    for(n in o1) o1.hasOwnProperty(n) && (res[n] = o1[n]);
+                    for(n in o2) o2.hasOwnProperty(n) && (res[n] = o2[n]);
+                    return res;
+                },
+                xmlEscape: buildEscape('[&<>]'),
+                attrEscape: buildEscape('["&<>]')
             },
-            isSimple: function(obj) {
-                var t = typeof obj;
-                return t === 'string' || t === 'number';
-            },
-            isShortTag: function(t) {
-                return SHORT_TAGS.hasOwnProperty(t);
-            },
-            extend: function(o1, o2) {
-                if(!o1 || !o2) return o1 || o2;
-                var res = {}, n;
-                for(n in o1) o1.hasOwnProperty(n) && (res[n] = o1[n]);
-                for(n in o2) o2.hasOwnProperty(n) && (res[n] = o2[n]);
-                return res;
-            },
-            xmlEscape: buildEscape('[&<>]'),
-            attrEscape: buildEscape('["&<>]')
-        },
-        BEM: BEM,
-        isFirst: function() { return this.position === 1 },
-        isLast: function() { return this.position === this._listLength }
-    }) {
-      apply();
-      return this._buf.join('')
-    };
+            BEM: BEM,
+            isFirst: function() { return this.position === 1 },
+            isLast: function() { return this.position === this._listLength }
+        };
+    ctx.apply();
+    return ctx._buf.join('');
 }
