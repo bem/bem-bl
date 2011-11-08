@@ -9,6 +9,18 @@
     ],
     content: [
         {
+            attrs : { id : 'mods-test' },
+            content: {
+                block: 'b-foo',
+                mods: { mod1 : 'val1' },
+                content: [
+                    { elem : 'elem1', mods : { emod1 : 'eval1' }},
+                    { elem : 'elem2', mods : { emod2 : 'eval2' }},
+                    { elem : 'elem3', mix : [{ elem : 'elem4', mods : { emod4 : 'eval4' }}]}
+                ]
+            }
+        },
+        {
             attrs : { id : 'once-test' },
             content: [
                 { block: 'b-foo', js: { id : 'test' }},
@@ -30,8 +42,11 @@
             block: 'i-bem',
             elem: 'test',
             content: [
+                { block: 'i-jquery', elem: 'observable' },
                 { block: 'i-jquery', elem: 'stringify' },
                 { block: 'i-bem' },
+                { block: 'i-bem', elem : 'internal' },
+                { block: 'i-bem', elem : 'mods' },
                 { block: 'i-bem', elem : 'live-ctx' },
                 { block: 'i-bem', elem : 'elem-params' }
             ]
