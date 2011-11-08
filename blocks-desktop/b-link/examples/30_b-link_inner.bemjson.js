@@ -17,7 +17,6 @@
                 content: [
                     {
                         block: 'b-icon',
-                        mix: [ { block: 'b-link', elem: 'icon'} ],
                         url: 'http://yandex.st/lego/_/Kx6F6RQnQFitm0qRxX7vpvfP0K0.png',
                         alt: '16x16 icon'
                     },
@@ -37,13 +36,12 @@
                 content: [
                     {
                         block: 'b-icon',
-                        mix: [ { block: 'b-link', elem: 'icon'} ],
                         url: '//yandex.st/lego/_/JMzwbLLDYCwdJBeYmjJFITN6lGI.png',
                         alt: '24x24 icon'
                     },
                     {
                         elem: 'inner',
-                        content: 'Pseudo-link with icon'
+                        content: 'Pseudo-link with icon 24x24'
                     }
                 ]
             }
@@ -57,7 +55,6 @@
                 content: [
                     {
                         block: 'b-icon',
-                        mix: [ { block: 'b-link', elem: 'icon'} ],
                         url: '//yandex.st/lego/_/7mx2-iHmpGYwkJ_7qdwuo9cpKkg.png',
                         alt: '48x48 icon'
                     },
