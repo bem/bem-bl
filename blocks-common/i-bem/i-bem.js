@@ -184,18 +184,34 @@ this.BEM = $.inherit($.observable, /** @lends BEM.prototype */ {
      * @protected
      * @param {Object} [elem] вложенный элемент
      * @param {String} modName имя модификатора
-     * @param {String} modVal значение модификатора
+     * @param {String} [modVal] значение модификатора
      * @returns {Boolean}
      */
     hasMod : function(elem, modName, modVal) {
 
-        if(arguments.length == 2) {
-            modVal = modName;
+        var len = arguments.length,
+            invert = false;
+
+        if(len == 1) {
+            modVal = '';
             modName = elem;
             elem = undefined;
+            invert = true;
+        }
+        else if(len == 2) {
+            if(typeof elem == 'string') {
+                modVal = modName;
+                modName = elem;
+                elem = undefined;
+            }
+            else {
+                modVal = '';
+                invert = true;
+            }
         }
 
-        return this.getMod(elem, modName) === modVal;
+        var res = this.getMod(elem, modName) === modVal;
+        return invert? !res : res;
 
     },
 
@@ -490,7 +506,7 @@ this.BEM = $.inherit($.observable, /** @lends BEM.prototype */ {
      * @param {String} [decl.baseBlock] имя родительского блока
      * @param {String} [decl.modName] имя модификатора
      * @param {String} [decl.modVal] значение модификатора
-     * @param {Object} props методы
+     * @param {Object} [props] методы
      * @param {Object} [staticProps] статические методы
      */
     decl : function(decl, props, staticProps) {
@@ -503,6 +519,8 @@ this.BEM = $.inherit($.observable, /** @lends BEM.prototype */ {
 
         if(decl.baseBlock && !blocks[decl.baseBlock])
             throw('baseBlock "' + decl.baseBlock + '" for "' + decl.block + '" is undefined');
+
+        props || (props = {});
 
         if(props.onSetMod) {
             modFnsToProps(props.onSetMod, props);
