@@ -909,8 +909,15 @@ var DOM = BEM.DOM = BEM.decl('i-bem__dom',/** @lends BEM.DOM.prototype */{
      */
     _elem : function(name, modName, modVal) {
 
-        var key = name + buildModPostfix(modName, modVal);
-        return this._elemCache[key] || (this._elemCache[key] = this.findElem(name, modName, modVal));
+        var key = name + buildModPostfix(modName, modVal),
+            res;
+
+        if(!(res = this._elemCache[key])) {
+            res = this._elemCache[key] = this.findElem(name, modName, modVal);
+            res.__bemElemName = name;
+        }
+
+        return res;
 
     },
 
@@ -923,6 +930,11 @@ var DOM = BEM.DOM = BEM.decl('i-bem__dom',/** @lends BEM.DOM.prototype */{
      * @returns {jQuery} DOM-элементы
      */
     elem : function(names, modName, modVal) {
+
+        if(modName && typeof modName != 'string') {
+            modName.__bemElemName = names;
+            return modName;
+        }
 
         if(names.indexOf(' ') < 0) {
             return this._elem(names, modName, modVal);
@@ -1556,6 +1568,8 @@ var DOM = BEM.DOM = BEM.decl('i-bem__dom',/** @lends BEM.DOM.prototype */{
      * @returns {String|undefined}
      */
     _extractElemNameFrom : function(elem) {
+
+        if(elem.__bemElemName) return elem.__bemElemName;
 
         var matches = elem[0].className.match(this._buildElemNameRE());
         return matches? matches[1] : undefined;

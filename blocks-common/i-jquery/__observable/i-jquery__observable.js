@@ -8,6 +8,7 @@
  *
  * @version 1.0.0
  * @requires $.identify
+ * @requires $.inherit
  */
 
 (function($) {
@@ -59,7 +60,7 @@ var storageExpando = '__' + +new Date + 'storage',
 
                     if(!(id in eStorage.ids)) {
                         var list = eStorage.list,
-                            item = { fn : fn, data : data, ctx : ctx || this, special : _special };
+                            item = { fn : fn, data : data, ctx : ctx, special : _special };
                         if(list.last) {
                             list.last.next = item;
                             item.prev = list.last;
@@ -159,20 +160,20 @@ var storageExpando = '__' + +new Date + 'storage',
          */
         trigger : function(e, data) {
 
-            var storage = this[storageExpando],
+            var _this = this,
+                storage = _this[storageExpando],
                 rawType;
 
             typeof e === 'string'?
-                e = $.Event(this.buildEventName(rawType = e)) :
-                e.type = this.buildEventName(rawType = e.type);
+                e = $.Event(_this.buildEventName(rawType = e)) :
+                e.type = _this.buildEventName(rawType = e.type);
 
             if(storage && (storage = storage[e.type])) {
                 var item = storage.list.first,
-                    ret,
-                    next;
+                    ret;
                 while(item) {
                     e.data = item.data;
-                    ret = item.fn.call(item.ctx, e, data);
+                    ret = item.fn.call(item.ctx || _this, e, data);
                     if(typeof ret !== 'undefined') {
                         e.result = ret;
                         if(ret === false) {
@@ -180,10 +181,10 @@ var storageExpando = '__' + +new Date + 'storage',
                             e.stopPropagation();
                         }
                     }
-                    next = item.next;
+
                     item.special && item.special.one &&
-                        this.un(rawType, item.fn, item.ctx);
-                    item = next;
+                        _this.un(rawType, item.fn, item.ctx);
+                    item = item.next;
                 }
             }
 
