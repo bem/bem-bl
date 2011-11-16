@@ -1,6 +1,6 @@
 var myPath = require('bem/lib/path'),
     Template = require('bem/lib/template'),
-    Js = require('bem/lib/techs/js');
+    Js = require('bem/lib/legacy-techs/js');
 
 exports.techModule = module;
 

@@ -115,13 +115,9 @@ this.BEM = $.inherit($.observable, /** @lends BEM.prototype */ {
      */
     _init : function() {
 
-        var _this = this;
-        if('_modCache' in _this && !_this.hasMod('js', 'inited'))
-            _this
-                .setMod('js', 'inited')
-                .trigger('init');
-
-        return _this;
+        return this
+            .setMod('js', 'inited')
+            .trigger('init');
 
     },
 
@@ -479,11 +475,7 @@ this.BEM = $.inherit($.observable, /** @lends BEM.prototype */ {
     /**
      * Удаляет блок
      */
-    destruct : function() {
-
-        delete this._modCache;
-
-    }
+    destruct : function() {}
 
 }, /** @lends BEM */{
 
@@ -614,7 +606,7 @@ this.BEM = $.inherit($.observable, /** @lends BEM.prototype */ {
     _extractElemNameFrom : function(elem) {},
 
     /**
-     * Выполняет функцию после "текущего события"
+     * Добавляет функцию в очередь для запуска после "текущего события"
      * @static
      * @protected
      * @param {Function} fn
@@ -623,11 +615,23 @@ this.BEM = $.inherit($.observable, /** @lends BEM.prototype */ {
     afterCurrentEvent : function(fn, ctx) {
 
         afterCurrentEventFns.push({ fn : fn, ctx : ctx }) == 1 &&
-            setTimeout(function() {
-                var fnObj,
-                    fnsCopy = afterCurrentEventFns.splice(0, afterCurrentEventFns.length);
-                while(fnObj = fnsCopy.shift()) fnObj.fn.call(fnObj.ctx || this);
-            }, 0);
+            setTimeout(this._runAfterCurrentEventFns, 0);
+
+    },
+
+    /**
+     * Запускает очерель
+     * @private
+     */
+    _runAfterCurrentEventFns : function() {
+
+        var fnsLen = afterCurrentEventFns.length;
+        if(fnsLen) {
+            var fnObj,
+                fnsCopy = afterCurrentEventFns.splice(0, fnsLen);
+
+            while(fnObj = fnsCopy.shift()) fnObj.fn.call(fnObj.ctx || this);
+        }
 
     },
 

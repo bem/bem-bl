@@ -1099,8 +1099,7 @@ var DOM = BEM.DOM = BEM.decl('i-bem__dom',/** @lends BEM.DOM.prototype */{
      * @static
      * @protected
      * @param {jQuery} [ctx=document] корневая DOM-нода
-     * @param {Function} [callback] обработчик, вызываемый после инициализации
-     * @param {Object} [callbackCtx] контекст обработчика
+     * @returns {jQuery} ctx контекст инициализации
      */
     init : function(ctx, callback, callbackCtx) {
 
@@ -1119,6 +1118,11 @@ var DOM = BEM.DOM = BEM.decl('i-bem__dom',/** @lends BEM.DOM.prototype */{
             function() {
                 callback.call(callbackCtx || this, ctx);
             });
+
+        // чтобы инициализация была полностью синхронной
+        this._runAfterCurrentEventFns();
+
+        return ctx;
 
     },
 
