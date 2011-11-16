@@ -45,10 +45,11 @@
                 { block: 'i-jquery', elem: 'observable' },
                 { block: 'i-jquery', elem: 'stringify' },
                 { block: 'i-bem' },
-                { block: 'i-bem', elem : 'internal' },
-                { block: 'i-bem', elem : 'mods' },
-                { block: 'i-bem', elem : 'live-ctx' },
-                { block: 'i-bem', elem : 'elem-params' }
+                { block: 'i-bem', elem: 'internal' },
+                { block: 'i-bem', elem: 'mods' },
+                { block: 'i-bem', elem: 'init' },
+                { block: 'i-bem', elem: 'live-ctx' },
+                { block: 'i-bem', elem: 'elem-params' }
             ]
         }
     ]
