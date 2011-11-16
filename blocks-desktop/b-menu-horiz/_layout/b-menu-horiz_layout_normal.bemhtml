@@ -1,0 +1,15 @@
+block b-menu-horiz, mod layout normal {
+
+    content: [
+        this.ctx.title,
+        {
+            elem: 'layout',
+            content: this.ctx.content
+        }
+    ]
+
+    elem layout, tag: 'ul'
+
+    elem layout-unit, tag: 'li'
+
+}

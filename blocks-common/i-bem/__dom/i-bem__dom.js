@@ -13,6 +13,15 @@ var win = $(window),
  */
     uniqIdToDomElems = {},
 
+
+/**
+ * Хранилище для блоков по уникальному ключу
+ * @static
+ * @private
+ * @type Object
+ */
+    uniqIdToBlock = {},
+
 /**
  * Хранилище для параметров блоков
  * @private
@@ -35,8 +44,6 @@ var win = $(window),
     liveClassEventStorage = {},
 
     blocks = BEM.blocks,
-
-    uniqIdToBlock = BEM._uniqIdToBlock,
 
     INTERNAL = BEM.INTERNAL,
 
@@ -226,46 +233,44 @@ var DOM = BEM.DOM = BEM.decl('i-bem__dom',/** @lends BEM.DOM.prototype */{
      */
     __constructor : function(domElem, params, initImmediately) {
 
+        var _this = this;
+
         /**
          * DOM-элементы блока
          * @protected
          * @type jQuery
          */
-        this.domElem = domElem;
+        _this.domElem = domElem;
 
         /**
          * кэш для имен событий на DOM-элементах
          * @private
          * @type Object
          */
-        this._eventNameCache = {};
+        _this._eventNameCache = {};
 
         /**
          * кэш для элементов
          * @private
          * @type Object
          */
-        this._elemCache = {};
+        _this._elemCache = {};
+
+        /**
+         * уникальный идентификатор блока
+         * @private
+         * @type String
+         */
+        uniqIdToBlock[_this._uniqId = params.uniqId || $.identify(_this)] = _this;
 
         /**
          * флаг необходимости unbind от document и window при уничтожении блока
          * @private
          * @type Boolean
          */
-        this._needSpecialUnbind = false;
+        _this._needSpecialUnbind = false;
 
-        this.__base(null, params, initImmediately);
-
-    },
-
-    /**
-     * Удаляет DOM-элемент из блока (для блоков на нескольких элементах)
-     * @private
-     * @param {jQuery} domElem
-     */
-    _removeDomElem : function(domElem) {
-
-        !(this.domElem = this.domElem.not(domElem))[0] && this.destruct();
+        _this.__base(null, params, initImmediately);
 
     },
 
@@ -904,8 +909,15 @@ var DOM = BEM.DOM = BEM.decl('i-bem__dom',/** @lends BEM.DOM.prototype */{
      */
     _elem : function(name, modName, modVal) {
 
-        var key = name + buildModPostfix(modName, modVal);
-        return this._elemCache[key] || (this._elemCache[key] = this.findElem(name, modName, modVal));
+        var key = name + buildModPostfix(modName, modVal),
+            res;
+
+        if(!(res = this._elemCache[key])) {
+            res = this._elemCache[key] = this.findElem(name, modName, modVal);
+            res.__bemElemName = name;
+        }
+
+        return res;
 
     },
 
@@ -918,6 +930,11 @@ var DOM = BEM.DOM = BEM.decl('i-bem__dom',/** @lends BEM.DOM.prototype */{
      * @returns {jQuery} DOM-элементы
      */
     elem : function(names, modName, modVal) {
+
+        if(modName && typeof modName != 'string') {
+            modName.__bemElemName = names;
+            return modName;
+        }
 
         if(names.indexOf(' ') < 0) {
             return this._elem(names, modName, modVal);
@@ -959,6 +976,25 @@ var DOM = BEM.DOM = BEM.decl('i-bem__dom',/** @lends BEM.DOM.prototype */{
     },
 
     /**
+     * Извлекает параметры элемента блока
+     * @param {String|jQuery} elem элемент
+     * @returns {Object} параметры
+     */
+    elemParams : function(elem) {
+
+        var elemName;
+        if(typeof elem ==  'string') {
+            elemName = elem;
+            elem = this.elem(elem);
+        } else {
+            elemName = this.__self._extractElemNameFrom(elem);
+        }
+
+        return extractParams(elem[0])[buildClass(this.__self.getName(), elemName)] || {};
+
+    },
+
+    /**
      * Проверяет, находится ли DOM-элемент в блоке
      * @protected
      * @param {jQuery} domElem DOM-элемент
@@ -984,7 +1020,7 @@ var DOM = BEM.DOM = BEM.decl('i-bem__dom',/** @lends BEM.DOM.prototype */{
     },
 
     /**
-     * Удаляет блок вместе с его DOM-нодами
+     * Удаляет блок
      * @param {Boolean} [keepDOM=false] нужно ли оставлять DOM-ноды блока в документе
      */
     destruct : function(keepDOM) {
@@ -992,22 +1028,25 @@ var DOM = BEM.DOM = BEM.decl('i-bem__dom',/** @lends BEM.DOM.prototype */{
         var _this = this,
             _self = _this.__self;
 
-        _this._needSpecialUnbind && _self.doc.add(_self.win).unbind('.' + _this._uniqId);
+        _this._isDestructing = true;
 
-        _this.__base();
+        _this._needSpecialUnbind && _self.doc.add(_self.win).unbind('.' + _this._uniqId);
 
         _this.dropElemCache().domElem.each(function(i, domNode) {
             $.each(getParams(domNode), function(blockName, blockParams) {
                 var block = uniqIdToBlock[blockParams.uniqId];
-                block && block._removeDomElem(domNode);
+                block && !block._isDestructing && block.destruct();
             });
             cleanupDomNode(domNode);
         });
 
         keepDOM || _this.domElem.remove();
 
+        delete uniqIdToBlock[_this.un()._uniqId];
         delete _this.domElem;
         delete _this._elemCache;
+
+        _this.__base();
 
     }
 
@@ -1060,8 +1099,7 @@ var DOM = BEM.DOM = BEM.decl('i-bem__dom',/** @lends BEM.DOM.prototype */{
      * @static
      * @protected
      * @param {jQuery} [ctx=document] корневая DOM-нода
-     * @param {Function} [callback] обработчик, вызываемый после инициализации
-     * @param {Object} [callbackCtx] контекст обработчика
+     * @returns {jQuery} ctx контекст инициализации
      */
     init : function(ctx, callback, callbackCtx) {
 
@@ -1080,6 +1118,11 @@ var DOM = BEM.DOM = BEM.decl('i-bem__dom',/** @lends BEM.DOM.prototype */{
             function() {
                 callback.call(callbackCtx || this, ctx);
             });
+
+        // чтобы инициализация была полностью синхронной
+        this._runAfterCurrentEventFns();
+
+        return ctx;
 
     },
 
@@ -1530,6 +1573,8 @@ var DOM = BEM.DOM = BEM.decl('i-bem__dom',/** @lends BEM.DOM.prototype */{
      */
     _extractElemNameFrom : function(elem) {
 
+        if(elem.__bemElemName) return elem.__bemElemName;
+
         var matches = elem[0].className.match(this._buildElemNameRE());
         return matches? matches[1] : undefined;
 
@@ -1598,6 +1643,18 @@ var DOM = BEM.DOM = BEM.decl('i-bem__dom',/** @lends BEM.DOM.prototype */{
     buildSelector : function(elem, modName, modVal) {
 
         return '.' + buildClass(this._name, elem, modName, modVal);
+
+    },
+
+    /**
+     * Возвращает инстанс блока по уникальному идентификатору
+     * @deprecated
+     * @param {String} [uniqId]
+     * @returns {BEM.DOM}
+     */
+    getBlockByUniqId : function(uniqId) {
+
+        return uniqIdToBlock[uniqId];
 
     },
 

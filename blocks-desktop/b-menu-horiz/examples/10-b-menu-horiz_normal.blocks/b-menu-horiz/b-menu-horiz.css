@@ -1,0 +1,21 @@
+.b-menu-horiz_layout_normal .b-menu-horiz__title
+{
+    margin-right: 10px;
+}
+
+.b-menu-horiz_layout_normal .b-menu-horiz__item
+{
+    margin: 0 0.2em;
+    padding: 0.3em 0.4em;
+}
+
+.b-menu-horiz_layout_normal .b-menu-horiz__item_state_current
+{
+    background: yellow;
+}
+
+.b-menu-horiz_layout_normal .b-link:link,
+.b-menu-horiz_layout_normal .b-link:visited
+{
+    color: #00c;
+}

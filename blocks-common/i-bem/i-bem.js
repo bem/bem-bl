@@ -20,14 +20,6 @@ var afterCurrentEventFns = [],
     blocks = {},
 
 /**
- * Хранилище для блоков по уникальному ключу
- * @static
- * @private
- * @type Object
- */
-    uniqIdToBlock = {},
-
-/**
  * Каналы сообщений
  * @static
  * @private
@@ -111,15 +103,6 @@ this.BEM = $.inherit($.observable, /** @lends BEM.prototype */ {
          */
         _this.params = $.extend(_this.getDefaultParams(), params);
 
-        /**
-         * уникальный идентификатор блока
-         * @private
-         * @type String
-         */
-        _this._uniqId = _this.params.uniqId || $.identify(_this);
-
-        uniqIdToBlock[_this._uniqId] = _this;
-
         initImmediately !== false?
             _this._init() :
             _this.afterCurrentEvent(_this._init);
@@ -132,13 +115,9 @@ this.BEM = $.inherit($.observable, /** @lends BEM.prototype */ {
      */
     _init : function() {
 
-        var _this = this;
-        if('_uniqId' in _this && !_this.hasMod('js', 'inited'))
-            _this
-                .setMod('js', 'inited')
-                .trigger('init');
-
-        return _this;
+        return this
+            .setMod('js', 'inited')
+            .trigger('init');
 
     },
 
@@ -201,18 +180,34 @@ this.BEM = $.inherit($.observable, /** @lends BEM.prototype */ {
      * @protected
      * @param {Object} [elem] вложенный элемент
      * @param {String} modName имя модификатора
-     * @param {String} modVal значение модификатора
+     * @param {String} [modVal] значение модификатора
      * @returns {Boolean}
      */
     hasMod : function(elem, modName, modVal) {
 
-        if(arguments.length == 2) {
-            modVal = modName;
+        var len = arguments.length,
+            invert = false;
+
+        if(len == 1) {
+            modVal = '';
             modName = elem;
             elem = undefined;
+            invert = true;
+        }
+        else if(len == 2) {
+            if(typeof elem == 'string') {
+                modVal = modName;
+                modName = elem;
+                elem = undefined;
+            }
+            else {
+                modVal = '';
+                invert = true;
+            }
         }
 
-        return this.getMod(elem, modName) === modVal;
+        var res = this.getMod(elem, modName) === modVal;
+        return invert? !res : res;
 
     },
 
@@ -480,12 +475,7 @@ this.BEM = $.inherit($.observable, /** @lends BEM.prototype */ {
     /**
      * Удаляет блок
      */
-    destruct : function() {
-
-       delete uniqIdToBlock[this.un()._uniqId];
-       delete this._uniqId;
-
-    }
+    destruct : function() {}
 
 }, /** @lends BEM */{
 
@@ -500,24 +490,6 @@ this.BEM = $.inherit($.observable, /** @lends BEM.prototype */ {
     blocks : blocks,
 
     /**
-     * Хранилище для блоков по уникальному ключу
-     * @static
-     * @private
-     * @type Object
-     */
-    _uniqIdToBlock : uniqIdToBlock,
-
-    /**
-     * Возвращает инстанс блока по уникальному идентификатору
-     * @param {String} [uniqId]
-     */
-    getBlockByUniqId : function(uniqId) {
-
-        return uniqIdToBlock[uniqId];
-
-    },
-
-    /**
      * Декларатор блоков, создает класс блока
      * @static
      * @protected
@@ -526,7 +498,7 @@ this.BEM = $.inherit($.observable, /** @lends BEM.prototype */ {
      * @param {String} [decl.baseBlock] имя родительского блока
      * @param {String} [decl.modName] имя модификатора
      * @param {String} [decl.modVal] значение модификатора
-     * @param {Object} props методы
+     * @param {Object} [props] методы
      * @param {Object} [staticProps] статические методы
      */
     decl : function(decl, props, staticProps) {
@@ -539,6 +511,8 @@ this.BEM = $.inherit($.observable, /** @lends BEM.prototype */ {
 
         if(decl.baseBlock && !blocks[decl.baseBlock])
             throw('baseBlock "' + decl.baseBlock + '" for "' + decl.block + '" is undefined');
+
+        props || (props = {});
 
         if(props.onSetMod) {
             modFnsToProps(props.onSetMod, props);
@@ -632,7 +606,7 @@ this.BEM = $.inherit($.observable, /** @lends BEM.prototype */ {
     _extractElemNameFrom : function(elem) {},
 
     /**
-     * Выполняет функцию после "текущего события"
+     * Добавляет функцию в очередь для запуска после "текущего события"
      * @static
      * @protected
      * @param {Function} fn
@@ -641,11 +615,23 @@ this.BEM = $.inherit($.observable, /** @lends BEM.prototype */ {
     afterCurrentEvent : function(fn, ctx) {
 
         afterCurrentEventFns.push({ fn : fn, ctx : ctx }) == 1 &&
-            setTimeout(function() {
-                var fnObj,
-                    fnsCopy = afterCurrentEventFns.splice(0, afterCurrentEventFns.length);
-                while(fnObj = fnsCopy.shift()) fnObj.fn.call(fnObj.ctx || this);
-            }, 0);
+            setTimeout(this._runAfterCurrentEventFns, 0);
+
+    },
+
+    /**
+     * Запускает очерель
+     * @private
+     */
+    _runAfterCurrentEventFns : function() {
+
+        var fnsLen = afterCurrentEventFns.length;
+        if(fnsLen) {
+            var fnObj,
+                fnsCopy = afterCurrentEventFns.splice(0, fnsLen);
+
+            while(fnObj = fnsCopy.shift()) fnObj.fn.call(fnObj.ctx || this);
+        }
 
     },
 
