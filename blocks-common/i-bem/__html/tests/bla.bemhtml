@@ -298,7 +298,7 @@ content: this.ctx.content
     var ctx = {
             ctx: this,
             _start: true,
-            apply: arguments.callee,
+            apply: this.apply,
             _buf: [],
             _: {
                 isArray: function(obj) {

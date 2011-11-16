@@ -113,6 +113,12 @@ BEM.INTERNAL = {
      */
     buildClasses : function(block, elem, mods, buffer) {
 
+        if(elem && typeof elem != 'string') {
+            buffer = mods;
+            mods = elem;
+            elem = undefined;
+        }
+
         var res = buffer || [];
 
         elem?

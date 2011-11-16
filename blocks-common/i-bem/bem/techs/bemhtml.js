@@ -40,29 +40,20 @@ exports.bemBuild = function (prefixes, outputDir, outputName) {
         */
 
 
-        var xjstTree = xjst.XJSTParser.matchAll(
-                xjstSources,
-                'topLevel',
-                undefined,
-                function(m, i) {
-                    console.log(xjstSources);
-                    throw { errorPos: i, toString: function(){ return "xjst match failed" } } } ),
+        var xjstTree = xjst.parse(xjstSources),
             xjstJS = process.env.BEMHTML_ENV == 'development' ?
                 xjst.XJSTCompiler.match(xjstTree, 'topLevel') :
                 xjst.compile(xjstTree);
 
         //process.stdout.write('--- compile:\n' + xjstJS + '\n\n');
-        try {
-            xjstJS = require('vm').runInThisContext(xjstJS).apply;
-        } catch(e) { console.log(e) }
+        var out = fs.createWriteStream(
+          myPath.join(
+              outputDir,
+              outputName + '.' + this.getTechName() + '.js'),
+          { encoding: 'utf8' }
+        );
 
-        fs.createWriteStream(
-                myPath.join(
-                    outputDir,
-                    outputName + '.' + this.getTechName() + '.js'),
-                { encoding: 'utf8' })
-            .write('var BEMHTML = ' + xjstJS + ';');
-
+        out.write('var BEMHTML = ' + xjstJS + ';BEMHTML = BEMHTML.apply;');
 
     } catch (e) {
         e.errorPos != undefined &&

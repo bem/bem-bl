@@ -9,41 +9,47 @@
     ],
     content: [
         {
-            block: 'b-link',
-            mods: { pseudo: 'yes' },
-            content: 'Псевдо-спан'
+            attrs: { style: 'margin: 20px 0 20px 20px;' },
+            content: [
+                {
+                    block: 'b-link',
+                    mods: { pseudo: 'yes' },
+                    content: 'Псевдо-ссылка спаном'
+                }, '&nbsp;&nbsp;',
+                {
+                    block: 'b-link',
+                    mods: { pseudo: 'yes' },
+                    url: 'http://ya.ru',
+                    content: 'Псевдо-ссылка ссылкой'
+                }
+            ]
         },
         {
-            block: 'b-link',
-            mods: { pseudo: 'yes' },
-            url: '#',
-            target: '_blank',
-            content: 'Псевдо-ссылка с таргетом'
+            attrs: { style: 'margin: 20px 0 20px 20px;' },
+            content: {
+                block: 'b-link',
+                mods: { pseudo: 'yes' },
+                url: 'http://ya.ru',
+                target: '_blank',
+                title: 'Заголовок',
+                content: 'Псевдо-ссылка ссылкой с атрибутами title и target'
+            }
         },
         {
-            block: 'b-link',
-            mods: { pseudo: 'yes' },
-            url: '#',
-            target: '_blank',
-            title: 'Title у псевдо-ссылки',
-            content: 'Псевдо-ссылка с тайтлом и таргетом'
-        },
-        {
-            block: 'b-link',
-            mods: { pseudo:'yes', disabled: 'yes' },
-            content: 'Залоченный псевдо-спан'
-        },
-        {
-            block: 'b-link',
-            mods: { pseudo: 'yes' },
-            url: 'http://ya.ru',
-            content: 'Псевдо-ссылка со ссылкой'
-        },
-        {
-            block: 'b-link',
-            mods: { pseudo: 'yes', disabled: 'yes' },
-            url: 'http://ya.ru',
-            content: 'Залоченная псевдо-ссылка'
+            attrs: { style: 'margin: 20px 0 20px 20px;' },
+            content: [
+                {
+                    block: 'b-link',
+                    mods: { pseudo: 'yes', disabled: 'yes' },
+                    content: 'Неактивная псевдо-ссылка спаном'
+                }, '&nbsp;&nbsp;',
+                {
+                    block: 'b-link',
+                    mods: { pseudo: 'yes', disabled: 'yes' },
+                    url: 'http://ya.ru',
+                    content: 'Неактивная псевдо-ссылка ссылкой'
+                }
+            ]
         }
     ]
 })

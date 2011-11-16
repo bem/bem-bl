@@ -1,0 +1,21 @@
+block b-menu-horiz, mod layout simple {
+
+    default, !this._init: {
+        local(
+            this._init = true,
+            this._separator = this.ctx.separator
+        ) this.apply();
+    }
+
+    elem item, default, !this.ctx._wrap: {
+
+        local(
+            this._mode = '',
+            this.ctx._wrap = true,
+            this.ctx = [ (this.isFirst()? '' : this._separator), this.ctx ]
+        ) this.apply();
+    }
+
+    elem item, tag: (this.elemMods.state? 'span' : false)
+
+}
