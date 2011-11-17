@@ -2,20 +2,6 @@ block b-search {
 
     tag: 'form'
 
-    attrs, !this.elem, !this.ctx._attr: {
-
-        var attrs,
-            default_attrs = {};
-
-        this.ctx.attrs && this.ctx.attrs.action;
-
-        local(this.ctx._attr = true)
-            attrs = this.apply() || {};
-
-        return this._.extend(default_attrs, attrs);
-
-    }
-
     content, this.ctx.input, this.ctx.button: {
         this.ctx.input.block = 'b-search';
         this.ctx.button.block = 'b-search';
@@ -41,6 +27,7 @@ block b-search {
                 }
             ]
         }
+
         this.ctx.under && c.content.push(
             {
                 elem: 'row',
