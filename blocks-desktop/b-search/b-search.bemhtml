@@ -1,7 +1,6 @@
 block b-search {
 
     tag: 'form'
-    js: true
 
     attrs, !this.elem, !this.ctx._attr: {
 
@@ -64,7 +63,7 @@ block b-search {
 
     elem button {
         tag: 'input',
-        attrs: { type: 'submit', value: 'Найти' }
+        attrs: { type: 'submit', value: 'Search' }
     }
 
 }
