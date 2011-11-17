@@ -44,13 +44,14 @@ block b-search {
         this.ctx.under && c.content.push(
             {
                 elem: 'row',
-                  content: [
-                      {
-                          elem: 'cell',
-                          colspan: 2,
-                          content: this.ctx.under
-                      }
-                  ]
+                content: [
+                    {
+                      elem: 'cell',
+                      mix: [ { block: 'b-search', elem: 'layout-under' } ],
+                      colspan: 2,
+                      content: this.ctx.under
+                    }
+                ]
             });
 
         return c;
