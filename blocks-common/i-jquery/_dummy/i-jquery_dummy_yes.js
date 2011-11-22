@@ -21,6 +21,39 @@ jQuery.fn = jQuery.prototype = {
 
 jQuery.fn.init.prototype = jQuery.fn;
 
+jQuery.Event = function( src, props ) {
+    // Allow instantiation without the 'new' keyword
+    if ( !(this instanceof jQuery.Event) ) {
+        return new jQuery.Event( src, props );
+    }
+
+    // Event object
+    if ( src && src.type ) {
+        this.originalEvent = src;
+        this.type = src.type;
+
+        // Events bubbling up the document may have been marked as prevented
+        // by a handler lower down the tree; reflect the correct value.
+        this.isDefaultPrevented = ( src.defaultPrevented || src.returnValue === false ||
+            src.getPreventDefault && src.getPreventDefault() ) ? returnTrue : returnFalse;
+
+    // Event type
+    } else {
+        this.type = src;
+    }
+
+    // Put explicitly provided properties onto the event object
+    if ( props ) {
+        jQuery.extend( this, props );
+    }
+
+    // Create a timestamp if incoming event doesn't have one
+    this.timeStamp = src && src.timeStamp || jQuery.now();
+
+    // Mark it as fixed
+    this[ jQuery.expando ] = true;
+};
+
 jQuery.extend = jQuery.fn.extend = function() {
     // copy reference to target object
     var target = arguments[0] || {}, i = 1, length = arguments.length, deep = false, options, name, src, copy;
@@ -203,6 +236,10 @@ jQuery.extend({
         }
 
         return ret;
+    },
+
+    now: function() {
+        return ( new Date() ).getTime();
     },
 
     // arg is for internal usage only
