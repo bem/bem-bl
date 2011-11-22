@@ -230,4 +230,4 @@ jQuery.extend({
 
 window.jQuery = window.$ = jQuery;
 
-})(window);
+})((function() { return this })());
