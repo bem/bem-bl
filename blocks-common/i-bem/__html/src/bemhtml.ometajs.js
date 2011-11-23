@@ -53,7 +53,7 @@ var BSOMetaJSTranslator = ometajs_.BSOMetaJSTranslator;
                                   case "-":
                                     return "-";
                                   default:
-                                    throw fail;
+                                    throw fail();
                                 }
                             }.call(this);
                         });
