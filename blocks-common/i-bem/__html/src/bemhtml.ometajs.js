@@ -25,7 +25,10 @@ var BSJSIdentity = ometajs_.BSJSIdentity;
 var BSJSTranslator = ometajs_.BSJSTranslator;
 var BSOMetaJSParser = ometajs_.BSOMetaJSParser;
 var BSOMetaJSTranslator = ometajs_.BSOMetaJSTranslator;
-(function(fail, OMeta) {{
+if (global === ometajs_) {
+  fail = function() { return fail };
+  OMeta = require('ometajs').OMeta;
+}{
     var BEMHTMLParser = exports.BEMHTMLParser = objectThatDelegatesTo(XJSTParser, {
         bemMatch: function() {
             var $elf = this, _fromIdx = this.input.idx;
@@ -428,4 +431,4 @@ var BSOMetaJSTranslator = ometajs_.BSOMetaJSTranslator;
             });
         }
     });
-}})(global === ometajs_ ? function() { return fail } : fail,global === ometajs_ ? require('ometajs').OMeta : OMeta);
+}
