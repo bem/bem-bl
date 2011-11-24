@@ -35,7 +35,9 @@ var BSJSTranslator = ometajs_.BSJSTranslator;
 var BSOMetaJSParser = ometajs_.BSOMetaJSParser;
 var BSOMetaJSTranslator = ometajs_.BSOMetaJSTranslator;
 if (global === ometajs_) {
-  fail = function() { return fail };
+  fail = (function(fail) {
+    return function() { return fail };
+  })(fail);
   OMeta = require('ometajs').OMeta;
 }{
     var BEMHTMLParser = exports.BEMHTMLParser = objectThatDelegatesTo(XJSTParser, {
