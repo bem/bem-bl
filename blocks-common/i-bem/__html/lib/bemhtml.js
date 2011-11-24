@@ -7,7 +7,7 @@ var ometa = require('ometajs'),
     XJSTParser = xjst.XJSTParser,
     XJSTCompiler = xjst.XJSTCompiler;
 
-var ometajs_ = require('ometajs').globals;var StringBuffer = ometajs_.StringBuffer;
+var ometajs_ = require('ometajs').globals || global;var StringBuffer = ometajs_.StringBuffer;
 var objectThatDelegatesTo = ometajs_.objectThatDelegatesTo;
 var isImmutable = ometajs_.isImmutable;
 var digitValue = ometajs_.digitValue;
@@ -34,7 +34,7 @@ var BSJSIdentity = ometajs_.BSJSIdentity;
 var BSJSTranslator = ometajs_.BSJSTranslator;
 var BSOMetaJSParser = ometajs_.BSOMetaJSParser;
 var BSOMetaJSTranslator = ometajs_.BSOMetaJSTranslator;
-{
+(function(fail, OMeta) {{
     var BEMHTMLParser = exports.BEMHTMLParser = objectThatDelegatesTo(XJSTParser, {
         bemMatch: function() {
             var $elf = this, _fromIdx = this.input.idx;
@@ -437,4 +437,4 @@ var BSOMetaJSTranslator = ometajs_.BSOMetaJSTranslator;
             });
         }
     });
-}
+}})(global === ometajs_ ? function() { return fail } : fail,global === ometajs_ ? require('ometajs').OMeta : OMeta);
