@@ -20,7 +20,6 @@ exports.bemBuild = function (prefixes, outputDir, outputName) {
                 function(m, i) {
                     console.log(arguments);
                     throw { errorPos: i, toString: function(){ return "match failed" } } } );
-        //process.stdout.write('--- tree:\n' + JSON.stringify(tree) + '\n\n');
 
         var xjstSources = bemhtml.BEMHTMLToXJST.match(
             tree,
@@ -29,31 +28,19 @@ exports.bemBuild = function (prefixes, outputDir, outputName) {
             function(m, i) {
                 process.stdout.write(JSON.stringify(arguments));
                 throw { toString: function(){ return "compilation failed" } } } );
-        //process.stdout.write('--- compile:\n' + compileFn + '\n\n');
-        /*
-        fs.createWriteStream(
-                myPath.join(
-                    outputDir,
-                    outputName + '.' + this.getTechName() + '.xjst'),
-                { encoding: 'utf8' })
-            .write(xjstSources);
-        */
-
 
         var xjstTree = xjst.parse(xjstSources),
             xjstJS = process.env.BEMHTML_ENV == 'development' ?
                 xjst.XJSTCompiler.match(xjstTree, 'topLevel') :
                 xjst.compile(xjstTree);
 
-        //process.stdout.write('--- compile:\n' + xjstJS + '\n\n');
-        var out = fs.createWriteStream(
-          myPath.join(
+        var filename = myPath.join(
               outputDir,
-              outputName + '.' + this.getTechName() + '.js'),
-          { encoding: 'utf8' }
-        );
+              outputName + '.' + this.getTechName() + '.js'
+            ),
+            content = 'var BEMHTML = ' + xjstJS + ';BEMHTML = BEMHTML.apply;';
 
-        out.write('var BEMHTML = ' + xjstJS + ';BEMHTML = BEMHTML.apply;');
+        fs.writeFileSync(filename, content);
 
     } catch (e) {
         e.errorPos != undefined &&
