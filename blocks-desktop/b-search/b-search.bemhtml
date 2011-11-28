@@ -27,7 +27,6 @@ block b-search {
                 }
             ]
         }
-
         this.ctx.under && c.content.push(
             {
                 elem: 'row',
