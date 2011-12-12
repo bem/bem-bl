@@ -1,6 +1,6 @@
 ({
     shouldDeps: [
-        { elem: 'reporter', mods: { type: ['html', 'console'] }},
-        { elem: 'runner' }
+        { elems: ['runner', 'ajax'] },
+        { elem: 'reporter', mods: { type: ['html', 'console'] }}
     ]
 })
