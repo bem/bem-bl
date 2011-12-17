@@ -1,21 +1,2 @@
-==Библиотека для unit-тестов
 ##{"block":"i-jasmine"}##
-
-===Элементы блока
- * runner
- * reporter
-   * Модификаторы элемента
-
-     * reporter
-==="Запускатор" тестов
-##{"elem":"runner"}##
-
-===Репортер для тестов
-##{"elem":"reporter"}##
-
-=====HTML-репортер
-##{"elem":"reporter","elemMods":{"type":"html"}}##
-
-=====Консольный репортер
-##{"elem":"reporter","elemMods":{"type":"console"}}##
 

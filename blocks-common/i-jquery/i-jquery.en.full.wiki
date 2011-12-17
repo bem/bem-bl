@@ -5,31 +5,31 @@
    * no
    * yes
 ===Block Elements
- * inherit
- * identify
- * is-empty-object
  * cookie
- * stringify
- * observable
- * leftclick
  * debounce
+ * identify
+ * inherit
+ * is-empty-object
+ * leftclick
+ * observable
+ * stringify
 ##{"mods":{"dummy":"no"}}##
 
 ##{"mods":{"dummy":"yes"}}##
 
-##{"elem":"inherit"}##
+##{"elem":"cookie"}##
+
+##{"elem":"debounce"}##
 
 ##{"elem":"identify"}##
 
+##{"elem":"inherit"}##
+
 ##{"elem":"is-empty-object"}##
-
-##{"elem":"cookie"}##
-
-##{"elem":"stringify"}##
-
-##{"elem":"observable"}##
 
 ##{"elem":"leftclick"}##
 
-##{"elem":"debounce"}##
+##{"elem":"observable"}##
+
+##{"elem":"stringify"}##
 

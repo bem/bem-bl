@@ -1,4 +1,4 @@
-﻿Библиотека состоит из блоков, реализованных по ((http://bem.github.com/bem-method/html/all.ru.html БЭМ-методу)).
+Библиотека состоит из блоков, реализованных по ((http://bem.github.com/bem-method/html/all.ru.html БЭМ-методу)).
 
 Код библиотеки находится на GitHub: ((https://github.com/bem/bem-bl github.com/bem/bem-bl)).
 

@@ -1,6 +1,7 @@
 ##{"block":"b-menu-vert"}##
 
 ===Block Elements
+ * item
  * item-content
    * Element Modificators
 
@@ -8,9 +9,10 @@
  * item-selector
  * separator
  * submenu
- * item
- * trigger
  * title
+ * trigger
+##{"elem":"item"}##
+
 ##{"elem":"item-content"}##
 
 ##{"elem":"item-content","elemMods":{"visibility":"visible"}}##
@@ -21,9 +23,7 @@
 
 ##{"elem":"submenu"}##
 
-##{"elem":"item"}##
+##{"elem":"title"}##
 
 ##{"elem":"trigger"}##
-
-##{"elem":"title"}##
 
