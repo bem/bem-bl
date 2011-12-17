@@ -7,40 +7,40 @@
    * no
    * yes
 ===Элементы блока
- * inherit
- * identify
- * is-empty-object
  * cookie
- * stringify
- * observable
- * leftclick
  * debounce
+ * identify
+ * inherit
+ * is-empty-object
+ * leftclick
+ * observable
+ * stringify
 ====Полноценная копия настоящего jQuery.
 ##{"mods":{"dummy":"no"}}##
 
 ====Необходимый минимум для работы кода, зависящего от jQuery вне браузера (например в NodeJS).
 ##{"mods":{"dummy":"yes"}}##
 
-===Плагин для наследования
-##{"elem":"inherit"}##
+##{"elem":"cookie"}##
+
+===Debounce and throttle function's decorator plugin 1.0.6
+##{"elem":"debounce"}##
 
 ===Плагин для уникализации и идентификации объектов
 ##{"elem":"identify"}##
 
+===Плагин для наследования
+##{"elem":"inherit"}##
+
 ===Плагин, реализующий $.isEmptyObject для jQuery < 1.4
 ##{"elem":"is-empty-object"}##
-
-##{"elem":"cookie"}##
-
-===Плагин для сериализации объектов в JSON-строку
-##{"elem":"stringify"}##
-
-===Плагин, реализующий событийную модель для произвольных объектов
-##{"elem":"observable"}##
 
 ===Плагин, позволяющий навешивать обработчики событий на нажатие только левой клавиши манипулятора типа мышь
 ##{"elem":"leftclick"}##
 
-===Debounce and throttle function's decorator plugin 1.0.6
-##{"elem":"debounce"}##
+===Плагин, реализующий событийную модель для произвольных объектов
+##{"elem":"observable"}##
+
+===Плагин для сериализации объектов в JSON-строку
+##{"elem":"stringify"}##
 

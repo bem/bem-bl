@@ -1,4 +1,4 @@
-﻿== Naming convention
+== Naming convention
 
 === Block name
 ##Block name## is a keyword (usually in English) that makes sence what is a block about.\\

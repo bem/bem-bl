@@ -3,13 +3,16 @@
 ===Block Modificators
  * layout
    * complex
-   * horiz
+   * normal
+   * simple
 ===Block Elements
  * item
  * title
 ##{"mods":{"layout":"complex"}}##
 
-##{"mods":{"layout":"horiz"}}##
+##{"mods":{"layout":"normal"}}##
+
+##{"mods":{"layout":"simple"}}##
 
 ##{"elem":"item"}##
 
