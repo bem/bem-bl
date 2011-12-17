@@ -13,12 +13,14 @@ blocks-%: $$(wildcard $$@/*)
 	echo $@
 
 blocks-common/%:
+	rm $@/$(*F).*.full.wiki
 	BEMTECH_locales_techs="`pwd`/lib/bem/techs/full.wiki.js" \
 	BEMTECH_locales_locales="ru en" \
 	bem create block -T lib/bem/techs/locales.js \
 	-l blocks-common $(*F)
 
 blocks-desktop/%:
+	rm $@/$(*F).*.full.wiki
 	BEMTECH_locales_techs="`pwd`/lib/bem/techs/full.wiki.js" \
 	BEMTECH_locales_locales="ru en" \
 	bem create block -T lib/bem/techs/locales.js \
