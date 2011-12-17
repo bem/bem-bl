@@ -1664,12 +1664,10 @@ var DOM = BEM.DOM = BEM.decl('i-bem__dom',/** @lends BEM.DOM.prototype */{
      */
     getWindowSize : function() {
 
-        var winNode = win[0];
-        if(typeof winNode.innerWidth != 'undefined')
-            return { width : winNode.innerWidth, height : winNode.innerHeight };
-
-        var clientNode = getClientNode();
-        return { width : clientNode.clientWidth, height : clientNode.clientHeight };
+        return {
+            width  : win.width(),
+            height : win.height()
+        };
 
     }
 

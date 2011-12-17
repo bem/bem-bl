@@ -8,3 +8,6 @@ blocks/b-blocks-list/b-blocks-list.bemhtml
 
 .idea
 *.iml
+
+.project
+.svn/
