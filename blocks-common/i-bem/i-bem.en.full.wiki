@@ -1,20 +1,17 @@
 ##{"block":"i-bem"}##
 
 ===Block Elements
- * internal
- * html
- * test
  * dom
    * Element Modificators
 
      * dom
-##{"elem":"internal"}##
-
-##{"elem":"html"}##
-
-##{"elem":"test"}##
-
+ * html
+ * internal
 ##{"elem":"dom"}##
 
 ##{"elem":"dom","elemMods":{"init":"auto"}}##
+
+##{"elem":"html"}##
+
+##{"elem":"internal"}##
 

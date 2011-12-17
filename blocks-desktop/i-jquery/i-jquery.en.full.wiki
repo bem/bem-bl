@@ -2,5 +2,8 @@
 
 ===Block Elements
  * core
+ * stringify
 ##{"elem":"core"}##
+
+##{"elem":"stringify"}##
 
