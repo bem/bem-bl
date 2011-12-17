@@ -3,7 +3,7 @@
 a.b-link_disabled_yes:link,
 a.b-link_disabled_yes:visited
 {
-    outline: none;
+    outline: 0;
     cursor: default !important;
 
     color: #ddd !important;
