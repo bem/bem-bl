@@ -11,3 +11,8 @@ blocks/b-blocks-list/b-blocks-list.bemhtml
 
 .project
 .svn/
+
+pages/*/*.css
+!pages/*/_*.css
+pages/*/*.bemjson.js
+pages/*/*.bemhtml.js
