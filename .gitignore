@@ -16,3 +16,5 @@ pages/*/*.css
 !pages/*/_*.css
 pages/*/*.bemjson.js
 pages/*/*.bemhtml.js
+
+index.*.bemjson.js
