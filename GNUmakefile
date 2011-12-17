@@ -1,3 +1,4 @@
+all:: remove-bom
 all:: sets index pages
 
 sets: $(wildcard sets/*)
@@ -113,5 +114,8 @@ index.%.full.wiki:
 		-n $(*F) \
 		-o ./
 
+.PHONY: remove-bom
+remove-bom:
+	find . -name '*.wiki' | xargs sed -i '1 s/^\xef\xbb\xbf//'
 
 .PHONY: all sets index
