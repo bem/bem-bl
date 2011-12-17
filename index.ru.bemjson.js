@@ -77,6 +77,23 @@
                 },
                 "."
             ]
+        },
+        {
+            "elem": "ul",
+            "content": [
+                {
+                    "elem": "li",
+                    "content": [
+                        {
+                            "block": "b-link",
+                            "url": "pages/naming/naming.ru.html",
+                            "content": [
+                                "Соглашения об именовании"
+                            ]
+                        }
+                    ]
+                }
+            ]
         }
     ]
 }
