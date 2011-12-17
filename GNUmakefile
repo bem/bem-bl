@@ -1,9 +1,12 @@
-all:: sets index
+all:: sets index pages
 
 sets: $(wildcard sets/*)
 
 sets/%: blocks-common blocks-desktop
 	make -C $@ -B
+
+pages:
+	make -C pages/
 
 .SECONDEXPANSION:
 blocks-%: $$(wildcard $$@/*)
