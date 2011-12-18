@@ -32,7 +32,7 @@ block b-template, mod type block {
                 }
             },{
                 block: 'b-blocks-desc',
-                content: this.ctx.text
+                content: this.ctx.content
             }]
         }
     }

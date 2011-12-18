@@ -9,3 +9,4 @@
 Информация об использовании библиотеки, вопросы и ответы - в ((http://clubs.ya.ru/bem/ Клубе на Я.ру)).
 
  * ((pages/naming/naming.ru.html Соглашения об именовании))
+ * ((pages/bemhtml-syntax/bemhtml-syntax.ru.html Основные понятия шаблонизатора BEMHTML))

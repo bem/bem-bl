@@ -9,7 +9,7 @@ blocks: $(foreach block,$(wildcard ../../blocks-*/*),$(notdir $(block))/$(notdir
 %.html: %.bemhtml.js %.bemjson.js %.ie.css %.css %.js
 	rm -f $@
 	BEMTECH_locales_techs="`pwd`/../../blocks-common/i-bem/bem/techs/html.js" \
-	BEMTECH_locales_locales="`echo $(@F) | perl -pi -e 's#^.*(ru|en).*$#\1#g'`" \
+	BEMTECH_locales_locales="`echo $(@F) | perl -pi -e 's#^.*(ru|en).*$$#\1#g'`" \
 	bem create block -T ../../lib/bem/techs/locales.js \
 	$(*D)
 
@@ -83,7 +83,7 @@ blocks: $(foreach block,$(wildcard ../../blocks-*/*),$(notdir $(block))/$(notdir
 %.full.wiki: %.blockdecl.js
 	touch $@
 	BEMTECH_locales_tech="`pwd`/../../lib/bem/techs/full.wiki.js" \
-	BEMTECH_locales_locales="`echo $(@F) | perl -pi -e 's#^.*(ru|en).*$#\1#g'`" \
+	BEMTECH_locales_locales="`echo $(@F) | perl -pi -e 's#^.*(ru|en).*$$#\1#g'`" \
 	bem build -d $*.blockdecl.js \
 	-t ../../lib/bem/techs/locales.js \
 	-l ../../blocks-common -l ../../blocks-desktop \
