@@ -10,7 +10,7 @@ block b-template, mod type front {
             {
                 block: 'b-description',
                 mods: { layout: 'block' },
-                content: this.ctx.text
+                content: this.ctx.content
             }
         ]
     }
