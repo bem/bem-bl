@@ -1,12 +1,12 @@
 /**
  * Inheritance plugin
  *
- * Copyright (c) 2010 Filatov Dmitry (alpha@zforms.ru)
+ * Copyright (c) 2010 Filatov Dmitry (dfilatov@yandex-team.ru)
  * Dual licensed under the MIT and GPL licenses:
  * http://www.opensource.org/licenses/mit-license.php
  * http://www.gnu.org/licenses/gpl.html
  *
- * @version 1.3.2
+ * @version 1.3.3
  */
 
 (function($) {
@@ -66,13 +66,14 @@ function override(base, result, add) {
 
 $.inherit = function() {
 
-    var hasBase = $.isFunction(arguments[0]),
-        base = hasBase? arguments[0] : emptyBase,
-        props = arguments[hasBase? 1 : 0] || {},
-        staticProps = arguments[hasBase? 2 : 1],
+    var args = arguments,
+        hasBase = $.isFunction(args[0]),
+        base = hasBase? args[0] : emptyBase,
+        props = args[hasBase? 1 : 0] || {},
+        staticProps = args[hasBase? 2 : 1],
         result = props.__constructor || (hasBase && base.prototype.__constructor)?
             function() {
-                this.__constructor.apply(this, arguments);
+                return this.__constructor.apply(this, arguments);
             } : function() {};
 
     if(!hasBase) {
