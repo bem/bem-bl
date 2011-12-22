@@ -39,7 +39,7 @@
 
             var i = -1, t = this, len = t.length;
             while(++i < len) i in t &&
-            callback.call(ctx, t[i], i, t);
+                callback.call(ctx, t[i], i, t);
 
         },
 
@@ -57,7 +57,7 @@
                 res = new Array(len);
 
             while(++i < len) i in t &&
-            (res[i] = callback.call(ctx, t[i], i, t));
+                (res[i] = callback.call(ctx, t[i], i, t));
 
             return res;
 
@@ -77,21 +77,21 @@
                 res = [];
 
             while(++i < len) i in t && callback.call(ctx, t[i], i, t) &&
-            res.push(t[i]);
+                res.push(t[i]);
 
             return res;
 
         }
 
     },
-        ptp = Array.prototype,
-        toStr = Object.prototype.toString;
+    ptp = Array.prototype,
+    toStr = Object.prototype.toString;
 
-    for(var name in methods)
-        ptp[name] || (ptp[name] = methods[name]);
+for(var name in methods)
+    ptp[name] || (ptp[name] = methods[name]);
 
-    Array.isArray || (Array.isArray = function(obj) {
-        return toStr.call(obj) === '[object Array]';
-    });
+Array.isArray || (Array.isArray = function(obj) {
+    return toStr.call(obj) === '[object Array]';
+});
 
 })();
