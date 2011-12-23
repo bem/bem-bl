@@ -45,6 +45,7 @@
                 { block: 'i-jquery', elem: 'observable' },
                 { block: 'i-jquery', elem: 'stringify' },
                 { block: 'i-bem' },
+                { block: 'i-bem', elem: 'ecma', modName: 'type', modVal: 'array' },
                 { block: 'i-bem', elem: 'internal' },
                 { block: 'i-bem', elem: 'mods' },
                 { block: 'i-bem', elem: 'init' },
