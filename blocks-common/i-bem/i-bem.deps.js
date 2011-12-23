@@ -9,5 +9,8 @@
             'observable'
         ]
     },
-    shouldDeps: { elem: 'internal' }
+    shouldDeps: [
+        { elem: 'ecma', mods: { type: 'array' }},
+        { elem: 'internal' }
+    ]
 })
