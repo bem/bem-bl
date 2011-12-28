@@ -1,6 +1,8 @@
 (function() {
 
-    var methods = {
+var ptp = Array.prototype,
+    toStr = Object.prototype.toString,
+    methods = {
 
         /**
          * Находит индекс элемента в массиве
@@ -83,9 +85,7 @@
 
         }
 
-    },
-    ptp = Array.prototype,
-    toStr = Object.prototype.toString;
+    };
 
 for(var name in methods)
     ptp[name] || (ptp[name] = methods[name]);
