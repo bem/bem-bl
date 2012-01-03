@@ -3,7 +3,7 @@
     title: 'Использование submenu',
     head: [
         { elem: 'css', url: '_60_b-menu-vert_submenu.css' },
-        { elem: 'js', url: '//yandex.st/jquery/1.6.2/jquery.min.js' },
+        { block: 'i-jquery', elem: 'core' },
         { elem: 'js', url: '_60_b-menu-vert_submenu.js' }
     ],
     content: [

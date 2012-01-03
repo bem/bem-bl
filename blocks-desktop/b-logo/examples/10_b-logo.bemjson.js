@@ -3,7 +3,7 @@
     title: 'b-logo',
     head: [
         { elem: 'css', url: '_10_b-logo.css' },
-        { elem: 'js', url: '//yandex.st/jquery/1.6.2/jquery.min.js' },
+        { block: 'i-jquery', elem: 'core' },
         { elem: 'js', url: '_10_b-logo.js' }
     ],
     content: [

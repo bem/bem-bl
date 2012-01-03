@@ -4,7 +4,7 @@
     head: [
         { elem: 'css', url: '_30_b-link_inner.css' },
         { elem: 'css', url: '_30_b-link_inner.ie.css', ie: true },
-        { elem: 'js', url: '//yandex.st/jquery/1.6.2/jquery.min.js' },
+        { block: 'i-jquery', elem: 'core' },
         { elem: 'js', url: '_30_b-link_inner.js' }
     ],
     content: [
