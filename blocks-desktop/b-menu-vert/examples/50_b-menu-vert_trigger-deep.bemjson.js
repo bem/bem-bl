@@ -3,7 +3,7 @@
     title: 'Меню с глубоко вложенным триггером',
     head: [
         { elem: 'css', url: '_50_b-menu-vert_trigger-deep.css' },
-        { elem: 'js', url: '//yandex.st/jquery/1.6.2/jquery.min.js' },
+        { block: 'i-jquery', elem: 'core' },
         { elem: 'js', url: '_50_b-menu-vert_trigger-deep.js' }
     ],
     content: [

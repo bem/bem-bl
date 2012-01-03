@@ -3,7 +3,7 @@
     title: 'Меню с триггером',
     head: [
         { elem: 'css', url: '_40_b-menu-vert_trigger.css' },
-        { elem: 'js', url: '//yandex.st/jquery/1.6.2/jquery.min.js' },
+        { block: 'i-jquery', elem: 'core' },
         { elem: 'js', url: '_40_b-menu-vert_trigger.js' }
     ],
     content: [
