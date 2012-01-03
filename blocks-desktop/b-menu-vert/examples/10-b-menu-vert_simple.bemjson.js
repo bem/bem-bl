@@ -3,7 +3,7 @@
     title: 'Простое вертикальное меню',
     head: [
         { elem: 'css', url: '_10-b-menu-vert_simple.css' },
-        { elem: 'js', url: '//yandex.st/jquery/1.6.2/jquery.min.js' },
+        { block: 'i-jquery', elem: 'core' },
         { elem: 'js', url: '_10-b-menu-vert_simple.js' }
     ],
     content: [

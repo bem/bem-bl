@@ -3,7 +3,7 @@
     title: 'A horizontal menu using links',
     head: [
         { elem: 'css', url: '_05-b-menu-horiz_simple.css' },
-        { elem: 'js', url: '//yandex.st/jquery/1.6.2/jquery.min.js' },
+        { block: 'i-jquery', elem: 'core' },
         { elem: 'js', url: '_05-b-menu-horiz_simple.js' }
     ],
     content: [
