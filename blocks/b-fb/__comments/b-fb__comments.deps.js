@@ -1,0 +1,7 @@
+({
+    mustDeps: [
+        {
+            "block": "i-fb"
+        }
+    ]
+})
