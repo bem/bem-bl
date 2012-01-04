@@ -5,7 +5,7 @@ block b-page {
             this._mode = '',
             this.ctx = {
                 tag: 'html',
-                attrs : { class: 'i-ua_js_no i-ua_css_standard'},
+                attrs : { class: 'i-ua_js_no i-ua_css_standard', 'xmlns:fb': 'http://ogp.me/ns/fb#'},
                 content: [
                     {
                         elem: 'head',
