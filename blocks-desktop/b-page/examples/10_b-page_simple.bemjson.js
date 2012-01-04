@@ -14,7 +14,7 @@
                 url: '_simple.ie.css',
                 ie: true
             },
-            { elem : 'js', url: '//yandex.st/jquery/1.6.2/jquery.min.js' },
+            { block: 'i-jquery', elem: 'core' },
             {
                 elem: 'js',
                 url: '_simple.js'

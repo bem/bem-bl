@@ -3,7 +3,7 @@
     title: 'Switching horizontal menu using a list',
     head: [
         { elem: 'css', url: '_30-b-menu-horiz_normal-js.css' },
-        { elem: 'js', url: '//yandex.st/jquery/1.6.2/jquery.min.js' },
+        { block: 'i-jquery', elem: 'core' },
         { elem: 'js', url: '_30-b-menu-horiz_normal-js.js' }
     ],
     content: [

@@ -75,7 +75,7 @@ pages: $(patsubst %.wiki,%.html, $(wildcard */*.wiki))
 		-l ../blocks-desktop \
 		-l ../blocks \
 		-d $*.deps.js \
-		-t css \
+		-t js \
 		-n $(*F) \
 		-o $(@D)
 

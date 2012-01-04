@@ -72,7 +72,7 @@ blocks: $(foreach block,$(wildcard ../../blocks-*/*),$(notdir $(block))/$(notdir
 		-l ../../blocks-desktop \
 		-l ../../blocks \
 		-d $*.deps.js \
-		-t css \
+		-t js \
 		-n $(*F) \
 		-o $(@D)
 

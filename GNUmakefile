@@ -110,7 +110,7 @@ index.%.full.wiki:
 		-l ../../blocks-desktop \
 		-l blocks \
 		-d $*.deps.js \
-		-t css \
+		-t js \
 		-n $(*F) \
 		-o ./
 

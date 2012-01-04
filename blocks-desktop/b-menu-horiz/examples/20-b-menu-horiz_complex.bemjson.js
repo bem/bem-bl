@@ -3,7 +3,7 @@
     title: 'A horizontal menu using a table',
     head: [
         { elem: 'css', url: '_20-b-menu-horiz_complex.css' },
-        { elem: 'js', url: '//yandex.st/jquery/1.6.2/jquery.min.js' },
+        { block: 'i-jquery', elem: 'core' },
         { elem: 'js', url: '_20-b-menu-horiz_complex.js' }
     ],
     content: [

@@ -5,11 +5,19 @@
    * Element Modificators
 
      * dom
+ * ecma
+   * Element Modificators
+
+     * ecma
  * html
  * internal
 ##{"elem":"dom"}##
 
 ##{"elem":"dom","elemMods":{"init":"auto"}}##
+
+##{"elem":"ecma"}##
+
+##{"elem":"ecma","elemMods":{"type":"array"}}##
 
 ##{"elem":"html"}##
 
