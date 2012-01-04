@@ -929,12 +929,20 @@ BEM.DOM.decl('b-link-example', {
    * Модификаторы элемента
 
      * dom
+ * ecma
+   * Модификаторы элемента
+
+     * ecma
  * html
  * internal
 ===Хелперы для работы с DOM-представлением
 ##{"elem":"dom"}##
 
 ##{"elem":"dom","elemMods":{"init":"auto"}}##
+
+##{"elem":"ecma"}##
+
+##{"elem":"ecma","elemMods":{"type":"array"}}##
 
 ===Реализация html-представления блоков.
 ##{"elem":"html"}##
