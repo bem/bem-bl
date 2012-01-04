@@ -36,6 +36,10 @@
         {
             "block": "i-desc",
             "mods": {"type": ["elem"]}
+        },
+        {
+            "block": "b-fb",
+            "elems": ["comments"]
         }
     ]
 })
