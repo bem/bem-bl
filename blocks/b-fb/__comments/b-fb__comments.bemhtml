@@ -1,0 +1,8 @@
+block b-fb, elem comments {
+    tag: 'fb:comments',
+    attrs: {
+        num_posts: 10,
+        width: 500
+    },
+    mix: [{ block: 'b-fb', js: true }]
+}

@@ -1,0 +1,1 @@
+({ mustDeps: { block: 'i-bem' } })
