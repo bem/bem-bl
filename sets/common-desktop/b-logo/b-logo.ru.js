@@ -3221,7 +3221,7 @@ BEM.DOM.decl('b-fb', {
     onSetMod : {
         'js' : function() {
             $('body').append('<div id="fb-root"></div>');
-            $('.b-fb__comments').attr('href', 'http://bem.github.com/bem-bl' + window.location.pathname);
+            $('.b-fb__comments').attr('href', 'http://bem.github.com' + window.location.pathname);
 
             (function(d){
                 var js, id = 'facebook-jssdk'; if (d.getElementById(id)) {return;}
