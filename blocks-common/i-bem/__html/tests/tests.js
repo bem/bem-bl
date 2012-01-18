@@ -22,14 +22,7 @@ fs.readFile(process.argv[2], 'utf8', function(err, input){
             function(m, i) { process.stdout.write(JSON.stringify(arguments)); throw { toString: function(){ return "compilation failed" } } } );
         process.stdout.write('--- compile:\n' + compileFn + '\n\n');
 
-        var compileFn2 = xjst.compile(
-                xjst.XJSTParser.matchAll(
-                    compileFn,
-                    'topLevel',
-                    undefined,
-                    function(m, i) { throw { errorPos: i, toString: function(){ return "xjst match failed" } } }
-                )
-            );
+        var compileFn2 = xjst.compile(xjst.parse(compileFn));
         //process.stdout.write('--- compile2:\n' + compileFn2 + '\n\n');
         //fs.writeFile('blabla', compileFn2);
         try {
