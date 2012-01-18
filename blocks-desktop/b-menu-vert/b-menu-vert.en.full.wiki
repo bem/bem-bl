@@ -1,3 +1,4 @@
+==Vertical menu
 ##{"block":"b-menu-vert"}##
 
 ===Block Elements
