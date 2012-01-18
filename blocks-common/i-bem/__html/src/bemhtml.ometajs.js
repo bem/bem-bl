@@ -341,7 +341,7 @@ if (global === ometajs_) {
                             return v = this._apply("trans");
                         }.call(this);
                     });
-                    return "this.mods[" + m + "] === " + v;
+                    return "this.mods && this.mods[" + m + "] === " + v;
                 }.call(this);
             }, function() {
                 return function() {
@@ -362,7 +362,7 @@ if (global === ometajs_) {
                             return v = this._apply("trans");
                         }.call(this);
                     });
-                    return "this.elemMods[" + m + "] === " + v;
+                    return "this.elemMods && this.elemMods[" + m + "] === " + v;
                 }.call(this);
             }, function() {
                 return function() {

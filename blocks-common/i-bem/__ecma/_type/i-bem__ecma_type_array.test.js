@@ -17,10 +17,10 @@ BEM.TEST.decl({ block : 'i-bem', elem : 'ecma', modName : 'type', modVal : 'arra
 
     describe('forEach specs', function() {
         it('should be callback called on every item', function() {
-            var data = [1, 2, undefined, 4, 5],
+            var data = [1, 2, 3, 4],
                 spy = jasmine.createSpy();
 
-            data[5] = undefined;
+            data[4] = undefined;
             data.forEach(spy);
             expect(spy.callCount).toEqual(5);
         });

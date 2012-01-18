@@ -1,2 +1,3 @@
+==Page's skeleton
 ##{"block":"b-page"}##
 

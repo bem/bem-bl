@@ -1177,11 +1177,9 @@ var ptp = Array.prototype,
          */
         forEach : function(callback, ctx) {
 
-            ctx || (ctx = null);
-
             var i = -1, t = this, len = t.length;
             while(++i < len) i in t &&
-                callback.call(ctx, t[i], i, t);
+                (ctx? callback.call(ctx, t[i], i, t) : callback(t[i], i, t));
 
         },
 
@@ -1193,13 +1191,11 @@ var ptp = Array.prototype,
          */
         map : function(callback, ctx) {
 
-            ctx || (ctx = null);
-
             var i = -1, t = this, len = t.length,
                 res = new Array(len);
 
             while(++i < len) i in t &&
-                (res[i] = callback.call(ctx, t[i], i, t));
+                (res[i] = ctx? callback.call(ctx, t[i], i, t) : callback(t[i], i, t));
 
             return res;
 
@@ -1213,13 +1209,11 @@ var ptp = Array.prototype,
          */
         filter : function(callback, ctx) {
 
-            ctx || (ctx = null);
-
             var i = -1, t = this, len = t.length,
                 res = [];
 
-            while(++i < len) i in t && callback.call(ctx, t[i], i, t) &&
-                res.push(t[i]);
+            while(++i < len) i in t &&
+                (ctx? callback.call(ctx, t[i], i, t) : callback(t[i], i, t)) && res.push(t[i]);
 
             return res;
 
