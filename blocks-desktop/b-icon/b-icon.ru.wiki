@@ -45,7 +45,7 @@ Aтрибуты ##alt, url, width, height## опциональны.
 %%
 
 В ##css## задаем размеры изображения и путь к нему:
-%%hl css
+%%hl xml
 .b-icon_type_simple
 {
     width: 16px;
