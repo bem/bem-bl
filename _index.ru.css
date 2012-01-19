@@ -72,7 +72,7 @@
 /* Global reset (end) */ /**/
 .b-page
 {
-    font: 13px 'PT Sans', sans-serif;
+    font: 16px 'PT Sans', sans-serif;
 
     position: relative;
     z-index: 0;
@@ -81,7 +81,6 @@
     padding: 80px 60px;
 
     color: #444;
-    background: #f1f1f1;
 }
 
 
