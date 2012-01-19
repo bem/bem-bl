@@ -1,4 +1,4 @@
-﻿This is an open source UI block library implemented accroding to the
+This is an open source UI block library implemented accroding to the
 ((http://bem.github.com/bem-method/html/all.en.html BEM methodology)).
 
 Source code is hosted on GitHub: ((https://github.com/bem/bem-bl github.com/bem/bem-bl)).
