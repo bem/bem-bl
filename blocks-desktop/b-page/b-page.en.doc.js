@@ -1,0 +1,1 @@
+{"name":"b-page","techs":[{"name":"bemhtml"},{"name":"en.title.txt"},{"name":"ru.title.txt"},{"name":"ru.wiki"}],"title":"Page's skeleton","bemjsonDesc":""}
