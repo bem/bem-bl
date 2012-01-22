@@ -1,3 +1,0 @@
-==Logo wrapping
-##{"block":"b-logo"}##
-

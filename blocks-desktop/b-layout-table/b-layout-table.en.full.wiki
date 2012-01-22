@@ -1,3 +1,0 @@
-==Layout with <table> tag
-##{"block":"b-layout-table"}##
-
