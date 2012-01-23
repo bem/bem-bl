@@ -14,15 +14,15 @@ blocks-%: $$(wildcard $$@/*)
 	echo $@
 
 blocks-common/%:
-	rm -f $@/$(*F).*.full.wiki
-	BEMTECH_locales_techs="`pwd`/lib/bem/techs/full.wiki.js" \
+	rm -f $@/$(*F).*.doc.js
+	BEMTECH_locales_techs="`pwd`/lib/bem/techs/doc.js.js" \
 	BEMTECH_locales_locales="ru en" \
 	bem create block -T lib/bem/techs/locales.js \
 	-l blocks-common $(*F)
 
 blocks-desktop/%:
-	rm $@/$(*F).*.full.wiki
-	BEMTECH_locales_techs="`pwd`/lib/bem/techs/full.wiki.js" \
+	rm -f $@/$(*F).*.doc.js
+	BEMTECH_locales_techs="`pwd`/lib/bem/techs/doc.js.js" \
 	BEMTECH_locales_locales="ru en" \
 	bem create block -T lib/bem/techs/locales.js \
 	-l blocks-desktop $(*F)
@@ -117,5 +117,6 @@ index.%.full.wiki:
 .PHONY: remove-bom
 remove-bom:
 	find . -name '*.wiki' | xargs sed -i '1 s/^\xef\xbb\xbf//'
+	find . -name '*.doc.js' | xargs sed -i '1 s/^\xef\xbb\xbf//'
 
 .PHONY: all sets index

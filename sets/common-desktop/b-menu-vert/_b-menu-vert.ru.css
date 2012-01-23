@@ -276,6 +276,19 @@
     font-family: 'PT Serif', serif;
 }
 
+.b-text__h1
+{
+    font-size: 2em;
+}
+.b-text__h2
+{
+    font-size: 1.6em;
+}
+.b-text__h3
+{
+    font-size: 1.4em;
+}
+
 .i-desc_type_mod .b-text__li:before
 {
     content: '_';
@@ -284,5 +297,72 @@
 .i-desc_type_elem .b-text__li:before
 {
     content: '__'
+}
+
+.b-layout-table
+{
+    font-size: 100%;
+
+    width: 100%;
+
+    border-collapse: collapse;
+}
+
+.b-layout-table__gap,
+.b-layout-table__cell
+{
+    padding: 0;
+
+    vertical-align: top;
+}
+
+.b-layout-table_layout_25-75 .b-layout-table__cell
+{
+    width: 25%;
+    padding: 0.4em 0;
+}
+
+.b-layout-table_layout_25-75 .b-layout-table__cell_position_r
+{
+    width: 75%;
+}
+
+.b-layout-table_layout_25-75 .b-layout-table__inner
+{
+    margin-right: 20px;
+}
+
+.b-blocks-desc__entity-data
+{
+    text-align: right;
+}
+
+.b-blocks-desc__entity-filename
+{
+    margin-bottom: 0.5em;
+}
+
+.b-blocks-desc__entity-bemjson
+{
+    color: #006600;
+    font: 0.8em Monaco,Consolas,"Courier New",monospace;
+    white-space: normal;
+}
+
+.b-blocks-desc__entity-group
+{
+    border-bottom: 1px solid #DBDFEA;
+    font-size: 115.385%;
+    font-weight: normal;
+    padding-bottom: 2px;
+    color: #EB8C28;
+    font-family: 'Maven Pro',Helvetica,sans-serif;
+    line-height: 1.1;
+    margin: 1.1em 0 0.5em;
+}
+
+.b-blocks-desc__doc-header
+{
+    margin-top: 0;
 }
 

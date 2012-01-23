@@ -1,0 +1,1 @@
+({"name":"i-ua","techs":[{"name":"bemhtml"},{"name":"en.title.txt"},{"name":"ru.title.txt"},{"name":"ru.wiki"}],"title":"Block for gathering and providing UserAgent information.","bemjsonDesc":""})

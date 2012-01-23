@@ -1,0 +1,15 @@
+.b-layout-table_layout_25-75 .b-layout-table__cell
+{
+    width: 25%;
+    padding: 0.4em 0;
+}
+
+.b-layout-table_layout_25-75 .b-layout-table__cell_position_r
+{
+    width: 75%;
+}
+
+.b-layout-table_layout_25-75 .b-layout-table__inner
+{
+    margin-right: 20px;
+}

@@ -1,8 +1,0 @@
-==Text block
-##{"block":"b-text"}##
-
-===Block Modificators
- * type
-   * global
-##{"mods":{"type":"global"}}##
-
