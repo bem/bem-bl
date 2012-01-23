@@ -1,1 +1,0 @@
-({"name":"i-test","techs":[{"name":"ru.title.txt"},{"name":"ru.wiki"}],"title":"Название из common","bemjsonDesc":{"block":"b-text","content":[{"elem":"p","content":["﻿Текст из common"]},{"elem":"p","content":[{"tag":"tt","content":["выделение"]}]},{"elem":"p","content":["Конец текста из common"]}]}})

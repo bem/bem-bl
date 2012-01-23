@@ -1,1 +1,0 @@
-({"name":"i-test","techs":[{"name":"ru.title.txt"},{"name":"ru.wiki"}],"title":"","bemjsonDesc":""})
