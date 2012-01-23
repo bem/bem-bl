@@ -1,5 +1,7 @@
 .b-description
 {
+    line-height: 1.5em;
+
     max-width: 75%;
     min-width: 400px;
     margin-top: 30px;

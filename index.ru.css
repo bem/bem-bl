@@ -2,6 +2,7 @@
 @import url(blocks/b-page/b-page.css);
 @import url(blocks/b-description/b-description.css);
 @import url(blocks/b-description/_layout/b-description_layout_inline.css);
+@import url(blocks/b-link/b-link.css);
 @import url(blocks/b-page-title/b-page-title.css);
 @import url(blocks/b-page-title/_page/b-page-title_page_inner.css);
 @import url(blocks/b-blocks-list/b-blocks-list.css);

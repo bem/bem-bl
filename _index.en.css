@@ -92,6 +92,8 @@
 
 .b-description
 {
+    line-height: 1.5em;
+
     max-width: 75%;
     min-width: 400px;
     margin-top: 30px;
@@ -110,6 +112,17 @@
 .b-description_layout_inline:before
 {
     content: " —\a0";
+}
+
+:link
+{
+    color: #1a3dc1;
+}
+
+:link:hover,
+:visited:hover
+{
+    color: #f00;
 }
 
 .b-page-title
@@ -172,6 +185,11 @@
     font-weight: 400;
 
     margin-left: 1em;
+}
+
+.b-text
+{
+    line-height: 1.5em;
 }
 
 .b-text__pre,
