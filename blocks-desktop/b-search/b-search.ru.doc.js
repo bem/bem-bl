@@ -1,1 +1,1 @@
-{"name":"b-search","elems":[{"name":"layout","techs":[{"name":"css"},{"name":"ru.title.txt"}],"title":"Раскладка поисковой формы","bemjsonDesc":""}],"techs":[{"name":"bemhtml"},{"name":"css"},{"name":"en.title.txt"},{"name":"ru.title.txt"}],"title":"Форма поиска","bemjsonDesc":""}
+({"name":"b-search","elems":[{"name":"layout","techs":[{"name":"css"},{"name":"ru.title.txt"}],"title":"Раскладка поисковой формы","bemjsonDesc":""}],"techs":[{"name":"bemhtml"},{"name":"css"},{"name":"en.title.txt"},{"name":"ru.title.txt"}],"title":"Форма поиска","bemjsonDesc":""})

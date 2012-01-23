@@ -117,5 +117,6 @@ index.%.full.wiki:
 .PHONY: remove-bom
 remove-bom:
 	find . -name '*.wiki' | xargs sed -i '1 s/^\xef\xbb\xbf//'
+	find . -name '*.doc.js' | xargs sed -i '1 s/^\xef\xbb\xbf//'
 
 .PHONY: all sets index

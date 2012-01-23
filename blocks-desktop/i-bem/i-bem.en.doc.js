@@ -1,1 +1,1 @@
-{"title":"","bemjsonDesc":""}
+({"title":"","bemjsonDesc":""})
