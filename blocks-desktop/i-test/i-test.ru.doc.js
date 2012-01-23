@@ -1,0 +1,1 @@
+({"name":"i-test","techs":[{"name":"ru.title.txt"},{"name":"ru.wiki"}],"title":"Название из desktop","bemjsonDesc":{"block":"b-text","content":[{"elem":"p","content":["﻿Текст из desktop"]},{"elem":"p","content":[{"tag":"i","content":["iiiiiiiiii"]}]},{"elem":"p","content":["Конец текста из desktop."]}]}})
