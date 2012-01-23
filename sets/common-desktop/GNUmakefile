@@ -13,9 +13,23 @@ blocks: $(foreach block,$(wildcard ../../blocks-*/*),$(notdir $(block))/$(notdir
 	bem create block -T ../../lib/bem/techs/locales.js \
 	$(*D)
 
-%.bemjson.js: %.full.wiki %.title.txt
-	touch $@
-	node ../../lib/wiki2bemjson.js $*.full.wiki $*.bemjson.js block
+%.bemjson.js: %.doc.js
+	echo 'create bemjson'
+
+%.doc.js: %.blockdecl.js
+	echo 'build doc.js'
+	BEMTECH_locales_tech="`pwd`/../../lib/bem/techs/doc.js.js" \
+	BEMTECH_locales_locales="`echo $(@F) | perl -pi -e 's#^.*(ru|en).*$$#\1#g'`" \
+	bem build -l ../../blocks-common \
+		-l ../../blocks-desktop \
+		-d $*.blockdecl.js \
+		-t ../../lib/bem/techs/locales.js \
+		-n $(*D) \
+		-o $(*D)
+
+#%.bemjson.js: %.full.wiki %.title.txt
+#	touch $@
+#	node ../../lib/wiki2bemjson.js $*.full.wiki $*.bemjson.js block
 
 %.bemhtml.js: %.deps.js
 	mkdir -p $(*D)
