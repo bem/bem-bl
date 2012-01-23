@@ -2,7 +2,8 @@
 
 all: blocks
 
-blocks: $(foreach block,$(wildcard ../../blocks-*/*),$(notdir $(block))/$(notdir $(block)).ru.html $(notdir $(block))/$(notdir $(block)).en.html)
+blocks:: $(foreach block,$(wildcard ../../blocks-common/*),$(notdir $(block))/$(notdir $(block)).ru.html $(notdir $(block))/$(notdir $(block)).en.html)
+blocks:: $(foreach block,$(wildcard ../../blocks-desktop/*),$(notdir $(block))/$(notdir $(block)).ru.html $(notdir $(block))/$(notdir $(block)).en.html)
 	echo $^
 
 .PRECIOUS: %.html
