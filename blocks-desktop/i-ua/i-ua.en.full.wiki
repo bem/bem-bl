@@ -1,3 +1,0 @@
-==Block for gathering and providing UserAgent information.
-##{"block":"i-ua"}##
-

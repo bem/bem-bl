@@ -17,3 +17,16 @@
 {
     font-family: 'PT Serif', serif;
 }
+
+.b-text__h1
+{
+    font-size: 2em;
+}
+.b-text__h2
+{
+    font-size: 1.6em;
+}
+.b-text__h3
+{
+    font-size: 1.4em;
+}

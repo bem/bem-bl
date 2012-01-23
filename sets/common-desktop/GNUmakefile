@@ -2,7 +2,8 @@
 
 all: blocks
 
-blocks: $(foreach block,$(wildcard ../../blocks-*/*),$(notdir $(block))/$(notdir $(block)).ru.html $(notdir $(block))/$(notdir $(block)).en.html)
+blocks:: $(foreach block,$(wildcard ../../blocks-common/*),$(notdir $(block))/$(notdir $(block)).ru.html $(notdir $(block))/$(notdir $(block)).en.html)
+blocks:: $(foreach block,$(wildcard ../../blocks-desktop/*),$(notdir $(block))/$(notdir $(block)).ru.html $(notdir $(block))/$(notdir $(block)).en.html)
 	echo $^
 
 .PRECIOUS: %.html
@@ -13,9 +14,27 @@ blocks: $(foreach block,$(wildcard ../../blocks-*/*),$(notdir $(block))/$(notdir
 	bem create block -T ../../lib/bem/techs/locales.js \
 	$(*D)
 
-%.bemjson.js: %.full.wiki %.title.txt
-	touch $@
-	node ../../lib/wiki2bemjson.js $*.full.wiki $*.bemjson.js block
+%.bemjson.js: %.doc.js
+	rm -f $@
+	BEMTECH_locales_techs="`pwd`/../../lib/bem/techs/block-page.js" \
+	BEMTECH_locales_locales="`echo $(@F) | perl -pi -e 's#^.*(ru|en).*$$#\1#g'`" \
+	bem create block -T ../../lib/bem/techs/locales.js \
+	$(*D)
+
+%.doc.js: %.blockdecl.js
+	rm -f $@
+	BEMTECH_locales_tech="`pwd`/../../lib/bem/techs/doc.js.js" \
+	BEMTECH_locales_locales="`echo $(@F) | perl -pi -e 's#^.*(ru|en).*$$#\1#g'`" \
+	bem build -l ../../blocks-common \
+		-l ../../blocks-desktop \
+		-d $*.blockdecl.js \
+		-t ../../lib/bem/techs/locales.js \
+		-n $(*D) \
+		-o $(*D)
+
+#%.bemjson.js: %.full.wiki %.title.txt
+#	touch $@
+#	node ../../lib/wiki2bemjson.js $*.full.wiki $*.bemjson.js block
 
 %.bemhtml.js: %.deps.js
 	mkdir -p $(*D)

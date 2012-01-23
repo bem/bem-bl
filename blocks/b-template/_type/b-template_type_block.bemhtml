@@ -16,9 +16,9 @@ block b-template, mod type block {
                             content: {
                                 block: 'b-link',
                                 url: '/',
-                                content: 'Список блоков'
+                                content: 'Index'
                             }
-                        },
+                        /*},
                         {
                             elem: 'item',
                             elemMods: { state: 'current' },
@@ -26,7 +26,7 @@ block b-template, mod type block {
                                 block: 'b-page-title',
                                 mods: { page: 'inner' },
                                 content: this.ctx.title
-                            }
+                            }*/
                         }
                     ]
                 }
