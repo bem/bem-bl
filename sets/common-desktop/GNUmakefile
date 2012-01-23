@@ -14,10 +14,14 @@ blocks: $(foreach block,$(wildcard ../../blocks-*/*),$(notdir $(block))/$(notdir
 	$(*D)
 
 %.bemjson.js: %.doc.js
-	echo 'create bemjson'
+	rm -f $@
+	BEMTECH_locales_techs="`pwd`/../../lib/bem/techs/block-page.js" \
+	BEMTECH_locales_locales="`echo $(@F) | perl -pi -e 's#^.*(ru|en).*$$#\1#g'`" \
+	bem create block -T ../../lib/bem/techs/locales.js \
+	$(*D)
 
 %.doc.js: %.blockdecl.js
-	echo 'build doc.js'
+	rm -f $@
 	BEMTECH_locales_tech="`pwd`/../../lib/bem/techs/doc.js.js" \
 	BEMTECH_locales_locales="`echo $(@F) | perl -pi -e 's#^.*(ru|en).*$$#\1#g'`" \
 	bem build -l ../../blocks-common \
