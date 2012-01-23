@@ -276,6 +276,19 @@
     font-family: 'PT Serif', serif;
 }
 
+.b-text__h1
+{
+    font-size: 2em;
+}
+.b-text__h2
+{
+    font-size: 1.6em;
+}
+.b-text__h3
+{
+    font-size: 1.4em;
+}
+
 .i-desc_type_mod .b-text__li:before
 {
     content: '_';
@@ -284,6 +297,11 @@
 .i-desc_type_elem .b-text__li:before
 {
     content: '__'
+}
+
+.ohl
+{
+    white-space: pre-wrap;
 }
 
 
