@@ -106,6 +106,8 @@
 
 .b-description
 {
+    line-height: 1.5em;
+
     max-width: 75%;
     min-width: 400px;
     margin-top: 30px;
@@ -124,6 +126,17 @@
 .b-description_layout_inline:before
 {
     content: " —\a0";
+}
+
+:link
+{
+    color: #1a3dc1;
+}
+
+:link:hover,
+:visited:hover
+{
+    color: #f00;
 }
 
 .b-page-title
@@ -256,6 +269,11 @@
     list-style: disc;
 }
 
+.b-text
+{
+    line-height: 1.5em;
+}
+
 .b-text__pre,
 .b-text__code,
 .b-text tt
@@ -299,24 +317,8 @@
     content: '__'
 }
 
-.ohl
+.b-fb
 {
-    white-space: pre-wrap;
-    display: block;
-    font-family: monospace;
-    font-size: 1em;
-    padding: 0.5em;
-    line-height: 1.6em;
-    color: black;
-    background-color: #f7f7e7;
+    margin-top: 6em;
 }
-.ohl-keyword
-{
-    color: green;
-}
-.ohl-string
-{
-    color: red;
-}
-
 

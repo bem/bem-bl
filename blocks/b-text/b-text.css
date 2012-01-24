@@ -1,3 +1,8 @@
+.b-text
+{
+    line-height: 1.5em;
+}
+
 .b-text__pre,
 .b-text__code,
 .b-text tt
