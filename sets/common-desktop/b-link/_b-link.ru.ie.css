@@ -128,6 +128,17 @@
     content: " —\a0";
 }
 
+:link
+{
+    color: #1a3dc1;
+}
+
+:link:hover,
+:visited:hover
+{
+    color: #f00;
+}
+
 .b-page-title
 {
     font: 60px 'PT Serif', serif;
