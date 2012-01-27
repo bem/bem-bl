@@ -1,2 +1,1 @@
-The ##inner## modifier is given for a link including an element.\\
-For a convinient usage of an icon inside a link.
+The ##inner## modifier is given for a link including an element
