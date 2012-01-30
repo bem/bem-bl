@@ -1,0 +1,1 @@
+({"name":"i-ecma","elems":[{"name":"array","techs":[{"name":"js"}],"title":"","bemjsonDesc":""}],"title":"","bemjsonDesc":""})
