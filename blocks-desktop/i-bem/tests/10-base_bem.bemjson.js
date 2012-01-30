@@ -1,10 +1,10 @@
 ({
     block: 'b-page',
     head: [
-    	{ elem: 'css', url: '_10-base_bem.css', ie: false },
-    	{ elem: 'css', url: '_10-base_bem.ie.css', ie: 'lt IE 8' },
-    	{ block: 'i-jquery', elem: 'core' },
-    	{ elem: 'js', url: '_10-base_bem.js' },
+        { elem: 'css', url: '_10-base_bem.css', ie: false },
+        { elem: 'css', url: '_10-base_bem.ie.css', ie: 'lt IE 8' },
+        { block: 'i-jquery', elem: 'core' },
+        { elem: 'js', url: '_10-base_bem.js' },
         { elem: 'js', url: '_10-base_bem.test.js' }
     ],
     content: [
@@ -44,8 +44,8 @@
             content: [
                 { block: 'i-jquery', elem: 'observable' },
                 { block: 'i-jquery', elem: 'stringify' },
+                { block: 'i-ecma', elem : 'array' },
                 { block: 'i-bem' },
-                { block: 'i-bem', elem: 'ecma', modName: 'type', modVal: 'array' },
                 { block: 'i-bem', elem: 'internal' },
                 { block: 'i-bem', elem: 'mods' },
                 { block: 'i-bem', elem: 'init' },

@@ -1,4 +1,4 @@
-BEM.TEST.decl({ block : 'i-bem', elem : 'ecma', modName : 'type', modVal : 'array' }, function(undefined) {
+BEM.TEST.decl({ block : 'i-ecma', elem : 'array' }, function(undefined) {
 
     describe('indexOf specs', function() {
         $.each([
