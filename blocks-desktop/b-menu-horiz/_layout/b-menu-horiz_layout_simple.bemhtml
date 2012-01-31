@@ -1,5 +1,13 @@
 block b-menu-horiz, mod layout simple {
 
+    content: [
+        this.ctx.title,
+        {
+            tag: false,
+            content: this.ctx.content
+        }
+    ]
+
     default, !this._init: {
         local(
             this._init = true,
