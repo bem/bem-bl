@@ -1,4 +1,4 @@
-﻿##b-layout-table## block — is a 100%-width table for making a layout.
+##b-layout-table## block — is a 100%-width table for making a layout.
 
 This block has a bemhtml template that gives a table, its rows and cells
 with all the attribute nodes needed.

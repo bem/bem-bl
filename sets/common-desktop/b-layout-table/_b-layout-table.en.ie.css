@@ -349,4 +349,24 @@
     white-space: normal;
 }
 
+.ohl
+{
+    white-space: pre-wrap;
+    display: block;
+    font-family: monospace;
+    font-size: 1em;
+    padding: 0.5em;
+    line-height: 1.6em;
+    color: black;
+    background-color: #f7f7e7;
+}
+.ohl-keyword
+{
+    color: green;
+}
+.ohl-string
+{
+    color: red;
+}
+
 
