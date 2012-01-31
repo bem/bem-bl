@@ -171,8 +171,9 @@
 .b-blocks-desc .b-text__ul,
 .b-blocks-desc .b-text__li
 {
-    list-style: none !important;
     margin-left: 0;
+
+    list-style: none !important;
 }
 
 .b-blocks-desc .b-text__li
@@ -185,6 +186,11 @@
     font-weight: 400;
 
     margin-left: 1em;
+}
+
+.b-blocks-desc .b-layout-table__cell
+{
+    vertical-align: baseline;
 }
 
 .b-text
