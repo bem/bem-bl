@@ -11,6 +11,10 @@
             block: 'b-menu-horiz',
             mods: { layout: 'simple' },
             separator: ' | ',
+            title: {
+                elem: 'title',
+                content: 'Navigation:'
+            },
             content: [
                 {
                     elem: 'item',
