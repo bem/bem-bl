@@ -28,7 +28,6 @@
                     elem: 'item',
                     content: {
                         block: 'b-link',
-                        mix: [{ block: 'b-menu-horiz', elem : 'item-selector' }],
                         url: '/',
                         content: [
                             {
