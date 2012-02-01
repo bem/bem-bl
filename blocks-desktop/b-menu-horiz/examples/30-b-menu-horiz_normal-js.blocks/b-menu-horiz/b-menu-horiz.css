@@ -25,6 +25,14 @@
     color: #fff;
 }
 
+.b-menu-horiz_layout_normal .b-menu-horiz__item_state_disabled a.b-menu-horiz__item-selector,
+.b-menu-horiz_layout_normal .b-menu-horiz__item_state_disabled a.b-menu-horiz__item-selector:hover
+{
+    cursor: default;
+
+    color: #ccc !important;
+}
+
 .b-menu-horiz_layout_normal .b-menu-horiz__item-selector .b-link__inner
 {
     border-bottom: 0 !important;
