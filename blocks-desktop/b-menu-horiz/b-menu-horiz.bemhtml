@@ -1,6 +1,6 @@
 block b-menu-horiz, this.mods {
 
-    js, this.ctx.js === undefined: true
+    js, !this.elem, this.ctx.js === undefined: true
 
     elem item, default, !this.ctx._wrap: {
 
