@@ -2,7 +2,7 @@ block b-link, this.mods.pseudo {
 
     tag: (this.ctx.url? 'a' : 'span')
 
-    js: true
+    js, !this.elem: true
 
     attrs, !this.ctx.url: {
         return {}
