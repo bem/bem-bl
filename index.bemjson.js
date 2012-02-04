@@ -3,6 +3,9 @@
     "content": [
         {
             "elem": "h1",
+            "attrs": {
+                "id": "BEMBL"
+            },
             "content": [
                 "BEM BL"
             ]
