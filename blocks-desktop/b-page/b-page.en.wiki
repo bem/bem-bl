@@ -1,0 +1,175 @@
+This blocks makes required HTML tags ##<html>##, ##<head>## and ##<body>##.
+It is charged with linking CSS and JS files to a page, creating meta tags,
+head node and so on.
+
+Block's ##bemjson## input data starts with block declaration including
+title value which is a content of ##<title>## HTML tag.
+
+%%hl js
+({
+	block : 'b-page',
+	title : 'Page with link',
+	...
+})
+%%
+
+##head## element which corresponds to ##<head>## HTML tag may be extended with
+##head## property containing elements for CSS and JS files to be linked to a page.
+
+%%hl js
+({
+	...
+	head : [
+		{ elem : 'css', url : 'example.css', ie : false },
+		{ elem : 'css', url : 'example.ie.css', ie : 'lt IE 8' },
+		{ elem : 'js', url : 'example.js' }
+	],
+	...
+})
+%%
+
+##css## element turns into ##<link>## HTML tag that links a CSS file stated as a value of
+##url## property of the element.\\
+This element may also have ##ie## property. If its value is ##false##, page has ##conditional
+comments## preventing usage of this CSS in IE. If its value is a string, ##<link>## tag is
+wrapped in a proper ##conditional comment## so that its CSS file is loaded in stated browsers
+only.\\
+It is also possibly to set ##content## property for a content of ##<style>## tag:
+
+%%hl js
+({
+	...
+	head : [
+		{
+			elem : 'css',
+			content : '.b-blah { color: #f00' }
+		},
+		...
+	],
+	...
+})
+%%
+
+##js## element is similar and links to a page JS files by ##<script>## tag.
+
+##head## property does not describe the whocle content of ##<head>## tag but
+extends its default value specified in its bemhtml template.
+
+ * ##<meta>## tag with charset
+
+%%hl js
+content: [
+	{
+		tag : 'meta',
+		attrs : { 'http-equiv' : 'content-type', content : 'text/html; charset=utf-8' }
+	},
+	...
+%%
+
+ * ##<meta>## tag for using IE9 (and later) with compatibility mode
+%%hl js
+content : [
+	...
+	{
+		tag : 'meta',
+		attrs : { 'http-equiv' : 'X-UA-Compatible', content : 'IE=EmulateIE7, IE=edge' }
+	},
+	...
+%%
+
+ * setting a content for ##<title>## tag from a property
+
+%%hl js
+content : [
+	...
+	{
+		tag : 'title',
+		content : this.ctx.title
+	},
+	...
+%%
+
+ * setting a favicon
+
+%%hl js
+content : [
+	...
+	this.ctx.favicon ? {
+		elem : 'favicon',
+		url : this.ctx.favicon
+	} : '',
+	...
+%%
+
+ * decalration of ##i-ua## block
+
+%%hl js
+content : [
+	...
+	{
+		block : 'i-ua'
+	},
+	...
+%%
+
+Similarly to ##head## property there may be set ##meta## property contained
+one or more ##meta## elements:
+
+%%hl js
+({
+	...
+	meta : {
+		elem : 'meta',
+		attrs : {
+			name : 'keywords',
+			content : 'js, css, html'
+		}
+	},
+	...
+})
+%%
+
+%%hl js
+({
+	...
+	meta : [
+		{
+			elem : 'meta',
+			attrs : {
+				name : 'keywords',
+				content : 'js, css, html'
+			}
+		},
+		{
+			elem : 'meta',
+			attrs : {
+				name : 'description',
+				content : 'Yet another webdev blog'
+			}
+		}
+	]
+	...
+})
+%%
+
+A value of ##content## property of ##b-page## block may be a hash describing
+page content of the only block or an array of block hashes:
+
+%%hl js
+({
+	...
+	content : [
+		{
+		block : 'b-link',
+		mods : { pseudo : 'yes', togcolor : 'yes', color: 'green' },
+		url : '#',
+		target : '_blank',
+		title : 'Кликни меня',
+		content : 'Псевдоссылка, меняющая цвет по клику'
+		}
+	]
+})
+%%
+
+Block describing in ##content## property are turned into HTML
+with their bemhtml templates.
