@@ -1,4 +1,4 @@
-﻿This blocks makes required HTML tags ##<html>##, ##<head>## and ##<body>##.
+This blocks makes required HTML tags ##<html>##, ##<head>## and ##<body>##.
 It is charged with linking CSS and JS files to a page, creating meta tags,
 head node and so on.
 

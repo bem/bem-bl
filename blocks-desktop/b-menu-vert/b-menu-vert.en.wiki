@@ -1,4 +1,4 @@
-﻿This block makes HTML markup for a vertical menu. It is based on
+This block makes HTML markup for a vertical menu. It is based on
 helper block ##i-menu##.
 
 There are 2 type of elements in this block:
