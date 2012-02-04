@@ -1,1 +1,1 @@
-The ##inner## modifier is given for a link including an element
+A modifier for a link including an element
