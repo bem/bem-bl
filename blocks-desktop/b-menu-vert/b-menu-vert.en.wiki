@@ -1,0 +1,12 @@
+﻿This block makes HTML markup for a vertical menu. It is based on
+helper block ##i-menu##.
+
+There are 2 type of elements in this block:
+
+===== Layout elements
+ * layout
+ * layout-unit
+
+===== Functional element
+ * title
+ * item
