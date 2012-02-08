@@ -22,7 +22,7 @@ blocks-common/%:
 
 blocks-desktop/%:
 	rm -f $@/$(*F).*.doc.js
-	BEMTECH_locales_techs="`pwd`/lib/bem/techs/doc.js.js" \
+	BEMTECH_locales_techs="decl.js" \
 	BEMTECH_locales_locales="ru en" \
 	bem create block -T lib/bem/techs/locales.js \
 	-l blocks-desktop $(*F)
