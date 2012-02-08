@@ -5,6 +5,7 @@ b
 .*.xsl.*
 sets/*/*/*.title.txt
 blocks/b-blocks-list/b-blocks-list.bemhtml
+*.decl.js
 
 .idea
 *.iml
