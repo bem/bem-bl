@@ -43,11 +43,13 @@
 %%
 
 Если вам не нужна ссылка, то можно обойтись и просто изображением, ##BEMJSON## будет еще проще:
+%%hl js
 {
-        block: 'b-logo',
-        content: {
-            elem: 'icon',
-            url: '/',
-            alt: 'logo'
-        }
+    block: 'b-logo',
+    content: {
+        elem: 'icon',
+        url: '/',
+        alt: 'logo'
     }
+}
+%%
