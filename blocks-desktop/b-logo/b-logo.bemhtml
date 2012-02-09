@@ -6,6 +6,10 @@ block b-logo {
 
         ctx.icon && (ctx.icon.block = 'b-logo');
 
+        if (ctx.content instanceof Array) for (var c in ctx.content) {
+            ctx.content[c].elem && (ctx.content[c].block = 'b-logo')
+        }
+
         local (
             this._mode = '',
             ctx.elem = undefined,

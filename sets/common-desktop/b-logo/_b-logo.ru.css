@@ -206,7 +206,10 @@
 {
     vertical-align: baseline;
 }
-
+.b-blocks-desc .b-text__p
+{
+    margin-top: 0.8em;
+}
 .b-text__h1,
 .b-text__h2,
 .b-text__h3
@@ -372,10 +375,30 @@
 
     min-width: 250px;
 
-    white-space: normal;
+    white-space: nowrap;
 
     color: #060;
 
     font: 0.8em Monaco, Consolas, "Courier New", monospace;
+}
+
+.ohl
+{
+    white-space: pre-wrap;
+    display: block;
+    font-family: monospace;
+    font-size: 1em;
+    padding: 0.5em;
+    line-height: 1.6em;
+    color: black;
+    background-color: #f7f7e7;
+}
+.ohl-keyword
+{
+    color: green;
+}
+.ohl-string
+{
+    color: red;
 }
 
