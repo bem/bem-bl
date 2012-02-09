@@ -1,4 +1,6 @@
-﻿=== Простое вертикальное меню
+﻿
+=== Простое вертикальное меню
+
 Блок, создает разметку для вертикального меню. Построен на основе блока-хелпера ##i-menu##.\\
 В простейшем случае в ##BEMJSON## достаточно объявить блок и перечислить его элементы
 ##item## в свойстве ##content##:
@@ -311,7 +313,7 @@
 {
   block: 'b-link',
   mods: { pseudo: 'yes', inner: 'yes' },
-  mix: [{ block: 'b-menu-vert', elem: 'trigger', elemMods: { state: 'opened' }}],
+  mix: [{ block: 'b-menu-vert', elem: 'trigger', elemMods: { state: 'opened' } }],
   content: [
     ...
 }
