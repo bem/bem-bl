@@ -1,9 +1,7 @@
 ﻿Блок, создает разметку для вертикального меню. Построен на основе блока-хелпера ##i-menu##.
 
 === Простое вертикальное меню
-
-В простейшем случае в ##BEMJSON## достаточно объявить блок и перечислить его элементы
-##item## в свойстве ##content##:
+В простейшем случае в ##BEMJSON## достаточно объявить блок и перечислить его элементы ##item## в свойстве ##content##:
 
 %%hl js
 {
@@ -39,14 +37,6 @@
         content: 'Index'
       }
     },
-    {
-      elem: 'item',
-      content: {
-        block: 'b-link',
-        url: 'http://google.com',
-        content: 'Backyard'
-      }
-    },
     ...
   ]
 }
@@ -72,8 +62,7 @@
     },
     {
       elem: 'item',
-      content: {
-    ...
+      content: { ... }
   ]
 }
 %%
@@ -99,14 +88,13 @@
     },
     {
       elem: 'item',
-      content: {
-    ...
+      content: { ... }
   ]
 }
 %%
 
-Предусмотрена и возможность создания пустого элемента списка для
-отделения одних пунктов от других. За это отвечает элемент ##separator##.\\
+Предусмотрена возможность создания пустого элемента списка для визуального
+разделения одних пунктов от других. За это отвечает элемент ##separator##.
 Для этого на уровне переопределения проекта нужно задать ##CSS##-правила для него.
 Чаще всего ##separator## представляют в виде горизонтальной черты.
 
@@ -116,20 +104,15 @@
   content: [
     {
       elem: 'item',
-      content: {
-        ...
-      }
+      content: { ... }
     },
     {
       elem: 'separator'
     },
     {
       elem: 'item',
-      content: {
-        ...
-      }
-    },
-    ...
+      content: { ... }
+    }
   ]
 }
 %%
@@ -150,7 +133,7 @@
         mods: { 'pseudo': 'yes' },
         content: 'First point'
       }
-    }
+    },
     ...
   ]
 }
@@ -159,10 +142,11 @@
 Кроме внешнего вида, ##js##-меню отличается и клиентской функциональностью: оно
 способно по клику левой кнопкой мыши переключать соответствующий пункт меню
 в состояние ##{ state: 'current' }## и генерировать на ##js##-объекте, соответствующем блоку,
-событие о факте переключения пункта меню.\\
-Для использования этой функциональности необходимо определить, где у меню будут
-расположены элементы ##item-selector##, реагирующие на клик. Эти элементы специально не совпадают
-с элементами ##item##, потому что чаще всего сам пункт меню больше по размеру, чем его активная область.\\
+событие о факте переключения пункта меню.
+
+Для использования этой функциональности необходимо определить ((#__item-selector элементы ##item-selector##)). Эти элементы специально не совпадают
+с элементами ##item##, потому что чаще всего сам пункт меню больше по размеру, чем его активная область.
+
 Элемент ##item-selector## можно использовать как сам по себе, так и примешивая его
 к другим элементам или блокам. В данном случае можно сделать ##mix## с псевдо-ссылками:
 
@@ -188,9 +172,7 @@
 
 === Вертикальное js-меню со сложным контентом
 
-Пункты меню могут содержать не один, а несколько блоков. В библиотеке
-bem-bl ((https://github.com/bem/bem-bl/blob/master/blocks-desktop/b-menu-vert/examples/30_b-menu-vert_js-complex.BEMJSON.js есть пример))
-такого меню. Его пункты помимо ссылок содержат иконки.
+Пункты меню могут содержать не один, а несколько блоков.
 
 Поскольку реакция на клик необходима для всего содержания пункта меню, элемент ##item-selector##
 используется в таком случае в явном виде, являясь контейнером для содержания пункта меню.
@@ -210,7 +192,7 @@ bem-bl ((https://github.com/bem/bem-bl/blob/master/blocks-desktop/b-menu-vert/ex
         content: [
           {
             block: 'b-icon',
-            url: 'http://yandex.st/lego/_/Kx6F6RQnQFitm0qRxX7vpvfP0K0.png',
+            url: '/',
             alt: 'Yandex favicon'
           },
           {
@@ -284,14 +266,7 @@ bem-bl ((https://github.com/bem/bem-bl/blob/master/blocks-desktop/b-menu-vert/ex
         }
       }
     },
-    {
-      elem: 'item',
-      content: {
-        block: 'b-link',
-        url: '/',
-        content: 'News'
-      }
-    }
+    ...
   ]
 }
 %%
@@ -300,11 +275,7 @@ bem-bl ((https://github.com/bem/bem-bl/blob/master/blocks-desktop/b-menu-vert/ex
 элемент ##item-content## с содержанием, которое показывается или скрывается в зависимости
 от кликов по элементу ##item-selector##.
 
-Элемент ##trigger-icon## используется только для обозначения иконки. На
-((https://github.com/bem/bem-bl/tree/master/blocks-desktop/b-menu-vert/examples/40_b-menu-vert_trigger.blocks уровне переопределения соответствующего примера))
-в ##bem-bl## ((https://github.com/bem/bem-bl/blob/master/blocks-desktop/b-menu-vert/examples/40_b-menu-vert_trigger.blocks/b-menu-vert/__trigger/b-menu-vert__trigger.css реализованы CSS-правила)),
-показывающие одну иконку для триггера с открытым состоянием и другую для триггера с закрытым
-состоянием.
+Элемент ##trigger-icon## используется только для обозначения иконки. Не является обязательным элементом.
 
 По умолчанию элемент ##trigger## не содержит модификатора ##state##, а элемент ##item-content##
 не содержит модификатора ##visibility##. В этом состоянии содержание элемента ##item-content## не видно.\\
@@ -319,9 +290,8 @@ bem-bl ((https://github.com/bem/bem-bl/blob/master/blocks-desktop/b-menu-vert/ex
 {
   block: 'b-link',
   mods: { pseudo: 'yes', inner: 'yes' },
-  mix: [{ block: 'b-menu-vert', elem: 'trigger', elemMods: { state: 'opened' }}],
-  content: [
-    ...
+  mix: [{ block: 'b-menu-vert', elem: 'trigger', elemMods: { state: 'opened' } }],
+  content: { ... }
 }
 %%
 
@@ -329,11 +299,8 @@ bem-bl ((https://github.com/bem/bem-bl/blob/master/blocks-desktop/b-menu-vert/ex
 'item-content': {
   elem: 'item-content',
   elemMods: { visibility: 'visible' },
-  content: ...
+  content: [ ... ]
 %%
-
-В библиотеке bem-bl также есть
-((https://github.com/bem/bem-bl/blob/master/blocks-desktop/b-menu-vert/examples/50_b-menu-vert_trigger-deep.BEMJSON.js пример меню с неоднократной вложенностью триггеров)).
 
 === Вложенные меню
 
@@ -348,11 +315,3 @@ bem-bl ((https://github.com/bem/bem-bl/blob/master/blocks-desktop/b-menu-vert/ex
 
 Элемент ##submenu## должен содержаться в элементе ##item-content## и включать в
 себя описание элементов ##item## для вложеннего меню.
-
-((https://github.com/bem/bem-bl/blob/master/blocks-desktop/b-menu-vert/examples/60_b-menu-vert_submenu.BEMJSON.js Пример для вложенного меню))
-в библиотеке ##bem-bl## демонстрирует такое ##BEMJSON##-описание.
-
-Сквозные вложенные меню работают и с триггером, ##BEMJSON## для такого случая
-можно посмотреть в
-((https://github.com/bem/bem-bl/blob/master/blocks-desktop/b-menu-vert/examples/70_b-menu-vert_submenu-trigger.BEMJSON.js соответствующем примере)). 
-
