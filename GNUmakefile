@@ -3,6 +3,9 @@ all:: sets index pages
 
 sets: $(wildcard sets/*)
 
+sets/bem:
+	echo 'Nothing to do here'
+
 sets/%: blocks-common blocks-desktop
 	make -C $@ -B
 
@@ -24,7 +27,7 @@ blocks-desktop/%:
 	BEMTECH_locales_techs="decl.js" \
 	BEMTECH_locales_locales="ru en" \
 	bem create block -T lib/bem/techs/locales.js \
-	-- force \
+	--force \
 	-l blocks-desktop $(*F)
 
 index: index.ru.html index.en.html index.html
