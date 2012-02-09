@@ -2,4 +2,6 @@ block b-text {
 
     this.elem, tag: this.ctx.elem
 
+    this.elem, this.ctx.id, attrs: { id: this.ctx.id  }
+
 }
