@@ -39,14 +39,6 @@
         content: 'Index'
       }
     },
-    {
-      elem: 'item',
-      content: {
-        block: 'b-link',
-        url: 'http://google.com',
-        content: 'Backyard'
-      }
-    },
     ...
   ]
 }
@@ -72,8 +64,7 @@
     },
     {
       elem: 'item',
-      content: {
-    ...
+      content: { ... }
   ]
 }
 %%
@@ -99,8 +90,7 @@
     },
     {
       elem: 'item',
-      content: {
-    ...
+      content: { ... }
   ]
 }
 %%
@@ -116,20 +106,15 @@
   content: [
     {
       elem: 'item',
-      content: {
-        ...
-      }
+      content: { ... }
     },
     {
       elem: 'separator'
     },
     {
       elem: 'item',
-      content: {
-        ...
-      }
-    },
-    ...
+      content: { ... }
+    }
   ]
 }
 %%
@@ -150,7 +135,7 @@
         mods: { 'pseudo': 'yes' },
         content: 'First point'
       }
-    }
+    },
     ...
   ]
 }
@@ -208,7 +193,7 @@
         content: [
           {
             block: 'b-icon',
-            url: 'http://yandex.st/lego/_/Kx6F6RQnQFitm0qRxX7vpvfP0K0.png',
+            url: '/',
             alt: 'Yandex favicon'
           },
           {
@@ -282,14 +267,7 @@
         }
       }
     },
-    {
-      elem: 'item',
-      content: {
-        block: 'b-link',
-        url: '/',
-        content: 'News'
-      }
-    }
+    ...
   ]
 }
 %%
@@ -314,8 +292,7 @@
   block: 'b-link',
   mods: { pseudo: 'yes', inner: 'yes' },
   mix: [{ block: 'b-menu-vert', elem: 'trigger', elemMods: { state: 'opened' } }],
-  content: [
-    ...
+  content: { ... }
 }
 %%
 
@@ -323,7 +300,7 @@
 'item-content': {
   elem: 'item-content',
   elemMods: { visibility: 'visible' },
-  content: ...
+  content: [ ... ]
 %%
 
 === Вложенные меню
