@@ -27,3 +27,7 @@
 {
     vertical-align: baseline;
 }
+.b-blocks-desc .b-text__p
+{
+    margin-top: 0.8em;
+}
