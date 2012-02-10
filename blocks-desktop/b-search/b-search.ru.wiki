@@ -1,2 +1,22 @@
 ﻿Поисковая форма, содержащая поле ввода и кнопку. Для раскладки используется блок
 ##b-layout-table##.
+
+Рассмотрим ##BEMJSON## блока:
+%%hl js
+block: 'b-search',
+attrs: { action: '/search.xml' },
+input: {
+    elem: 'input',
+    attrs: { value: 'Text' }
+},
+button: {
+    elem: 'button'
+},
+under: [
+    {
+        block: 'b-link',
+        url: '/',
+        content: 'Advanced search'
+    }
+]
+%%
