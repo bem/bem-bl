@@ -206,7 +206,10 @@
 {
     vertical-align: baseline;
 }
-
+.b-blocks-desc .b-text__p
+{
+    margin-top: 0.8em;
+}
 .b-text__h1,
 .b-text__h2,
 .b-text__h3
@@ -372,7 +375,7 @@
 
     min-width: 250px;
 
-    white-space: normal;
+    white-space: nowrap;
 
     color: #060;
 
