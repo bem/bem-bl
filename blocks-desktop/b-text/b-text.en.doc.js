@@ -1,1 +1,0 @@
-({"name":"b-text","mods":[{"name":"type","vals":[{"name":"global","techs":[{"name":"css"},{"name":"ru.title.txt"},{"name":"ru.wiki"}],"title":"","bemjsonDesc":""}],"title":"","bemjsonDesc":""}],"techs":[{"name":"bemhtml"},{"name":"css"},{"name":"en.title.txt"},{"name":"ru.title.txt"},{"name":"ru.wiki"}],"title":"Text block","bemjsonDesc":""})

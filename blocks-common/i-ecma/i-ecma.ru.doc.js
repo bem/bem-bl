@@ -1,1 +1,0 @@
-({"name":"i-ecma","elems":[{"name":"array","techs":[{"name":"js"}],"title":"","bemjsonDesc":""}],"techs":[{"name":"ru.title.txt"}],"title":"ECMA5-методы стандартных объектов для браузеров, не поддерживающих ECMA5","bemjsonDesc":""})
