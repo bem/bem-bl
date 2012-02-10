@@ -100,7 +100,7 @@
       elemMods: { state: 'current' },
       content: {
         block: 'b-link',
-        mods: { 'pseudo': 'yes' },
+        mods: { pseudo: 'yes' },
         url: '/',
         content: 'Home'
       }
@@ -109,7 +109,7 @@
       elem: 'item',
       content: {
         block: 'b-link',
-        mods: { 'pseudo': 'yes' },
+        mods: { pseudo: 'yes' },
         url: '/office',
         content: 'Office'
       }
@@ -136,7 +136,7 @@
       elemMods: { state: 'current' },
       content: {
         block: 'b-link',
-        mods: { 'pseudo': 'yes' },
+        mods: { pseudo: 'yes' },
         mix: [{ block: 'b-menu-horiz', elem : 'item-selector' }],
         url: '/',
         content: 'Home'
@@ -146,7 +146,7 @@
       elem: 'item',
       content: {
         block: 'b-link',
-        mods: { 'pseudo': 'yes' },
+        mods: { pseudo: 'yes' },
         mix: [{ block: 'b-menu-horiz', elem : 'item-selector' }],
         url: '/office',
         content: 'Office'
@@ -166,7 +166,7 @@
 применять ##mix##.
 
 Кроме того, что соответствующий элемент ##item## в результате клика приобретает
-модификатор ##{ state : 'current' }##, на ##BEM## объекте блока возникает событие ##current##,
+модификатор ##{ state: 'current' }##, на ##BEM## объекте блока возникает событие ##current##,
 сопровождающееся данными о текущем и предыдущем активных пунктах.
 В своём ##JavaScript## приложении можно реагировать на это событие.
 
