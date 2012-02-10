@@ -1,5 +1,7 @@
 #BEMTECH_locales_tech="`pwd`/../../../lib/bem/techs/full.wiki.js" BEMTECH_locales_locales="ru en" bem build -d i-jquery.bemdecl.js -t ../../../lib/bem/techs/locales.js -l ../../../blocks-common -l ../../../blocks-desktop -n i-jquery
 
+BEM ?= bem
+
 all: blocks
 
 blocks:: $(foreach block,$(wildcard ../../blocks-common/*),$(notdir $(block))/$(notdir $(block)).ru.html $(notdir $(block))/$(notdir $(block)).en.html)
@@ -21,9 +23,16 @@ blocks:: $(foreach block,$(wildcard ../../blocks-desktop/*),$(notdir $(block))/$
 	bem create block -T ../../lib/bem/techs/locales.js \
 	$(*D)
 
-%.doc.js: %.blockdecl.js
-	rm -f $@
-	BEMTECH_locales_tech="`pwd`/../../lib/bem/techs/doc.js.js" \
+%.doc.js: %.decl.js
+	echo 'build doc'
+	BEMTECH_locales_techs="`pwd`/../../lib/bem/techs/doc.js.js" \
+	BEMTECH_locales_locales="`echo $(@F) | perl -pi -e 's#^.*(ru|en).*$$#\1#g'`" \
+	$(BEM) create block -T ../../lib/bem/techs/locales.js \
+	--force \
+	$(*D)
+
+%.decl.js: %.blockdecl.js
+	BEMTECH_locales_tech="decl.js" \
 	BEMTECH_locales_locales="`echo $(@F) | perl -pi -e 's#^.*(ru|en).*$$#\1#g'`" \
 	bem build -l ../../blocks-common \
 		-l ../../blocks-desktop \
@@ -31,6 +40,17 @@ blocks:: $(foreach block,$(wildcard ../../blocks-desktop/*),$(notdir $(block))/$
 		-t ../../lib/bem/techs/locales.js \
 		-n $(*D) \
 		-o $(*D)
+
+#%.doc.js: %.blockdecl.js
+#	rm -f $@
+#	BEMTECH_locales_tech="`pwd`/../../lib/bem/techs/doc.js.js" \
+#	BEMTECH_locales_locales="`echo $(@F) | perl -pi -e 's#^.*(ru|en).*$$#\1#g'`" \
+#	bem build -l ../../blocks-common \
+#		-l ../../blocks-desktop \
+#		-d $*.blockdecl.js \
+#		-t ../../lib/bem/techs/locales.js \
+#		-n $(*D) \
+#		-o $(*D)
 
 #%.bemjson.js: %.full.wiki %.title.txt
 #	touch $@
