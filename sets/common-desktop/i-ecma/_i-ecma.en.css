@@ -60,10 +60,10 @@
         border: 0;
     }
 
-    b
-    {
-        font-weight: normal;
-    }
+    /*b*/
+    /*{*/
+        /*font-weight: normal;*/
+    /*}*/
 
     i
     {
@@ -194,33 +194,42 @@
     margin-top: 40px;
 }
 
+.b-blocks-desc .b-text__ul
+{
+    margin-bottom: 0;
+}
+
 .b-blocks-desc .b-text__ul,
-.b-blocks-desc .b-text__li
+.b-blocks-desc .b-text__ul .b-text__li
 {
     margin-left: 0;
 
-    list-style: none !important;
-}
-
-.b-blocks-desc .b-text__li
-{
-    font-weight: bold;
+    list-style: disc inside;
 }
 
 .b-blocks-desc .b-text__li .b-text__li
 {
-    font-weight: 400;
-
     margin-left: 1em;
+
+    list-style: none;
 }
 
 .b-blocks-desc .b-layout-table__cell
 {
     vertical-align: baseline;
 }
+
 .b-blocks-desc .b-text__p
 {
     margin-top: 0.8em;
+}
+
+.b-blocks-desc .b-text__h6
+{
+    font-size: 100%;
+    font-weight: bold;
+
+    margin-bottom: 0.3em;
 }
 .b-text__h1,
 .b-text__h2,
@@ -396,14 +405,17 @@
 
 .b-blocks-desc__entity-group
 {
+    margin: 1.1em 0 0.5em;
+    padding-bottom: 2px;
+
+    line-height: 1.1;
+
+    color: #EB8C28;
     border-bottom: 1px solid #DBDFEA;
+
     font-size: 115.385%;
     font-weight: normal;
-    padding-bottom: 2px;
-    color: #EB8C28;
-    font-family: 'Maven Pro',Helvetica,sans-serif;
-    line-height: 1.1;
-    margin: 1.1em 0 0.5em;
+    font-family: 'Maven Pro', Helvetica, sans-serif;
 }
 
 .b-blocks-desc__doc-header
