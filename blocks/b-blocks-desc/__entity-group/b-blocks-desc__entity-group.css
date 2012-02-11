@@ -1,11 +1,14 @@
 .b-blocks-desc__entity-group
 {
+    margin: 1.1em 0 0.5em;
+    padding-bottom: 2px;
+
+    line-height: 1.1;
+
+    color: #EB8C28;
     border-bottom: 1px solid #DBDFEA;
+
     font-size: 115.385%;
     font-weight: normal;
-    padding-bottom: 2px;
-    color: #EB8C28;
-    font-family: 'Maven Pro',Helvetica,sans-serif;
-    line-height: 1.1;
-    margin: 1.1em 0 0.5em;
+    font-family: 'Maven Pro', Helvetica, sans-serif;
 }
