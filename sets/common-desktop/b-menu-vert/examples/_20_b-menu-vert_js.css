@@ -1,0 +1,60 @@
+.b-menu-vert__item-content
+{
+    display: none;
+}
+.b-menu-vert__item-content_visibility_visible
+{
+    display: block;
+}
+
+.b-menu-vert__layout,
+.b-menu-vert__separator,
+.b-menu-vert__layout-unit
+{
+    margin: 0;
+    padding: 0;
+
+    list-style: none;
+}
+
+.b-menu-vert__item
+{
+    display: -moz-inline-box;
+    display: inline-block;
+
+    padding: 0.4em 0.3em 0.2em;
+}
+
+.b-menu-vert__item_state_current
+{
+    background-color: lightpink;
+}
+
+.b-menu-vert__item_state_current .b-link__inner
+{
+    cursor: default;
+
+    color: #000 !important;
+    border-bottom: none !important;
+}
+
+.b-link_pseudo_yes
+{
+    color: #1a3dc1;
+}
+
+.i-ua_js_yes .b-link_pseudo_yes
+{
+    text-decoration: none;
+
+    cursor: pointer;
+}
+
+.i-ua_js_yes .b-link_pseudo_yes .b-link__inner
+{
+    text-decoration: none;
+
+    color: inherit;
+    border-bottom: 1px dotted;
+}
+

@@ -1,0 +1,24 @@
+.b-menu-vert__item-content
+{
+    display: none;
+}
+.b-menu-vert__item-content_visibility_visible
+{
+    display: block;
+}
+
+.b-menu-vert__layout,
+.b-menu-vert__separator,
+.b-menu-vert__layout-unit
+{
+    margin: 0;
+    padding: 0;
+
+    list-style: none;
+}
+
+.b-menu-vert__separator
+{
+    border-bottom: 1px solid #ccc;
+}
+

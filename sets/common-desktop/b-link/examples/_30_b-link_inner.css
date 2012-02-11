@@ -1,0 +1,53 @@
+.b-link:hover
+{
+    color: #f00;
+}
+
+.b-link_inner_yes:link,
+.b-link_inner_yes:hover,
+.b-link_inner_yes:visited
+{
+    text-decoration: none;
+}
+
+.b-link_inner_yes .b-link__inner
+{
+    text-decoration: underline;
+
+    color: inherit;
+}
+
+.b-link_inner_yes .b-icon
+{
+    vertical-align: middle;
+
+    margin-right: 5px;
+}
+.b-link_pseudo_yes
+{
+    color: #1a3dc1;
+}
+
+.i-ua_js_yes .b-link_pseudo_yes
+{
+    text-decoration: none;
+
+    cursor: pointer;
+}
+
+.i-ua_js_yes .b-link_pseudo_yes .b-link__inner
+{
+    text-decoration: none;
+
+    color: inherit;
+    border-bottom: 1px dotted;
+}
+
+.b-icon
+{
+    font: 0/0 a;
+
+    border: 0;
+
+}
+

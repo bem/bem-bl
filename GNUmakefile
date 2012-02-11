@@ -17,16 +17,12 @@ blocks-%: $$(wildcard $$@/*)
 	echo $@
 
 blocks-common/%:
-	BEMTECH_locales_techs="decl.js" \
-	BEMTECH_locales_locales="ru en" \
-	bem create block -T lib/bem/techs/locales.js \
+	bem create block -T decl.js \
 	--force \
 	-l blocks-common $(*F)
 
 blocks-desktop/%:
-	BEMTECH_locales_techs="decl.js" \
-	BEMTECH_locales_locales="ru en" \
-	bem create block -T lib/bem/techs/locales.js \
+	bem create block -T decl.js \
 	--force \
 	-l blocks-desktop $(*F)
 
