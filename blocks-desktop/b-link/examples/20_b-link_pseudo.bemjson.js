@@ -14,13 +14,13 @@
                 {
                     block: 'b-link',
                     mods: { pseudo: 'yes' },
-                    content: 'Псевдо-ссылка спаном'
+                    content: 'Псевдоссылка спаном'
                 }, '&nbsp;&nbsp;',
                 {
                     block: 'b-link',
                     mods: { pseudo: 'yes' },
                     url: 'http://ya.ru',
-                    content: 'Псевдо-ссылка ссылкой'
+                    content: 'Псевдоссылка ссылкой'
                 }
             ]
         },
@@ -32,7 +32,7 @@
                 url: 'http://ya.ru',
                 target: '_blank',
                 title: 'Заголовок',
-                content: 'Псевдо-ссылка ссылкой с атрибутами title и target'
+                content: 'Псевдоссылка ссылкой с атрибутами title и target'
             }
         },
         {
@@ -41,13 +41,13 @@
                 {
                     block: 'b-link',
                     mods: { pseudo: 'yes', disabled: 'yes' },
-                    content: 'Неактивная псевдо-ссылка спаном'
+                    content: 'Неактивная псевдоссылка спаном'
                 }, '&nbsp;&nbsp;',
                 {
                     block: 'b-link',
                     mods: { pseudo: 'yes', disabled: 'yes' },
                     url: 'http://ya.ru',
-                    content: 'Неактивная псевдо-ссылка ссылкой'
+                    content: 'Неактивная псевдоссылка ссылкой'
                 }
             ]
         }
