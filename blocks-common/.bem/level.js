@@ -18,6 +18,17 @@ exports['get-elem'] = function(block, elem) {
         block + '__' + elem]);
 };
 
+exports['get-elem-mod'] = function(block, elem, mod) {
+    if (elem == 'examples') {
+        return [block, elem, mod].join('/');
+    }
+
+    return [block,
+        '__', elem,
+        '_' + mod,
+        block + '__' + elem + '_' + mod].join('/');
+};
+
 exports['match-elem-mod'] = function(path) {
     var match = this.match('examples-mod', path);
     if (match) return match;
@@ -78,8 +89,8 @@ exports['match-examples-mod-val'] = function(path) {
     return {
         block: match[1],
         elem: match[2],
-        mod: match[3],
-        val: match[4],
+        mod: match[3] + '_' + match[4],
+        //val: match[4],
         suffix: match[5]
     };
 };
