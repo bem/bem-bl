@@ -4,6 +4,14 @@ b
 .*.xsl
 .*.xsl.*
 sets/*/*/*.title.txt
+sets/*/*/*.bemdecl.js
+sets/*/*/*.deps.js
+sets/*/*/*.bemdecl.js
+sets/*/*/*.bemhtml.js
+sets/*/*/*.bemjson.js
+sets/*/*/*.deps.js
+sets/*/*/*.doc.js
+
 blocks/b-blocks-list/b-blocks-list.bemhtml
 *.decl.js
 
