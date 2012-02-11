@@ -1,117 +1,124 @@
-Блок b-page создаёт теги верхнего уровня страницы: ##<html>##, ##<head>##, ##<body>##. Именно
-он отвечает за то, какие подключить css и js-файлы к странице,
-выставление meta-тегов, заголовка и т.д.
+﻿﻿Блок ##b-page## создаёт теги верхнего уровня страницы:
+* ##<html>##
+* ##<head>##
+* ##<body>##
 
-Декларация блока в ##bemjson## начинается объявлением блока и
-указанием свойства ##title##, которое превращается в тег ##<title>## в HTML.
+Именно он отвечает за то, какие подключить ##CSS## и ##JS## файлы к странице,
+выставление ##meta## тегов, заголовка и так далее.
 
-%%hl js
-({
-	block : 'b-page',
-	title : 'Page with link',
-	...
-})
-%%
-
-Указание свойства ##head## дополняет элемент ##head##, соответствующий HTML-тегу ##<head>##,
-элементами для подключения css и  js-файлов:
+Декларация блока в ##BEMJSON## начинается объявлением блока и
+указанием свойства ##title##, которое превращается в тег ##<title>## в ##HTML##.
 
 %%hl js
 ({
-	...
-	head : [
-		{ elem : 'css', url : 'example.css', ie : false },
-		{ elem : 'css', url : 'example.ie.css', ie : 'lt IE 8' },
-		{ elem : 'js', url : 'example.js' }
-	],
-	...
+block: 'b-page',
+title: 'Page with link',
+...
 })
 %%
 
-Элемент ##css## превращается в HTML в тег ##<link>##, подключающий как css-стиль тот файл,
+Указание свойства ##head## дополняет элемент ##head##, соответствующий ##HTML## тегу ##<head>##,
+элементами для подключения ##CSS## и ##JS## файлов:
+
+%%hl js
+({
+...
+head: [
+    { elem: 'css', url: 'example.css', ie: false },
+    { elem: 'css', url: 'example.ie.css', ie: 'lt IE 8' },
+    { elem: 'js', url: 'example.js' }
+],
+...
+})
+%%
+
+Элемент ##css## превращается в ##HTML## в тег ##<link>##, подключающий как ##CSS## стиль тот файл,
 что указан в свойстве ##url## этого элемента. Также у такого элемента может быть свойство ##ie##.
 Если это свойство ##false##, то будут использоваться такие ##condittional
-comments##, которые предотвратят использование этих стилей в IE. При
+comments##, которые предотвратят использование этих стилей в ##IE##. При
 строчном значении этого свойства тег ##<link>## , будет обёрнут в соответствующий ##conditional
 comment##, и этот стиль будет грузиться и использоваться указанных
 браузерах.\\
-Также есть возможность указывать свойство content для содержания тега ##<style>##:
+Также есть возможность указывать свойство ##content## для содержания тега ##<style>##:
 
 %%hl js
 ({
-	...
-	head : [
-		{
-			elem : 'css',
-			content : '.b-blah { color: #f00' }
-		},
-		...
-	],
-	...
+...
+head: [
+    {
+        elem: 'css',
+        content: '.b-blah { color: #f00' }
+    },
+    ...
+],
+...
 })
 %%
 
-Элемент ##js## действует аналогично, подключая к странице js-файлы при помощи тега
+Элемент ##js## действует аналогично, подключая к странице ##JS## файлы при помощи тега
 ##<script>##.
 
-Свойство ##head## не описывает содержание HTML-тега ##<head>## полностью, а лишь
-дополняет дефолтное, которое блок сам создаёт в своём bemhtml-шаблоне:
+Свойство ##head## не описывает содержание ##HTML##-тега ##<head>## полностью, а лишь
+дополняет дефолтное, которое блок сам создаёт в своём ##BEMHTML## шаблоне.
 
- * тег ##<meta>## с указанием кодировки
+==== Тег <meta> с указанием кодировки
+
+##BEMHTML##:
+%%hl js
+content: [
+{
+    tag: 'meta',
+    attrs: { 'http-equiv': 'content-type', content: 'text/html; charset=utf-8' }
+},
+...
+%%
+
+==== Тег <meta> для использования ##IE9## (и выше) в максимальном ##compatibility## режиме
+
+##BEMHTML##:
+%%hl js
+content: [
+...
+{
+    tag: 'meta',
+    attrs: { 'http-equiv': 'X-UA-Compatible', content: 'IE=EmulateIE7, IE=edge' }
+},
+...
+%%
+
+==== Выставление значения тега <title> страницы из свойства
 
 %%hl js
 content: [
-	{
-		tag : 'meta',
-		attrs : { 'http-equiv' : 'content-type', content : 'text/html; charset=utf-8' }
-	},
-	...
+...
+{
+    tag: 'title',
+    content: this.ctx.title
+},
+...
 %%
 
- * тег ##<meta>## для использования IE9 (и выше) в максимальном compatibility режиме
+==== Выставление фавиконки
+
 %%hl js
-content : [
-	...
-	{
-		tag : 'meta',
-		attrs : { 'http-equiv' : 'X-UA-Compatible', content : 'IE=EmulateIE7, IE=edge' }
-	},
-	...
+content: [
+...
+this.ctx.favicon ? {
+    elem: 'favicon',
+    url: this.ctx.favicon
+} : '',
+...
 %%
 
- * выставление значения тега ##<title>## страницы из свойства
+==== Декларация блока i-ua
 
 %%hl js
-content : [
-	...
-	{
-		tag : 'title',
-		content : this.ctx.title
-	},
-	...
-%%
-
- * выставление фавиконки
-
-%%hl js
-content : [
-	...
-	this.ctx.favicon ? {
-		elem : 'favicon',
-		url : this.ctx.favicon
-	} : '',
-	...
-%%
-
- * декларация блока ##i-ua##
-
-%%hl js
-content : [
-	...
-	{
-		block : 'i-ua'
-	},
-	...
+content: [
+...
+{
+    block: 'i-ua'
+},
+...
 %%
 
 Аналогично указанию свойства ##head##, может быть задано свойство ##meta##,
@@ -119,38 +126,38 @@ content : [
 
 %%hl js
 ({
-	...
-	meta : {
-		elem : 'meta',
-		attrs : {
-			name : 'keywords',
-			content : 'js, css, html'
-		}
-	},
-	...
+...
+meta: {
+    elem: 'meta',
+    attrs: {
+        name: 'keywords',
+        content: 'js, css, html'
+    }
+},
+...
 })
 %%
 
 %%hl js
 ({
-	...
-	meta : [
-		{
-			elem : 'meta',
-			attrs : {
-				name : 'keywords',
-				content : 'js, css, html'
-			}
-		},
-		{
-			elem : 'meta',
-			attrs : {
-				name : 'description',
-				content : 'Yet another webdev blog'
-			}
-		}
-	]
-	...
+...
+meta: [
+    {
+        elem: 'meta',
+        attrs: {
+            name: 'keywords',
+            content: 'js, css, html'
+        }
+    },
+    {
+        elem: 'meta',
+        attrs: {
+            name : 'description',
+            content : 'Yet another webdev blog'
+        }
+    }
+]
+...
 })
 %%
 
@@ -159,18 +166,16 @@ content : [
 
 %%hl js
 ({
-	...
-	content : [
-		{
-		block : 'b-link',
-		mods : { pseudo : 'yes', togcolor : 'yes', color: 'green' },
-		url : '#',
-		target : '_blank',
-		title : 'Кликни меня',
-		content : 'Псевдоссылка, меняющая цвет по клику'
-		}
-	]
+...
+content: {
+    block: 'b-link',
+    mods: { pseudo: 'yes', togcolor: 'yes', color: 'green' },
+    url: '#',
+    target: '_blank',
+    title: 'Кликни меня',
+    content: 'Псевдоссылка, меняющая цвет по клику'
+}
 })
 %%
 
-На блоки, содержащиеся в ##content##, действуют их bemhtml-шаблоны.
+На блоки, содержащиеся в ##content##, действуют их ##BEMHTML## шаблоны.
