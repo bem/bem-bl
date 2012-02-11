@@ -113,6 +113,18 @@
     margin-top: 30px;
 }
 
+.b-description .b-text__ul
+{
+    margin: 0.4em 0 0 2em;
+
+    list-style: disc;
+}
+
+.b-description .b-text__p
+{
+    margin-top: 0.8em;
+}
+
 .b-description_layout_inline
 {
     font-family: 'PT Serif';
@@ -200,6 +212,8 @@
     font-weight: 400;
 
     margin-left: 1em;
+
+    list-style: disc;
 }
 
 .b-blocks-desc .b-layout-table__cell
