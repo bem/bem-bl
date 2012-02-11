@@ -781,7 +781,9 @@ var DOM = BEM.DOM = BEM.decl('i-bem__dom',/** @lends BEM.DOM.prototype */{
         if(elem && typeof modVal != 'undefined' && elem.length > 1) {
             var _this = this;
             elem.each(function() {
-                _this.setMod($(this), modName, modVal);
+                var item = $(this);
+                item.__bemElemName = elem.__bemElemName;
+                _this.setMod(item, modName, modVal);
             });
             return _this;
         }
