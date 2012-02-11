@@ -1,0 +1,7 @@
+block b-block-example {
+    tag: 'iframe',
+    attrs: {
+        src: this.ctx.src,
+        id: this.ctx.id
+    }
+}

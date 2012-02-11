@@ -1,0 +1,9 @@
+.b-block-example
+{
+    overflow-x: hidden;
+
+    width: 100%;
+
+    border: 0;
+    border-left: 2px solid #ddd;
+}
