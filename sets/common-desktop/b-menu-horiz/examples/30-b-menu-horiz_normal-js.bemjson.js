@@ -20,7 +20,7 @@
                     elemMods: { state: 'current' },
                     content: {
                         block: 'b-link',
-                        mods: { 'pseudo': 'yes' },
+                        mods: { pseudo: 'yes' },
                         mix: [{ block: 'b-menu-horiz', elem : 'item-selector' }],
                         url: '/',
                         content: 'Home'
@@ -31,7 +31,7 @@
                     elemMods: { state: 'disabled' },
                     content: {
                         block: 'b-link',
-                        mods: { 'pseudo' : 'yes' },
+                        mods: { pseudo : 'yes' },
                         mix: [{ block: 'b-menu-horiz', elem : 'item-selector' }],
                         url: '/',
                         content: 'Products'
@@ -41,7 +41,7 @@
                     elem: 'item',
                     content: {
                         block: 'b-link',
-                        mods: { 'pseudo' : 'yes' },
+                        mods: { pseudo : 'yes' },
                         mix: [{ block: 'b-menu-horiz', elem : 'item-selector' }],
                         url: '/',
                         content: 'Services'
@@ -51,7 +51,7 @@
                     elem: 'item',
                     content: {
                         block: 'b-link',
-                        mods: { 'pseudo' : 'yes' },
+                        mods: { pseudo : 'yes' },
                         mix: [{ block: 'b-menu-horiz', elem : 'item-selector' }],
                         url: '/',
                         content: 'Support'
@@ -61,7 +61,7 @@
                     elem: 'item',
                     content: {
                         block: 'b-link',
-                        mods: { 'pseudo' : 'yes' },
+                        mods: { pseudo : 'yes' },
                         mix: [{ block: 'b-menu-horiz', elem : 'item-selector' }],
                         url: '/',
                         content: 'Company'

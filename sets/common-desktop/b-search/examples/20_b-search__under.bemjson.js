@@ -6,25 +6,22 @@
         { block: 'i-jquery', elem: 'core' },
         { elem: 'js', url: '_20_b-search__under.js' }
     ],
-    content: [
-        {
-            block: 'b-search',
-            attrs: { action: '/search.xml' },
-            input: {
-                elem: 'input',
-                attrs: { value: 'Text' }
-            },
-            button: {
-                elem: 'button'
-            },
-            under: [
-                {
-                    block: 'b-link',
-                    url: '/',
-                    content: 'Advanced search'
-                }
-            ]
-
-        }
-    ]
+    content: {
+        block: 'b-search',
+        attrs: { action: '/search.xml' },
+        input: {
+            elem: 'input',
+            attrs: { value: 'Text' }
+        },
+        button: {
+            elem: 'button'
+        },
+        under: [
+            {
+                block: 'b-link',
+                url: '/',
+                content: 'Advanced search'
+            }
+        ]
+    }
 })
