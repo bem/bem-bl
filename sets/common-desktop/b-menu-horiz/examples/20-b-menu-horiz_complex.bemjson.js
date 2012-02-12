@@ -2,9 +2,7 @@
     block: 'b-page',
     title: 'A horizontal menu using a table',
     head: [
-        { elem: 'css', url: '_20-b-menu-horiz_complex.css' },
-        { block: 'i-jquery', elem: 'core' },
-        { elem: 'js', url: '_20-b-menu-horiz_complex.js' }
+        { elem: 'css', url: '_20-b-menu-horiz_complex.css' }
     ],
     content: [
         {
