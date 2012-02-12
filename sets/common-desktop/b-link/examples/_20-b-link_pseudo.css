@@ -1,0 +1,36 @@
+.b-link_pseudo_yes:hover
+{
+    color: #f00;
+}
+
+.b-link_pseudo_yes
+{
+    color: #1a3dc1;
+}
+
+.i-ua_js_yes .b-link_pseudo_yes
+{
+    text-decoration: none;
+
+    cursor: pointer;
+}
+
+.i-ua_js_yes .b-link_pseudo_yes .b-link__inner
+{
+    text-decoration: none;
+
+    color: inherit;
+    border-bottom: 1px dotted;
+}
+
+.b-link_disabled_yes,
+.b-link_disabled_yes:hover,
+a.b-link_disabled_yes:link,
+a.b-link_disabled_yes:visited
+{
+    outline: 0;
+    cursor: default !important;
+
+    color: #ddd !important;
+}
+

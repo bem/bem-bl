@@ -1,0 +1,25 @@
+block b-block-example {
+
+    attrs: {
+        id: this.ctx.id
+    }
+
+    elem iframe {
+        tag: 'iframe',
+        attrs: {
+            src: this.ctx.url
+        }
+    }
+
+    elem source-link, default: {
+        local(
+            this._mode = '',
+            this.ctx = {
+            block: 'b-link',
+            url: 'https://github.com/bem/bem-bl/tree/gh-pages/sets/common-desktop/' + this.ctx.blockname + '/',
+            mix: [{block: 'b-block-example', elem: 'source'}],
+            content: this.ctx.content
+            }
+        ) this.apply()
+    }
+}

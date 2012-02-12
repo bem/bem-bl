@@ -1,0 +1,59 @@
+.b-menu-vert__item-content
+{
+    display: none;
+}
+.b-menu-vert__item-content_visibility_visible
+{
+    display: block;
+}
+
+.b-menu-vert__layout,
+.b-menu-vert__separator,
+.b-menu-vert__layout-unit
+{
+    margin: 0;
+    padding: 0;
+
+    list-style: none;
+}
+
+.b-menu-vert__title
+{
+    font-size: 100%;
+
+    margin: 5px 5px 5px 23px;
+}
+
+.b-menu-vert__item
+{
+    display: inline-block;
+
+    margin-left: 23px;
+    padding: 3px 5px;
+}
+
+.b-menu-vert__item_state_current
+{
+    background-color: yellow;
+}
+
+.b-link_pseudo_yes
+{
+    color: #1a3dc1;
+}
+
+.i-ua_js_yes .b-link_pseudo_yes
+{
+    text-decoration: none;
+
+    cursor: pointer;
+}
+
+.i-ua_js_yes .b-link_pseudo_yes .b-link__inner
+{
+    text-decoration: none;
+
+    color: inherit;
+    border-bottom: 1px dotted;
+}
+
