@@ -8,7 +8,8 @@ exports.techs = {
     'ru.wiki' : '',
     'en.title.txt' : '',
     'en.wiki' : '',
-    'bemjson.js' : ''
+    'bemjson.js' : '',
+    'blocks' : ''
 };
 
 exports['get-elem'] = function(block, elem) {

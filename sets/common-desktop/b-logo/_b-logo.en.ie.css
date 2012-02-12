@@ -418,6 +418,11 @@
     font-family: 'Maven Pro', Helvetica, sans-serif;
 }
 
+.b-block-example
+{
+    margin-bottom: 3em;
+}
+
 .b-block-example__iframe
 {
     overflow-x: hidden;
@@ -431,6 +436,7 @@
 .b-block-example__source
 {
     font-size: 0.8em;
+    margin-right: 2em;
 }
 
 
