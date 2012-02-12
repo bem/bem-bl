@@ -1,0 +1,76 @@
+.b-menu-vert__item-content
+{
+    display: none;
+}
+.b-menu-vert__item-content_visibility_visible
+{
+    display: block;
+}
+
+.b-menu-vert__layout,
+.b-menu-vert__separator,
+.b-menu-vert__layout-unit
+{
+    margin: 0;
+    padding: 0;
+
+    list-style: none;
+}
+
+.b-menu-vert__title
+{
+    font-size: 100%;
+
+    margin: 5px 5px 5px 23px;
+}
+
+.b-menu-vert__item,
+.b-menu-vert_type_submenu .b-menu-vert__item-content
+{
+    padding: 3px 5px 3px 23px;
+}
+
+.b-menu-vert_type_submenu .b-menu-vert__item,
+.b-menu-vert_type_submenu .b-menu-vert__item-content
+{
+    margin-left: 20px;
+}
+
+.b-menu-vert .b-link:link,
+.b-menu-vert .b-link:visited
+{
+    color: #00c;
+}
+
+.b-menu-vert__trigger
+{
+    cursor: pointer;
+}
+.b-menu-vert__trigger
+{
+    margin-left: -18px;
+}
+
+.b-menu-vert__trigger-icon
+{
+    margin: 1px 0 -1px;
+    padding: 9px 0 0 16px;
+
+    cursor: pointer;
+
+    background: url("../../../../blocks-desktop/b-menu-vert/examples/50-b-menu-vert_trigger-deep.blocks/b-menu-vert/__trigger/b-menu-vert__trigger.gif") no-repeat;
+}
+
+.b-menu-vert__trigger_state_opened .b-menu-vert__trigger-icon
+{
+    background-position: -16px 0;
+}
+
+.b-icon
+{
+    font: 0/0 a;
+
+    border: 0;
+
+}
+
