@@ -443,3 +443,18 @@
     color: red;
 }
 
+.b-block-example__iframe
+{
+    overflow-x: hidden;
+
+    width: 100%;
+
+    border: 0;
+    border-left: 2px solid #ddd;
+}
+
+.b-block-example__source
+{
+    font-size: 0.8em;
+}
+
