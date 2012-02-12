@@ -2,10 +2,10 @@
     block: 'b-page',
     title: 'b-link_pseudo_yes',
     head: [
-        { elem: 'css', url: '_20_b-link_pseudo.css', ie: false  },
-        { elem: 'css', url: '_20_b-link_pseudo.ie.css', ie: 'lt IE 8' },
+        { elem: 'css', url: '_20-b-link_pseudo.css', ie: false  },
+        { elem: 'css', url: '_20-b-link_pseudo.ie.css', ie: 'lt IE 8' },
         { block: 'i-jquery', elem: 'core' },
-        { elem: 'js', url: '_20_b-link_pseudo.js' }
+        { elem: 'js', url: '20-b-link_pseudo.js' }
     ],
     content: [
         {

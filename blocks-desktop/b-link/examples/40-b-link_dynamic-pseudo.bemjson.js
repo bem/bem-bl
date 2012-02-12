@@ -3,8 +3,8 @@
     js: true,
     title: 'b-link_pseudo_yes',
     head: [
-        { elem: 'css', url: '_40_b-link_dynamic-pseudo.css', ie: false  },
-        { elem: 'css', url: '_40_b-link_dynamic-pseudo.ie.css', ie: 'lt IE 8' },
+        { elem: 'css', url: '_40-b-link_dynamic-pseudo.css', ie: false  },
+        { elem: 'css', url: '_40-b-link_dynamic-pseudo.ie.css', ie: 'lt IE 8' },
         { block: 'i-jquery', elem: 'core'},
         { elem: 'js', url: '40_b-link_dynamic-pseudo.js' }
     ],
