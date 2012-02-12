@@ -403,6 +403,21 @@
     font: 0.8em Monaco, Consolas, "Courier New", monospace;
 }
 
+.b-blocks-desc__entity-group
+{
+    margin: 1.1em 0 0.5em;
+    padding-bottom: 2px;
+
+    line-height: 1.1;
+
+    color: #EB8C28;
+    border-bottom: 1px solid #DBDFEA;
+
+    font-size: 115.385%;
+    font-weight: normal;
+    font-family: 'Maven Pro', Helvetica, sans-serif;
+}
+
 .ohl
 {
     white-space: pre-wrap;
@@ -421,6 +436,21 @@
 .ohl-string
 {
     color: red;
+}
+
+.b-block-example__iframe
+{
+    overflow-x: hidden;
+
+    width: 100%;
+
+    border: 0;
+    border-left: 2px solid #ddd;
+}
+
+.b-block-example__source
+{
+    font-size: 0.8em;
 }
 
 
