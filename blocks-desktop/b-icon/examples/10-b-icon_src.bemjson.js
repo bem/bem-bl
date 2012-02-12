@@ -2,8 +2,7 @@
     block: 'b-page',
     title: 'b-icon',
     head: [
-        { elem: 'css', url: '_10-b-icon_src.css' },
-        { elem: 'js', url: '_10-b-icon_src.js' }
+        { elem: 'css', url: '_10-b-icon_src.css' }
     ],
     content: {
         block: 'b-icon',

@@ -4,7 +4,7 @@
     head: [
         { elem: 'css', url: '_30-b-menu-horiz_normal-js.css' },
         { block: 'i-jquery', elem: 'core' },
-        { elem: 'js', url: '_30-b-menu-horiz_normal-js.js' }
+        { elem: 'js', url: '30-b-menu-horiz_normal-js.js' }
     ],
     content: [
         {
