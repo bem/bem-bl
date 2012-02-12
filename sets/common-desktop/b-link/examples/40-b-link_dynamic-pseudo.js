@@ -3074,6 +3074,13 @@ var DOM = BEM.DOM = BEM.decl('i-bem__dom',/** @lends BEM.DOM.prototype */{
 
 /* ../../../../blocks-common/i-bem/__dom/i-bem__dom.js: end */ /**/
 
+/* ../../../../blocks-common/i-bem/__dom/_init/i-bem__dom_init_auto.js: begin */ /**/
+/* дефолтная инициализация */
+$(function() {
+    BEM.DOM.init();
+});
+/* ../../../../blocks-common/i-bem/__dom/_init/i-bem__dom_init_auto.js: end */ /**/
+
 /* ../../../../blocks-desktop/b-link/examples/40-b-link_dynamic-pseudo.blocks/b-page/b-page.js: begin */ /**/
 /** @requires BEM */
 /** @requires BEM.DOM */

@@ -49,6 +49,17 @@ exports.deps = [
         "elem": "dom"
     },
     {
+        "block": "i-bem",
+        "elem": "dom",
+        "mod": "init"
+    },
+    {
+        "block": "i-bem",
+        "elem": "dom",
+        "mod": "init",
+        "val": "auto"
+    },
+    {
         "block": "b-page"
     },
     {
