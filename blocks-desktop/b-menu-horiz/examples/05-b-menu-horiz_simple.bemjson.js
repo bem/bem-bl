@@ -2,9 +2,7 @@
     block: 'b-page',
     title: 'A horizontal menu using links',
     head: [
-        { elem: 'css', url: '_05-b-menu-horiz_simple.css' },
-        { block: 'i-jquery', elem: 'core' },
-        { elem: 'js', url: '_05-b-menu-horiz_simple.js' }
+        { elem: 'css', url: '_05-b-menu-horiz_simple.css' }
     ],
     content: [
         {
