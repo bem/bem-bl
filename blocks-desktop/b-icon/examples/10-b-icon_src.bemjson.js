@@ -2,8 +2,8 @@
     block: 'b-page',
     title: 'b-icon',
     head: [
-        { elem: 'css', url: '_10icon-src.css' },
-        { elem: 'js', url: '_10icon-src.js' }
+        { elem: 'css', url: '_10-b-icon_src.css' },
+        { elem: 'js', url: '_10-b-icon_src.js' }
     ],
     content: {
         block: 'b-icon',
