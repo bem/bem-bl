@@ -2,8 +2,7 @@
     block: 'b-page',
     title: 'b-layout-table',
     head: [
-        { elem: 'css', url: '_20_b-layout-table_rows.css' },
-        { elem: 'js', url: '_20_b-layout-table_rows.js' }
+        { elem: 'css', url: '_20-b-layout-table_rows.css' }
     ],
     content: [
         {
