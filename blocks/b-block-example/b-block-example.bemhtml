@@ -16,7 +16,7 @@ block b-block-example {
             this._mode = '',
             this.ctx = {
             block: 'b-link',
-            url: 'https://github.com/bem/bem-bl/tree/gh-pages/sets/common-desktop/' + this.ctx.blockname + '/',
+            url: this.ctx.url,
             mix: [{block: 'b-block-example', elem: 'source'}],
             content: this.ctx.content
             }
