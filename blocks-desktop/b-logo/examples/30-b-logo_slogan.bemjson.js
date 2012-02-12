@@ -2,9 +2,9 @@
     block: 'b-page',
     title: 'b-logo',
     head: [
-        { elem: 'css', url: '_30_b-logo-slogan.css' },
+        { elem: 'css', url: '_30-b-logo_slogan.css' },
         { block: 'i-jquery', elem: 'core' },
-        { elem: 'js', url: '_30_b-logo-slogan.js' }
+        { elem: 'js', url: '_30-b-logo_slogan.js' }
     ],
     content: [
         {
@@ -15,7 +15,7 @@
                 content: [
                     {
                         elem: 'icon',
-                        url: '../../../../bem-bl/blocks-desktop/b-logo/examples/30_b-logo-slogan.blocks/b-logo/b-logo.png'
+                        url: '../../../blocks-desktop/b-logo/examples/30-b-logo_slogan.blocks/b-logo/b-logo.png'
                     },
                     {
                         elem: 'slogan',
