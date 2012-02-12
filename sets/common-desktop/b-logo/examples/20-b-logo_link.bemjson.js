@@ -15,7 +15,7 @@
                 title: 'logo',
                 icon: {
                     elem: 'icon',
-                    url: '../../../../bem-bl/blocks-desktop/b-logo/examples/20-b-logo_link.blocks/b-logo/b-logo.png',
+                    url: '../../../blocks-desktop/b-logo/examples/20-b-logo_link.blocks/b-logo/b-logo.png',
                     alt: 'logo'
                 }
             }
