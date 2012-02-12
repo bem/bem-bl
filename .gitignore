@@ -5,6 +5,8 @@ b
 .*.xsl.*
 sets/
 
+*.decl.js
+
 .idea
 *.iml
 
