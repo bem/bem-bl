@@ -2,9 +2,7 @@
     block: 'b-page',
     title: 'b-logo',
     head: [
-        { elem: 'css', url: '_30-b-logo_slogan.css' },
-        { block: 'i-jquery', elem: 'core' },
-        { elem: 'js', url: '_30-b-logo_slogan.js' }
+        { elem: 'css', url: '_30-b-logo_slogan.css' }
     ],
     content: [
         {

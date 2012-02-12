@@ -2,9 +2,7 @@
     block: 'b-page',
     title: 'A horizontal menu using a list',
     head: [
-        { elem: 'css', url: '_10-b-menu-horiz_normal.css' },
-        { block: 'i-jquery', elem: 'core' },
-        { elem: 'js', url: '_10-b-menu-horiz_normal.js' }
+        { elem: 'css', url: '_10-b-menu-horiz_normal.css' }
     ],
     content: [
         {
