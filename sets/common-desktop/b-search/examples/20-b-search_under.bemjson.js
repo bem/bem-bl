@@ -2,9 +2,7 @@
     block: 'b-page',
     title: 'b-search with under row',
     head: [
-        { elem: 'css', url: '_20_b-search__under.css' },
-        { block: 'i-jquery', elem: 'core' },
-        { elem: 'js', url: '_20_b-search__under.js' }
+        { elem: 'css', url: '_20-b-search_under.css' }
     ],
     content: {
         block: 'b-search',
