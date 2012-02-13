@@ -2,9 +2,9 @@
     block: 'b-page',
     title: 'Меню с триггером',
     head: [
-        { elem: 'css', url: '_40_b-menu-vert_trigger.css' },
+        { elem: 'css', url: '_40-b-menu-vert_trigger.css' },
         { block: 'i-jquery', elem: 'core' },
-        { elem: 'js', url: '_40_b-menu-vert_trigger.js' }
+        { elem: 'js', url: '40-b-menu-vert_trigger.js' }
     ],
     content: [
         {

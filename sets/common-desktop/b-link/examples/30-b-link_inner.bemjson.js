@@ -2,10 +2,10 @@
     block: 'b-page',
     title: 'b-link_inner_yes',
     head: [
-        { elem: 'css', url: '_30_b-link_inner.css' },
-        { elem: 'css', url: '_30_b-link_inner.ie.css', ie: true },
+        { elem: 'css', url: '_30-b-link_inner.css' },
+        { elem: 'css', url: '_30-b-link_inner.ie.css', ie: true },
         { block: 'i-jquery', elem: 'core' },
-        { elem: 'js', url: '_30_b-link_inner.js' }
+        { elem: 'js', url: '30_b-link_inner.js' }
     ],
     content: [
         {
