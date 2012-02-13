@@ -2,18 +2,14 @@
     block: 'b-page',
     title: 'Меню с глубоко вложенным триггером',
     head: [
-        { elem: 'css', url: '_50_b-menu-vert_trigger-deep.css' },
+        { elem: 'css', url: '_50-b-menu-vert_trigger-deep.css' },
         { block: 'i-jquery', elem: 'core' },
-        { elem: 'js', url: '_50_b-menu-vert_trigger-deep.js' }
+        { elem: 'js', url: '50-b-menu-vert_trigger-deep.js' }
     ],
     content: [
         {
             block: 'b-menu-vert',
             js: true,
-            title: {
-                elem: 'title',
-                content: 'Меню с глубоко вложенным триггером:'
-            },
             content: [
                 {
                     elem: 'item',

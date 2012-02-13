@@ -2,18 +2,14 @@
     block: 'b-page',
     title: 'JS-меню с дополнительными элементами',
     head: [
-        { elem: 'css', url: '_30_b-menu-vert_js-complex.css' },
+        { elem: 'css', url: '_30-b-menu-vert_js-complex.css' },
         { block: 'i-jquery', elem: 'core' },
-        { elem: 'js', url: '_30_b-menu-vert_js-complex.js' }
+        { elem: 'js', url: '30-b-menu-vert_js-complex.js' }
     ],
     content: [
         {
             block: 'b-menu-vert',
             js: true,
-            title: {
-                elem: 'title',
-                content: 'JS-меню, переключающее активный элемент:'
-            },
             content: [
                 {
                     elem: 'item',
