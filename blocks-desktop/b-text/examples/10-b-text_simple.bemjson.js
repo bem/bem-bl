@@ -2,8 +2,7 @@
     block: 'b-page',
     title: 'Текст на странице',
     head: [
-        { elem: 'css', url: '_10_simple.css' },
-        { elem: 'js', url: '_10_simple.js' }
+        { elem: 'css', url: '_10-b-text_simple.css' },
     ],
     content: {
         block: 'b-text',
