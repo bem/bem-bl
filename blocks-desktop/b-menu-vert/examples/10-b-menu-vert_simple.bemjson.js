@@ -2,9 +2,7 @@
     block: 'b-page',
     title: 'Простое вертикальное меню',
     head: [
-        { elem: 'css', url: '_10-b-menu-vert_simple.css' },
-        { block: 'i-jquery', elem: 'core' },
-        { elem: 'js', url: '_10-b-menu-vert_simple.js' }
+        { elem: 'css', url: '_10-b-menu-vert_simple.css' }
     ],
     content: [
         {
