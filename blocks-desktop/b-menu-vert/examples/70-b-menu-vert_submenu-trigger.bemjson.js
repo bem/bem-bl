@@ -2,9 +2,9 @@
     block: 'b-page',
     title: 'Использование submenu',
     head: [
-        { elem: 'css', url: '_70_b-menu-vert_submenu-trigger.css' },
+        { elem: 'css', url: '_70-b-menu-vert_submenu-trigger.css' },
         { block: 'i-jquery', elem: 'core' },
-        { elem: 'js', url: '_70_b-menu-vert_submenu-trigger.js' }
+        { elem: 'js', url: '70-b-menu-vert_submenu-trigger.js' }
     ],
     content: [
         {
@@ -12,7 +12,7 @@
             js: true,
             title: {
                 elem: 'title',
-                content: 'Использование submenu:'
+                content: 'Menu title'
             },
             content: [
                 {
