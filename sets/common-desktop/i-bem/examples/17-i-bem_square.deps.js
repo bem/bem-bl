@@ -45,11 +45,22 @@ exports.deps = [
         "elem": "core"
     },
     {
-        "block": "b-page"
+        "block": "i-bem",
+        "elem": "dom"
     },
     {
         "block": "i-bem",
-        "elem": "dom"
+        "elem": "dom",
+        "mod": "init"
+    },
+    {
+        "block": "i-bem",
+        "elem": "dom",
+        "mod": "init",
+        "val": "auto"
+    },
+    {
+        "block": "b-page"
     },
     {
         "block": "b-square"

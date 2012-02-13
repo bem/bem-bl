@@ -3074,6 +3074,13 @@ var DOM = BEM.DOM = BEM.decl('i-bem__dom',/** @lends BEM.DOM.prototype */{
 
 /* ../../../../blocks-common/i-bem/__dom/i-bem__dom.js: end */ /**/
 
+/* ../../../../blocks-common/i-bem/__dom/_init/i-bem__dom_init_auto.js: begin */ /**/
+/* дефолтная инициализация */
+$(function() {
+    BEM.DOM.init();
+});
+/* ../../../../blocks-common/i-bem/__dom/_init/i-bem__dom_init_auto.js: end */ /**/
+
 /* ../../../../blocks-desktop/i-bem/examples/20-i-bem_liveinit-multiple.blocks/b-tv/b-tv.js: begin */ /**/
 /**
  * BEM-декларация блока позволяет сообщить, к какому блоку (блоку с модификатором,

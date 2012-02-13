@@ -2,10 +2,10 @@
     block: 'b-page',
     title: 'Изменение/дополнение стандартного поведения блока через модификатор',
     head: [
-        { elem: 'css', url: '_40-extend.css', ie: false },
-        { elem: 'css', url: '_40-extend.ie.css', ie: 'lt IE 8' },
+        { elem: 'css', url: '_40-i-bem_extend.css', ie: false },
+        { elem: 'css', url: '_40-i-bem_extend.ie.css', ie: 'lt IE 8' },
         { block: 'i-jquery', elem: 'core' },
-        { elem: 'js', url: '_40-extend.js' }
+        { elem: 'js', url: '40-i-bem_extend.js' }
     ],
     content: {
         block: 'b-link',
