@@ -1,0 +1,9 @@
+{
+    "expr"    : true,
+    "undef"   : true,
+    "predef"  : ["BEM"],
+    "browser" : true,
+    "jquery"  : true,
+    "boss"    : true,
+    "sub"     : true
+}
