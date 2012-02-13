@@ -2,9 +2,9 @@
     block: 'b-page',
     title: 'JS-меню, переключающее активный элемент',
     head: [
-        { elem: 'css', url: '_20_b-menu-vert_js.css' },
+        { elem: 'css', url: '_20-b-menu-vert_js.css' },
         { block: 'i-jquery', elem: 'core' },
-        { elem: 'js', url: '_20_b-menu-vert_js.js' }
+        { elem: 'js', url: '20-b-menu-vert_js.js' }
     ],
     content: [
         {
