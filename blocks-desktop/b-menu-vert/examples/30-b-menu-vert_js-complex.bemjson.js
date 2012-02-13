@@ -10,10 +10,6 @@
         {
             block: 'b-menu-vert',
             js: true,
-            title: {
-                elem: 'title',
-                content: 'JS-меню, переключающее активный элемент:'
-            },
             content: [
                 {
                     elem: 'item',

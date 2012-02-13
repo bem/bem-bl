@@ -10,10 +10,6 @@
         {
             block: 'b-menu-vert',
             js: true,
-            title: {
-                elem: 'title',
-                content: 'Меню с глубоко вложенным триггером:'
-            },
             content: [
                 {
                     elem: 'item',

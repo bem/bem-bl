@@ -10,10 +10,6 @@
         {
             block: 'b-menu-vert',
             js: true,
-            title: {
-                elem: 'title',
-                content: 'Использование submenu:'
-            },
             content: [
                 {
                     elem: 'item',

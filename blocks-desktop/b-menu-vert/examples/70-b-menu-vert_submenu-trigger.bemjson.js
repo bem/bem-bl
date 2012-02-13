@@ -12,7 +12,7 @@
             js: true,
             title: {
                 elem: 'title',
-                content: 'Использование submenu:'
+                content: 'Menu title'
             },
             content: [
                 {
