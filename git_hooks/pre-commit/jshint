@@ -7,7 +7,7 @@ case "${1}" in
     * )
 
         ERROR_DIR=__JSHINT_TMP_DIR
-        git diff --cached --name-only --diff-filter=ACMR | grep -e '\.js$' --color=auto | grep -v -P -e '\.(deps|test)\.js' | xargs git checkout-index -f --prefix=$ERROR_DIR/
+        git diff --cached --name-only --diff-filter=ACMR | grep -e '\.js$' --color=auto | grep -v -P -e '\.(deps|bemjson|test)\.js' | xargs git checkout-index -f --prefix=$ERROR_DIR/
         if [ -d $ERROR_DIR ]; then
             jshint $ERROR_DIR --config .jshintrc > $ERROR_DIR/error.log
             if [ $? -ne 0 ]; then
