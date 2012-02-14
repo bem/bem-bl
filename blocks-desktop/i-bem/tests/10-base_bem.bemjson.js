@@ -44,6 +44,7 @@
             content: [
                 { block: 'i-jquery', elem: 'observable' },
                 { block: 'i-jquery', elem: 'stringify' },
+                { block: 'i-ecma', elem : 'object' },
                 { block: 'i-ecma', elem : 'array' },
                 { block: 'i-bem' },
                 { block: 'i-bem', elem: 'internal' },
