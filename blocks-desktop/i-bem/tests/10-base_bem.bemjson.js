@@ -39,6 +39,14 @@
             }
         },
         {
+            attrs: { id : 'contains-dom-elem-test' },
+            content : [
+                { block: 'b-foo', content: { elem: 'e1' }, js: { id: 'id' }},
+                { block: 'b-foo', content: { elem: 'e2' }, js: { id: 'id' }},
+                { tag: 'div', attrs: { id: 'no-contains'} }
+            ]
+        },
+        {
             block: 'i-bem',
             elem: 'test',
             content: [
@@ -51,7 +59,8 @@
                 { block: 'i-bem', elem: 'mods' },
                 { block: 'i-bem', elem: 'init' },
                 { block: 'i-bem', elem: 'live-ctx' },
-                { block: 'i-bem', elem: 'elem-params' }
+                { block: 'i-bem', elem: 'elem-params' },
+                { block: 'i-bem', elem: 'contains-dom-elem' }
             ]
         }
     ]

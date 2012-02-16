@@ -1004,7 +1004,13 @@ var DOM = BEM.DOM = BEM.decl('i-bem__dom',/** @lends BEM.DOM.prototype */{
      */
     containsDomElem : function(domElem) {
 
-        return domElem.parents().andSelf().index(this.domElem) > -1;
+        var res = false;
+
+        this.domElem.each(function() {
+            return !(res = domElem.parents().andSelf().index(this) > -1);
+        });
+
+        return res;
 
     },
 
