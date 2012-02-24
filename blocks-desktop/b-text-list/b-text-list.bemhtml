@@ -1,0 +1,63 @@
+block b-text-list {
+
+  tag: "ul" //по умолчанию ul
+
+  content: {
+  
+    var content = this.ctx.content,
+        content_type = Object.prototype.toString.call(content).slice(8, -1),
+        notItemElem = function (obj) {
+          return !( obj && obj instanceof Object && 
+                    obj.elem && obj.elem == "item" )
+        },
+        result
+    ;
+    switch (content_type) {
+      case "Array":
+
+        result = [];
+
+        content.forEach( function(e) {
+
+          if ( notItemElem(e) ) {
+
+            result.push({ elem: "item", content: e });
+
+          } else {
+
+            result.push(e);
+
+          }
+
+        }, this)
+
+        break;
+
+      case "Object":
+
+        if ( notItemElem(content) ) {
+
+          result.push({ elem: "item", content: content });
+
+        } else {
+
+          result.push(content);
+
+        }
+
+        break;
+
+      default:
+
+        result.push({ elem: "item", content: content });
+    }
+
+    return result;
+  }
+
+  elem item {
+
+    tag: "li"
+
+  }
+}
