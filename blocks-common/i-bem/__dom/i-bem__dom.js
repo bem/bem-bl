@@ -278,7 +278,7 @@ var DOM = BEM.DOM = BEM.decl('i-bem__dom',/** @lends BEM.DOM.prototype */{
      * Находит блоки внутри (включая контекст) текущего блока или его элементов
      * @protected
      * @param {String|jQuery} [elem] элемент блока
-     * @param {String|Object} block имя или описание (blockName,modName,modVal) искомого блока
+     * @param {String|Object} block имя или описание (block,modName,modVal) искомого блока
      * @returns {BEM[]}
      */
     findBlocksInside : function(elem, block) {
@@ -292,7 +292,7 @@ var DOM = BEM.DOM = BEM.decl('i-bem__dom',/** @lends BEM.DOM.prototype */{
      * Находит первый блок внутри (включая контекст) текущего блока или его элементов
      * @protected
      * @param {String|jQuery} [elem] элемент блока
-     * @param {String|Object} block имя или описание (blockName,modName,modVal) искомого блока
+     * @param {String|Object} block имя или описание (block,modName,modVal) искомого блока
      * @returns {BEM}
      */
     findBlockInside : function(elem, block) {
@@ -306,7 +306,7 @@ var DOM = BEM.DOM = BEM.decl('i-bem__dom',/** @lends BEM.DOM.prototype */{
      * Находит блоки снаружи (включая контекст) текущего блока или его элементов
      * @protected
      * @param {String|jQuery} [elem] элемент блока
-     * @param {String|Object} block имя или описание (blockName,modName,modVal) искомого блока
+     * @param {String|Object} block имя или описание (block,modName,modVal) искомого блока
      * @returns {BEM[]}
      */
     findBlocksOutside : function(elem, block) {
@@ -320,7 +320,7 @@ var DOM = BEM.DOM = BEM.decl('i-bem__dom',/** @lends BEM.DOM.prototype */{
      * Находит первый блок снаружи (включая контекст) текущего блока или его элементов
      * @protected
      * @param {String|jQuery} [elem] элемент блока
-     * @param {String|Object} block имя или описание (blockName,modName,modVal) искомого блока
+     * @param {String|Object} block имя или описание (block,modName,modVal) искомого блока
      * @returns {BEM}
      */
     findBlockOutside : function(elem, block) {
@@ -334,7 +334,7 @@ var DOM = BEM.DOM = BEM.decl('i-bem__dom',/** @lends BEM.DOM.prototype */{
      * Находит блоки на DOM-элементах текущего блока или его элементов
      * @protected
      * @param {String|jQuery} [elem] элемент блока
-     * @param {String|Object} block имя или описание (blockName,modName,modVal) искомого блока
+     * @param {String|Object} block имя или описание (block,modName,modVal) искомого блока
      * @returns {BEM[]}
      */
     findBlocksOn : function(elem, block) {
@@ -348,7 +348,7 @@ var DOM = BEM.DOM = BEM.decl('i-bem__dom',/** @lends BEM.DOM.prototype */{
      * Находит первый блок на DOM-элементах текущего блока или его элементов
      * @protected
      * @param {String|jQuery} [elem] элемент блока
-     * @param {String|Object} block имя или описание (blockName,modName,modVal) искомого блока
+     * @param {String|Object} block имя или описание (block,modName,modVal) искомого блока
      * @returns {BEM}
      */
     findBlockOn : function(elem, block) {
@@ -363,7 +363,7 @@ var DOM = BEM.DOM = BEM.decl('i-bem__dom',/** @lends BEM.DOM.prototype */{
      * @private
      * @param {String} select возможные значения: 'find', 'closest', ''
      * @param {String|jQuery|undefined} elem элемент блока
-     * @param {String|Object} block имя или описание (blockName,modName,modVal) искомого блока
+     * @param {String|Object} block имя или описание (block,modName,modVal) искомого блока
      * @returns {Object}
      */
     _buildFindBlocksParams : function(select, elem, block, onlyFirst) {
@@ -486,11 +486,12 @@ var DOM = BEM.DOM = BEM.decl('i-bem__dom',/** @lends BEM.DOM.prototype */{
                 (typeof params.elem == 'string'? this.findElem(params.elem) : params.elem) :
                 this.domElem,
             isSimpleBlock = typeof params.block == 'string',
-            blockName = isSimpleBlock? params.block : params.block.blockName,
+            blockDesc = params.block,
+            blockName = isSimpleBlock? blockDesc : (blockDesc.block || blockDesc.blockName),
             selector = '.' +
                 (isSimpleBlock?
                     buildClass(blockName) :
-                    buildClass(blockName, params.block.modName, params.block.modVal)) +
+                    buildClass(blockName, blockDesc.modName, blockDesc.modVal)) +
                 (params.onlyFirst? ':first' : ''),
             domElems = ctxElem.filter(selector);
 
