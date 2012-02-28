@@ -8,7 +8,7 @@ block b-link {
             a = { href: ctx.url },
             props = ['title', 'target'], p;
 
-        while(p = props.shift()) ctx[p] && (a[p] = ctx[p]);
+        while(p = props.pop()) ctx[p] && (a[p] = ctx[p]);
 
         return a;
 
