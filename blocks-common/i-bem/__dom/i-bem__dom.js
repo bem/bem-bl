@@ -1299,7 +1299,7 @@ var DOM = BEM.DOM = BEM.decl('i-bem__dom',/** @lends BEM.DOM.prototype */{
      * Хелпер для подписки на live-события на DOM-элементах блока или его элементов
      * @static
      * @protected
-     * @param {String|Object} [to] описание (объект с modName, modVal, elemName) или имя элемента или элементов (через пробел)
+     * @param {String|Object} [to] описание (объект с modName, modVal, elem) или имя элемента или элементов (через пробел)
      * @param {String} event имя события
      * @param {Function} callback обработчик
      */
@@ -1312,15 +1312,17 @@ var DOM = BEM.DOM = BEM.decl('i-bem__dom',/** @lends BEM.DOM.prototype */{
         }
 
         if(!to || typeof to == 'string') {
-            to = { elemName : to };
+            to = { elem : to };
         }
+
+        to.elemName && (to.elem = to.elemName);
 
         var _this = this;
 
-        if(to.elemName && to.elemName.indexOf(' ') > 1) {
-            $.each(to.elemName.split(' '), function(i, elemName) {
+        if(to.elem && to.elem.indexOf(' ') > 1) {
+            $.each(to.elem.split(' '), function(i, elem) {
                 _this._liveClassBind(
-                    buildClass(_this._name, elemName, to.modName, to.modVal),
+                    buildClass(_this._name, elem, to.modName, to.modVal),
                     event,
                     callback,
                     invokeOnInit);
@@ -1329,7 +1331,7 @@ var DOM = BEM.DOM = BEM.decl('i-bem__dom',/** @lends BEM.DOM.prototype */{
         }
 
         return _this._liveClassBind(
-            buildClass(_this._name, to.elemName, to.modName, to.modVal),
+            buildClass(_this._name, to.elem, to.modName, to.modVal),
             event,
             callback,
             invokeOnInit);
@@ -1340,18 +1342,18 @@ var DOM = BEM.DOM = BEM.decl('i-bem__dom',/** @lends BEM.DOM.prototype */{
      * Хелпер для отписки от live-событий на DOM-элементах блока или его элементов
      * @static
      * @protected
-     * @param {String} [elemName] имя элемента или элементов (через пробел)
+     * @param {String} [elem] имя элемента или элементов (через пробел)
      * @param {String} event имя события
      * @param {Function} [callback] обработчик
      */
-    liveUnbindFrom : function(elemName, event, callback) {
+    liveUnbindFrom : function(elem, event, callback) {
 
         var _this = this;
 
-        if(elemName.indexOf(' ') > 1) {
-            $.each(elemName.split(' '), function(i, elemName) {
+        if(elem.indexOf(' ') > 1) {
+            $.each(elem.split(' '), function(i, elem) {
                 _this._liveClassUnbind(
-                    buildClass(_this._name, elemName),
+                    buildClass(_this._name, elem),
                     event,
                     callback);
             });
@@ -1359,7 +1361,7 @@ var DOM = BEM.DOM = BEM.decl('i-bem__dom',/** @lends BEM.DOM.prototype */{
         }
 
         return _this._liveClassUnbind(
-            buildClass(_this._name, elemName),
+            buildClass(_this._name, elem),
             event,
             callback);
 
