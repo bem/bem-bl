@@ -1,63 +1,27 @@
-block b-text-list {
+block b-text-list, !this.elem  {
 
-  tag: "ul" //по умолчанию ul
+    tag: "ul" //по умолчанию ul
 
-  content: {
-  
-    var content = this.ctx.content,
-        content_type = Object.prototype.toString.call(content).slice(8, -1),
-        notItemElem = function (obj) {
-          return !( obj && obj instanceof Object && 
-                    obj.elem && obj.elem == "item" )
-        },
-        result
-    ;
-    switch (content_type) {
-      case "Array":
-
-        result = [];
-
-        content.forEach( function(e) {
-
-          if ( notItemElem(e) ) {
-
-            result.push({ elem: "item", content: e });
-
-          } else {
-
-            result.push(e);
-
-          }
-
-        }, this)
-
-        break;
-
-      case "Object":
-
-        if ( notItemElem(content) ) {
-
-          result.push({ elem: "item", content: content });
-
-        } else {
-
-          result.push(content);
-
+    content {
+        typeof this.ctx.content == 'string' ||
+        typeof this.ctx.content == 'number' ||
+        typeof this.ctx.content == 'object' && !this.ctx.content.elem: {
+            elem: 'item', content: this.ctx.content
         }
-
-        break;
-
-      default:
-
-        result.push({ elem: "item", content: content });
+        this._.isArray(this.ctx.content): {
+            var result = [];
+            this.ctx.content.forEach(function(e){
+                e.elem ? result.push(e)
+                       : result.push({elem: 'item', content: e})
+            })
+            return result;
+        }
     }
 
-    return result;
-  }
+}
 
-  elem item {
+block b-text-list, elem item {
 
     tag: "li"
 
-  }
 }
