@@ -65,7 +65,7 @@ exports.bemBuild = function (prefixes, outputDir, outputName) {
     var filename = myPath.join(outputDir,
             outputName + '.' + this.getTechName() + '.js'),
         // TODO: поддержать работу с шаблоном как с CommonJS-модулем, через `BEMHTML = require('tpl.bemhtml.js').apply`
-        content = 'var BEMHTML = ' + xjstJS + ';BEMHTML = (function(bemhtmlApply) { return function() { return bemhtmlApply.apply([this]); }; }(BEMHTML.apply));';
+        content = 'var BEMHTML = (function(xjst) { return function() { return xjst.apply.call([this]); }; }(' + xjstJS + '));';
     fs.writeFileSync(filename, content);
 
     return this;
