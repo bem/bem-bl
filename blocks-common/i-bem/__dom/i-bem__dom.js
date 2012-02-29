@@ -326,7 +326,7 @@ var DOM = BEM.DOM = BEM.decl('i-bem__dom',/** @lends BEM.DOM.prototype */{
     findBlockOutside : function(elem, block) {
 
         return this._doBlocksMethod(
-            this._buildFindBlocksParams('closest', elem, block))[0];
+            this._buildFindBlocksParams('closest', elem, block))[0] || null;
 
     },
 
