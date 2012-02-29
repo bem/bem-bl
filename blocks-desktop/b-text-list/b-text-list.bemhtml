@@ -1,27 +1,18 @@
-block b-text-list, !this.elem  {
+block b-text-list, !this.elem {
 
-    tag: "ul" //по умолчанию ul
+    tag: 'ul' //по умолчанию ul
 
-    content {
-        typeof this.ctx.content == 'string' ||
-        typeof this.ctx.content == 'number' ||
-        typeof this.ctx.content == 'object' && !this.ctx.content.elem: {
-            elem: 'item', content: this.ctx.content
-        }
-        this._.isArray(this.ctx.content): {
-            var result = [];
-            this.ctx.content.forEach(function(e){
-                e.elem ? result.push(e)
-                       : result.push({elem: 'item', content: e})
-            })
-            return result;
-        }
+    content, this._.isArray(this.ctx.items): {
+
+        var cont = this.ctx.content = [];
+
+        this.ctx.items.forEach(function(e){
+            cont.push({elem: 'item', content: e})
+        })
+
+        return cont;
     }
 
 }
 
-block b-text-list, elem item {
-
-    tag: "li"
-
-}
+block b-text-list, elem item, tag: 'li'
