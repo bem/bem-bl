@@ -1,0 +1,18 @@
+block b-text-list, !this.elem {
+
+    tag: 'ul' //по умолчанию ul
+
+    content, this._.isArray(this.ctx.items): {
+
+        var cont = this.ctx.content = [];
+
+        this.ctx.items.forEach(function(e){
+            cont.push({elem: 'item', content: e})
+        })
+
+        return cont;
+    }
+
+}
+
+block b-text-list, elem item, tag: 'li'
