@@ -26,7 +26,7 @@ endif
 
 YENV ?= development
 
-EXAMPLES ?= $(shell find $(SET_SOURCE) -not -name '*.params.*' \( -wholename '*/examples/*.xml' -o -wholename '*/examples/*.bemjson.js' \) -not \( -name '.svn' -prune \) | sed -e 's~$(SET_SOURCE)/~~;s~.xml$$~~;s~.bemjson.js$$~~')
+EXAMPLES ?= $(shell find ../../blocks-common ../../blocks-desktop \( -wholename '*/examples/*.bemjson.js' \) | sed -e 's~../../blocks-common/~~;s~../../blocks-desktop/~~;s~.bemjson.js$$~~')
 
 TECH_PATH = $(1)
 TECH_PATH_bemhtml = $(BEMBL_PREFIX)blocks-common/i-bem/bem/techs/bemhtml.js
@@ -63,6 +63,9 @@ PAGES_SUFFIXES_bemdecl.js := $(or $(EXAMPLE_SUFFIXES_bemdecl.js),html)
 
 PAGE_LEVELS = $(EXAMPLE_LEVELS)
 
+%/examples::
+	$(info Building examples for a block)
+
 # Дополнительные цели для примеров (все пути предваряются $(LEGO_PREFIX))
 # $(1) - Путь-префикс: blocks/
 # $(2) - Директория уровня страницы: blocks/b-block
@@ -70,6 +73,7 @@ PAGE_LEVELS = $(EXAMPLE_LEVELS)
 # $(4) - Директория страницы: blocks/b-block/examples
 # $(5) - Префикс для собираемых файлов страницы: blocks/b-block/examples/example-name
 define after_PAGE_template
+
 
 .PHONY: $(5)
 $(5):: \
