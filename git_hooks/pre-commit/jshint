@@ -1,0 +1,23 @@
+#!/bin/sh
+
+case "${1}" in
+    --about )
+        echo "check *.js files using jshint"
+        ;;
+    * )
+
+        ERROR_DIR=__JSHINT_TMP_DIR
+        git diff --cached --name-only --diff-filter=ACMR | grep -e '\.js$' --color=auto | grep -v -P -e '\.(deps|bemjson|test)\.js' | xargs git checkout-index -f --prefix=$ERROR_DIR/
+        if [ -d $ERROR_DIR ]; then
+            jshint $ERROR_DIR --config .jshintrc > $ERROR_DIR/error.log
+            if [ $? -ne 0 ]; then
+                sed 's/__JSHINT_TMP_DIR\///g;s/\n/\r/g' $ERROR_DIR/error.log
+                rm -rf $ERROR_DIR
+                exit 1
+            fi
+            rm -rf $ERROR_DIR
+        fi
+
+        exit
+
+esac

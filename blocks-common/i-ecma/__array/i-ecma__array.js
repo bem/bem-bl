@@ -77,6 +77,36 @@ var ptp = Array.prototype,
 
             return res;
 
+        },
+
+        /**
+         * Свертывает массив, используя аккумулятор
+         * @param {Function} callback вызывается для каждого элемента
+         * @param {Object} [initialVal] начальное значение аккумулятора
+         * @returns {Object} аккумулятор
+         */
+        reduce : function(callback, initialVal) {
+
+            var i = -1, t = this, len = t.length,
+                res;
+
+            if(arguments.length < 2) {
+                while(++i < len) {
+                    if(i in t) {
+                        res = t[i];
+                        break;
+                    }
+                }
+            }
+            else {
+                res = initialVal;
+            }
+
+            while(++i < len) i in t &&
+                (res = callback(res, t[i], i, t));
+
+            return res;
+
         }
 
     };

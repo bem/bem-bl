@@ -278,7 +278,7 @@ var DOM = BEM.DOM = BEM.decl('i-bem__dom',/** @lends BEM.DOM.prototype */{
      * Находит блоки внутри (включая контекст) текущего блока или его элементов
      * @protected
      * @param {String|jQuery} [elem] элемент блока
-     * @param {String|Object} block имя или описание (blockName,modName,modVal) искомого блока
+     * @param {String|Object} block имя или описание (block,modName,modVal) искомого блока
      * @returns {BEM[]}
      */
     findBlocksInside : function(elem, block) {
@@ -292,7 +292,7 @@ var DOM = BEM.DOM = BEM.decl('i-bem__dom',/** @lends BEM.DOM.prototype */{
      * Находит первый блок внутри (включая контекст) текущего блока или его элементов
      * @protected
      * @param {String|jQuery} [elem] элемент блока
-     * @param {String|Object} block имя или описание (blockName,modName,modVal) искомого блока
+     * @param {String|Object} block имя или описание (block,modName,modVal) искомого блока
      * @returns {BEM}
      */
     findBlockInside : function(elem, block) {
@@ -306,7 +306,7 @@ var DOM = BEM.DOM = BEM.decl('i-bem__dom',/** @lends BEM.DOM.prototype */{
      * Находит блоки снаружи (включая контекст) текущего блока или его элементов
      * @protected
      * @param {String|jQuery} [elem] элемент блока
-     * @param {String|Object} block имя или описание (blockName,modName,modVal) искомого блока
+     * @param {String|Object} block имя или описание (block,modName,modVal) искомого блока
      * @returns {BEM[]}
      */
     findBlocksOutside : function(elem, block) {
@@ -320,13 +320,13 @@ var DOM = BEM.DOM = BEM.decl('i-bem__dom',/** @lends BEM.DOM.prototype */{
      * Находит первый блок снаружи (включая контекст) текущего блока или его элементов
      * @protected
      * @param {String|jQuery} [elem] элемент блока
-     * @param {String|Object} block имя или описание (blockName,modName,modVal) искомого блока
+     * @param {String|Object} block имя или описание (block,modName,modVal) искомого блока
      * @returns {BEM}
      */
     findBlockOutside : function(elem, block) {
 
         return this._doBlocksMethod(
-            this._buildFindBlocksParams('closest', elem, block))[0];
+            this._buildFindBlocksParams('closest', elem, block))[0] || null;
 
     },
 
@@ -334,7 +334,7 @@ var DOM = BEM.DOM = BEM.decl('i-bem__dom',/** @lends BEM.DOM.prototype */{
      * Находит блоки на DOM-элементах текущего блока или его элементов
      * @protected
      * @param {String|jQuery} [elem] элемент блока
-     * @param {String|Object} block имя или описание (blockName,modName,modVal) искомого блока
+     * @param {String|Object} block имя или описание (block,modName,modVal) искомого блока
      * @returns {BEM[]}
      */
     findBlocksOn : function(elem, block) {
@@ -348,7 +348,7 @@ var DOM = BEM.DOM = BEM.decl('i-bem__dom',/** @lends BEM.DOM.prototype */{
      * Находит первый блок на DOM-элементах текущего блока или его элементов
      * @protected
      * @param {String|jQuery} [elem] элемент блока
-     * @param {String|Object} block имя или описание (blockName,modName,modVal) искомого блока
+     * @param {String|Object} block имя или описание (block,modName,modVal) искомого блока
      * @returns {BEM}
      */
     findBlockOn : function(elem, block) {
@@ -363,7 +363,7 @@ var DOM = BEM.DOM = BEM.decl('i-bem__dom',/** @lends BEM.DOM.prototype */{
      * @private
      * @param {String} select возможные значения: 'find', 'closest', ''
      * @param {String|jQuery|undefined} elem элемент блока
-     * @param {String|Object} block имя или описание (blockName,modName,modVal) искомого блока
+     * @param {String|Object} block имя или описание (block,modName,modVal) искомого блока
      * @returns {Object}
      */
     _buildFindBlocksParams : function(select, elem, block, onlyFirst) {
@@ -486,11 +486,12 @@ var DOM = BEM.DOM = BEM.decl('i-bem__dom',/** @lends BEM.DOM.prototype */{
                 (typeof params.elem == 'string'? this.findElem(params.elem) : params.elem) :
                 this.domElem,
             isSimpleBlock = typeof params.block == 'string',
-            blockName = isSimpleBlock? params.block : params.block.blockName,
+            blockDesc = params.block,
+            blockName = isSimpleBlock? blockDesc : (blockDesc.block || blockDesc.blockName),
             selector = '.' +
                 (isSimpleBlock?
                     buildClass(blockName) :
-                    buildClass(blockName, params.block.modName, params.block.modVal)) +
+                    buildClass(blockName, blockDesc.modName, blockDesc.modVal)) +
                 (params.onlyFirst? ':first' : ''),
             domElems = ctxElem.filter(selector);
 
@@ -1004,7 +1005,13 @@ var DOM = BEM.DOM = BEM.decl('i-bem__dom',/** @lends BEM.DOM.prototype */{
      */
     containsDomElem : function(domElem) {
 
-        return domElem.parents().andSelf().index(this.domElem) > -1;
+        var res = false;
+
+        this.domElem.each(function() {
+            return !(res = domElem.parents().andSelf().index(this) > -1);
+        });
+
+        return res;
 
     },
 
@@ -1292,7 +1299,7 @@ var DOM = BEM.DOM = BEM.decl('i-bem__dom',/** @lends BEM.DOM.prototype */{
      * Хелпер для подписки на live-события на DOM-элементах блока или его элементов
      * @static
      * @protected
-     * @param {String|Object} [to] описание (объект с modName, modVal, elemName) или имя элемента или элементов (через пробел)
+     * @param {String|Object} [to] описание (объект с modName, modVal, elem) или имя элемента или элементов (через пробел)
      * @param {String} event имя события
      * @param {Function} callback обработчик
      */
@@ -1305,15 +1312,17 @@ var DOM = BEM.DOM = BEM.decl('i-bem__dom',/** @lends BEM.DOM.prototype */{
         }
 
         if(!to || typeof to == 'string') {
-            to = { elemName : to };
+            to = { elem : to };
         }
+
+        to.elemName && (to.elem = to.elemName);
 
         var _this = this;
 
-        if(to.elemName && to.elemName.indexOf(' ') > 1) {
-            $.each(to.elemName.split(' '), function(i, elemName) {
+        if(to.elem && to.elem.indexOf(' ') > 1) {
+            $.each(to.elem.split(' '), function(i, elem) {
                 _this._liveClassBind(
-                    buildClass(_this._name, elemName, to.modName, to.modVal),
+                    buildClass(_this._name, elem, to.modName, to.modVal),
                     event,
                     callback,
                     invokeOnInit);
@@ -1322,7 +1331,7 @@ var DOM = BEM.DOM = BEM.decl('i-bem__dom',/** @lends BEM.DOM.prototype */{
         }
 
         return _this._liveClassBind(
-            buildClass(_this._name, to.elemName, to.modName, to.modVal),
+            buildClass(_this._name, to.elem, to.modName, to.modVal),
             event,
             callback,
             invokeOnInit);
@@ -1333,18 +1342,18 @@ var DOM = BEM.DOM = BEM.decl('i-bem__dom',/** @lends BEM.DOM.prototype */{
      * Хелпер для отписки от live-событий на DOM-элементах блока или его элементов
      * @static
      * @protected
-     * @param {String} [elemName] имя элемента или элементов (через пробел)
+     * @param {String} [elem] имя элемента или элементов (через пробел)
      * @param {String} event имя события
      * @param {Function} [callback] обработчик
      */
-    liveUnbindFrom : function(elemName, event, callback) {
+    liveUnbindFrom : function(elem, event, callback) {
 
         var _this = this;
 
-        if(elemName.indexOf(' ') > 1) {
-            $.each(elemName.split(' '), function(i, elemName) {
+        if(elem.indexOf(' ') > 1) {
+            $.each(elem.split(' '), function(i, elem) {
                 _this._liveClassUnbind(
-                    buildClass(_this._name, elemName),
+                    buildClass(_this._name, elem),
                     event,
                     callback);
             });
@@ -1352,7 +1361,7 @@ var DOM = BEM.DOM = BEM.decl('i-bem__dom',/** @lends BEM.DOM.prototype */{
         }
 
         return _this._liveClassUnbind(
-            buildClass(_this._name, elemName),
+            buildClass(_this._name, elem),
             event,
             callback);
 

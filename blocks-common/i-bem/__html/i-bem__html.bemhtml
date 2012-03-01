@@ -4,6 +4,9 @@
         var vBlock = this.ctx.block,
             vElem = this.ctx.elem,
             block = this._currBlock || this.block;
+
+        this.ctx || (this.ctx = {});
+
         local(
             this._mode = 'default',
             this.block = vBlock || (vElem ? block : undefined),

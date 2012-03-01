@@ -1,4 +1,4 @@
-block b-link, this.mods.pseudo {
+block b-link, (this.mods && this.mods.pseudo) {
 
     tag: (this.ctx.url? 'a' : 'span')
 
@@ -9,14 +9,14 @@ block b-link, this.mods.pseudo {
     },
 
     content, !this.ctx._wrap, !this.mods.inner: {
-        local(
+        apply(
             this._mode = '',
             this.ctx = {
                 elem: 'inner',
                 content: this.ctx.content,
                 _wrap: true
             }
-        ) this.apply();
+        );
     }
 }
 
