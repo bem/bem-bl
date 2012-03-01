@@ -24,6 +24,10 @@ exports.deps = [
     },
     {
         "block": "i-ecma",
+        "elem": "object"
+    },
+    {
+        "block": "i-ecma",
         "elem": "array"
     },
     {

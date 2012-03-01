@@ -434,6 +434,26 @@ $.observable = $.inherit(Observable, Observable);
 })(jQuery);
 /* ../../../../blocks-common/i-jquery/__observable/i-jquery__observable.js: end */ /**/
 
+/* ../../../../blocks-common/i-ecma/__object/i-ecma__object.js: begin */ /**/
+(function() {
+
+/**
+ * Возвращает массив свойств объекта
+ * @param {Object} obj объект
+ * @returns {Array}
+ */
+Object.keys || (Object.keys = function(obj) {
+    var res = [];
+
+    for(var i in obj) obj.hasOwnProperty(i) &&
+        res.push(i);
+
+    return res;
+});
+
+})();
+/* ../../../../blocks-common/i-ecma/__object/i-ecma__object.js: end */ /**/
+
 /* ../../../../blocks-common/i-ecma/__array/i-ecma__array.js: begin */ /**/
 (function() {
 
@@ -511,6 +531,36 @@ var ptp = Array.prototype,
 
             while(++i < len) i in t &&
                 (ctx? callback.call(ctx, t[i], i, t) : callback(t[i], i, t)) && res.push(t[i]);
+
+            return res;
+
+        },
+
+        /**
+         * Свертывает массив, используя аккумулятор
+         * @param {Function} callback вызывается для каждого элемента
+         * @param {Object} [initialVal] начальное значение аккумулятора
+         * @returns {Object} аккумулятор
+         */
+        reduce : function(callback, initialVal) {
+
+            var i = -1, t = this, len = t.length,
+                res;
+
+            if(arguments.length < 2) {
+                while(++i < len) {
+                    if(i in t) {
+                        res = t[i];
+                        break;
+                    }
+                }
+            }
+            else {
+                res = initialVal;
+            }
+
+            while(++i < len) i in t &&
+                (res = callback(res, t[i], i, t));
 
             return res;
 
