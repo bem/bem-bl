@@ -1,0 +1,7 @@
+{
+    "name": "bem-bl",
+    "version": "0.0.0",
+    "dependencies": {
+        "qq": "0.3.3"
+    }
+}
