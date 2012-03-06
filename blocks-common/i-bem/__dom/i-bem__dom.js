@@ -1181,6 +1181,28 @@ var DOM = BEM.DOM = BEM.decl('i-bem__dom',/** @lends BEM.DOM.prototype */{
     },
 
     /**
+     * Добавляет фрагмент DOM-дерева в конец контекста и инициализирует блоки
+     * @param {jQuery} ctx корневая DOM-нода
+     * @param {jQuery|String} content добавляемый контент
+     */
+    append : function(ctx, content) {
+
+        this.init($(content).appendTo(ctx));
+
+    },
+
+    /**
+     * Добавляет фрагмент DOM-дерева в начало контекста и инициализирует блоки
+     * @param {jQuery} ctx корневая DOM-нода
+     * @param {jQuery|String} content добавляемый контент
+     */
+    prepend : function(ctx, content) {
+
+        this.init($(content).prependTo(ctx));
+
+    },
+
+    /**
      * Строит полное имя live-события
      * @static
      * @private
