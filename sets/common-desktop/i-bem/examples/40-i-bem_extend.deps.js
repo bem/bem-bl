@@ -70,6 +70,10 @@ exports.deps = [
         "block": "b-link"
     },
     {
+        "block": "i-jquery",
+        "elem": "leftclick"
+    },
+    {
         "block": "b-link",
         "mod": "pseudo"
     },
@@ -77,6 +81,15 @@ exports.deps = [
         "block": "b-link",
         "mod": "pseudo",
         "val": "yes"
+    },
+    {
+        "block": "b-link",
+        "mod": "pseudo",
+        "val": "no"
+    },
+    {
+        "block": "b-link",
+        "elem": "inner"
     },
     {
         "block": "b-link",

@@ -1,5 +1,6 @@
 var BEMHTML = (function(exports) {var __r8,__r10,__r12,__r14,__r16,__r18,__r20,__r22,__r24,__r26;exports.apply = apply;function apply(c) {
 var __this = this;
+if(this['block'] === 'b-link' && this['elem'] === 'inner' && this['_mode'] === 'tag') {return 'span';return}
 if(this['block'] === 'b-link' && (! (this['mods'] && this['mods']['pseudo'])) === false && this['_mode'] === 'content' && (! (! this['ctx']['_wrap'])) === false && (! (! this['mods']['inner'])) === false) {{{"";var __r41 = this['_mode'];(this['_mode']='');var __r42 = this['ctx'];(this['ctx']=({'elem': 'inner','content': this['ctx']['content'],'_wrap': true}));apply.call(__this);(this['_mode']=__r41);(this['ctx']=__r42);""}undefined;undefined;undefined};return}
 if(this['block'] === 'b-link' && (! (this['mods'] && this['mods']['pseudo'])) === false && this['_mode'] === 'attrs' && (! (! this['ctx']['url'])) === false) {return ({});return}
 if(this['block'] === 'b-link' && (! (this['mods'] && this['mods']['pseudo'])) === false && this['_mode'] === 'js' && (! (! this['elem'])) === false) {return true;return}

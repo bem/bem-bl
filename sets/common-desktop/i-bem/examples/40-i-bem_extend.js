@@ -2626,6 +2626,50 @@ var DOM = BEM.DOM = BEM.decl('i-bem__dom',/** @lends BEM.DOM.prototype */{
     },
 
     /**
+     * Добавляет фрагмент DOM-дерева в конец контекста и инициализирует блоки
+     * @param {jQuery} ctx корневая DOM-нода
+     * @param {jQuery|String} content добавляемый контент
+     */
+    append : function(ctx, content) {
+
+        this.init($(content).appendTo(ctx));
+
+    },
+
+    /**
+     * Добавляет фрагмент DOM-дерева в начало контекста и инициализирует блоки
+     * @param {jQuery} ctx корневая DOM-нода
+     * @param {jQuery|String} content добавляемый контент
+     */
+    prepend : function(ctx, content) {
+
+        this.init($(content).prependTo(ctx));
+
+    },
+
+    /**
+     * Добавляет фрагмент DOM-дерева перед контекстом и инициализирует блоки
+     * @param {jQuery} ctx контекстная DOM-нода
+     * @param {jQuery|String} content добавляемый контент
+     */
+    before : function(ctx, content) {
+
+        this.init($(content).insertBefore(ctx));
+
+    },
+
+    /**
+     * Добавляет фрагмент DOM-дерева после контекстом и инициализирует блоки
+     * @param {jQuery} ctx контекстная DOM-нода
+     * @param {jQuery|String} content добавляемый контент
+     */
+    after : function(ctx, content) {
+
+        this.init($(content).insertAfter(ctx));
+
+    },
+
+    /**
      * Строит полное имя live-события
      * @static
      * @private
@@ -3139,6 +3183,49 @@ $(function() {
     BEM.DOM.init();
 });
 /* ../../../../blocks-common/i-bem/__dom/_init/i-bem__dom_init_auto.js: end */ /**/
+
+/* ../../../../blocks-common/i-jquery/__leftclick/i-jquery__leftclick.js: begin */ /**/
+/**
+ * leftClick event plugin
+ *
+ * Copyright (c) 2010 Filatov Dmitry (alpha@zforms.ru)
+ * Dual licensed under the MIT and GPL licenses:
+ * http://www.opensource.org/licenses/mit-license.php
+ * http://www.gnu.org/licenses/gpl.html
+ *
+ * @version 1.0.0
+ */
+
+(function($) {
+
+var leftClick = $.event.special.leftclick = {
+
+    setup : function() {
+
+        $(this).bind('click', leftClick.handler);
+
+    },
+
+    teardown : function() {
+
+        $(this).unbind('click', leftClick.handler);
+
+    },
+
+    handler : function(e) {
+
+        if(!e.button) {
+            e.type = 'leftclick';
+            $.event.handle.apply(this, arguments);
+            e.type = 'click';
+        }
+
+    }
+
+};
+
+})(jQuery);
+/* ../../../../blocks-common/i-jquery/__leftclick/i-jquery__leftclick.js: end */ /**/
 
 /* ../../../../blocks-desktop/b-link/_pseudo/b-link_pseudo_yes.js: begin */ /**/
 BEM.DOM.decl({'name': 'b-link', 'modName': 'pseudo', 'modVal': 'yes'}, {
