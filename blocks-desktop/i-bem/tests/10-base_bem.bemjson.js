@@ -85,6 +85,9 @@
             }
         },
         {
+            attrs: { id: 'dom-ops-test'}
+        },
+        {
             block: 'i-bem',
             elem: 'test',
             content: [
@@ -99,7 +102,8 @@
                 { block: 'i-bem', elem: 'live-ctx' },
                 { block: 'i-bem', elem: 'elem-params' },
                 { block: 'i-bem', elem: 'contains-dom-elem' },
-                { block: 'i-bem', elem: 'find-block' }
+                { block: 'i-bem', elem: 'find-block' },
+                { block: 'i-bem', elem: 'dom-ops' }
             ]
         }
     ]
