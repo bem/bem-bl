@@ -13,6 +13,7 @@ var win = $(window),
  */
     uniqIdToDomElems = {},
 
+
 /**
  * Хранилище для блоков по уникальному ключу
  * @static
@@ -282,7 +283,8 @@ var DOM = BEM.DOM = BEM.decl('i-bem__dom',/** @lends BEM.DOM.prototype */{
      */
     findBlocksInside : function(elem, block) {
 
-        return this._findBlocks('find', elem, block);
+        return this._doBlocksMethod(
+            this._buildFindBlocksParams('find', elem, block));
 
     },
 
@@ -295,7 +297,8 @@ var DOM = BEM.DOM = BEM.decl('i-bem__dom',/** @lends BEM.DOM.prototype */{
      */
     findBlockInside : function(elem, block) {
 
-        return this._findBlocks('find', elem, block, true);
+        return this._doBlocksMethod(
+            this._buildFindBlocksParams('find', elem, block, true));
 
     },
 
@@ -308,7 +311,8 @@ var DOM = BEM.DOM = BEM.decl('i-bem__dom',/** @lends BEM.DOM.prototype */{
      */
     findBlocksOutside : function(elem, block) {
 
-        return this._findBlocks('parents', elem, block);
+        return this._doBlocksMethod(
+            this._buildFindBlocksParams('parents', elem, block));
 
     },
 
@@ -321,7 +325,8 @@ var DOM = BEM.DOM = BEM.decl('i-bem__dom',/** @lends BEM.DOM.prototype */{
      */
     findBlockOutside : function(elem, block) {
 
-        return this._findBlocks('closest', elem, block)[0] || null;
+        return this._doBlocksMethod(
+            this._buildFindBlocksParams('closest', elem, block))[0] || null;
 
     },
 
@@ -334,7 +339,8 @@ var DOM = BEM.DOM = BEM.decl('i-bem__dom',/** @lends BEM.DOM.prototype */{
      */
     findBlocksOn : function(elem, block) {
 
-        return this._findBlocks('', elem, block);
+        return this._doBlocksMethod(
+            this._buildFindBlocksParams('', elem, block));
 
     },
 
@@ -347,33 +353,166 @@ var DOM = BEM.DOM = BEM.decl('i-bem__dom',/** @lends BEM.DOM.prototype */{
      */
     findBlockOn : function(elem, block) {
 
-        return this._findBlocks('', elem, block, true);
+        return this._doBlocksMethod(
+            this._buildFindBlocksParams('', elem, block, true));
 
     },
 
-    _findBlocks : function(select, elem, block, onlyFirst) {
+    /**
+     * Хелпер для маппинга аргументов поиска в хэш параметров для вызова
+     * @private
+     * @param {String} select возможные значения: 'find', 'closest', ''
+     * @param {String|jQuery|undefined} elem элемент блока
+     * @param {String|Object} block имя или описание (block,modName,modVal) искомого блока
+     * @returns {Object}
+     */
+    _buildFindBlocksParams : function(select, elem, block, onlyFirst) {
 
-        if(!block) {
-            block = elem;
-            elem = undefined;
+        return {
+            select    : select,
+            elem      : block? elem : undefined,
+            block     : block || elem,
+            onlyFirst : onlyFirst
+        };
+
+    },
+
+    /**
+     * Выполняет метод блоков внутри (включая контекст) текущего блока или его элементов
+     * @protected
+     * @param {String|jQuery} [elem] элемент блока
+     * @param {String|Object} block имя или описание (blockName,modName,modVal) искомого блока
+     * @param {String} method имя метода
+     * @param {Array} [args] параметры метода
+     * @returns {Array} результаты вызовов метода
+     */
+    doBlocksMethodInside : function(elem, block, method, args) {
+
+        return this._doBlocksMethod(
+            this._buildDoBlocksMethodParams('find', elem, block, method, args));
+
+    },
+
+    /**
+     * Выполняет метод блоков снаружи (включая контекст) текущего блока или его элементов
+     * @protected
+     * @param {String|jQuery} [elem] элемент блока
+     * @param {String|Object} block имя или описание (blockName,modName,modVal) искомого блока
+     * @param {String} method имя метода
+     * @param {Array} [args] параметры метода
+     * @returns {Array} результаты вызовов метода
+     */
+    doBlocksMethodOutside : function(elem, block, method, args) {
+
+        return this._doBlocksMethod(
+            this._buildDoBlocksMethodParams('closest', elem, block, method, args));
+
+    },
+
+    /**
+     * Выполняет метод блоков на DOM-элементах текущего блока или его элементов
+     * @protected
+     * @param {String|jQuery} [elem] элемент блока
+     * @param {String|Object} block имя или описание (blockName,modName,modVal) искомого блока
+     * @param {String} method имя метода
+     * @param {Array} [args] параметры метода
+     * @returns {Array} результаты вызовов метода
+     */
+    doBlocksMethodOn : function(elem, block, method, args) {
+
+        return this._doBlocksMethod(
+            this._buildDoBlocksMethodParams('', elem, block, method, args));
+
+    },
+
+    /**
+     * Выполняет метод блоков
+     * @protected
+     * @param {BEM[]} blocks блоки
+     * @param {String} method имя метода
+     * @param {Array} [args] параметры метода
+     * @returns {Array} результаты вызовов метода
+     */
+    doBlocksMethod : function(blocks, method, args) {
+
+        return this._doBlocksMethod({
+            blocks  : blocks,
+            method  : method,
+            args    : args
+        });
+
+    },
+
+    /**
+     * Хелпер для маппинга аргументов вызова методов в хэш параметров для вызова
+     * @private
+     * @param {String} select возможные значения: 'find', 'closest', ''
+     * @param {String|jQuery|undefined} elem элемент блока
+     * @param {String|Object} block имя или описание (blockName,modName,modVal) искомого блока
+     * @param {String} method имя метода
+     * @param {Array} [args] параметры метода
+     * @returns {Object}
+     */
+    _buildDoBlocksMethodParams : function(select, elem, block, method, args) {
+
+        var hasElem = typeof method == 'string';
+        return {
+            select : select,
+            elem   : hasElem? elem : undefined,
+            block  : hasElem? block : elem,
+            method : hasElem? method : block,
+            args   : hasElem? args : method
+        };
+
+    },
+
+    /**
+     * Ищет блоки и выполняет заданный метод, если метод не задан, то возвращает блоки
+     * @private
+     * @param {Object} params параметры
+     * @returns {BEM[]|Array} блоки или результаты вызовов метода
+     */
+    _doBlocksMethod : function(params) {
+
+        var _this = this;
+
+        if(params.blocks) {
+            return $.map(params.blocks, function(block) {
+                return _this._doBlockMethod(block, params.method, params.args);
+            });
         }
 
-        var ctxElem = elem?
-                (typeof elem == 'string'? this.findElem(elem) : elem) :
+        var ctxElem = params.elem?
+                (typeof params.elem == 'string'? this.findElem(params.elem) : params.elem) :
                 this.domElem,
-            isSimpleBlock = typeof block == 'string',
-            blockName = isSimpleBlock? block : (block.block || block.blockName),
+            isSimpleBlock = typeof params.block == 'string',
+            blockDesc = params.block,
+            blockName = isSimpleBlock? blockDesc : (blockDesc.block || blockDesc.blockName),
             selector = '.' +
                 (isSimpleBlock?
                     buildClass(blockName) :
-                    buildClass(blockName, block.modName, block.modVal)) +
-                (onlyFirst? ':first' : ''),
+                    buildClass(blockName, blockDesc.modName, blockDesc.modVal)) +
+                (params.onlyFirst? ':first' : ''),
             domElems = ctxElem.filter(selector);
 
-        select && (domElems = domElems.add(ctxElem[select](selector)));
+        params.select && (domElems = domElems.add(ctxElem[params.select](selector)));
 
-        if(onlyFirst) {
-            return domElems[0]? initBlock(blockName, domElems.eq(0), true) : null;
+        if(params.onlyFirst) {
+            return domElems[0]?
+                this._doBlockMethod(
+                    initBlock(blockName, domElems.eq(0), true),
+                    params.method,
+                    params.args) :
+                null;
+        }
+
+        if(params.method) {
+            return $.map(domElems, function(domElem) {
+                return _this._doBlockMethod(
+                    initBlock(blockName, $(domElem), true),
+                    params.method,
+                    params.args);
+            });
         }
 
         var res = [],
@@ -388,6 +527,19 @@ var DOM = BEM.DOM = BEM.decl('i-bem__dom',/** @lends BEM.DOM.prototype */{
         });
 
         return res;
+
+    },
+
+    /**
+     * Выполняет заданный метод, если метод не задан, то возвращает блок
+     * @private
+     * @param {BEM} block блок
+     * @param {String} method имя метода
+     * @param {Array} args параметры метода
+     */
+    _doBlockMethod : function(block, method, args) {
+
+        return method? block[method].apply(block, args || []) : block;
 
     },
 
