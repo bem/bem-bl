@@ -260,7 +260,7 @@ this.BEM = $.inherit($.observable, /** @lends BEM.prototype */ {
 
         if(!hasElem) { // кэшируем
             modNames.length?
-                $.each(modNames, function(i, name) {
+                modNames.forEach(function(name) {
                     _this._modCache[name] = res[name];
                 }):
                 _this._modCache = res;
@@ -308,8 +308,8 @@ this.BEM = $.inherit($.observable, /** @lends BEM.prototype */ {
 
             elem && modFnParams.unshift(elem);
 
-            $.each([['*', '*'], [modName, '*'], [modName, modVal]], function(){
-                needSetMod = _this._callModFn(elemName, this[0], this[1], modFnParams) !== false && needSetMod;
+            [['*', '*'], [modName, '*'], [modName, modVal]].forEach(function(mod) {
+                needSetMod = _this._callModFn(elemName, mod[0], mod[1], modFnParams) !== false && needSetMod;
             });
 
             !elem && needSetMod && (_this._modCache[modName] = modVal);

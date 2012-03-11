@@ -537,7 +537,7 @@ var DOM = BEM.DOM = BEM.decl('i-bem__dom',/** @lends BEM.DOM.prototype */{
 
         var _this = this;
         return event.indexOf(' ') > 1?
-            $.map(event.split(' '), function(e) {
+            event.split(' ').map(function(e) {
                 return _this._buildOneEventName(e);
             }).join(' ') :
             _this._buildOneEventName(event);
@@ -563,7 +563,7 @@ var DOM = BEM.DOM = BEM.decl('i-bem__dom',/** @lends BEM.DOM.prototype */{
 
         var lego = '.bem_' + _this.__self._name;
 
-        return eventNameCache[event] = $.map(event.split('.'), function(e, i) {
+        return eventNameCache[event] = event.split('.').map(function(e, i) {
             return i == 0? e + lego : lego + '_' + e;
         }).join('') + uniq;
 
@@ -674,11 +674,11 @@ var DOM = BEM.DOM = BEM.decl('i-bem__dom',/** @lends BEM.DOM.prototype */{
             extractAll = !modNames.length,
             countMatched = 0;
 
-        $.each((elem || this.domElem)[0].className
+        ((elem || this.domElem)[0].className
             .match(this.__self._buildModValRE(
                 '(' + (extractAll? NAME_PATTERN : modNames.join('|')) + ')',
                 elem,
-                'g')) || [], function(i, className) {
+                'g')) || []).forEach(function(className) {
                     var iModVal = (className = className.trim()).lastIndexOf(MOD_DELIM),
                         iModName = className.substr(0, iModVal - 1).lastIndexOf(MOD_DELIM);
                     res[className.substr(iModName + 1, iModVal - iModName - 1)] = className.substr(iModVal + 1);
@@ -686,7 +686,7 @@ var DOM = BEM.DOM = BEM.decl('i-bem__dom',/** @lends BEM.DOM.prototype */{
                 });
 
         // пустые значения модификаторов не отражены в классах, нужно их заполнить пустыми значения
-        countMatched < modNames.length && $.each(modNames, function(i, modName) {
+        countMatched < modNames.length && modNames.forEach(function(modName) {
             modName in res || (res[modName] = '');
         });
 
@@ -743,7 +743,7 @@ var DOM = BEM.DOM = BEM.decl('i-bem__dom',/** @lends BEM.DOM.prototype */{
 
         var _self = this.__self,
             selector = '.' +
-                $.map(names.split(' '), function(name) {
+                names.split(' ').map(function(name) {
                     return buildClass(_self._name, name, modName, modVal);
                 }).join(',.');
         return findDomElem(ctx, selector);
@@ -793,8 +793,8 @@ var DOM = BEM.DOM = BEM.decl('i-bem__dom',/** @lends BEM.DOM.prototype */{
 
         var res = $([]),
             _this = this;
-        $.each(names.split(' '), function() {
-            res = res.add(_this._elem(this, modName, modVal));
+        names.split(' ').forEach(function(name) {
+            res = res.add(_this._elem(name, modName, modVal));
         });
         return res;
 
@@ -815,7 +815,7 @@ var DOM = BEM.DOM = BEM.decl('i-bem__dom',/** @lends BEM.DOM.prototype */{
                 modPostfix = buildModPostfix(modName, modVal);
             names.indexOf(' ') < 0?
                 delete _this._elemCache[names + modPostfix] :
-                $.each(names.split(' '), function(i, name) {
+                names.split(' ').forEach(function(name) {
                     delete _this._elemCache[name + modPostfix];
                 });
         } else {
@@ -1089,7 +1089,7 @@ var DOM = BEM.DOM = BEM.decl('i-bem__dom',/** @lends BEM.DOM.prototype */{
 
         var _this = this;
         if(e.indexOf(' ') > -1) {
-            $.each(e.split(' '), function(i, e) {
+            e.split(' ').forEach(function(e) {
                 _this._liveClassBind(className, e, callback, invokeOnInit);
             });
         }
@@ -1212,7 +1212,7 @@ var DOM = BEM.DOM = BEM.decl('i-bem__dom',/** @lends BEM.DOM.prototype */{
         var _this = this;
 
         if(to.elem && to.elem.indexOf(' ') > 1) {
-            $.each(to.elem.split(' '), function(i, elem) {
+            to.elem.split(' ').forEach(function(elem) {
                 _this._liveClassBind(
                     buildClass(_this._name, elem, to.modName, to.modVal),
                     event,
@@ -1243,7 +1243,7 @@ var DOM = BEM.DOM = BEM.decl('i-bem__dom',/** @lends BEM.DOM.prototype */{
         var _this = this;
 
         if(elem.indexOf(' ') > 1) {
-            $.each(elem.split(' '), function(i, elem) {
+            elem.split(' ').forEach(function(elem) {
                 _this._liveClassUnbind(
                     buildClass(_this._name, elem),
                     event,
@@ -1272,8 +1272,8 @@ var DOM = BEM.DOM = BEM.decl('i-bem__dom',/** @lends BEM.DOM.prototype */{
         var name = this._name;
         blocks[blockName].on('init', function(e) {
             var blocks = e.block[findFnName](name);
-            callback && $.each(blocks, function() {
-                callback.call(this);
+            callback && blocks.forEach(function(block) {
+                callback.call(block);
             });
         });
         return this;
@@ -1384,7 +1384,7 @@ var DOM = BEM.DOM = BEM.decl('i-bem__dom',/** @lends BEM.DOM.prototype */{
             }
 
             if(e.indexOf(' ') > -1) {
-                $.each(e.split(' '), function(i, e) {
+                e.split(' ').forEach(function(e) {
                     _this._liveCtxBind(ctx, e, data, fn, fnCtx);
                 });
             } else {
