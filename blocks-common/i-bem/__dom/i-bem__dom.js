@@ -679,7 +679,7 @@ var DOM = BEM.DOM = BEM.decl('i-bem__dom',/** @lends BEM.DOM.prototype */{
                 '(' + (extractAll? NAME_PATTERN : modNames.join('|')) + ')',
                 elem,
                 'g')) || [], function(i, className) {
-                    var iModVal = (className = $.trim(className)).lastIndexOf(MOD_DELIM),
+                    var iModVal = (className = className.trim()).lastIndexOf(MOD_DELIM),
                         iModName = className.substr(0, iModVal - 1).lastIndexOf(MOD_DELIM);
                     res[className.substr(iModName + 1, iModVal - iModName - 1)] = className.substr(iModVal + 1);
                     ++countMatched;

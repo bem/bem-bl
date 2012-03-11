@@ -96,6 +96,7 @@
                 { block: 'i-ecma', elem: 'object' },
                 { block: 'i-ecma', elem: 'array' },
                 { block: 'i-ecma', elem: 'function' },
+                { block: 'i-ecma', elem: 'string' },
                 { block: 'i-bem' },
                 { block: 'i-bem', elem: 'internal' },
                 { block: 'i-bem', elem: 'mods' },
