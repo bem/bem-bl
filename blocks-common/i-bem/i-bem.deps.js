@@ -9,10 +9,12 @@
                 'debounce',
                 'observable'
             ]
-        },
+        }
+    ],
+    shouldDeps: [
         { block: 'i-ecma', elem: 'object' },
         { block: 'i-ecma', elem: 'array' },
-        { block: 'i-ecma', elem: 'function' }
-    ],
-    shouldDeps: { elem: 'internal' }
+        { block: 'i-ecma', elem: 'function' },
+        { elem: 'internal' }
+    ]
 })
