@@ -130,10 +130,7 @@ this.BEM = $.inherit($.observable, /** @lends BEM.prototype */ {
      */
     changeThis : function(fn, ctx) {
 
-        var _this = this;
-        return function() {
-            return fn.apply(ctx || _this, arguments);
-        };
+        return fn.bind(ctx || this);
 
     },
 
@@ -644,9 +641,7 @@ this.BEM = $.inherit($.observable, /** @lends BEM.prototype */ {
      */
     changeThis : function(fn, ctx) {
 
-        return function() {
-            return fn.apply(ctx || this, arguments);
-        };
+        return fn.bind(ctx || this);
 
     },
 
