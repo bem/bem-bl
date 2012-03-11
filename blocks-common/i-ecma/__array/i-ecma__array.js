@@ -14,16 +14,18 @@ var ptp = Array.prototype,
 
             fromIdx = +(fromIdx || 0);
 
-            var len = this.length;
+            var t = this, len = t.length;
 
             if(len > 0 && fromIdx < len) {
                 fromIdx = fromIdx < 0? Math.ceil(fromIdx) : Math.floor(fromIdx);
                 fromIdx < -len && (fromIdx = 0);
                 fromIdx < 0 && (fromIdx = fromIdx + len);
 
-                while(fromIdx < len)
-                    if(this[fromIdx++] === item)
-                        return fromIdx - 1;
+                while(fromIdx < len) {
+                    if(fromIdx in t && t[fromIdx] === item)
+                        return fromIdx;
+                    ++fromIdx;
+                }
             }
 
             return -1;

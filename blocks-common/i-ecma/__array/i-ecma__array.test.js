@@ -7,7 +7,8 @@ BEM.TEST.decl({ block : 'i-ecma', elem : 'array' }, function(undefined) {
             { data : [1, 2, 3, 2], args : [2, 2], res : 3 },
             { data : [1, 2, 3, 2], args : [1, 2], res : -1 },
             { data : [1, 2, 3, 2], args : [2, -1], res : 3 },
-            { data : [1, 2, 3, 2], args : [2, -10], res : 1 }
+            { data : [1, 2, 3, 2], args : [2, -10], res : 1 },
+            { data : (function() { var res = [1,,,2]; res[2] = undefined; return res; })(), args : [undefined], res : 2 }
         ].forEach(function(test) {
             it('should be correct result', function() {
                 expect(test.data.indexOf.apply(test.data, test.args)).toEqual(test.res);
