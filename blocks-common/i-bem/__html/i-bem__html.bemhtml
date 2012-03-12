@@ -364,12 +364,23 @@ content: this.ctx.content
                     for(n in o2) o2.hasOwnProperty(n) && (res[n] = o2[n]);
                     return res;
                 },
+                identify: (function() {
+                    var cnt = 0,
+                        expando = '__' + (+new Date()),
+                        get = function() { return 'uniq' + ++cnt; };
+                    return function(obj, onlyGet) {
+                        if(!obj) return get();
+                        if(onlyGet || obj[expando]) return obj[expando];
+                        else return (obj[expando] = get());
+                    };
+                })(),
                 xmlEscape: buildEscape('[&<>]'),
                 attrEscape: buildEscape('["&<>]')
             },
             BEM: BEM,
             isFirst: function() { return this.position === 1 },
-            isLast: function() { return this.position === this._listLength }
+            isLast: function() { return this.position === this._listLength },
+            generateId: function() { return this._.identify(this.ctx); }
         };
     ctx.apply();
     return ctx._buf.join('');
