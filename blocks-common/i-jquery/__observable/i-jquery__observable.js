@@ -168,6 +168,8 @@ var storageExpando = '__' + +new Date + 'storage',
                 e = $.Event(_this.buildEventName(rawType = e)) :
                 e.type = _this.buildEventName(rawType = e.type);
 
+            e.target || (e.target = _this);
+
             if(storage && (storage = storage[e.type])) {
                 var item = storage.list.first,
                     ret;
