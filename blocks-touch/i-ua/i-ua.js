@@ -26,9 +26,9 @@
     }
 
     if (window.opera) {
-        opera = window.opera.version();
+        browser.opera = window.opera.version();
     } else if (match = ua.match(/\sCrMo\/([\d.]+)/)) {
-        chrome = match[1];
+        browser.chrome = match[1];
     }
 
     if (navigator.connection) {
