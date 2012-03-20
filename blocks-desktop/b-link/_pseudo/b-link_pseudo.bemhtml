@@ -1,8 +1,8 @@
-block b-link, (this.mods && this.mods.pseudo) {
+block b-link, (this.mods && this.mods.pseudo), !this.elem {
 
     tag: (this.ctx.url? 'a' : 'span')
 
-    js, !this.elem: true
+    js: true
 
     attrs, !this.ctx.url: {
         return {}
