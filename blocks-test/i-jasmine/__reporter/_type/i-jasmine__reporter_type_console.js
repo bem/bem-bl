@@ -87,7 +87,7 @@ jasmine.ConsoleReporter = $.inherit({
     _printSummary : function(elapsed, total, failed) {
 
         console.log('Finished in ' + elapsed / 1000 + ' seconds.');
-        console.log(this._colorString('Specs total: ' + " " + total + '\n' + 'Failed: ' + failed, failed? 'red' : 'green'));
+        console.log(this._colorString('Specs total: ' + total + '\n' + 'Failed: ' + failed, failed? 'red' : 'green'));
         console.log('');
 
     },
