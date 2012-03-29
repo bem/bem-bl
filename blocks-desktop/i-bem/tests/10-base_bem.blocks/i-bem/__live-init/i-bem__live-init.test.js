@@ -11,14 +11,17 @@ BEM.TEST.decl({ block : 'i-bem', elem : 'live-init' }, function() {
             }
         }, {
             live : function() {
-                this.liveBindTo('click');
+                this.liveBindTo('elem', 'click');
             }
         });
 
-        BEM.DOM.append($('#live-init-test'), '<div id="b-live-init-test" class="b-live-init-test i-bem" onclick="return {\'b-live-init-test\':{}}"/>');
+        BEM.DOM.append(
+            $('#live-init-test'),
+            '<div class="b-live-init-test i-bem" onclick="return {\'b-live-init-test\':{}}"><div id="b-live-init-test__elem" class="b-live-init-test__elem"></div>');
+
         expect(spy).not.toHaveBeenCalled();
 
-        $('#b-live-init-test').click();
+        $('#b-live-init-test__elem').click();
         expect(spy).toHaveBeenCalled();
     });
 });
