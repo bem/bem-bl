@@ -1,12 +1,10 @@
-var fs = require('fs'),
-    vm = require('vm');
+var FS = require('fs'),
+    VM = require('vm');
 
-exports.techModule = module;
-
-exports.newFileContent = function(vars) {
+exports.getCreateResult = function(path, suffix, vars) {
     var bemhtmlFile = vars.Prefix + '.bemhtml.js',
         bemjsonFile = vars.Prefix + '.bemjson.js';
 
-    vm.runInThisContext(fs.readFileSync(bemhtmlFile, 'utf-8'));
-    return BEMHTML.apply(vm.runInThisContext(fs.readFileSync(bemjsonFile, 'utf-8')));
+    VM.runInThisContext(FS.readFileSync(bemhtmlFile, 'utf-8'));
+    return BEMHTML.apply(VM.runInThisContext(FS.readFileSync(bemjsonFile, 'utf-8')));
 };
