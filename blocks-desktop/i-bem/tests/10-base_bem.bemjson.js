@@ -21,6 +21,9 @@
             }
         },
         {
+            attrs: { id: 'live-init-test' }
+        },
+        {
             attrs: { id: 'once-test' },
             content: [
                 { block: 'b-foo', js: { id: 'test' }},
@@ -101,6 +104,7 @@
                 { block: 'i-bem', elem: 'internal' },
                 { block: 'i-bem', elem: 'mods' },
                 { block: 'i-bem', elem: 'init' },
+                { block: 'i-bem', elem: 'live-init' },
                 { block: 'i-bem', elem: 'live-ctx' },
                 { block: 'i-bem', elem: 'elem-params' },
                 { block: 'i-bem', elem: 'contains-dom-elem' },
