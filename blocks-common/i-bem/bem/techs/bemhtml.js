@@ -1,72 +1,87 @@
-var myPath = require('bem/lib/path'),
-    sys = require('util'),
-    fs = require('fs'),
-    xjst = require('xjst');
+var Q = require('q'),
+    PATH = require('path'),
+    SYS = require('util'),
+    FS = require('fs'),
+    XJST = require('xjst');
 
-exports.techModule = module;
+exports.getBuildResultChunk = function(relPath, path, suffix) {
 
-exports.bemBuild = function (prefixes, outputDir, outputName) {
+    return [
+        '/* ' + path + ': start */',
+        FS.readFileSync(path),
+        '/* ' + path + ': end */',
+        '\n'
+    ].join('\n');
 
-    var bemhtml = require('../../__html/lib/bemhtml.js'),
-        sources = this
-            .filterExists(prefixes)
-            .map(function(file) {
-                return [
-                    '/* ' + file + ': start */',
-                    fs.readFileSync(file),
-                    '/* ' + file + ': end */',
-                    '\n'
-                ].join('\n');
-            })
-            .join('\n');
+};
 
-    try {
-        var tree = bemhtml.BEMHTMLParser.matchAll(
-            sources,
-            'topLevel',
-            undefined,
-            function(m, i) {
-                console.log(arguments);
-                throw { errorPos: i, toString: function() { return "bemhtml match failed" } }
-            });
+exports.getBuildResult = function(prefixes, suffix, outputDir, outputName) {
 
-        var xjstSources = bemhtml.BEMHTMLToXJST.match(
-            tree,
-            'topLevel',
-            undefined,
-            function(m, i) {
-                console.log(arguments);
-                throw { toString: function() { return "bemhtml to xjst compilation failed" } };
-            });
-    } catch (e) {
-        e.errorPos != undefined &&
-            sys.error(
-                sources.slice(0, e.errorPos) +
-                "\n--- Parse error ->" +
-                sources.slice(e.errorPos) + '\n');
-        console.log('error: ' + e);
-        throw e;
-    }
+    var _this = this;
+    return this.filterPrefixes(prefixes, ['bemhtml'])
+        .then(function(paths) {
+            return Q.all(paths.map(function(path) {
+                return _this.getBuildResultChunk(
+                    PATH.relative(outputDir, path), path, suffix);
+            }));
+        })
+        .then(function(sources) {
+            sources = sources.join('\n');
 
-    try {
-        var xjstTree = xjst.parse(xjstSources);
-    } catch (e) {
-        throw new Error("xjst parse failed");
-    }
+            var BEMHTML = require('../../__html/lib/bemhtml.js');
+            try {
+                var tree = BEMHTML.BEMHTMLParser.matchAll(
+                    sources,
+                    'topLevel',
+                    undefined,
+                    function(m, i) {
+                        console.log(arguments);
+                        throw { errorPos: i, toString: function() { return "bemhtml match failed" } }
+                    });
 
-    try {
-        var xjstJS = process.env.BEMHTML_ENV == 'development' ?
-            xjst.XJSTCompiler.match(xjstTree, 'topLevel') :
-            xjst.compile(xjstTree);
-    } catch (e) {
-        throw new Error("xjst to js compilation failed");
-    }
+                var xjstSources = BEMHTML.BEMHTMLToXJST.match(
+                    tree,
+                    'topLevel',
+                    undefined,
+                    function(m, i) {
+                        console.log(arguments);
+                        throw { toString: function() { return "bemhtml to xjst compilation failed" } };
+                    });
+            } catch (e) {
+                e.errorPos != undefined &&
+                    SYS.error(
+                        sources.slice(0, e.errorPos) +
+                        "\n--- Parse error ->" +
+                        sources.slice(e.errorPos) + '\n');
+                console.log('error: ' + e);
+                throw e;
+            }
 
-    var filename = myPath.join(outputDir,
-            outputName + '.' + this.getTechName() + '.js'),
-        // TODO: поддержать работу с шаблоном как с CommonJS-модулем, через `BEMHTML = require('tpl.bemhtml.js').apply`
-        content = 'var BEMHTML = ' + xjstJS + ';BEMHTML = (function(xjst) { return function() { return xjst.apply.call([this]); }; }(BEMHTML));';
-    fs.writeFileSync(filename, content);
+            try {
+                var xjstTree = XJST.parse(xjstSources);
+            } catch (e) {
+                throw new Error("xjst parse failed");
+            }
 
-    return this;
+            try {
+                var xjstJS = process.env.BEMHTML_ENV == 'development' ?
+                    XJST.XJSTCompiler.match(xjstTree, 'topLevel') :
+                    XJST.compile(xjstTree);
+            } catch (e) {
+                throw new Error("xjst to js compilation failed");
+            }
+
+            // TODO: поддержать работу с шаблоном как с CommonJS-модулем, через `BEMHTML = require('tpl.bemhtml.js').apply`
+            return 'var BEMHTML = ' + xjstJS + ';BEMHTML = (function(xjst) { return function() { return xjst.apply.call([this]); }; }(BEMHTML));';
+
+        });
+
+};
+
+exports.storeBuildResults = function(prefix, res) {
+    var _this = this,
+        suffix = 'bemhtml.js';
+    return Q.when(res, function(res) {
+        return _this.storeBuildResult(_this.getPath(prefix, suffix), suffix, res['bemhtml']);
+    });
 };
