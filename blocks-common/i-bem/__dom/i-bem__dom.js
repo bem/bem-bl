@@ -1168,7 +1168,7 @@ var DOM = BEM.DOM = BEM.decl('i-bem__dom',/** @lends BEM.DOM.prototype */{
                     ((e.data || (e.data = {})).domElem = $(this)).closest(_this.buildSelector()),
                     true ],
                 block = initBlock.apply(null, invokeOnInit? args.concat([callback, e]) : args);
-            block && (invokeOnInit || callback.apply(block, arguments));
+            block && (invokeOnInit || (callback && callback.apply(block, arguments)));
         };
 
     },
@@ -1179,7 +1179,7 @@ var DOM = BEM.DOM = BEM.decl('i-bem__dom',/** @lends BEM.DOM.prototype */{
      * @protected
      * @param {String} [elemName] имя элемента или элементов (через пробел)
      * @param {String} event имя события
-     * @param {Function} callback обработчик, вызываемый после успешной инициализации
+     * @param {Function} [callback] обработчик, вызываемый после успешной инициализации
      */
     liveInitOnEvent : function(elemName, event, callback) {
 
@@ -1193,7 +1193,7 @@ var DOM = BEM.DOM = BEM.decl('i-bem__dom',/** @lends BEM.DOM.prototype */{
      * @protected
      * @param {String|Object} [to] описание (объект с modName, modVal, elem) или имя элемента или элементов (через пробел)
      * @param {String} event имя события
-     * @param {Function} callback обработчик
+     * @param {Function} [callback] обработчик
      */
     liveBindTo : function(to, event, callback, invokeOnInit) {
 
