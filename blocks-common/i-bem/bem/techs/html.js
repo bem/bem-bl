@@ -8,3 +8,7 @@ exports.getCreateResult = function(path, suffix, vars) {
     VM.runInThisContext(FS.readFileSync(bemhtmlFile, 'utf-8'));
     return BEMHTML.apply(VM.runInThisContext(FS.readFileSync(bemjsonFile, 'utf-8')));
 };
+
+exports.getDependencies = function() {
+    return ['bemjson.js', 'bemhtml.js'];
+};

@@ -85,3 +85,7 @@ exports.storeBuildResults = function(prefix, res) {
         return _this.storeBuildResult(_this.getPath(prefix, suffix), suffix, res['bemhtml']);
     });
 };
+
+exports.getDependencies = function() {
+    return ['deps.js'];
+};
