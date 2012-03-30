@@ -70,3 +70,7 @@ exports.bemBuild = function (prefixes, outputDir, outputName) {
 
     return this;
 };
+
+exports.getDependencies = function() {
+    return ['deps.js'];
+};

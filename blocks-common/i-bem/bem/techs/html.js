@@ -10,3 +10,7 @@ exports.newFileContent = function(vars) {
     vm.runInThisContext(fs.readFileSync(bemhtmlFile, 'utf-8'));
     return BEMHTML.apply(vm.runInThisContext(fs.readFileSync(bemjsonFile, 'utf-8')));
 };
+
+exports.getDependencies = function() {
+    return ['bemjson.js', 'bemhtml.js'];
+};
