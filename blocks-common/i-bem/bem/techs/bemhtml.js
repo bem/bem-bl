@@ -86,6 +86,3 @@ exports.storeBuildResults = function(prefix, res) {
     });
 };
 
-exports.getDependencies = function() {
-    return ['deps.js'];
-};
