@@ -12,3 +12,7 @@ exports.getCreateResult = function(path, suffix, vars) {
 exports.getDependencies = function() {
     return ['bemjson.js', 'bemhtml.js'];
 };
+
+exports.getDependencies = function() {
+    return ['bemjson.js', 'bemhtml.js'];
+};
