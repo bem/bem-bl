@@ -117,10 +117,14 @@ this.BEM = $.inherit($.observable, /** @lends BEM.prototype */ {
      */
     _init : function(params) {
 
-        this.params = $.extend(this.getDefaultParams(), params);
-        return this
-            .setMod('js', 'inited')
-            .trigger('init');
+        if(!this.hasMod('js', 'inited')) {
+            this.params = $.extend(this.getDefaultParams(), params);
+            this
+                .setMod('js', 'inited')
+                .trigger('init');
+        }
+
+        return this;
 
     },
 
