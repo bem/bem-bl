@@ -98,7 +98,7 @@ function initBlock(blockName, domElem, params, forceLive, callback) {
 
     var uniqId = params.uniqId;
     if(uniqIdToBlock[uniqId]) {
-        return uniqIdToBlock[uniqId]._init();
+        return uniqIdToBlock[uniqId];
     }
 
     uniqIdToDomElems[uniqId] = uniqIdToDomElems[uniqId]?
