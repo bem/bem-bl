@@ -295,16 +295,16 @@ this.BEM = $.inherit($.observable, /** @lends BEM.prototype */ {
             if(this._processingMods[modId]) return _this;
 
             var elemName,
-                currentModVal = elem?
+                curModVal = elem?
                     _this._getElemMod(modName, elem, elemName = _this.__self._extractElemNameFrom(elem)) :
                     _this.getMod(modName);
 
-            if(currentModVal === modVal) return _this;
+            if(curModVal === modVal) return _this;
 
             this._processingMods[modId] = true;
 
             var needSetMod = true,
-                modFnParams = [modName, modVal, currentModVal];
+                modFnParams = [modName, modVal, curModVal];
 
             elem && modFnParams.unshift(elem);
 
@@ -314,7 +314,7 @@ this.BEM = $.inherit($.observable, /** @lends BEM.prototype */ {
 
             !elem && needSetMod && (_this._modCache[modName] = modVal);
 
-            needSetMod && _this._afterSetMod(modName, modVal, elem, elemName);
+            needSetMod && _this._afterSetMod(modName, modVal, curModVal, elem, elemName);
 
             delete this._processingMods[modId];
         }
@@ -328,9 +328,11 @@ this.BEM = $.inherit($.observable, /** @lends BEM.prototype */ {
      * @protected
      * @param {String} modName имя модификатора
      * @param {String} modVal значение модификатора
+     * @param {String} oldModVal старое значение модификатора
      * @param {Object} [elem] вложенный элемент
+     * @param {String} [elemName] имя элемента
      */
-    _afterSetMod : function(modName, modVal, elem) {},
+    _afterSetMod : function(modName, modVal, oldModVal, elem, elemName) {},
 
     /**
      * Устанавливает модификатор у блока/вложенного элемента в зависимости от условия.
