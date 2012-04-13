@@ -699,10 +699,11 @@ var DOM = BEM.DOM = BEM.decl('i-bem__dom',/** @lends BEM.DOM.prototype */{
      * @private
      * @param {String} modName имя модификатора
      * @param {String} modVal значение модификатора
-     * @param {jQuery} [elem] DOM-элемент
+     * @param {String} oldModVal старое значение модификатора
+     * @param {jQuery} [elem] элемент
      * @param {String} [elemName] имя элемента
      */
-    _afterSetMod : function(modName, modVal, elem, elemName) {
+    _afterSetMod : function(modName, modVal, oldModVal, elem, elemName) {
 
         var _self = this.__self,
             classPrefix = _self._buildModClassPrefix(modName, elemName),
@@ -717,7 +718,10 @@ var DOM = BEM.DOM = BEM.decl('i-bem__dom',/** @lends BEM.DOM.prototype */{
                     (needDel? '' : '$1' + classPrefix + modVal) + '$3') :
                 needDel || $(this).addClass(classPrefix + modVal);
         });
-        elemName && this.dropElemCache(elemName, modName, modVal);
+
+        elemName && this
+            .dropElemCache(elemName, modName, oldModVal)
+            .dropElemCache(elemName, modName, modVal);
 
     },
 
