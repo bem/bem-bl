@@ -86,8 +86,8 @@ exports.storeBuildResults = function(prefix, res) {
     });
 };
 
-exports.getDependencies = function() {
-    return ['deps.js'];
+exports.getSuffixes = function() {
+    return ['bemhtml'];
 };
 
 exports.getDependencies = function() {
