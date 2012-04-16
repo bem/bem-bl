@@ -67,8 +67,10 @@ function init(domElem, uniqInitId) {
         processParams(params, domNode, blockName, uniqInitId);
         var block = uniqIdToBlock[params.uniqId];
         if(block) {
-            block.domElem = block.domElem.add(domElem);
-            $.extend(block.params, params);
+            if(block.domElem.index(domNode) < 0) {
+                block.domElem = block.domElem.add(domElem);
+                $.extend(block.params, params);
+            }
         } else {
             initBlock(blockName, domElem, params);
         }
