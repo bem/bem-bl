@@ -68,11 +68,11 @@ block b-page {
                     this.ctx = [6, 7, 8, 9].map(function(v) { return { elem: 'css', url: this.ctx.url + '.ie' + v + '.css', ie: 'IE ' + v } }, this)
                 ) this.apply();
             } else {
-                var hideRule = !this.ctx.ie ?
+                var hideRule = !ie ?
                         ['gt IE 7', '<!-->', '<!--'] :
                         ie == '!IE' ?
-                            [this.ctx.ie, '<!-->', '<!--'] :
-                            [this.ctx.ie, '', ''];
+                            [ie, '<!-->', '<!--'] :
+                            [ie, '', ''];
                 local(
                     this._mode = '',
                     this.ctx._ieCommented = true,
