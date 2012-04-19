@@ -1,0 +1,12 @@
+.b-menu_layout_horiz .b-menu__list
+{
+    display: inline-table;
+    vertical-align: middle;
+}
+
+.b-menu_layout_horiz .b-menu__item,
+.b-menu_layout_horiz .b-menu__gap
+{
+    display: table-cell;
+    vertical-align: middle;
+}
