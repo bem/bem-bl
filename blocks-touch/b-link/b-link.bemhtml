@@ -1,0 +1,20 @@
+block b-link {
+    mix: [{
+        block: 'i-pressed-controller',
+        js: true
+    }],
+    tag: 'span'
+
+    attrs: {
+        var a = {};
+
+        this.ctx.url && (a.href = this.ctx.url);
+        this.ctx.target && (a.target = this.ctx.target);
+
+        return a;
+    }
+
+    this.ctx.url, tag: 'a'
+
+    elem text, tag: 'span'
+}

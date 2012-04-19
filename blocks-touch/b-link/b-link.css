@@ -1,0 +1,11 @@
+.b-link__text
+{
+    vertical-align: middle;
+}
+
+.b-link > .b-ico
+{
+    margin: 0 5px 0 0;
+
+    vertical-align: middle;
+}
