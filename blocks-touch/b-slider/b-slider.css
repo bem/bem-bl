@@ -1,0 +1,30 @@
+/* запрещаем тягание и выделение блоков внутри в декстопных браузерах */
+.b-slider .b-link,
+.b-slider .b-form-button,
+.b-slider .b-ico
+{
+    -webkit-user-drag: none;
+    -webkit-user-select: none;
+}
+
+.b-slider__inner
+{
+    overflow: hidden;
+}
+
+.b-slider .b-menu
+{
+    float: left;
+
+    white-space: nowrap;
+}
+
+.i-ua_platform_ios .b-slider .b-menu
+{
+    -webkit-transform: translateZ(0);
+}
+
+.b-slider_animation_yes
+{
+    pointer-events: none;
+}
