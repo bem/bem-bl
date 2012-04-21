@@ -1,0 +1,18 @@
+block b-icon {
+    tag: 'i'
+
+    this.ctx.src {
+        tag: 'img'
+        attrs: {
+            var a = {
+                src: this.ctx.src
+            };
+
+            this.ctx.width && (a.width = this.ctx.width);
+            this.ctx.height && (a.height = this.ctx.height);
+            this.ctx.alt && (a.alt = this.ctx.alt);
+
+            return a;
+        }
+    }
+}
