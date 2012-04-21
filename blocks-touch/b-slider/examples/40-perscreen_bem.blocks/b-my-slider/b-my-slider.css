@@ -1,0 +1,14 @@
+.b-my-slider
+{
+    font-size: 16px;
+
+    padding: 20px 0 10px;
+}
+
+.b-my-slider .b-menu__item
+{
+    padding: 0 10px;
+
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+}
