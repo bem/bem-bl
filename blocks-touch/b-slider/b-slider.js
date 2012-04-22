@@ -239,7 +239,7 @@
 
                 // при поэкранном слайдере заново рассчитываем текущую позицию
                 if (slider._perScreen) {
-                    slider._currentX = -slider._step * (slider._index - 1);
+                    slider._currentX = -slider._step * slider._index;
                 }
 
                 // если после поворота в ландшафтный режим справа появилась "дырка"
@@ -409,7 +409,7 @@
                     }
 
                     // индекс текущего экрана
-                    if (this._perScreen && this._index > 1) {
+                    if (this._perScreen && this._index >= 1) {
                         this._index--;
                     }
                 // слайд влево
@@ -423,7 +423,7 @@
                     }
 
                     // индекс текущего экрана
-                    if (this._perScreen && this._index < this._count) {
+                    if (this._perScreen && this._index <= this._count) {
                         this._index++;
                     }
                 }
