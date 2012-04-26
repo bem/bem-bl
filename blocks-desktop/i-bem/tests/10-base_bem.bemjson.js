@@ -102,6 +102,7 @@
                 { block: 'i-ecma', elem: 'json' },
                 { block: 'i-bem' },
                 { block: 'i-bem', elem: 'internal' },
+                { block: 'i-bem', elem: 'decls' },
                 { block: 'i-bem', elem: 'mods' },
                 { block: 'i-bem', elem: 'init' },
                 { block: 'i-bem', elem: 'live-init' },
