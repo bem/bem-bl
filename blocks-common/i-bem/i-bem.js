@@ -67,6 +67,26 @@ function modFnsToProps(modFns, props, elemName) {
 
 }
 
+function buildCheckMod(modName, modVal) {
+
+    return modVal?
+        Array.isArray(modVal)?
+            function(block) {
+                var i = 0, len = modVal.length;
+                while(i < len)
+                    if(block.hasMod(modName, modVal[i++]))
+                        return true;
+                return false;
+            } :
+            function(block) {
+                return block.hasMod(modName, modVal);
+            } :
+        function(block) {
+            return block.hasMod(modName);
+        };
+
+}
+
 /** @namespace */
 this.BEM = $.inherit($.observable, /** @lends BEM.prototype */ {
 
@@ -528,11 +548,12 @@ this.BEM = $.inherit($.observable, /** @lends BEM.prototype */ {
         var baseBlock = blocks[decl.baseBlock || decl.block] || this;
 
         if(decl.modName) {
+            var checkMod = buildCheckMod(decl.modName, decl.modVal);
             $.each(props, function(name, prop) {
                 $.isFunction(prop) &&
                     (props[name] = function() {
                         var method;
-                        if(this.hasMod(decl.modName, decl.modVal)) {
+                        if(checkMod(this)) {
                             method = prop;
                         } else {
                             var baseMethod = baseBlock.prototype[name];
