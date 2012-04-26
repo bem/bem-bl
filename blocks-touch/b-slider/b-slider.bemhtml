@@ -1,0 +1,8 @@
+block b-slider {
+    js: true
+
+    content: {
+        elem: 'inner',
+        content: this.ctx.content
+    }
+}

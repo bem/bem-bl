@@ -1,0 +1,30 @@
+block b-menu {
+    content: [
+        this.ctx.content[0] && this.ctx.content[0].elem === 'title' ? this.ctx.content.shift() : null,
+        {
+            elem: 'list',
+            tag: 'ul',
+            content: this.ctx.content
+        }
+    ]
+
+    elem title, tag: 'h3'
+
+    elem item {
+        tag: 'li'
+
+        this.isFirst(), mix: [{
+            elemMods: {
+                pos: 'first'
+            }
+        }]
+
+        this.isLast(), mix: [{
+            elemMods: {
+                pos: 'last'
+            }
+        }]
+    }
+
+    elem gap, tag: 'li'
+}

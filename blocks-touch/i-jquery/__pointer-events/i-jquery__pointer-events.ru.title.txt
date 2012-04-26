@@ -1,0 +1,1 @@
+Универсальные события указателя pointerdown, pointermove, pointerup, pointercancel и tap
