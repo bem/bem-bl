@@ -1,8 +1,23 @@
 block b-slider {
     js: true
 
+    mix: {
+        var mix = [];
+
+        this.ctx.indicator && mix.push({ block: 'b-slider-indicator', js: true });
+        this.ctx.arrows && mix.push({ block: 'b-slider-arrows', js: true });
+
+        return mix;
+    }
+
     content: {
         elem: 'inner',
-        content: this.ctx.content
+        content: {
+            block: 'b-menu',
+            mods: {
+                layout: 'horiz'
+            },
+            content: this.ctx.content
+        }
     }
 }
