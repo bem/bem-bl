@@ -1,5 +1,5 @@
 BEM.TEST.decl({ block : 'i-bem', elem : 'live-init' }, function() {
-    it('should be inited only on event', function() {
+    it('should be inited only on DOM event', function() {
         var spy = jasmine.createSpy();
         BEM.DOM.decl('b-live-init-test', {
             onSetMod : {
@@ -22,6 +22,35 @@ BEM.TEST.decl({ block : 'i-bem', elem : 'live-init' }, function() {
         expect(spy).not.toHaveBeenCalled();
 
         $('#b-live-init-test__elem').click();
+        expect(spy).toHaveBeenCalled();
+    });
+
+    it('should be inited only on BEM event', function() {
+        var spy = jasmine.createSpy();
+        BEM.DOM.decl('b-bem-live-init-test-inner', {}, { live : false });
+        BEM.DOM.decl('b-bem-live-init-test', {
+            onSetMod : {
+                'js' : {
+                    'inited' : function() {
+                        spy();
+                    }
+                }
+            }
+        }, {
+            live : function() {
+                this.liveInitOnBlockInsideEvent('test-event', 'b-bem-live-init-test-inner');
+            }
+        });
+
+        BEM.DOM.append(
+            $('#live-init-test'),
+            '<div class="b-bem-live-init-test i-bem" onclick="return {\'b-bem-live-init-test\':{}}">' +
+                '<div class="b-bem-live-init-test-inner i-bem" onclick="return {\'b-bem-live-init-test-inner\':{}}">' +
+            '</div>');
+
+        expect(spy).not.toHaveBeenCalled();
+
+        $('.b-bem-live-init-test-inner').bem('b-bem-live-init-test-inner').trigger('test-event');
         expect(spy).toHaveBeenCalled();
     });
 });

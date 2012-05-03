@@ -1,0 +1,6 @@
+.b-menu_layout_vert .b-menu__title,
+.b-menu_layout_vert .b-menu__item,
+.b-menu_layout_vert .b-menu__gap
+{
+    display: block;
+}
