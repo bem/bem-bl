@@ -4,7 +4,7 @@ block i-jquery, elem core, default: {
         ctx: {
             block: 'b-page',
             elem: 'js',
-            url: '//yandex.st/jquery/1.7.2/jquery.min.js'
+            url: 'http://yandex.st/jquery/1.7.2/jquery.min.js'
         }
     });
 }
