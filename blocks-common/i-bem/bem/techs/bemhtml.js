@@ -1,4 +1,5 @@
-var Q = require('q'),
+var BEM = require('bem'),
+    Q = BEM.require('q'),
     PATH = require('path'),
     SYS = require('util'),
     FS = require('fs'),
