@@ -293,7 +293,7 @@ content: this.ctx.content
             if(mods) {
                 var modName; // TODO: разобраться с OmetaJS и YUI Compressor
                 for(modName in mods)
-                    if(mods.hasOwnProperty(modName)) {
+                    if(mods.hasOwnProperty(modName) && mods[modName]) {
                         var modVal = mods[modName];
                         res.push(' ');
                         elem?
