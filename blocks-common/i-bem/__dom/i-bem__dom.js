@@ -1281,7 +1281,7 @@ var DOM = BEM.DOM = BEM.decl('i-bem__dom',/** @lends BEM.DOM.prototype */{
         blocks[blockName].on(event, function(e) {
             var blocks = e.block[findFnName](name);
             callback && blocks.forEach(function(block) {
-                callback.call(block);
+                callback.call(block, e);
             });
         });
         return this;
