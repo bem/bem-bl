@@ -74,7 +74,7 @@ exports.getBuildResult = function(prefixes, suffix, outputDir, outputName) {
 
             return 'var BEMHTML = ' + xjstJS + '\n'
                 + 'BEMHTML = (function(xjst) { return function() { return xjst.apply.call([this]); }; }(BEMHTML));\n'
-                + 'typeof module.exports === "undefined" || (module.exports = BEMHTML);';
+                + 'typeof exports === "undefined" || (module.exports = BEMHTML);';
 
         });
 
