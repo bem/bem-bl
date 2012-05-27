@@ -91,7 +91,3 @@ exports.storeBuildResults = function(prefix, res) {
 exports.getSuffixes = function() {
     return ['bemhtml'];
 };
-
-exports.getDependencies = function() {
-    return ['deps.js'];
-};
