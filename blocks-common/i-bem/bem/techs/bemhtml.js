@@ -72,8 +72,9 @@ exports.getBuildResult = function(prefixes, suffix, outputDir, outputName) {
                 throw new Error("xjst to js compilation failed");
             }
 
-            // TODO: поддержать работу с шаблоном как с CommonJS-модулем, через `BEMHTML = require('tpl.bemhtml.js').apply`
-            return 'var BEMHTML = ' + xjstJS + ';BEMHTML = (function(xjst) { return function() { return xjst.apply.call([this]); }; }(BEMHTML));';
+            return 'var BEMHTML = ' + xjstJS + '\n'
+                + 'BEMHTML = (function(xjst) { return function() { return xjst.apply.call([this]); }; }(BEMHTML));\n'
+                + 'typeof module.exports === "undefined" || (module.exports = BEMHTML);';
 
         });
 
