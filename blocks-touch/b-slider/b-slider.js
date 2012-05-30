@@ -453,7 +453,7 @@
                 }
 
                 // индекс текущего экрана
-                if (this._perScreen && this._index > 1) {
+                if (this._perScreen && this._index >= 1) {
                     this._index--;
                 }
             // слайд влево
@@ -465,7 +465,7 @@
                 }
 
                 // индекс текущего экрана
-                if (this._perScreen && this._index < this._count) {
+                if (this._perScreen && this._index <= this._count) {
                     this._index++;
                 }
             }
