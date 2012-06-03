@@ -58,7 +58,7 @@
 
 default: {
     var _this = this,
-        BEM = _this.BEM,
+        BEM_ = _this.BEM,
         v = this.ctx,
         buf = this._buf,
         tag;
@@ -72,7 +72,7 @@ default: {
         if(this.block && v.js !== false) {
             js = apply(this._mode = 'js');
             js = js? this._.extend(v.js, js === true? {} : js) : v.js === true? {} : v.js;
-            js && ((jsParams = {})[BEM.INTERNAL.buildClass(this.block, v.elem)] = js);
+            js && ((jsParams = {})[BEM_.INTERNAL.buildClass(this.block, v.elem)] = js);
         }
 
         buf.push('<', tag);
@@ -88,7 +88,7 @@ default: {
             buf.push(' class="');
             if(isBEM) {
 
-                BEM.INTERNAL.buildClasses(this.block, v.elem, v.elemMods || v.mods, buf);
+                BEM_.INTERNAL.buildClasses(this.block, v.elem, v.elemMods || v.mods, buf);
 
                 var mix = apply(this._mode = 'mix');
                 v.mix && (mix = mix? mix.concat(v.mix) : v.mix);
@@ -101,13 +101,13 @@ default: {
                         block = mixItem.block || _this.block;
 
                         hasItem && buf.push(' ');
-                        BEM.INTERNAL[hasItem? 'buildClasses' : 'buildModsClasses'](
+                        BEM_.INTERNAL[hasItem? 'buildClasses' : 'buildModsClasses'](
                             block,
                             mixItem.elem || (mixItem.block ? undefined : _this.elem),
                             mixItem.elemMods || mixItem.mods,
                             buf);
                         if(mixItem.js) {
-                            (jsParams || (jsParams = {}))[BEM.INTERNAL.buildClass(block, mixItem.elem)] = mixItem.js === true? {} : mixItem.js;
+                            (jsParams || (jsParams = {}))[BEM_.INTERNAL.buildClass(block, mixItem.elem)] = mixItem.js === true? {} : mixItem.js;
                             addJSInitClass || (addJSInitClass = block && !mixItem.elem);
                         }
                     }
@@ -167,7 +167,7 @@ mix: undefined
 content: this.ctx.content
 
 !this._start: {
-    var BEM = {},
+    var BEM_ = {},
         toString = Object.prototype.toString,
         SHORT_TAGS = { // хэш для быстрого определения, является ли тэг коротким
             area : 1, base : 1, br : 1, col : 1, command : 1, embed : 1, hr : 1, img : 1,
@@ -293,7 +293,7 @@ content: this.ctx.content
             if(mods) {
                 var modName; // TODO: разобраться с OmetaJS и YUI Compressor
                 for(modName in mods)
-                    if(mods.hasOwnProperty(modName)) {
+                    if(mods.hasOwnProperty(modName) && mods[modName]) {
                         var modVal = mods[modName];
                         res.push(' ');
                         elem?
@@ -331,7 +331,7 @@ content: this.ctx.content
 
     };
 
-    })(BEM);
+    })(BEM_);
 
     var buildEscape = (function() {
             var ts = { '"': '&quot;', '&': '&amp;', '<': '&lt;', '>': '&gt;' },
@@ -377,7 +377,7 @@ content: this.ctx.content
                 xmlEscape: buildEscape('[&<>]'),
                 attrEscape: buildEscape('["&<>]')
             },
-            BEM: BEM,
+            BEM: BEM_,
             isFirst: function() { return this.position === 1 },
             isLast: function() { return this.position === this._listLength },
             generateId: function() { return this._.identify(this.ctx); }

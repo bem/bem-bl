@@ -121,11 +121,13 @@ this.BEM = $.inherit($.observable, /** @lends BEM.prototype */ {
          * @protected
          * @type Object
          */
-        _this.params = $.extend(_this.getDefaultParams(), params);
+        _this.params = null;
 
         initImmediately !== false?
-            _this._init() :
-            _this.afterCurrentEvent(_this._init);
+            _this._init(params) :
+            _this.afterCurrentEvent(function() {
+                _this._init(params);
+            });
 
     },
 
@@ -133,11 +135,16 @@ this.BEM = $.inherit($.observable, /** @lends BEM.prototype */ {
      * Инициализирует блок
      * @private
      */
-    _init : function() {
+    _init : function(params) {
 
-        return this
-            .setMod('js', 'inited')
-            .trigger('init');
+        if(!this.hasMod('js', 'inited')) {
+            this.params = $.extend(this.getDefaultParams(), params);
+            this
+                .setMod('js', 'inited')
+                .trigger('init');
+        }
+
+        return this;
 
     },
 

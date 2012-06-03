@@ -1,10 +1,10 @@
 block i-jquery, elem core, default: {
-    local(
+    return apply(
         this._mode = '',
         this.ctx = {
             block: 'b-page',
             elem: 'js',
-            url: '//yandex.st/jquery/1.6.2/jquery.min.js'
+            url: '//yandex.st/jquery/1.7.2/jquery.min.js'
         }
-    ) this.apply()
+    );
 }

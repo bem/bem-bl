@@ -100,7 +100,7 @@ function initBlock(blockName, domElem, params, forceLive, callback) {
 
     var uniqId = params.uniqId;
     if(uniqIdToBlock[uniqId]) {
-        return uniqIdToBlock[uniqId]._init();
+        return uniqIdToBlock[uniqId]._init(params);
     }
 
     uniqIdToDomElems[uniqId] = uniqIdToDomElems[uniqId]?
@@ -1281,7 +1281,7 @@ var DOM = BEM.DOM = BEM.decl('i-bem__dom',/** @lends BEM.DOM.prototype */{
         blocks[blockName].on(event, function(e) {
             var blocks = e.block[findFnName](name);
             callback && blocks.forEach(function(block) {
-                callback.call(block);
+                callback.call(block, e);
             });
         });
         return this;
