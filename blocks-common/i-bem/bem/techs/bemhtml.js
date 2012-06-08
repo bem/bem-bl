@@ -2,17 +2,23 @@ var BEM = require('bem'),
     Q = BEM.require('q'),
     PATH = require('path'),
     SYS = require('util'),
-    FS = require('fs'),
-    XJST = require('xjst');
+    XJST = require('xjst'),
+
+    readFile = BEM.require('./util').readFile;
 
 exports.getBuildResultChunk = function(relPath, path, suffix) {
 
-    return [
-        '/* ' + path + ': start */',
-        FS.readFileSync(path),
-        '/* ' + path + ': end */',
-        '\n'
-    ].join('\n');
+    return readFile(path)
+        .then(function(c) {
+
+            return [
+                '/* ' + path + ': start */',
+                c,
+                '/* ' + path + ': end */',
+                '\n'
+            ].join('\n');
+
+        });
 
 };
 
