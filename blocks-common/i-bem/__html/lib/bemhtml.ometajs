@@ -23,9 +23,11 @@ ometa BEMHTMLParser <: XJSTParser {
                  &(spaces ('{' | ':' | ',')) -> [ nn ],
 
     bemMatchAndSet = bemMatch | bemhtmlSet | bemCustom,
-    listBemMatchAndSet = bemMatchAndSet:t spaces ',' spaces listBemMatchAndSet:ts -> BEMHTMLParser._concatChildren(t, ts),
-    listBemMatchAndSet = bemMatchAndSet:t spaces '{' spaces listBemMatchAndSet+:ts spaces '}' spaces -> BEMHTMLParser._concatChildren(t, [#sub, ts]),
-    listBemMatchAndSet = bemMatchAndSet:t spaces ':' (asgnExpr:e -> [#return, e] | stmt):c ','? -> [t, [#body, c]],
+    listBemMatchAndSet = bemMatchAndSet:t spaces
+                       ( ',' spaces listBemMatchAndSet:ts -> BEMHTMLParser._concatChildren(t, ts)
+                       | '{' spaces listBemMatchAndSet+:ts spaces '}' spaces -> BEMHTMLParser._concatChildren(t, [#sub, ts])
+                       | ':' (asgnExpr:e -> [#return, e] | stmt):c ','? -> [t, [#body, c]]
+                       ),
 
     topLevel = listBemMatchAndSet*:ts spaces end -> BEMHTMLParser._addElemPredic(BEMHTMLParser._dropAllSubs(ts))
 
