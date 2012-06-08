@@ -1,8 +1,4 @@
 var ometa = require('ometajs'),
-    OMeta = ometa.OMeta,
-    Parser = ometa.Parser,
-    BSJSParser = exports.BSJSParser = ometa.BSJSParser,
-    BSJSTranslator = exports.BSJSTranslator = ometa.BSJSTranslator,
     xjst = require('xjst'),
     XJSTParser = xjst.XJSTParser,
     XJSTCompiler = xjst.XJSTCompiler;
@@ -23,24 +19,13 @@ ometa BEMHTMLParser <: XJSTParser {
 
     bemCustom = asgnExpr:e -> [#xjst, e],
 
-    bemhtmlSet = bhDefault | bhTag | bhAttrs | bhClass | bhBEM | bhJSAttr | bhJS | bhMix | bhContent,
-
-    bhPredic :n = spaces seq(n):nn -> nn,
-
-    bhDefault = bhPredic('default'):n -> [n],
-    bhTag = bhPredic('tag'):n -> [n],
-    bhAttrs = bhPredic('attrs'):n -> [n],
-    bhClass = bhPredic('cls'):n -> [n],
-    bhBEM = bhPredic('bem'):n -> [n],
-    bhJS = bhPredic('js'):n -> [n],
-    bhJSAttr = bhPredic('jsAttr'):n -> [n],
-    bhMix = bhPredic('mix'):n -> [n],
-    bhContent = bhPredic('content'):n -> [n],
+    bemhtmlSet = spaces <letter (letter | digit | '-')*>:nn
+                 &(spaces ('{' | ':' | ',')) -> [ nn ],
 
     bemMatchAndSet = bemMatch | bemhtmlSet | bemCustom,
-    listBemMatchAndSet = bemMatchAndSet:t ',' listBemMatchAndSet:ts -> BEMHTMLParser._concatChildren(t, ts),
+    listBemMatchAndSet = bemMatchAndSet:t spaces ',' spaces listBemMatchAndSet:ts -> BEMHTMLParser._concatChildren(t, ts),
     listBemMatchAndSet = bemMatchAndSet:t spaces '{' spaces listBemMatchAndSet+:ts spaces '}' spaces -> BEMHTMLParser._concatChildren(t, [#sub, ts]),
-    listBemMatchAndSet = bemMatchAndSet:t ':' (asgnExpr:e -> [#return, e] | stmt):c ','? -> [t, [#body, c]],
+    listBemMatchAndSet = bemMatchAndSet:t spaces ':' (asgnExpr:e -> [#return, e] | stmt):c ','? -> [t, [#body, c]],
 
     topLevel = listBemMatchAndSet*:ts spaces end -> BEMHTMLParser._addElemPredic(BEMHTMLParser._dropAllSubs(ts))
 

@@ -26,7 +26,7 @@ fs.readFile(process.argv[2], 'utf8', function(err, input){
         //process.stdout.write('--- compile2:\n' + compileFn2 + '\n\n');
         //fs.writeFile('blabla', compileFn2);
         try {
-            compileFn2 = process.compile(compileFn2, 'compile2').apply;
+            compileFn2 = require('vm').runInNewContext(compileFn2, 'compile2').apply;
         } catch(e) { console.log(e) }
 
         process.stdout.write('\n-=-=-=-=-=-=-=-=-=-=-\n\n');
