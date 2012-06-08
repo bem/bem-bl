@@ -19,7 +19,9 @@ ometa BEMHTMLParser <: XJSTParser {
   bemCustom = asgnExpr:e -> [#xjst, e],
 
   bemhtmlSet = spaces <letter (letter | digit | '-')*>:nn
-               &(spaces ('{' | ':' | ',')) -> [ nn ],
+               &(spaces ('{' | ':' | ','))
+               ?(!BEMHTMLParser._isPrimitive(nn))
+               -> [ nn ],
 
   bemMatchAndSet = bemMatch | bemhtmlSet | bemCustom,
   listBemMatchAndSet = bemMatchAndSet:t spaces
@@ -36,6 +38,19 @@ ometa BEMHTMLParser <: XJSTParser {
     BEMHTMLParser._addElemPredic(BEMHTMLParser._dropAllSubs(ts))
   }
 }
+
+BEMHTMLParser._primitives = {
+  'true': true,
+  'false': true,
+  'null': true,
+  'undefined': true,
+  'NaN': true,
+  'Infinity': true
+};
+
+BEMHTMLParser._isPrimitive = function(name) {
+  return BEMHTMLParser._primitives[name];
+};
 
 BEMHTMLParser._concatChildren = function(p, cs) {
   if (cs[0] !== 'sub') return [p].concat(cs);
