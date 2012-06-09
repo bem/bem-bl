@@ -34,11 +34,23 @@ ometa BEMHTMLParser <: XJSTParser {
                        [t, [#body, c]]
                      }),
 
-  applyMode = "apply" "(" bemVal:mode ")" applyStmt([#apply]):st ->  [
-                #local,
-                [#set, [#getp, [#string, "_mode"], ["this"] ], mode],
-                st
-              ],
+  applyMode = "apply" "(" expr:e ")" applyStmt([#apply]):st ->  {
+    function traverse(e) {
+      if (e[0] !== 'binop' && e[1] !== ',') return [ e ];
+      return [].concat(traverse(e[2]), traverse(e[3]));
+    }
+
+    [
+      #local,
+      traverse(e).map(function (e) {
+        if (e[0] !== 'string') return e;
+        return [#set, [#getp, [#string, '_mode'], [#this]], e];
+      }).reduce(function (acc, current) {
+        return [#binop, ',', acc, current];
+      }),
+      st
+    ]
+  },
 
   primExprHd = applyMode:l localExpr(l):r -> r
              | ^primExprHd,
