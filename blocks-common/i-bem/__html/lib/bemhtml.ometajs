@@ -34,6 +34,18 @@ ometa BEMHTMLParser <: XJSTParser {
                        [t, [#body, c]]
                      }),
 
+  applyMode = "apply" "(" bemVal:mode ")" applyStmt([#apply]):st ->  [
+                #local,
+                [#set, [#getp, [#string, "_mode"], ["this"] ], mode],
+                st
+              ],
+
+  primExprHd = applyMode:l localExpr(l):r -> r
+             | ^primExprHd,
+
+  stmt       = applyMode:l localStmt(l):r -> r
+             | ^stmt,
+
   topLevel = listBemMatchAndSet*:ts spaces end -> {
     BEMHTMLParser._addElemPredic(BEMHTMLParser._dropAllSubs(ts))
   }
