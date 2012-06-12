@@ -15,6 +15,11 @@ exports.getCreateResult = function(path, suffix, vars) {
         });
 };
 
+exports.storeCreateResult = function(path, suffix, res, force) {
+    // always overwrite html files
+    return this.__base(path, suffix, res, true);
+};
+
 exports.getDependencies = function() {
     return ['bemjson.js', 'bemhtml.js'];
 };
