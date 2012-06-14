@@ -35,7 +35,7 @@ exports.getBuildResult = function(prefixes, suffix, outputDir, outputName) {
         .then(function(sources) {
             sources = sources.join('\n');
 
-            var BEMHTML = require('../../__html/lib/bemhtml.js');
+            var BEMHTML = require('../../__html/lib/bemhtml');
             try {
                 var tree = BEMHTML.BEMHTMLParser.matchAll(
                     sources,
