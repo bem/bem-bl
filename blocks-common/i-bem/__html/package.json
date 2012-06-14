@@ -1,0 +1,13 @@
+{
+  "name": "bemhtml",
+  "version": "0.0.0",
+  "private": true,
+  "devDependencies": {
+    "xjst": "~ 0.2.33",
+    "ometajs": "~ 3.0.14",
+    "mocha": "1.1.x"
+  },
+  "scripts": {
+    "test": "mocha --ui tdd --growl --reporter spec test/*-test.js"
+  }
+}
