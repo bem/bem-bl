@@ -4,6 +4,9 @@ var ometa = require('ometajs'),
     XJSTCompiler = xjst.XJSTCompiler;
 
 ometa BEMHTMLParser <: XJSTParser {
+  isKeyword = :x ?(x === 'applyCtx')
+            | ^isKeyword,
+
   bemMatch = bemBlock | bemElem | bemMod,
 
   bemVal = letter:x (letter | digit | '-')*:xs -> [#string, x + xs.join('')],
@@ -34,34 +37,45 @@ ometa BEMHTMLParser <: XJSTParser {
                        [t, [#body, c]]
                      }),
 
-  applyMode = "apply" "(" expr:e ")" applyStmt([#apply]):st ->  {
-    function traverse(e) {
-      if (e[0] !== 'binop' && e[1] !== ',') return [ e ];
-      return [].concat(traverse(e[2]), traverse(e[3]));
-    }
+  applyMode :type = "apply" "(" expr:e ")"
+      { BEMHTMLParser._transMode(e) }:modded_e
+      applyFactory([type, modded_e]):r -> r,
 
-    [
-      #local,
-      traverse(e).map(function (e) {
-        if (e[0] !== 'string') return e;
-        return [#set, [#getp, [#string, '_mode'], [#this]], e];
-      }).reduce(function (acc, current) {
-        return [#binop, ',', acc, current];
-      }),
-      st
-    ]
-  },
+  applyCtx :type "applyCtx" "(" expr:ctx ")" = {
+        BEMHTMLParser._transMode([
+          #binop, ',',
+          [#set, [#getp, [#string, 'ctx'], [#this] ], ctx],
+          [#string, '']
+        ])
+      }:modded_e
+      applyFactory([type, #next, modded_e]):r -> r,
 
-  primExprHd = applyMode:l localExpr(l):r -> r
+  primExprHd = applyMode(#expr):r -> r
+             | applyCtx(#expr):r -> r
              | ^primExprHd,
 
-  stmt       = applyMode:l localStmt(l):r -> r
+  stmt       = applyMode(#stmt):r -> r
+             | applyCtx(#stmt):r -> r
              | ^stmt,
 
   topLevel = listBemMatchAndSet*:ts spaces end -> {
     BEMHTMLParser._addElemPredic(BEMHTMLParser._dropAllSubs(ts))
   }
 }
+
+BEMHTMLParser._transMode = function transMode(e) {
+    function traverse(e) {
+    if (e[0] !== 'binop' && e[1] !== ',') return [ e ];
+    return [].concat(traverse(e[2]), traverse(e[3]));
+  }
+
+  return traverse(e).map(function (e) {
+    if (e[0] !== 'string') return e;
+    return [#set, [#getp, [#string, '_mode'], [#this]], e];
+  }).reduce(function (acc, current) {
+    return [#binop, ',', acc, current];
+  });
+};
 
 BEMHTMLParser._primitives = {
   'true': true,
