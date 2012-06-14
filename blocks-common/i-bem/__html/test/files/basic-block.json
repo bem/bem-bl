@@ -9,7 +9,9 @@
                     { "elem": "eee", "content":
                         { "tag": "b", "content": "blalba" } },
                     { "block": "b2", "elem": "eee", "content":
-                        { "tag": "b", "content": "blalba" } }
+                        { "tag": "b", "content": "blalba" } },
+                    { "block": "b-bla" },
+                    { "block": "b-alb" }
                     ]
             }
         }
