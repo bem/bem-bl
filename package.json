@@ -3,13 +3,13 @@
   "version": "0.0.0",
   "private": true,
   "dependencies": {
-    "xjst": "~ 0.2.33",
-    "ometajs": "~ 3.0.14"
+    "xjst": "~ 0.2.34",
+    "ometajs": "~ 3.0.15"
   },
   "devDependencies": {
     "mocha": "1.1.x"
   },
   "scripts": {
-    "test": "mocha --ui tdd --growl --reporter spec test/*-test.js"
+    "test": "mocha --ui tdd --growl --reporter spec blocks-common/i-bem/__html/test/*-test.js"
   }
 }
