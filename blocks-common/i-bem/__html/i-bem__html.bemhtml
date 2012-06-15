@@ -94,21 +94,56 @@ default: {
                 v.mix && (mix = mix? mix.concat(v.mix) : v.mix);
 
                 if(mix) {
-                    var i = 0, l = mix.length, mixItem, hasItem, block;
-                    while(i < l) {
-                        mixItem = mix[i++];
-                        hasItem = mixItem.block || mixItem.elem,
-                        block = mixItem.block || _this.block;
+                    var visited = {};
+
+                    function visitedKey(block, elem) {
+                      return (block || '') + '__' + (elem || '');
+                    }
+
+                    visited[visitedKey(this.block, this.elem)] = true;
+
+                    for (var i = 0; i < mix.length; i++) {
+                        var mixItem = mix[i],
+                            hasItem = mixItem.block || mixItem.elem,
+                            block = mixItem.block || mixItem._block || _this.block,
+                            elem = mixItem.elem || mixItem._elem || _this.elem;
 
                         hasItem && buf.push(' ');
                         BEM_.INTERNAL[hasItem? 'buildClasses' : 'buildModsClasses'](
                             block,
-                            mixItem.elem || (mixItem.block ? undefined : _this.elem),
+                            elem || (mixItem.block ? undefined : _this.elem),
                             mixItem.elemMods || mixItem.mods,
                             buf);
+
                         if(mixItem.js) {
                             (jsParams || (jsParams = {}))[BEM_.INTERNAL.buildClass(block, mixItem.elem)] = mixItem.js === true? {} : mixItem.js;
                             addJSInitClass || (addJSInitClass = block && !mixItem.elem);
+                        }
+
+                        // Process nested mixes
+                        if (hasItem && !visited[visitedKey(block, elem)]) {
+                            visited[visitedKey(block, elem)] = true;
+                            var nestedMix = apply(
+                              this.block = block,
+                              this.elem = elem,
+                              'mix'
+                            );
+
+                            if (nestedMix) {
+                                for (var j = 0; j < nestedMix.length; j++) {
+                                    var nestedItem = nestedMix[j];
+                                    if (!nestedItem.block &&
+                                        !nestedItem.elem ||
+                                        !visited[visitedKey(
+                                          nestedItem.block,
+                                          nestedItem.elem
+                                        )]) {
+                                        nestedItem._block = block;
+                                        nestedItem._elem = elem;
+                                        mix.splice(i + 1, 0, nestedItem);
+                                    }
+                                }
+                            }
                         }
                     }
                 }
