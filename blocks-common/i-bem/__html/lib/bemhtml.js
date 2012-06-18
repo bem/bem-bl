@@ -24,7 +24,7 @@ exports.translate = function translate(source, options) {
   }
 
   try {
-    var xjstJS = (process.env.BEMHTML_ENV == 'development' || options.devMode) ?
+    var xjstJS = options.devMode ?
                    xjst.compile(xjstTree, '', { 'no-opt': true })
                    :
                    xjst.compile(xjstTree);
