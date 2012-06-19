@@ -146,7 +146,13 @@ block b-page {
 
 
 /* /Users/indutny/Code/bem/bem-bl-test/bem-bl/blocks-desktop/b-link/b-link.bemhtml: start */
+block b-link-base {
+  mix: [{mods: { key: 'value' }}]
+}
+
+
 block b-link {
+    mix: [{ block: 'b-link-base' }]
 
     tag: 'a'
 
