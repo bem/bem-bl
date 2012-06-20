@@ -11,13 +11,19 @@ block b-slider {
     }
 
     content: {
-        elem: 'inner',
-        content: {
-            block: 'b-menu',
-            mods: {
-                layout: 'horiz'
-            },
-            content: this.ctx.content
+        var mods = {
+            layout: 'horiz'
+        };
+
+        this.ctx.mods['vert-align'] === 'top' && (mods['vert-align'] = 'top');
+
+        return {
+            elem: 'inner',
+            content: {
+                block: 'b-menu',
+                mods: mods,
+                content: this.ctx.content
+            }
         }
     }
 }
