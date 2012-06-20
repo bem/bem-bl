@@ -57,3 +57,8 @@ exports.compile = function compile(source, options) {
 
   return context.BEMHTML;
 };
+
+//
+// Jail grammar
+//
+exports.Jail = require('./ometa/jail').Jail;

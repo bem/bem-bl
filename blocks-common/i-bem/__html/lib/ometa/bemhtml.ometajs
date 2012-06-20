@@ -1,6 +1,7 @@
 var xjst = require('xjst'),
     XJSTParser = xjst.XJSTParser,
-    XJSTCompiler = xjst.XJSTCompiler;
+    XJSTCompiler = xjst.XJSTCompiler,
+    Jail = require('./jail').Jail;
 
 ometa BEMHTMLParser <: XJSTParser {
   isKeyword = :x ?(x === 'applyCtx')
@@ -18,7 +19,10 @@ ometa BEMHTMLParser <: XJSTParser {
   bemMod = bemPredic('mod') bemVal:m space+ bemVal:v -> [#blockMod, m, v],
   bemMod = bemPredic('elemMod') bemVal:m space+ bemVal:v -> [#elemMod, m, v],
 
-  bemCustom = asgnExpr:e -> [#xjst, e],
+  bemCustom = asgnExpr:e -> [
+    #xjst,
+    Jail.match(e, 'topLevel', ['_$' + (BEMHTMLParser._jailId++).toString(36)])
+  ],
 
   bemhtmlSet = spaces <letter (letter | digit | '-')*>:nn
                &(spaces ('{' | ':' | ','))
@@ -70,6 +74,8 @@ ometa BEMHTMLParser <: XJSTParser {
     BEMHTMLParser._addElemPredic(BEMHTMLParser._dropAllSubs(ts))
   }
 }
+
+BEMHTMLParser._jailId = 0;
 
 BEMHTMLParser._transMode = function transMode(e) {
     function traverse(e) {
