@@ -15,7 +15,7 @@ block b-slider {
             layout: 'horiz'
         };
 
-        this.ctx.mods['vert-align'] === 'top' && (mods['vert-align'] = 'top');
+        this.ctx.mods && this.ctx.mods['vert-align'] === 'top' && (mods['vert-align'] = 'top');
 
         return {
             elem: 'inner',
