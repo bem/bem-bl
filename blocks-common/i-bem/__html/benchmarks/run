@@ -22,7 +22,7 @@ fs.readdirSync(__dirname).filter(function(file) {
 }).forEach(function(file) {
   var content = ibem + '\n' + fs.readFileSync(file + '.bemhtml').toString(),
       json = require(file + '.json'),
-      template = bemhtml.compile(content);
+      template = bemhtml.compile(content, { engine: 'sort-group' });
 
   suite.add(path.basename(file).replace(/\-benchmark$/, ''), function () {
     template.call(json);

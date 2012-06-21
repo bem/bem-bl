@@ -10,7 +10,7 @@ ometa BEMHTMLParser <: XJSTParser {
   bemMatch = bemBlock | bemElem | bemMod,
 
   bemVal = letter:x (letter | digit | '-')*:xs -> [#string, x + xs.join('')],
-  bemVal = asgnExpr,
+  bemVal = asgnExpr:e -> e,
 
   bemPredic :n = spaces seq(n):nn space+ -> nn,
 
@@ -19,10 +19,7 @@ ometa BEMHTMLParser <: XJSTParser {
   bemMod = bemPredic('mod') bemVal:m space+ bemVal:v -> [#blockMod, m, v],
   bemMod = bemPredic('elemMod') bemVal:m space+ bemVal:v -> [#elemMod, m, v],
 
-  bemCustom = asgnExpr:e -> [
-    #xjst,
-    Jail.match(e, 'topLevel', ['_$' + (BEMHTMLParser._jailId++).toString(36)])
-  ],
+  bemCustom = asgnExpr:e -> [#xjst, e],
 
   bemhtmlSet = spaces <letter (letter | digit | '-')*>:nn
                &(spaces ('{' | ':' | ','))
@@ -36,9 +33,13 @@ ometa BEMHTMLParser <: XJSTParser {
                      } | '{' spaces listBemMatchAndSet+:ts spaces '}'
                           spaces -> {
                        BEMHTMLParser._concatChildren(t, [#sub, ts])
-                     } | ':' (asgnExpr:e -> [#return, e] | stmt):c ','? -> {
-                       [t, [#body, c]]
-                     }):r -> {
+                     } | ':' (asgnExpr:e -> [#return, e] | stmt):c ','? ->
+                       [t, [#body, Jail.match(
+                         c,
+                         'topLevel',
+                         ['_$' + (BEMHTMLParser._jailId++).toString(36)]
+                       )]]
+                     ):r -> {
                        if (this.predicates.length === 0) return r;
                        BEMHTMLParser._concatChildren(
                          [#xjst, this.predicates],

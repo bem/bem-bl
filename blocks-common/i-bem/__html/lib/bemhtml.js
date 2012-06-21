@@ -20,14 +20,14 @@ exports.translate = function translate(source, options) {
   try {
     var xjstTree = xjst.parse(xjstSources);
   } catch (e) {
-    throw new Error("xjst parse failed");
+    throw new Error("xjst parse failed\n" + e.stack);
   }
 
   try {
     var xjstJS = options.devMode ?
                    xjst.compile(xjstTree, '', { 'no-opt': true })
                    :
-                   xjst.compile(xjstTree);
+                   xjst.compile(xjstTree, { engine: options.engine });
   } catch (e) {
       throw new Error("xjst to js compilation failed:\n" + e.stack);
   }
