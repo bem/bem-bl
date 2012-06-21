@@ -33,4 +33,5 @@ suite('i-bem block and others', function() {
   unit('block with nested looped mixes', 'looped-mix');
   unit('block with single non-array mix', 'single-mix');
   unit('blocks with local variables', 'local-var');
+  unit('attr with empty value', 'empty-attrs');
 });
