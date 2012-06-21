@@ -34,4 +34,5 @@ suite('i-bem block and others', function() {
   unit('block with single non-array mix', 'single-mix');
   unit('blocks with local variables', 'local-var');
   unit('attr with empty value', 'empty-attrs');
+  unit('one symbol elem', 'one-symbol-elem');
 });
