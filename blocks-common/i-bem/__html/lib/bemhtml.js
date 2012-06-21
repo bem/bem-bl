@@ -32,14 +32,22 @@ exports.translate = function translate(source, options) {
       throw new Error("xjst to js compilation failed:\n" + e.stack);
   }
 
-  return 'var BEMHTML = ' + xjstJS + ';\n' +
-         'BEMHTML = (function(xjst) {\n' +
-         '  return function() {\n' +
-         '    return xjst.apply.call(\n' +
+  return 'var BEMHTML = function(BEM) {\n' +
+         '  var BEMHTML = ' + xjstJS + ';\n' +
+         '  BEMHTML = (function(xjst) {\n' +
+         '    return function() {\n' +
+         '      return xjst.apply.call(\n' +
          (options.raw ? 'this' : '[this]') + '\n' +
-         '    ); };\n' +
-         '}(BEMHTML));\n' +
-         'typeof exports === "undefined" || (exports.BEMHTML = BEMHTML);';
+         '      );\n' +
+         '    };\n' +
+         '  }(BEMHTML));\n' +
+         '  return BEMHTML;\n' +
+         '};\n' +
+         'if (typeof exports === "undefined") {\n' +
+         '  BEMHTML = BEMHTML();\n' +
+         '} else {\n' +
+         '  exports.BEMHTML = BEMHTML;\n' +
+         '}';
 };
 
 //

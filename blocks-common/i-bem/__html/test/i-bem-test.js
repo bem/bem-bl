@@ -21,7 +21,7 @@ suite('i-bem block and others', function() {
       };
 
       assert.equal(
-        bemhtml.compile(iBem + contents.src, { devMode: true })
+        bemhtml.compile(iBem + contents.src, { devMode: true })()
             .call(contents.data) + '\n',
         contents.dst
       );
