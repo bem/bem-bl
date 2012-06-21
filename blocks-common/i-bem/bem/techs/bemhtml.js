@@ -78,9 +78,12 @@ exports.getBuildResult = function(prefixes, suffix, outputDir, outputName) {
                 throw new Error("xjst to js compilation failed");
             }
 
-            return 'var BEMHTML = ' + xjstJS + '\n'
-                + 'BEMHTML = (function(xjst) { return function() { return xjst.apply.call([this]); }; }(BEMHTML));\n'
-                + 'typeof exports === "undefined" || (exports.BEMHTML = BEMHTML);';
+            return 'var BEMHTML = function(BEM) {\n' +
+                    'var BEMHTML = ' + xjstJS + '\n' +
+                    'BEMHTML = (function(xjst) { return function() { return xjst.apply.call([this]); }; }(BEMHTML));\n' +
+                    'return BEMHTML\n' +
+                '};\n' +
+                'if (typeof exports === "undefined") { BEMHTML = BEMHTML() } else { exports.BEMHTML = BEMHTML }';
 
         });
 
