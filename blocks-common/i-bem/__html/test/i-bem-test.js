@@ -31,5 +31,6 @@ suite('i-bem block and others', function() {
   unit('basic block', 'basic-block');
   unit('block with nested mixes', 'nested-mix');
   unit('block with nested looped mixes', 'looped-mix');
+  unit('block with single non-array mix', 'single-mix');
   unit('blocks with local variables', 'local-var');
 });

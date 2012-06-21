@@ -102,6 +102,8 @@ default: {
 
                     visited[visitedKey(this.block, this.elem)] = true;
 
+                    // Transform mix to the single-item array if it's not array
+                    if (!this._.isArray(mix)) mix = [mix];
                     for (var i = 0; i < mix.length; i++) {
                         var mixItem = mix[i],
                             hasItem = mixItem.block || mixItem.elem,
