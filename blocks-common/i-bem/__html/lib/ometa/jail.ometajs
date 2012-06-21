@@ -34,7 +34,7 @@ Jail.prototype._get = function get(name) {
   var ctx = this._ctx;
 
   do {
-    if (ctx.hash['_' + name]) return ctx.hash['_' + name];
+    if (ctx.hash.hasOwnProperty(name)) return ctx.hash[name];
     ctx = ctx.parent;
   } while (ctx !== undefined);
 
@@ -43,9 +43,9 @@ Jail.prototype._get = function get(name) {
 
 Jail.prototype._set = function set(name) {
   if (this._ctx === this._global) {
-    return this._global.hash['_' + name] = this._prefix + name;
+    return this._global.hash[name] = this._prefix + name;
   }
 
-  this._ctx.hash['_' + name] = name;
+  this._ctx.hash[name] = name;
   return name;
 };
