@@ -360,6 +360,8 @@ default: {
                 v.mix && (mix = mix? mix.concat(v.mix) : v.mix);
 
                 if(mix) {
+                    // Transform mix to the single-item array if it's not array
+                    if (!this._.isArray(mix)) mix = [mix];
                     var i = 0, l = mix.length, mixItem, hasItem, block;
                     while(i < l) {
                         mixItem = mix[i++];
