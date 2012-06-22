@@ -15,7 +15,7 @@
     var events;
 
     // тач
-    if ('ontouchstart' in window) {
+    if ('ontouchstart' in window && navigator.userAgent.indexOf('Android') === -1) {
         events = {
             type: 'touch',
             down: 'touchstart',
