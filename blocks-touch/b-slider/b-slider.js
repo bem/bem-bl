@@ -38,9 +38,9 @@
         _delayedInit: function() {
 
             var slider = this,
-                images = slider.findBlocksInside('b-ico');
+                images = slider.findBlocksInside('b-icon');
 
-            // если внутри есть картинки (b-ico),
+            // если внутри есть картинки (b-icon),
             // то отложить инициализацию  до момента их полной загрузки,
             // чтобы слайдер мог правильно получить свою настоящую ширину
             if (images.length) {
