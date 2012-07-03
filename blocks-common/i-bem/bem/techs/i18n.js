@@ -21,28 +21,55 @@ var LangsMixin = exports.LangsMixin = {
 exports.Tech = INHERIT(BEM.Tech, BEM.util.extend({}, LangsMixin, {
 
     getSuffixForLang: function(lang) {
-        return [this.getTechName(), lang + '.json.js'].join('/');
+        return [this.getTechName(), lang + '.js'].join('/');
     },
 
     getSuffixes: function() {
+        return this.getBuildSuffixes().concat(this.getCreateSuffixes());
+    },
+
+    getCreateSuffixes: function() {
         return this.getLangs().map(this.getSuffixForLang, this);
+    },
+
+    getBuildSuffixes: function() {
+        return [this.getSuffixForLang('all')];
     },
 
     getBuildResult: function(prefixes, suffix, outputDir, outputName) {
 
         var _this = this;
-        return Q.when(this.filterPrefixes(prefixes, [suffix]), function(paths) {
+        return Q.all(this.filterPrefixes(prefixes, this.getBuildSuffixes()))
+            .then(function(allPaths) {
 
-            return paths.reduce(function(decl, path) {
+                // read and process *.i18n/all.js files of BEM entities
+                var decl = allPaths.reduce(function(decl, path) {
 
-                return Q.all([decl, _this.readContent(path, suffix)])
-                    .spread(function(decl, c) {
-                        return BEM.util.extend(true, decl, c);
-                    });
+                    return Q.all([decl, _this.readContent(path, suffix)])
+                        .spread(_this.extendLangDecl.bind(_this));
 
-            }, {});
+                }, {});
 
-        });
+                // read and process *.i18n/[lang].js files of BEM entities
+                return _this.getLangs().reduce(function(decl, lang) {
+
+                    // filter prefixes for each lang
+                    return _this.filterPrefixes(prefixes, [_this.getSuffixForLang(lang)])
+                        .then(function(langPaths) {
+
+                            // read and process files for concrete lang
+                            return langPaths.reduce(function(decl, path) {
+
+                                return Q.all([decl, _this.readLangContent(path, lang)])
+                                    .spread(_this.extendLangDecl.bind(_this));
+
+                            }, decl);
+
+                        });
+
+                }, decl);
+
+            });
 
     },
 
@@ -66,6 +93,43 @@ exports.Tech = INHERIT(BEM.Tech, BEM.util.extend({}, LangsMixin, {
 
     readContent: function(path, suffix) {
         return BEM.util.readDecl(path);
+    },
+
+    readLangContent: function(path, lang) {
+
+        return this.readContent(path)
+            .then(function(c) {
+                var d = {};
+                d[lang] = c;
+                return d;
+            });
+
+    },
+
+    extendLangDecl: function(decl, c) {
+
+        Object.keys(c).forEach(function(lang) {
+
+            Object.keys(c[lang]).forEach(function(keyset) {
+
+                decl[lang] || (decl[lang] = {});
+
+                // fallback to BEM.util.extend() on normal keysets
+                if (keyset !== '') {
+                    // TODO: here will also go merge of i18n:js and i18n:xsl content of key values in the future
+                    decl[lang][keyset] = BEM.util.extend(true, decl[lang][keyset] || {}, c[lang][keyset]);
+                    return;
+                }
+
+                // concatenate values of empty keysets
+                decl[lang][keyset] || (decl[lang][keyset] = '');
+                decl[lang][keyset] += ';\n' + c[lang][keyset];
+
+            });
+        });
+
+        return decl;
+
     }
 
 }));
