@@ -1,15 +1,15 @@
 var BEM = require('bem'),
     Q = BEM.require('qq'),
     INHERIT = BEM.require('inherit'),
+    Tech = BEM.require('./techs/js-i').Tech,
     LangsMixin = require('./i18n').LangsMixin,
     PATH = require('path'),
     TANKER = require('../../__i18n/lib/tanker');
 
-exports.Tech = INHERIT(BEM.Tech, BEM.util.extend({}, LangsMixin, {
+exports.Tech = INHERIT(Tech, BEM.util.extend({}, LangsMixin, {
 
-    getSuffixForLang: function(lang, techSuffix) {
-        typeof techSuffix === 'string' || (techSuffix = 'js');
-        return ['i18n', lang + '.' + techSuffix].join('/');
+    getBaseTechSuffix: function() {
+        return 'js';
     },
 
     getSuffixForAll: function() {
@@ -17,79 +17,85 @@ exports.Tech = INHERIT(BEM.Tech, BEM.util.extend({}, LangsMixin, {
     },
 
     getSuffixes: function() {
+        return [this.getBaseTechSuffix()];
+    },
+
+    getBuildSuffixes: function() {
 
         return this.getLangs()
-            .map(this.getSuffixForLang)
-            .concat([this.getSuffixForAll()]);
+            .map(this.getBuildSuffixForLang, this);
 
     },
 
-    getCreateResults: function(prefix, vars) {
+    getBuildSuffixForLang: function(lang) {
+        return lang + '.' + this.getBaseTechSuffix();
+    },
 
-        var all = this.getSuffixForAll(),
+    getBuildResults: function(prefixes, outputDir, outputName) {
+
+        var _this = this,
+            prefix = PATH.resolve(outputDir, outputName),
+            source = this.getPath(prefix, this.getSuffixForAll()),
             res = {};
-
-        this.getLangs().forEach(function(lang) {
-
-            var suffix = this.getSuffixForLang(lang);
-            res[suffix] = this.getCreateResult(this.getPath(prefix, suffix), suffix, BEM.util.extend({ lang: lang }, vars));
-
-        }, this);
-
-        return Q.shallow(res)
-            .then(function(res) {
-
-                res[all] = Object.keys(res).reduce(function(content, suffix) {
-
-                    return content.concat([
-                        '/* begin ' + suffix + ' */',
-                        '',
-                        res[suffix],
-                        '/* end ' + suffix + ' */',
-                        ''
-                    ]);
-
-                }, []).join('\n');
-
-                return res;
-
-            });
-
-    },
-
-    getCreateResult: function(path, suffix, vars) {
-
-        var source = this.getPath(vars.Prefix, this.getSuffixForLang(vars.lang, 'json.js'));
 
         return BEM.util.readJsonJs(source)
             .then(function(data) {
 
-                var res = [];
+                _this.getLangs().forEach(function(lang) {
 
-                Object.keys(data).forEach(function(keyset) {
+                    var suffix = _this.getBuildSuffixForLang(lang),
+                        dataLang = _this.extendLangDecl({}, data['all'] || {});
 
-                    res.push("BEM.I18N.decl('" + keyset + "', {");
-
-                    Object.keys(data[keyset]).forEach(function(key, i, arr) {
-
-                        TANKER.xmlToJs(data[keyset][key], function(js) {
-                            res.push(JSON.stringify(key) + ': ' + js + (i === arr.length - 1 ? '' : ','));
-                        });
-
-                    });
-
-                    res.push('}, {\n"lang": "' + vars.lang + '"\n});\n');
+                    dataLang = _this.extendLangDecl(dataLang, data[lang] || {});
+                    res[suffix] = _this.getBuildResult(prefixes, suffix, outputDir, outputName, dataLang, lang);
 
                 });
 
-                return res.join('\n');
+                return Q.shallow(res);
 
             });
 
     },
 
-    storeCreateResult: function(path, suffix, res, force) {
-        return this.__base(path, suffix, res, true);
+    getBuildResult: function(prefixes, suffix, outputDir, outputName, data, lang) {
+
+        var _this = this;
+        return this.__base(prefixes, this.getBaseTechSuffix(), outputDir, outputName)
+            .then(function(res) {
+                return res.concat(_this.serializeI18nData(data, lang));
+            });
+
+    },
+
+    serializeI18nData: function(data, lang) {
+
+        var res = [];
+
+        Object.keys(data).sort().forEach(function(keyset) {
+
+            // output value of empty keyset as a simple js code
+            if (keyset === '') {
+                res.push(data[keyset]);
+                return;
+            }
+
+            // generate i18n declaration for normal keysets
+            res.push("BEM.I18N.decl('" + keyset + "', {");
+
+            Object.keys(data[keyset]).forEach(function(key, i, arr) {
+
+                TANKER.xmlToJs(data[keyset][key], function(js) {
+                    res.push(JSON.stringify(key) + ': ' + js + (i === arr.length - 1 ? '' : ','));
+                });
+
+            });
+
+            res.push('}, {\n"lang": "' + lang + '"\n});\n');
+
+        });
+
+        return res;
+
     },
 
     getDependencies: function() {

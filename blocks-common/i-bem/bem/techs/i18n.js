@@ -14,6 +14,37 @@ var LangsMixin = exports.LangsMixin = {
 
     getSuffixForLang: function(lang) {
         return lang + '.' + this.getTechName();
+    },
+
+    extendDecl: function(decl, ext) {
+
+        Object.keys(ext).forEach(function(lang) {
+            decl[lang] = this.extendLangDecl(decl[lang] || {}, ext[lang]);
+        }, this);
+
+        return decl;
+
+    },
+
+    extendLangDecl: function(decl, ext) {
+
+        Object.keys(ext).forEach(function(keyset) {
+
+            // fallback to BEM.util.extend() on normal keysets
+            if (keyset !== '') {
+                // TODO: here will also go merge of i18n:js and i18n:xsl content of key values in the future
+                decl[keyset] = BEM.util.extend(true, decl[keyset] || {}, ext[keyset]);
+                return;
+            }
+
+            // concatenate values of empty keysets
+            decl[keyset] || (decl[keyset] = '');
+            decl[keyset] += '\n' + ext[keyset];
+
+        });
+
+        return decl;
+
     }
 
 };
@@ -46,7 +77,7 @@ exports.Tech = INHERIT(BEM.Tech, BEM.util.extend({}, LangsMixin, {
                 var decl = allPaths.reduce(function(decl, path) {
 
                     return Q.all([decl, _this.readContent(path, suffix)])
-                        .spread(_this.extendLangDecl.bind(_this));
+                        .spread(_this.extendDecl.bind(_this));
 
                 }, {});
 
@@ -103,32 +134,6 @@ exports.Tech = INHERIT(BEM.Tech, BEM.util.extend({}, LangsMixin, {
                 d[lang] = c;
                 return d;
             });
-
-    },
-
-    extendLangDecl: function(decl, c) {
-
-        Object.keys(c).forEach(function(lang) {
-
-            Object.keys(c[lang]).forEach(function(keyset) {
-
-                decl[lang] || (decl[lang] = {});
-
-                // fallback to BEM.util.extend() on normal keysets
-                if (keyset !== '') {
-                    // TODO: here will also go merge of i18n:js and i18n:xsl content of key values in the future
-                    decl[lang][keyset] = BEM.util.extend(true, decl[lang][keyset] || {}, c[lang][keyset]);
-                    return;
-                }
-
-                // concatenate values of empty keysets
-                decl[lang][keyset] || (decl[lang][keyset] = '');
-                decl[lang][keyset] += ';\n' + c[lang][keyset];
-
-            });
-        });
-
-        return decl;
 
     }
 
