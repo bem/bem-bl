@@ -23,7 +23,8 @@ exports.Tech = INHERIT(Tech, BEM.util.extend({}, LangsMixin, {
     getBuildSuffixes: function() {
 
         return this.getLangs()
-            .map(this.getBuildSuffixForLang, this);
+            .map(this.getBuildSuffixForLang, this)
+            .concat([this.getBaseTechSuffix()]);
 
     },
 
@@ -50,6 +51,9 @@ exports.Tech = INHERIT(Tech, BEM.util.extend({}, LangsMixin, {
                     res[suffix] = _this.getBuildResult(prefixes, suffix, outputDir, outputName, dataLang, lang);
 
                 });
+
+                // NOTE: hack to pass outputName to storeBuildResult()
+                res[_this.getBaseTechSuffix()] = outputName;
 
                 return Q.shallow(res);
 
@@ -97,6 +101,21 @@ exports.Tech = INHERIT(Tech, BEM.util.extend({}, LangsMixin, {
         res.push("\nBEM.I18N.lang('" + lang + "');\n");
 
         return res;
+
+    },
+
+    storeBuildResult: function(path, suffix, res) {
+
+        if (suffix === this.getBaseTechSuffix()) {
+            return BEM.util.symbolicLink(
+                path,
+                this.getPath(
+                    res,
+                    this.getBuildSuffixForLang(this.getLangs().shift())),
+                true);
+        }
+
+        return this.__base(path, suffix, res);
 
     },
 
