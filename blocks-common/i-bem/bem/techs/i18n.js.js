@@ -80,7 +80,7 @@ exports.Tech = INHERIT(Tech, BEM.util.extend({}, LangsMixin, {
             }
 
             // generate i18n declaration for normal keysets
-            res.push("BEM.I18N.decl('" + keyset + "', {");
+            res.push("\nBEM.I18N.decl('" + keyset + "', {");
 
             Object.keys(data[keyset]).forEach(function(key, i, arr) {
 
@@ -93,6 +93,8 @@ exports.Tech = INHERIT(Tech, BEM.util.extend({}, LangsMixin, {
             res.push('}, {\n"lang": "' + lang + '"\n});\n');
 
         });
+
+        res.push("\nBEM.I18N.lang('" + lang + "');\n");
 
         return res;
 
