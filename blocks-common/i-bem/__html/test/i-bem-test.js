@@ -36,4 +36,5 @@ suite('i-bem block and others', function() {
   unit('attr with empty value', 'empty-attrs');
   unit('one symbol elem', 'one-symbol-elem');
   unit('bemhtml with comments', 'comments');
+  unit('mix regression #232', 'gh-232');
 });

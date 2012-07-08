@@ -113,7 +113,8 @@ default: {
                         hasItem && buf.push(' ');
                         BEM_.INTERNAL[hasItem? 'buildClasses' : 'buildModsClasses'](
                             block,
-                            elem || (mixItem.block ? undefined : _this.elem),
+                            mixItem.elem || mixItem._elem ||
+                                (mixItem.block ? undefined : _this.elem),
                             mixItem.elemMods || mixItem.mods,
                             buf);
 
