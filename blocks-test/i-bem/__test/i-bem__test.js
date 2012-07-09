@@ -23,7 +23,7 @@ BEM.TEST = {
     decl : function(desc, test) {
 
         var testName = buildTestName(desc);
-        decls[testName] || (decls[testName] = []).push(test);
+        (decls[testName] || (decls[testName] = [])).push(test);
 
     },
 
