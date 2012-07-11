@@ -15,9 +15,11 @@
             this.mods = (vBlock ? this.ctx.mods : this.mods) || {},
             this.elemMods = this.ctx.elemMods || {}
         ) {
-            (this.block || this.elem) ?
-                (this.position = (this.position || 0) + 1) :
+            if (this.block || this.elem) {
+                (this.position = (this.position || 0) + 1)
+              } else {
                 this._listLength--;
+              }
             apply();
         }
     }

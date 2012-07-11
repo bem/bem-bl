@@ -2,9 +2,16 @@ var xjst = require('xjst'),
     XJSTIdentity = xjst.XJSTIdentity;
 
 ometa Jail <: XJSTIdentity {
-  func %( this._ctx = this._wrap() ) multi:args trans:body -> {
-    [#func, args, body]
+  // Function expression
+  func %( this._ctx = this._wrap() ) anything:name multi:args trans:body -> {
+    [#func, name, args, body]
   },
+
+  // Function declaration
+  stmt = [#func anything:name anything:args anything:body]:fn
+         trans([#var, [name]]):v
+         trans(fn):tfn -> [#stmt, [#func, v[1][0], tfn[2], tfn[3]]]
+       | ^stmt,
 
   set trans:lhs trans:rhs -> [#set, lhs, rhs],
   get :name -> [#get, this._get(name)],
