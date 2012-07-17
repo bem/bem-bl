@@ -1467,7 +1467,7 @@ var DOM = BEM.DOM = BEM.decl('i-bem__dom',/** @lends BEM.DOM.prototype */{
      */
     liveCtxUnbind : function(ctx, e, fn, fnCtx) {
 
-        return this._liveCtxBind(ctx, e, fn, fnCtx);
+        return this._liveCtxUnbind(ctx, e, fn, fnCtx);
 
     },
 
@@ -1484,7 +1484,7 @@ var DOM = BEM.DOM = BEM.decl('i-bem__dom',/** @lends BEM.DOM.prototype */{
     _liveCtxUnbind : function(ctx, e, fn, fnCtx) {
 
         var _this = this,
-            storage = liveEventCtxStorage[e =_this.buildEventName(e)];
+            storage = liveEventCtxStorage[e =_this._buildCtxEventName(e)];
 
         if(storage) {
             ctx.each(function() {
