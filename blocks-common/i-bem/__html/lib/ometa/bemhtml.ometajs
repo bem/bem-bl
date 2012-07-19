@@ -182,7 +182,7 @@ ometa BEMHTMLToXJST <: XJSTCompiler {
   bhPredic = [#elemMod trans:m trans:v] -> {
     'this.elemMods && this.elemMods[' + m + '] === ' + v
   },
-  bhPredic = [#xjst trans:e] -> e,
+  bhPredic = [#xjst trans:e] -> '(' + e + ')',
   bhPredic = [:m] -> { 'this._mode === "' + m + '"' },
 
   bhBody = [#body tBody:b] -> { '{ ' + b + ' }' },
