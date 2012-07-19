@@ -4,7 +4,7 @@ block b-layout-table {
 
     elem row, tag: 'tr'
 
-    this.elem === 'cell' || this.elem === 'gap' {
+    (this.elem === 'cell' || this.elem === 'gap') {
         tag: 'td'
         attrs: {
 
