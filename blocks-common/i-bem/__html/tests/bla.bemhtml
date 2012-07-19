@@ -4,52 +4,26 @@
         var vBlock = this.ctx.block,
             vElem = this.ctx.elem,
             block = this._currBlock || this.block;
-
-        this.ctx || (this.ctx = {});
-
         local(
             this._mode = 'default',
             this.block = vBlock || (vElem ? block : undefined),
             this._currBlock = vBlock || vElem ? undefined : block,
             this.elem = this.ctx.elem,
-            this.mods = (vBlock ? this.ctx.mods : this.mods) || {},
-            this.elemMods = this.ctx.elemMods || {}
-        ) {
-            (this.block || this.elem) ?
-                (this.position = (this.position || 0) + 1) :
-                this._listLength--;
-            apply();
-        }
+            this.mods = this.ctx.mods,
+            this.elemMods = this.ctx.elemMods) this.apply();
     }
 
     this._.isArray(this.ctx): {
         var v = this.ctx,
             l = v.length,
-            i = 0,
-            prevPos = this.position,
-            prevNotNewList = this._notNewList;
-
-        if(prevNotNewList) {
-            this._listLength += l - 1;
-        } else {
-            this.position = 0;
-            this._listLength = l;
-        }
-
-        this._notNewList = true;
-
+            i = 0;
         while(i < l)
-            apply(this.ctx = v[i++]);
-
-        prevNotNewList || (this.position = prevPos);
+            local(this.ctx = v[i++]) this.apply();
     }
 
-    !this.ctx: {
-        this._listLength--;
-    }
+    !this.ctx: {}
 
     this._.isSimple(this.ctx): {
-        this._listLength--;
         this._buf.push(this.ctx)
     }
 
@@ -58,102 +32,90 @@
 
 default: {
     var _this = this,
-        BEM_ = _this.BEM,
+        BEM = _this.BEM,
         v = this.ctx,
         buf = this._buf,
         tag;
 
-    tag = apply(this._mode = 'tag');
-    typeof tag != 'undefined' || (tag = v.tag);
-    typeof tag != 'undefined' || (tag = 'div');
+    local(this._mode = 'tag') tag = this.apply();
+    tag || (tag = v.tag || 'div');
 
-    if(tag) {
-        var jsParams, js;
-        if(this.block && v.js !== false) {
-            js = apply(this._mode = 'js');
-            js = js? this._.extend(v.js, js === true? {} : js) : v.js === true? {} : v.js;
-            js && ((jsParams = {})[BEM_.INTERNAL.buildClass(this.block, v.elem)] = js);
+    var attrs;
+    local(this._mode = 'attrs') attrs = this.apply();
+    attrs = this._.extend(v.attrs, attrs);
+
+    var jsParams, js;
+    if(v.block && v.js !== false) {
+        local(this._mode = 'js') js = this.apply();
+        js = this._.extend(v.js, js === true? {} : js);
+        js && ((jsParams = {})[v.block] = js);
+    }
+
+    buf.push('<', tag);
+
+    var isBEM = v.block || v.elem,
+        cls;
+
+    local(this._mode = 'cls') cls = this.apply();
+    cls || (cls = v.cls);
+
+    if(isBEM || cls) {
+        buf.push(' class="');
+        if(isBEM) {
+
+            BEM.INTERNAL.buildClasses(this.block, v.elem, v.elemMods || v.mods, buf);
+
+            var mix;
+            local(this._mode = 'mix') mix = this.apply();
+            mix = mix? mix.concat(v.mix) : v.mix;
+
+            mix && mix.forEach(function(mix) {
+                var hasItem = mix.block || mix.elem,
+                    block = mix.block || _this.block;
+                hasItem && buf.push(' ');
+                BEM.INTERNAL[hasItem? 'buildClasses' : 'buildModsClasses'](
+                    block,
+                    mix.elem,
+                    mix.elemMods || mix.mods,
+                    buf);
+                mix.js && ((jsParams || (jsParams = {}))[block] = mix.js === true? {} : mix.js);
+            });
+
         }
 
-        buf.push('<', tag);
+        cls && buf.push(isBEM? ' ' : '', cls);
 
-        var isBEM = apply(this._mode = 'bem');
-        typeof isBEM != 'undefined' || (isBEM = typeof v.bem != 'undefined' ? v.bem : v.block || v.elem);
+        jsParams && buf.push(' i-bem');
+        buf.push('"');
+    }
 
-        var cls = apply(this._mode = 'cls');
-        cls || (cls = v.cls);
+    jsParams && buf.push(
+        " onclick='return ",
+        JSON.stringify(jsParams),
+        "'");
 
-        var addJSInitClass = v.block && jsParams;
-        if(isBEM || cls) {
-            buf.push(' class="');
-            if(isBEM) {
-
-                BEM_.INTERNAL.buildClasses(this.block, v.elem, v.elemMods || v.mods, buf);
-
-                var mix = apply(this._mode = 'mix');
-                v.mix && (mix = mix? mix.concat(v.mix) : v.mix);
-
-                if(mix) {
-                    var i = 0, l = mix.length, mixItem, hasItem, block;
-                    while(i < l) {
-                        mixItem = mix[i++];
-                        hasItem = mixItem.block || mixItem.elem,
-                        block = mixItem.block || _this.block;
-
-                        hasItem && buf.push(' ');
-                        BEM_.INTERNAL[hasItem? 'buildClasses' : 'buildModsClasses'](
-                            block,
-                            mixItem.elem || (mixItem.block ? undefined : _this.elem),
-                            mixItem.elemMods || mixItem.mods,
-                            buf);
-                        if(mixItem.js) {
-                            (jsParams || (jsParams = {}))[BEM_.INTERNAL.buildClass(block, mixItem.elem)] = mixItem.js === true? {} : mixItem.js;
-                            addJSInitClass || (addJSInitClass = block && !mixItem.elem);
-                        }
-                    }
-                }
-            }
-
-            cls && buf.push(isBEM? ' ' : '', cls);
-
-            addJSInitClass && buf.push(' i-bem');
-            buf.push('"');
-        }
-
-        if(jsParams) {
-            var jsAttr = apply(this._mode = 'jsAttr');
-            buf.push(
-                ' ', jsAttr || 'onclick', '="return ',
-                this._.attrEscape(JSON.stringify(jsParams)),
-                '"');
-        }
-
-        var attrs = apply(this._mode = 'attrs');
-        attrs = this._.extend(attrs, v.attrs); // NOTE: возможно стоит делать массив, чтобы потом быстрее сериализовывать
-        if(attrs) {
-            var name; // TODO: разобраться с OmetaJS и YUI Compressor
-            for(name in attrs)
-            buf.push(' ', name, '="', this._.attrEscape(attrs[name]), '"');
-        }
+    var attrs;
+    local(this._mode = 'attrs') attrs = this.apply();
+    attrs = this._.extend(attrs, v.attrs); // NOTE: возможно стоит делать массив, чтобы потом быстрее сериализовывать
+    if(attrs) {
+        var name; // TODO: поправить при апдейте ometa-js
+        for(name in attrs)
+            buf.push(' ', name, '="', attrs[name], '"'); // TODO: escaping!
     }
 
     if(this._.isShortTag(tag)) {
         buf.push('/>');
     } else {
-        tag && buf.push('>');
+        buf.push('>');
 
-        var content = apply(this._mode = 'content');
-        if(content || content === 0) {
-            var isBEM = this.block || this.elem;
-            apply(
-                this._notNewList = false,
-                this.position = isBEM ? 1 : this.position,
-                this._listLength = isBEM ? 1 : this._listLength,
+        var content;
+        local(this._mode = 'content') content = this.apply();
+        if(content || content === 0)
+            local(
                 this.ctx = content,
-                this._mode = '');
-        }
+                this._mode = '') this.apply();
 
-        tag && buf.push('</', tag, '>');
+        buf.push('</', tag, '>');
     }
 }
 
@@ -161,13 +123,13 @@ tag: undefined
 attrs: undefined
 cls: undefined
 js: undefined
-jsAttr: undefined
-bem: undefined
 mix: undefined
 content: this.ctx.content
 
+
+
 !this._start: {
-    var BEM_ = {},
+    var BEM = {},
         toString = Object.prototype.toString,
         SHORT_TAGS = { // хэш для быстрого определения, является ли тэг коротким
             area : 1, base : 1, br : 1, col : 1, command : 1, embed : 1, hr : 1, img : 1,
@@ -291,9 +253,9 @@ content: this.ctx.content
             var res = buffer || [];
 
             if(mods) {
-                var modName; // TODO: разобраться с OmetaJS и YUI Compressor
+                var modName; // TODO: поправить при апдейте ometa-js
                 for(modName in mods)
-                    if(mods.hasOwnProperty(modName) && mods[modName]) {
+                    if(mods.hasOwnProperty(modName)) {
                         var modVal = mods[modName];
                         res.push(' ');
                         elem?
@@ -331,20 +293,12 @@ content: this.ctx.content
 
     };
 
-    })(BEM_);
+    })(BEM);
 
-    var buildEscape = (function() {
-            var ts = { '"': '&quot;', '&': '&amp;', '<': '&lt;', '>': '&gt;' },
-                f = function(t) { return ts[t] || t };
-            return function(r) {
-                r = new RegExp(r, 'g');
-                return function(s) { return ('' + s).replace(r, f) }
-            }
-        })(),
-        ctx = {
+    var ctx = {
             ctx: this,
             _start: true,
-            apply: apply,
+            apply: this.apply,
             _buf: [],
             _: {
                 isArray: function(obj) {
@@ -363,25 +317,32 @@ content: this.ctx.content
                     for(n in o1) o1.hasOwnProperty(n) && (res[n] = o1[n]);
                     for(n in o2) o2.hasOwnProperty(n) && (res[n] = o2[n]);
                     return res;
-                },
-                identify: (function() {
-                    var cnt = 0,
-                        expando = '__' + (+new Date()),
-                        get = function() { return 'uniq' + ++cnt; };
-                    return function(obj, onlyGet) {
-                        if(!obj) return get();
-                        if(onlyGet || obj[expando]) return obj[expando];
-                        else return (obj[expando] = get());
-                    };
-                })(),
-                xmlEscape: buildEscape('[&<>]'),
-                attrEscape: buildEscape('["&<>]')
+                }
             },
-            BEM: BEM_,
-            isFirst: function() { return this.position === 1 },
-            isLast: function() { return this.position === this._listLength },
-            generateId: function() { return this._.identify(this.ctx); }
+            BEM: BEM
         };
-    ctx.apply();
+    ctx.apply(ctx);
     return ctx._buf.join('');
+}
+
+
+
+block b-bla, tag: 'span'
+block b-bla, mix: [{ mods: { m2: 'v2' } }]
+block b-bla, js: true
+block b-alb, attrs: { bbb: 1, title: 2 }
+block b-alb, js: { bbb: 1, title: 2 }
+
+block b-nojs, tag, !this.elem: 'table'
+block b-nojs, default, !this.elem, !this.ctx._wrap: {
+    local(
+        this.ctx._wrap = true,
+        this.ctx = { elem: 'run', content: this.ctx },
+        this._mode = '') this.apply();
+}
+
+elem elem1, default: {
+    local(
+        this.ctx = this.ctx.content,
+        this._mode = '') this.apply();
 }

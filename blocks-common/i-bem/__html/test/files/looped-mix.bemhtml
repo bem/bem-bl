@@ -1,4 +1,0 @@
-block b1, tag: 'a'
-block b1, mix: [{ block: 'b2' }]
-block b2, tag: 'b'
-block b2, mix: [{ mods: { modname: 'modval' } }, { block: 'b1' }]

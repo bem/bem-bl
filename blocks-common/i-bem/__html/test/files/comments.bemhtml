@@ -1,7 +1,0 @@
-// comment
-/* comment */
-block b /* comment */ {
-  tag: 'a' // comment
-}
-
-// comment

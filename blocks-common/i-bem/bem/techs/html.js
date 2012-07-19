@@ -1,40 +1,16 @@
-var BEM = require('bem'),
-    Q = BEM.require('q'),
-    VM = require('vm');
+var fs = require('fs'),
+    vm = require('vm');
 
-exports.getCreateResult = function(path, suffix, vars) {
+exports.techModule = module;
+
+exports.newFileContent = function(vars) {
     var bemhtmlFile = vars.Prefix + '.bemhtml.js',
         bemjsonFile = vars.Prefix + '.bemjson.js';
 
-    return Q.all([
-            readBemhtml(bemhtmlFile),
-            readBemjson(bemjsonFile)
-        ])
-        .spread(function(bemhtml, bemjson) {
-            return bemhtml.apply(bemjson);
-        });
-};
-
-exports.storeCreateResult = function(path, suffix, res, force) {
-    // always overwrite html files
-    return this.__base(path, suffix, res, true);
+    vm.runInThisContext(fs.readFileSync(bemhtmlFile, 'utf-8'));
+    return BEMHTML.apply(vm.runInThisContext(fs.readFileSync(bemjsonFile, 'utf-8')));
 };
 
 exports.getDependencies = function() {
     return ['bemjson.js', 'bemhtml.js'];
 };
-
-function readBemhtml(path) {
-    return BEM.util.readFile(path)
-        .then(function(c) {
-            VM.runInThisContext(c, path);
-            return BEMHTML;
-        });
-}
-
-function readBemjson(path) {
-    return BEM.util.readFile(path)
-        .then(function(c) {
-            return VM.runInThisContext(c, path);
-        });
-}
