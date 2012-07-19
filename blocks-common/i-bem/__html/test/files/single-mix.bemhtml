@@ -1,0 +1,3 @@
+block b1, mix: { block: 'b2' }
+block b1, tag: 'a'
+block b2, tag: 'b'
