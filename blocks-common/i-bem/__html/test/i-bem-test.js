@@ -25,6 +25,11 @@ suite('i-bem block and others', function() {
             .call(contents.data) + '\n',
         contents.dst
       );
+      assert.equal(
+        bemhtml.compile(iBem + contents.src, { devMode: false })
+            .call(contents.data) + '\n',
+        contents.dst
+      );
     });
   }
 
