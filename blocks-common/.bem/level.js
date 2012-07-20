@@ -1,8 +1,9 @@
-var myPath = require('bem/lib/path');
+var BEM = require('bem'),
+    myPath = BEM.require('./path');
 
 exports.techs = {
     'js': '../i-bem/bem/techs/js.js',
-    'css': 'bem/lib/techs/css',
+    'css': 'css',
     'bemhtml': '../i-bem/bem/techs/bemhtml.js'
 };
 

@@ -201,7 +201,7 @@
         // коррекция начального смещения при непервом начальном элементе в поэкранном слайдере
         _correctPerScreenNonFirst: function() {
 
-            this._currentX = -this._step * (this._index - 1);
+            this._currentX = -this._step * (--this._index);
 
             this._correct();
 
