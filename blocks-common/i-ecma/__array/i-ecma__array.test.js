@@ -201,16 +201,61 @@ BEM.TEST.decl({ block : 'i-ecma', elem : 'array' }, function(undefined) {
         });
 
         it('should return false if there is not elements', function() {
-            expect([].some(function() { return false })).toBeFalsy();
+            expect([].some(function() { return false; })).toBeFalsy();
         });
 
         it('should be callback\'s arguments valid', function() {
-            var data = [1];
-            data.some(function(item, i, arr) {
-                expect(item).toBe(1);
-                expect(i).toBe(0);
-                expect(arr).toBe(data);
-            });
+            var data = ['1'],
+                callback = jasmine.createSpy();
+
+            data.some(callback);
+
+            expect(callback).toHaveBeenCalledWith('1', 0, data);
+        });
+    });
+
+    describe('every spec', function() {
+        it('should be correct result', function() {
+            expect([1, 2].every(function() { return true; })).toBeTruthy();
+            expect([1, 2].every(function(item) { return item > 1; })).toBeFalsy();
+        });
+
+        it('should be callback for every item if all items are valid', function() {
+            var data = [1, 2, 3, 4],
+                spy = {
+                    test: function(item) { return item > 0; }
+                };
+
+            spyOn(spy, 'test').andCallThrough();
+
+            expect(data.every(spy.test)).toBeTruthy();
+            expect(spy.test.callCount).toEqual(4);
+        });
+
+        it('should\'t be callback for every item if invalid item present', function() {
+            var data = [1, 2, 3, 4],
+                spy = {
+                    test: function(item) { return item < 1; }
+                };
+
+            spyOn(spy, 'test').andCallThrough();
+
+            expect(data.every(spy.test)).toBeFalsy();
+            expect(spy.test.callCount).toEqual(1);
+        });
+
+        it('should return true if there is not elements', function() {
+            expect([].every(function() { return true; })).toBeTruthy();
+            expect([].every(function() { return false; })).toBeTruthy();
+        });
+
+        it('should be callback\'s arguments valid', function() {
+            var data = ['1'],
+                callback = jasmine.createSpy();
+
+            data.every(callback);
+
+            expect(callback).toHaveBeenCalledWith('1', 0, data);
         });
     });
 
