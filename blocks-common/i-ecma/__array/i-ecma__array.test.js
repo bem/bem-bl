@@ -176,28 +176,22 @@ BEM.TEST.decl({ block : 'i-ecma', elem : 'array' }, function(undefined) {
 
         it('shouldn\'t call callback for every item if valid item present', function() {
             var data = [1, 2, 3, 4],
-                spy = {
-                    test: function() { return true; }
-                };
+                spy = jasmine.createSpy();
             data[5] = undefined;
 
-            spyOn(spy, 'test').andCallThrough();
-            data.some(spy.test);
+            data.some(function() { spy(); return true; });
 
-            expect(spy.test.callCount).toEqual(1);
+            expect(spy.callCount).toEqual(1);
         });
 
         it('should call callback for every item if no valid item present', function() {
             var data = [1, 2, 3, 4],
-                spy = {
-                    test: function() { return false; }
-                };
+                spy = jasmine.createSpy();
             data[5] = undefined;
 
-            spyOn(spy, 'test').andCallThrough();
-            data.some(spy.test);
+            data.some(function() { spy(); return false; });
 
-            expect(spy.test.callCount).toEqual(5);
+            expect(spy.callCount).toEqual(5);
         });
 
         it('should return false if there is not elements', function() {
@@ -206,11 +200,11 @@ BEM.TEST.decl({ block : 'i-ecma', elem : 'array' }, function(undefined) {
 
         it('should be callback\'s arguments valid', function() {
             var data = ['1'],
-                callback = jasmine.createSpy();
+                spy = jasmine.createSpy();
 
-            data.some(callback);
+            data.some(spy);
 
-            expect(callback).toHaveBeenCalledWith('1', 0, data);
+            expect(spy).toHaveBeenCalledWith('1', 0, data);
         });
     });
 
@@ -222,26 +216,26 @@ BEM.TEST.decl({ block : 'i-ecma', elem : 'array' }, function(undefined) {
 
         it('should be callback for every item if all items are valid', function() {
             var data = [1, 2, 3, 4],
-                spy = {
-                    test: function(item) { return item > 0; }
-                };
+                spy = jasmine.createSpy();
 
-            spyOn(spy, 'test').andCallThrough();
+            expect(data.every(function(item) {
+                spy();
+                return item > 0;
+            })).toBeTruthy();
 
-            expect(data.every(spy.test)).toBeTruthy();
-            expect(spy.test.callCount).toEqual(4);
+            expect(spy.callCount).toEqual(4);
         });
 
         it('should\'t be callback for every item if invalid item present', function() {
             var data = [1, 2, 3, 4],
-                spy = {
-                    test: function(item) { return item < 1; }
-                };
+                spy = jasmine.createSpy();
 
-            spyOn(spy, 'test').andCallThrough();
+            expect(data.every(function(item) {
+                spy();
+                return item < 1;
+            })).toBeFalsy();
 
-            expect(data.every(spy.test)).toBeFalsy();
-            expect(spy.test.callCount).toEqual(1);
+            expect(spy.callCount).toEqual(1);
         });
 
         it('should return true if there is not elements', function() {
@@ -251,11 +245,11 @@ BEM.TEST.decl({ block : 'i-ecma', elem : 'array' }, function(undefined) {
 
         it('should be callback\'s arguments valid', function() {
             var data = ['1'],
-                callback = jasmine.createSpy();
+                spy = jasmine.createSpy();
 
-            data.every(callback);
+            data.every(spy);
 
-            expect(callback).toHaveBeenCalledWith('1', 0, data);
+            expect(spy).toHaveBeenCalledWith('1', 0, data);
         });
     });
 
