@@ -12,7 +12,7 @@ suite('i-bem block and others', function() {
     return fs.readFileSync(path.resolve(__dirname, 'files', file)).toString();
   }
 
-  function unit(name, file) {
+  function unit(name, file, raw) {
     test(name, function() {
       var contents = {
         src: readFile(file + '.bemhtml'),
@@ -21,7 +21,12 @@ suite('i-bem block and others', function() {
       };
 
       assert.equal(
-        bemhtml.compile(iBem + contents.src, { devMode: true })
+        bemhtml.compile(iBem + contents.src, { devMode: true, raw: raw })
+            .call(contents.data) + '\n',
+        contents.dst
+      );
+      assert.equal(
+        bemhtml.compile(iBem + contents.src, { devMode: false, raw: raw })
             .call(contents.data) + '\n',
         contents.dst
       );
@@ -37,4 +42,5 @@ suite('i-bem block and others', function() {
   unit('one symbol elem', 'one-symbol-elem');
   unit('bemhtml with comments', 'comments');
   unit('mix regression #232', 'gh-232');
+  unit('condition regression #239', 'gh-239', true);
 });

@@ -27,7 +27,7 @@ exports.translate = function translate(source, options) {
     var xjstJS = options.devMode ?
                    xjst.compile(xjstTree, '', { 'no-opt': true })
                    :
-                   xjst.compile(xjstTree, { engine: options.engine });
+                   xjst.compile(xjstTree, { engine: 'sort-group' });
   } catch (e) {
       throw new Error("xjst to js compilation failed:\n" + e.stack);
   }
