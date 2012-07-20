@@ -1,6 +1,6 @@
 var xjst = require('xjst'),
     XJSTParser = xjst.XJSTParser,
-    XJSTIdentity = xjst.XJSTIdentity,
+    XJSTCompiler = xjst.XJSTCompiler,
     Jail = require('./jail').Jail;
 
 ometa BEMHTMLParser <: XJSTParser {
@@ -173,55 +173,25 @@ BEMHTMLParser._addElemPredic = function(ts) {
   return ts;
 };
 
-ometa BEMHTMLToXJST <: XJSTIdentity {
-  bhPredic = [#block :e] -> [
-    #binop, '===',
-    [#getp, [#string, 'block'], [#this]],
-    e
-  ],
-  bhPredic = [#blockMod :m :v] -> [
-    #binop, '&&',
-    [#getp, [#string, 'mods'], [#this]],
-    [ #binop, '===',
-      [#getp, m, [#getp, [#string, 'mods'], [#this]]],
-      v
-    ]
-  ],
-  bhPredic = [#elem :e] -> [
-    #binop, '===',
-    [#getp, [#string, 'elem'], [#this]],
-    e
-  ],
-  bhPredic = [#elemMod :m :v] -> [
-    #binop, '&&',
-    [#getp, [#string, 'elemMods'], [#this]],
-    [ #binop, '===',
-      [#getp, m, [#getp, [#string, 'elemMods'], [#this]]],
-      v
-    ]
-  ],
-  bhPredic = [#xjst :e] -> e,
-  bhPredic = [:m] -> [
-    #binop, '===',
-    [#getp, [#string, '_mode'], [#this]],
-    [#string, m]
-  ],
+ometa BEMHTMLToXJST <: XJSTCompiler {
+  bhPredic = [#block trans:e] -> { 'this.block === (' + e + ')' },
+  bhPredic = [#blockMod trans:m trans:v] -> {
+    'this.mods && this.mods[' + m + '] === (' + v + ')'
+  },
+  bhPredic = [#elem trans:e] -> { 'this.elem === (' + e  + ')' },
+  bhPredic = [#elemMod trans:m trans:v] -> {
+    'this.elemMods && this.elemMods[' + m + '] === (' + v + ')'
+  },
+  bhPredic = [#xjst trans:e] -> '(' + e + ')',
+  bhPredic = [:m] -> { 'this._mode === "' + m + '"' },
 
-  bhBody = [#body :b] -> b,
+  bhBody = [#body tBody:b] -> { '{ ' + b + ' }' },
 
-  bhTemplate = [bhPredic+:ps bhBody:b] -> [
-    #template,
-    BEMHTMLToXJST.cons(ps),
-    b
-  ],
+  bhTemplate = [bhPredic+:ps bhBody:b] -> {
+    'template(' + ps.join(' && ') + ') ' + b
+  },
 
-  topLevel = [bhTemplate+:ts] -> ts,
-  topLevel = bhTemplate:t -> [t],
-  topLevel = empty -> []
+  topLevel = [bhTemplate+:ts] -> ts.join('\n\n'),
+  topLevel = bhTemplate:t -> t,
+  topLevel = empty -> 'template(true){}'
 }
-
-BEMHTMLToXJST.cons = function cons(arr) {
-  return arr.reduce(function(prev, curr) {
-    return ['binop', '&&', prev, curr];
-  });
-};

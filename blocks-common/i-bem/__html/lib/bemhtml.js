@@ -13,9 +13,15 @@ var ometajs = require('ometajs'),
 //
 exports.translate = function translate(source, options) {
   var tree = BEMHTMLParser.matchAll(source, 'topLevel'),
-      xjstTree = xjst.translate(BEMHTMLToXJST.match(tree, 'topLevel'));
+      xjstSources = BEMHTMLToXJST.match(tree, 'topLevel');
 
   options || (options = {});
+
+  try {
+    var xjstTree = xjst.parse(xjstSources);
+  } catch (e) {
+    throw new Error("xjst parse failed\n" + e.stack);
+  }
 
   try {
     var xjstJS = options.devMode ?

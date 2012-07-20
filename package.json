@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "dependencies": {
-    "xjst": "~ 0.3.3",
+    "xjst": "~ 0.3.2",
     "ometajs": "~ 3.1.4"
   },
   "devDependencies": {
