@@ -130,7 +130,7 @@ var ptp = Array.prototype,
         },
 
         /**
-         * Проверяет, удовлетворяет ли массив условию в callback
+         * Проверяет, удовлетворяет ли каждый элемент массива условию в callback
          * @param {Function} callback
          * @param {Object} [ctx=this] контекст вызова callback
          * @returns {Boolean}
