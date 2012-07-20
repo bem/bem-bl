@@ -74,11 +74,11 @@ BEMHTMLParser._addElemPredic = function(ts) {
 
 ometa BEMHTMLToXJST <: XJSTCompiler {
 
-    bhPredic = [#block trans:e] -> { 'this.block === ' + e },
-    bhPredic = [#blockMod trans:m trans:v] -> { 'this.mods && this.mods[' + m + '] === ' + v },
-    bhPredic = [#elem trans:e] -> { 'this.elem === ' + e },
-    bhPredic = [#elemMod trans:m trans:v] -> { 'this.elemMods && this.elemMods[' + m + '] === ' + v },
-    bhPredic = [#xjst trans:e] -> e,
+    bhPredic = [#block trans:e] -> { 'this.block === (' + e + ' )'},
+    bhPredic = [#blockMod trans:m trans:v] -> { 'this.mods && this.mods[' + m + '] === (' + v + ')' },
+    bhPredic = [#elem trans:e] -> { 'this.elem === (' + e  + ')' },
+    bhPredic = [#elemMod trans:m trans:v] -> { 'this.elemMods && this.elemMods[' + m + '] === (' + v + ')' },
+    bhPredic = [#xjst trans:e] -> { '(' + e + ')' },
     bhPredic = [:m] -> { 'this._mode === "' + m + '"' },
 
     bhBody = [#body tBody:b] -> { '{ ' + b + ' }' },

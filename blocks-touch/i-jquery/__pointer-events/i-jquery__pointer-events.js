@@ -194,10 +194,19 @@
                     'pointerup.tapEvent': function(e) {
                         // предотвращаем мышиные события
                         if (touch.target.nodeType !== 9) {
+                            // при обычном превенте появляется-прачется адресный тулбар,
+                            // т.е. клик как событие происходит, просто нет действия
+                            $(touch.target).bind('click.preventClick', function() {
+                                $(touch.target).unbind('.preventClick');
+                                return false;
+                            });
+
+                            // http://cubiq.org/dropbox/clickdelay.html
                             $('body').css('pointer-events', 'none');
                             setTimeout(function() {
+                                $(touch.target).unbind('.preventClick');
                                 $('body').css('pointer-events', 'auto');
-                            }, 450);
+                            }, 750);
                         }
 
                         // если совсем не было move, или был, но меньше 5 пикселей, то триггерим тап

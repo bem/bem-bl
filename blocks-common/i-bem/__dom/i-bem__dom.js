@@ -1203,7 +1203,7 @@ var DOM = BEM.DOM = BEM.decl('i-bem__dom',/** @lends BEM.DOM.prototype */{
      */
     liveBindTo : function(to, event, callback, invokeOnInit) {
 
-        if($.isFunction(event)) {
+        if(!event || $.isFunction(event)) {
             callback = event;
             event = to;
             to = undefined;
@@ -1277,11 +1277,12 @@ var DOM = BEM.DOM = BEM.decl('i-bem__dom',/** @lends BEM.DOM.prototype */{
     _liveInitOnBlockEvent : function(event, blockName, callback, findFnName) {
 
         var name = this._name;
-
         blocks[blockName].on(event, function(e) {
-            var blocks = e.block[findFnName](name);
+            var args = arguments,
+                blocks = e.block[findFnName](name);
+
             callback && blocks.forEach(function(block) {
-                callback.call(block, e);
+                callback.apply(block, args);
             });
         });
         return this;

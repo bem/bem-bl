@@ -38,9 +38,9 @@
         _delayedInit: function() {
 
             var slider = this,
-                images = slider.findBlocksInside('b-ico');
+                images = slider.findBlocksInside('b-icon');
 
-            // если внутри есть картинки (b-ico),
+            // если внутри есть картинки (b-icon),
             // то отложить инициализацию  до момента их полной загрузки,
             // чтобы слайдер мог правильно получить свою настоящую ширину
             if (images.length) {
@@ -201,7 +201,7 @@
         // коррекция начального смещения при непервом начальном элементе в поэкранном слайдере
         _correctPerScreenNonFirst: function() {
 
-            this._currentX = -this._step * (this._index - 1);
+            this._currentX = -this._step * (--this._index);
 
             this._correct();
 
@@ -409,7 +409,7 @@
                     }
 
                     // индекс текущего экрана
-                    if (this._perScreen && this._index >= 1) {
+                    if (this._perScreen && this._index > 0) {
                         this._index--;
                     }
                 // слайд влево
@@ -423,7 +423,7 @@
                     }
 
                     // индекс текущего экрана
-                    if (this._perScreen && this._index <= this._count) {
+                    if (this._perScreen && this._index < this._count - 1) {
                         this._index++;
                     }
                 }

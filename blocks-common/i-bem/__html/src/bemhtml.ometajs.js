@@ -330,7 +330,7 @@ if (global === ometajs_) {
                             return e = this._apply("trans");
                         }.call(this);
                     });
-                    return "this.block === " + e;
+                    return "this.block === (" + e + " )";
                 }.call(this);
             }, function() {
                 return function() {
@@ -341,7 +341,7 @@ if (global === ometajs_) {
                             return v = this._apply("trans");
                         }.call(this);
                     });
-                    return "this.mods && this.mods[" + m + "] === " + v;
+                    return "this.mods && this.mods[" + m + "] === (" + v + ")";
                 }.call(this);
             }, function() {
                 return function() {
@@ -351,7 +351,7 @@ if (global === ometajs_) {
                             return e = this._apply("trans");
                         }.call(this);
                     });
-                    return "this.elem === " + e;
+                    return "this.elem === (" + e + ")";
                 }.call(this);
             }, function() {
                 return function() {
@@ -362,7 +362,7 @@ if (global === ometajs_) {
                             return v = this._apply("trans");
                         }.call(this);
                     });
-                    return "this.elemMods && this.elemMods[" + m + "] === " + v;
+                    return "this.elemMods && this.elemMods[" + m + "] === (" + v + ")";
                 }.call(this);
             }, function() {
                 return function() {
@@ -372,7 +372,7 @@ if (global === ometajs_) {
                             return e = this._apply("trans");
                         }.call(this);
                     });
-                    return e;
+                    return "(" + e + ")";
                 }.call(this);
             }, function() {
                 return function() {
