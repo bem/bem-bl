@@ -7,7 +7,8 @@
     },{
         block: 'b-menu',
         mods: {
-            layout: 'horiz'
+            layout: 'horiz',
+            'vert-align': 'top'
         }
     }]
 })
