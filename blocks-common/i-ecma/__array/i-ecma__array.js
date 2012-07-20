@@ -127,6 +127,24 @@ var ptp = Array.prototype,
 
             return false;
 
+        },
+
+        /**
+         * Проверяет, удовлетворяет ли массив условию в callback
+         * @param {Function} callback
+         * @param {Object} [ctx=this] контекст вызова callback
+         * @returns {Boolean}
+         */
+        every : function(callback, ctx) {
+
+            var i = -1, t = this, len = t.length;
+
+            while(++i < len)
+                if(i in t && !(ctx ? callback.call(ctx, t[i], i, t) : callback(t[i], i, t)))
+                    return false;
+
+            return true;
+
         }
 
     };
