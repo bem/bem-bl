@@ -168,4 +168,50 @@ BEM.TEST.decl({ block : 'i-ecma', elem : 'array' }, function(undefined) {
         });
     });
 
+    describe('some spec', function() {
+        it('should be correct result', function() {
+            expect([1].some(function() { return true; })).toBeTruthy();
+            expect([1].some(function() { return false; })).toBeFalsy();
+        });
+
+        it('shouldn\'t call callback for every item if valid item present', function() {
+            var data = [1, 2, 3, 4],
+                spy = {
+                    test: function() { return true; }
+                };
+            data[5] = undefined;
+
+            spyOn(spy, 'test').andCallThrough();
+            data.some(spy.test);
+
+            expect(spy.test.callCount).toEqual(1);
+        });
+
+        it('should call callback for every item if no valid item present', function() {
+            var data = [1, 2, 3, 4],
+                spy = {
+                    test: function() { return false; }
+                };
+            data[5] = undefined;
+
+            spyOn(spy, 'test').andCallThrough();
+            data.some(spy.test);
+
+            expect(spy.test.callCount).toEqual(5);
+        });
+
+        it('should return false if there is not elements', function() {
+            expect([].some(function() { return false })).toBeFalsy();
+        });
+
+        it('should be callback\'s arguments valid', function() {
+            var data = [1];
+            data.some(function(item, i, arr) {
+                expect(item).toBe(1);
+                expect(i).toBe(0);
+                expect(arr).toBe(data);
+            });
+        });
+    });
+
 });
