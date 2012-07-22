@@ -1,0 +1,40 @@
+block b-page, elem css {
+
+    bem: false
+
+    default, this.ctx.hasOwnProperty('ie'): {
+        var ctx = this.ctx,
+            ie = ctx.ie;
+
+        if(ie === true && ctx.url) {
+            var url = this.ctx.url;
+            url = url.replace(/(?:\.ie)?\.css$/, '');
+
+            return apply(this._mode='', this.ctx=[6, 7, 8, 9].map(function(v, i) {
+                    return { elem: 'css', url: url + '.ie' + v + '.css', ie: 'IE' + v };
+                }));
+        }
+
+        var hideRule = !ie ?
+            ['gt IE 7', '<!-->', '<!--'] :
+            ie === '!IE' ?
+                [ie, '<!-->', '<!--'] :
+                [ie, '', ''];
+
+        applyCtx(this.ctx=[
+                '<!--[if ', hideRule[0], ']>',
+                hideRule[1],
+                ctx,
+                hideRule[2],
+                '<![endif]-->'
+            ]);
+    }
+
+    tag: 'style'
+
+    this.ctx.url {
+        tag: 'link'
+        attrs: { rel: 'stylesheet', href: this.ctx.url }
+    }
+
+}
