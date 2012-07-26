@@ -1,12 +1,12 @@
 var BEM = require('bem'),
     Q = BEM.require('qq'),
-    INHERIT = BEM.require('inherit'),
-    Tech = BEM.require('./techs/js-i').Tech,
     LangsMixin = require('./i18n').LangsMixin,
     PATH = require('path'),
     TANKER = require('../../__i18n/lib/tanker');
 
-exports.Tech = INHERIT(Tech, BEM.util.extend({}, LangsMixin, {
+exports.baseTechName = 'js';
+
+exports.techMixin = BEM.util.extend({}, LangsMixin, {
 
     getBaseTechSuffix: function() {
         return 'js';
@@ -123,4 +123,4 @@ exports.Tech = INHERIT(Tech, BEM.util.extend({}, LangsMixin, {
         return ['i18n'];
     }
 
-}));
+});
