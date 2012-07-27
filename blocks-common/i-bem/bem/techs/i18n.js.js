@@ -66,9 +66,14 @@ exports.techMixin = BEM.util.extend({}, LangsMixin, {
         var _this = this;
         return this.__base(prefixes, this.getBaseTechSuffix(), outputDir, outputName)
             .then(function(res) {
-                return res.concat(_this.serializeI18nData(data, lang));
+                return res.concat(_this.serializeI18nData(data, lang))
+                    .concat([_this.serializeI18nInit(lang)]);
             });
 
+    },
+
+    serializeI18nInit: function(lang) {
+        return "\nBEM.I18N.lang('" + lang + "');\n";
     },
 
     serializeI18nData: function(data, lang) {
@@ -97,8 +102,6 @@ exports.techMixin = BEM.util.extend({}, LangsMixin, {
             res.push('}, {\n"lang": "' + lang + '"\n});\n');
 
         });
-
-        res.push("\nBEM.I18N.lang('" + lang + "');\n");
 
         return res;
 
