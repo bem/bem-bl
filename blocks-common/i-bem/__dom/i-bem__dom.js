@@ -107,6 +107,11 @@ function initBlock(blockName, domElem, params, forceLive, callback) {
         uniqIdToDomElems[uniqId].add(domElem) :
         domElem;
 
+    var parentDomNode = domNode.parentNode;
+    if(!parentDomNode || parentDomNode.nodeType === 11) { // jquery doesn't unique disconnected node
+        $.unique(uniqIdToDomElems[uniqId]);
+    }
+
     var blockClass = blocks[blockName] || DOM.decl(blockName, {}, { live : true });
     if(!(blockClass._liveInitable = !!blockClass._processLive()) || forceLive || params.live === false) {
         var block = new blockClass(uniqIdToDomElems[uniqId], params, !!forceLive);
