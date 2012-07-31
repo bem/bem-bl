@@ -1010,11 +1010,15 @@ var DOM = BEM.DOM = BEM.decl('i-bem__dom',/** @lends BEM.DOM.prototype */{
             keepDOM = undefined;
         }
 
-        findDomElem(ctx, '.i-bem', excludeSelf).each(function() {
+        findDomElem(ctx, '.i-bem', excludeSelf).each(function(i, domNode) {
             $.each(getParams(this), function(blockName, blockParams) {
                 if(blockParams.uniqId) {
                     var block = uniqIdToBlock[blockParams.uniqId];
-                    block? block.destruct(true) : delete uniqIdToDomElems[blockParams.uniqId];
+                    block?
+                        block.domElem.length === 1?
+                            block.destruct(true) :
+                            block.domElem = block.domElem.not(domNode) :
+                        delete uniqIdToDomElems[blockParams.uniqId];
                 }
             });
             cleanupDomNode(this);
