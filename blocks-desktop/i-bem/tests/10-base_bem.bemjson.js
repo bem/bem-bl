@@ -107,6 +107,7 @@
                 { block: 'i-bem', elem: 'init' },
                 { block: 'i-bem', elem: 'live-init' },
                 { block: 'i-bem', elem: 'live-ctx' },
+                { block: 'i-bem', elem: 'destruct' },
                 { block: 'i-bem', elem: 'elem-params' },
                 { block: 'i-bem', elem: 'contains-dom-elem' },
                 { block: 'i-bem', elem: 'find-block' },
