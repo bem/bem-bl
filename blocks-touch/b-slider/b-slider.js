@@ -60,7 +60,7 @@
                             notLoadedImages--;
                             if (notLoadedImages == 0) {
                                 // пыщь!
-                                slider._initialization();
+                                slider._initialization(defaults);
                             }
                         });
                     }
@@ -69,16 +69,16 @@
                 // если все картинки на момент вызова слайдера оказались
                 // загруженными (например, из кэша), то инициализироваться сразу
                 if (allImagesLoaded) {
-                    slider._initialization();
+                    slider._initialization(defaults);
                 }
             // если картинок не было вообще, то тоже инициализироваться сразу
             } else {
-                slider._initialization();
+                slider._initialization(defaults);
             }
 
         },
 
-        _initialization: function() {
+        _initialization: function(defaults) {
 
             var slider = this;
 
