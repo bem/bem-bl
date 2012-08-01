@@ -60,7 +60,7 @@
                             notLoadedImages--;
                             if (notLoadedImages == 0) {
                                 // пыщь!
-                                slider._initialization(defaults);
+                                slider._initialization();
                             }
                         });
                     }
@@ -69,11 +69,11 @@
                 // если все картинки на момент вызова слайдера оказались
                 // загруженными (например, из кэша), то инициализироваться сразу
                 if (allImagesLoaded) {
-                    slider._initialization(defaults);
+                    slider._initialization();
                 }
             // если картинок не было вообще, то тоже инициализироваться сразу
             } else {
-                slider._initialization(defaults);
+                slider._initialization();
             }
 
         },
@@ -87,7 +87,7 @@
             // элементы этого меню
             slider._items = slider._menu.findElem('item');
             // переопределяем параметры по умолчанию заданными-конкретными
-            slider._options = $.extend(defaults, slider.params);
+            slider._options = $.extend({}, defaults, slider.params);
             // jQ-объект
             slider._elem = slider._menu.domElem;
             // поэкранный слайд
