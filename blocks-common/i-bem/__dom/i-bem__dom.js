@@ -205,6 +205,20 @@ function cleanupDomNode(domNode) {
 }
 
 /**
+ * Отцепляет DOM-ноду от блока, если нода последняя -- уничтожает блок
+ * @private
+ * @param {BEM.DOM} block блок
+ * @param {HTMLElement} domNode DOM-нода
+ */
+function removeDomNodeFromBlock(block, domNode) {
+
+    block.domElem.length === 1?
+        block.destruct(true) :
+        block.domElem = block.domElem.not(domNode);
+
+}
+
+/**
  * Возвращает DOM-ноду для вычислений размера окна в IE
  * @returns {HTMLElement}
  */
@@ -901,11 +915,20 @@ var DOM = BEM.DOM = BEM.decl('i-bem__dom',/** @lends BEM.DOM.prototype */{
         _this._needSpecialUnbind && _self.doc.add(_self.win).unbind('.' + _this._uniqId);
 
         _this.dropElemCache().domElem.each(function(i, domNode) {
-            $.each(getParams(domNode), function(blockName, blockParams) {
+            var params = getParams(domNode);
+            $.each(params, function(blockName, blockParams) {
                 var block = uniqIdToBlock[blockParams.uniqId];
-                block && !block._isDestructing && block.destruct();
+                if(block) {
+                    if(!block._isDestructing) {
+                        removeDomNodeFromBlock(block, domNode);
+                        delete params[blockName];
+                    }
+                }
+                else {
+                    delete uniqIdToDomElems[blockParams.uniqId];
+                }
             });
-            cleanupDomNode(domNode);
+            $.isEmptyObject(params) && cleanupDomNode(domNode);
         });
 
         keepDOM || _this.domElem.remove();
@@ -1011,17 +1034,20 @@ var DOM = BEM.DOM = BEM.decl('i-bem__dom',/** @lends BEM.DOM.prototype */{
         }
 
         findDomElem(ctx, '.i-bem', excludeSelf).each(function(i, domNode) {
-            $.each(getParams(this), function(blockName, blockParams) {
+            var params = getParams(this);
+            $.each(params, function(blockName, blockParams) {
                 if(blockParams.uniqId) {
                     var block = uniqIdToBlock[blockParams.uniqId];
-                    block?
-                        block.domElem.length === 1?
-                            block.destruct(true) :
-                            block.domElem = block.domElem.not(domNode) :
+                    if(block) {
+                        removeDomNodeFromBlock(block, domNode);
+                        delete params[blockName];
+                    }
+                    else {
                         delete uniqIdToDomElems[blockParams.uniqId];
+                    }
                 }
             });
-            cleanupDomNode(this);
+            $.isEmptyObject(params) && cleanupDomNode(this);
         });
         keepDOM || (excludeSelf? ctx.empty() : ctx.remove());
 
