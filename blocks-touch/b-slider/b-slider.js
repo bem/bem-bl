@@ -78,7 +78,7 @@
 
         },
 
-        _initialization: function(defaults) {
+        _initialization: function() {
 
             var slider = this;
 
