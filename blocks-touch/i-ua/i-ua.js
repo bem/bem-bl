@@ -4,7 +4,8 @@
         browser = {},
         device = {},
         support = {},
-        match;
+        match,
+        lastOrient = (win.innerWidth > win.innerHeight);
 
     if (match = ua.match(/Android\s+([\d.]+)/)) {
         platform.android = match[1];
@@ -62,6 +63,22 @@
         }
     }
 
+    // http://stackoverflow.com/a/6603537
+    $(win).bind('resize', function() {
+        var width = win.innerWidth,
+            height = win.innerHeight,
+            landscape = (width > height);
+
+        if (landscape !== lastOrient) {
+            $(win).trigger('orientchange', {
+                landscape: landscape,
+                width: width,
+                height: height
+            });
+        }
+        lastOrient = landscape;
+    });
+
     BEM.DOM.decl('i-ua', {
 
         onSetMod: {
@@ -91,11 +108,11 @@
                     .setMod('svg', self.svg ? 'yes' : 'no')
                     .setMod('orient', self.landscape ? 'landscape' : 'portrait');
 
-                self.onOrientChange(function(landscape, width, height) {
-                    self.width = width;
-                    self.height = height;
-                    self.landscape = landscape;
-                    that.setMod('orient', landscape ? 'landscape' : 'portrait');
+                this.bindToWin('orientchange', function(e, data) {
+                    self.width = data.width;
+                    self.height = data.height;
+                    self.landscape = data.landscape;
+                    that.setMod('orient', data.landscape ? 'landscape' : 'portrait');
                 });
 
             }
@@ -122,21 +139,7 @@
         svg: support.svg,
         width: win.innerWidth,
         height: win.innerHeight,
-        landscape: (win.innerWidth > win.innerHeight),
-        onOrientChange: function(callback) {
-            var lastOrient = (win.innerWidth > win.innerHeight);
-
-            $(win).bind('resize', function() {
-                var width = win.innerWidth,
-                    height = win.innerHeight,
-                    landscape = (width > height);
-
-                if (landscape !== lastOrient) {
-                    callback(landscape, width, height);
-                }
-                lastOrient = landscape;
-            });
-        }
+        landscape: lastOrient
 
     });
 
