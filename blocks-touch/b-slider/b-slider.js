@@ -82,6 +82,9 @@
 
             var slider = this;
 
+            // отписываемся от всех возможных предыдущих событий
+            slider._clearBinds();
+
             // меню, которое перемещается
             slider._menu = slider.findBlockInside('b-menu');
             // элементы этого меню
@@ -114,7 +117,7 @@
                 slider._calcParams();
 
                 // при поворотах пересчитываем ширину
-                ua.onOrientChange(function() {
+                $(window).bind('orientchange.touchSlides', function() {
                     slider._items.width(slider._elem.parent().width());
                 });
 
@@ -147,12 +150,8 @@
                     })
                     // бинд на i-bem-события
                     .on({
-                        left: function(e, data) {
-                            slider._onLeft(e, data);
-                        },
-                        right: function(e, data) {
-                            slider._onRight(e, data)
-                        }
+                        left: slider._onLeft,
+                        right: slider._onRight
                     });
 
                 // запрет кликов на время анимации
@@ -172,16 +171,38 @@
 
         },
 
+        _clearBinds: function() {
+
+            this
+                .unbindFrom('.touchSlides')
+                .un('left', this._onLeft)
+                .un('right', this._onRight)
+                .un('start', this._onStart)
+                .un('end', this._onEnd);
+
+            $(window).unbind('.touchSlides');
+
+        },
+
         // запрет кликов на время анимации
         _preventClicks: function() {
 
-            this
-                .on('start', function() {
-                    this.setMod('animation', 'yes');
-                })
-                .on('end', function() {
-                    this.delMod('animation');
-                });
+            this.on({
+                start: this._onStart,
+                end: this._onEnd
+            });
+
+        },
+
+        _onStart: function() {
+
+            this.setMod('animation', 'yes');
+
+        },
+
+        _onEnd: function() {
+
+            this.delMod('animation');
 
         },
 
@@ -228,7 +249,7 @@
             var slider = this;
 
             // поворот
-            ua.onOrientChange(function(w, h ,landscape) {
+            $(window).bind('orientchange.touchSlides', function(landscape) {
                 // пересчёт
                 slider._calcParams();
 
@@ -252,7 +273,6 @@
                 slider.trigger('update', slider._getCurrentParams());
 
                 slider._correct();
-
             });
 
         },
