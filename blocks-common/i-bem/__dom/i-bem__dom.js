@@ -69,7 +69,7 @@ function init(domElem, uniqInitId) {
         if(block) {
             if(block.domElem.index(domNode) < 0) {
                 block.domElem = block.domElem.add(domElem);
-                $.extend(block.params, params);
+                $.extend(block._params, params);
             }
         } else {
             initBlock(blockName, domElem, params);
