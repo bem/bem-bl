@@ -1,19 +1,19 @@
 (function(){
 
 /**
- * BEM-декларация блока позволяет сообщить, к какому блоку (блоку с модификатором,
- * блоку с определённым значением модификатора) относится данный JavaScript-компонент.
+ * The block's BEM declaration can state which block (a block with a modifier or a block with a specific modifier value) 
+ * a given JavaScript component refers to. 
  *
- * Варианты деклараций можно найти на wiki-странице блока i-bem blocks/i-bem/i-bem.wiki
+ * You can find various declarations on the i-bem block's wiki page, blocks/i-bem/i-bem.wiki
  */
 BEM.DOM.decl('b-square', {
 
     onSquareClick : function(e) {
 
         /*
-         Метод toggleMod переключает модификатор блока или элемента
-         между двумя значениями. Сигнатуру метода можно узнать
-         в справочнике по BEM /blocks/i-bem/i-bem.jsdoc.wiki
+         The toggleMod method switches a block's or element's modifier 
+         between two values. You can find the method's signature
+         in the BEM reference, /blocks/i-bem/i-bem.jsdoc.wiki
          */
 
         this.toggleMod('color', 'green', '');
@@ -24,14 +24,13 @@ BEM.DOM.decl('b-square', {
 
     live : function() {
         /*
-         live-инициализация -- это "инициализация по требованию".
-         Она позволяет делать инициализацю блока только тогда,
-         когда это необходимо. Например, когда пользователь непосреддственно
-         начал работать с блоком.
-         В данном случае инициализация происходит по событию click на блоке.
-         Инициализация также может происходить по событию на элементе блока,
-         по факту инициализации вложенных или смиксованных блоков. Все
-         доступные методы инициализации можно найти в справочнике по BEM DOM
+         Live initialization is "on-demand initialization".
+         It lets you initialize a block only when necessary,
+         for example, when the user began working with the block directly.
+         In this case, initialization occurs on a click event on the block.
+         Initialization can also occur on an event on a block element,
+         when nested or mixed blocks are initialized. You can find 
+         all the available initialization methods in the BEM DOM reference, 
          /blocks/i-bem/dom/i-bem__dom.jsdoc.wiki
          */
 
