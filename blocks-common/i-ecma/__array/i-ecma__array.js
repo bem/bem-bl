@@ -7,8 +7,8 @@ var ptp = Array.prototype,
         /**
          * Finds the index of an element in an array
          * @param {Object} item
-         * @param {Number} [fromIdx] - starting from index (length - 1 - fromIdx, if fromIdx < 0)
-         * @returns {Number} - element index or -1, if not found
+         * @param {Number} [fromIdx] Starting from index (length - 1 - fromIdx, if fromIdx < 0)
+         * @returns {Number} Element index or -1, if not found
          */
         indexOf : function(item, fromIdx) {
 
@@ -34,8 +34,8 @@ var ptp = Array.prototype,
 
         /**
          * Calls the callback for each element
-         * @param {Function} callback - called for each element
-         * @param {Object} [ctx=null] - callback context
+         * @param {Function} callback Called for each element
+         * @param {Object} [ctx=null] Callback context
          */
         forEach : function(callback, ctx) {
 
@@ -47,8 +47,8 @@ var ptp = Array.prototype,
 
         /**
          * Creates array B from array A so that B[i] = callback(A[i])
-         * @param {Function} callback - called for each element
-         * @param {Object} [ctx=null] - callback context
+         * @param {Function} callback Called for each element
+         * @param {Object} [ctx=null] Callback context
          * @returns {Array}
          */
         map : function(callback, ctx) {
@@ -65,8 +65,8 @@ var ptp = Array.prototype,
 
         /**
          * Creates an array containing only the elements from the source array that the callback returns true for. 
-         * @param {Function} callback - called for each element
-         * @param {Object} [ctx] - callback context
+         * @param {Function} callback Called for each element
+         * @param {Object} [ctx] Callback context
          * @returns {Array}
          */
         filter : function(callback, ctx) {
@@ -83,9 +83,9 @@ var ptp = Array.prototype,
 
         /**
          * Wraps the array using an accumulator
-         * @param {Function} callback - called for each element
-         * @param {Object} [initialVal] - initial value of the accumulator
-         * @returns {Object} - accumulator
+         * @param {Function} callback Called for each element
+         * @param {Object} [initialVal] Initial value of the accumulator
+         * @returns {Object} Accumulator
          */
         reduce : function(callback, initialVal) {
 
@@ -114,7 +114,7 @@ var ptp = Array.prototype,
         /**
          * Checks whether at least one element in the array meets the condition in the callback
          * @param {Function} callback
-         * @param {Object} [ctx=this] - callback context
+         * @param {Object} [ctx=this] Callback context
          * @returns {Boolean}
          */
         some : function(callback, ctx) {
@@ -132,7 +132,7 @@ var ptp = Array.prototype,
         /**
          * Checks whether every element in the array meets the condition in the callback
          * @param {Function} callback
-         * @param {Object} [ctx=this] - context of the callback call
+         * @param {Object} [ctx=this] Context of the callback call
          * @returns {Boolean}
          */
         every : function(callback, ctx) {
