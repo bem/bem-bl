@@ -43,4 +43,5 @@ suite('i-bem block and others', function() {
   unit('bemhtml with comments', 'comments');
   unit('mix regression #232', 'gh-232');
   unit('condition regression #239', 'gh-239', true);
+  unit('simple types regression #254', 'gh-254');
 });
