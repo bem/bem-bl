@@ -1,26 +1,26 @@
 (function(){
 
 /**
- * BEM-декларация блока позволяет сообщить, к какому блоку (блоку с модификатором,
- * блоку с определённым значением модификатора) относится данный JavaScript-компонент.
+ * The block's BEM declaration can state which block (a block with a modifier or a block with a specific modifier value) 
+ * a given JavaScript component refers to.
  *
- * В данном случае код срабатывает на блоке b-link_action_alert
+ * In this case, the code is triggered on the b-link_action_alert block
  *
- * Варианты деклараций можно найти на wiki-странице блока i-bem blocks/i-bem/i-bem.wiki
+ * You can find various declarations on the i-bem block's wiki page, blocks/i-bem/i-bem.wiki
  */
 BEM.DOM.decl({ name: 'b-link', modName: 'action', modVal: 'alert' }, {
 
     /**
-     * Метод _onClick называется так не случайно. Название должно совпадать с
-     * названием метода блока-родителя, то есть b-link_pseudo_yes
+     * The _onClick method is named this for a reason. The name should match
+     * the name of the parent block method, i.e. b-link_pseudo_yes
      */
     _onClick: function(e) {
 
-        // this.base содержит ссылку на соответствующий метод "родительского" компонента
+        // this.base Contains a reference to the corresponding method in the "parent" component
         this.__base.apply(this, arguments);
 
-        // Доопределяем базовый метод собственным кодом
-        alert('Текстовое сообщение');
+        // Pre-defining the base method using our own code
+        alert('Text message');
 
     }
 
