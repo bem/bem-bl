@@ -186,7 +186,7 @@ content: this.ctx.content
     var MOD_DELIM = '_',
 
     /**
-     * Separator between names of a block and a nested element
+     * Separator between block names and a nested element
      * @const
      * @type String
      */
@@ -238,12 +238,13 @@ content: this.ctx.content
         /**
          * Builds the class for a block or element with a modifier
          * @private
-         * @param {String} block - block name
-         * @param {String} [elem] - element name
-         * @param {String} [modName] - modifier name
-         * @param {String} [modVal] - element name
-         * @param {Array} [buffer] - buffer
-         * @returns {String|Array} - class or buffer string (depending on whether the buffer parameter is present)         */
+         * @param {String} block Block name
+         * @param {String} [elem] Element name
+         * @param {String} [modName] Modifier name
+         * @param {String} [modVal] Element name
+         * @param {Array} [buffer] Buffer
+         * @returns {String|Array} Class or buffer string (depending on whether the buffer parameter is present)
+    	 */
         buildClass : function(block, elem, modName, modVal, buffer) {
 
             var typeOf = typeof modName;
@@ -279,11 +280,11 @@ content: this.ctx.content
         /**
          * Builds modifier classes
          * @private
-         * @param {String} block - block name
-         * @param {String} [elem] - element name
-         * @param {Object} [mods] - modifier name
-         * @param {Array} [buffer] - buffer
-         * @returns {String|Array} - class or buffer string (depending on whether the buffer parameter is present)
+         * @param {String} block Block name
+         * @param {String} [elem] Element name
+         * @param {Object} [mods] Modifier name
+         * @param {Array} [buffer] Buffer
+         * @returns {String|Array} Class or buffer string (depending on whether the buffer parameter is present)
          */
         buildModsClasses : function(block, elem, mods, buffer) {
 
@@ -308,11 +309,11 @@ content: this.ctx.content
         /**
          * Builds full classes for a block or element with modifiers
          * @private
-         * @param {String} block - block name
-         * @param {String} [elem] - element name
-         * @param {Object} [mods] - modifier name
-         * @param {Array} [buffer] - buffer
-         * @returns {String|Array} - class or buffer string (depending on whether the buffer parameter is present)
+         * @param {String} block Block name
+         * @param {String} [elem] Element name
+         * @param {Object} [mods] Modifier name
+         * @param {Array} [buffer] Buffer
+         * @returns {String|Array} Class or buffer string (depending on whether the buffer parameter is present)
          */
         buildClasses : function(block, elem, mods, buffer) {
 
