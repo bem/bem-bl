@@ -50,7 +50,9 @@
 
     this._.isSimple(this.ctx): {
         this._listLength--;
-        this._buf.push(this.ctx)
+
+        var ctx = this.ctx;
+        (ctx && ctx !== true) || ctx === 0 && this._buf.push(ctx);
     }
 
 }
