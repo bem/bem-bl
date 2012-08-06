@@ -1,4 +1,4 @@
-/** @fileOverview - module for internal BEM helpers */
+/** @fileOverview Module for internal BEM helpers */
 /** @requires BEM */
 
 (function(BEM, $, undefined) {
@@ -63,12 +63,12 @@ BEM.INTERNAL = {
     /**
      * Builds the class of a block or element with a modifier
      * @private
-     * @param {String} block - block name
-     * @param {String} [elem] - element name
-     * @param {String} [modName] - modifier name
-     * @param {String} [modVal] - modifier value
-     * @param {Array} [buffer] - buffer
-     * @returns {String|Array} - class or buffer string (depending on whether the buffer parameter is present)
+     * @param {String} block Block name
+     * @param {String} [elem] Element name
+     * @param {String} [modName] Modifier name
+     * @param {String} [modVal] Modifier value
+     * @param {Array} [buffer] Buffer
+     * @returns {String|Array} Class or buffer string (depending on whether the buffer parameter is present)
      */
     buildClass : function(block, elem, modName, modVal, buffer) {
 
@@ -105,11 +105,11 @@ BEM.INTERNAL = {
     /**
      * Builds full classes for a buffer or element with modifiers
      * @private
-     * @param {String} block - block name
-     * @param {String} [elem] - element name
-     * @param {Object} [mods] - modifiers
-     * @param {Array} [buffer] - buffer
-     * @returns {String|Array} - class or buffer string (depending on whether the buffer parameter is present)
+     * @param {String} block Block name
+     * @param {String} [elem] Element name
+     * @param {Object} [mods] Modifiers
+     * @param {Array} [buffer] Buffer
+     * @returns {String|Array} Class or buffer string (depending on whether the buffer parameter is present)
      */
     buildClasses : function(block, elem, mods, buffer) {
 
