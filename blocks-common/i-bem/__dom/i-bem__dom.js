@@ -57,8 +57,8 @@ var win = $(window),
 /**
  * Initializes blocks on a DOM element
  * @private
- * @param {jQuery} domElem - DOM element
- * @param {String} uniqInitId - ID of the "initialization wave"
+ * @param {jQuery} domElem DOM element
+ * @param {String} uniqInitId ID of the "initialization wave"
  */
 function init(domElem, uniqInitId) {
 
@@ -81,11 +81,11 @@ function init(domElem, uniqInitId) {
 /**
  * Initializes a specific block on a DOM element, or returns the existing block if it was already created
  * @private
- * @param {String} blockName - block name
- * @param {jQuery} domElem - DOM element
- * @param {Object} [params] - initialization parameters
- * @param {Boolean} [forceLive] - force live initialization
- * @param {Function} [callback] - handler to call after complete initialization
+ * @param {String} blockName Block name
+ * @param {jQuery} domElem DOM element
+ * @param {Object} [params] Initialization parameters
+ * @param {Boolean} [forceLive] Force live initialization
+ * @param {Function} [callback] Handler to call after complete initialization
  */
 function initBlock(blockName, domElem, params, forceLive, callback) {
 
@@ -120,10 +120,10 @@ function initBlock(blockName, domElem, params, forceLive, callback) {
 /**
  * Processes and adds necessary block parameters
  * @private
- * @param {Object} params - initialization parameters
- * @param {HTMLElement} domNode - DOM node
- * @param {String} blockName - block name
- * @param {String} [uniqInitId] - ID of the "initialization wave"
+ * @param {Object} params Initialization parameters
+ * @param {HTMLElement} domNode DOM node
+ * @param {String} blockName Block name
+ * @param {String} [uniqInitId] ID of the "initialization wave"
  */
 function processParams(params, domNode, blockName, uniqInitId) {
 
@@ -142,9 +142,9 @@ function processParams(params, domNode, blockName, uniqInitId) {
 /**
  * Helper for searching for a DOM element using a selector inside the context, including the context itself
  * @private
- * @param {jQuery} ctx - context
- * @param {String} selector - CSS selector
- * @param {Boolean} [excludeSelf=false] - exclude context from search
+ * @param {jQuery} ctx Context
+ * @param {String} selector CSS selector
+ * @param {Boolean} [excludeSelf=false] Exclude context from search
  * @returns {jQuery}
  */
 function findDomElem(ctx, selector, excludeSelf) {
@@ -159,7 +159,7 @@ function findDomElem(ctx, selector, excludeSelf) {
 /**
  * Returns parameters of a block's DOM element
  * @private
- * @param {HTMLElement} domNode - DOM node
+ * @param {HTMLElement} domNode DOM node
  * @returns {Object}
  */
 function getParams(domNode) {
@@ -173,7 +173,7 @@ function getParams(domNode) {
 /**
  * Retrieves block parameters from a DOM element
  * @private
- * @param {HTMLElement} domNode - DOM node
+ * @param {HTMLElement} domNode DOM node
  * @returns {Object}
  */
 function extractParams(domNode) {
@@ -191,7 +191,7 @@ function extractParams(domNode) {
 /**
  * Cleans up all the BEM storages associated with a DOM node
  * @private
- * @param {HTMLElement} domNode - DOM node
+ * @param {HTMLElement} domNode DOM node
  */
 function cleanupDomNode(domNode) {
 
@@ -211,8 +211,8 @@ function getClientNode() {
 
 /**
  * Returns a block on a DOM element and initializes it if necessary 
- * @param {String} blockName - block name
- * @param {Object} params - block parameters
+ * @param {String} blockName Block name
+ * @param {Object} params Block parameters
  * @returns {BEM}
  */
 $.fn.bem = function(blockName, params) {
@@ -228,8 +228,8 @@ var DOM = BEM.DOM = BEM.decl('i-bem__dom',/** @lends BEM.DOM.prototype */{
      * @class Base block for creating BEM blocks that have DOM representation 
      * @constructs
      * @private
-     * @param {jQuery} domElem - DOM element that the block is created on
-     * @param {Object} params - block parameters
+     * @param {jQuery} domElem DOM element that the block is created on
+     * @param {Object} params Block parameters
      * @param {Boolean} [initImmediately=true]
      */
     __constructor : function(domElem, params, initImmediately) {
@@ -278,8 +278,8 @@ var DOM = BEM.DOM = BEM.decl('i-bem__dom',/** @lends BEM.DOM.prototype */{
     /**
      * Finds blocks inside the current block or its elements (including context)
      * @protected
-     * @param {String|jQuery} [elem] - block element
-     * @param {String|Object} block - name or description (block,modName,modVal) of the block to find
+     * @param {String|jQuery} [elem] Block element
+     * @param {String|Object} block Name or description (block,modName,modVal) of the block to find
      * @returns {BEM[]}
      */
     findBlocksInside : function(elem, block) {
@@ -291,8 +291,8 @@ var DOM = BEM.DOM = BEM.decl('i-bem__dom',/** @lends BEM.DOM.prototype */{
     /**
      * Finds the first block inside the current block or its elements (including context)
      * @protected
-     * @param {String|jQuery} [elem] - block element
-     * @param {String|Object} block - name or description (block,modName,modVal) of the block to find
+     * @param {String|jQuery} [elem] Block element
+     * @param {String|Object} block Name or description (block,modName,modVal) of the block to find
      * @returns {BEM}
      */
     findBlockInside : function(elem, block) {
@@ -304,8 +304,8 @@ var DOM = BEM.DOM = BEM.decl('i-bem__dom',/** @lends BEM.DOM.prototype */{
     /**
      * Finds blocks outside the current block or its elements (including context)
      * @protected
-     * @param {String|jQuery} [elem] - block element
-     * @param {String|Object} block - name or description (block,modName,modVal) of the block to find
+     * @param {String|jQuery} [elem] Block element
+     * @param {String|Object} block Name or description (block,modName,modVal) of the block to find
      * @returns {BEM[]}
      */
     findBlocksOutside : function(elem, block) {
@@ -317,8 +317,8 @@ var DOM = BEM.DOM = BEM.decl('i-bem__dom',/** @lends BEM.DOM.prototype */{
     /**
      * Finds the first block outside the current block or its elements (including context)
      * @protected
-     * @param {String|jQuery} [elem] - block element
-     * @param {String|Object} block - name or description (block,modName,modVal) of the block to find
+     * @param {String|jQuery} [elem] Block element
+     * @param {String|Object} block Name or description (block,modName,modVal) of the block to find
      * @returns {BEM}
      */
     findBlockOutside : function(elem, block) {
@@ -330,8 +330,8 @@ var DOM = BEM.DOM = BEM.decl('i-bem__dom',/** @lends BEM.DOM.prototype */{
     /**
      * Finds blocks on DOM elements of the current block or its elements
      * @protected
-     * @param {String|jQuery} [elem] - block element
-     * @param {String|Object} block - name or description (block,modName,modVal) of the block to find
+     * @param {String|jQuery} [elem] Block element
+     * @param {String|Object} block Name or description (block,modName,modVal) of the block to find
      * @returns {BEM[]}
      */
     findBlocksOn : function(elem, block) {
@@ -343,8 +343,8 @@ var DOM = BEM.DOM = BEM.decl('i-bem__dom',/** @lends BEM.DOM.prototype */{
     /**
      * Finds the first block on DOM elements of the current block or its elements
      * @protected
-     * @param {String|jQuery} [elem] - block element
-     * @param {String|Object} block - name or description (block,modName,modVal) of the block to find
+     * @param {String|jQuery} [elem] Block element
+     * @param {String|Object} block Name or description (block,modName,modVal) of the block to find
      * @returns {BEM}
      */
     findBlockOn : function(elem, block) {
@@ -396,9 +396,9 @@ var DOM = BEM.DOM = BEM.decl('i-bem__dom',/** @lends BEM.DOM.prototype */{
     /**
      * Adds an event handler for any DOM element
      * @protected
-     * @param {jQuery} domElem - DOM element where the event will be listened for
-     * @param {String|Object} event - event name or event object
-     * @param {Function} fn - handler function, which will be executed in the block's context
+     * @param {jQuery} domElem DOM element where the event will be listened for
+     * @param {String|Object} event Event name or event object
+     * @param {Function} fn Handler function, which will be executed in the block's context
      * @returns {BEM}
      */
     bindToDomElem : function(domElem, event, fn) {
@@ -424,8 +424,8 @@ var DOM = BEM.DOM = BEM.decl('i-bem__dom',/** @lends BEM.DOM.prototype */{
     /**
      * Adds an event handler to the document
      * @protected
-     * @param {String} event - event name
-     * @param {Function} fn - handler function, which will be executed in the block's context
+     * @param {String} event Event name
+     * @param {Function} fn Handler function, which will be executed in the block's context
      * @returns {BEM}
      */
     bindToDoc : function(event, fn) {
@@ -438,8 +438,8 @@ var DOM = BEM.DOM = BEM.decl('i-bem__dom',/** @lends BEM.DOM.prototype */{
     /**
      * Adds an event handler to the window
      * @protected
-     * @param {String} event - event name
-     * @param {Function} fn - handler function, which will be executed in the block's context
+     * @param {String} event Event name
+     * @param {Function} fn Handler function, which will be executed in the block's context
      * @returns {BEM}
      */
     bindToWin : function(event, fn) {
@@ -452,9 +452,9 @@ var DOM = BEM.DOM = BEM.decl('i-bem__dom',/** @lends BEM.DOM.prototype */{
     /**
      * Adds an event handler to the block's main DOM elements or its nested elements
      * @protected
-     * @param {jQuery|String} [elem] - element
-     * @param {String} event - event name
-     * @param {Function} fn - handler function, which will be executed in the block's context
+     * @param {jQuery|String} [elem] Element
+     * @param {String} event Event name
+     * @param {Function} fn Handler function, which will be executed in the block's context
      * @returns {BEM}
      */
     bindTo : function(elem, event, fn) {
@@ -474,8 +474,8 @@ var DOM = BEM.DOM = BEM.decl('i-bem__dom',/** @lends BEM.DOM.prototype */{
     /**
      * Removes event handlers from any DOM element
      * @protected
-     * @param {jQuery} domElem - DOM element where the event was being listened for
-     * @param {String} event - event name
+     * @param {jQuery} domElem DOM element where the event was being listened for
+     * @param {String} event Event name
      * @returns {BEM}
      */
     unbindFromDomElem : function(domElem, event) {
@@ -488,7 +488,7 @@ var DOM = BEM.DOM = BEM.decl('i-bem__dom',/** @lends BEM.DOM.prototype */{
     /**
      * Removes event handler from document
      * @protected
-     * @param {String} event - event name
+     * @param {String} event Event name
      * @returns {BEM}
      */
     unbindFromDoc : function(event) {
@@ -500,7 +500,7 @@ var DOM = BEM.DOM = BEM.decl('i-bem__dom',/** @lends BEM.DOM.prototype */{
     /**
      * Removes event handler from window
      * @protected
-     * @param {String} event - event name
+     * @param {String} event Event name
      * @returns {BEM}
      */
     unbindFromWin : function(event) {
@@ -512,8 +512,8 @@ var DOM = BEM.DOM = BEM.decl('i-bem__dom',/** @lends BEM.DOM.prototype */{
     /**
      * Removes event handlers from the block's main DOM elements or its nested elements
      * @protected
-     * @param {jQuery|String} [elem] - nested element
-     * @param {String} event - event name
+     * @param {jQuery|String} [elem] Nested element
+     * @param {String} event Event name
      * @returns {BEM}
      */
     unbindFrom : function(elem, event) {
@@ -532,7 +532,7 @@ var DOM = BEM.DOM = BEM.decl('i-bem__dom',/** @lends BEM.DOM.prototype */{
     /**
      * Builds a full name for an event
      * @private
-     * @param {String} event - event name
+     * @param {String} event Event name
      * @returns {String}
      */
     _buildEventName : function(event) {
@@ -549,7 +549,7 @@ var DOM = BEM.DOM = BEM.decl('i-bem__dom',/** @lends BEM.DOM.prototype */{
     /**
      * Builds a full name for a single event
      * @private
-     * @param {String} event - event name
+     * @param {String} event Event name
      * @returns {String}
      */
     _buildOneEventName : function(event) {
@@ -574,8 +574,8 @@ var DOM = BEM.DOM = BEM.decl('i-bem__dom',/** @lends BEM.DOM.prototype */{
     /**
      * Triggers block event handlers and live event handlers
      * @protected
-     * @param {String} e - event name
-     * @param {Object} [data] - additional information
+     * @param {String} e Event name
+     * @param {Object} [data] Additional information
      * @returns {BEM}
      */
     trigger : function(e, data) {
@@ -622,9 +622,9 @@ var DOM = BEM.DOM = BEM.decl('i-bem__dom',/** @lends BEM.DOM.prototype */{
     /**
      * Sets a modifier for a block/nested element
      * @protected
-     * @param {jQuery} [elem] - nested element
-     * @param {String} modName - modifier name
-     * @param {String} modVal - modifier value
+     * @param {jQuery} [elem] Nested element
+     * @param {String} modName Modifier name
+     * @param {String} modVal Modifier value
      * @returns {BEM}
      */
     setMod : function(elem, modName, modVal) {
@@ -645,10 +645,10 @@ var DOM = BEM.DOM = BEM.decl('i-bem__dom',/** @lends BEM.DOM.prototype */{
     /**
      * Retrieves modifier value from the DOM node's CSS class
      * @private
-     * @param {String} modName - modifier name
-     * @param {jQuery} [elem] - nested element
-     * @param {String} [elemName] - name of the nested element
-     * @returns {String} - modifier value
+     * @param {String} modName Modifier name
+     * @param {jQuery} [elem] Nested element
+     * @param {String} [elemName] Name of the nested element
+     * @returns {String} Modifier value
      */
     _extractModVal : function(modName, elem, elemName) {
 
@@ -666,9 +666,9 @@ var DOM = BEM.DOM = BEM.decl('i-bem__dom',/** @lends BEM.DOM.prototype */{
     /**
      * Retrieves a name/value list of modifiers
      * @private
-     * @param {Array} [modNames] - names of modifiers
-     * @param {Object} [elem] - element
-     * @returns {Object} - hash of modifier values by names
+     * @param {Array} [modNames] Names of modifiers
+     * @param {Object} [elem] Element
+     * @returns {Object} Hash of modifier values by names
      */
     _extractMods : function(modNames, elem) {
 
@@ -699,11 +699,11 @@ var DOM = BEM.DOM = BEM.decl('i-bem__dom',/** @lends BEM.DOM.prototype */{
     /**
      * Sets a modifier's CSS class for a block's DOM element or nested element
      * @private
-     * @param {String} modName - modifier name
-     * @param {String} modVal - modifier value
-     * @param {String} oldModVal - old modifier value
-     * @param {jQuery} [elem] - element
-     * @param {String} [elemName] - element name
+     * @param {String} modName Modifier name
+     * @param {String} modVal Modifier value
+     * @param {String} oldModVal Old modifier value
+     * @param {jQuery} [elem] Element
+     * @param {String} [elemName] Element name
      */
     _afterSetMod : function(modName, modVal, oldModVal, elem, elemName) {
 
@@ -730,11 +730,11 @@ var DOM = BEM.DOM = BEM.decl('i-bem__dom',/** @lends BEM.DOM.prototype */{
     /**
      * Finds elements nested in a block
      * @protected
-     * @param {String|jQuery} [ctx=this.domElem] - element where search is being performed
-     * @param {String} names - nested element name (or names separated by spaces)
-     * @param {String} [modName] - modifier name
-     * @param {String} [modVal] - modifier value
-     * @returns {jQuery} - DOM elements
+     * @param {String|jQuery} [ctx=this.domElem] Element where search is being performed
+     * @param {String} names Nested element name (or names separated by spaces)
+     * @param {String} [modName] Modifier name
+     * @param {String} [modVal] Modifier value
+     * @returns {jQuery} DOM elements
      */
     findElem : function(ctx, names, modName, modVal) {
 
@@ -759,10 +759,10 @@ var DOM = BEM.DOM = BEM.decl('i-bem__dom',/** @lends BEM.DOM.prototype */{
     /**
      * Finds elements nested in a block
      * @protected
-     * @param {String} name - nested element name
-     * @param {String} [modName] - modifier name
-     * @param {String} [modVal] - modifier value
-     * @returns {jQuery} - DOM elements
+     * @param {String} name Nested element name
+     * @param {String} [modName] Modifier name
+     * @param {String} [modVal] Modifier value
+     * @returns {jQuery} DOM elements
      */
     _elem : function(name, modName, modVal) {
 
@@ -781,10 +781,10 @@ var DOM = BEM.DOM = BEM.decl('i-bem__dom',/** @lends BEM.DOM.prototype */{
     /**
      * Lazy search for elements nested in a block (caches results)
      * @protected
-     * @param {String} names - nested element name (or names separated by spaces)
-     * @param {String} [modName] - modifier name
-     * @param {String} [modVal] - modifier value
-     * @returns {jQuery} - DOM elements
+     * @param {String} names Nested element name (or names separated by spaces)
+     * @param {String} [modName] Modifier name
+     * @param {String} [modVal] Modifier value
+     * @returns {jQuery} DOM elements
      */
     elem : function(names, modName, modVal) {
 
@@ -809,9 +809,9 @@ var DOM = BEM.DOM = BEM.decl('i-bem__dom',/** @lends BEM.DOM.prototype */{
     /**
      * Clearing the cache for elements
      * @protected
-     * @param {String} names - nested element name (or names separated by spaces)
-     * @param {String} [modName] - modifier name
-     * @param {String} [modVal] - modifier value
+     * @param {String} names Nested element name (or names separated by spaces)
+     * @param {String} [modName] Modifier name
+     * @param {String} [modVal] Modifier value
      * @returns {BEM}
      */
     dropElemCache : function(names, modName, modVal) {
@@ -834,8 +834,8 @@ var DOM = BEM.DOM = BEM.decl('i-bem__dom',/** @lends BEM.DOM.prototype */{
 
     /**
      * Retrieves parameters of a block element
-     * @param {String|jQuery} elem - element
-     * @returns {Object} - parameters
+     * @param {String|jQuery} elem Element
+     * @returns {Object} Parameters
      */
     elemParams : function(elem) {
 
@@ -854,7 +854,7 @@ var DOM = BEM.DOM = BEM.decl('i-bem__dom',/** @lends BEM.DOM.prototype */{
     /**
      * Checks whether a DOM element is in a block
      * @protected
-     * @param {jQuery} domElem - DOM element
+     * @param {jQuery} domElem DOM element
      * @returns {Boolean}
      */
     containsDomElem : function(domElem) {
@@ -871,9 +871,9 @@ var DOM = BEM.DOM = BEM.decl('i-bem__dom',/** @lends BEM.DOM.prototype */{
 
     /**
      * Builds a CSS selector corresponding to a block/element and modifier
-     * @param {String} [elem] - element name
-     * @param {String} [modName] - modifier name
-     * @param {String} [modVal] - modifier value
+     * @param {String} [elem] Element name
+     * @param {String} [modName] Modifier name
+     * @param {String} [modVal] Modifier value
      * @returns {String}
      */
     buildSelector : function(elem, modName, modVal) {
@@ -884,7 +884,7 @@ var DOM = BEM.DOM = BEM.decl('i-bem__dom',/** @lends BEM.DOM.prototype */{
 
     /**
      * Deletes a block
-     * @param {Boolean} [keepDOM=false] - whether to keep the block's DOM nodes in the document
+     * @param {Boolean} [keepDOM=false] Whether to keep the block's DOM nodes in the document
      */
     destruct : function(keepDOM) {
 
@@ -932,8 +932,8 @@ var DOM = BEM.DOM = BEM.decl('i-bem__dom',/** @lends BEM.DOM.prototype */{
     /**
      * Processes a block's live properties
      * @private
-     * @param {Boolean} [heedLive=false] - whether to take into account that the block already processed its live properties
-     * @returns {Boolean} - whether the block is a live block
+     * @param {Boolean} [heedLive=false] Whether to take into account that the block already processed its live properties
+     * @returns {Boolean} Whether the block is a live block
      */
     _processLive : function(heedLive) {
 
@@ -961,8 +961,8 @@ var DOM = BEM.DOM = BEM.decl('i-bem__dom',/** @lends BEM.DOM.prototype */{
      * Initializes blocks on a fragment of the DOM tree
      * @static
      * @protected
-     * @param {jQuery} [ctx=document] - root DOM node
-     * @returns {jQuery} ctx - initialization context
+     * @param {jQuery} [ctx=document] Root DOM node
+     * @returns {jQuery} ctx Initialization context
      */
     init : function(ctx, callback, callbackCtx) {
 
@@ -993,9 +993,9 @@ var DOM = BEM.DOM = BEM.decl('i-bem__dom',/** @lends BEM.DOM.prototype */{
      * Destroys blocks on a fragment of the DOM tree
      * @static
      * @protected
-     * @param {Boolean} [keepDOM=false] - whether to keep DOM nodes in the document
-     * @param {jQuery} ctx - root DOM node
-     * @param {Boolean} [excludeSelf=false] - exclude the context
+     * @param {Boolean} [keepDOM=false] Whether to keep DOM nodes in the document
+     * @param {jQuery} ctx Root DOM node
+     * @param {Boolean} [excludeSelf=false] Exclude the context
      */
     destruct : function(keepDOM, ctx, excludeSelf) {
 
@@ -1022,10 +1022,10 @@ var DOM = BEM.DOM = BEM.decl('i-bem__dom',/** @lends BEM.DOM.prototype */{
      * Replaces a fragment of the DOM tree inside the context, destroying old blocks and intializing new ones
      * @static
      * @protected
-     * @param {jQuery} ctx - root DOM node
-     * @param {jQuery|String} content - new content
-     * @param {Function} [callback] - handler to be called after initialization
-     * @param {Object} [callbackCtx] - handler's context
+     * @param {jQuery} ctx Root DOM node
+     * @param {jQuery|String} content New content
+     * @param {Function} [callback] Handler to be called after initialization
+     * @param {Object} [callbackCtx] Handler's context
      */
     update : function(ctx, content, callback, callbackCtx) {
 
@@ -1036,8 +1036,8 @@ var DOM = BEM.DOM = BEM.decl('i-bem__dom',/** @lends BEM.DOM.prototype */{
 
     /**
      * Adds a fragment of the DOM tree at the end of the context and initializes blocks
-     * @param {jQuery} ctx - root DOM node
-     * @param {jQuery|String} content - content to be added
+     * @param {jQuery} ctx Root DOM node
+     * @param {jQuery|String} content Content to be added
      */
     append : function(ctx, content) {
 
@@ -1047,8 +1047,8 @@ var DOM = BEM.DOM = BEM.decl('i-bem__dom',/** @lends BEM.DOM.prototype */{
 
     /**
      * Adds a fragment of the DOM tree at the beginning of the context and initializes blocks
-     * @param {jQuery} ctx - root DOM node
-     * @param {jQuery|String} content - content to be added
+     * @param {jQuery} ctx Root DOM node
+     * @param {jQuery|String} content Content to be added
      */
     prepend : function(ctx, content) {
 
@@ -1058,8 +1058,8 @@ var DOM = BEM.DOM = BEM.decl('i-bem__dom',/** @lends BEM.DOM.prototype */{
 
     /**
      * Adds a fragment of the DOM tree before the context and initializes blocks
-     * @param {jQuery} ctx - contextual DOM node
-     * @param {jQuery|String} content - content to be added
+     * @param {jQuery} ctx Contextual DOM node
+     * @param {jQuery|String} content Content to be added
      */
     before : function(ctx, content) {
 
@@ -1069,8 +1069,8 @@ var DOM = BEM.DOM = BEM.decl('i-bem__dom',/** @lends BEM.DOM.prototype */{
 
     /**
      * Adds a fragment of the DOM tree after the context and initializes blocks
-     * @param {jQuery} ctx - contextual DOM node
-     * @param {jQuery|String} content - content to be added
+     * @param {jQuery} ctx Contextual DOM node
+     * @param {jQuery|String} content Content to be added
      */
     after : function(ctx, content) {
 
@@ -1082,7 +1082,7 @@ var DOM = BEM.DOM = BEM.decl('i-bem__dom',/** @lends BEM.DOM.prototype */{
      * Builds a full name for a live event
      * @static
      * @private
-     * @param {String} e - event name
+     * @param {String} e Event name
      * @returns {String}
      */
     _buildCtxEventName : function(e) {
@@ -1183,9 +1183,9 @@ var DOM = BEM.DOM = BEM.decl('i-bem__dom',/** @lends BEM.DOM.prototype */{
      * Helper for live initialization for an event on DOM elements of a block or its elements
      * @static
      * @protected
-     * @param {String} [elemName] - element name or names (separated by spaces)
-     * @param {String} event - event name
-     * @param {Function} [callback] - handler to call after successful initialization
+     * @param {String} [elemName] Element name or names (separated by spaces)
+     * @param {String} event Event name
+     * @param {Function} [callback] Handler to call after successful initialization
      */
     liveInitOnEvent : function(elemName, event, callback) {
 
@@ -1197,9 +1197,9 @@ var DOM = BEM.DOM = BEM.decl('i-bem__dom',/** @lends BEM.DOM.prototype */{
      * Helper for subscribing to live events on DOM elements of a block or its elements
      * @static
      * @protected
-     * @param {String|Object} [to] - description (object with modName, modVal, elem) or name of the element or elements (space-separated)
-     * @param {String} event - event name
-     * @param {Function} [callback] - handler
+     * @param {String|Object} [to] Description (object with modName, modVal, elem) or name of the element or elements (space-separated)
+     * @param {String} event Event name
+     * @param {Function} [callback] Handler
      */
     liveBindTo : function(to, event, callback, invokeOnInit) {
 
@@ -1240,9 +1240,9 @@ var DOM = BEM.DOM = BEM.decl('i-bem__dom',/** @lends BEM.DOM.prototype */{
      * Helper for unsubscribing from live events on DOM elements of a block or its elements
      * @static
      * @protected
-     * @param {String} [elem] - name of the element or elements (space-separated)
-     * @param {String} event - event name
-     * @param {Function} [callback] - handler
+     * @param {String} [elem] Name of the element or elements (space-separated)
+     * @param {String} event Event name
+     * @param {Function} [callback] Handler
      */
     liveUnbindFrom : function(elem, event, callback) {
 
@@ -1269,10 +1269,10 @@ var DOM = BEM.DOM = BEM.decl('i-bem__dom',/** @lends BEM.DOM.prototype */{
      * Helper for live initialization when a different block is initialized
      * @static
      * @private
-     * @param {String} event - event name
-     * @param {String} blockName - name of the block that should trigger a reaction when initialized
-     * @param {Function} callback - handler to be called after successful initialization in the new block's context
-     * @param {String} findFnName - name of the method for searching
+     * @param {String} event Event name
+     * @param {String} blockName Name of the block that should trigger a reaction when initialized
+     * @param {Function} callback Handler to be called after successful initialization in the new block's context
+     * @param {String} findFnName Name of the method for searching
      */
     _liveInitOnBlockEvent : function(event, blockName, callback, findFnName) {
 
@@ -1293,9 +1293,9 @@ var DOM = BEM.DOM = BEM.decl('i-bem__dom',/** @lends BEM.DOM.prototype */{
      * Helper for live initialization for a different block's event on the current block's DOM element
      * @static
      * @protected
-     * @param {String} event - event name
-     * @param {String} blockName - name of the block that should trigger a reaction when initialized
-     * @param {Function} callback - handler to be called after successful initialization in the new block's context
+     * @param {String} event Event name
+     * @param {String} blockName Name of the block that should trigger a reaction when initialized
+     * @param {Function} callback Handler to be called after successful initialization in the new block's context
      */
     liveInitOnBlockEvent : function(event, blockName, callback) {
 
@@ -1307,9 +1307,9 @@ var DOM = BEM.DOM = BEM.decl('i-bem__dom',/** @lends BEM.DOM.prototype */{
      * Helper for live initialization for a different block's event inside the current block
      * @static
      * @protected
-     * @param {String} event - event name
-     * @param {String} blockName - name of the block that should trigger a reaction when initialized
-     * @param {Function} [callback] - handler to be called after successful initialization in the new block's context
+     * @param {String} event Event name
+     * @param {String} blockName Name of the block that should trigger a reaction when initialized
+     * @param {Function} [callback] Handler to be called after successful initialization in the new block's context
      */
     liveInitOnBlockInsideEvent : function(event, blockName, callback) {
 
@@ -1322,8 +1322,8 @@ var DOM = BEM.DOM = BEM.decl('i-bem__dom',/** @lends BEM.DOM.prototype */{
      * @deprecated - use liveInitOnBlockEvent
      * @static
      * @protected
-     * @param {String} blockName - name of the block that should trigger a reaction when initialized
-     * @param {Function} callback - handler to be called after successful initialization in the new block's context
+     * @param {String} blockName Name of the block that should trigger a reaction when initialized
+     * @param {Function} callback Handler to be called after successful initialization in the new block's context
      */
     liveInitOnBlockInit : function(blockName, callback) {
 
@@ -1336,8 +1336,8 @@ var DOM = BEM.DOM = BEM.decl('i-bem__dom',/** @lends BEM.DOM.prototype */{
      * @deprecated - use liveInitOnBlockInsideEvent
      * @static
      * @protected
-     * @param {String} blockName - name of the block that should trigger a reaction when initialized
-     * @param {Function} [callback] - handler to be called after successful initialization in the new block's context
+     * @param {String} blockName Name of the block that should trigger a reaction when initialized
+     * @param {Function} [callback] Handler to be called after successful initialization in the new block's context
      */
     liveInitOnBlockInsideInit : function(blockName, callback) {
 
@@ -1349,11 +1349,11 @@ var DOM = BEM.DOM = BEM.decl('i-bem__dom',/** @lends BEM.DOM.prototype */{
      * Adds a live event handler to a block, based on a specified element where the event will be listened for
      * @static
      * @protected
-     * @param {jQuery} [ctx] - the element in which the event will be listened for
-     * @param {String} e - event name
-     * @param {Object} [data] - additional information that the handler gets as e.data
-     * @param {Function} fn - handler
-     * @param {Object} [fnCtx] - handler's context
+     * @param {jQuery} [ctx] The element in which the event will be listened for
+     * @param {String} e Event name
+     * @param {Object} [data] Additional information that the handler gets as e.data
+     * @param {Function} fn Handler
+     * @param {Object} [fnCtx] Handler's context
      */
     on : function(ctx, e, data, fn, fnCtx) {
 
@@ -1367,10 +1367,10 @@ var DOM = BEM.DOM = BEM.decl('i-bem__dom',/** @lends BEM.DOM.prototype */{
      * Removes the live event handler from a block, based on a specified element where the event was being listened for 
      * @static
      * @protected
-     * @param {jQuery} [ctx] - the element in which the event was being listened for
-     * @param {String} e - event name
-     * @param {Function} [fn] - handler
-     * @param {Object} [fnCtx] - handler context
+     * @param {jQuery} [ctx] The element in which the event was being listened for
+     * @param {String} e Event name
+     * @param {Function} [fn] Handler
+     * @param {Object} [fnCtx] Handler context
      */
     un : function(ctx, e, fn, fnCtx) {
 
@@ -1382,14 +1382,14 @@ var DOM = BEM.DOM = BEM.decl('i-bem__dom',/** @lends BEM.DOM.prototype */{
 
     /**
      * Adds a live event handler to a block, based on a specified element where the event will be listened for
-     * @deprecated - use on
+     * @deprecated Use on
      * @static
      * @protected
-     * @param {jQuery} ctx - the element in which the event will be listened for
-     * @param {String} e - event name
-     * @param {Object} [data] - additional information that the handler gets as e.data
-     * @param {Function} fn - handler
-     * @param {Object} [fnCtx] - handler context
+     * @param {jQuery} ctx The element in which the event will be listened for
+     * @param {String} e Event name
+     * @param {Object} [data] Additional information that the handler gets as e.data
+     * @param {Function} fn Handler
+     * @param {Object} [fnCtx] Handler context
      */
     liveCtxBind : function(ctx, e, data, fn, fnCtx) {
 
@@ -1401,11 +1401,11 @@ var DOM = BEM.DOM = BEM.decl('i-bem__dom',/** @lends BEM.DOM.prototype */{
      * Adds a live event handler to a block, based on a specified element where the event will be listened for
      * @static
      * @private
-     * @param {jQuery} ctx - the element in which the event will be listened for
-     * @param {String} e  - event name
-     * @param {Object} [data] - additional information that the handler gets as e.data
-     * @param {Function} fn - handler
-     * @param {Object} [fnCtx] - handler context
+     * @param {jQuery} ctx The element in which the event will be listened for
+     * @param {String} e  Event name
+     * @param {Object} [data] Additional information that the handler gets as e.data
+     * @param {Function} fn Handler
+     * @param {Object} [fnCtx] Handler context
      */
     _liveCtxBind : function(ctx, e, data, fn, fnCtx) {
 
@@ -1453,13 +1453,13 @@ var DOM = BEM.DOM = BEM.decl('i-bem__dom',/** @lends BEM.DOM.prototype */{
 
     /**
      * Removes a live event handler from a block, based on a specified element where the event was being listened for
-     * @deprecated - use un
+     * @deprecated Use on
      * @static
      * @protected
-     * @param {jQuery} ctx - the element in which the event was being listened for
-     * @param {String} e - event name
-     * @param {Function} [fn] - handler
-     * @param {Object} [fnCtx] - handler context
+     * @param {jQuery} ctx The element in which the event was being listened for
+     * @param {String} e Event name
+     * @param {Function} [fn] Handler
+     * @param {Object} [fnCtx] Handler context
      */
     liveCtxUnbind : function(ctx, e, fn, fnCtx) {
 
@@ -1471,10 +1471,10 @@ var DOM = BEM.DOM = BEM.decl('i-bem__dom',/** @lends BEM.DOM.prototype */{
      * Removes a live event handler from a block, based on a specified element where the event was being listened for
      * @static
      * @private
-     * @param {jQuery} ctx - the element in which the event was being listened for
-     * @param {String} e - event name
-     * @param {Function} [fn] - handler
-     * @param {Object} [fnCtx] - handler context
+     * @param {jQuery} ctx The element in which the event was being listened for
+     * @param {String} e Event name
+     * @param {Function} [fn] Handler
+     * @param {Object} [fnCtx] Handler context
      */
     _liveCtxUnbind : function(ctx, e, fn, fnCtx) {
 
@@ -1504,7 +1504,7 @@ var DOM = BEM.DOM = BEM.decl('i-bem__dom',/** @lends BEM.DOM.prototype */{
      * Retrieves the name of an element nested in a block
      * @static
      * @private
-     * @param {jQuery} elem - nested element
+     * @param {jQuery} elem Nested element
      * @returns {String|undefined}
      */
     _extractElemNameFrom : function(elem) {
@@ -1519,7 +1519,7 @@ var DOM = BEM.DOM = BEM.decl('i-bem__dom',/** @lends BEM.DOM.prototype */{
     /**
      * Retrieves block parameters from a DOM element
      * @static
-     * @param {HTMLElement} domNode - DOM node
+     * @param {HTMLElement} domNode DOM node
      * @returns {Object}
      */
     extractParams : extractParams,
@@ -1528,8 +1528,8 @@ var DOM = BEM.DOM = BEM.decl('i-bem__dom',/** @lends BEM.DOM.prototype */{
      * Builds a prefix for the CSS class of a DOM element or nested element of the block, based on modifier name
      * @static
      * @private
-     * @param {String} modName - modifier name
-     * @param {jQuery|String} [elem] - element
+     * @param {String} modName Modifier name
+     * @param {jQuery|String} [elem] Element
      * @returns {String}
      */
     _buildModClassPrefix : function(modName, elem) {
@@ -1546,9 +1546,9 @@ var DOM = BEM.DOM = BEM.decl('i-bem__dom',/** @lends BEM.DOM.prototype */{
      * Builds a regular expression for extracting modifier values from a DOM element or nested element of a block
      * @static
      * @private
-     * @param {String} modName - modifier name
-     * @param {jQuery|String} [elem] - element
-     * @param {String} [quantifiers] - regular expression quantifiers
+     * @param {String} modName Modifier name
+     * @param {jQuery|String} [elem] Element
+     * @param {String} [quantifiers] Regular expression quantifiers
      * @returns {RegExp}
      */
     _buildModValRE : function(modName, elem, quantifiers) {
@@ -1571,9 +1571,9 @@ var DOM = BEM.DOM = BEM.decl('i-bem__dom',/** @lends BEM.DOM.prototype */{
 
     /**
      * Builds a CSS selector corresponding to the block/element and modifier
-     * @param {String} [elem] - element name
-     * @param {String} [modName] - modifier name
-     * @param {String} [modVal] - modifier value
+     * @param {String} [elem] Element name
+     * @param {String} [modName] Modifier name
+     * @param {String} [modVal] Modifier value
      * @returns {String}
      */
     buildSelector : function(elem, modName, modVal) {
@@ -1596,7 +1596,7 @@ var DOM = BEM.DOM = BEM.decl('i-bem__dom',/** @lends BEM.DOM.prototype */{
 
     /**
      * Returns the size of the current window
-     * @returns {Object} - object with width and height fields
+     * @returns {Object} Object with width and height fields
      */
     getWindowSize : function() {
 
