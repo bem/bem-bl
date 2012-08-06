@@ -4,6 +4,8 @@
     "",
     0,
     true,
-    false
+    false,
+    "Abstract",
+    { "elem": "lem", "content": "text" }
   ]
 }
