@@ -186,7 +186,7 @@ content: this.ctx.content
     var MOD_DELIM = '_',
 
     /**
-     * Separator between block names and a nested element
+     * Separator between names of a block and a nested element
      * @const
      * @type String
      */
