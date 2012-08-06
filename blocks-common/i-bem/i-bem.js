@@ -31,9 +31,9 @@ var afterCurrentEventFns = [],
  * Builds the name of the handler method for setting a modifier
  * @static
  * @private
- * @param {String} elemName element name
- * @param {String} modName modifier name
- * @param {String} modVal modifier value
+ * @param {String} elemName - element name
+ * @param {String} modName - modifier name
+ * @param {String} modVal - modifier value
  * @returns {String}
  */
 function buildModFnName(elemName, modName, modVal) {
@@ -94,8 +94,8 @@ this.BEM = $.inherit($.observable, /** @lends BEM.prototype */ {
      * @class Base block for creating BEM blocks
      * @constructs
      * @private
-     * @param {Object} mods block modifiers
-     * @param {Object} params block parameters
+     * @param {Object} mods - block modifiers
+     * @param {Object} params - block parameters
      * @param {Boolean} [initImmediately=true]
      */
     __constructor : function(mods, params, initImmediately) {
@@ -152,8 +152,8 @@ this.BEM = $.inherit($.observable, /** @lends BEM.prototype */ {
      * Changes the context of the function being passed
      * @protected
      * @param {Function} fn
-     * @param {Object} [ctx=this] context
-     * @returns {Function} function with a modified context
+     * @param {Object} [ctx=this] - context
+     * @returns {Function} - function with a modified context
      */
     changeThis : function(fn, ctx) {
 
@@ -165,7 +165,7 @@ this.BEM = $.inherit($.observable, /** @lends BEM.prototype */ {
      * Executes the function in the context of the block, after the "current event"
      * @protected
      * @param {Function} fn
-     * @param {Object} [ctx] context
+     * @param {Object} [ctx] - context
      */
     afterCurrentEvent : function(fn, ctx) {
 
@@ -176,8 +176,8 @@ this.BEM = $.inherit($.observable, /** @lends BEM.prototype */ {
     /**
      * Executes the block's event handlers and live event handlers
      * @protected
-     * @param {String} e event name
-     * @param {Object} [data] additional information
+     * @param {String} e - event name
+     * @param {Object} [data] - additional information
      * @returns {BEM}
      */
     trigger : function(e, data) {
@@ -202,9 +202,9 @@ this.BEM = $.inherit($.observable, /** @lends BEM.prototype */ {
     /**
      * Checks whether a block or nested element has a modifier
      * @protected
-     * @param {Object} [elem] nested element
-     * @param {String} modName modifier name
-     * @param {String} [modVal] modifier value
+     * @param {Object} [elem] - nested element
+     * @param {String} modName - modifier name
+     * @param {String} [modVal] - modifier value
      * @returns {Boolean}
      */
     hasMod : function(elem, modName, modVal) {
@@ -238,9 +238,9 @@ this.BEM = $.inherit($.observable, /** @lends BEM.prototype */ {
     /**
      * Returns the value of the modifier of the block/nested element
      * @protected
-     * @param {Object} [elem] nested element
-     * @param {String} modName modifier name
-     * @returns {String} modifier value
+     * @param {Object} [elem] - nested element
+     * @param {String} modName - modifier name
+     * @returns {String} - modifier value
      */
     getMod : function(elem, modName) {
 
@@ -260,10 +260,10 @@ this.BEM = $.inherit($.observable, /** @lends BEM.prototype */ {
     /**
      * Returns the value of the modifier of the nested element
      * @private
-     * @param {String} modName modifier name
-     * @param {Object} elem nested element
-     * @param {Object} [elem] nested element name
-     * @returns {String} modifier value
+     * @param {String} modName - modifier name
+     * @param {Object} elem - nested element
+     * @param {Object} [elem] - nested element name
+     * @returns {String} - modifier value
      */
     _getElemMod : function(modName, elem, elemName) {
 
@@ -274,9 +274,9 @@ this.BEM = $.inherit($.observable, /** @lends BEM.prototype */ {
     /**
      * Returns values of modifiers of the block/nested element
      * @protected
-     * @param {Object} [elem] nested element
-     * @param {String} [modName1, ..., modNameN] modifier names
-     * @returns {Object} hash of modifier values
+     * @param {Object} [elem] - nested element
+     * @param {String} [modName1, ..., modNameN] - modifier names
+     * @returns {Object} - hash of modifier values
      */
     getMods : function(elem) {
 
@@ -300,9 +300,9 @@ this.BEM = $.inherit($.observable, /** @lends BEM.prototype */ {
     /**
      * Sets the modifier for a block/nested element
      * @protected
-     * @param {Object} [elem] nested element
-     * @param {String} modName modifier name
-     * @param {String} modVal modifier value
+     * @param {Object} [elem] - nested element
+     * @param {String} modName - modifier name
+     * @param {String} modVal - modifier value
      * @returns {BEM}
      */
     setMod : function(elem, modName, modVal) {
@@ -353,11 +353,11 @@ this.BEM = $.inherit($.observable, /** @lends BEM.prototype */ {
     /**
      * Function after successfully changing the modifier of the block/nested element
      * @protected
-     * @param {String} modName modifier name
-     * @param {String} modVal modifier value
-     * @param {String} oldModVal old modifier value
-     * @param {Object} [elem] nested element
-     * @param {String} [elemName] element name
+     * @param {String} modName - modifier name
+     * @param {String} modVal - modifier value
+     * @param {String} oldModVal - old modifier value
+     * @param {Object} [elem] - nested element
+     * @param {String} [elemName] - element name
      */
     _afterSetMod : function(modName, modVal, oldModVal, elem, elemName) {},
 
@@ -366,11 +366,11 @@ this.BEM = $.inherit($.observable, /** @lends BEM.prototype */ {
      * If the condition parameter is passed: when true, modVal1 is set; when false, modVal2 is set.
      * If the condition parameter is not passed: modVal1 is set if modVal2 was set, or vice versa.
      * @protected
-     * @param {Object} [elem] nested element
-     * @param {String} modName modifier name
-     * @param {String} modVal1 first modifier value
-     * @param {String} [modVal2] second modifier value
-     * @param {Boolean} [condition] condition
+     * @param {Object} [elem] - nested element
+     * @param {String} modName - modifier name
+     * @param {String} modVal1 - first modifier value
+     * @param {String} [modVal2] - second modifier value
+     * @param {Boolean} [condition] - condition
      * @returns {BEM}
      */
     toggleMod : function(elem, modName, modVal1, modVal2, condition) {
@@ -405,8 +405,8 @@ this.BEM = $.inherit($.observable, /** @lends BEM.prototype */ {
     /**
      * Removes a modifier from a block/nested element
      * @protected
-     * @param {Object} [elem] nested element
-     * @param {String} modName modifier name
+     * @param {Object} [elem] - nested element
+     * @param {String} modName - modifier name
      * @returns {BEM}
      */
     delMod : function(elem, modName) {
@@ -423,10 +423,10 @@ this.BEM = $.inherit($.observable, /** @lends BEM.prototype */ {
     /**
      * Executes handlers for setting modifiers
      * @private
-     * @param {String} elemName element name
-     * @param {String} modName modifier name
-     * @param {String} modVal modifier value
-     * @param {Array} modFnParams handler parameters
+     * @param {String} elemName - element name
+     * @param {String} modName - modifier name
+     * @param {String} modVal - modifier value
+     * @param {Array} modFnParams - handler parameters
      */
     _callModFn : function(elemName, modName, modVal, modFnParams) {
 
@@ -440,9 +440,9 @@ this.BEM = $.inherit($.observable, /** @lends BEM.prototype */ {
     /**
      * Retrieves the value of the modifier
      * @private
-     * @param {String} modName modifier name
-     * @param {Object} [elem] element
-     * @returns {String} modifier value
+     * @param {String} modName - modifier name
+     * @param {Object} [elem] - element
+     * @returns {String} - modifier value
      */
     _extractModVal : function(modName, elem) {
 
@@ -453,9 +453,9 @@ this.BEM = $.inherit($.observable, /** @lends BEM.prototype */ {
     /**
      * Retrieves name/value for a list of modifiers
      * @private
-     * @param {Array} modNames names of modifiers
-     * @param {Object} [elem] element
-     * @returns {Object} hash of modifier values by name
+     * @param {Array} modNames - names of modifiers
+     * @param {Object} [elem] - element
+     * @returns {Object} - hash of modifier values by name
      */
     _extractMods : function(modNames, elem) {
 
@@ -465,9 +465,9 @@ this.BEM = $.inherit($.observable, /** @lends BEM.prototype */ {
 
     /**
      * Returns a named communication channel
-     * @param {String} [id='default'] channel ID
-     * @param {Boolean} [drop=false] destroy the channel
-     * @returns {$.observable|undefined} communication channel
+     * @param {String} [id='default'] - channel ID
+     * @param {Boolean} [drop=false] - destroy the channel
+     * @returns {$.observable|undefined} - communication channel
      */
     channel : function(id, drop) {
 
@@ -519,13 +519,13 @@ this.BEM = $.inherit($.observable, /** @lends BEM.prototype */ {
      * Declares blocks and creates a block class
      * @static
      * @protected
-     * @param {String|Object} decl block name (simple syntax) or description
-     * @param {String} decl.block|decl.name block name
-     * @param {String} [decl.baseBlock] name of the parent block
-     * @param {String} [decl.modName] modifier name
-     * @param {String} [decl.modVal] modifier value
-     * @param {Object} [props] methods
-     * @param {Object} [staticProps] static methods
+     * @param {String|Object} decl - block name (simple syntax) or description
+     * @param {String} decl.block|decl.name - block name
+     * @param {String} [decl.baseBlock] - name of the parent block
+     * @param {String} [decl.modName] - modifier name
+     * @param {String} [decl.modVal] - modifier value
+     * @param {Object} [props] - methods
+     * @param {Object} [staticProps] - static methods
      */
     decl : function(decl, props, staticProps) {
 
@@ -587,8 +587,8 @@ this.BEM = $.inherit($.observable, /** @lends BEM.prototype */ {
     /**
      * Processes a block's live properties
      * @private
-     * @param {Boolean} [heedLive=false] whether to take into account that the block already processed its live properties
-     * @returns {Boolean} whether the block is a live block
+     * @param {Boolean} [heedLive=false] - whether to take into account that the block already processed its live properties
+     * @returns {Boolean} - whether the block is a live block
      */
     _processLive : function(heedLive) {
 
@@ -599,8 +599,8 @@ this.BEM = $.inherit($.observable, /** @lends BEM.prototype */ {
     /**
      * Factory method for creating an instance of the block named
      * @static
-     * @param {String|Object} block block name or description
-     * @param {Object} [params] block parameters
+     * @param {String|Object} block - block name or description
+     * @param {Object} [params] - block parameters
      * @returns {BEM}
      */
     create : function(block, params) {
@@ -627,7 +627,7 @@ this.BEM = $.inherit($.observable, /** @lends BEM.prototype */ {
      * Retrieves the name of an element nested in a block
      * @static
      * @private
-     * @param {Object} elem nested element
+     * @param {Object} elem - nested element
      * @returns {String|undefined}
      */
     _extractElemNameFrom : function(elem) {},
@@ -666,8 +666,8 @@ this.BEM = $.inherit($.observable, /** @lends BEM.prototype */ {
      * Changes the context of the function being passed
      * @protected
      * @param {Function} fn
-     * @param {Object} ctx context
-     * @returns {Function} function with a modified context
+     * @param {Object} ctx - context
+     * @returns {Function} - function with a modified context
      */
     changeThis : function(fn, ctx) {
 
@@ -694,9 +694,9 @@ this.BEM = $.inherit($.observable, /** @lends BEM.prototype */ {
 
     /**
      * Returns/destroys a named communication channel
-     * @param {String} [id='default'] channel ID
-     * @param {Boolean} [drop=false] destroy the channel
-     * @returns {$.observable|undefined} communication channel
+     * @param {String} [id='default'] - channel ID
+     * @param {Boolean} [drop=false] - destroy the channel
+     * @returns {$.observable|undefined} - communication channel
      */
     channel : function(id, drop) {
 
