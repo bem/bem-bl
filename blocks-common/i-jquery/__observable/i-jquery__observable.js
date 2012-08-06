@@ -20,9 +20,9 @@ var storageExpando = '__' + +new Date + 'storage',
     Observable = /** @lends $.observable.prototype */{
 
         /**
-         * Строит полное имя события
+         * Builds full event name
          * @protected
-         * @param {String} e тип события
+         * @param {String} e Event type
          * @returns {String}
          */
         buildEventName : function(e) {
@@ -32,11 +32,11 @@ var storageExpando = '__' + +new Date + 'storage',
         },
 
         /**
-         * Добавление обработчика события
-         * @param {String} e тип события
-         * @param {Object} [data] дополнительные данные, приходящие в обработчик как e.data
-         * @param {Function} fn обработчик
-         * @param {Object} [ctx] контекст обработчика
+         * Adding event handler
+         * @param {String} e Event type
+         * @param {Object} [data] Additional data that the handler gets as e.data
+         * @param {Function} fn Handler
+         * @param {Object} [ctx] Handler context
          * @returns {$.observable}
          */
         on : function(e, data, fn, ctx, _special) {
@@ -89,10 +89,10 @@ var storageExpando = '__' + +new Date + 'storage',
         },
 
         /**
-         * Удаление обработчика/обработчиков события
-         * @param {String} [e] тип события
-         * @param {Function} [fn] обработчик
-         * @param {Object} [ctx] контекст обработчика
+         * Removing event handler(s)
+         * @param {String} [e] Event type
+         * @param {Function} [fn] Handler
+         * @param {Object} [ctx] Handler context
          * @returns {$.observable}
          */
         un : function(e, fn, ctx) {
@@ -100,14 +100,14 @@ var storageExpando = '__' + +new Date + 'storage',
             if(typeof e == 'string' || typeof e == 'undefined') {
                 var storage = this[storageExpando];
                 if(storage) {
-                    if(e) { // если передан тип события
+                    if(e) { // if event type was passed
                         var eList = e.split(' '),
                             i = 0,
                             eStorage;
                         while(e = eList[i++]) {
                             e = this.buildEventName(e);
                             if(eStorage = storage[e]) {
-                                if(fn) {  // если передан конкретный обработчик
+                                if(fn) {  // if specific handler was passed
                                     var id = getFnId(fn, ctx),
                                         ids = eStorage.ids;
                                     if(id in ids) {
@@ -153,9 +153,9 @@ var storageExpando = '__' + +new Date + 'storage',
         },
 
         /**
-         * Запускает обработчики события
-         * @param {String|$.Event} e событие
-         * @param {Object} [data] дополнительные данные
+         * Fires event handlers
+         * @param {String|$.Event} e Event
+         * @param {Object} [data] Additional data
          * @returns {$.observable}
          */
         trigger : function(e, data) {
