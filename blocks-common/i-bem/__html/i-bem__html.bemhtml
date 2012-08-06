@@ -52,7 +52,7 @@
         this._listLength--;
 
         var ctx = this.ctx;
-        (ctx && ctx !== true) || ctx === 0 && this._buf.push(ctx);
+        (ctx && ctx !== true || ctx === 0) && this._buf.push(ctx);
     }
 
 }
