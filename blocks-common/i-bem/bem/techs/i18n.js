@@ -9,11 +9,19 @@ var LangsMixin = exports.LangsMixin = {
 
     getLangs: function() {
         var env = process.env.BEM_I18N_LANGS;
-        return env? env.split(' ') : DEFAULT_LANGS;
+        return env? env.split(' ') : [].concat(DEFAULT_LANGS);
+    },
+
+    getDefaultLang: function() {
+        return process.env.BEM_I18N_DEFAULT_LANG || this.getLangs().shift();
     },
 
     getSuffixForLang: function(lang) {
         return lang + '.' + this.getTechName();
+    },
+
+    getSourceSuffix: function() {
+        return ['i18n', 'all.js'].join('/');
     },
 
     extendDecl: function(decl, ext) {

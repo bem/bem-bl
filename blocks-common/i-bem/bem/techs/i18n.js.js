@@ -2,7 +2,7 @@ var BEM = require('bem'),
     Q = BEM.require('qq'),
     LangsMixin = require('./i18n').LangsMixin,
     PATH = require('path'),
-    TANKER = require('../../__i18n/lib/tanker');
+    I18NJS = require('../../__i18n/lib/i18n-js');
 
 exports.baseTechName = 'js';
 
@@ -10,10 +10,6 @@ exports.techMixin = BEM.util.extend({}, LangsMixin, {
 
     getBaseTechSuffix: function() {
         return 'js';
-    },
-
-    getSuffixForAll: function() {
-        return ['i18n', 'all.js'].join('/');
     },
 
     getSuffixes: function() {
@@ -36,7 +32,7 @@ exports.techMixin = BEM.util.extend({}, LangsMixin, {
 
         var _this = this,
             prefix = PATH.resolve(outputDir, outputName),
-            source = this.getPath(prefix, this.getSuffixForAll()),
+            source = this.getPath(prefix, this.getSourceSuffix()),
             res = {};
 
         return BEM.util.readJsonJs(source)
@@ -72,40 +68,9 @@ exports.techMixin = BEM.util.extend({}, LangsMixin, {
 
     },
 
-    serializeI18nInit: function(lang) {
-        return "\nBEM.I18N.lang('" + lang + "');\n";
-    },
+    serializeI18nInit: I18NJS.serializeInit,
 
-    serializeI18nData: function(data, lang) {
-
-        var res = [];
-
-        Object.keys(data).sort().forEach(function(keyset) {
-
-            // output value of empty keyset as a simple js code
-            if (keyset === '') {
-                res.push(data[keyset]);
-                return;
-            }
-
-            // generate i18n declaration for normal keysets
-            res.push("\nBEM.I18N.decl('" + keyset + "', {");
-
-            Object.keys(data[keyset]).forEach(function(key, i, arr) {
-
-                TANKER.xmlToJs(data[keyset][key], function(js) {
-                    res.push(JSON.stringify(key) + ': ' + js + (i === arr.length - 1 ? '' : ','));
-                });
-
-            });
-
-            res.push('}, {\n"lang": "' + lang + '"\n});\n');
-
-        });
-
-        return res;
-
-    },
+    serializeI18nData: I18NJS.serializeData,
 
     storeBuildResult: function(path, suffix, res) {
 
@@ -114,7 +79,7 @@ exports.techMixin = BEM.util.extend({}, LangsMixin, {
                 path,
                 this.getPath(
                     res,
-                    this.getBuildSuffixForLang(this.getLangs().shift())),
+                    this.getBuildSuffixForLang(this.getDefaultLang())),
                 true);
         }
 
