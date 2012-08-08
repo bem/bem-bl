@@ -27,6 +27,7 @@ exports.getDependencies = function() {
 function readBemhtml(path) {
     return BEM.util.readFile(path)
         .then(function(c) {
+            /** @name BEMHTML variable appears after runInThisContext() call */
             VM.runInThisContext(c, path);
             return BEMHTML;
         });
