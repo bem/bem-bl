@@ -32,11 +32,12 @@ exports.techMixin = BEM.util.extend({}, LangsMixin, {
 
         var _this = this,
             prefix = PATH.resolve(outputDir, outputName),
-            source = this.getPath(prefix, this.getSourceSuffix()),
-            res = {};
+            source = this.getPath(prefix, this.getSourceSuffix());
 
         return BEM.util.readJsonJs(source)
             .then(function(data) {
+
+                var res = {};
 
                 _this.getLangs().forEach(function(lang) {
 
