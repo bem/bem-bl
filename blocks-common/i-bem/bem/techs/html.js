@@ -26,15 +26,20 @@ exports.techMixin = {
 
     },
 
-    getCreateResult: function(path, suffix, vars) {
+    getHtml: function(bemhtml, bemjson) {
 
-        return Q.all([
-                this.getBemhtml(vars.Prefix),
-                this.getBemjson(vars.Prefix)
-            ])
+        return Q.all([bemhtml, bemjson])
             .spread(function(bemhtml, bemjson) {
                 return bemhtml.apply(bemjson);
             });
+
+    },
+
+    getCreateResult: function(path, suffix, vars) {
+
+        return this.getHtml(
+            this.getBemhtml(vars.Prefix),
+            this.getBemjson(vars.Prefix));
 
     },
 
