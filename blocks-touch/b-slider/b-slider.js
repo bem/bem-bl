@@ -370,6 +370,8 @@
 
         _onReInit: function() {
 
+            this.trigger('update', this._getCurrentParams());
+
             this._delayedInit();
 
         },
