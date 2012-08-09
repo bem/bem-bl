@@ -1076,7 +1076,7 @@ var DOM = BEM.DOM = BEM.decl('i-bem__dom',/** @lends BEM.DOM.prototype */{
      */
     replace : function(ctx, content) {
 
-        this.destruct(ctx, true);
+        this.destruct(true, ctx);
         this.init($(content).replaceAll(ctx));
 
     },
