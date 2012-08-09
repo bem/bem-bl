@@ -1074,7 +1074,7 @@ var DOM = BEM.DOM = BEM.decl('i-bem__dom',/** @lends BEM.DOM.prototype */{
      * @param {jQuery} ctx корневая DOM-нода
      * @param {jQuery|String} content добавляемый контент
      */
-    replaceWith : function(ctx, content) {
+    replace : function(ctx, content) {
 
         this.destruct(ctx, true);
         this.init($(content).replaceAll(ctx));
