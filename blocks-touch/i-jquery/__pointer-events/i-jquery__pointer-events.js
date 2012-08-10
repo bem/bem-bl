@@ -7,7 +7,7 @@
  * http://www.opensource.org/licenses/mit-license.php
  * http://www.gnu.org/licenses/gpl.html
  *
- * @version 0.3
+ * @version 0.3.1
  */
 
 (function($) {
@@ -192,25 +192,25 @@
                         touch.x2 = e.pointer.x;
                     },
                     'pointerup.tapEvent': function(e) {
-                        // предотвращаем мышиные события
-                        if (touch.target.nodeType !== 9) {
-                            // при обычном превенте появляется-прачется адресный тулбар,
-                            // т.е. клик как событие происходит, просто нет действия
-                            $(touch.target).bind('click.preventClick', function() {
-                                $(touch.target).unbind('.preventClick');
-                                return false;
-                            });
-
-                            // http://cubiq.org/dropbox/clickdelay.html
-                            $('body').css('pointer-events', 'none');
-                            setTimeout(function() {
-                                $(touch.target).unbind('.preventClick');
-                                $('body').css('pointer-events', 'auto');
-                            }, 750);
-                        }
-
                         // если совсем не было move, или был, но меньше 5 пикселей, то триггерим тап
                         if (!touch.x2 || Math.abs(touch.x2 - touch.x1) < 5) {
+                            // предотвращаем мышиные события
+                            if (touch.target.nodeType !== 9) {
+                                // при обычном превенте появляется-прачется адресный тулбар,
+                                // т.е. клик как событие происходит, просто нет действия
+                                $(touch.target).bind('click.preventClick', function() {
+                                    $(touch.target).unbind('.preventClick');
+                                    return false;
+                                });
+
+                                // http://cubiq.org/dropbox/clickdelay.html
+                                $('body').css('pointer-events', 'none');
+                                setTimeout(function() {
+                                    $(touch.target).unbind('.preventClick');
+                                    $('body').css('pointer-events', 'auto');
+                                }, 750);
+                            }
+
                             e.type = 'tap';
                             $.event.handle.apply(this, arguments);
                         }
