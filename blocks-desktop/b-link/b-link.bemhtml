@@ -5,11 +5,12 @@ block b-link {
     attrs: {
 
         var ctx = this.ctx,
-            url = ctx.url,
-            props = ['title', 'target'], p,
+            props = ['title', 'target'],
+            p = typeof ctx.url,
             a = {
-                  href: (typeof url === 'string' ? url :
-                      (p = [], apply(this._buf = p, this._mode = '', this.ctx = url), p.join('')))
+                  href: ((p === 'undefined' || p === 'string') ? ctx.url :
+                      (p = [], apply(this._buf = p, this._mode = '', this.ctx = ctx.url),
+                          p.join('')))
                 };
 
         while(p = props.pop()) ctx[p] && (a[p] = ctx[p]);
