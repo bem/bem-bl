@@ -74,38 +74,55 @@ function jsExpander(item, _raw) {
 
     switch(type) {
 
-        case 'TANKER_DYNAMIC':
-            // [ keyset, key, [params] ]
-            code = expandNodes(item, currentExpander);
-            return "this.keyset('" + code[0] + "').key('" + code[1] + "', " + (code[2] || "{}") + ")";
+    case 'TANKER_DYNAMIC':
+        // [ keyset, key, [params] ]
+        code = expandNodes(item, currentExpander);
+        return "this.keyset('" + code[0] + "').key('" + code[1] + "', " + (code[2] || "{}") + ")";
 
-        case 'JS_DYNAMIC':
-            // [ code ]
-            code = '(function(params) { ' + expandNodes(item[0], rawExpander).join('') + ' })(params)';
-            return code;
+    case 'JS_DYNAMIC':
+        // [ code ]
+        code = '(function(params) { ' + expandNodes(item[0], rawExpander).join('') + ' }).call(this, params);';
+        return code;
 
-        case 'XSL_DYNAMIC':
-            // [ code ]
-            return '';
+    case 'XSL_DYNAMIC':
+        // [ code ]
+        return '';
 
-        case 'PARAMS':
-            // [ [params] ]
-            return "{ " + expandNodes(item, currentExpander).join(', ') + " } ";
+    case 'XML':
+        // [ tag, attrs, [content] ]
+        var tag = item[0],
+            attrs = item[1],
+            prop = [],
+            a;
 
-        case 'PARAM':
-            // [ name, [value] ]
-            return [item[0], expandNodes(item[1], currentExpander)].join(': ');
+        for(a in attrs) { prop.push([a, SINGLE_QUOTE_CHAR + attrs[a] + SINGLE_QUOTE_CHAR].join('=')); };
+        prop = prop.length? jsQuote(' ' + prop.join(' ')) : '';
 
-        case 'PARAM-CALL':
-            // [ key ]
-            return 'params[' + item[0] + ']';
+        code = item[2].length?
+            ['"<' + tag + prop + '>"', expandNodes(item[2], currentExpander), '"</' + tag + '>"'].join(' + ') :
+            '"<' + tag + prop + '/>"';
 
-        case 'TEXT':
-            // [ text ]
-            return _raw ? item[0] : SINGLE_QUOTE_CHAR + jsQuote(item[0]) + SINGLE_QUOTE_CHAR;
+        return code;
 
-        default:
-            throw new Error('Unexpected item type: ' + type);
+    case 'PARAMS':
+        // [ [params] ]
+        return "{ " + expandNodes(item, currentExpander).join(', ') + " } ";
+
+    case 'PARAM':
+        // [ name, [code] ]
+        code = expandNodes(item[1], currentExpander);
+        return [item[0], toString.call(code) === '[object Array]' ? code.join(' + ') : code].join(': ');
+
+    case 'PARAM-CALL':
+        // [ key ]
+        return 'params[' + item[0] + ']';
+
+    case 'TEXT':
+        // [ text ]
+        return _raw ? item[0] : SINGLE_QUOTE_CHAR + jsQuote(item[0]) + SINGLE_QUOTE_CHAR;
+
+    default:
+        throw new Error('Unexpected item type: ' + type);
 
     }
 
@@ -176,8 +193,16 @@ function _node(node) {
         if(node.firstChild()) return _param(node.children[0]);
 
     }
+    else if(node.name.indexOf(':') === -1) {
+        return _xml(node);
+    }
 
 }
+
+function _xml(node) {
+    return [node.name, node.attributes, toCommonNodes(node.children), 'XML'];
+}
+
 
 function _dynamic(nodes) {
 
