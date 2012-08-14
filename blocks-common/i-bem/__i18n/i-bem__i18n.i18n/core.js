@@ -5,6 +5,8 @@ var i18n = i18n || {};
 (function(bem_, undefined) {
 
 var cache = {},
+    // {String[]} A stack used for restoring context with dynamic keysets
+    stack = [],
     /** {String} */
     MOD_DELIM = '_',
     /** {String} */
@@ -38,6 +40,18 @@ function bemParse(name) {
 
 }
 
+function _pushStack(name) {
+    if(!name) return false;
+
+    var len = stack.length;
+    return !(len && stack[len - 1] === name) && stack.push(name);
+}
+
+function _popStack(name) {
+    var len = stack.length;
+    return len && stack[len - 1] !== name && stack.pop();
+}
+
 /**
  * @constructor
  */
@@ -61,6 +75,8 @@ _i18n.prototype = {
     },
 
     keyset : function(name) {
+        _pushStack(this._keyset);
+
         this._keyset = bemName(name);
         return this;
     },
@@ -105,7 +121,7 @@ _i18n.prototype = {
 
         try{
             return typeof value === 'string' ?
-                value : thisCtx ? value.call(thisCtx, params) : value(params);
+                value : thisCtx ? value.call(thisCtx, params) : value.call(this, params);
         } catch(e) {
             throw "[Error] keyset: " + this._keyset + " key: " + this._key + " (lang: " + this._lang + ")";
         }
@@ -115,7 +131,10 @@ _i18n.prototype = {
 
 };
 
-/** @namespace */
+/**
+ * @namespace
+ * @lends BEM.I18N
+ */
 bem_.I18N = (function(base) {
 
     /**
@@ -140,11 +159,18 @@ bem_.I18N = (function(base) {
      * @return {String}
      */
     klass.key = function(name, params) {
-        var proto = this._i18n;
+        var proto = this._i18n,
+            _keyset, result;
 
         proto.lang(this._currentLang).key(name);
 
-        return proto.val.call(proto, params, klass);
+        result = proto.val.call(proto, params, klass);
+
+        // восстанавливаем значение предыдущего кейсета, если нужно
+        _keyset = _popStack(proto._keyset);
+        _keyset && proto.keyset(_keyset);
+
+        return result;
     };
 
     /**
