@@ -69,7 +69,7 @@ function init(domElem, uniqInitId) {
         if(block) {
             if(block.domElem.index(domNode) < 0) {
                 block.domElem = block.domElem.add(domElem);
-                $.extend(block.params, params);
+                $.extend(block._params, params);
             }
         } else {
             initBlock(blockName, domElem, params);
@@ -100,12 +100,17 @@ function initBlock(blockName, domElem, params, forceLive, callback) {
 
     var uniqId = params.uniqId;
     if(uniqIdToBlock[uniqId]) {
-        return uniqIdToBlock[uniqId]._init(params);
+        return uniqIdToBlock[uniqId]._init();
     }
 
     uniqIdToDomElems[uniqId] = uniqIdToDomElems[uniqId]?
         uniqIdToDomElems[uniqId].add(domElem) :
         domElem;
+
+    var parentDomNode = domNode.parentNode;
+    if(!parentDomNode || parentDomNode.nodeType === 11) { // jquery doesn't unique disconnected node
+        $.unique(uniqIdToDomElems[uniqId]);
+    }
 
     var blockClass = blocks[blockName] || DOM.decl(blockName, {}, { live : true });
     if(!(blockClass._liveInitable = !!blockClass._processLive()) || forceLive || params.live === false) {
@@ -196,6 +201,20 @@ function extractParams(domNode) {
 function cleanupDomNode(domNode) {
 
     delete domElemToParams[$.identify(domNode)];
+
+}
+
+/**
+ * Отцепляет DOM-ноду от блока, если нода последняя -- уничтожает блок
+ * @private
+ * @param {BEM.DOM} block блок
+ * @param {HTMLElement} domNode DOM-нода
+ */
+function removeDomNodeFromBlock(block, domNode) {
+
+    block.domElem.length === 1?
+        block.destruct(true) :
+        block.domElem = block.domElem.not(domNode);
 
 }
 
@@ -896,11 +915,20 @@ var DOM = BEM.DOM = BEM.decl('i-bem__dom',/** @lends BEM.DOM.prototype */{
         _this._needSpecialUnbind && _self.doc.add(_self.win).unbind('.' + _this._uniqId);
 
         _this.dropElemCache().domElem.each(function(i, domNode) {
-            $.each(getParams(domNode), function(blockName, blockParams) {
+            var params = getParams(domNode);
+            $.each(params, function(blockName, blockParams) {
                 var block = uniqIdToBlock[blockParams.uniqId];
-                block && !block._isDestructing && block.destruct();
+                if(block) {
+                    if(!block._isDestructing) {
+                        removeDomNodeFromBlock(block, domNode);
+                        delete params[blockName];
+                    }
+                }
+                else {
+                    delete uniqIdToDomElems[blockParams.uniqId];
+                }
             });
-            cleanupDomNode(domNode);
+            $.isEmptyObject(params) && cleanupDomNode(domNode);
         });
 
         keepDOM || _this.domElem.remove();
@@ -1005,14 +1033,21 @@ var DOM = BEM.DOM = BEM.decl('i-bem__dom',/** @lends BEM.DOM.prototype */{
             keepDOM = undefined;
         }
 
-        findDomElem(ctx, '.i-bem', excludeSelf).each(function() {
-            $.each(getParams(this), function(blockName, blockParams) {
+        findDomElem(ctx, '.i-bem', excludeSelf).each(function(i, domNode) {
+            var params = getParams(this);
+            $.each(params, function(blockName, blockParams) {
                 if(blockParams.uniqId) {
                     var block = uniqIdToBlock[blockParams.uniqId];
-                    block? block.destruct(true) : delete uniqIdToDomElems[blockParams.uniqId];
+                    if(block) {
+                        removeDomNodeFromBlock(block, domNode);
+                        delete params[blockName];
+                    }
+                    else {
+                        delete uniqIdToDomElems[blockParams.uniqId];
+                    }
                 }
             });
-            cleanupDomNode(this);
+            $.isEmptyObject(params) && cleanupDomNode(this);
         });
         keepDOM || (excludeSelf? ctx.empty() : ctx.remove());
 

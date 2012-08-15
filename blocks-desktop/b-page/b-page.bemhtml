@@ -58,8 +58,9 @@ block b-page {
     }
 
     elem css {
-        bem: false,
-        tag: 'style',
+        bem: false
+        tag: 'style'
+
         default, this.ctx.hasOwnProperty('ie'), !this.ctx._ieCommented: {
             var ie = this.ctx.ie;
             if (ie === true) {
@@ -69,7 +70,7 @@ block b-page {
                 ) this.apply();
             } else {
                 var hideRule = !ie ?
-                        ['gt IE 7', '<!-->', '<!--'] :
+                        ['gt IE 9', '<!-->', '<!--'] :
                         ie == '!IE' ?
                             [ie, '<!-->', '<!--'] :
                             [ie, '', ''];
