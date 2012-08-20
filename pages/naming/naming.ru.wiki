@@ -59,4 +59,4 @@
 
 **Например:**
 * ##b-menu-horiz_~_item_state_current##
-* ##b-menu-horiz__item_state_disabled##
+* ##b-menu-horiz_~_item_state_disabled##
