@@ -30,9 +30,15 @@ exports.techMixin = BEM.util.extend({}, LangsMixin, {
 
         return Q.all([BEM.util.readFile(path), i18n])
             .spread(function(bemhtml, i18n) {
-                /** @name BEMHTML variable appears after runInThisContext() call */
-                VM.runInThisContext(i18n + '\n\n' + bemhtml, path);
-                return BEMHTML;
+                return VM.runInThisContext([
+                        '(function(){',
+                        // make local var BEM to prevent global assignment in i18n code
+                        'var BEM;',
+                        i18n,
+                        bemhtml,
+                        'return BEMHTML;',
+                        '})()'
+                    ].join('\n'), path);
             });
 
     },
