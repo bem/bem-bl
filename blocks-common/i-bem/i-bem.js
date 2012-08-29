@@ -385,7 +385,7 @@ this.BEM = $.inherit($.observable, /** @lends BEM.prototype */ {
             modVal2 = modVal1;
             modVal1 = modName;
             modName = elem;
-            elem = undefined;
+            elem = [undefined];
         }
         if(typeof modVal2 == 'undefined') {
             modVal2 = '';
@@ -396,9 +396,7 @@ this.BEM = $.inherit($.observable, /** @lends BEM.prototype */ {
 
         var _this = this;
         $.each(elem, function(index, elem) {
-
-            elem = $(elem);
-
+            elem = elem && $(elem);
             var modVal = _this.getMod(elem, modName);
             (modVal == modVal1 || modVal == modVal2) &&
                 _this.setMod(
@@ -407,7 +405,6 @@ this.BEM = $.inherit($.observable, /** @lends BEM.prototype */ {
                     typeof condition === 'boolean'?
                         (condition? modVal1 : modVal2) :
                         _this.hasMod(elem, modName, modVal1)? modVal2 : modVal1);
-
         });
 
         return this;
