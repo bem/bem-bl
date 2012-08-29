@@ -395,7 +395,7 @@ this.BEM = $.inherit($.observable, /** @lends BEM.prototype */ {
         }
 
         var _this = this;
-        $.each(elem || [undefined], function(index, elem) {
+        $.each(elem || [undefined], function(i, elem) {
             elem = elem && $(elem); // Если это элемент
             var modVal = _this.getMod(elem, modName);
             (modVal == modVal1 || modVal == modVal2) &&
