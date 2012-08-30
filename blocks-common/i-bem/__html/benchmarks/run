@@ -21,16 +21,36 @@ fs.readdirSync(__dirname).filter(function(file) {
   return path.resolve(__dirname, file).replace(/\.bemhtml$/, '');
 }).forEach(function(file) {
   var content = ibem + '\n' + fs.readFileSync(file + '.bemhtml').toString(),
+      name = path.basename(file).replace(/\-benchmark$/, ''),
       json = require(file + '.json'),
-      template = bemhtml.compile(content, { engine: 'sort-group' });
+      options = {
+        cache: bemhtml.cache.create()
+      },
+      template = bemhtml.compile(content, {
+        devMode: true,
+        engine: 'sort-group',
+        cache: /cache/.test(name)
+      });
 
-  suite.add(path.basename(file).replace(/\-benchmark$/, ''), function () {
-    template.call(json);
-  }, {
-    maxTime: 5
+  var bench = suite.add({
+    name: name,
+    setup: function() {
+      var template = this.data.template,
+          options = this.data.options,
+          json = this.data.json;
+    },
+    fn: function () {
+      template.call(json, options);
+    },
+    data: {
+      options: options,
+      json: json,
+      template: template
+    }
   });
 });
 
-suite.on('cycle', function(event, data) {
-  console.log(String(data));
+suite.on('cycle', function(data) {
+  if (data.target.error) console.error(data.target.error.stack);
+  console.log(String(data.target));
 }).run({ async: true });
