@@ -1,0 +1,206 @@
+/* /Users/indutny/Code/bem/bem-bl-test/bem-bl/blocks-desktop/i-ua/i-ua.bemhtml: start */
+block i-ua {
+    tag: 'script',
+    bem: false,
+    content: [
+                ';(function(d,e,c,r){',
+                    'e=d.documentElement;',
+                    'c="className";',
+                    'r="replace";',
+                    'e[c]=e[c][r]("i-ua_js_no","i-ua_js_yes");',
+                    'if(d.compatMode!="CSS1Compat")',
+                    'e[c]=e[c][r]("i-ua_css_standart","i-ua_css_quirks")',
+                '})(document);'
+            ].join('')
+}
+
+/* /Users/indutny/Code/bem/bem-bl-test/bem-bl/blocks-desktop/i-ua/i-ua.bemhtml: end */
+
+
+/* /Users/indutny/Code/bem/bem-bl-test/bem-bl/blocks-desktop/i-jquery/__core/i-jquery__core.bemhtml: start */
+block i-jquery, elem core, default: {
+    return apply(
+        this._mode = '',
+        this.ctx = {
+            block: 'b-page',
+            elem: 'js',
+            url: '//yandex.st/jquery/1.7.2/jquery.min.js'
+        }
+    );
+}
+
+/* /Users/indutny/Code/bem/bem-bl-test/bem-bl/blocks-desktop/i-jquery/__core/i-jquery__core.bemhtml: end */
+
+
+/* /Users/indutny/Code/bem/bem-bl-test/bem-bl/blocks-desktop/b-page/b-page.bemhtml: start */
+block b-page {
+    default: {
+        this._buf.push('<!DOCTYPE html>');
+        local(
+            this._mode = '',
+            this.ctx = {
+                tag: 'html',
+                cls: 'i-ua_js_no i-ua_css_standard',
+                content: [
+                    {
+                        elem: 'head',
+                        content: [
+                            {
+                                tag: 'meta',
+                                attrs: { charset: 'utf-8' }
+                            },
+                            {
+                                tag: 'meta',
+                                attrs: { 'http-equiv': 'X-UA-Compatible', content: 'IE=EmulateIE7, IE=edge' }
+                            },
+                            {
+                                tag: 'title',
+                                content: this.ctx.title
+                            },
+                            this.ctx.favicon ? {
+                                elem: 'favicon',
+                                url: this.ctx.favicon
+                            } : '',
+                            this.ctx.meta,
+                            {
+                                block: 'i-ua'
+                            },
+                            this.ctx.head
+                        ]
+                    },
+                    {
+                        elem: 'body',
+                        mix: [this.ctx],
+                        content: [
+                            this.ctx.content
+                        ]
+                    }
+                ]
+            }) this.apply();
+    }
+
+    elem head {
+        bem: false,
+        tag: 'head'
+    }
+
+    elem body, tag: 'body'
+
+    elem meta {
+        bem: false,
+        tag: 'meta',
+        attrs: this.ctx.attrs
+    }
+
+    elem css {
+        bem: false,
+        tag: 'style',
+        default, this.ctx.hasOwnProperty('ie'), !this.ctx._ieCommented: {
+            var ie = this.ctx.ie;
+            if (ie === true) {
+                local(
+                    this._mode = '',
+                    this.ctx = [6, 7, 8, 9].map(function(v) { return { elem: 'css', url: this.ctx.url + '.ie' + v + '.css', ie: 'IE ' + v } }, this)
+                ) this.apply();
+            } else {
+                var hideRule = !ie ?
+                        ['gt IE 7', '<!-->', '<!--'] :
+                        ie == '!IE' ?
+                            [ie, '<!-->', '<!--'] :
+                            [ie, '', ''];
+                local(
+                    this._mode = '',
+                    this.ctx._ieCommented = true,
+                    this.ctx = [
+                        '<!--[if ' + hideRule[0] + ']>',
+                        hideRule[1],
+                        this.ctx,
+                        hideRule[2],
+                        '<![endif]-->'
+                    ]
+                ) this.apply();
+            }
+        },
+        this.ctx.url {
+            tag: 'link',
+            attrs: { rel: 'stylesheet', href: this.ctx.url }
+        }
+    }
+
+    elem js {
+        bem: false,
+        tag: 'script',
+        attrs, this.ctx.url: { src: this.ctx.url }
+    }
+
+    elem favicon {
+        bem: false,
+        tag: 'link',
+        attrs: { rel: 'shortcut icon', href: this.ctx.url }
+    }
+
+}
+
+
+/* /Users/indutny/Code/bem/bem-bl-test/bem-bl/blocks-desktop/b-page/b-page.bemhtml: end */
+
+
+/* /Users/indutny/Code/bem/bem-bl-test/bem-bl/blocks-desktop/b-link/b-link.bemhtml: start */
+block b-link-base {
+  mix: [{mods: { key: 'value' }}]
+}
+
+
+block b-link {
+    mix: [{ block: 'b-link-base' }]
+
+    tag: 'a'
+
+    attrs: {
+
+        var ctx = this.ctx,
+            a = { href: ctx.url },
+            props = ['title', 'target'], p;
+
+        while(p = props.pop()) ctx[p] && (a[p] = ctx[p]);
+
+        return a;
+
+    }
+
+}
+
+/* /Users/indutny/Code/bem/bem-bl-test/bem-bl/blocks-desktop/b-link/b-link.bemhtml: end */
+
+
+/* /Users/indutny/Code/bem/bem-bl-test/bem-bl/blocks-desktop/b-link/_pseudo/b-link_pseudo.bemhtml: start */
+block b-link, (this.mods && this.mods.pseudo), !this.elem {
+
+    tag: (this.ctx.url? 'a' : 'span')
+
+    js: true
+
+    attrs, !this.ctx.url: {
+        return {}
+    },
+
+    content, !this.ctx._wrap, !this.mods.inner: {
+        apply(
+            this._mode = '',
+            this.ctx = {
+                elem: 'inner',
+                content: this.ctx.content,
+                _wrap: true
+            }
+        );
+    }
+}
+
+
+/* /Users/indutny/Code/bem/bem-bl-test/bem-bl/blocks-desktop/b-link/_pseudo/b-link_pseudo.bemhtml: end */
+
+
+/* /Users/indutny/Code/bem/bem-bl-test/bem-bl/blocks-desktop/b-link/__inner/b-link__inner.bemhtml: start */
+block b-link, elem inner, tag: 'span'
+/* /Users/indutny/Code/bem/bem-bl-test/bem-bl/blocks-desktop/b-link/__inner/b-link__inner.bemhtml: end */
+

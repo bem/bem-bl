@@ -1,0 +1,19 @@
+{
+  "cache": "key",
+  "block": "hello",
+
+  "content": [{
+    "block": "how"
+  }, {
+    "link": "are"
+  }, {
+    "block": "you"
+  }],
+
+  "links": {
+    "are": {
+      "tag": "p",
+      "block": "are"
+    }
+  }
+}
