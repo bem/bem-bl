@@ -1,5 +1,6 @@
 var BEM = require('bem'),
     Q = BEM.require('qq'),
+    PATH = require('path'),
     LangsMixin = require('./i18n').LangsMixin,
     VM = require('vm'),
     I18NJS = require('../../__i18n/lib/i18n-js');
@@ -94,7 +95,7 @@ exports.techMixin = BEM.util.extend({}, LangsMixin, {
             return BEM.util.symbolicLink(
                 path,
                 this.getPath(
-                    res,
+                    PATH.basename(res),
                     this.getCreateSuffixForLang(this.getDefaultLang())),
                 true);
         }
