@@ -135,27 +135,27 @@ content: this.ctx.content
             area : 1, base : 1, br : 1, col : 1, command : 1, embed : 1, hr : 1, img : 1,
             input : 1, keygen : 1, link : 1, meta : 1, param : 1, source : 1, wbr : 1 };
 
-    /** @fileOverview модуль для внутренних BEM-хелперов */
+    /** @fileOverview - module for internal BEM helpers */
     /** @requires BEM */
 
     (function(BEM, undefined) {
 
     /**
-     * Разделитель для модификаторов и их значений
+     * Separator for modifiers and their values
      * @const
      * @type String
      */
     var MOD_DELIM = '_',
 
     /**
-     * Разделитель между именами блока и вложенного элемента
+     * Separator between the names of a block and a nested element
      * @const
      * @type String
      */
         ELEM_DELIM = '__',
 
     /**
-     * Паттерн для допустимых имен элементов и модификаторов
+     * Pattern for acceptable names of elements and modifiers
      * @const
      * @type String
      */
@@ -198,14 +198,14 @@ content: this.ctx.content
         },
 
         /**
-         * Строит класс блока или элемента с учетом модификатора
+         * Builds the class for a block or element with a modifier
          * @private
-         * @param {String} block имя блока
-         * @param {String} [elem] имя элемента
-         * @param {String} [modName] имя модификатора
-         * @param {String} [modVal] имя элемента
-         * @param {Array} [buffer] буфер
-         * @returns {String|Array} строка класса или буфер (в зависимости от наличия параметра buffer)
+         * @param {String} block Block name
+         * @param {String} [elem] Element name
+         * @param {String} [modName] Modifier name
+         * @param {String} [modVal] Element name
+         * @param {Array} [buffer] Buffer
+         * @returns {String|Array} Class or buffer string (depending on whether the buffer parameter is present)
          */
         buildClass : function(block, elem, modName, modVal, buffer) {
 
@@ -240,13 +240,13 @@ content: this.ctx.content
         },
 
         /**
-         * Строит классы модификаторов
+         * Builds modifier classes
          * @private
-         * @param {String} block имя блока
-         * @param {String} [elem] имя элемента
-         * @param {Object} [mods] имя модификатора
-         * @param {Array} [buffer] буфер
-         * @returns {String|Array} строка класса или буфер (в зависимости от наличия параметра buffer)
+         * @param {String} block Block name
+         * @param {String} [elem] Element name
+         * @param {Object} [mods] Modifier name
+         * @param {Array} [buffer] Buffer
+         * @returns {String|Array} Class or buffer string (depending on whether the buffer parameter is present)
          */
         buildModsClasses : function(block, elem, mods, buffer) {
 
@@ -269,13 +269,13 @@ content: this.ctx.content
         },
 
         /**
-         * Строит полные классы блока или элемента с учетом модификаторов
+         * Builds full classes for a block or element with modifiers
          * @private
-         * @param {String} block имя блока
-         * @param {String} [elem] имя элемента
-         * @param {Object} [mods] имя модификатора
-         * @param {Array} [buffer] буфер
-         * @returns {String|Array} строка класса или буфер (в зависимости от наличия параметра buffer)
+         * @param {String} block Block name
+         * @param {String} [elem] Element name
+         * @param {Object} [mods] Modifier name
+         * @param {Array} [buffer] Buffer
+         * @returns {String|Array} Class or buffer string (depending on whether the buffer parameter is present)
          */
         buildClasses : function(block, elem, mods, buffer) {
 

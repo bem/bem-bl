@@ -5,10 +5,10 @@ var ptp = Array.prototype,
     methods = {
 
         /**
-         * Находит индекс элемента в массиве
+         * Finds the index of an element in an array
          * @param {Object} item
-         * @param {Number} [fromIdx] начиная с индекса (length - 1 - fromIdx, если fromIdx < 0)
-         * @returns {Number} индекс элемента или -1, если не найдено
+         * @param {Number} [fromIdx] Starting from index (length - 1 - fromIdx, if fromIdx < 0)
+         * @returns {Number} Element index or -1, if not found
          */
         indexOf : function(item, fromIdx) {
 
@@ -33,9 +33,9 @@ var ptp = Array.prototype,
         },
 
         /**
-         * Вызывает callback для каждого элемента
-         * @param {Function} callback вызывается для каждого элемента
-         * @param {Object} [ctx=null] контекст для callback
+         * Calls the callback for each element
+         * @param {Function} callback Called for each element
+         * @param {Object} [ctx=null] Callback context
          */
         forEach : function(callback, ctx) {
 
@@ -46,9 +46,9 @@ var ptp = Array.prototype,
         },
 
         /**
-         * Создает массив B из массива A, такой что B[i] = callback(A[i])
-         * @param {Function} callback вызывается для каждого элемента
-         * @param {Object} [ctx=null] контекст для callback
+         * Creates array B from array A so that B[i] = callback(A[i])
+         * @param {Function} callback Called for each element
+         * @param {Object} [ctx=null] Callback context
          * @returns {Array}
          */
         map : function(callback, ctx) {
@@ -64,9 +64,9 @@ var ptp = Array.prototype,
         },
 
         /**
-         * Создает массив, содержащий только те элементы из исходного массива, для которых callback возвращает true.
-         * @param {Function} callback вызывается для каждого элемента
-         * @param {Object} [ctx] контекст для callback
+         * Creates an array containing only the elements from the source array that the callback returns true for. 
+         * @param {Function} callback Called for each element
+         * @param {Object} [ctx] Callback context
          * @returns {Array}
          */
         filter : function(callback, ctx) {
@@ -82,10 +82,10 @@ var ptp = Array.prototype,
         },
 
         /**
-         * Свертывает массив, используя аккумулятор
-         * @param {Function} callback вызывается для каждого элемента
-         * @param {Object} [initialVal] начальное значение аккумулятора
-         * @returns {Object} аккумулятор
+         * Wraps the array using an accumulator
+         * @param {Function} callback Called for each element
+         * @param {Object} [initialVal] Initial value of the accumulator
+         * @returns {Object} Accumulator
          */
         reduce : function(callback, initialVal) {
 
@@ -112,9 +112,9 @@ var ptp = Array.prototype,
         },
 
         /**
-         * Проверяет, удовлетворяет ли хотя бы один элемент массива условию в callback
+         * Checks whether at least one element in the array meets the condition in the callback
          * @param {Function} callback
-         * @param {Object} [ctx=this] контекст callback
+         * @param {Object} [ctx=this] Callback context
          * @returns {Boolean}
          */
         some : function(callback, ctx) {
@@ -130,9 +130,9 @@ var ptp = Array.prototype,
         },
 
         /**
-         * Проверяет, удовлетворяет ли каждый элемент массива условию в callback
+         * Checks whether every element in the array meets the condition in the callback
          * @param {Function} callback
-         * @param {Object} [ctx=this] контекст вызова callback
+         * @param {Object} [ctx=this] Context of the callback call
          * @returns {Boolean}
          */
         every : function(callback, ctx) {

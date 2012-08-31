@@ -1,23 +1,23 @@
 /**
- * BEM-декларация блока позволяет сообщить, к какому блоку (блоку с модификатором,
- * блоку с определённым значением модификатора) относится данный JavaScript-компонент.
- * Варианты деклараций можно найти на wiki-странице блока i-bem blocks/i-bem/i-bem.wiki
+ * A block's BEM declaration can state which block (a block with a modifier or a block with a specific modifier value) 
+ * a given JavaScript component refers to.
+ * You can find various declarations on the i-bem block's wiki page, blocks/i-bem/i-bem.wiki
  */
 BEM.DOM.decl('b-tv', {
 
     /*
-     onSetMod -- это специальное свойство, позволяющее описать, как компонент
-     должен реагровать на установку модицикатора у блока. Подробнее об onSetMod
-     и вариантах его использования можно прочесть на wiki-странице
-     блока i-bem (/blocks/i-bem/i-bem.wiki)
+     onSetMod is a special property for describing how a component
+     should react to setting a modifier for a block. You can read more 
+     about onSetMod and its various uses on the i-bem block's wiki page 
+    (/blocks/i-bem/i-bem.wiki)
      */
     onSetMod : {
 
         js : function() {
             /*
-             Метод setMod позволяет задать блоку или его элементу модификатор
-             со значением. Подробнее об этом методе можно узнать в справочнике
-             по BEM blocks/i-bem/i-bem.jsdoc.wiki
+             The setMod method allows to set a modifier with a value for a block 
+             or its element. For details on this method, see the 
+             BEM blocks reference, /i-bem/i-bem.jsdoc.wiki
              */
             this.setMod('touched', 'yes');
         }
@@ -37,17 +37,16 @@ BEM.DOM.decl('b-tv', {
     live : function() {
 
         /*
-         live-инициализация -- это "инициализация по требованию".
-         Она позволяет делать инициализацю блока только тогда,
-         когда это необходимо. Например, когда пользователь непосреддственно
-         начал работать с блоком.
-
-         В данном случае инициализация происходит в любом из двух случаев:
-         наведении курсора на элемент over или клику на элементе click.
-         Инициализация также может происходить по событию на самом блоке,
-         по факту инициализации вложенных или смиксованных блоков. Все
-         доступные методы инициализации можно найти в справочнике
-         по BEM DOM (/blocks/i-bem/dom/i-bem__dom.jsdoc.wiki).
+         Live initialization is "on-demand initialization".
+         It lets you initialize a block only when necessary,
+         for example, when the user begins working with the block directly.
+         
+         In this case, initialization occurs in either of two cases:
+         putting the cursor on the "over" element, or clicking on the "click" element.
+         Initialization can also occur on an event on the block itself,
+         when nested or mixed blocks are initialized. You can find all 
+         the available initialization methods in the BEM DOM reference
+         (/blocks/i-bem/dom/i-bem__dom.jsdoc.wiki).
          */
 
         this

@@ -1,24 +1,24 @@
-/** @fileOverview модуль для внутренних BEM-хелперов */
+/** @fileOverview Module for internal BEM helpers */
 /** @requires BEM */
 
 (function(BEM, $, undefined) {
 
 /**
- * Разделитель для модификаторов и их значений
+ * Separator for modifiers and their values
  * @const
  * @type String
  */
 var MOD_DELIM = '_',
 
 /**
- * Разделитель между именами блока и вложенного элемента
+ * Separator between names of a block and a nested element
  * @const
  * @type String
  */
     ELEM_DELIM = '__',
 
 /**
- * Паттерн для допустимых имен элементов и модификаторов
+ * Pattern for acceptable element and modifier names
  * @const
  * @type String
  */
@@ -61,14 +61,14 @@ BEM.INTERNAL = {
     },
 
     /**
-     * Строит класс блока или элемента с учетом модификатора
+     * Builds the class of a block or element with a modifier
      * @private
-     * @param {String} block имя блока
-     * @param {String} [elem] имя элемента
-     * @param {String} [modName] имя модификатора
-     * @param {String} [modVal] значение модификатора
-     * @param {Array} [buffer] буфер
-     * @returns {String|Array} строка класса или буфер (в зависимости от наличия параметра buffer)
+     * @param {String} block Block name
+     * @param {String} [elem] Element name
+     * @param {String} [modName] Modifier name
+     * @param {String} [modVal] Modifier value
+     * @param {Array} [buffer] Buffer
+     * @returns {String|Array} Class or buffer string (depending on whether the buffer parameter is present)
      */
     buildClass : function(block, elem, modName, modVal, buffer) {
 
@@ -103,13 +103,13 @@ BEM.INTERNAL = {
     },
 
     /**
-     * Строит полные классы блока или элемента с учетом модификаторов
+     * Builds full classes for a buffer or element with modifiers
      * @private
-     * @param {String} block имя блока
-     * @param {String} [elem] имя элемента
-     * @param {Object} [mods] модификаторы
-     * @param {Array} [buffer] буфер
-     * @returns {String|Array} строка класса или буфер (в зависимости от наличия параметра buffer)
+     * @param {String} block Block name
+     * @param {String} [elem] Element name
+     * @param {Object} [mods] Modifiers
+     * @param {Array} [buffer] Buffer
+     * @returns {String|Array} Class or buffer string (depending on whether the buffer parameter is present)
      */
     buildClasses : function(block, elem, mods, buffer) {
 
