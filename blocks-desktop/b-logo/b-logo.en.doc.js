@@ -1,0 +1,1 @@
+({"name":"b-logo","techs":[{"name":"bemhtml"},{"name":"en.title.txt"},{"name":"ru.title.txt"},{"name":"ru.wiki"}],"title":"Logo wrapping","bemjsonDesc":""})

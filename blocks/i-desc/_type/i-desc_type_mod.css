@@ -1,0 +1,5 @@
+.i-desc_type_mod .b-text__li:before
+{
+    content: '_';
+
+}

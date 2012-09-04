@@ -1,0 +1,13 @@
+Библиотека состоит из блоков, которые реализованны по ((http://bem.github.com/bem-method/html/all.ru.html BEM методу)).
+
+Код библиотеки находится на ##GitHub##: ((https://github.com/bem/bem-bl github.com/bem/bem-bl)).
+
+Блоки реализованы в технологиях ##BEMHTML## (шаблоны), ##CSS##, клиентский ##JS##.
+
+Для использования библиотеки необходимо:
+* подготовить ((http://clubs.ya.ru/bem/replies.xml?item_no=901 среду разработки и потренироваться на тестовом
+проекте));
+* ознакомится с ((pages/naming/naming.ru.html соглашением об именовании));
+* изучить ((pages/bemhtml-syntax/bemhtml-syntax.ru.html основные понятия шаблонизатора BEMHTML));
+
+Информация об использовании библиотеки, вопросы и ответы — в ((http://clubs.ya.ru/bem/ Клубе на Я.ру)).

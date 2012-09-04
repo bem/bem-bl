@@ -1,0 +1,72 @@
+/* Global reset (begin) */ /**/
+    *
+    {
+        font-size: 100%;
+
+        margin: 0;
+    }
+
+
+    h1, h2, h3, h4, h5, h6
+    {
+        font-weight: normal;
+
+        padding: 0;
+    }
+
+    table
+    {
+        border-collapse: collapse;
+    }
+
+    th, td
+    {
+        padding: 0;
+
+        text-align: left;
+        vertical-align: top;
+
+        border-collapse: collapse;
+    }
+
+    ol, ul
+    {
+        list-style: none;
+    }
+
+    ol, ul, li
+    {
+        padding: 0;
+    }
+
+    code, input, textarea
+    {
+        font-family: Arial, Helvetica, sans-serif;
+    }
+
+    a
+    {
+        text-decoration: none;
+    }
+
+    :link,
+    :visited
+    {
+        text-decoration: underline;
+    }
+
+    a img, fieldset
+    {
+        border: 0;
+    }
+
+    /*b*/
+    /*{*/
+        /*font-weight: normal;*/
+    /*}*/
+
+    i
+    {
+        font-style: normal;
+    }
+/* Global reset (end) */ /**/

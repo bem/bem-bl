@@ -1,0 +1,12 @@
+.b-blocks-desc__entity-bemjson
+{
+    display: block;
+
+    min-width: 250px;
+
+    white-space: nowrap;
+
+    color: #060;
+
+    font: 0.8em Monaco, Consolas, "Courier New", monospace;
+}

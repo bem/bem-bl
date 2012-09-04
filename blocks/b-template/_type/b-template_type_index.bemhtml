@@ -1,0 +1,20 @@
+block b-template, mod type index {
+    tag: '',
+    content: {
+        elem: 'i',
+        content: [
+            {
+                block: 'b-page-title',
+                content: this.ctx.title
+            },
+            {
+                block: 'b-description',
+                mods: { layout: 'block' },
+                content: this.ctx.content
+            },
+            {
+                block: 'b-blocks-list'
+            }
+        ]
+    }
+}

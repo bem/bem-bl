@@ -1,0 +1,30 @@
+.b-tv
+{
+    background-color:black;
+    width:300px;
+    height:200px;
+}
+
+.b-tv__click
+{
+    float:right;
+    margin:10px;
+}
+
+.b-tv__over
+{
+    clear:both;
+    float:right;
+    margin:10px;
+}
+
+.b-tv_state_profilaktika
+{
+    background:url("../../../../blocks-desktop/i-bem/examples/20-i-bem_liveinit-multiple.blocks/b-tv/_state/b-tv_state_profilaktika.gif");
+}
+
+.b-tv_touched_yes
+{
+    border:red 3px solid;
+}
+

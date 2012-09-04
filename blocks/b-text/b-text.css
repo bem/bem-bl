@@ -1,0 +1,37 @@
+.b-text
+{
+    line-height: 1.5em;
+}
+
+.b-text__pre,
+.b-text__code,
+.b-text tt
+{
+    font: 12px Monaco, Consolas, "Courier New", monospace;
+
+    white-space: normal;
+
+    color: #060;
+}
+
+.b-text__h1,
+.b-text__h2,
+.b-text__h3,
+.b-text__h4,
+.b-text__h5
+{
+    font-family: 'PT Serif', serif;
+}
+
+.b-text__h1
+{
+    font-size: 2em;
+}
+.b-text__h2
+{
+    font-size: 1.6em;
+}
+.b-text__h3
+{
+    font-size: 1.4em;
+}

@@ -1,0 +1,21 @@
+.b-blocks-list
+{
+    margin-top: 60px;
+
+    -moz-column-width: 20em;
+    -webkit-column-width: 20em;
+    column-width: 20em;
+
+    -moz-column-gap: 20px;
+    -webkit-column-gap: 20px;
+    column-gap: 20px;
+}
+
+.b-blocks-list .b-menu-vert__item
+{
+    display: block;
+
+    margin-bottom: 10px;
+
+    white-space: nowrap;
+}

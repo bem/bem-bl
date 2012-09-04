@@ -1,0 +1,3 @@
+block b-description, mod layout inline {
+    tag: 'span'
+}

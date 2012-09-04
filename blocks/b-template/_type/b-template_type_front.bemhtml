@@ -1,0 +1,17 @@
+block b-template, mod type front {
+    tag: '',
+    content: {
+        elem: 'i',
+        content: [
+            {
+                block: 'b-page-title',
+                content: this.ctx.title
+            },
+            {
+                block: 'b-description',
+                mods: { layout: 'block' },
+                content: this.ctx.content
+            }
+        ]
+    }
+}

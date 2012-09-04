@@ -1,0 +1,82 @@
+all:: pages
+
+pages: $(patsubst %.wiki,%.html, $(wildcard */*.wiki))
+
+%.html: %.bemjson.js %.bemhtml.js %.css %.ie.css %.js
+	if [ -f $*.html ]; then \
+		rm $*.html; \
+	fi; \
+	BEMTECH_locales_techs="`pwd`/../blocks-common/i-bem/bem/techs/html.js" \
+	BEMTECH_locales_locales="`echo ./$(@F) | perl -pi -e 's#^.*(ru|en).*$$#\1#g'`" \
+	bem create block -T ../lib/bem/techs/locales.js \
+	-l . \
+	$(*D)
+
+%.bemhtml.js: %.deps.js
+	mkdir -p $(*D)
+	touch $@
+	bem build -l ../blocks-common \
+		-l ../blocks-desktop \
+		-l ../blocks \
+		-d $*.deps.js \
+		-t ../blocks-common/i-bem/bem/techs/bemhtml.js \
+		-n $(*F) \
+		-o $(@D)
+
+%.deps.js: %.bemdecl.js
+	touch $@
+	bem build \
+		-l ../blocks-common \
+		-l ../blocks-desktop \
+		-l ../blocks \
+		-d $*.bemdecl.js \
+		-t deps.js \
+		-n $(*F) \
+		-o $(@D)
+
+%.bemdecl.js: %.bemjson.js
+	node ../lib/bemjson2bemdecl.js $*.bemjson.js
+
+%.bemjson.js:
+	echo $(@D)
+	node ../lib/wiki2bemjson.js $*.wiki $*.bemjson.js block
+
+.PRECIOUS: %.css
+%.css: %.deps.js
+	touch $@
+	bem build \
+		-l ../blocks-common \
+		-l ../blocks-desktop \
+		-l ../blocks \
+		-d $*.deps.js \
+		-t css \
+		-n $(*F) \
+		-o $(@D)
+	borschik -t css -i $@ -o $(@D)/_$(@F)
+
+.PRECIOUS: %.ie.css
+%.ie.css: %.css %.deps.js
+	touch $@
+	bem build \
+		-l ../blocks-common \
+		-l ../blocks-desktop \
+		-l ../blocks \
+		-d $*.deps.js \
+		-t ie.css \
+		-n $(*F) \
+		-o $(@D)
+	borschik -t css -i $@ -o $(@D)/_$(@F)
+
+.PRECIOUS: %.js
+%.js: %.deps.js
+	touch $@
+	bem build \
+		-l ../blocks-common \
+		-l ../blocks-desktop \
+		-l ../blocks \
+		-d $*.deps.js \
+		-t js \
+		-n $(*F) \
+		-o $(@D)
+
+.PHONY: all

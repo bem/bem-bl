@@ -1,0 +1,267 @@
+/* Global reset (begin) */ /**/
+    *
+    {
+        font-size: 100%;
+
+        margin: 0;
+    }
+
+
+    h1, h2, h3, h4, h5, h6
+    {
+        font-weight: normal;
+
+        padding: 0;
+    }
+
+    table
+    {
+        border-collapse: collapse;
+    }
+
+    th, td
+    {
+        padding: 0;
+
+        text-align: left;
+        vertical-align: top;
+
+        border-collapse: collapse;
+    }
+
+    ol, ul
+    {
+        list-style: none;
+    }
+
+    ol, ul, li
+    {
+        padding: 0;
+    }
+
+    code, input, textarea
+    {
+        font-family: Arial, Helvetica, sans-serif;
+    }
+
+    a
+    {
+        text-decoration: none;
+    }
+
+    :link,
+    :visited
+    {
+        text-decoration: underline;
+    }
+
+    a img, fieldset
+    {
+        border: 0;
+    }
+
+    /*b*/
+    /*{*/
+        /*font-weight: normal;*/
+    /*}*/
+
+    i
+    {
+        font-style: normal;
+    }
+/* Global reset (end) */ /**/
+.b-page
+{
+    font: 16px 'PT Sans', sans-serif;
+
+    position: relative;
+    z-index: 0;
+
+    margin: 0;
+    padding: 80px 60px;
+
+    color: #444;
+}
+
+
+.b-page__i
+{
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.b-description
+{
+    line-height: 1.5em;
+
+    max-width: 75%;
+    min-width: 400px;
+    margin-top: 30px;
+}
+
+.b-description .b-text__ul
+{
+    margin: 0.4em 0 0 2em;
+
+    list-style: disc;
+}
+
+.b-description .b-text__p
+{
+    margin-top: 0.8em;
+}
+
+.b-description_layout_inline
+{
+    font-family: 'PT Serif';
+    font-style: italic;
+
+    white-space: normal;
+
+    color: #7f7e7e;
+}
+
+.b-description_layout_inline:before
+{
+    content: " —\a0";
+}
+
+:link
+{
+    color: #1a3dc1;
+}
+
+:link:hover,
+:visited:hover
+{
+    color: #f00;
+}
+
+.b-page-title
+{
+    font: 60px 'PT Serif', serif;
+
+    line-height: 1em;
+}
+
+.b-page-title_page_inner
+{
+    font-size: 21px;
+
+	display: inline;
+
+    margin-left: 10px;
+}
+
+.b-blocks-list
+{
+    margin-top: 60px;
+
+    -moz-column-width: 20em;
+    -webkit-column-width: 20em;
+    column-width: 20em;
+
+    -moz-column-gap: 20px;
+    -webkit-column-gap: 20px;
+    column-gap: 20px;
+}
+
+.b-blocks-list .b-menu-vert__item
+{
+    display: block;
+
+    margin-bottom: 10px;
+
+    white-space: nowrap;
+}
+
+.b-blocks-desc
+{
+    margin-top: 40px;
+}
+
+.b-blocks-desc .b-text__ul
+{
+    margin-bottom: 0;
+}
+
+.b-blocks-desc .b-text__ul,
+.b-blocks-desc .b-text__ul .b-text__li
+{
+    margin-left: 0;
+
+    list-style: disc inside;
+}
+
+.b-blocks-desc .b-text__li .b-text__li
+{
+    margin-left: 1em;
+
+    list-style: none;
+}
+
+.b-blocks-desc .b-layout-table__cell
+{
+    vertical-align: baseline;
+}
+
+.b-blocks-desc .b-text__p
+{
+    margin-top: 0.8em;
+}
+
+.b-blocks-desc .b-text__h6
+{
+    font-size: 100%;
+    font-weight: bold;
+
+    margin-bottom: 0.3em;
+}
+.b-text
+{
+    line-height: 1.5em;
+}
+
+.b-text__pre,
+.b-text__code,
+.b-text tt
+{
+    font: 12px Monaco, Consolas, "Courier New", monospace;
+
+    white-space: normal;
+
+    color: #060;
+}
+
+.b-text__h1,
+.b-text__h2,
+.b-text__h3,
+.b-text__h4,
+.b-text__h5
+{
+    font-family: 'PT Serif', serif;
+}
+
+.b-text__h1
+{
+    font-size: 2em;
+}
+.b-text__h2
+{
+    font-size: 1.6em;
+}
+.b-text__h3
+{
+    font-size: 1.4em;
+}
+
+.i-desc_type_mod .b-text__li:before
+{
+    content: '_';
+
+}
+.i-desc_type_elem .b-text__li:before
+{
+    content: '__'
+}
+

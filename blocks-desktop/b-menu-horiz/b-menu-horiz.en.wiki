@@ -1,4 +1,4 @@
-﻿##b-menu-horiz## blocks makes ##HTML## markup for a horizontal menu. The block
+##b-menu-horiz## blocks makes ##HTML## markup for a horizontal menu. The block
 also has a functionality (implemented on JavaScript) that helps to write
 scripts with reaction on a menu item becoming selected.
 

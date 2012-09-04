@@ -1,0 +1,43 @@
+block b-blocks-list {
+
+    default, !this._bBlocksList: {
+        local (
+            this._bBlocksList = {{BlocksList}}
+        )
+        this.apply();
+    }
+    content: {
+        function htmlEscape(str) {
+            return String(str)
+            .replace(/&/g, '&amp;')
+            .replace(/"/g, '&quot;')
+            .replace(/'/g, '&#39;')
+            .replace(/</g, '&lt;')
+            .replace(/>/g, '&gt;');
+        }
+        var _list = [];
+        for(var i in this._bBlocksList) {
+            var b = this._bBlocksList[i];
+            _list.push({
+                elem: 'item',
+                content: [
+                    {
+                        block: 'b-link',
+                        url: b.url,
+                        content: b.name
+                    },
+                    {
+                        block: 'b-description',
+                        mods: { layout: 'inline' },
+                        content: htmlEscape(b.title)
+                    }
+                ]
+            });
+        }
+
+        return {
+        block: 'b-menu-vert',
+        content: _list
+        }
+    }
+}

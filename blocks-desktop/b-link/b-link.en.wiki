@@ -1,4 +1,4 @@
-﻿Link block is ised inside other blocks.
+Link block is ised inside other blocks.
 
 For a simple like set the following bemjson:
 
