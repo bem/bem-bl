@@ -1,0 +1,56 @@
+.b-layout-table
+{
+    font-size: 100%;
+
+    width: 100%;
+
+    border-collapse: collapse;
+}
+
+.b-layout-table__gap,
+.b-layout-table__cell
+{
+    padding: 0;
+
+    vertical-align: top;
+}
+
+.b-menu-vert__item-content
+{
+    display: none;
+}
+.b-menu-vert__item-content_visibility_visible
+{
+    display: block;
+}
+
+.b-menu-vert__layout,
+.b-menu-vert__separator,
+.b-menu-vert__layout-unit
+{
+    margin: 0;
+    padding: 0;
+
+    list-style: none;
+}
+
+.b-link_pseudo_yes
+{
+    color: #1a3dc1;
+}
+
+.i-ua_js_yes .b-link_pseudo_yes
+{
+    text-decoration: none;
+
+    cursor: pointer;
+}
+
+.i-ua_js_yes .b-link_pseudo_yes .b-link__inner
+{
+    text-decoration: none;
+
+    color: inherit;
+    border-bottom: 1px dotted;
+}
+
