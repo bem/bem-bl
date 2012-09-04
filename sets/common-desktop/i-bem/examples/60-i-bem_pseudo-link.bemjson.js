@@ -1,6 +1,6 @@
 ({
     block: 'b-page',
-    title: 'Реакция на события вложенных блоков',
+    title: 'Reaction to nested blocks events',
     head: [
         { elem: 'css', url: '_60-i-bem_pseudo-link.css', ie: false },
         { elem: 'css', url: '_60-i-bem_pseudo-link.ie.css', ie: 'lt IE 8' },
@@ -12,7 +12,7 @@
         content: {
             block: 'b-link',
             mods: { pseudo: 'yes', 'is-bem': 'yes' },
-            content: 'Некликнутая ссылка'
+            content: 'Unlicked button'
         }
     }
 })
