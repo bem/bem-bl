@@ -78,6 +78,29 @@ exports.deps = [
         "block": "b-menu-reaction"
     },
     {
+        "block": "b-menu-reaction",
+        "elem": "menu"
+    },
+    {
+        "block": "b-menu-reaction",
+        "elem": "item"
+    },
+    {
+        "block": "b-menu-reaction",
+        "elem": "item",
+        "mod": "state"
+    },
+    {
+        "block": "b-menu-reaction",
+        "elem": "item",
+        "mod": "state",
+        "val": "current"
+    },
+    {
+        "block": "b-menu-reaction",
+        "elem": "panel"
+    },
+    {
         "block": "b-layout-table"
     },
     {
@@ -110,7 +133,7 @@ exports.deps = [
     {
         "block": "b-layout-table",
         "mod": "layout",
-        "val": "60-40"
+        "val": "35-65"
     },
     {
         "block": "b-menu-vert",
@@ -140,21 +163,6 @@ exports.deps = [
     },
     {
         "block": "b-menu-vert"
-    },
-    {
-        "block": "b-menu-vert",
-        "elem": "item"
-    },
-    {
-        "block": "b-menu-vert",
-        "elem": "item",
-        "mod": "state"
-    },
-    {
-        "block": "b-menu-vert",
-        "elem": "item",
-        "mod": "state",
-        "val": "current"
     },
     {
         "block": "b-menu-vert",

@@ -13,7 +13,7 @@
         content: [
             {
                 block: 'b-layout-table',
-                mods: { layout: '60-40'},
+                mods: { layout: '35-65'},
                 content: {
                     elem: 'row',
                     content: [
@@ -24,10 +24,12 @@
                                 content: [
                                     {
                                         block: 'b-menu-vert',
+                                        mix: [{ block: 'b-menu-reaction', elem: 'menu' }],
                                         js: true,
                                         content: [
                                             {
                                                 elem: 'item',
+                                                js: { 'handler-url' : '/handler1.js' },
                                                 elemMods: { 'state' : 'current' },
                                                 content: {
                                                     block: 'b-link',
@@ -39,6 +41,7 @@
                                             },
                                             {
                                                 elem: 'item',
+                                                js: { 'handler-url' : '/handler2.js' },
                                                 content: {
                                                     block: 'b-link',
                                                     mods : { 'pseudo' : 'yes'},
@@ -49,6 +52,7 @@
                                             },
                                             {
                                                 elem: 'item',
+                                                js: { 'handler-url' : '/handler3.js' },
                                                 content: {
                                                     block: 'b-link',
                                                     mods : { 'pseudo' : 'yes'},
@@ -59,6 +63,7 @@
                                             },
                                             {
                                                 elem: 'item',
+                                                js: { 'handler-url' : '/handler4.js' },
                                                 content: {
                                                     block: 'b-link',
                                                     mods : { 'pseudo' : 'yes'},
@@ -75,7 +80,13 @@
                         {
                             elem: 'cell',
                             elemMods: { position: 'r'},
-                            content: 'Second cell'
+                            content: [
+                                {
+                                    block: 'b-menu-reaction',
+                                    elem: 'panel',
+                                    content: 'What am I going to load?'
+                                }
+                            ]
                         }
                     ]
                 }

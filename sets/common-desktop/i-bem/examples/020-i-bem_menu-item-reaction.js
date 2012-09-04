@@ -3222,6 +3222,32 @@ $(function() {
 });
 /* ../../../../blocks-common/i-bem/__dom/_init/i-bem__dom_init_auto.js: end */ /**/
 
+/* ../../../../blocks-desktop/i-bem/examples/020-i-bem_menu-item-reaction.blocks/b-menu-reaction/b-menu-reaction.js: begin */ /**/
+/** @requires BEM.DOM */
+
+(function() {
+
+BEM.DOM.decl('b-menu-reaction', {
+
+    onSetMod : {
+        'js' : function() {
+
+            var _this = this;
+
+            this.findBlockInside(this.elem('menu'), 'b-menu-vert').on('current', function(e, data){
+
+                _this.elem('panel').html('Load ' + this.elemParams(data.current)['handler-url']);
+
+            })
+        }
+    }
+
+});
+
+})();
+
+/* ../../../../blocks-desktop/i-bem/examples/020-i-bem_menu-item-reaction.blocks/b-menu-reaction/b-menu-reaction.js: end */ /**/
+
 /* ../../../../blocks-desktop/i-menu/i-menu.js: begin */ /**/
 /** @requires BEM */
 /** @requires BEM */

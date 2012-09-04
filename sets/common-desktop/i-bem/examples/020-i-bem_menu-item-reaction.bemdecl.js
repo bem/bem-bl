@@ -3,7 +3,26 @@ exports.blocks = [
         "name": "b-page"
     },
     {
-        "name": "b-menu-reaction"
+        "name": "b-menu-reaction",
+        "elems": [
+            {
+                "name": "menu"
+            },
+            {
+                "name": "item",
+                "mods": [
+                    {
+                        "name": "state",
+                        "vals": [
+                            "current"
+                        ]
+                    }
+                ]
+            },
+            {
+                "name": "panel"
+            }
+        ]
     },
     {
         "name": "b-layout-table",
@@ -11,7 +30,7 @@ exports.blocks = [
             {
                 "name": "layout",
                 "vals": [
-                    "60-40"
+                    "35-65"
                 ]
             }
         ],
@@ -38,17 +57,6 @@ exports.blocks = [
     {
         "name": "b-menu-vert",
         "elems": [
-            {
-                "name": "item",
-                "mods": [
-                    {
-                        "name": "state",
-                        "vals": [
-                            "current"
-                        ]
-                    }
-                ]
-            },
             {
                 "name": "item-selector"
             }

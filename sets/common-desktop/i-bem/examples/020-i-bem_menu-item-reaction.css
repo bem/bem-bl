@@ -1,5 +1,7 @@
 @import url(../../../../blocks-desktop/b-layout-table/b-layout-table.css);
+@import url(../../../../blocks-desktop/i-bem/examples/020-i-bem_menu-item-reaction.blocks/b-layout-table/_layout/b-layout-table_layout_35-65.css);
 @import url(../../../../blocks-desktop/b-menu-vert/__item-content/b-menu-vert__item-content.css);
 @import url(../../../../blocks-desktop/b-menu-vert/__item-content/_visibility/b-menu-vert__item-content_visibility_visible.css);
 @import url(../../../../blocks-desktop/b-menu-vert/b-menu-vert.css);
+@import url(../../../../blocks-desktop/i-bem/examples/020-i-bem_menu-item-reaction.blocks/b-menu-vert/b-menu-vert.css);
 @import url(../../../../blocks-desktop/b-link/_pseudo/b-link_pseudo_yes.css);
