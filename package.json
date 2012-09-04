@@ -2,6 +2,7 @@
     "name": "bem-bl",
     "version": "0.0.0",
     "dependencies": {
-        "qq": "0.3.3"
+        "qq": "0.3.3",
+        "inherit": "~1.0.0"
     }
 }
