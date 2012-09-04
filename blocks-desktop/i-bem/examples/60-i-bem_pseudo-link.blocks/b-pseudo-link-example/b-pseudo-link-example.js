@@ -6,7 +6,7 @@ BEM.DOM.decl('b-pseudo-link-example', {
             var link = this.findBlockInside('b-link');
             BEM.blocks['b-link']
                 .liveCtxBind(link.domElem, 'click', function(){
-                    link.elem('inner').text('Кликнутая ссылка');
+                    link.elem('inner').text('Clicked link');
                 }, this);
         }
 
