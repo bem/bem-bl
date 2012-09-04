@@ -23,6 +23,9 @@ exports.deps = [
         "elem": "observable"
     },
     {
+        "block": "i-bem"
+    },
+    {
         "block": "i-ecma",
         "elem": "object"
     },
@@ -31,7 +34,8 @@ exports.deps = [
         "elem": "array"
     },
     {
-        "block": "i-bem"
+        "block": "i-ecma",
+        "elem": "function"
     },
     {
         "block": "i-bem",
@@ -51,6 +55,10 @@ exports.deps = [
     {
         "block": "i-bem",
         "elem": "dom"
+    },
+    {
+        "block": "i-ecma",
+        "elem": "string"
     },
     {
         "block": "i-bem",
@@ -103,11 +111,11 @@ exports.deps = [
     },
     {
         "block": "b-menu-horiz",
-        "elem": "title"
+        "mod": "layout"
     },
     {
         "block": "b-menu-horiz",
-        "mod": "layout"
+        "elem": "title"
     },
     {
         "block": "b-menu-horiz",
@@ -128,11 +136,14 @@ exports.deps = [
     },
     {
         "block": "b-link",
-        "mod": "pseudo",
-        "val": "no"
+        "elem": "inner"
     },
     {
         "block": "b-link",
-        "elem": "inner"
+        "mod": "pseudo",
+        "val": "no"
     }
 ];
+exports.depsByTechs = {
+    "": {}
+};

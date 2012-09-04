@@ -23,6 +23,9 @@ exports.deps = [
         "elem": "observable"
     },
     {
+        "block": "i-bem"
+    },
+    {
         "block": "i-ecma",
         "elem": "object"
     },
@@ -31,7 +34,8 @@ exports.deps = [
         "elem": "array"
     },
     {
-        "block": "i-bem"
+        "block": "i-ecma",
+        "elem": "function"
     },
     {
         "block": "i-bem",
@@ -53,6 +57,10 @@ exports.deps = [
         "elem": "dom"
     },
     {
+        "block": "i-ecma",
+        "elem": "string"
+    },
+    {
         "block": "i-bem",
         "elem": "dom",
         "mod": "init"
@@ -67,3 +75,6 @@ exports.deps = [
         "block": "b-page"
     }
 ];
+exports.depsByTechs = {
+    "": {}
+};

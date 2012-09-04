@@ -94,6 +94,11 @@
 {
     display: none;
 }
+.b-menu-vert__item-content_visibility_visible
+{
+    display: block;
+}
+
 .b-menu-vert__layout,
 .b-menu-vert__separator,
 .b-menu-vert__layout-unit

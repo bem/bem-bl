@@ -23,6 +23,9 @@ exports.deps = [
         "elem": "observable"
     },
     {
+        "block": "i-bem"
+    },
+    {
         "block": "i-ecma",
         "elem": "object"
     },
@@ -31,7 +34,8 @@ exports.deps = [
         "elem": "array"
     },
     {
-        "block": "i-bem"
+        "block": "i-ecma",
+        "elem": "function"
     },
     {
         "block": "i-bem",
@@ -65,3 +69,6 @@ exports.deps = [
         "elem": "link"
     }
 ];
+exports.depsByTechs = {
+    "": {}
+};

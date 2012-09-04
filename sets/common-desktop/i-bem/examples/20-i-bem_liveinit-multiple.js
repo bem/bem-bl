@@ -128,16 +128,16 @@ var counter = 0,
     };
 
 /**
- * Уникализатор
- * @param {Object} [obj] объект, который нужно идентифицировать
- * @param {Boolean} [onlyGet=false] возвращать уникальное значение, только если оно уже до этого было присвоено
- * @returns {String} идентификатор
+ * Makes unique ID
+ * @param {Object} [obj] Object that needs to be identified
+ * @param {Boolean} [onlyGet=false] Return a unique value only if it had already been assigned before
+ * @returns {String} ID
  */
 $.identify = function(obj, onlyGet) {
 
     if(!obj) return get();
 
-    var key = 'uniqueID' in obj? 'uniqueID' : expando; // используем, по возможности. нативный uniqueID для элементов в IE
+    var key = 'uniqueID' in obj? 'uniqueID' : expando; // Use when possible. native uniqueID for elements in IE
 
     return onlyGet || key in obj?
         obj[key] :
@@ -255,9 +255,9 @@ var storageExpando = '__' + +new Date + 'storage',
     Observable = /** @lends $.observable.prototype */{
 
         /**
-         * Строит полное имя события
+         * Builds full event name
          * @protected
-         * @param {String} e тип события
+         * @param {String} e Event type
          * @returns {String}
          */
         buildEventName : function(e) {
@@ -267,11 +267,11 @@ var storageExpando = '__' + +new Date + 'storage',
         },
 
         /**
-         * Добавление обработчика события
-         * @param {String} e тип события
-         * @param {Object} [data] дополнительные данные, приходящие в обработчик как e.data
-         * @param {Function} fn обработчик
-         * @param {Object} [ctx] контекст обработчика
+         * Adding event handler
+         * @param {String} e Event type
+         * @param {Object} [data] Additional data that the handler gets as e.data
+         * @param {Function} fn Handler
+         * @param {Object} [ctx] Handler context
          * @returns {$.observable}
          */
         on : function(e, data, fn, ctx, _special) {
@@ -324,10 +324,10 @@ var storageExpando = '__' + +new Date + 'storage',
         },
 
         /**
-         * Удаление обработчика/обработчиков события
-         * @param {String} [e] тип события
-         * @param {Function} [fn] обработчик
-         * @param {Object} [ctx] контекст обработчика
+         * Removing event handler(s)
+         * @param {String} [e] Event type
+         * @param {Function} [fn] Handler
+         * @param {Object} [ctx] Handler context
          * @returns {$.observable}
          */
         un : function(e, fn, ctx) {
@@ -335,14 +335,14 @@ var storageExpando = '__' + +new Date + 'storage',
             if(typeof e == 'string' || typeof e == 'undefined') {
                 var storage = this[storageExpando];
                 if(storage) {
-                    if(e) { // если передан тип события
+                    if(e) { // if event type was passed
                         var eList = e.split(' '),
                             i = 0,
                             eStorage;
                         while(e = eList[i++]) {
                             e = this.buildEventName(e);
                             if(eStorage = storage[e]) {
-                                if(fn) {  // если передан конкретный обработчик
+                                if(fn) {  // if specific handler was passed
                                     var id = getFnId(fn, ctx),
                                         ids = eStorage.ids;
                                     if(id in ids) {
@@ -388,9 +388,9 @@ var storageExpando = '__' + +new Date + 'storage',
         },
 
         /**
-         * Запускает обработчики события
-         * @param {String|$.Event} e событие
-         * @param {Object} [data] дополнительные данные
+         * Fires event handlers
+         * @param {String|$.Event} e Event
+         * @param {Object} [data] Additional data
          * @returns {$.observable}
          */
         trigger : function(e, data) {
@@ -402,6 +402,8 @@ var storageExpando = '__' + +new Date + 'storage',
             typeof e === 'string'?
                 e = $.Event(_this.buildEventName(rawType = e)) :
                 e.type = _this.buildEventName(rawType = e.type);
+
+            e.target || (e.target = _this);
 
             if(storage && (storage = storage[e.type])) {
                 var item = storage.list.first,
@@ -434,150 +436,6 @@ $.observable = $.inherit(Observable, Observable);
 })(jQuery);
 /* ../../../../blocks-common/i-jquery/__observable/i-jquery__observable.js: end */ /**/
 
-/* ../../../../blocks-common/i-ecma/__object/i-ecma__object.js: begin */ /**/
-(function() {
-
-/**
- * Возвращает массив свойств объекта
- * @param {Object} obj объект
- * @returns {Array}
- */
-Object.keys || (Object.keys = function(obj) {
-    var res = [];
-
-    for(var i in obj) obj.hasOwnProperty(i) &&
-        res.push(i);
-
-    return res;
-});
-
-})();
-/* ../../../../blocks-common/i-ecma/__object/i-ecma__object.js: end */ /**/
-
-/* ../../../../blocks-common/i-ecma/__array/i-ecma__array.js: begin */ /**/
-(function() {
-
-var ptp = Array.prototype,
-    toStr = Object.prototype.toString,
-    methods = {
-
-        /**
-         * Находит индекс элемента в массиве
-         * @param {Object} item
-         * @param {Number} [fromIdx] начиная с индекса (length - 1 - fromIdx, если fromIdx < 0)
-         * @returns {Number} индекс элемента или -1, если не найдено
-         */
-        indexOf : function(item, fromIdx) {
-
-            fromIdx = +(fromIdx || 0);
-
-            var len = this.length;
-
-            if(len > 0 && fromIdx < len) {
-                fromIdx = fromIdx < 0? Math.ceil(fromIdx) : Math.floor(fromIdx);
-                fromIdx < -len && (fromIdx = 0);
-                fromIdx < 0 && (fromIdx = fromIdx + len);
-
-                while(fromIdx < len)
-                    if(this[fromIdx++] === item)
-                        return fromIdx - 1;
-            }
-
-            return -1;
-
-        },
-
-        /**
-         * Вызывает callback для каждого элемента
-         * @param {Function} callback вызывается для каждого элемента
-         * @param {Object} [ctx=null] контекст для callback
-         */
-        forEach : function(callback, ctx) {
-
-            var i = -1, t = this, len = t.length;
-            while(++i < len) i in t &&
-                (ctx? callback.call(ctx, t[i], i, t) : callback(t[i], i, t));
-
-        },
-
-        /**
-         * Создает массив B из массива A, такой что B[i] = callback(A[i])
-         * @param {Function} callback вызывается для каждого элемента
-         * @param {Object} [ctx=null] контекст для callback
-         * @returns {Array}
-         */
-        map : function(callback, ctx) {
-
-            var i = -1, t = this, len = t.length,
-                res = new Array(len);
-
-            while(++i < len) i in t &&
-                (res[i] = ctx? callback.call(ctx, t[i], i, t) : callback(t[i], i, t));
-
-            return res;
-
-        },
-
-        /**
-         * Создает массив, содержащий только те элементы из исходного массива, для которых callback возвращает true.
-         * @param {Function} callback вызывается для каждого элемента
-         * @param {Object} [ctx] контекст для callback
-         * @returns {Array}
-         */
-        filter : function(callback, ctx) {
-
-            var i = -1, t = this, len = t.length,
-                res = [];
-
-            while(++i < len) i in t &&
-                (ctx? callback.call(ctx, t[i], i, t) : callback(t[i], i, t)) && res.push(t[i]);
-
-            return res;
-
-        },
-
-        /**
-         * Свертывает массив, используя аккумулятор
-         * @param {Function} callback вызывается для каждого элемента
-         * @param {Object} [initialVal] начальное значение аккумулятора
-         * @returns {Object} аккумулятор
-         */
-        reduce : function(callback, initialVal) {
-
-            var i = -1, t = this, len = t.length,
-                res;
-
-            if(arguments.length < 2) {
-                while(++i < len) {
-                    if(i in t) {
-                        res = t[i];
-                        break;
-                    }
-                }
-            }
-            else {
-                res = initialVal;
-            }
-
-            while(++i < len) i in t &&
-                (res = callback(res, t[i], i, t));
-
-            return res;
-
-        }
-
-    };
-
-for(var name in methods)
-    ptp[name] || (ptp[name] = methods[name]);
-
-Array.isArray || (Array.isArray = function(obj) {
-    return toStr.call(obj) === '[object Array]';
-});
-
-})();
-/* ../../../../blocks-common/i-ecma/__array/i-ecma__array.js: end */ /**/
-
 /* ../../../../blocks-common/i-bem/i-bem.js: begin */ /**/
 /** @requires jquery.inherit */
 /** @requires jquery.isEmptyObject */
@@ -587,21 +445,21 @@ Array.isArray || (Array.isArray = function(obj) {
 (function($, undefined) {
 
 /**
- * Хранилище для отложенных функций
+ * Storage for deferred functions
  * @private
  * @type Array
  */
 var afterCurrentEventFns = [],
 
 /**
- * Хранилище деклараций блоков (хэш по имени блока)
+ * Storage for block declarations (hash by block name)
  * @private
  * @type Object
  */
     blocks = {},
 
 /**
- * Каналы сообщений
+ * Communication channels
  * @static
  * @private
  * @type Object
@@ -609,12 +467,12 @@ var afterCurrentEventFns = [],
     channels = {};
 
 /**
- * Строит имя метода-обработчика установки модификатора
+ * Builds the name of the handler method for setting a modifier
  * @static
  * @private
- * @param {String} elemName имя элемента
- * @param {String} modName имя модификатора
- * @param {String} modVal значение модификатора
+ * @param {String} elemName Element name
+ * @param {String} modName Modifier name
+ * @param {String} modVal Modifier value
  * @returns {String}
  */
 function buildModFnName(elemName, modName, modVal) {
@@ -627,7 +485,7 @@ function buildModFnName(elemName, modName, modVal) {
 }
 
 /**
- * Преобразует хэш обработчиков модификаторов в методы
+ * Transforms a hash of modifier handlers to methods
  * @static
  * @private
  * @param {Object} modFns
@@ -648,15 +506,35 @@ function modFnsToProps(modFns, props, elemName) {
 
 }
 
+function buildCheckMod(modName, modVal) {
+
+    return modVal?
+        Array.isArray(modVal)?
+            function(block) {
+                var i = 0, len = modVal.length;
+                while(i < len)
+                    if(block.hasMod(modName, modVal[i++]))
+                        return true;
+                return false;
+            } :
+            function(block) {
+                return block.hasMod(modName, modVal);
+            } :
+        function(block) {
+            return block.hasMod(modName);
+        };
+
+}
+
 /** @namespace */
 this.BEM = $.inherit($.observable, /** @lends BEM.prototype */ {
 
     /**
-     * @class Базовый блок для создания bem-блоков
+     * @class Base block for creating BEM blocks
      * @constructs
      * @private
-     * @param {Object} mods модификаторы блока
-     * @param {Object} params параметры блока
+     * @param {Object} mods Block modifiers
+     * @param {Object} params Block parameters
      * @param {Boolean} [initImmediately=true]
      */
     __constructor : function(mods, params, initImmediately) {
@@ -664,65 +542,74 @@ this.BEM = $.inherit($.observable, /** @lends BEM.prototype */ {
         var _this = this;
 
         /**
-         * кэш модификаторов блока
+         * Cache of block modifiers
          * @private
          * @type Object
          */
         _this._modCache = mods || {};
 
         /**
-         * текущие модификаторы в стэке установки
+         * Current modifiers in the stack
          * @private
          * @type Object
          */
         _this._processingMods = {};
 
         /**
-         * параметры блока с учетом дефолтных
+         * The block's parameters, taking into account the defaults
          * @protected
          * @type Object
          */
-        _this.params = $.extend(_this.getDefaultParams(), params);
+        _this._params = params; // это нужно для правильной сборки параметров у блока из нескольких нод
+        _this.params = null;
 
         initImmediately !== false?
             _this._init() :
-            _this.afterCurrentEvent(_this._init);
+            _this.afterCurrentEvent(function() {
+                _this._init();
+            });
 
     },
 
     /**
-     * Инициализирует блок
+     * Initializes the block
      * @private
      */
     _init : function() {
 
-        return this
-            .setMod('js', 'inited')
-            .trigger('init');
+        if(!this._initing && !this.hasMod('js', 'inited')) {
+            this._initing = true;
+
+            this.params = $.extend(this.getDefaultParams(), this._params);
+            delete this._params;
+
+            this.setMod('js', 'inited');
+            delete this._initing;
+            this.trigger('init');
+        }
+
+        return this;
 
     },
 
     /**
-     * Изменяет контекст передаваемой функции
+     * Changes the context of the function being passed
      * @protected
      * @param {Function} fn
-     * @param {Object} [ctx=this] контекст
-     * @returns {Function} функция с измененным контекстом
+     * @param {Object} [ctx=this] Context
+     * @returns {Function} Function with a modified context
      */
     changeThis : function(fn, ctx) {
 
-        var _this = this;
-        return function() {
-            return fn.apply(ctx || _this, arguments);
-        };
+        return fn.bind(ctx || this);
 
     },
 
     /**
-     * Выполняет функцию в контексте блока после "текущего события"
+     * Executes the function in the context of the block, after the "current event"
      * @protected
      * @param {Function} fn
-     * @param {Object} [ctx] контекст
+     * @param {Object} [ctx] Context
      */
     afterCurrentEvent : function(fn, ctx) {
 
@@ -731,10 +618,10 @@ this.BEM = $.inherit($.observable, /** @lends BEM.prototype */ {
     },
 
     /**
-     * Запускает обработчики события у блока и обработчики live-событий
+     * Executes the block's event handlers and live event handlers
      * @protected
-     * @param {String} e имя события
-     * @param {Object} [data] дополнительные данные
+     * @param {String} e Event name
+     * @param {Object} [data] Additional information
      * @returns {BEM}
      */
     trigger : function(e, data) {
@@ -757,11 +644,11 @@ this.BEM = $.inherit($.observable, /** @lends BEM.prototype */ {
     },
 
     /**
-     * Проверят наличие модификатора у блока/вложенного элемента
+     * Checks whether a block or nested element has a modifier
      * @protected
-     * @param {Object} [elem] вложенный элемент
-     * @param {String} modName имя модификатора
-     * @param {String} [modVal] значение модификатора
+     * @param {Object} [elem] Nested element
+     * @param {String} modName Modifier name
+     * @param {String} [modVal] Modifier value
      * @returns {Boolean}
      */
     hasMod : function(elem, modName, modVal) {
@@ -793,16 +680,16 @@ this.BEM = $.inherit($.observable, /** @lends BEM.prototype */ {
     },
 
     /**
-     * Возвращает значение модификатора блока/вложенного элемента
+     * Returns the value of the modifier of the block/nested element
      * @protected
-     * @param {Object} [elem] вложенный элемент
-     * @param {String} modName имя модификатора
-     * @returns {String} значение модификатора
+     * @param {Object} [elem] Nested element
+     * @param {String} modName Modifier name
+     * @returns {String} Modifier value
      */
     getMod : function(elem, modName) {
 
         var type = typeof elem;
-        if(type === 'string' || type === 'undefined') { // elem либо отсутствует, либо undefined
+        if(type === 'string' || type === 'undefined') { // elem either omitted or undefined
             modName = elem || modName;
             var modCache = this._modCache;
             return modName in modCache?
@@ -815,12 +702,12 @@ this.BEM = $.inherit($.observable, /** @lends BEM.prototype */ {
     },
 
     /**
-     * Возвращает значение модификатора вложенного элемента
+     * Returns the value of the modifier of the nested element
      * @private
-     * @param {String} modName имя модификатора
-     * @param {Object} elem вложенный элемент
-     * @param {Object} [elem] имя вложенного элемента
-     * @returns {String} значение модификатора
+     * @param {String} modName Modifier name
+     * @param {Object} elem Nested element
+     * @param {Object} [elem] Nested element name
+     * @returns {String} Modifier value
      */
     _getElemMod : function(modName, elem, elemName) {
 
@@ -829,11 +716,11 @@ this.BEM = $.inherit($.observable, /** @lends BEM.prototype */ {
     },
 
     /**
-     * Возвращает значения модификаторов блока/вложенного элемента
+     * Returns values of modifiers of the block/nested element
      * @protected
-     * @param {Object} [elem] вложенный элемент
-     * @param {String} [modName1, ..., modNameN] имена модификаторов
-     * @returns {Object} значения модификаторов в виде хэша
+     * @param {Object} [elem] Nested element
+     * @param {String} [modName1, ..., modNameN] Modifier names
+     * @returns {Object} Hash of modifier values
      */
     getMods : function(elem) {
 
@@ -842,9 +729,9 @@ this.BEM = $.inherit($.observable, /** @lends BEM.prototype */ {
             modNames = [].slice.call(arguments, hasElem? 1 : 0),
             res = _this._extractMods(modNames, hasElem? elem : undefined);
 
-        if(!hasElem) { // кэшируем
+        if(!hasElem) { // caching
             modNames.length?
-                $.each(modNames, function(i, name) {
+                modNames.forEach(function(name) {
                     _this._modCache[name] = res[name];
                 }):
                 _this._modCache = res;
@@ -855,11 +742,11 @@ this.BEM = $.inherit($.observable, /** @lends BEM.prototype */ {
     },
 
     /**
-     * Устанавливает модификатор у блока/вложенного элемента
+     * Sets the modifier for a block/nested element
      * @protected
-     * @param {Object} [elem] вложенный элемент
-     * @param {String} modName имя модификатора
-     * @param {String} modVal значение модификатора
+     * @param {Object} [elem] Nested element
+     * @param {String} modName Modifier name
+     * @param {String} modVal Modifier value
      * @returns {BEM}
      */
     setMod : function(elem, modName, modVal) {
@@ -879,26 +766,26 @@ this.BEM = $.inherit($.observable, /** @lends BEM.prototype */ {
             if(this._processingMods[modId]) return _this;
 
             var elemName,
-                currentModVal = elem?
+                curModVal = elem?
                     _this._getElemMod(modName, elem, elemName = _this.__self._extractElemNameFrom(elem)) :
                     _this.getMod(modName);
 
-            if(currentModVal === modVal) return _this;
+            if(curModVal === modVal) return _this;
 
             this._processingMods[modId] = true;
 
             var needSetMod = true,
-                modFnParams = [modName, modVal, currentModVal];
+                modFnParams = [modName, modVal, curModVal];
 
             elem && modFnParams.unshift(elem);
 
-            $.each([['*', '*'], [modName, '*'], [modName, modVal]], function(){
-                needSetMod = _this._callModFn(elemName, this[0], this[1], modFnParams) !== false && needSetMod;
+            [['*', '*'], [modName, '*'], [modName, modVal]].forEach(function(mod) {
+                needSetMod = _this._callModFn(elemName, mod[0], mod[1], modFnParams) !== false && needSetMod;
             });
 
             !elem && needSetMod && (_this._modCache[modName] = modVal);
 
-            needSetMod && _this._afterSetMod(modName, modVal, elem, elemName);
+            needSetMod && _this._afterSetMod(modName, modVal, curModVal, elem, elemName);
 
             delete this._processingMods[modId];
         }
@@ -908,29 +795,31 @@ this.BEM = $.inherit($.observable, /** @lends BEM.prototype */ {
     },
 
     /**
-     * Функция после успешного изменения модификатора у блока/вложенного элемента
+     * Function after successfully changing the modifier of the block/nested element
      * @protected
-     * @param {String} modName имя модификатора
-     * @param {String} modVal значение модификатора
-     * @param {Object} [elem] вложенный элемент
+     * @param {String} modName Modifier name
+     * @param {String} modVal Modifier value
+     * @param {String} oldModVal Old modifier value
+     * @param {Object} [elem] Nested element
+     * @param {String} [elemName] Element name
      */
-    _afterSetMod : function(modName, modVal, elem) {},
+    _afterSetMod : function(modName, modVal, oldModVal, elem, elemName) {},
 
     /**
-     * Устанавливает модификатор у блока/вложенного элемента в зависимости от условия.
-     * Если передан параметр condition, то при true устанавливается modVal1, при false - modVal2,
-     * если же condition не передан, то устанавливается modVal1, если установлен modVal2, и наоборот
+     * Sets a modifier for a block/nested element, depending on conditions.
+     * If the condition parameter is passed: when true, modVal1 is set; when false, modVal2 is set.
+     * If the condition parameter is not passed: modVal1 is set if modVal2 was set, or vice versa.
      * @protected
-     * @param {Object} [elem] вложенный элемент
-     * @param {String} modName имя модификатора
-     * @param {String} modVal1 первое значение модификатора
-     * @param {String} [modVal2] второе значение модификатора
-     * @param {Boolean} [condition] условие
+     * @param {Object} [elem] Nested element
+     * @param {String} modName Modifier name
+     * @param {String} modVal1 First modifier value
+     * @param {String} [modVal2] Second modifier value
+     * @param {Boolean} [condition] Condition
      * @returns {BEM}
      */
     toggleMod : function(elem, modName, modVal1, modVal2, condition) {
 
-        if(typeof elem == 'string') { // если это блок
+        if(typeof elem == 'string') { // if this is a block
             condition = modVal2;
             modVal2 = modVal1;
             modVal1 = modName;
@@ -944,24 +833,28 @@ this.BEM = $.inherit($.observable, /** @lends BEM.prototype */ {
             modVal2 = '';
         }
 
-        var modVal = this.getMod(elem, modName);
-        (modVal == modVal1 || modVal == modVal2) &&
-            this.setMod(
-                elem,
-                modName,
-                typeof condition === 'boolean'?
-                    (condition? modVal1 : modVal2) :
-                    this.hasMod(elem, modName, modVal1)? modVal2 : modVal1);
+        var _this = this;
+        $.each(elem || [undefined], function(i, elem) {
+            elem = elem && $(elem); // Если это элемент
+            var modVal = _this.getMod(elem, modName);
+            (modVal == modVal1 || modVal == modVal2) &&
+                _this.setMod(
+                    elem,
+                    modName,
+                    typeof condition === 'boolean'?
+                        (condition? modVal1 : modVal2) :
+                        _this.hasMod(elem, modName, modVal1)? modVal2 : modVal1);
+        });
 
         return this;
 
     },
 
     /**
-     * Удаляет модификатор у блока/вложенного элемента
+     * Removes a modifier from a block/nested element
      * @protected
-     * @param {Object} [elem] вложенный элемент
-     * @param {String} modName имя модификатора
+     * @param {Object} [elem] Nested element
+     * @param {String} modName Modifier name
      * @returns {BEM}
      */
     delMod : function(elem, modName) {
@@ -976,12 +869,12 @@ this.BEM = $.inherit($.observable, /** @lends BEM.prototype */ {
     },
 
     /**
-     * Выполняет обработчики установки модификаторов
+     * Executes handlers for setting modifiers
      * @private
-     * @param {String} elemName имя элемента
-     * @param {String} modName имя модификатора
-     * @param {String} modVal значение модификатора
-     * @param {Array} modFnParams параметры обработчика
+     * @param {String} elemName Element name
+     * @param {String} modName Modifier name
+     * @param {String} modVal Modifier value
+     * @param {Array} modFnParams Handler parameters
      */
     _callModFn : function(elemName, modName, modVal, modFnParams) {
 
@@ -993,11 +886,11 @@ this.BEM = $.inherit($.observable, /** @lends BEM.prototype */ {
     },
 
     /**
-     * Извлекает значение модификатора
+     * Retrieves the value of the modifier
      * @private
-     * @param {String} modName имя модификатора
-     * @param {Object} [elem] элемент
-     * @returns {String} значение модификатора
+     * @param {String} modName Modifier name
+     * @param {Object} [elem] Element
+     * @returns {String} Modifier value
      */
     _extractModVal : function(modName, elem) {
 
@@ -1006,11 +899,11 @@ this.BEM = $.inherit($.observable, /** @lends BEM.prototype */ {
     },
 
     /**
-     * Извлекает имя/значение списка модификаторов
+     * Retrieves name/value for a list of modifiers
      * @private
-     * @param {Array} modNames имена модификаторов
-     * @param {Object} [elem] элемент
-     * @returns {Object} хэш значений модификаторов по имени
+     * @param {Array} modNames Names of modifiers
+     * @param {Object} [elem] Element
+     * @returns {Object} Hash of modifier values by name
      */
     _extractMods : function(modNames, elem) {
 
@@ -1019,10 +912,10 @@ this.BEM = $.inherit($.observable, /** @lends BEM.prototype */ {
     },
 
     /**
-     * Возвращает именованный канал сообщений
-     * @param {String} [id='default'] идентификатор канала
-     * @param {Boolean} [drop=false] уничтожить канал
-     * @returns {$.observable|undefined} канал сообщений
+     * Returns a named communication channel
+     * @param {String} [id='default'] Channel ID
+     * @param {Boolean} [drop=false] Destroy the channel
+     * @returns {$.observable|undefined} Communication channel
      */
     channel : function(id, drop) {
 
@@ -1031,7 +924,7 @@ this.BEM = $.inherit($.observable, /** @lends BEM.prototype */ {
     },
 
     /**
-     * Возвращает дефолтные параметры блока
+     * Returns a block's default parameters
      * @returns {Object}
      */
     getDefaultParams : function() {
@@ -1041,7 +934,7 @@ this.BEM = $.inherit($.observable, /** @lends BEM.prototype */ {
     },
 
     /**
-     * Хелпер для очистки свойств блока
+     * Helper for cleaning up block properties
      * @param {Object} [obj=this]
      */
     del : function(obj) {
@@ -1054,7 +947,7 @@ this.BEM = $.inherit($.observable, /** @lends BEM.prototype */ {
 	},
 
     /**
-     * Удаляет блок
+     * Deletes a block
      */
     destruct : function() {}
 
@@ -1063,7 +956,7 @@ this.BEM = $.inherit($.observable, /** @lends BEM.prototype */ {
     _name : 'i-bem',
 
     /**
-     * Хранилище деклараций блоков (хэш по имени блока)
+     * Storage for block declarations (hash by block name)
      * @static
      * @protected
      * @type Object
@@ -1071,16 +964,16 @@ this.BEM = $.inherit($.observable, /** @lends BEM.prototype */ {
     blocks : blocks,
 
     /**
-     * Декларатор блоков, создает класс блока
+     * Declares blocks and creates a block class
      * @static
      * @protected
-     * @param {String|Object} decl имя блока (простой синтаксис) или описание
-     * @param {String} decl.block|decl.name имя блока
-     * @param {String} [decl.baseBlock] имя родительского блока
-     * @param {String} [decl.modName] имя модификатора
-     * @param {String} [decl.modVal] значение модификатора
-     * @param {Object} [props] методы
-     * @param {Object} [staticProps] статические методы
+     * @param {String|Object} decl Block name (simple syntax) or description
+     * @param {String} decl.block|decl.name Block name
+     * @param {String} [decl.baseBlock] Name of the parent block
+     * @param {String} [decl.modName] Modifier name
+     * @param {String} [decl.modVal] Modifier value
+     * @param {Object} [props] Methods
+     * @param {Object} [staticProps] Static methods
      */
     decl : function(decl, props, staticProps) {
 
@@ -1110,11 +1003,12 @@ this.BEM = $.inherit($.observable, /** @lends BEM.prototype */ {
         var baseBlock = blocks[decl.baseBlock || decl.block] || this;
 
         if(decl.modName) {
+            var checkMod = buildCheckMod(decl.modName, decl.modVal);
             $.each(props, function(name, prop) {
                 $.isFunction(prop) &&
                     (props[name] = function() {
                         var method;
-                        if(this.hasMod(decl.modName, decl.modVal)) {
+                        if(checkMod(this)) {
                             method = prop;
                         } else {
                             var baseMethod = baseBlock.prototype[name];
@@ -1130,7 +1024,7 @@ this.BEM = $.inherit($.observable, /** @lends BEM.prototype */ {
 
         var block;
         decl.block == baseBlock._name?
-            // делаем новый live в том случае, если уже запускался старый
+            // makes a new "live" if the old one was already executed
             (block = $.inheritSelf(baseBlock, props, staticProps))._processLive(true) :
             (block = blocks[decl.block] = $.inherit(baseBlock, props, staticProps))._name = decl.block;
 
@@ -1139,10 +1033,10 @@ this.BEM = $.inherit($.observable, /** @lends BEM.prototype */ {
     },
 
     /**
-     * Осуществляет обработку live-свойств блока
+     * Processes a block's live properties
      * @private
-     * @param {Boolean} [heedLive=false] нужно ли учитывать то, что блок обрабатывал уже свои live-свойства
-     * @returns {Boolean} является ли блок live-блоком
+     * @param {Boolean} [heedLive=false] Whether to take into account that the block already processed its live properties
+     * @returns {Boolean} Whether the block is a live block
      */
     _processLive : function(heedLive) {
 
@@ -1151,10 +1045,10 @@ this.BEM = $.inherit($.observable, /** @lends BEM.prototype */ {
     },
 
     /**
-     * Фабричный метод для создания экземпляра блока по имени
+     * Factory method for creating an instance of the block named
      * @static
-     * @param {String|Object} block имя блока или описание
-     * @param {Object} [params] параметры блока
+     * @param {String|Object} block Block name or description
+     * @param {Object} [params] Block parameters
      * @returns {BEM}
      */
     create : function(block, params) {
@@ -1166,7 +1060,7 @@ this.BEM = $.inherit($.observable, /** @lends BEM.prototype */ {
     },
 
     /**
-     * Возвращает имя текущего блока
+     * Returns the name of the current block
      * @static
      * @protected
      * @returns {String}
@@ -1178,16 +1072,16 @@ this.BEM = $.inherit($.observable, /** @lends BEM.prototype */ {
     },
 
     /**
-     * Извлекает имя вложенного в блок элемента
+     * Retrieves the name of an element nested in a block
      * @static
      * @private
-     * @param {Object} elem вложенный элемент
+     * @param {Object} elem Nested element
      * @returns {String|undefined}
      */
     _extractElemNameFrom : function(elem) {},
 
     /**
-     * Добавляет функцию в очередь для запуска после "текущего события"
+     * Adds a function to the queue for executing after the "current event"
      * @static
      * @protected
      * @param {Function} fn
@@ -1201,7 +1095,7 @@ this.BEM = $.inherit($.observable, /** @lends BEM.prototype */ {
     },
 
     /**
-     * Запускает очерель
+     * Executes the queue
      * @private
      */
     _runAfterCurrentEventFns : function() {
@@ -1217,22 +1111,20 @@ this.BEM = $.inherit($.observable, /** @lends BEM.prototype */ {
     },
 
     /**
-     * Изменяет контекст передаваемой функции
+     * Changes the context of the function being passed
      * @protected
      * @param {Function} fn
-     * @param {Object} ctx контекст
-     * @returns {Function} функция с измененным контекстом
+     * @param {Object} ctx Context
+     * @returns {Function} Function with a modified context
      */
     changeThis : function(fn, ctx) {
 
-        return function() {
-            return fn.apply(ctx || this, arguments);
-        };
+        return fn.bind(ctx || this);
 
     },
 
     /**
-     * Хелпер для очистки свойств
+     * Helper for cleaning out properties
      * @param {Object} [obj=this]
      */
     del : function(obj) {
@@ -1249,10 +1141,10 @@ this.BEM = $.inherit($.observable, /** @lends BEM.prototype */ {
 	},
 
     /**
-     * Возвращает/уничтожает именованный канал сообщений
-     * @param {String} [id='default'] идентификатор канала
-     * @param {Boolean} [drop=false] уничтожить канал
-     * @returns {$.observable|undefined} канал сообщений
+     * Returns/destroys a named communication channel
+     * @param {String} [id='default'] Channel ID
+     * @param {Boolean} [drop=false] Destroy the channel
+     * @returns {$.observable|undefined} Communication channel
      */
     channel : function(id, drop) {
 
@@ -1278,31 +1170,231 @@ this.BEM = $.inherit($.observable, /** @lends BEM.prototype */ {
 });
 
 })(jQuery);
-
 /* ../../../../blocks-common/i-bem/i-bem.js: end */ /**/
 
+/* ../../../../blocks-common/i-ecma/__object/i-ecma__object.js: begin */ /**/
+(function() {
+
+/**
+ * Возвращает массив свойств объекта
+ * @param {Object} obj объект
+ * @returns {Array}
+ */
+Object.keys || (Object.keys = function(obj) {
+    var res = [];
+
+    for(var i in obj) obj.hasOwnProperty(i) &&
+        res.push(i);
+
+    return res;
+});
+
+})();
+/* ../../../../blocks-common/i-ecma/__object/i-ecma__object.js: end */ /**/
+
+/* ../../../../blocks-common/i-ecma/__array/i-ecma__array.js: begin */ /**/
+(function() {
+
+var ptp = Array.prototype,
+    toStr = Object.prototype.toString,
+    methods = {
+
+        /**
+         * Finds the index of an element in an array
+         * @param {Object} item
+         * @param {Number} [fromIdx] Starting from index (length - 1 - fromIdx, if fromIdx < 0)
+         * @returns {Number} Element index or -1, if not found
+         */
+        indexOf : function(item, fromIdx) {
+
+            fromIdx = +(fromIdx || 0);
+
+            var t = this, len = t.length;
+
+            if(len > 0 && fromIdx < len) {
+                fromIdx = fromIdx < 0? Math.ceil(fromIdx) : Math.floor(fromIdx);
+                fromIdx < -len && (fromIdx = 0);
+                fromIdx < 0 && (fromIdx = fromIdx + len);
+
+                while(fromIdx < len) {
+                    if(fromIdx in t && t[fromIdx] === item)
+                        return fromIdx;
+                    ++fromIdx;
+                }
+            }
+
+            return -1;
+
+        },
+
+        /**
+         * Calls the callback for each element
+         * @param {Function} callback Called for each element
+         * @param {Object} [ctx=null] Callback context
+         */
+        forEach : function(callback, ctx) {
+
+            var i = -1, t = this, len = t.length;
+            while(++i < len) i in t &&
+                (ctx? callback.call(ctx, t[i], i, t) : callback(t[i], i, t));
+
+        },
+
+        /**
+         * Creates array B from array A so that B[i] = callback(A[i])
+         * @param {Function} callback Called for each element
+         * @param {Object} [ctx=null] Callback context
+         * @returns {Array}
+         */
+        map : function(callback, ctx) {
+
+            var i = -1, t = this, len = t.length,
+                res = new Array(len);
+
+            while(++i < len) i in t &&
+                (res[i] = ctx? callback.call(ctx, t[i], i, t) : callback(t[i], i, t));
+
+            return res;
+
+        },
+
+        /**
+         * Creates an array containing only the elements from the source array that the callback returns true for. 
+         * @param {Function} callback Called for each element
+         * @param {Object} [ctx] Callback context
+         * @returns {Array}
+         */
+        filter : function(callback, ctx) {
+
+            var i = -1, t = this, len = t.length,
+                res = [];
+
+            while(++i < len) i in t &&
+                (ctx? callback.call(ctx, t[i], i, t) : callback(t[i], i, t)) && res.push(t[i]);
+
+            return res;
+
+        },
+
+        /**
+         * Wraps the array using an accumulator
+         * @param {Function} callback Called for each element
+         * @param {Object} [initialVal] Initial value of the accumulator
+         * @returns {Object} Accumulator
+         */
+        reduce : function(callback, initialVal) {
+
+            var i = -1, t = this, len = t.length,
+                res;
+
+            if(arguments.length < 2) {
+                while(++i < len) {
+                    if(i in t) {
+                        res = t[i];
+                        break;
+                    }
+                }
+            }
+            else {
+                res = initialVal;
+            }
+
+            while(++i < len) i in t &&
+                (res = callback(res, t[i], i, t));
+
+            return res;
+
+        },
+
+        /**
+         * Checks whether at least one element in the array meets the condition in the callback
+         * @param {Function} callback
+         * @param {Object} [ctx=this] Callback context
+         * @returns {Boolean}
+         */
+        some : function(callback, ctx) {
+
+            var i = -1, t = this, len = t.length;
+
+            while(++i < len)
+                if(i in t && (ctx ? callback.call(ctx, t[i], i, t) : callback(t[i], i, t)))
+                    return true;
+
+            return false;
+
+        },
+
+        /**
+         * Checks whether every element in the array meets the condition in the callback
+         * @param {Function} callback
+         * @param {Object} [ctx=this] Context of the callback call
+         * @returns {Boolean}
+         */
+        every : function(callback, ctx) {
+
+            var i = -1, t = this, len = t.length;
+
+            while(++i < len)
+                if(i in t && !(ctx ? callback.call(ctx, t[i], i, t) : callback(t[i], i, t)))
+                    return false;
+
+            return true;
+
+        }
+
+    };
+
+for(var name in methods)
+    ptp[name] || (ptp[name] = methods[name]);
+
+Array.isArray || (Array.isArray = function(obj) {
+    return toStr.call(obj) === '[object Array]';
+});
+
+})();
+/* ../../../../blocks-common/i-ecma/__array/i-ecma__array.js: end */ /**/
+
+/* ../../../../blocks-common/i-ecma/__function/i-ecma__function.js: begin */ /**/
+(function() {
+
+var slice = Array.prototype.slice;
+
+Function.prototype.bind || (Function.prototype.bind = function(ctx) {
+
+    var fn = this,
+        args = slice.call(arguments, 1);
+
+    return function () {
+        return fn.apply(ctx, args.concat(slice.call(arguments)));
+    }
+
+});
+
+})();
+/* ../../../../blocks-common/i-ecma/__function/i-ecma__function.js: end */ /**/
+
 /* ../../../../blocks-common/i-bem/__internal/i-bem__internal.js: begin */ /**/
-/** @fileOverview модуль для внутренних BEM-хелперов */
+/** @fileOverview Module for internal BEM helpers */
 /** @requires BEM */
 
 (function(BEM, $, undefined) {
 
 /**
- * Разделитель для модификаторов и их значений
+ * Separator for modifiers and their values
  * @const
  * @type String
  */
 var MOD_DELIM = '_',
 
 /**
- * Разделитель между именами блока и вложенного элемента
+ * Separator between names of a block and a nested element
  * @const
  * @type String
  */
     ELEM_DELIM = '__',
 
 /**
- * Паттерн для допустимых имен элементов и модификаторов
+ * Pattern for acceptable element and modifier names
  * @const
  * @type String
  */
@@ -1345,14 +1437,14 @@ BEM.INTERNAL = {
     },
 
     /**
-     * Строит класс блока или элемента с учетом модификатора
+     * Builds the class of a block or element with a modifier
      * @private
-     * @param {String} block имя блока
-     * @param {String} [elem] имя элемента
-     * @param {String} [modName] имя модификатора
-     * @param {String} [modVal] значение модификатора
-     * @param {Array} [buffer] буфер
-     * @returns {String|Array} строка класса или буфер (в зависимости от наличия параметра buffer)
+     * @param {String} block Block name
+     * @param {String} [elem] Element name
+     * @param {String} [modName] Modifier name
+     * @param {String} [modVal] Modifier value
+     * @param {Array} [buffer] Buffer
+     * @returns {String|Array} Class or buffer string (depending on whether the buffer parameter is present)
      */
     buildClass : function(block, elem, modName, modVal, buffer) {
 
@@ -1387,13 +1479,13 @@ BEM.INTERNAL = {
     },
 
     /**
-     * Строит полные классы блока или элемента с учетом модификаторов
+     * Builds full classes for a buffer or element with modifiers
      * @private
-     * @param {String} block имя блока
-     * @param {String} [elem] имя элемента
-     * @param {Object} [mods] модификаторы
-     * @param {Array} [buffer] буфер
-     * @returns {String|Array} строка класса или буфер (в зависимости от наличия параметра buffer)
+     * @param {String} block Block name
+     * @param {String} [elem] Element name
+     * @param {Object} [mods] Modifiers
+     * @param {Array} [buffer] Buffer
+     * @returns {String|Array} Class or buffer string (depending on whether the buffer parameter is present)
      */
     buildClasses : function(block, elem, mods, buffer) {
 
@@ -1452,15 +1544,14 @@ var win = $(window),
     doc = $(document),
 
 /**
- * Хранилище для DOM-элементов по уникальному ключу
+ * Storage for DOM elements by unique key
  * @private
  * @type Object
  */
     uniqIdToDomElems = {},
 
-
 /**
- * Хранилище для блоков по уникальному ключу
+ * Storage for blocks by unique key
  * @static
  * @private
  * @type Object
@@ -1468,21 +1559,21 @@ var win = $(window),
     uniqIdToBlock = {},
 
 /**
- * Хранилище для параметров блоков
+ * Storage for block parameters
  * @private
  * @type Object
  */
     domElemToParams = {},
 
 /**
- * Хранилище для обработчиков liveCtx-событий
+ * Storage for liveCtx event handlers 
  * @private
  * @type Object
  */
     liveEventCtxStorage = {},
 
 /**
- * Хранилище для обработчиков liveClass-событий
+ * Storage for liveClass event handlers
  * @private
  * @type Object
  */
@@ -1501,10 +1592,10 @@ var win = $(window),
     buildClass = INTERNAL.buildClass;
 
 /**
- * Инициализирует блоки на DOM-элементе
+ * Initializes blocks on a DOM element
  * @private
- * @param {jQuery} domElem DOM-элемент
- * @param {String} uniqInitId идентификатор "волны инициализации"
+ * @param {jQuery} domElem DOM element
+ * @param {String} uniqInitId ID of the "initialization wave"
  */
 function init(domElem, uniqInitId) {
 
@@ -1513,8 +1604,10 @@ function init(domElem, uniqInitId) {
         processParams(params, domNode, blockName, uniqInitId);
         var block = uniqIdToBlock[params.uniqId];
         if(block) {
-            block.domElem = block.domElem.add(domElem);
-            $.extend(block.params, params);
+            if(block.domElem.index(domNode) < 0) {
+                block.domElem = block.domElem.add(domElem);
+                $.extend(block._params, params);
+            }
         } else {
             initBlock(blockName, domElem, params);
         }
@@ -1523,13 +1616,13 @@ function init(domElem, uniqInitId) {
 }
 
 /**
- * Инициализирует конкретный блок на DOM-элементе или возвращает существующий блок, если он уже был создан
+ * Initializes a specific block on a DOM element, or returns the existing block if it was already created
  * @private
- * @param {String} blockName имя блока
- * @param {jQuery} domElem DOM-элемент
- * @param {Object} [params] параметры инициализации
- * @param {Boolean} [forceLive] форсировать возможность live-инициализации
- * @param {Function} [callback] обработчик, вызываемый после полной инициализации
+ * @param {String} blockName Block name
+ * @param {jQuery} domElem DOM element
+ * @param {Object} [params] Initialization parameters
+ * @param {Boolean} [forceLive] Force live initialization
+ * @param {Function} [callback] Handler to call after complete initialization
  */
 function initBlock(blockName, domElem, params, forceLive, callback) {
 
@@ -1551,6 +1644,11 @@ function initBlock(blockName, domElem, params, forceLive, callback) {
         uniqIdToDomElems[uniqId].add(domElem) :
         domElem;
 
+    var parentDomNode = domNode.parentNode;
+    if(!parentDomNode || parentDomNode.nodeType === 11) { // jquery doesn't unique disconnected node
+        $.unique(uniqIdToDomElems[uniqId]);
+    }
+
     var blockClass = blocks[blockName] || DOM.decl(blockName, {}, { live : true });
     if(!(blockClass._liveInitable = !!blockClass._processLive()) || forceLive || params.live === false) {
         var block = new blockClass(uniqIdToDomElems[uniqId], params, !!forceLive);
@@ -1562,12 +1660,12 @@ function initBlock(blockName, domElem, params, forceLive, callback) {
 }
 
 /**
- * Обрабатывает и добавляет необходимые параметры блока
+ * Processes and adds necessary block parameters
  * @private
- * @param {Object} params параметры инициализации
- * @param {HTMLElement} domNode DOM-нода
- * @param {String} blockName имя блока
- * @param {String} [uniqInitId] идентификатор "волны инициализации"
+ * @param {Object} params Initialization parameters
+ * @param {HTMLElement} domNode DOM node
+ * @param {String} blockName Block name
+ * @param {String} [uniqInitId] ID of the "initialization wave"
  */
 function processParams(params, domNode, blockName, uniqInitId) {
 
@@ -1584,11 +1682,11 @@ function processParams(params, domNode, blockName, uniqInitId) {
 }
 
 /**
- * Хелпер для поиска DOM-элемента по селектору внутри контекста, включая сам контекст
+ * Helper for searching for a DOM element using a selector inside the context, including the context itself
  * @private
- * @param {jQuery} ctx контекст
- * @param {String} selector CSS-селектор
- * @param {Boolean} [excludeSelf=false] исключить контекст из поиска
+ * @param {jQuery} ctx Context
+ * @param {String} selector CSS selector
+ * @param {Boolean} [excludeSelf=false] Exclude context from search
  * @returns {jQuery}
  */
 function findDomElem(ctx, selector, excludeSelf) {
@@ -1601,9 +1699,9 @@ function findDomElem(ctx, selector, excludeSelf) {
 }
 
 /**
- * Возвращает параметры DOM-элемента блока
+ * Returns parameters of a block's DOM element
  * @private
- * @param {HTMLElement} domNode DOM-нода
+ * @param {HTMLElement} domNode DOM node
  * @returns {Object}
  */
 function getParams(domNode) {
@@ -1615,15 +1713,15 @@ function getParams(domNode) {
 }
 
 /**
- * Извлекает параметры блока из DOM-элемента
+ * Retrieves block parameters from a DOM element
  * @private
- * @param {HTMLElement} domNode DOM-нода
+ * @param {HTMLElement} domNode DOM node
  * @returns {Object}
  */
 function extractParams(domNode) {
 
     var fn = domNode.onclick || domNode.ondblclick;
-    if(!fn && domNode.tagName.toLowerCase() == 'body') { // LEGO-2027 в FF onclick не работает на body
+    if(!fn && domNode.tagName.toLowerCase() == 'body') { // LEGO-2027 in FF onclick doesn't work on body
         var elem = $(domNode),
             attr = elem.attr('onclick') || elem.attr('ondblclick');
         attr && (fn = Function(attr));
@@ -1633,9 +1731,9 @@ function extractParams(domNode) {
 }
 
 /**
- * Очищает все BEM-хранилища, связанные с DOM-нодой
+ * Cleans up all the BEM storages associated with a DOM node
  * @private
- * @param {HTMLElement} domNode DOM-нода
+ * @param {HTMLElement} domNode DOM node
  */
 function cleanupDomNode(domNode) {
 
@@ -1644,7 +1742,21 @@ function cleanupDomNode(domNode) {
 }
 
 /**
- * Возвращает DOM-ноду для вычислений размера окна в IE
+ * Uncople DOM node from the block. If this is the last node, then destroys the block.
+ * @private
+ * @param {BEM.DOM} block block
+ * @param {HTMLElement} domNode DOM node
+ */
+function removeDomNodeFromBlock(block, domNode) {
+
+    block.domElem.length === 1?
+        block.destruct(true) :
+        block.domElem = block.domElem.not(domNode);
+
+}
+
+/**
+ * Returns a DOM node for calculating the window size in IE
  * @returns {HTMLElement}
  */
 function getClientNode() {
@@ -1654,9 +1766,9 @@ function getClientNode() {
 }
 
 /**
- * Возвращает и, при необходимости, инициализирует блок на DOM-элементе
- * @param {String} blockName имя блока
- * @param {Object} params параметры блока
+ * Returns a block on a DOM element and initializes it if necessary 
+ * @param {String} blockName Block name
+ * @param {Object} params Block parameters
  * @returns {BEM}
  */
 $.fn.bem = function(blockName, params) {
@@ -1669,11 +1781,11 @@ $.fn.bem = function(blockName, params) {
  */
 var DOM = BEM.DOM = BEM.decl('i-bem__dom',/** @lends BEM.DOM.prototype */{
     /**
-     * @class Базовый блок для создания bem-блоков, имеющих DOM-представление
+     * @class Base block for creating BEM blocks that have DOM representation 
      * @constructs
      * @private
-     * @param {jQuery} domElem DOM-элемент, на котором создается блок
-     * @param {Object} params параметры блока
+     * @param {jQuery} domElem DOM element that the block is created on
+     * @param {Object} params Block parameters
      * @param {Boolean} [initImmediately=true]
      */
     __constructor : function(domElem, params, initImmediately) {
@@ -1681,35 +1793,35 @@ var DOM = BEM.DOM = BEM.decl('i-bem__dom',/** @lends BEM.DOM.prototype */{
         var _this = this;
 
         /**
-         * DOM-элементы блока
+         * Block's DOM elements
          * @protected
          * @type jQuery
          */
         _this.domElem = domElem;
 
         /**
-         * кэш для имен событий на DOM-элементах
+         * Cache for names of events on DOM elements
          * @private
          * @type Object
          */
         _this._eventNameCache = {};
 
         /**
-         * кэш для элементов
+         * Cache for elements
          * @private
          * @type Object
          */
         _this._elemCache = {};
 
         /**
-         * уникальный идентификатор блока
+         * Unique block ID
          * @private
          * @type String
          */
         uniqIdToBlock[_this._uniqId = params.uniqId || $.identify(_this)] = _this;
 
         /**
-         * флаг необходимости unbind от document и window при уничтожении блока
+         * Flag for whether it's necessary to unbind from the document and window when destroying the block
          * @private
          * @type Boolean
          */
@@ -1720,244 +1832,106 @@ var DOM = BEM.DOM = BEM.decl('i-bem__dom',/** @lends BEM.DOM.prototype */{
     },
 
     /**
-     * Находит блоки внутри (включая контекст) текущего блока или его элементов
+     * Finds blocks inside the current block or its elements (including context)
      * @protected
-     * @param {String|jQuery} [elem] элемент блока
-     * @param {String|Object} block имя или описание (block,modName,modVal) искомого блока
+     * @param {String|jQuery} [elem] Block element
+     * @param {String|Object} block Name or description (block,modName,modVal) of the block to find
      * @returns {BEM[]}
      */
     findBlocksInside : function(elem, block) {
 
-        return this._doBlocksMethod(
-            this._buildFindBlocksParams('find', elem, block));
+        return this._findBlocks('find', elem, block);
 
     },
 
     /**
-     * Находит первый блок внутри (включая контекст) текущего блока или его элементов
+     * Finds the first block inside the current block or its elements (including context)
      * @protected
-     * @param {String|jQuery} [elem] элемент блока
-     * @param {String|Object} block имя или описание (block,modName,modVal) искомого блока
+     * @param {String|jQuery} [elem] Block element
+     * @param {String|Object} block Name or description (block,modName,modVal) of the block to find
      * @returns {BEM}
      */
     findBlockInside : function(elem, block) {
 
-        return this._doBlocksMethod(
-            this._buildFindBlocksParams('find', elem, block, true));
+        return this._findBlocks('find', elem, block, true);
 
     },
 
     /**
-     * Находит блоки снаружи (включая контекст) текущего блока или его элементов
+     * Finds blocks outside the current block or its elements (including context)
      * @protected
-     * @param {String|jQuery} [elem] элемент блока
-     * @param {String|Object} block имя или описание (block,modName,modVal) искомого блока
+     * @param {String|jQuery} [elem] Block element
+     * @param {String|Object} block Name or description (block,modName,modVal) of the block to find
      * @returns {BEM[]}
      */
     findBlocksOutside : function(elem, block) {
 
-        return this._doBlocksMethod(
-            this._buildFindBlocksParams('parents', elem, block));
+        return this._findBlocks('parents', elem, block);
 
     },
 
     /**
-     * Находит первый блок снаружи (включая контекст) текущего блока или его элементов
+     * Finds the first block outside the current block or its elements (including context)
      * @protected
-     * @param {String|jQuery} [elem] элемент блока
-     * @param {String|Object} block имя или описание (block,modName,modVal) искомого блока
+     * @param {String|jQuery} [elem] Block element
+     * @param {String|Object} block Name or description (block,modName,modVal) of the block to find
      * @returns {BEM}
      */
     findBlockOutside : function(elem, block) {
 
-        return this._doBlocksMethod(
-            this._buildFindBlocksParams('closest', elem, block))[0] || null;
+        return this._findBlocks('closest', elem, block)[0] || null;
 
     },
 
     /**
-     * Находит блоки на DOM-элементах текущего блока или его элементов
+     * Finds blocks on DOM elements of the current block or its elements
      * @protected
-     * @param {String|jQuery} [elem] элемент блока
-     * @param {String|Object} block имя или описание (block,modName,modVal) искомого блока
+     * @param {String|jQuery} [elem] Block element
+     * @param {String|Object} block Name or description (block,modName,modVal) of the block to find
      * @returns {BEM[]}
      */
     findBlocksOn : function(elem, block) {
 
-        return this._doBlocksMethod(
-            this._buildFindBlocksParams('', elem, block));
+        return this._findBlocks('', elem, block);
 
     },
 
     /**
-     * Находит первый блок на DOM-элементах текущего блока или его элементов
+     * Finds the first block on DOM elements of the current block or its elements
      * @protected
-     * @param {String|jQuery} [elem] элемент блока
-     * @param {String|Object} block имя или описание (block,modName,modVal) искомого блока
+     * @param {String|jQuery} [elem] Block element
+     * @param {String|Object} block Name or description (block,modName,modVal) of the block to find
      * @returns {BEM}
      */
     findBlockOn : function(elem, block) {
 
-        return this._doBlocksMethod(
-            this._buildFindBlocksParams('', elem, block, true));
+        return this._findBlocks('', elem, block, true);
 
     },
 
-    /**
-     * Хелпер для маппинга аргументов поиска в хэш параметров для вызова
-     * @private
-     * @param {String} select возможные значения: 'find', 'closest', ''
-     * @param {String|jQuery|undefined} elem элемент блока
-     * @param {String|Object} block имя или описание (block,modName,modVal) искомого блока
-     * @returns {Object}
-     */
-    _buildFindBlocksParams : function(select, elem, block, onlyFirst) {
+    _findBlocks : function(select, elem, block, onlyFirst) {
 
-        return {
-            select    : select,
-            elem      : block? elem : undefined,
-            block     : block || elem,
-            onlyFirst : onlyFirst
-        };
-
-    },
-
-    /**
-     * Выполняет метод блоков внутри (включая контекст) текущего блока или его элементов
-     * @protected
-     * @param {String|jQuery} [elem] элемент блока
-     * @param {String|Object} block имя или описание (blockName,modName,modVal) искомого блока
-     * @param {String} method имя метода
-     * @param {Array} [args] параметры метода
-     * @returns {Array} результаты вызовов метода
-     */
-    doBlocksMethodInside : function(elem, block, method, args) {
-
-        return this._doBlocksMethod(
-            this._buildDoBlocksMethodParams('find', elem, block, method, args));
-
-    },
-
-    /**
-     * Выполняет метод блоков снаружи (включая контекст) текущего блока или его элементов
-     * @protected
-     * @param {String|jQuery} [elem] элемент блока
-     * @param {String|Object} block имя или описание (blockName,modName,modVal) искомого блока
-     * @param {String} method имя метода
-     * @param {Array} [args] параметры метода
-     * @returns {Array} результаты вызовов метода
-     */
-    doBlocksMethodOutside : function(elem, block, method, args) {
-
-        return this._doBlocksMethod(
-            this._buildDoBlocksMethodParams('closest', elem, block, method, args));
-
-    },
-
-    /**
-     * Выполняет метод блоков на DOM-элементах текущего блока или его элементов
-     * @protected
-     * @param {String|jQuery} [elem] элемент блока
-     * @param {String|Object} block имя или описание (blockName,modName,modVal) искомого блока
-     * @param {String} method имя метода
-     * @param {Array} [args] параметры метода
-     * @returns {Array} результаты вызовов метода
-     */
-    doBlocksMethodOn : function(elem, block, method, args) {
-
-        return this._doBlocksMethod(
-            this._buildDoBlocksMethodParams('', elem, block, method, args));
-
-    },
-
-    /**
-     * Выполняет метод блоков
-     * @protected
-     * @param {BEM[]} blocks блоки
-     * @param {String} method имя метода
-     * @param {Array} [args] параметры метода
-     * @returns {Array} результаты вызовов метода
-     */
-    doBlocksMethod : function(blocks, method, args) {
-
-        return this._doBlocksMethod({
-            blocks  : blocks,
-            method  : method,
-            args    : args
-        });
-
-    },
-
-    /**
-     * Хелпер для маппинга аргументов вызова методов в хэш параметров для вызова
-     * @private
-     * @param {String} select возможные значения: 'find', 'closest', ''
-     * @param {String|jQuery|undefined} elem элемент блока
-     * @param {String|Object} block имя или описание (blockName,modName,modVal) искомого блока
-     * @param {String} method имя метода
-     * @param {Array} [args] параметры метода
-     * @returns {Object}
-     */
-    _buildDoBlocksMethodParams : function(select, elem, block, method, args) {
-
-        var hasElem = typeof method == 'string';
-        return {
-            select : select,
-            elem   : hasElem? elem : undefined,
-            block  : hasElem? block : elem,
-            method : hasElem? method : block,
-            args   : hasElem? args : method
-        };
-
-    },
-
-    /**
-     * Ищет блоки и выполняет заданный метод, если метод не задан, то возвращает блоки
-     * @private
-     * @param {Object} params параметры
-     * @returns {BEM[]|Array} блоки или результаты вызовов метода
-     */
-    _doBlocksMethod : function(params) {
-
-        var _this = this;
-
-        if(params.blocks) {
-            return $.map(params.blocks, function(block) {
-                return _this._doBlockMethod(block, params.method, params.args);
-            });
+        if(!block) {
+            block = elem;
+            elem = undefined;
         }
 
-        var ctxElem = params.elem?
-                (typeof params.elem == 'string'? this.findElem(params.elem) : params.elem) :
+        var ctxElem = elem?
+                (typeof elem == 'string'? this.findElem(elem) : elem) :
                 this.domElem,
-            isSimpleBlock = typeof params.block == 'string',
-            blockDesc = params.block,
-            blockName = isSimpleBlock? blockDesc : (blockDesc.block || blockDesc.blockName),
+            isSimpleBlock = typeof block == 'string',
+            blockName = isSimpleBlock? block : (block.block || block.blockName),
             selector = '.' +
                 (isSimpleBlock?
                     buildClass(blockName) :
-                    buildClass(blockName, blockDesc.modName, blockDesc.modVal)) +
-                (params.onlyFirst? ':first' : ''),
+                    buildClass(blockName, block.modName, block.modVal)) +
+                (onlyFirst? ':first' : ''),
             domElems = ctxElem.filter(selector);
 
-        params.select && (domElems = domElems.add(ctxElem[params.select](selector)));
+        select && (domElems = domElems.add(ctxElem[select](selector)));
 
-        if(params.onlyFirst) {
-            return domElems[0]?
-                this._doBlockMethod(
-                    initBlock(blockName, domElems.eq(0), true),
-                    params.method,
-                    params.args) :
-                null;
-        }
-
-        if(params.method) {
-            return $.map(domElems, function(domElem) {
-                return _this._doBlockMethod(
-                    initBlock(blockName, $(domElem), true),
-                    params.method,
-                    params.args);
-            });
+        if(onlyFirst) {
+            return domElems[0]? initBlock(blockName, domElems.eq(0), true) : null;
         }
 
         var res = [],
@@ -1976,24 +1950,11 @@ var DOM = BEM.DOM = BEM.decl('i-bem__dom',/** @lends BEM.DOM.prototype */{
     },
 
     /**
-     * Выполняет заданный метод, если метод не задан, то возвращает блок
-     * @private
-     * @param {BEM} block блок
-     * @param {String} method имя метода
-     * @param {Array} args параметры метода
-     */
-    _doBlockMethod : function(block, method, args) {
-
-        return method? block[method].apply(block, args || []) : block;
-
-    },
-
-    /**
-     * Добавляет обработчик события произвольного DOM-элемента
+     * Adds an event handler for any DOM element
      * @protected
-     * @param {jQuery} domElem DOM-элемент, на котором будет слушаться событие
-     * @param {String|Object} event имя события или объект события
-     * @param {Function} fn функция-обработчик, будет выполнена в контексте блока
+     * @param {jQuery} domElem DOM element where the event will be listened for
+     * @param {String|Object} event Event name or event object
+     * @param {Function} fn Handler function, which will be executed in the block's context
      * @returns {BEM}
      */
     bindToDomElem : function(domElem, event, fn) {
@@ -2017,10 +1978,10 @@ var DOM = BEM.DOM = BEM.decl('i-bem__dom',/** @lends BEM.DOM.prototype */{
     },
 
     /**
-     * Добавляет обработчик события на document
+     * Adds an event handler to the document
      * @protected
-     * @param {String} event имя события
-     * @param {Function} fn функция-обработчик, будет выполнена в контексте блока
+     * @param {String} event Event name
+     * @param {Function} fn Handler function, which will be executed in the block's context
      * @returns {BEM}
      */
     bindToDoc : function(event, fn) {
@@ -2031,10 +1992,10 @@ var DOM = BEM.DOM = BEM.decl('i-bem__dom',/** @lends BEM.DOM.prototype */{
     },
 
     /**
-     * Добавляет обработчик события на window
+     * Adds an event handler to the window
      * @protected
-     * @param {String} event имя события
-     * @param {Function} fn функция-обработчик, будет выполнена в контексте блока
+     * @param {String} event Event name
+     * @param {Function} fn Handler function, which will be executed in the block's context
      * @returns {BEM}
      */
     bindToWin : function(event, fn) {
@@ -2045,16 +2006,16 @@ var DOM = BEM.DOM = BEM.decl('i-bem__dom',/** @lends BEM.DOM.prototype */{
     },
 
     /**
-     * Добавляет обработчик события на основные DOM-элементы блока или его вложенные элементы
+     * Adds an event handler to the block's main DOM elements or its nested elements
      * @protected
-     * @param {jQuery|String} [elem] элемент
-     * @param {String} event имя события
-     * @param {Function} fn функция-обработчик, будет выполнена в контексте блока
+     * @param {jQuery|String} [elem] Element
+     * @param {String} event Event name
+     * @param {Function} fn Handler function, which will be executed in the block's context
      * @returns {BEM}
      */
     bindTo : function(elem, event, fn) {
 
-        if(!event || $.isFunction(event)) { // если нет элемента
+        if(!event || $.isFunction(event)) { // if there is no element
             fn = event;
             event = elem;
             elem = this.domElem;
@@ -2067,10 +2028,10 @@ var DOM = BEM.DOM = BEM.decl('i-bem__dom',/** @lends BEM.DOM.prototype */{
     },
 
     /**
-     * Удаляет обработчики события произвольного DOM-элемента
+     * Removes event handlers from any DOM element
      * @protected
-     * @param {jQuery} domElem DOM-элемент, на котором будет слушаться событие
-     * @param {String} event имя события
+     * @param {jQuery} domElem DOM element where the event was being listened for
+     * @param {String} event Event name
      * @returns {BEM}
      */
     unbindFromDomElem : function(domElem, event) {
@@ -2081,9 +2042,9 @@ var DOM = BEM.DOM = BEM.decl('i-bem__dom',/** @lends BEM.DOM.prototype */{
     },
 
     /**
-     * Удаляет обработчик события у document
+     * Removes event handler from document
      * @protected
-     * @param {String} event имя события
+     * @param {String} event Event name
      * @returns {BEM}
      */
     unbindFromDoc : function(event) {
@@ -2093,9 +2054,9 @@ var DOM = BEM.DOM = BEM.decl('i-bem__dom',/** @lends BEM.DOM.prototype */{
     },
 
     /**
-     * Удаляет обработчик события у document
+     * Removes event handler from window
      * @protected
-     * @param {String} event имя события
+     * @param {String} event Event name
      * @returns {BEM}
      */
     unbindFromWin : function(event) {
@@ -2105,10 +2066,10 @@ var DOM = BEM.DOM = BEM.decl('i-bem__dom',/** @lends BEM.DOM.prototype */{
     },
 
     /**
-     * Удаляет обработчики события из основных DOM-элементы блока или его вложенных элементов
+     * Removes event handlers from the block's main DOM elements or its nested elements
      * @protected
-     * @param {jQuery|String} [elem] вложенный элемент
-     * @param {String} event имя события
+     * @param {jQuery|String} [elem] Nested element
+     * @param {String} event Event name
      * @returns {BEM}
      */
     unbindFrom : function(elem, event) {
@@ -2125,16 +2086,16 @@ var DOM = BEM.DOM = BEM.decl('i-bem__dom',/** @lends BEM.DOM.prototype */{
     },
 
     /**
-     * Строит полное имя события
+     * Builds a full name for an event
      * @private
-     * @param {String} event имя события
+     * @param {String} event Event name
      * @returns {String}
      */
     _buildEventName : function(event) {
 
         var _this = this;
         return event.indexOf(' ') > 1?
-            $.map(event.split(' '), function(e) {
+            event.split(' ').map(function(e) {
                 return _this._buildOneEventName(e);
             }).join(' ') :
             _this._buildOneEventName(event);
@@ -2142,9 +2103,9 @@ var DOM = BEM.DOM = BEM.decl('i-bem__dom',/** @lends BEM.DOM.prototype */{
     },
 
     /**
-     * Строит полное имя для одного события
+     * Builds a full name for a single event
      * @private
-     * @param {String} event имя события
+     * @param {String} event Event name
      * @returns {String}
      */
     _buildOneEventName : function(event) {
@@ -2160,17 +2121,17 @@ var DOM = BEM.DOM = BEM.decl('i-bem__dom',/** @lends BEM.DOM.prototype */{
 
         var lego = '.bem_' + _this.__self._name;
 
-        return eventNameCache[event] = $.map(event.split('.'), function(e, i) {
+        return eventNameCache[event] = event.split('.').map(function(e, i) {
             return i == 0? e + lego : lego + '_' + e;
         }).join('') + uniq;
 
     },
 
     /**
-     * Запускает обработчики события у блока и обработчики live-событий
+     * Triggers block event handlers and live event handlers
      * @protected
-     * @param {String} e имя события
-     * @param {Object} [data] дополнительные данные
+     * @param {String} e Event name
+     * @param {Object} [data] Additional information
      * @returns {BEM}
      */
     trigger : function(e, data) {
@@ -2215,11 +2176,11 @@ var DOM = BEM.DOM = BEM.decl('i-bem__dom',/** @lends BEM.DOM.prototype */{
     },
 
     /**
-     * Устанавливает модификатор у блока/вложенного элемента
+     * Sets a modifier for a block/nested element
      * @protected
-     * @param {jQuery} [elem] вложенный элемент
-     * @param {String} modName имя модификатора
-     * @param {String} modVal значение модификатора
+     * @param {jQuery} [elem] Nested element
+     * @param {String} modName Modifier name
+     * @param {String} modVal Modifier value
      * @returns {BEM}
      */
     setMod : function(elem, modName, modVal) {
@@ -2238,12 +2199,12 @@ var DOM = BEM.DOM = BEM.decl('i-bem__dom',/** @lends BEM.DOM.prototype */{
     },
 
     /**
-     * Извлекает значение модификатора из CSS-класса DOM-ноды
+     * Retrieves modifier value from the DOM node's CSS class
      * @private
-     * @param {String} modName имя модификатора
-     * @param {jQuery} [elem] вложенный элемент
-     * @param {String} [elemName] имя вложенного элемента
-     * @returns {String} значение модификатора
+     * @param {String} modName Modifier name
+     * @param {jQuery} [elem] Nested element
+     * @param {String} [elemName] Name of the nested element
+     * @returns {String} Modifier value
      */
     _extractModVal : function(modName, elem, elemName) {
 
@@ -2259,11 +2220,11 @@ var DOM = BEM.DOM = BEM.decl('i-bem__dom',/** @lends BEM.DOM.prototype */{
     },
 
     /**
-     * Извлекает имя/значение списка модификаторов
+     * Retrieves a name/value list of modifiers
      * @private
-     * @param {Array} [modNames] имена модификаторов
-     * @param {Object} [elem] элемент
-     * @returns {Object} хэш значений модификаторов по имени
+     * @param {Array} [modNames] Names of modifiers
+     * @param {Object} [elem] Element
+     * @returns {Object} Hash of modifier values by names
      */
     _extractMods : function(modNames, elem) {
 
@@ -2271,19 +2232,19 @@ var DOM = BEM.DOM = BEM.decl('i-bem__dom',/** @lends BEM.DOM.prototype */{
             extractAll = !modNames.length,
             countMatched = 0;
 
-        $.each((elem || this.domElem)[0].className
+        ((elem || this.domElem)[0].className
             .match(this.__self._buildModValRE(
                 '(' + (extractAll? NAME_PATTERN : modNames.join('|')) + ')',
                 elem,
-                'g')) || [], function(i, className) {
-                    var iModVal = (className = $.trim(className)).lastIndexOf(MOD_DELIM),
+                'g')) || []).forEach(function(className) {
+                    var iModVal = (className = className.trim()).lastIndexOf(MOD_DELIM),
                         iModName = className.substr(0, iModVal - 1).lastIndexOf(MOD_DELIM);
                     res[className.substr(iModName + 1, iModVal - iModName - 1)] = className.substr(iModVal + 1);
                     ++countMatched;
                 });
 
-        // пустые значения модификаторов не отражены в классах, нужно их заполнить пустыми значения
-        countMatched < modNames.length && $.each(modNames, function(i, modName) {
+        // empty modifier values are not reflected in classes; they must be filled with empty values
+        countMatched < modNames.length && modNames.forEach(function(modName) {
             modName in res || (res[modName] = '');
         });
 
@@ -2292,14 +2253,15 @@ var DOM = BEM.DOM = BEM.decl('i-bem__dom',/** @lends BEM.DOM.prototype */{
     },
 
     /**
-     * Уставливает CSS-класс модификатора на DOM-элемент блока или вложенный элемент
+     * Sets a modifier's CSS class for a block's DOM element or nested element
      * @private
-     * @param {String} modName имя модификатора
-     * @param {String} modVal значение модификатора
-     * @param {jQuery} [elem] DOM-элемент
-     * @param {String} [elemName] имя элемента
+     * @param {String} modName Modifier name
+     * @param {String} modVal Modifier value
+     * @param {String} oldModVal Old modifier value
+     * @param {jQuery} [elem] Element
+     * @param {String} [elemName] Element name
      */
-    _afterSetMod : function(modName, modVal, elem, elemName) {
+    _afterSetMod : function(modName, modVal, oldModVal, elem, elemName) {
 
         var _self = this.__self,
             classPrefix = _self._buildModClassPrefix(modName, elemName),
@@ -2314,22 +2276,25 @@ var DOM = BEM.DOM = BEM.decl('i-bem__dom',/** @lends BEM.DOM.prototype */{
                     (needDel? '' : '$1' + classPrefix + modVal) + '$3') :
                 needDel || $(this).addClass(classPrefix + modVal);
         });
-        elemName && this.dropElemCache(elemName, modName, modVal);
+
+        elemName && this
+            .dropElemCache(elemName, modName, oldModVal)
+            .dropElemCache(elemName, modName, modVal);
 
     },
 
     /**
-     * Находит вложенные в блок элементы
+     * Finds elements nested in a block
      * @protected
-     * @param {String|jQuery} [ctx=this.domElem] элемент, на котором проходит поиск
-     * @param {String} names имя (или через пробел имена) вложенного элемента
-     * @param {String} [modName] имя модификатора
-     * @param {String} [modVal] значение модификатора
-     * @returns {jQuery} DOM-элементы
+     * @param {String|jQuery} [ctx=this.domElem] Element where search is being performed
+     * @param {String} names Nested element name (or names separated by spaces)
+     * @param {String} [modName] Modifier name
+     * @param {String} [modVal] Modifier value
+     * @returns {jQuery} DOM elements
      */
     findElem : function(ctx, names, modName, modVal) {
 
-        if(arguments.length % 2) { // если кол-во аргументов один или три
+        if(arguments.length % 2) { // if the number of arguments is one or three
             modVal = modName;
             modName = names;
             names = ctx;
@@ -2340,7 +2305,7 @@ var DOM = BEM.DOM = BEM.decl('i-bem__dom',/** @lends BEM.DOM.prototype */{
 
         var _self = this.__self,
             selector = '.' +
-                $.map(names.split(' '), function(name) {
+                names.split(' ').map(function(name) {
                     return buildClass(_self._name, name, modName, modVal);
                 }).join(',.');
         return findDomElem(ctx, selector);
@@ -2348,12 +2313,12 @@ var DOM = BEM.DOM = BEM.decl('i-bem__dom',/** @lends BEM.DOM.prototype */{
     },
 
     /**
-     * Находит вложенные в блок элементы
+     * Finds elements nested in a block
      * @protected
-     * @param {String} name имя вложенного элемента
-     * @param {String} [modName] имя модификатора
-     * @param {String} [modVal] значение модификатора
-     * @returns {jQuery} DOM-элементы
+     * @param {String} name Nested element name
+     * @param {String} [modName] Modifier name
+     * @param {String} [modVal] Modifier value
+     * @returns {jQuery} DOM elements
      */
     _elem : function(name, modName, modVal) {
 
@@ -2370,12 +2335,12 @@ var DOM = BEM.DOM = BEM.decl('i-bem__dom',/** @lends BEM.DOM.prototype */{
     },
 
     /**
-     * Ленивый поиск вложенных в блок элементы (результат кэшируется)
+     * Lazy search for elements nested in a block (caches results)
      * @protected
-     * @param {String} names имя (или через пробел имена) вложенных элементов
-     * @param {String} [modName] имя модификатора
-     * @param {String} [modVal] значение модификатора
-     * @returns {jQuery} DOM-элементы
+     * @param {String} names Nested element name (or names separated by spaces)
+     * @param {String} [modName] Modifier name
+     * @param {String} [modVal] Modifier value
+     * @returns {jQuery} DOM elements
      */
     elem : function(names, modName, modVal) {
 
@@ -2390,19 +2355,19 @@ var DOM = BEM.DOM = BEM.decl('i-bem__dom',/** @lends BEM.DOM.prototype */{
 
         var res = $([]),
             _this = this;
-        $.each(names.split(' '), function() {
-            res = res.add(_this._elem(this, modName, modVal));
+        names.split(' ').forEach(function(name) {
+            res = res.add(_this._elem(name, modName, modVal));
         });
         return res;
 
     },
 
     /**
-     * Сброс кэша для элементов
+     * Clearing the cache for elements
      * @protected
-     * @param {String} names имя (или через пробел имена) вложенных элементов
-     * @param {String} [modName] имя модификатора
-     * @param {String} [modVal] значение модификатора
+     * @param {String} names Nested element name (or names separated by spaces)
+     * @param {String} [modName] Modifier name
+     * @param {String} [modVal] Modifier value
      * @returns {BEM}
      */
     dropElemCache : function(names, modName, modVal) {
@@ -2412,7 +2377,7 @@ var DOM = BEM.DOM = BEM.decl('i-bem__dom',/** @lends BEM.DOM.prototype */{
                 modPostfix = buildModPostfix(modName, modVal);
             names.indexOf(' ') < 0?
                 delete _this._elemCache[names + modPostfix] :
-                $.each(names.split(' '), function(i, name) {
+                names.split(' ').forEach(function(name) {
                     delete _this._elemCache[name + modPostfix];
                 });
         } else {
@@ -2424,9 +2389,9 @@ var DOM = BEM.DOM = BEM.decl('i-bem__dom',/** @lends BEM.DOM.prototype */{
     },
 
     /**
-     * Извлекает параметры элемента блока
-     * @param {String|jQuery} elem элемент
-     * @returns {Object} параметры
+     * Retrieves parameters of a block element
+     * @param {String|jQuery} elem Element
+     * @returns {Object} Parameters
      */
     elemParams : function(elem) {
 
@@ -2443,9 +2408,9 @@ var DOM = BEM.DOM = BEM.decl('i-bem__dom',/** @lends BEM.DOM.prototype */{
     },
 
     /**
-     * Проверяет, находится ли DOM-элемент в блоке
+     * Checks whether a DOM element is in a block
      * @protected
-     * @param {jQuery} domElem DOM-элемент
+     * @param {jQuery} domElem DOM element
      * @returns {Boolean}
      */
     containsDomElem : function(domElem) {
@@ -2461,10 +2426,10 @@ var DOM = BEM.DOM = BEM.decl('i-bem__dom',/** @lends BEM.DOM.prototype */{
     },
 
     /**
-     * Строит CSS-селектор, соответствующий блоку/элементу и модификатору
-     * @param {String} [elem] имя элемент
-     * @param {String} [modName] имя модификатора
-     * @param {String} [modVal] значение модификатора
+     * Builds a CSS selector corresponding to a block/element and modifier
+     * @param {String} [elem] Element name
+     * @param {String} [modName] Modifier name
+     * @param {String} [modVal] Modifier value
      * @returns {String}
      */
     buildSelector : function(elem, modName, modVal) {
@@ -2474,8 +2439,8 @@ var DOM = BEM.DOM = BEM.decl('i-bem__dom',/** @lends BEM.DOM.prototype */{
     },
 
     /**
-     * Удаляет блок
-     * @param {Boolean} [keepDOM=false] нужно ли оставлять DOM-ноды блока в документе
+     * Deletes a block
+     * @param {Boolean} [keepDOM=false] Whether to keep the block's DOM nodes in the document
      */
     destruct : function(keepDOM) {
 
@@ -2487,11 +2452,20 @@ var DOM = BEM.DOM = BEM.decl('i-bem__dom',/** @lends BEM.DOM.prototype */{
         _this._needSpecialUnbind && _self.doc.add(_self.win).unbind('.' + _this._uniqId);
 
         _this.dropElemCache().domElem.each(function(i, domNode) {
-            $.each(getParams(domNode), function(blockName, blockParams) {
+            var params = getParams(domNode);
+            $.each(params, function(blockName, blockParams) {
                 var block = uniqIdToBlock[blockParams.uniqId];
-                block && !block._isDestructing && block.destruct();
+                if(block) {
+                    if(!block._isDestructing) {
+                        removeDomNodeFromBlock(block, domNode);
+                        delete params[blockName];
+                    }
+                }
+                else {
+                    delete uniqIdToDomElems[blockParams.uniqId];
+                }
             });
-            cleanupDomNode(domNode);
+            $.isEmptyObject(params) && cleanupDomNode(domNode);
         });
 
         keepDOM || _this.domElem.remove();
@@ -2507,24 +2481,24 @@ var DOM = BEM.DOM = BEM.decl('i-bem__dom',/** @lends BEM.DOM.prototype */{
 }, /** @lends BEM.DOM */{
 
     /**
-     * Шорткат для документа
+     * Document shortcut
      * @protected
      * @type jQuery
      */
     doc : doc,
 
     /**
-     * Шорткат для window
+     * Window shortcut
      * @protected
      * @type jQuery
      */
     win : win,
 
     /**
-     * Осуществляет обработку live-свойств блока
+     * Processes a block's live properties
      * @private
-     * @param {Boolean} [heedLive=false] нужно ли учитывать то, что блок обрабатывал уже свои live-свойства
-     * @returns {Boolean} является ли блок live-блоком
+     * @param {Boolean} [heedLive=false] Whether to take into account that the block already processed its live properties
+     * @returns {Boolean} Whether the block is a live block
      */
     _processLive : function(heedLive) {
 
@@ -2549,11 +2523,11 @@ var DOM = BEM.DOM = BEM.decl('i-bem__dom',/** @lends BEM.DOM.prototype */{
     },
 
     /**
-     * Инициализирует блоки на фрагменте DOM-дерева
+     * Initializes blocks on a fragment of the DOM tree
      * @static
      * @protected
-     * @param {jQuery} [ctx=document] корневая DOM-нода
-     * @returns {jQuery} ctx контекст инициализации
+     * @param {jQuery} [ctx=document] Root DOM node
+     * @returns {jQuery} ctx Initialization context
      */
     init : function(ctx, callback, callbackCtx) {
 
@@ -2573,7 +2547,7 @@ var DOM = BEM.DOM = BEM.decl('i-bem__dom',/** @lends BEM.DOM.prototype */{
                 callback.call(callbackCtx || this, ctx);
             });
 
-        // чтобы инициализация была полностью синхронной
+        // makes initialization completely synchronous
         this._runAfterCurrentEventFns();
 
         return ctx;
@@ -2581,12 +2555,12 @@ var DOM = BEM.DOM = BEM.decl('i-bem__dom',/** @lends BEM.DOM.prototype */{
     },
 
     /**
-     * Уничтожает блоки на фрагменте DOM-дерева
+     * Destroys blocks on a fragment of the DOM tree
      * @static
      * @protected
-     * @param {Boolean} [keepDOM=false] нужно ли оставлять DOM-ноды в документе
-     * @param {jQuery} ctx корневая DOM-нода
-     * @param {Boolean} [excludeSelf=false] не учитывать контекст
+     * @param {Boolean} [keepDOM=false] Whether to keep DOM nodes in the document
+     * @param {jQuery} ctx Root DOM node
+     * @param {Boolean} [excludeSelf=false] Exclude the context
      */
     destruct : function(keepDOM, ctx, excludeSelf) {
 
@@ -2596,27 +2570,34 @@ var DOM = BEM.DOM = BEM.decl('i-bem__dom',/** @lends BEM.DOM.prototype */{
             keepDOM = undefined;
         }
 
-        findDomElem(ctx, '.i-bem', excludeSelf).each(function() {
-            $.each(getParams(this), function(blockName, blockParams) {
+        findDomElem(ctx, '.i-bem', excludeSelf).each(function(i, domNode) {
+            var params = getParams(this);
+            $.each(params, function(blockName, blockParams) {
                 if(blockParams.uniqId) {
                     var block = uniqIdToBlock[blockParams.uniqId];
-                    block && block.destruct(true);
+                    if(block) {
+                        removeDomNodeFromBlock(block, domNode);
+                        delete params[blockName];
+                    }
+                    else {
+                        delete uniqIdToDomElems[blockParams.uniqId];
+                    }
                 }
             });
-            cleanupDomNode(this);
+            $.isEmptyObject(params) && cleanupDomNode(this);
         });
         keepDOM || (excludeSelf? ctx.empty() : ctx.remove());
 
     },
 
     /**
-     * Заменяет фрагмент DOM-дерева внутри контекста, уничтожая старые блоки и инициализируя новые
+     * Replaces a fragment of the DOM tree inside the context, destroying old blocks and intializing new ones
      * @static
      * @protected
-     * @param {jQuery} ctx корневая DOM-нода
-     * @param {jQuery|String} content новый контент
-     * @param {Function} [callback] обработчик, вызываемый после инициализации
-     * @param {Object} [callbackCtx] контекст обработчика
+     * @param {jQuery} ctx Root DOM node
+     * @param {jQuery|String} content New content
+     * @param {Function} [callback] Handler to be called after initialization
+     * @param {Object} [callbackCtx] Handler's context
      */
     update : function(ctx, content, callback, callbackCtx) {
 
@@ -2626,10 +2607,66 @@ var DOM = BEM.DOM = BEM.decl('i-bem__dom',/** @lends BEM.DOM.prototype */{
     },
 
     /**
-     * Строит полное имя live-события
+     * Changes a fragment of the DOM tree including the context and initializes blocks.
+     * @param {jQuery} ctx Root DOM node
+     * @param {jQuery|String} content Content to be added
+     */
+    replace : function(ctx, content) {
+
+        this.destruct(true, ctx);
+        this.init($(content).replaceAll(ctx));
+
+    },
+
+    /**
+     * Adds a fragment of the DOM tree at the end of the context and initializes blocks
+     * @param {jQuery} ctx Root DOM node
+     * @param {jQuery|String} content Content to be added
+     */
+    append : function(ctx, content) {
+
+        this.init($(content).appendTo(ctx));
+
+    },
+
+    /**
+     * Adds a fragment of the DOM tree at the beginning of the context and initializes blocks
+     * @param {jQuery} ctx Root DOM node
+     * @param {jQuery|String} content Content to be added
+     */
+    prepend : function(ctx, content) {
+
+        this.init($(content).prependTo(ctx));
+
+    },
+
+    /**
+     * Adds a fragment of the DOM tree before the context and initializes blocks
+     * @param {jQuery} ctx Contextual DOM node
+     * @param {jQuery|String} content Content to be added
+     */
+    before : function(ctx, content) {
+
+        this.init($(content).insertBefore(ctx));
+
+    },
+
+    /**
+     * Adds a fragment of the DOM tree after the context and initializes blocks
+     * @param {jQuery} ctx Contextual DOM node
+     * @param {jQuery|String} content Content to be added
+     */
+    after : function(ctx, content) {
+
+        this.init($(content).insertAfter(ctx));
+
+    },
+
+    /**
+     * Builds a full name for a live event
      * @static
      * @private
-     * @param {String} e имя события
+     * @param {String} e Event name
      * @returns {String}
      */
     _buildCtxEventName : function(e) {
@@ -2642,7 +2679,7 @@ var DOM = BEM.DOM = BEM.decl('i-bem__dom',/** @lends BEM.DOM.prototype */{
 
         var _this = this;
         if(e.indexOf(' ') > -1) {
-            $.each(e.split(' '), function(i, e) {
+            e.split(' ').forEach(function(e) {
                 _this._liveClassBind(className, e, callback, invokeOnInit);
             });
         }
@@ -2721,18 +2758,18 @@ var DOM = BEM.DOM = BEM.decl('i-bem__dom',/** @lends BEM.DOM.prototype */{
                     ((e.data || (e.data = {})).domElem = $(this)).closest(_this.buildSelector()),
                     true ],
                 block = initBlock.apply(null, invokeOnInit? args.concat([callback, e]) : args);
-            block && (invokeOnInit || callback.apply(block, arguments));
+            block && (invokeOnInit || (callback && callback.apply(block, arguments)));
         };
 
     },
 
     /**
-     * Хелпер для live-инициализации по событию на DOM-элементах блока или его элементов
+     * Helper for live initialization for an event on DOM elements of a block or its elements
      * @static
      * @protected
-     * @param {String} [elemName] имя элемента или элементов (через пробел)
-     * @param {String} event имя события
-     * @param {Function} callback обработчик, вызываемый после успешной инициализации
+     * @param {String} [elemName] Element name or names (separated by spaces)
+     * @param {String} event Event name
+     * @param {Function} [callback] Handler to call after successful initialization
      */
     liveInitOnEvent : function(elemName, event, callback) {
 
@@ -2741,16 +2778,16 @@ var DOM = BEM.DOM = BEM.decl('i-bem__dom',/** @lends BEM.DOM.prototype */{
     },
 
     /**
-     * Хелпер для подписки на live-события на DOM-элементах блока или его элементов
+     * Helper for subscribing to live events on DOM elements of a block or its elements
      * @static
      * @protected
-     * @param {String|Object} [to] описание (объект с modName, modVal, elem) или имя элемента или элементов (через пробел)
-     * @param {String} event имя события
-     * @param {Function} callback обработчик
+     * @param {String|Object} [to] Description (object with modName, modVal, elem) or name of the element or elements (space-separated)
+     * @param {String} event Event name
+     * @param {Function} [callback] Handler
      */
     liveBindTo : function(to, event, callback, invokeOnInit) {
 
-        if(!callback) {
+        if(!event || $.isFunction(event)) {
             callback = event;
             event = to;
             to = undefined;
@@ -2765,7 +2802,7 @@ var DOM = BEM.DOM = BEM.decl('i-bem__dom',/** @lends BEM.DOM.prototype */{
         var _this = this;
 
         if(to.elem && to.elem.indexOf(' ') > 1) {
-            $.each(to.elem.split(' '), function(i, elem) {
+            to.elem.split(' ').forEach(function(elem) {
                 _this._liveClassBind(
                     buildClass(_this._name, elem, to.modName, to.modVal),
                     event,
@@ -2784,19 +2821,19 @@ var DOM = BEM.DOM = BEM.decl('i-bem__dom',/** @lends BEM.DOM.prototype */{
     },
 
     /**
-     * Хелпер для отписки от live-событий на DOM-элементах блока или его элементов
+     * Helper for unsubscribing from live events on DOM elements of a block or its elements
      * @static
      * @protected
-     * @param {String} [elem] имя элемента или элементов (через пробел)
-     * @param {String} event имя события
-     * @param {Function} [callback] обработчик
+     * @param {String} [elem] Name of the element or elements (space-separated)
+     * @param {String} event Event name
+     * @param {Function} [callback] Handler
      */
     liveUnbindFrom : function(elem, event, callback) {
 
         var _this = this;
 
         if(elem.indexOf(' ') > 1) {
-            $.each(elem.split(' '), function(i, elem) {
+            elem.split(' ').forEach(function(elem) {
                 _this._liveClassUnbind(
                     buildClass(_this._name, elem),
                     event,
@@ -2813,20 +2850,23 @@ var DOM = BEM.DOM = BEM.decl('i-bem__dom',/** @lends BEM.DOM.prototype */{
     },
 
     /**
-     * Хелпер для live-инициализации по инициализации другого блока
+     * Helper for live initialization when a different block is initialized
      * @static
      * @private
-     * @param {String} blockName имя блока, на инициализацию которого нужно реагировать
-     * @param {Function} callback обработчик, вызываемый после успешной инициализации в контексте нового блока
-     * @param {String} findFnName имя метода для поиска
+     * @param {String} event Event name
+     * @param {String} blockName Name of the block that should trigger a reaction when initialized
+     * @param {Function} callback Handler to be called after successful initialization in the new block's context
+     * @param {String} findFnName Name of the method for searching
      */
-    _liveInitOnBlockInit : function(blockName, callback, findFnName) {
+    _liveInitOnBlockEvent : function(event, blockName, callback, findFnName) {
 
         var name = this._name;
-        blocks[blockName].on('init', function(e) {
-            var blocks = e.block[findFnName](name);
-            callback && $.each(blocks, function() {
-                callback.call(this);
+        blocks[blockName].on(event, function(e) {
+            var args = arguments,
+                blocks = e.block[findFnName](name);
+
+            callback && blocks.forEach(function(block) {
+                callback.apply(block, args);
             });
         });
         return this;
@@ -2834,41 +2874,70 @@ var DOM = BEM.DOM = BEM.decl('i-bem__dom',/** @lends BEM.DOM.prototype */{
     },
 
     /**
-     * Хелпер для live-инициализации по инициализации другого блока на DOM-элементе текущего
+     * Helper for live initialization for a different block's event on the current block's DOM element
      * @static
      * @protected
-     * @param {String} blockName имя блока, на инициализацию которого нужно реагировать
-     * @param {Function} callback обработчик, вызываемый после успешной инициализации в контексте нового блока
+     * @param {String} event Event name
+     * @param {String} blockName Name of the block that should trigger a reaction when initialized
+     * @param {Function} callback Handler to be called after successful initialization in the new block's context
+     */
+    liveInitOnBlockEvent : function(event, blockName, callback) {
+
+        return this._liveInitOnBlockEvent(event, blockName, callback, 'findBlocksOn');
+
+    },
+
+    /**
+     * Helper for live initialization for a different block's event inside the current block
+     * @static
+     * @protected
+     * @param {String} event Event name
+     * @param {String} blockName Name of the block that should trigger a reaction when initialized
+     * @param {Function} [callback] Handler to be called after successful initialization in the new block's context
+     */
+    liveInitOnBlockInsideEvent : function(event, blockName, callback) {
+
+        return this._liveInitOnBlockEvent(event, blockName, callback, 'findBlocksOutside');
+
+    },
+
+    /**
+     * Helper for live initialization when a different block is initialized on a DOM element of the current block
+     * @deprecated - use liveInitOnBlockEvent
+     * @static
+     * @protected
+     * @param {String} blockName Name of the block that should trigger a reaction when initialized
+     * @param {Function} callback Handler to be called after successful initialization in the new block's context
      */
     liveInitOnBlockInit : function(blockName, callback) {
 
-        return this._liveInitOnBlockInit(blockName, callback, 'findBlocksOn');
+        return this.liveInitOnBlockEvent('init', blockName, callback);
 
     },
 
     /**
-     * Хелпер для live-инициализации по инициализации другого блока внутри текущего
+     * Helper for live initialization when a different block is initialized inside the current block
+     * @deprecated - use liveInitOnBlockInsideEvent
      * @static
      * @protected
-     * @param {String} blockName имя блока, на инициализацию которого нужно реагировать
-     * @param {Function} [callback] обработчик, вызываемый после успешной инициализации в контексте нового блока
+     * @param {String} blockName Name of the block that should trigger a reaction when initialized
+     * @param {Function} [callback] Handler to be called after successful initialization in the new block's context
      */
     liveInitOnBlockInsideInit : function(blockName, callback) {
 
-        return this._liveInitOnBlockInit(blockName, callback, 'findBlocksOutside');
+        return this.liveInitOnBlockInsideEvent('init', blockName, callback);
 
     },
 
     /**
-     * Добавляет обработчик live-события на блок, с учётом заданного элемента,
-     * внутри которого будет слушаться событие
+     * Adds a live event handler to a block, based on a specified element where the event will be listened for
      * @static
      * @protected
-     * @param {jQuery} [ctx] элемент, внутри которого будет слушаться событие
-     * @param {String} e имя события
-     * @param {Object} [data] дополнительные данные, приходящие в обработчик как e.data
-     * @param {Function} fn обработчик
-     * @param {Object} [fnCtx] контекст обработчика
+     * @param {jQuery} [ctx] The element in which the event will be listened for
+     * @param {String} e Event name
+     * @param {Object} [data] Additional information that the handler gets as e.data
+     * @param {Function} fn Handler
+     * @param {Object} [fnCtx] Handler's context
      */
     on : function(ctx, e, data, fn, fnCtx) {
 
@@ -2879,14 +2948,13 @@ var DOM = BEM.DOM = BEM.decl('i-bem__dom',/** @lends BEM.DOM.prototype */{
     },
 
     /**
-     * Удаляет обработчик live-события у блока, с учётом заданного элемента,
-     * внутри которого слушалось событие
+     * Removes the live event handler from a block, based on a specified element where the event was being listened for 
      * @static
      * @protected
-     * @param {jQuery} [ctx] элемент, внутри которого слушалось событие
-     * @param {String} e имя события
-     * @param {Function} [fn] обработчик
-     * @param {Object} [fnCtx] контекст обработчика
+     * @param {jQuery} [ctx] The element in which the event was being listened for
+     * @param {String} e Event name
+     * @param {Function} [fn] Handler
+     * @param {Object} [fnCtx] Handler context
      */
     un : function(ctx, e, fn, fnCtx) {
 
@@ -2897,16 +2965,15 @@ var DOM = BEM.DOM = BEM.decl('i-bem__dom',/** @lends BEM.DOM.prototype */{
     },
 
     /**
-     * Добавляет обработчик live-события на блок, с учётом заданного элемента,
-     * внутри которого будет слушаться событие
-     * @deprecated использовать on
+     * Adds a live event handler to a block, based on a specified element where the event will be listened for
+     * @deprecated Use on
      * @static
      * @protected
-     * @param {jQuery} ctx элемент, внутри которого будет слушаться событие
-     * @param {String} e имя события
-     * @param {Object} [data] дополнительные данные, приходящие в обработчик как e.data
-     * @param {Function} fn обработчик
-     * @param {Object} [fnCtx] контекст обработчика
+     * @param {jQuery} ctx The element in which the event will be listened for
+     * @param {String} e Event name
+     * @param {Object} [data] Additional information that the handler gets as e.data
+     * @param {Function} fn Handler
+     * @param {Object} [fnCtx] Handler context
      */
     liveCtxBind : function(ctx, e, data, fn, fnCtx) {
 
@@ -2915,15 +2982,14 @@ var DOM = BEM.DOM = BEM.decl('i-bem__dom',/** @lends BEM.DOM.prototype */{
     },
 
     /**
-     * Добавляет обработчик live-события на блок, с учётом заданного элемента,
-     * внутри которого будет слушаться событие
+     * Adds a live event handler to a block, based on a specified element where the event will be listened for
      * @static
      * @private
-     * @param {jQuery} ctx элемент, внутри которого будет слушаться событие
-     * @param {String} e имя события
-     * @param {Object} [data] дополнительные данные, приходящие в обработчик как e.data
-     * @param {Function} fn обработчик
-     * @param {Object} [fnCtx] контекст обработчика
+     * @param {jQuery} ctx The element in which the event will be listened for
+     * @param {String} e  Event name
+     * @param {Object} [data] Additional information that the handler gets as e.data
+     * @param {Function} fn Handler
+     * @param {Object} [fnCtx] Handler context
      */
     _liveCtxBind : function(ctx, e, data, fn, fnCtx) {
 
@@ -2937,7 +3003,7 @@ var DOM = BEM.DOM = BEM.decl('i-bem__dom',/** @lends BEM.DOM.prototype */{
             }
 
             if(e.indexOf(' ') > -1) {
-                $.each(e.split(' '), function(i, e) {
+                e.split(' ').forEach(function(e) {
                     _this._liveCtxBind(ctx, e, data, fn, fnCtx);
                 });
             } else {
@@ -2970,36 +3036,34 @@ var DOM = BEM.DOM = BEM.decl('i-bem__dom',/** @lends BEM.DOM.prototype */{
     },
 
     /**
-     * Удаляет обработчик live-события у блока, с учётом заданного элемента,
-     * внутри которого слушалось событие
-     * @deprecated использовать un
+     * Removes a live event handler from a block, based on a specified element where the event was being listened for
+     * @deprecated Use on
      * @static
      * @protected
-     * @param {jQuery} ctx элемент, внутри которого слушалось событие
-     * @param {String} e имя события
-     * @param {Function} [fn] обработчик
-     * @param {Object} [fnCtx] контекст обработчика
+     * @param {jQuery} ctx The element in which the event was being listened for
+     * @param {String} e Event name
+     * @param {Function} [fn] Handler
+     * @param {Object} [fnCtx] Handler context
      */
     liveCtxUnbind : function(ctx, e, fn, fnCtx) {
 
-        return this._liveCtxBind(ctx, e, fn, fnCtx);
+        return this._liveCtxUnbind(ctx, e, fn, fnCtx);
 
     },
 
     /**
-     * Удаляет обработчик live-события у блока, с учётом заданного элемента,
-     * внутри которого слушалось событие
+     * Removes a live event handler from a block, based on a specified element where the event was being listened for
      * @static
      * @private
-     * @param {jQuery} ctx элемент, внутри которого слушалось событие
-     * @param {String} e имя события
-     * @param {Function} [fn] обработчик
-     * @param {Object} [fnCtx] контекст обработчика
+     * @param {jQuery} ctx The element in which the event was being listened for
+     * @param {String} e Event name
+     * @param {Function} [fn] Handler
+     * @param {Object} [fnCtx] Handler context
      */
     _liveCtxUnbind : function(ctx, e, fn, fnCtx) {
 
         var _this = this,
-            storage = liveEventCtxStorage[e =_this.buildEventName(e)];
+            storage = liveEventCtxStorage[e =_this._buildCtxEventName(e)];
 
         if(storage) {
             ctx.each(function() {
@@ -3021,10 +3085,10 @@ var DOM = BEM.DOM = BEM.decl('i-bem__dom',/** @lends BEM.DOM.prototype */{
     },
 
     /**
-     * Извлекает имя вложенного в блок элемента
+     * Retrieves the name of an element nested in a block
      * @static
      * @private
-     * @param {jQuery} elem вложенный элемент
+     * @param {jQuery} elem Nested element
      * @returns {String|undefined}
      */
     _extractElemNameFrom : function(elem) {
@@ -3037,19 +3101,19 @@ var DOM = BEM.DOM = BEM.decl('i-bem__dom',/** @lends BEM.DOM.prototype */{
     },
 
     /**
-     * Извлекает параметры блока из DOM-элемента
+     * Retrieves block parameters from a DOM element
      * @static
-     * @param {HTMLElement} domNode DOM-нода
+     * @param {HTMLElement} domNode DOM node
      * @returns {Object}
      */
     extractParams : extractParams,
 
     /**
-     * Строит префикс для CSS-класса DOM-элемента или вложенного элемента блока по имени модификатора
+     * Builds a prefix for the CSS class of a DOM element or nested element of the block, based on modifier name
      * @static
      * @private
-     * @param {String} modName имя модификатора
-     * @param {jQuery|String} [elem] элемент
+     * @param {String} modName Modifier name
+     * @param {jQuery|String} [elem] Element
      * @returns {String}
      */
     _buildModClassPrefix : function(modName, elem) {
@@ -3063,12 +3127,12 @@ var DOM = BEM.DOM = BEM.decl('i-bem__dom',/** @lends BEM.DOM.prototype */{
     },
 
     /**
-     * Строит регулярное выражение для извлечения значения модификатора из DOM-элемента или вложенного элемента блока
+     * Builds a regular expression for extracting modifier values from a DOM element or nested element of a block
      * @static
      * @private
-     * @param {String} modName имя модификатора
-     * @param {jQuery|String} [elem] элемент
-     * @param {String} [quantifiers] квантификаторы регулярного выражения
+     * @param {String} modName Modifier name
+     * @param {jQuery|String} [elem] Element
+     * @param {String} [quantifiers] Regular expression quantifiers
      * @returns {RegExp}
      */
     _buildModValRE : function(modName, elem, quantifiers) {
@@ -3078,7 +3142,7 @@ var DOM = BEM.DOM = BEM.decl('i-bem__dom',/** @lends BEM.DOM.prototype */{
     },
 
     /**
-     * Строит регулярное выражение для извлечения имени вложенного в блок элемента
+     * Builds a regular expression for extracting names of elements nested in a block
      * @static
      * @private
      * @returns {RegExp}
@@ -3090,10 +3154,10 @@ var DOM = BEM.DOM = BEM.decl('i-bem__dom',/** @lends BEM.DOM.prototype */{
     },
 
     /**
-     * Строит CSS-селектор, соответствующий блоку/элементу и модификатору
-     * @param {String} [elem] имя элемент
-     * @param {String} [modName] имя модификатора
-     * @param {String} [modVal] значение модификатора
+     * Builds a CSS selector corresponding to the block/element and modifier
+     * @param {String} [elem] Element name
+     * @param {String} [modName] Modifier name
+     * @param {String} [modVal] Modifier value
      * @returns {String}
      */
     buildSelector : function(elem, modName, modVal) {
@@ -3103,7 +3167,7 @@ var DOM = BEM.DOM = BEM.decl('i-bem__dom',/** @lends BEM.DOM.prototype */{
     },
 
     /**
-     * Возвращает инстанс блока по уникальному идентификатору
+     * Returns a block instance by unique ID
      * @deprecated
      * @param {String} [uniqId]
      * @returns {BEM.DOM}
@@ -3115,8 +3179,8 @@ var DOM = BEM.DOM = BEM.decl('i-bem__dom',/** @lends BEM.DOM.prototype */{
     },
 
     /**
-     * Возвращает размер текущего окна
-     * @returns {Object} объект с полями width, height
+     * Returns the size of the current window
+     * @returns {Object} Object with width and height fields
      */
     getWindowSize : function() {
 
@@ -3133,6 +3197,24 @@ var DOM = BEM.DOM = BEM.decl('i-bem__dom',/** @lends BEM.DOM.prototype */{
 
 /* ../../../../blocks-common/i-bem/__dom/i-bem__dom.js: end */ /**/
 
+/* ../../../../blocks-common/i-ecma/__string/i-ecma__string.js: begin */ /**/
+(function() {
+
+String.prototype.trim || (String.prototype.trim = function () {
+
+    var str = this.replace(/^\s\s*/, ''),
+        ws = /\s/,
+        i = str.length;
+
+    while(ws.test(str.charAt(--i)));
+
+    return str.slice(0, i + 1);
+
+});
+
+})();
+/* ../../../../blocks-common/i-ecma/__string/i-ecma__string.js: end */ /**/
+
 /* ../../../../blocks-common/i-bem/__dom/_init/i-bem__dom_init_auto.js: begin */ /**/
 /* дефолтная инициализация */
 $(function() {
@@ -3142,25 +3224,25 @@ $(function() {
 
 /* ../../../../blocks-desktop/i-bem/examples/20-i-bem_liveinit-multiple.blocks/b-tv/b-tv.js: begin */ /**/
 /**
- * BEM-декларация блока позволяет сообщить, к какому блоку (блоку с модификатором,
- * блоку с определённым значением модификатора) относится данный JavaScript-компонент.
- * Варианты деклараций можно найти на wiki-странице блока i-bem blocks/i-bem/i-bem.wiki
+ * A block's BEM declaration can state which block (a block with a modifier or a block with a specific modifier value) 
+ * a given JavaScript component refers to.
+ * You can find various declarations on the i-bem block's wiki page, blocks/i-bem/i-bem.wiki
  */
 BEM.DOM.decl('b-tv', {
 
     /*
-     onSetMod -- это специальное свойство, позволяющее описать, как компонент
-     должен реагровать на установку модицикатора у блока. Подробнее об onSetMod
-     и вариантах его использования можно прочесть на wiki-странице
-     блока i-bem (/blocks/i-bem/i-bem.wiki)
+     onSetMod is a special property for describing how a component
+     should react to setting a modifier for a block. You can read more 
+     about onSetMod and its various uses on the i-bem block's wiki page 
+    (/blocks/i-bem/i-bem.wiki)
      */
     onSetMod : {
 
         js : function() {
             /*
-             Метод setMod позволяет задать блоку или его элементу модификатор
-             со значением. Подробнее об этом методе можно узнать в справочнике
-             по BEM blocks/i-bem/i-bem.jsdoc.wiki
+             The setMod method allows to set a modifier with a value for a block 
+             or its element. For details on this method, see the 
+             BEM blocks reference, /i-bem/i-bem.jsdoc.wiki
              */
             this.setMod('touched', 'yes');
         }
@@ -3180,17 +3262,16 @@ BEM.DOM.decl('b-tv', {
     live : function() {
 
         /*
-         live-инициализация -- это "инициализация по требованию".
-         Она позволяет делать инициализацю блока только тогда,
-         когда это необходимо. Например, когда пользователь непосреддственно
-         начал работать с блоком.
-
-         В данном случае инициализация происходит в любом из двух случаев:
-         наведении курсора на элемент over или клику на элементе click.
-         Инициализация также может происходить по событию на самом блоке,
-         по факту инициализации вложенных или смиксованных блоков. Все
-         доступные методы инициализации можно найти в справочнике
-         по BEM DOM (/blocks/i-bem/dom/i-bem__dom.jsdoc.wiki).
+         Live initialization is "on-demand initialization".
+         It lets you initialize a block only when necessary,
+         for example, when the user begins working with the block directly.
+         
+         In this case, initialization occurs in either of two cases:
+         putting the cursor on the "over" element, or clicking on the "click" element.
+         Initialization can also occur on an event on the block itself,
+         when nested or mixed blocks are initialized. You can find all 
+         the available initialization methods in the BEM DOM reference
+         (/blocks/i-bem/dom/i-bem__dom.jsdoc.wiki).
          */
 
         this
