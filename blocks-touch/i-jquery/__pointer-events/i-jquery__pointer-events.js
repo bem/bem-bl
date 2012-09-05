@@ -7,7 +7,7 @@
  * http://www.opensource.org/licenses/mit-license.php
  * http://www.gnu.org/licenses/gpl.html
  *
- * @version 0.3.1
+ * @version 0.3.2
  */
 
 (function($) {
@@ -15,7 +15,7 @@
     var events;
 
     // тач
-    if ('ontouchstart' in window && navigator.userAgent.indexOf('Android') === -1) {
+    if ('ontouchstart' in window) {
         events = {
             type: 'touch',
             down: 'touchstart',
@@ -172,7 +172,8 @@
         setup: function() {
 
             // если мышь, то эмулируем тап через обычный клик
-            if (events.type == 'mouse') {
+            // + костыль для Android
+            if (events.type == 'mouse' || /Android/.test(navigator.userAgent)) {
 
                 $(this).bind('click.tapEvent', function(e) {
                     e.type = 'tap';
