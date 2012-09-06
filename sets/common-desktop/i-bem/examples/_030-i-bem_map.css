@@ -1,0 +1,270 @@
+.b-map_api_dynamic
+{
+    position: relative;
+    overflow: hidden;
+
+    border: 0;
+}
+
+.b-map_api_dynamic .b-map__static-map
+{
+    width: 100%;
+    height: 200px;
+}
+
+.b-map_api_dynamic .b-map__map
+{
+    width: 100%;
+    height: 200px;
+
+    visibility: hidden;
+}
+
+.b-map_api_dynamic .ymaps-events-pane
+{
+    -moz-box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.7) inset;
+    -webkit-box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.7) inset;
+    box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.7) inset;
+}
+
+.b-map_api_dynamic .ymaps-map
+{
+    background: #ddd;
+}
+
+.b-map__static-link
+{
+    position: absolute;
+    top: 0;
+    right: 0;
+    z-index: 1;
+
+    display: block;
+    width: 740px;
+    height: 200px;
+
+    border: 0;
+}
+
+.b-map__static-map:before
+{
+    position: absolute;
+    top: 0;
+    right: 0;
+    z-index: 1;
+
+    width: 100%;
+    height: 200px;
+
+    content: "";
+
+    -moz-box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.7) inset;
+    -webkit-box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.7) inset;
+    box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.7) inset;
+}
+
+.b-map__controls
+{
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    margin-top: 10px;
+    margin-left: 10px;
+
+    display: none;
+
+    width: 25px;
+
+    background-color: rgba(0, 0, 0, 0.3);
+    border-radius: 3px;
+
+    text-align: center;
+}
+
+.b-map__zoomin,
+.b-map__zoomout,
+.b-map__userlocation
+{
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+}
+
+.b-map__controls .b-form-button__content
+{
+    padding: 0;
+}
+
+.b-map__control-icon
+{
+    position: relative;
+    top: 5px;
+
+    width: 15px;
+    height: 15px;
+
+    background: url("../../../../blocks-desktop/i-bem/examples/030-i-bem_map.blocks/b-map/_api/b-map__controls.png") no-repeat;
+}
+
+.b-map__control-icon_type_zoomin
+{
+    background-position: 0 0;
+}
+
+.b-map__control-icon_type_zoomout
+{
+    background-position: -26px 0;
+}
+
+.b-map__control-icon_type_userlocation
+{
+    background-position: 0px -26px;
+}
+
+.b-map__controls .b-spin
+{
+    margin: 2px 3px;
+}
+
+.b-map__spin-pane
+{
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    margin-top: 10px;
+    margin-left: 10px;
+
+    width: 30px;
+    height: 50px;
+
+    background: black;
+    background-color: rgba(0, 0, 0, 0.3);
+    border-radius: 3px;
+}
+
+.b-map__spin-pane .b-spin
+{
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    margin: auto;
+
+    width: 27px;
+    height: 27px;
+}
+
+.b-map__static-img
+{
+    position: absolute;
+    top: 0px;
+    right: 0px;
+
+    width: 740px;
+    height: 320px;
+
+    border: 0;
+}
+
+.b-map__goto-map
+{
+    position: absolute;
+    right: 9px;
+    top: 7px;
+
+    display: none;
+}
+
+.b-map__goto-map-icon
+{
+    display: inline-block;
+
+    width: 10px;
+    height: 10px;
+
+    margin-right: 7px;
+
+    background: url("../../../../blocks-desktop/i-bem/examples/030-i-bem_map.blocks/b-map/_api/b-map__goto-map-icon.png") no-repeat;
+}
+
+.i-geo-point
+{
+    position: absolute;
+    top: -40px;
+    left: -10px;
+
+    display: block;
+
+    width: 37px;
+    height: 42px;
+
+    background-image: url("../../../../blocks-desktop/i-bem/examples/030-i-bem_map.blocks/i-geo-point/i-geo-point.png");
+    background-position: 0px 0px;
+    background-repeat: no-repeat;
+
+    text-decoration: none;
+}
+
+.i-geo-point:hover,
+.i-geo-point_hovered_yes
+{
+    background-position: -41px 0px;
+}
+
+.i-geo-point_type_adv
+{
+    background-position: -85px 0px;
+}
+
+.i-geo-point_type_adv:hover,
+.i-geo-point_type_adv.i-geo-point_hovered_yes
+{
+    background-position: -126px 0px;
+}
+
+.i-geo-point_type_single
+{
+    background-position: 0px -49px;
+}
+
+.i-geo-point_type_single:hover,
+.i-geo-point_type_single.i-geo-point_hovered_yes
+{
+    background-position: -41px -49px;
+}
+
+.i-geo-point_type_ya
+{
+    top: -12px;
+    left: -12px;
+
+    width: 24px;
+    height: 24px;
+
+    background-position: -84px -50px;
+}
+
+.i-geo-point_type_ya:hover,
+.i-geo-point_type_ya.i-geo-point_hovered_yes
+{
+    background-position: -84px -50px;
+}
+
+.i-geo-point__cont
+{
+    font-size: 13px;
+
+    position: absolute;
+    top: 6px;
+    left: 6px;
+
+    width: 16px;
+    height: 13px;
+
+    text-align: center;
+    text-decoration: none;
+
+    color: black;
+}
+
