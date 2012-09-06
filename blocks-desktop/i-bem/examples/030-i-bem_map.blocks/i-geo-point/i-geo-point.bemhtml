@@ -1,0 +1,15 @@
+block i-geo-point {
+    tag: 'a'
+
+    attrs: {
+        var ctx = this.ctx,
+            a = { href: ctx.url },
+            props = ['title', 'target'], p;
+
+        while(p = props.pop()) ctx[p] && (a[p] = ctx[p]);
+
+        ctx.counter && (a.onmousedown = ctx.counter);
+
+        return a;
+    }
+}

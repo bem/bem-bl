@@ -1,0 +1,79 @@
+.i-geo-point
+{
+    position: absolute;
+    top: -40px;
+    left: -10px;
+
+    display: block;
+
+    width: 37px;
+    height: 42px;
+
+    background-image: url("i-geo-point.png");
+    background-position: 0px 0px;
+    background-repeat: no-repeat;
+
+    text-decoration: none;
+}
+
+.i-geo-point:hover,
+.i-geo-point_hovered_yes
+{
+    background-position: -41px 0px;
+}
+
+.i-geo-point_type_adv
+{
+    background-position: -85px 0px;
+}
+
+.i-geo-point_type_adv:hover,
+.i-geo-point_type_adv.i-geo-point_hovered_yes
+{
+    background-position: -126px 0px;
+}
+
+.i-geo-point_type_single
+{
+    background-position: 0px -49px;
+}
+
+.i-geo-point_type_single:hover,
+.i-geo-point_type_single.i-geo-point_hovered_yes
+{
+    background-position: -41px -49px;
+}
+
+.i-geo-point_type_ya
+{
+    top: -12px;
+    left: -12px;
+
+    width: 24px;
+    height: 24px;
+
+    background-position: -84px -50px;
+}
+
+.i-geo-point_type_ya:hover,
+.i-geo-point_type_ya.i-geo-point_hovered_yes
+{
+    background-position: -84px -50px;
+}
+
+.i-geo-point__cont
+{
+    font-size: 13px;
+
+    position: absolute;
+    top: 6px;
+    left: 6px;
+
+    width: 16px;
+    height: 13px;
+
+    text-align: center;
+    text-decoration: none;
+
+    color: black;
+}

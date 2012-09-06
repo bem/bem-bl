@@ -1,0 +1,30 @@
+block b-map, mod api 'dynamic' {
+    tag: 'div'
+
+    attrs: this.ctx.attrs
+
+    elem tile, attrs: {
+        var a = {};
+        a.style = ' left: ' + this.ctx.left + 'px; top: ' + this.ctx.top + 'px;' + ' background: url(' + this.ctx.url + ')';
+
+        return a;
+    }
+
+    elem static-img {
+        tag: 'div',
+        attrs: {
+            style: 'background: url(' + this.ctx.src + ') no-repeat;'
+        }
+    }
+
+    elem goto-map-icon, tag: 'i'
+
+    content: [
+        {
+            elem: 'map',
+            tag: 'div'
+        },
+        this.ctx.content
+    ]
+
+}
