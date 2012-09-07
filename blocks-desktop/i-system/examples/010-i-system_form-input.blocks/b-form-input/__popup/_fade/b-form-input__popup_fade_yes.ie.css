@@ -1,0 +1,8 @@
+.b-form-input__popup_fade_yes .b-form-input__fade
+{
+    font: 0/0 a;
+
+    background: none !important;
+
+    filter:progid:DXImageTransform.Microsoft.gradient(GradientType=1,enabled=true,startColorstr=#00ffffff, endColorstr=#ffffffff);
+}

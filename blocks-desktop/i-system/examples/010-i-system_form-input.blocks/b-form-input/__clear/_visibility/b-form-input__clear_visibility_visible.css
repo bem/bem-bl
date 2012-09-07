@@ -1,0 +1,11 @@
+.b-form-input__clear_visibility_visible
+{
+    visibility: visible;
+
+	opacity: 0.6;
+}
+
+.b-form-input__clear_visibility_visible:hover
+{
+	opacity: 1;
+}

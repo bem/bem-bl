@@ -1,0 +1,45 @@
+block b-form-input {
+
+    default, !this._inputId: {
+        local(
+            this._inputId = this.ctx.id || this.generateId(), // 'id-' + Math.random(), // TODO: Сделать generate-id(.)
+            this._name = this.ctx.name || '',
+            this._value = this.ctx.value || ''
+        ) this.apply();
+    }
+
+    js: {
+        return this.mods.popup == 'gradient' ? { popupMods: { gradient: 'yes' } } : true;
+    }
+    tag: 'span'
+
+    elem input {
+        tag: 'input',
+        attrs: {
+            var a = {
+                id: this._inputId,
+                name: this._name
+            };
+
+            this._value && (a.value = this._value);
+            this.mods.disabled && (a.disabled = 'disabled');
+
+            return a;
+        },
+        default, !this.ctx._wrap: {
+            local(
+                this._mode = '',
+                this.ctx._wrap = true,
+                this.ctx = {
+                    elem: 'box',
+                    tag: 'span',
+                    content: [
+                        this.ctx,
+                        this.ctx.clear
+                    ]
+                }
+            ) this.apply();
+        }
+    }
+
+}

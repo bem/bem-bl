@@ -1,0 +1,15 @@
+.b-form-input__popup_fade_yes .b-form-input__fade
+{
+    w: expression(
+        function (t) {
+            var p = t.parentNode;
+            var h = p.offsetHeight;
+
+            if (t.h != h) {
+                t.h = h;
+
+                t.style.height = h + "px";
+            }
+        } (this)
+    );
+}

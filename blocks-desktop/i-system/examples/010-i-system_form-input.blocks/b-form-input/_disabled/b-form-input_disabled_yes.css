@@ -1,0 +1,16 @@
+.b-form-input_disabled_yes .b-form-input__input,
+.b-form-input_disabled_yes .b-form-input__label,
+.b-form-input_disabled_yes .b-form-input__hint
+{
+    opacity: 0.5;
+}
+
+.b-form-input_disabled_yes .b-form-input__clear
+{
+    display: none;
+}
+
+.b-form-input_disabled_yes .b-form-input__input
+{
+    resize: none;
+}

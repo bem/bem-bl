@@ -1,0 +1,10 @@
+.b-form-input_disabled_yes .b-form-input__label,
+.b-form-input_disabled_yes .b-form-input__hint
+{
+    color: #ccc;
+}
+
+.b-form-input_disabled_yes .b-form-input__box
+{
+    background-image: url(b-form-input_disabled_yes.png);
+}

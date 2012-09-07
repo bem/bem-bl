@@ -1,0 +1,20 @@
+.b-form-input_theme_grey .b-form-input__box
+{
+    border-color: #a3a3a3 #c6c6c6 #e5e5e5;
+}
+
+.b-form-input_theme_grey.b-form-input_focused_yes .b-form-input__box
+{
+    -webkit-box-shadow: inset 0 1px 1px #cfcfcf, 0 0 1px #ffd94f, 0 0 1px #ffd94f, 0 0 2px #ffd94f;
+    -moz-box-shadow: inset 0 1px 1px #cfcfcf,  0 0 1px #ffd94f, 0 0 1px #ffd94f, 0 0 2px #ffd94f;
+    box-shadow: inset 0 1px 1px #cfcfcf, 0 0 1px #ffd94f, 0 0 1px #ffd94f, 0 0 2px #ffd94f;
+}
+
+.b-form-input_theme_grey.b-form-input_disabled_yes .b-form-input__box
+{
+    border-color: #e9e9e9 #f2f2f2 #f9f9f9;
+
+    -webkit-box-shadow: inset 0px 1px 1px #f4f4f4;
+    -moz-box-shadow: inset 0px 1px 1px #f4f4f4;
+    box-shadow: inset 0px 1px 1px #f4f4f4;
+}

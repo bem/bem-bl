@@ -1,0 +1,29 @@
+.i-ua_js_yes .b-form-input__hint
+{
+    float: left;
+
+    padding-top: 3px;
+    
+    line-height: 100% !important;
+}
+
+/* TODO подумать как это отсюда убрать */ /**/
+.i-ua_js_yes .b-form-input_size_s .b-form-input__hint
+{
+    padding-top: 4px;
+}
+
+.i-ua_js_yes .b-form-input_size_m .b-form-input__hint
+{
+    padding-top: 5px;
+}
+
+.i-ua_js_yes .b-form-input_size_l .b-form-input__hint
+{
+    padding-top: 4px;
+}
+
+.i-ua_js_yes .b-form-input_size_xl .b-form-input__hint
+{
+    padding-top: 6px;
+}

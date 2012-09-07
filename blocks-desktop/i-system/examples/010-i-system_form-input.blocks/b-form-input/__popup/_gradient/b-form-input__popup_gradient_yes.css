@@ -1,0 +1,7 @@
+.b-form-input__popup_gradient_yes
+{
+    background: #fff url(b-form-input__popup_gradient_yes.png) repeat-x 0 100%;
+    background: -webkit-gradient(linear, left top, left bottom, from(#ffffff), to(#eeeeee));
+    background: -moz-linear-gradient(top, #ffffff, #eeeeee);
+    background: -o-linear-gradient(top, #ffffff, #eeeeee);
+}

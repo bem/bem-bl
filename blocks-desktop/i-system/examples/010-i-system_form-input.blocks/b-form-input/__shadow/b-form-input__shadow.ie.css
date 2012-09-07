@@ -1,0 +1,9 @@
+.b-form-input__shadow
+{
+    top: -6px;
+    left: -6px;
+
+    border: 0;
+    background: #bbb;
+    filter:progid:DXImageTransform.Microsoft.Blur(PixelRadius='6', MakeShadow='true', ShadowOpacity='0.35');
+}

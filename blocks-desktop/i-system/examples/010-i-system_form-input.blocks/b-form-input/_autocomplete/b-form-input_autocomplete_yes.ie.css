@@ -1,0 +1,7 @@
+.b-form-input__popup-items
+{
+    position: relative;
+    z-index: 9;
+
+    background: #fff;
+}

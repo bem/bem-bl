@@ -1,0 +1,22 @@
+.b-form-input__popup .i-popup__content
+{
+    width: 380px;
+}
+
+.b-form-input__popup .b-form-input__popup-items
+{
+    w: expression(
+        function (t) {
+            var p = t.parentNode;
+            var w = p.offsetWidth;
+
+            if ((t.w != w)) {
+                if (w > 380) {
+                    t.style.width = (t.w = w) + "px";
+                }   else {
+                    t.style.width = (t.w = 380) + "px";
+                }
+            }
+        } (this)
+    );
+}

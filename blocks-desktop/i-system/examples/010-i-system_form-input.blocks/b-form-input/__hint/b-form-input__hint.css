@@ -1,0 +1,52 @@
+.b-form-input__hint-wrap
+{
+    position: relative;
+    z-index: 2;
+
+    display: none; /*Прячем не хинт, а его обертку*/ /**/
+
+    float: left;
+    overflow: hidden;
+
+    width: 100%;
+    height: 1.4em;
+    margin-bottom: -1.4em;
+}
+
+.b-form-input__hint
+{
+    font-family: Arial, sans-serif;
+
+    position: absolute;
+
+    width: 100%;
+    height: 100%;
+    padding: 0.2em 0 0 7px; /*Отступ справа для новых шапок, в em отступы не совпадают*//**/
+
+    cursor: text;
+    line-height: 100%;
+    white-space: nowrap;
+
+    color: #999;
+}
+
+/* TODO подумать как это отсюда убрать */ /**/
+.i-ua_js_yes .b-form-input_size_s .b-form-input__hint
+{
+    line-height: 137%;
+}
+
+.i-ua_js_yes .b-form-input_size_m .b-form-input__hint
+{
+    padding-top: 0.39em;
+}
+
+.i-ua_js_yes .b-form-input_size_l .b-form-input__hint
+{
+    padding-top: 0.31em;
+}
+
+.i-ua_js_yes .b-form-input_size_xl .b-form-input__hint
+{
+    padding-top: 0.3em;
+}
