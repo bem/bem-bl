@@ -1,0 +1,6 @@
+block b-form-input {
+
+    elem sample, tag: 'span'
+    elem samples, tag: 'span'
+
+}

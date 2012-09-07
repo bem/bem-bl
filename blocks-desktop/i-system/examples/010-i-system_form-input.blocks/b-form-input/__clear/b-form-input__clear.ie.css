@@ -1,0 +1,27 @@
+.b-form-input__clear
+{
+    font: 0/0 a;
+
+    position: relative;  /*Пришлось задать после добавления обертки .b-form-input__hint-wrap*/ /**/
+
+    float: left;
+
+    margin-top: 0.28em;
+    margin-right: -25px !important;
+    margin-bottom: -11px;
+}
+
+.b-form-input_size_l .b-form-input__clear
+{
+    margin-bottom: -13px;
+}
+
+.b-form-input_size_xl .b-form-input__clear
+{
+    margin-bottom: -15px;
+}
+
+.i-ua_css.i-ua_css_quirks .b-form-input__clear
+{
+    margin-top: 0.22em;
+}

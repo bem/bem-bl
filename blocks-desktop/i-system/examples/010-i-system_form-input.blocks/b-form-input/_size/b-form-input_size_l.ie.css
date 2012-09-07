@@ -1,0 +1,13 @@
+.b-form-input_size_l .b-form-input__box,
+.i-ua_css.i-ua_css_quirks .b-form-input_size_l .b-form-input__input
+{
+    height: 24px;
+}
+
+.b-form-input_size_l .b-form-input__input
+{
+    height: 22px;
+    padding-top: 0;
+
+    line-height: 22px;
+}

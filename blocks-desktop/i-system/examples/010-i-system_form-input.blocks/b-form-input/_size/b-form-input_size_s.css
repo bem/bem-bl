@@ -1,0 +1,21 @@
+.b-form-input_size_s .b-form-input__hint,
+.b-form-input_size_s .b-form-input__input
+{
+    font: 11px Verdana, Arial, sans-serif;
+}
+
+.b-form-input_size_s .b-form-input__input
+{
+    line-height: 137%;
+}
+
+.b-form-input_size_s .b-form-input__box
+{
+    height: 19px;
+}
+
+.b-form-input_size_s .b-form-input__hint-wrap
+{
+    height: 19px;
+    margin-bottom: -19px;
+}

@@ -1,0 +1,18 @@
+.b-form-input__shadow
+{
+    w: expression(
+        function (t) {
+            var p = t.parentNode,
+                w = p.offsetWidth,
+                h = p.offsetHeight;
+
+            if ( t.w != w || t.h != h ) {
+                t.w = w;
+                t.h = h;
+
+                t.style.width = w  + 'px';
+                t.style.height = h + 'px';
+            }
+        } (this)
+    );
+}

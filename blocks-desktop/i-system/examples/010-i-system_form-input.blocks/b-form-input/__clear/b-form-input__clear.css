@@ -1,0 +1,45 @@
+.b-form-input__clear
+{
+    position: absolute;
+    z-index: 5;
+
+    visibility: hidden;
+
+    width: 11px;
+    height: 11px;
+    margin: 0.25em 0 0 7px;
+    padding: 0;
+
+    background: url(b-form-input__clear_s_m.png) 50% 50% no-repeat;
+}
+
+/* TODO подумать как это отсюда убрать */ /**/
+.b-form-input_size_s .b-form-input__clear
+{
+    margin-top: 3px !important;   /* !important — нужны для IE */ /**/
+}
+
+.b-form-input_size_m .b-form-input__clear,
+.b-form-input_size_l .b-form-input__clear
+{
+    margin-top: 5px !important;
+}
+
+.b-form-input_size_l .b-form-input__clear
+{
+    width: 13px;
+    height: 13px;
+    margin-left: 6px;
+
+    background-image: url(b-form-input__clear_l.png);
+}
+
+.b-form-input_size_xl .b-form-input__clear
+{
+    width: 15px;
+    height: 15px;
+    margin-top: 7px !important;
+    margin-left: 5px;
+
+    background-image: url(b-form-input__clear_xl.png);
+}

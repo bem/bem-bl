@@ -1,0 +1,21 @@
+.b-form-input__popup_fade_yes .b-form-input__popup-items
+{
+    overflow: hidden;
+}
+
+.b-form-input__popup_fade_yes .b-form-input__fade
+{
+    position: absolute;
+    z-index: 10; /*В новом саджесте не было градиента*/ /**/
+    top: 0;
+    left: 100%;
+
+    width: 40px;
+    height: 100%;
+    margin-left: -40px;
+
+    background: url(b-form-input__popup_fade_yes.png) repeat-y;
+    background: -webkit-gradient(linear,left bottom,right bottom,color-stop(0.3, rgba(255,255,255,0)),color-stop(1, rgba(255,255,255,1)));
+    background: -moz-linear-gradient(left center,rgba(255,255,255,0) 30%,rgba(255,255,255,1) 100%);
+    background: -o-linear-gradient(left ,rgba(255,255,255,0) 30%,rgba(255,255,255,1) 100%);
+}

@@ -1,0 +1,30 @@
+.b-form-input_width_content .b-form-input__box
+{
+    overflow: hidden;
+}
+
+.b-form-input_width_content .b-form-input__input
+{
+    float: left;
+
+    width: 100%;
+    max-width: 100%;
+}
+
+.b-form-input_width_content .b-form-input__clear
+{
+    right: 7px;
+}
+
+.b-form-input__width-ruler
+{
+    font: 100% Arial, sans-serif;
+
+    position: absolute;
+    top: -9999px;
+    left: -9999px;
+
+    padding-right: 1.3em;
+
+    white-space: pre;
+}

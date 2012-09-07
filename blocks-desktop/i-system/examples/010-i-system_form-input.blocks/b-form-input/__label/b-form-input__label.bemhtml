@@ -1,0 +1,6 @@
+block b-form-input, elem label {
+    
+    tag: 'label'
+    attrs: { 'for': this._inputId }
+
+}

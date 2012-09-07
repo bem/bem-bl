@@ -1,0 +1,31 @@
+.b-form-input
+{
+    zoom: 1;
+}
+
+.b-form-input__box
+{
+    zoom: 1;  /* необходимо для инпута без size */ /**/
+
+    padding-left: 0.3em;
+
+    background: #fff url(b-form-input.png) repeat-x;
+}
+
+.b-form-input__input
+{
+    float: left;
+
+    padding: 0;
+}
+
+.i-ua_css_quirks .b-form-input__box
+{
+    height: auto !important;
+    padding-left: 0;
+}
+
+.i-ua_css_quirks .b-form-input__input
+{
+    margin-left: 0;
+}

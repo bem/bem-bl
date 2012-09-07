@@ -1,0 +1,24 @@
+.b-form-input_size_m .b-form-input__hint,
+.b-form-input_size_m .b-form-input__input
+{
+    font-size: 13px;
+}
+
+.b-form-input_size_m .b-form-input__input
+{
+    padding-top: 3px;
+    padding-bottom: 2px;
+
+    line-height: 130%;
+}
+
+.b-form-input_size_m .b-form-input__box
+{
+    height: 22px;
+}
+
+.b-form-input_size_m .b-form-input__hint-wrap
+{
+    height: 22px;
+    margin-bottom: -22px;
+}

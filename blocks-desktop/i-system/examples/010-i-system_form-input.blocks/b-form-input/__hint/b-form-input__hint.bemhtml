@@ -1,0 +1,18 @@
+block b-form-input, elem hint {
+
+    tag: 'label'
+    attrs: { 'for': this._inputId }
+
+    default, !this.ctx._wrap: {
+        local(
+            this._mode = '',
+            this.ctx._wrap = true,
+            this.ctx = {
+                elem: 'hint-wrap',
+                tag: 'span',
+                content: this.ctx
+            }
+        ) this.apply();
+    }
+
+}

@@ -1,0 +1,25 @@
+.b-form-input__popup
+{
+    min-width: 25em;
+    max-width: 100%;
+    margin-left: 1px; /*Выравниваем подсказки в саджесте относительно строки запроса*/ /**/
+    margin-top: 0;
+
+    background: #fff;
+}
+
+/* Выставляем боксовую модель для правильного совпадения border'ов с инпутом*/ /**/
+.b-form-input__popup
+{
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+}
+
+.b-form-input__popup .b-form-input__popup-items
+{
+    margin: 0;
+    padding: 0;
+
+    list-style: none;
+}

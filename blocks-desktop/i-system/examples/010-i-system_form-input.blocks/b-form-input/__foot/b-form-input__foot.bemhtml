@@ -1,0 +1,8 @@
+block b-form-input, mod autocomplete yes, elem foot, default: {
+    local(
+        this._mode = '',
+        this.ctx.block = 'b-autocomplete-item',
+        this.ctx.mods = { type: 'foot' },
+        this.ctx.elem = undefined
+    ) this.apply();
+}
