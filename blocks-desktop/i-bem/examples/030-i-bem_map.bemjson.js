@@ -1,6 +1,6 @@
 ({
     block: 'b-page',
-    title: 'Block reacts to choosing a menu item',
+    title: 'Map and geopoint blocks',
     head: [
         { elem: 'css', url: '_030-i-bem_map.css', ie: false },
         { elem: 'css', url: '_030-i-bem_map.ie.css', ie: 'lt IE 8' },
