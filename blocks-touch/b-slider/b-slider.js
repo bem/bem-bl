@@ -501,7 +501,7 @@
             slider.trigger('start', slider._getCurrentParams());
 
             slider._elem
-                .one('webkitTransitionEnd.touchSlides oTransitionEnd.touchSlides', function() {
+                .one('webkitTransitionEnd.touchSlides oTransitionEnd.touchSlides  otransitionend.touchSlides', function() {
                     slider.trigger('end', slider._getCurrentParams());
                 })
                 .css({
