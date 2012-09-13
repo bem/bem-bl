@@ -1,0 +1,11 @@
+@font-face {
+    font-family: 'open_sans_condensed_light';
+    src: local('open_sans_condensed_light');
+    src: url('i-font_face_opensans-condlight.woff'),
+         url('i-font_face_opensans-condlight.ttf');
+}
+
+.i-font_face_opensans-condlight
+{
+    font-family: 'open_sans_condensed_light';
+}
