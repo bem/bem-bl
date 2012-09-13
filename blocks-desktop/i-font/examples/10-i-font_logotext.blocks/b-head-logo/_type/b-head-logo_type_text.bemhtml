@@ -1,0 +1,20 @@
+block b-head-logo, mod type text {
+
+    content: {
+        elem: 'logo',
+        content: {
+            elem: 'link',
+            mix: [ { block: 'i-font', mods: { face: 'opensans-condlight' } } ],
+            tag: 'a',
+            attrs: { url: 'http://www.yandex.ru/' },
+            content: [
+                {
+                    elem: 'letter',
+                    tag: 'span',
+                    content: 'Я'
+                },
+                'ндекс'
+            ]
+        }
+    }
+}
