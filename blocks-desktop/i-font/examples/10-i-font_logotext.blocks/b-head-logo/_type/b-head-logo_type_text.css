@@ -1,0 +1,19 @@
+.b-head-logo_type_text .b-head-logo__link
+{
+    font-size: 46px;
+
+    line-height: 100%;
+    text-decoration: none;
+    
+    color: #000;
+}
+
+.b-head-logo_type_text .b-head-logo__link:hover
+{
+    color: #000!important;
+}
+
+.b-head-logo_type_text .b-head-logo__letter
+{
+    color: #f00;
+}
