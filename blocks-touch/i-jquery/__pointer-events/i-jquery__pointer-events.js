@@ -12,7 +12,10 @@
 
 (function($) {
 
-    var events;
+    var events,
+        iOSversion = navigator.userAgent.match(/iPhone\sOS\s([\d_]+)/);
+
+    iOSversion = iOSversion && iOSversion[1].replace(/_/g, '.');
 
     // тач
     if ('ontouchstart' in window) {
@@ -199,17 +202,19 @@
                             if (touch.target.nodeType !== 9) {
                                 // при обычном превенте появляется-прачется адресный тулбар,
                                 // т.е. клик как событие происходит, просто нет действия
-                                $(touch.target).bind('click.preventClick', function() {
-                                    $(touch.target).unbind('.preventClick');
+                                $(document).one('click.preventClick', function(e) {
+                                    e.preventDefault();
                                     return false;
                                 });
 
-                                // http://cubiq.org/dropbox/clickdelay.html
-                                $('body').css('pointer-events', 'none');
-                                setTimeout(function() {
-                                    $(touch.target).unbind('.preventClick');
-                                    $('body').css('pointer-events', 'auto');
-                                }, 750);
+                                if (!(iOSversion >= '6')) {
+                                    // http://cubiq.org/dropbox/clickdelay.html
+                                    $('body').css('pointer-events', 'none');
+                                    setTimeout(function() {
+                                        $(document).unbind('.preventClick');
+                                        $('body').css('pointer-events', 'auto');
+                                    }, 750);
+                                }
                             }
 
                             e.type = 'tap';
