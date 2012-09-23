@@ -1,13 +1,18 @@
-var DomJS = require('dom-js').DomJS,
+var DOM = require('dom-js'),
 
     QUOTE_CHAR = '"',
     SINGLE_QUOTE_CHAR = "'";
 
 var parseXml = exports.parseXml = function(xml, cb) {
 
-    new DomJS().parse('<root>' + xml + '</root>', function(err, dom) {
-        cb(dom.children);
-    });
+    try {
+        new DOM.DomJS().parse('<root>' + xml + '</root>', function(err, dom) {
+            if(err) return;
+            cb(dom.children);
+        });
+    } catch(e) {
+        parseXml(DOM.escape(xml), cb);
+    }
 
 };
 
