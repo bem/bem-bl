@@ -33,7 +33,7 @@
 %%hl js
 {
     block: 'b-search',
-    attrs: { action: '/search.xml', id: 'myForm' }
+    attrs: { action: '/search.xml', id: 'myForm' },
     input: {
         elem: 'input',
         attrs: { value: 'Some text', id: 'myInput' }
