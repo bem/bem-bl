@@ -39,4 +39,20 @@ BEM.TEST.decl({ block : 'i-bem', elem : 'mods' }, function() {
         expect(block.hasMod(elem1, 'emod2')).toBeFalsy();
     });
 
+    it('mod shortcut for getMod should be valid', function() {
+        var elem1 = block.elem('elem1');
+
+        expect(block.mod('mod1')).toEqual('val1');
+        expect(block.mod(elem1, 'emod1')).toEqual('eval1');
+    });
+
+    it('mod shortcut for setMod should be valid', function() {
+        var elem1 = block.elem('elem1');
+
+        expect(block.mod('mod10', 'val10').getMod('mod10')).toEqual('val10');
+        expect(block.mod('mod10', '').getMod('mod10')).toEqual('');
+        expect(block.mod(elem1, 'emod10', 'eval10').getMod(elem1, 'emod10')).toEqual('eval10');
+        expect(block.mod(elem1, 'emod10', '').getMod(elem1, 'emod10')).toEqual('');
+    });
+
 });
