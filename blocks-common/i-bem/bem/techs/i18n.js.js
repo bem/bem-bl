@@ -12,11 +12,15 @@ exports.techMixin = BEM.util.extend({}, LangsMixin, {
         return 'js';
     },
 
-    getBuildSuffixes: function() {
+    getBuildSuffixesMap: function() {
 
         return this.getLangs()
             .map(this.getBuildSuffixForLang, this)
-            .concat([this.getBaseTechSuffix()]);
+            .concat([this.getBaseTechSuffix()])
+            .reduce(function(map, tech) {
+                map[tech] = [tech];
+                return map;
+            }, {});
 
     },
 
