@@ -17,7 +17,7 @@ BEM.DOM.decl('i-pressed-controller', {
         var that = this;
 
         that._pressedTimer = setTimeout(function() {
-            if (!that._isMove) {
+            if (!that._isMove && that.domElem) {
                 that.setMod('pressed', 'yes');
             }
         }, 80);
