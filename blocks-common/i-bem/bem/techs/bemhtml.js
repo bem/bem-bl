@@ -1,13 +1,9 @@
 var BEM = require('bem'),
-    Q = BEM.require('q'),
-    PATH = require('path'),
-    SYS = require('util'),
-
-    readFile = BEM.require('./util').readFile;
+    PATH = require('path');
 
 exports.getBuildResultChunk = function(relPath, path, suffix) {
 
-    return readFile(path)
+    return BEM.util.readFile(path)
         .then(function(c) {
 
             return [
@@ -23,14 +19,7 @@ exports.getBuildResultChunk = function(relPath, path, suffix) {
 
 exports.getBuildResult = function(prefixes, suffix, outputDir, outputName) {
 
-    var _this = this;
-    return this.filterPrefixes(prefixes, this.getCreateSuffixes())
-        .then(function(paths) {
-            return Q.all(paths.map(function(path) {
-                return _this.getBuildResultChunk(
-                    PATH.relative(outputDir, path), path, suffix);
-            }));
-        })
+    return this.__base.apply(this, arguments)
         .then(function(sources) {
             sources = sources.join('\n');
 
@@ -47,6 +36,6 @@ exports.getSuffixes = function() {
     return ['bemhtml'];
 };
 
-exports.getBuildSuffixes = function() {
-    return ['bemhtml.js'];
+exports.getBuildSuffixesMap = function() {
+    return { 'bemhtml.js': this.getSuffixes() };
 };
