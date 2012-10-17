@@ -141,12 +141,14 @@ this.BEM = $.inherit($.observable, /** @lends BEM.prototype */ {
         if(!this._initing && !this.hasMod('js', 'inited')) {
             this._initing = true;
 
-            this.params = $.extend(this.getDefaultParams(), this._params);
-            delete this._params;
+            if(!this.params) {
+                this.params = $.extend(this.getDefaultParams(), this._params);
+                delete this._params;
+            }
 
             this.setMod('js', 'inited');
             delete this._initing;
-            this.trigger('init');
+            this.hasMod('js', 'inited') && this.trigger('init');
         }
 
         return this;
