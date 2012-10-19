@@ -29,7 +29,7 @@ var win = $(window),
     domElemToParams = {},
 
 /**
- * Storage for liveCtx event handlers 
+ * Storage for liveCtx event handlers
  * @private
  * @type Object
  */
@@ -229,7 +229,7 @@ function getClientNode() {
 }
 
 /**
- * Returns a block on a DOM element and initializes it if necessary 
+ * Returns a block on a DOM element and initializes it if necessary
  * @param {String} blockName Block name
  * @param {Object} params Block parameters
  * @returns {BEM}
@@ -244,7 +244,7 @@ $.fn.bem = function(blockName, params) {
  */
 var DOM = BEM.DOM = BEM.decl('i-bem__dom',/** @lends BEM.DOM.prototype */{
     /**
-     * @class Base block for creating BEM blocks that have DOM representation 
+     * @class Base block for creating BEM blocks that have DOM representation
      * @constructs
      * @private
      * @param {jQuery} domElem DOM element that the block is created on
@@ -997,7 +997,7 @@ var DOM = BEM.DOM = BEM.decl('i-bem__dom',/** @lends BEM.DOM.prototype */{
         if(!ctx || $.isFunction(ctx)) {
             callbackCtx = callback;
             callback = ctx;
-            ctx = doc;
+            ctx = this.doc;
         }
 
         var uniqInitId = $.identify();
@@ -1140,7 +1140,7 @@ var DOM = BEM.DOM = BEM.decl('i-bem__dom',/** @lends BEM.DOM.prototype */{
 
             if(!storage) {
                 storage = liveClassEventStorage[e] = {};
-                doc.bind(e, _this.changeThis(_this._liveClassTrigger, _this));
+                _this.doc.bind(e, _this.changeThis(_this._liveClassTrigger, _this));
             }
 
             storage = storage[className] || (storage[className] = { uniqIds : {}, fns : [] });
@@ -1399,7 +1399,7 @@ var DOM = BEM.DOM = BEM.decl('i-bem__dom',/** @lends BEM.DOM.prototype */{
     },
 
     /**
-     * Removes the live event handler from a block, based on a specified element where the event was being listened for 
+     * Removes the live event handler from a block, based on a specified element where the event was being listened for
      * @static
      * @protected
      * @param {jQuery} [ctx] The element in which the event was being listened for
