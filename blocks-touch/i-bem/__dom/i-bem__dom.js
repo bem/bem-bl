@@ -16,10 +16,10 @@
                     });
 
                     // http://cubiq.org/dropbox/clickdelay.html
-                    $('body').css('pointer-events', 'none');
+                    _this.scope.css('pointer-events', 'none');
                     setTimeout(function() {
                         _this.doc.unbind('.preventClick');
-                        $('body').css('pointer-events', 'auto');
+                        _this.scope.css('pointer-events', 'auto');
                     }, 750);
 
                     origCallback.apply(this, arguments);

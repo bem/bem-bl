@@ -43,6 +43,18 @@ exports.techMixin = {
             '',
             '})();'], vars);
 
+    },
+
+    getBuildResult: function(prefixes, suffix, outputDir, outputName) {
+        return this.__base(prefixes, suffix, outputDir, outputName).then(function(res) {
+            if(suffix === 'js' && process.env.BEM_CONFLICTS_NO) {
+                res.unshift('(function(BEM_CONFLICTS_NO) {');
+                res.push('})(' + process.env.BEM_CONFLICTS_NO + ');');
+            }
+            return res;
+
+        });
+
     }
 
 };
