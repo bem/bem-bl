@@ -1,0 +1,1 @@
+typeof BEM_CONFLICTS_NO !== 'undefined' && ((this._BEM || (this._BEM = {}))[this.BEM.version = BEM_CONFLICTS_NO] = this.BEM);
