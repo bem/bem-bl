@@ -4,7 +4,7 @@ all: lib
 src: $(patsubst %.ometajs,%.ometajs.js,$(wildcard src/*.ometajs))
 
 %.ometajs.js: %.ometajs
-	ometajs2js -i $< -o $@
+	ometajs2js -b -i $< -o $@
 
 lib: lib/bemhtml.js
 
