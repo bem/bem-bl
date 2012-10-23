@@ -1,4 +1,6 @@
 ometa BEMHTMLParser <: XJSTParser {
+    isKeyword = :x ?(x === 'applyCtx')
+              | ^isKeyword,
 
     bemMatch = bemBlock | bemElem | bemMod,
 
@@ -29,13 +31,64 @@ ometa BEMHTMLParser <: XJSTParser {
     bhContent = bhPredic('content'):n -> [n],
 
     bemMatchAndSet = bemMatch | bemhtmlSet | bemCustom,
-    listBemMatchAndSet = bemMatchAndSet:t ',' listBemMatchAndSet:ts -> BEMHTMLParser._concatChildren(t, ts),
-    listBemMatchAndSet = bemMatchAndSet:t spaces '{' spaces listBemMatchAndSet+:ts spaces '}' spaces -> BEMHTMLParser._concatChildren(t, [#sub, ts]),
-    listBemMatchAndSet = bemMatchAndSet:t ':' (asgnExpr:e -> [#return, e] | stmt):c ','? -> [t, [#body, c]],
+    listBemMatchAndSet %(this.predicates = [])
+        = bemMatchAndSet:t ',' listBemMatchAndSet:ts -> {
+          BEMHTMLParser._applyPredicates(
+              this.predicates,
+              BEMHTMLParser._concatChildren(t, ts));
+        } | bemMatchAndSet:t spaces '{' spaces listBemMatchAndSet+:ts spaces '}' spaces -> {
+          BEMHTMLParser._applyPredicates(
+              this.predicates,
+              BEMHTMLParser._concatChildren(t, [#sub, ts]))
+        } | bemMatchAndSet:t ':' (asgnExpr:e -> [#return, e] | stmt):c ','? -> {
+          BEMHTMLParser._applyPredicates(this.predicates, [t, [#body, c]])
+        },
 
-    topLevel = listBemMatchAndSet*:ts spaces end -> BEMHTMLParser._addElemPredic(BEMHTMLParser._dropAllSubs(ts))
+    applyMode :type = "apply" "(" expr:e ")"
+        { BEMHTMLParser._transMode(e) }:modded_e
+        applyFactory([type, modded_e]):r -> r,
+
+    applyCtx :type = "applyCtx" "(" expr:ctx ")" = {
+          BEMHTMLParser._transMode([
+            #binop, ',',
+            [#set, [#getp, [#string, 'ctx'], [#this] ], ctx],
+            [#string, '']
+          ])
+        }:modded_e
+        applyFactory([type, #next, modded_e]):r -> r,
+
+    primExprHd = applyMode(#expr):r -> r
+               | applyCtx(#expr):r -> r
+               | ^primExprHd,
+
+    stmt       = applyMode(#stmt):r -> r
+               | applyCtx(#stmt):r -> r
+               | ^stmt,
+
+    topLevel = listBemMatchAndSet*:ts spaces end -> {
+      BEMHTMLParser._addElemPredic(BEMHTMLParser._dropAllSubs(ts))
+    }
 
 }
+
+BEMHTMLParser._transMode = function transMode(e) {
+    function traverse(e) {
+    if (e[0] !== 'binop' && e[1] !== ',') return [ e ];
+    return [].concat(traverse(e[2]), traverse(e[3]));
+  }
+
+  return traverse(e).map(function (e) {
+    if (e[0] !== 'string') return e;
+    return [#set, [#getp, [#string, '_mode'], [#this]], e];
+  }).reduce(function (acc, current) {
+    return [#binop, ',', acc, current];
+  });
+};
+
+BEMHTMLParser._applyPredicates = function(predicates, to) {
+  if (predicates.length != 0) to.unshift(['xjst', predicates]);
+  return to;
+};
 
 BEMHTMLParser._concatChildren = function(p, cs) {
     if(cs[0] === 'sub') {
