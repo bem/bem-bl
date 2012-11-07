@@ -12,10 +12,6 @@ exports.techMixin = BEM.util.extend({}, LangsMixin, {
         return 'js';
     },
 
-    getSuffixes: function() {
-        return [this.getBaseTechSuffix()];
-    },
-
     getBuildSuffixes: function() {
 
         return this.getLangs()

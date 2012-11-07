@@ -33,7 +33,8 @@ ometa BEMHTMLParser <: XJSTParser {
                      } | '{' spaces listBemMatchAndSet+:ts spaces '}'
                           spaces -> {
                        BEMHTMLParser._concatChildren(t, [#sub, ts])
-                     } | ':' (asgnExpr:e -> [#return, e] | stmt):c ','? ->
+                     } | ':' (asgnExpr:e -> [#begin, [#return, e]]
+                             | stmt):c ','? ->
                        [t, [#body, Jail.match(
                          c,
                          'topLevel',

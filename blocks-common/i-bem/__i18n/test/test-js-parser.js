@@ -25,5 +25,6 @@ function unit(name) {
 
 unit('dynamic-01');
 unit('dynamic-02');
-//unit('html-01');
 unit('param-xml-01');
+unit('html-01');
+unit('entity-01');

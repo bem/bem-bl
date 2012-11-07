@@ -201,8 +201,7 @@ bem_.I18N = (function(base) {
      * @return {String}
      */
     klass.lang = function(lang) {
-        typeof lang !== undefined
-            && (this._currentLang = lang);
+        typeof lang !== 'undefined' && (this._currentLang = lang);
 
         return this._currentLang;
     };
