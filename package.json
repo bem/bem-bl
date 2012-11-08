@@ -4,13 +4,13 @@
   "private": true,
   "dependencies": {
     "xjst": "~ 0.3.3",
-    "ometajs": "~ 3.1.4"
+    "ometajs": "~ 3.1.4",
+    "dom-js": "~0.0.9"
   },
   "devDependencies": {
     "mocha": "1.2.x",
     "benchmark": "~0.3.0",
-    "microtime": "~0.3.1",
-    "dom-js": "~0.0.9"
+    "microtime": "~0.3.1"
   },
   "scripts": {
     "test": "mocha --ui tdd --growl --reporter spec blocks-common/i-bem/__html/test/*-test.js"
