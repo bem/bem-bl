@@ -1,0 +1,3 @@
+block b1 {
+   content: applyNext(this._someFlag = 'blah')
+}
