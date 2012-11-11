@@ -3,12 +3,10 @@ var BEM = require('bem'),
     PATH = require('path'),
     I18NJS = require('../../__i18n/lib/i18n-js'),
 
-    LangsMixin = require('./i18n').LangsMixin,
-
     pjoin = PATH.join;
 
 
-exports.techMixin = BEM.util.extend({}, LangsMixin, {
+exports.techMixin = BEM.util.extend({}, require('./i18n').LangsMixin, {
 
     getBuildSuffixForLang: function(lang) {
         return pjoin('i18n', lang + '.keys.js');
