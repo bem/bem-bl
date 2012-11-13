@@ -6,6 +6,7 @@ block b-page {
         var ctx = this.ctx,
             dtype = apply('doctype'),
             buf = [
+                dtype,
                 {
                     elem: 'root',
                     content: [
