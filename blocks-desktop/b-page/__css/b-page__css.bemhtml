@@ -1,0 +1,40 @@
+block b-page, elem css {
+
+    bem: false
+
+    tag: 'style'
+
+    default, this.ctx.hasOwnProperty('ie'), !this.ctx._ieCommented: {
+        var ie = this.ctx.ie;
+        if (ie === true) {
+            apply(
+                this._mode = '',
+                this.ctx = [6, 7, 8, 9].map(function(v) {
+                    return { elem: 'css', url: this.ctx.url + '.ie' + v + '.css', ie: 'IE ' + v } }, this)
+            );
+        } else {
+            var hideRule = !ie ?
+                    ['gt IE 9', '<!-->', '<!--'] :
+                    ie === '!IE' ?
+                        [ie, '<!-->', '<!--'] :
+                        [ie, '', ''];
+            apply(
+                this._mode = '',
+                this.ctx._ieCommented = true,
+                this.ctx = [
+                    '<!--[if ' + hideRule[0] + ']>',
+                    hideRule[1],
+                    this.ctx,
+                    hideRule[2],
+                    '<![endif]-->'
+                ]
+            );
+        }
+    }
+
+    this.ctx.url {
+        tag: 'link',
+        attrs: { rel: 'stylesheet', href: this.ctx.url }
+    }
+
+}
