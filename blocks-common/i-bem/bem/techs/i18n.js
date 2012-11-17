@@ -3,7 +3,9 @@ var BEM = require('bem'),
     INHERIT = BEM.require('inherit'),
     PATH = require('path'),
 
-    DEFAULT_LANGS = ['ru', 'en'];
+    DEFAULT_LANGS = ['ru', 'en'],
+
+    pjoin = PATH.join;
 
 var LangsMixin = exports.LangsMixin = {
 
@@ -21,7 +23,7 @@ var LangsMixin = exports.LangsMixin = {
     },
 
     getSourceSuffix: function() {
-        return ['i18n', 'all.js'].join('/');
+        return pjoin('i18n', 'all.js');
     },
 
     extendDecl: function(decl, ext) {
@@ -60,7 +62,7 @@ var LangsMixin = exports.LangsMixin = {
 exports.Tech = INHERIT(BEM.Tech, BEM.util.extend({}, LangsMixin, {
 
     getSuffixForLang: function(lang) {
-        return [this.getTechName(), lang + '.js'].join('/');
+        return pjoin(this.getTechName(), lang + '.js');
     },
 
     getSuffixes: function() {
