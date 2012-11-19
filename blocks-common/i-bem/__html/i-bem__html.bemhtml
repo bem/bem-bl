@@ -338,10 +338,10 @@ content: this.ctx.content
                     if(!mods.hasOwnProperty(modName)) continue;
 
                     var modVal = mods[modName];
-                    if (modVal === undefined || modVal === null) continue;
+                    if (modVal == null) continue;
 
                     modVal = mods[modName] + '';
-                    if (modVal.length === 0) continue;
+                    if (!modVal) continue;
 
                     res.push(' ');
                     if (elem) {
