@@ -334,14 +334,22 @@ content: this.ctx.content
 
             if(mods) {
                 var modName; // TODO: разобраться с OmetaJS и YUI Compressor
-                for(modName in mods)
-                    if(mods.hasOwnProperty(modName) && mods[modName] && mods[modName].toString().length) {
-                        var modVal = mods[modName];
-                        res.push(' ');
-                        elem?
-                            buildElemClass(block, elem, modName, modVal, res) :
-                            buildBlockClass(block, modName, modVal, res);
+                for(modName in mods) {
+                    if(!mods.hasOwnProperty(modName)) continue;
+
+                    var modVal = mods[modName];
+                    if (modVal === undefined || modVal === null) continue;
+
+                    modVal = mods[modName] + '';
+                    if (modVal.length === 0) continue;
+
+                    res.push(' ');
+                    if (elem) {
+                      buildElemClass(block, elem, modName, modVal, res)
+                    } else {
+                      buildBlockClass(block, modName, modVal, res);
                     }
+                }
             }
 
             return buffer? res : res.join('');
