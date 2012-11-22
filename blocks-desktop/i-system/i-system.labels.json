@@ -1,7 +1,0 @@
-{
-    "brand" : "nonbrand",
-    "action" : "static",
-    "purposes" : [
-        ["purpose", "helper"]
-    ]
-}
