@@ -8,7 +8,7 @@
         },
         ua = BEM.blocks['i-ua'],
         // реалтаймовый слайд не для всех
-        realtimeSlide= ua.ios || ua.bada || ua.opera || ua.other || false,
+        realtimeSlide= ua.ios || ua.android >= '4' ||  ua.bada || ua.opera || ua.other || false,
         // параметры по умолчанию
         defaults = {
             step: 100,
