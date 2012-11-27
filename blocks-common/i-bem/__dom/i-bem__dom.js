@@ -29,7 +29,7 @@ var win = $(window),
     domElemToParams = {},
 
 /**
- * Storage for liveCtx event handlers 
+ * Storage for liveCtx event handlers
  * @private
  * @type Object
  */
@@ -229,7 +229,7 @@ function getClientNode() {
 }
 
 /**
- * Returns a block on a DOM element and initializes it if necessary 
+ * Returns a block on a DOM element and initializes it if necessary
  * @param {String} blockName Block name
  * @param {Object} params Block parameters
  * @returns {BEM}
@@ -244,7 +244,7 @@ $.fn.bem = function(blockName, params) {
  */
 var DOM = BEM.DOM = BEM.decl('i-bem__dom',/** @lends BEM.DOM.prototype */{
     /**
-     * @class Base block for creating BEM blocks that have DOM representation 
+     * @class Base block for creating BEM blocks that have DOM representation
      * @constructs
      * @private
      * @param {jQuery} domElem DOM element that the block is created on
@@ -1201,9 +1201,13 @@ var DOM = BEM.DOM = BEM.decl('i-bem__dom',/** @lends BEM.DOM.prototype */{
                 var nodeClassName = ' ' + node.className + ' ', i = 0;
                 while(className = classNames[i++]) {
                     if(nodeClassName.indexOf(' ' + className + ' ') > -1) {
-                        var j = 0, fns = storage[className].fns, fn;
-                        while(fn = fns[j++]) fn.fn.call($(node), e);
-                        if(e.isPropagationStopped()) return;
+                        var j = 0, fns = storage[className].fns, fn, stopPropagationAndPreventDefault = false;
+                        while(fn = fns[j++])
+                            if(fn.fn.call($(node), e) === false) stopPropagationAndPreventDefault = true;
+
+                        stopPropagationAndPreventDefault && e.preventDefault();
+                        if(stopPropagationAndPreventDefault || e.isPropagationStopped()) return;
+
                         classNames.splice(--i, 1);
                     }
                 }
@@ -1221,7 +1225,9 @@ var DOM = BEM.DOM = BEM.decl('i-bem__dom',/** @lends BEM.DOM.prototype */{
                     ((e.data || (e.data = {})).domElem = $(this)).closest(_this.buildSelector()),
                     true ],
                 block = initBlock.apply(null, invokeOnInit? args.concat([callback, e]) : args);
-            block && (invokeOnInit || (callback && callback.apply(block, arguments)));
+
+            if(block && !invokeOnInit && callback)
+                return callback.apply(block, arguments);
         };
 
     },
@@ -1411,7 +1417,7 @@ var DOM = BEM.DOM = BEM.decl('i-bem__dom',/** @lends BEM.DOM.prototype */{
     },
 
     /**
-     * Removes the live event handler from a block, based on a specified element where the event was being listened for 
+     * Removes the live event handler from a block, based on a specified element where the event was being listened for
      * @static
      * @protected
      * @param {jQuery} [ctx] The element in which the event was being listened for

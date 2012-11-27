@@ -99,4 +99,30 @@ BEM.TEST.decl({ block : 'i-bem', elem : 'live-init' }, function() {
         $('.b-bem-live-init-test-custom-data-inner').bem('b-bem-live-init-test-custom-data-inner').trigger('test-event', customData);
         expect(spy.mostRecentCall.args[1]).toBe(customData);
     });
+
+    it('should stop propagation if callback return false', function() {
+        var spy = jasmine.createSpy();
+        BEM.DOM.decl('b-bem-live-init-test-return-false', {}, {
+            live : function() {
+                this.liveBindTo('click', spy);
+            }
+        });
+        BEM.DOM.decl('b-bem-live-init-test-return-false-inner', {}, {
+            live : function() {
+                this.liveBindTo('click', function() {
+                    return false;
+                });
+            }
+        });
+
+        BEM.DOM.append(
+            $('#live-init-test'),
+            '<div class="b-bem-live-init-test-return-false i-bem" onclick="return {\'b-bem-live-init-test-return-false\':{}}">' +
+                '<div id="b-bem-live-init-test-return-false-inner" class="b-bem-live-init-test-return-false-inner i-bem" onclick="return {\'b-bem-live-init-test-return-false-inner\':{}}">' +
+            '</div>');
+
+        $('#b-bem-live-init-test-return-false-inner').click();
+
+        expect(spy).not.toHaveBeenCalled();
+    });
 });
