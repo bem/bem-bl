@@ -972,12 +972,8 @@ var DOM = BEM.DOM = BEM.decl('i-bem__dom',/** @lends BEM.DOM.prototype */{
             var noLive = typeof res == 'undefined';
 
             if(noLive ^ heedLive) {
-                if($.isFunction(_this.live)) {
-                    res = _this.live() !== false;
-                    _this.live = function() {};
-                } else {
-                    res = _this.live;
-                }
+                res = _this.live() !== false;
+                _this.live = function() {};
             }
         }
 

@@ -596,6 +596,13 @@ this.BEM = $.inherit($.observable, /** @lends BEM.prototype */ {
             });
         }
 
+        if(staticProps && typeof staticProps.live === 'boolean') {
+            var live = staticProps.live;
+            staticProps.live = function() {
+                return live;
+            };
+        }
+
         var block;
         decl.block == baseBlock._name?
             // makes a new "live" if the old one was already executed
