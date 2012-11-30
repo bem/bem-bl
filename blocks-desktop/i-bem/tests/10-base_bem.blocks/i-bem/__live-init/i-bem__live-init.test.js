@@ -125,4 +125,20 @@ BEM.TEST.decl({ block : 'i-bem', elem : 'live-init' }, function() {
 
         expect(spy).not.toHaveBeenCalled();
     });
+
+    it('should be live=true replaced by function', function() {
+        var base;
+        BEM.DOM.decl('b-bem-live-init-test-replace-by-function', {}, { live : true });
+        BEM.DOM.decl('b-bem-live-init-test-replace-by-function', {}, {
+            live : function() {
+                base = this.__base();
+            }
+        });
+
+        BEM.DOM.append(
+            $('#live-init-test'),
+            '<div class="b-bem-live-init-test-replace-by-function i-bem" onclick="return {\'b-bem-live-init-test-replace-by-function\':{}}">');
+
+        expect(base).toBeTruthy();
+    });
 });
