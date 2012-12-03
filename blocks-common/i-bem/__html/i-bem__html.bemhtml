@@ -376,8 +376,9 @@ content: this.ctx.content
                 },
                 identify: (function() {
                     var cnt = 0,
-                        expando = '__' + (+new Date()),
-                        get = function() { return 'uniq' + ++cnt; };
+                        id = BEM_.__id = (+new Date()),
+                        expando = '__' + id,
+                        get = function() { return 'uniq' + id + ++cnt; };
                     return function(obj, onlyGet) {
                         if(!obj) return get();
                         if(onlyGet || obj[expando]) return obj[expando];
