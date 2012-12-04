@@ -12,10 +12,7 @@
 
 (function($) {
 
-    var events,
-        iOSversion = navigator.userAgent.match(/iPhone\sOS\s([\d_]+)/);
-
-    iOSversion = iOSversion && iOSversion[1].replace(/_/g, '.');
+    var events;
 
     // тач
     if ('ontouchstart' in window) {
@@ -207,14 +204,12 @@
                                     return false;
                                 });
 
-                                if (!(iOSversion >= '6')) {
-                                    // http://cubiq.org/dropbox/clickdelay.html
-                                    $('body').css('pointer-events', 'none');
-                                    setTimeout(function() {
-                                        $(document).unbind('.preventClick');
-                                        $('body').css('pointer-events', 'auto');
-                                    }, 750);
-                                }
+                                // http://cubiq.org/dropbox/clickdelay.html
+                                $('body').css('pointer-events', 'none');
+                                setTimeout(function() {
+                                    $(document).unbind('.preventClick');
+                                    $('body').css('pointer-events', 'auto');
+                                }, 750);
                             }
 
                             e.type = 'tap';
