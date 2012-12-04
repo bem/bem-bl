@@ -2,7 +2,8 @@
     block: 'b-page',
     title: 'A horizontal menu using a list',
     head: [
-        { elem: 'css', url: '_10-b-menu-horiz_normal.css' }
+        { elem: 'css', url: '_10-b-menu-horiz_normal.css', ie: false },
+        { elem: 'css', url: '_10-b-menu-horiz_normal.ie.css', ie: 'lt IE 8' }
     ],
     content: [
         {

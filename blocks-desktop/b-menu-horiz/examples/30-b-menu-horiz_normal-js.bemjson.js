@@ -2,7 +2,8 @@
     block: 'b-page',
     title: 'Switching horizontal menu using a list',
     head: [
-        { elem: 'css', url: '_30-b-menu-horiz_normal-js.css' },
+        { elem: 'css', url: '_30-b-menu-horiz_normal-js.css', ie: false },
+        { elem: 'css', url: '_30-b-menu-horiz_normal-js.css', ie: 'lt IE 8' },
         { block: 'i-jquery', elem: 'core' },
         { elem: 'js', url: '30-b-menu-horiz_normal-js.js' }
     ],
