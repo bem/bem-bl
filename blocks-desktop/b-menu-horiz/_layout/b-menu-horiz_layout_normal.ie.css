@@ -1,0 +1,8 @@
+.b-menu-horiz_layout_normal .b-menu-horiz__title,
+.b-menu-horiz_layout_normal .b-menu-horiz__layout,
+.b-menu-horiz_layout_normal .b-menu-horiz__layout-unit
+{
+    display: inline;
+
+    zoom: 1;
+}
