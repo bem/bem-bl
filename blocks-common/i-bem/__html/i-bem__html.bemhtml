@@ -9,7 +9,6 @@
 
         local(
             this._mode = 'default',
-            this._links = this.ctx.links || this._links,
             this.block = vBlock || (vElem ? block : undefined),
             this._currBlock = vBlock || vElem ? undefined : block,
             this.elem = this.ctx.elem,
@@ -198,123 +197,6 @@ default: {
 
         tag && buf.push('</', tag, '>');
     }
-}
-
-// Cache start
-cache && this.ctx && this.ctx.cache: {
-    var cached;
-
-    // setProperty(obj, ['nested', 'key'], 'value')
-    function setProperty(obj, key, value) {
-        if (key.length === 0) return;
-
-        if (Array.isArray(value)) {
-            var target = obj;
-            for (var i = 0; i < value.length - 1; i++) {
-                target = target[value[i]];
-            }
-            value = target[value[i]];
-        }
-
-        var host = obj,
-            previous;
-
-        for (var i = 0; i < key.length - 1; i++) {
-            host = host[key[i]];
-        }
-
-        previous = host[key[i]];
-        host[key[i]] = value;
-
-        return previous;
-    }
-
-    if (cached = cache.get(this.ctx.cache)) {
-        // Cache hit
-        for (var i = 0; i < cached.log.length; i++) {
-            if (typeof cached.log[i] === 'string') {
-                this._buf.push(cached.log[i]);
-                continue;
-            }
-
-            // Apply log and create reverse movement
-            var log = cached.log[i],
-                reverseLog;
-
-            reverseLog = log.log.map(function(entry) {
-                return {
-                    key: entry[0],
-                    value: setProperty(this, entry[0], entry[1])
-                };
-            }, this).reverse();
-
-            // Generate content
-            apply(this.ctx.cache = null,
-                  this._cacheLog = null,
-                  this.ctx.link = log.link);
-
-            // Revert changes
-            reverseLog.forEach(function(entry) {
-                setProperty(this, entry.key, entry.value)
-            }, this);
-        }
-        return cached.res;
-    }
-
-    // Record log
-    var cacheLog = [],
-        res;
-
-    local(this.ctx.cache = null,
-          this._cachePos = this._buf.length,
-          this._cacheLog = cacheLog,
-          this._localLog = []) {
-        res = apply();
-
-        var tail = this._buf.slice(this._cachePos).join('');
-        if (tail) cacheLog.push(tail);
-    }
-
-    // And set cache
-    cache.set(this.ctx.cache, { log: cacheLog, res: res });
-
-    return res;
-}
-
-// Data redirection
-this.ctx && !this._.isSimple(this.ctx) && this.ctx.link: {
-    function follow() {
-        if (this.ctx.link === 'no-follow') return;
-
-        var data = this._links[this.ctx.link];
-        return apply(this.ctx = data);
-    }
-
-    if (!cache || !this._cacheLog) return follow.call(this);
-
-    // Get contents that should be cached
-    var contents = this._buf.slice(this._cachePos).join('');
-
-    // Move buffer position forward
-    this._cachePos = this._buf.length;
-
-    this._cacheLog.push(
-        // static cache entry
-        contents,
-
-        // dynamic entry
-        {
-            log: this._localLog.slice(),
-            link: this.ctx.link
-        }
-    );
-
-    var res = follow.call(this);
-
-    // Skip non-cacheable contents
-    this._cachePos = this._buf.length;
-
-    return res;
 }
 
 tag: undefined
