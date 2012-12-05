@@ -16,7 +16,7 @@ ometa BEMHTMLParser <: XJSTParser {
 
     bemCustom = asgnExpr:e -> [#xjst, e],
 
-    bemhtmlSet = spaces <letter (letter | digit | '-')*>:nn
+    bemhtmlSet = spaces <letter (letter | digit | '-' | '_')*>:nn
                &(spaces ('{' | ':' | ','))
                ?(!BEMHTMLParser._isPrimitive(nn))
                -> [ nn ],
@@ -147,3 +147,165 @@ ometa BEMHTMLToXJST <: XJSTCompiler {
     topLevel = empty -> 'template(true){}'
 
 }
+
+ometa BEMHTMLLogLocal <: XJSTIdentity {
+  // local(...) ... => if (this._localLog) { log; local(...) ... } else { ... }
+  localStmt trans:a trans:t logChanges(#stmt, a, t):log -> {
+    [#if, [#getp, [#string, '_localLog'], [#get, '__this']],
+       log,
+       [ #begin, [#localStmt, a, t] ]
+    ]
+  },
+
+  // local(...) ... => this._localLog ? (log, local(...) ... ) : ...
+  localExpr trans:a trans:t logChanges(#expr, a, t):log -> {
+    [#condExpr, [#getp, [#string, '_localLog'], [#get, '__this']],
+      log,
+      [#localExpr, a, t]
+    ]
+  },
+
+  transChange = [#set [(#get :v | #getp :p :v)] :v]:e -> e,
+
+  transJsonChange = [#binding :k :v] transChange([
+                      #set,
+                      [#getp, [#string, k], [#get, '__this']],
+                      v
+                    ]):r -> r,
+
+  transChanges = [#json transJsonChange*:pairs] -> pairs
+               | [#binop ',' transChanges:left transChange:right] -> {
+                   left.concat([ right ]);
+                 }
+               | transChange:r -> [ r ],
+
+  // Translate simple changes into one `push` call
+  logChanges :type transChanges:changes :body -> {
+    var self = this,
+        localLog = [#getp, [#string, '_localLog'], [#get, '__this']],
+        prelude = [],
+        args = [];
+
+    changes = changes.map(function(change) {
+      function flatten(property) {
+        var result = [],
+            curr = property;
+
+        while (true) {
+          if (curr[0] !== 'getp' && curr[0] !== 'this' &&
+              (curr[0] !== 'get' || curr[1] !== '__this')) {
+            return false;
+          }
+
+          if (curr[0] === 'get' || curr[0] === 'this' || curr[0] === 'string') {
+            break;
+          }
+
+          result.push(curr[1]);
+          curr = curr[2];
+        }
+
+        return result.reverse();
+      }
+
+      var property = flatten(change[1]),
+          value = change[2];
+
+      // We're logging only local(this.x = ...) cases
+      // (No this.ctx.a = ... and etc)
+      if (!property || property.length === 0 ||
+          property[0][0] === 'string' && property[0][1] === 'ctx') {
+        return change;
+      }
+
+      // Replace all properties with side-effects
+      property = property.map(function(property) {
+        if (property[0] === 'string') return property;
+
+        var tmp = self.getVar();
+
+        prelude.push([#set, tmp, property]);
+
+        return tmp;
+      });
+
+      // Movement case: this.a.b = this.c.d
+      var propValue = flatten(value);
+      if (propValue) {
+        args.push([
+          #arr,
+          [#arr].concat(property),
+          [#arr].concat(propValue)
+        ]);
+      } else {
+        if (value[0] !== 'string' && value[0] !== 'get') {
+          var tmp = self.getVar();
+
+          prelude.push([#set, tmp, value]);
+          value = tmp;
+        }
+
+        // Generic case
+        args.push([
+          #arr,
+          [#arr].concat(property),
+          value
+        ]);
+      }
+
+      // Reflect property changes
+      return [#set, property.reduce(function(acc, curr) {
+        return [#getp, curr, acc];
+      }, [#get, '__this']), value];
+    });
+
+    var local = [
+      type === #stmt ? #localStmt : #localExpr,
+      changes.reduce(function(prev, curr) {
+        return [#binop, ',', prev, curr];
+      }),
+      body
+    ];
+
+    var call = [#call, [#getp, [#string, 'push'], localLog]].concat(args);
+
+    var result;
+    if (args.length !== 0) {
+      // Revert everything pushed to localLog
+      var reverse = [#set, localLog, [#call,
+            [#getp, [#string, 'slice'], localLog], [#number, 0],
+            [#number, -args.length]
+          ]],
+          tmp = this.getVar();
+
+      if (type === #expr) {
+        result = prelude.concat([ call, [#set, tmp, local], reverse, tmp ]);
+      } else {
+        result = prelude.concat([ call, local, reverse ]);
+      }
+    } else {
+      result = prelude.concat([ local ]);
+    }
+
+    if (type == #expr) {
+      return result.reduce(function(prev, curr) {
+        return [#binop, ',', prev, curr];
+      });
+    } else {
+      return [#begin].concat(result);
+    }
+  },
+
+  topLevel {
+    this._vars = [];
+  } [trans*:ts] -> [this._vars, ts]
+}
+
+BEMHTMLLogLocal.prototype.getVar = function getVar() {
+  var i = this._vars.length,
+      name = '__bv' + i;
+
+  this._vars.push(name);
+
+  return [#get, name];
+};

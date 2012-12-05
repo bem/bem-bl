@@ -46,6 +46,13 @@ exports.getBuildResult = function(prefixes, suffix, outputDir, outputName) {
                         throw { errorPos: i, toString: function() { return "bemhtml match failed" } }
                     });
 
+                var vars = [];
+                if (process.env.BEMHTML_CACHE == 'on') {
+                  var xjstCached = BEMHTMLLogLocal.match(tree, 'topLevel');
+                  vars = xjstCached[0];
+                  tree = xjstCached[1];
+                }
+
                 var xjstSources = BEMHTML.BEMHTMLToXJST.match(
                     tree,
                     'topLevel',
@@ -78,10 +85,19 @@ exports.getBuildResult = function(prefixes, suffix, outputDir, outputName) {
                 throw new Error("xjst to js compilation failed");
             }
 
-            return 'var BEMHTML = ' + xjstJS + '\n'
-                + 'BEMHTML = (function(xjst) { return function() { return xjst.apply.call([this]); }; }(BEMHTML));\n'
-                + 'typeof exports === "undefined" || (exports.BEMHTML = BEMHTML);';
-
+            return 'var BEMHTML = function() {\n' +
+                   '  var cache,\n' +
+                   '      xjst = '  + xjstJS + ';\n' +
+                   '  return function(options) {\n' +
+                   '    if (!options) options = {};\n' +
+                   '    cache = options.cache;\n' +
+                   (vars.length > 0 ? '    var ' + vars.join(', ') +
+                        ';\n' : '') +
+                   '    return xjst.apply.call([this]);\n' +
+                   '  };\n' +
+                   '}();\n' +
+                   'typeof exports === "undefined" || ' +
+                   '(exports.BEMHTML = BEMHTML);';
         });
 
 };
