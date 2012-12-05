@@ -148,7 +148,25 @@ ometa BEMHTMLToXJST <: XJSTCompiler {
 
 }
 
-ometa BEMHTMLLogLocal <: XJSTIdentity {
+ometa BXJSTIdentity <: BSJSIdentity {
+    const = [#string :s] | [#number :n],
+
+    extends :filename -> [#extends, filename],
+
+    superStmt :op -> [#superStmt, op],
+    superExpr :op -> [#superExpr, op],
+
+    nhApplyStmt :p -> [#nhApplyStmt, p],
+    nhApplyExpr -> [#nhApplyExpr],
+    applyStmt :p -> [#applyStmt, p],
+
+    localStmt trans:as trans:t -> [#localStmt, as, t],
+    localExpr trans:as trans:t -> [#localExpr, as, t],
+
+    template trans:m trans:b -> [#template, m, b]
+}
+
+ometa BEMHTMLLogLocal <: BXJSTIdentity {
   // local(...) ... => if (this._localLog) { log; local(...) ... } else { ... }
   localStmt trans:a trans:t logChanges(#stmt, a, t):log -> {
     [#if, [#getp, [#string, '_localLog'], [#get, '__this']],

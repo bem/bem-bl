@@ -369,19 +369,86 @@ BEMHTMLToXJST.prototype["topLevel"] = function $topLevel() {
     });
 };
 
+var BXJSTIdentity = function BXJSTIdentity(source) {
+    BSJSIdentity.call(this, source);
+};
+
+BXJSTIdentity.grammarName = "BXJSTIdentity";
+
+BXJSTIdentity.match = BSJSIdentity.match;
+
+BXJSTIdentity.matchAll = BSJSIdentity.matchAll;
+
+exports.BXJSTIdentity = BXJSTIdentity;
+
+require("util").inherits(BXJSTIdentity, BSJSIdentity);
+
+BXJSTIdentity.prototype["const"] = function $const() {
+    var s, n;
+    return this._list(function() {
+        return this._match("string") && this._skip() && (s = this._getIntermediate(), true);
+    }) || this._list(function() {
+        return this._match("number") && this._skip() && (n = this._getIntermediate(), true);
+    });
+};
+
+BXJSTIdentity.prototype["extends"] = function $extends() {
+    var filename;
+    return this._skip() && (filename = this._getIntermediate(), true) && this._exec([ "extends", filename ]);
+};
+
+BXJSTIdentity.prototype["superStmt"] = function $superStmt() {
+    var op;
+    return this._skip() && (op = this._getIntermediate(), true) && this._exec([ "superStmt", op ]);
+};
+
+BXJSTIdentity.prototype["superExpr"] = function $superExpr() {
+    var op;
+    return this._skip() && (op = this._getIntermediate(), true) && this._exec([ "superExpr", op ]);
+};
+
+BXJSTIdentity.prototype["nhApplyStmt"] = function $nhApplyStmt() {
+    var p;
+    return this._skip() && (p = this._getIntermediate(), true) && this._exec([ "nhApplyStmt", p ]);
+};
+
+BXJSTIdentity.prototype["nhApplyExpr"] = function $nhApplyExpr() {
+    return this._exec([ "nhApplyExpr" ]);
+};
+
+BXJSTIdentity.prototype["applyStmt"] = function $applyStmt() {
+    var p;
+    return this._skip() && (p = this._getIntermediate(), true) && this._exec([ "applyStmt", p ]);
+};
+
+BXJSTIdentity.prototype["localStmt"] = function $localStmt() {
+    var as, t;
+    return this._rule("trans", false, [], null, this["trans"]) && (as = this._getIntermediate(), true) && this._rule("trans", false, [], null, this["trans"]) && (t = this._getIntermediate(), true) && this._exec([ "localStmt", as, t ]);
+};
+
+BXJSTIdentity.prototype["localExpr"] = function $localExpr() {
+    var as, t;
+    return this._rule("trans", false, [], null, this["trans"]) && (as = this._getIntermediate(), true) && this._rule("trans", false, [], null, this["trans"]) && (t = this._getIntermediate(), true) && this._exec([ "localExpr", as, t ]);
+};
+
+BXJSTIdentity.prototype["template"] = function $template() {
+    var m, b;
+    return this._rule("trans", false, [], null, this["trans"]) && (m = this._getIntermediate(), true) && this._rule("trans", false, [], null, this["trans"]) && (b = this._getIntermediate(), true) && this._exec([ "template", m, b ]);
+};
+
 var BEMHTMLLogLocal = function BEMHTMLLogLocal(source) {
-    XJSTIdentity.call(this, source);
+    BXJSTIdentity.call(this, source);
 };
 
 BEMHTMLLogLocal.grammarName = "BEMHTMLLogLocal";
 
-BEMHTMLLogLocal.match = XJSTIdentity.match;
+BEMHTMLLogLocal.match = BXJSTIdentity.match;
 
-BEMHTMLLogLocal.matchAll = XJSTIdentity.matchAll;
+BEMHTMLLogLocal.matchAll = BXJSTIdentity.matchAll;
 
 exports.BEMHTMLLogLocal = BEMHTMLLogLocal;
 
-require("util").inherits(BEMHTMLLogLocal, XJSTIdentity);
+require("util").inherits(BEMHTMLLogLocal, BXJSTIdentity);
 
 BEMHTMLLogLocal.prototype["localStmt"] = function $localStmt() {
     var a, t, log;
