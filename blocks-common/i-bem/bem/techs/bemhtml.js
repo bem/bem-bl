@@ -48,7 +48,9 @@ exports.getBuildResult = function(prefixes, suffix, outputDir, outputName) {
 
                 var vars = [];
                 if (process.env.BEMHTML_CACHE == 'on') {
-                  var xjstCached = BEMHTMLLogLocal.match(tree, 'topLevel');
+                  var xjstCached = BEMHTML.BEMHTMLLogLocal.match(
+                    tree,
+                    'topLevel');
                   vars = xjstCached[0];
                   tree = xjstCached[1];
                 }
