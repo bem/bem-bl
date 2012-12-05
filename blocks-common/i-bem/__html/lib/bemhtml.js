@@ -117,7 +117,7 @@ BEMHTMLParser.prototype["bemhtmlSet"] = function $bemhtmlSet() {
                     return this._rule("letter", false, [], null, this["letter"]);
                 }) || this._atomic(function() {
                     return this._rule("digit", false, [], null, this["digit"]);
-                }) || this._match("-");
+                }) || this._match("-") || this._match("_");
             });
         });
     }, true) && (nn = this._getIntermediate(), true) && this._atomic(function() {
@@ -367,4 +367,163 @@ BEMHTMLToXJST.prototype["topLevel"] = function $topLevel() {
     }) || this._atomic(function() {
         return this._rule("empty", false, [], null, this["empty"]) && this._exec("template(true){}");
     });
+};
+
+var BEMHTMLLogLocal = function BEMHTMLLogLocal(source) {
+    XJSTIdentity.call(this, source);
+};
+
+BEMHTMLLogLocal.grammarName = "BEMHTMLLogLocal";
+
+BEMHTMLLogLocal.match = XJSTIdentity.match;
+
+BEMHTMLLogLocal.matchAll = XJSTIdentity.matchAll;
+
+exports.BEMHTMLLogLocal = BEMHTMLLogLocal;
+
+require("util").inherits(BEMHTMLLogLocal, XJSTIdentity);
+
+BEMHTMLLogLocal.prototype["localStmt"] = function $localStmt() {
+    var a, t, log;
+    return this._rule("trans", false, [], null, this["trans"]) && (a = this._getIntermediate(), true) && this._rule("trans", false, [], null, this["trans"]) && (t = this._getIntermediate(), true) && this._rule("logChanges", false, [ "stmt", a, t ], null, this["logChanges"]) && (log = this._getIntermediate(), true) && this._exec(function() {
+        return [ "if", [ "getp", [ "string", "_localLog" ], [ "get", "__this" ] ], log, [ "begin", [ "localStmt", a, t ] ] ];
+    }.call(this));
+};
+
+BEMHTMLLogLocal.prototype["localExpr"] = function $localExpr() {
+    var a, t, log;
+    return this._rule("trans", false, [], null, this["trans"]) && (a = this._getIntermediate(), true) && this._rule("trans", false, [], null, this["trans"]) && (t = this._getIntermediate(), true) && this._rule("logChanges", false, [ "expr", a, t ], null, this["logChanges"]) && (log = this._getIntermediate(), true) && this._exec(function() {
+        return [ "condExpr", [ "getp", [ "string", "_localLog" ], [ "get", "__this" ] ], log, [ "localExpr", a, t ] ];
+    }.call(this));
+};
+
+BEMHTMLLogLocal.prototype["transChange"] = function $transChange() {
+    var v, e;
+    return this._list(function() {
+        return this._match("set") && this._list(function() {
+            return this._atomic(function() {
+                var v;
+                return this._match("get") && this._skip() && (v = this._getIntermediate(), true);
+            }) || this._atomic(function() {
+                var p, v;
+                return this._match("getp") && this._skip() && (p = this._getIntermediate(), true) && this._skip() && (v = this._getIntermediate(), true);
+            });
+        }) && this._skip() && (v = this._getIntermediate(), true);
+    }) && (e = this._getIntermediate(), true) && this._exec(e);
+};
+
+BEMHTMLLogLocal.prototype["transJsonChange"] = function $transJsonChange() {
+    var k, v, r;
+    return this._list(function() {
+        return this._match("binding") && this._skip() && (k = this._getIntermediate(), true) && this._skip() && (v = this._getIntermediate(), true);
+    }) && this._rule("transChange", false, [ [ "set", [ "getp", [ "string", k ], [ "get", "__this" ] ], v ] ], null, this["transChange"]) && (r = this._getIntermediate(), true) && this._exec(r);
+};
+
+BEMHTMLLogLocal.prototype["transChanges"] = function $transChanges() {
+    return this._atomic(function() {
+        var pairs;
+        return this._list(function() {
+            return this._match("json") && this._any(function() {
+                return this._atomic(function() {
+                    return this._rule("transJsonChange", false, [], null, this["transJsonChange"]);
+                });
+            }) && (pairs = this._getIntermediate(), true);
+        }) && this._exec(pairs);
+    }) || this._atomic(function() {
+        var left, right;
+        return this._list(function() {
+            return this._match("binop") && this._match(",") && this._rule("transChanges", false, [], null, this["transChanges"]) && (left = this._getIntermediate(), true) && this._rule("transChange", false, [], null, this["transChange"]) && (right = this._getIntermediate(), true);
+        }) && this._exec(function() {
+            return left.concat([ right ]);
+        }.call(this));
+    }) || this._atomic(function() {
+        var r;
+        return this._rule("transChange", false, [], null, this["transChange"]) && (r = this._getIntermediate(), true) && this._exec([ r ]);
+    });
+};
+
+BEMHTMLLogLocal.prototype["logChanges"] = function $logChanges() {
+    var type, changes, body;
+    return this._skip() && (type = this._getIntermediate(), true) && this._rule("transChanges", false, [], null, this["transChanges"]) && (changes = this._getIntermediate(), true) && this._skip() && (body = this._getIntermediate(), true) && this._exec(function() {
+        var self = this, localLog = [ "getp", [ "string", "_localLog" ], [ "get", "__this" ] ], prelude = [], args = [];
+        changes = changes.map(function(change) {
+            function flatten(property) {
+                var result = [], curr = property;
+                while (true) {
+                    if (curr[0] !== "getp" && curr[0] !== "this" && (curr[0] !== "get" || curr[1] !== "__this")) {
+                        return false;
+                    }
+                    if (curr[0] === "get" || curr[0] === "this" || curr[0] === "string") {
+                        break;
+                    }
+                    result.push(curr[1]);
+                    curr = curr[2];
+                }
+                return result.reverse();
+            }
+            var property = flatten(change[1]), value = change[2];
+            if (!property || property.length === 0 || property[0][0] === "string" && property[0][1] === "ctx") {
+                return change;
+            }
+            property = property.map(function(property) {
+                if (property[0] === "string") return property;
+                var tmp = self.getVar();
+                prelude.push([ "set", tmp, property ]);
+                return tmp;
+            });
+            var propValue = flatten(value);
+            if (propValue) {
+                args.push([ "arr", [ "arr" ].concat(property), [ "arr" ].concat(propValue) ]);
+            } else {
+                if (value[0] !== "string" && value[0] !== "get") {
+                    var tmp = self.getVar();
+                    prelude.push([ "set", tmp, value ]);
+                    value = tmp;
+                }
+                args.push([ "arr", [ "arr" ].concat(property), value ]);
+            }
+            return [ "set", property.reduce(function(acc, curr) {
+                return [ "getp", curr, acc ];
+            }, [ "get", "__this" ]), value ];
+        });
+        var local = [ type === "stmt" ? "localStmt" : "localExpr", changes.reduce(function(prev, curr) {
+            return [ "binop", ",", prev, curr ];
+        }), body ];
+        var call = [ "call", [ "getp", [ "string", "push" ], localLog ] ].concat(args);
+        var result;
+        if (args.length !== 0) {
+            var reverse = [ "set", localLog, [ "call", [ "getp", [ "string", "slice" ], localLog ], [ "number", 0 ], [ "number", -args.length ] ] ], tmp = this.getVar();
+            if (type === "expr") {
+                result = prelude.concat([ call, [ "set", tmp, local ], reverse, tmp ]);
+            } else {
+                result = prelude.concat([ call, local, reverse ]);
+            }
+        } else {
+            result = prelude.concat([ local ]);
+        }
+        if (type == "expr") {
+            return result.reduce(function(prev, curr) {
+                return [ "binop", ",", prev, curr ];
+            });
+        } else {
+            return [ "begin" ].concat(result);
+        }
+    }.call(this));
+};
+
+BEMHTMLLogLocal.prototype["topLevel"] = function $topLevel() {
+    var ts;
+    return this._exec(this._vars = []) && this._list(function() {
+        return this._any(function() {
+            return this._atomic(function() {
+                return this._rule("trans", false, [], null, this["trans"]);
+            });
+        }) && (ts = this._getIntermediate(), true);
+    }) && this._exec([ this._vars, ts ]);
+};
+
+BEMHTMLLogLocal.prototype.getVar = function getVar() {
+    var i = this._vars.length, name = "__bv" + i;
+    this._vars.push(name);
+    return [ "get", name ];
 };
