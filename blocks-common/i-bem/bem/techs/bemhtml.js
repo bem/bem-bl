@@ -26,7 +26,8 @@ exports.getBuildResult = function(prefixes, suffix, outputDir, outputName) {
             var BEMHTML = require('../../__html/lib/bemhtml');
 
             return BEMHTML.translate(sources, {
-              devMode: process.env.BEMHTML_ENV == 'development'
+              devMode: process.env.BEMHTML_ENV == 'development',
+              cache: process.env.BEMHTML_CACHE == 'on'
             });
         });
 
