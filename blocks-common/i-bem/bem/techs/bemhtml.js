@@ -46,15 +46,6 @@ exports.getBuildResult = function(prefixes, suffix, outputDir, outputName) {
                         throw { errorPos: i, toString: function() { return "bemhtml match failed" } }
                     });
 
-                var vars = [];
-                if (process.env.BEMHTML_CACHE == 'on') {
-                  var xjstCached = BEMHTML.BEMHTMLLogLocal.match(
-                    tree,
-                    'topLevel');
-                  vars = xjstCached[0];
-                  tree = xjstCached[1];
-                }
-
                 var xjstSources = BEMHTML.BEMHTMLToXJST.match(
                     tree,
                     'topLevel',
@@ -63,6 +54,22 @@ exports.getBuildResult = function(prefixes, suffix, outputDir, outputName) {
                         console.log(arguments);
                         throw { toString: function() { return "bemhtml to xjst compilation failed" } };
                     });
+
+                var vars = [];
+                if (process.env.BEMHTML_CACHE == 'on') {
+                  var xjstTree = XJST.XJSTParser.matchAll(xjstSources,
+                                                          'topLevel');
+
+                  var xjstCached = BEMHTML.BEMHTMLLogLocal.match(
+                    xjstTree,
+                    'topLevel');
+                  vars = xjstCached[0];
+                  xjstTree = xjstCached[1];
+
+                  var xjstSource = XJST.XJSTCompiler.match(xjstTree,
+                                                           'topLevel');
+                }
+
             } catch (e) {
                 e.errorPos != undefined &&
                     SYS.error(
