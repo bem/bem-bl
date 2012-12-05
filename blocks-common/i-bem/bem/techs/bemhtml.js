@@ -66,8 +66,7 @@ exports.getBuildResult = function(prefixes, suffix, outputDir, outputName) {
                   vars = xjstCached[0];
                   xjstTree = xjstCached[1];
 
-                  console.log(xjstTree);
-                  var xjstSource = XJST.XJSTCompiler.match([ xjstTree ],
+                  var xjstSource = XJST.XJSTCompiler.match([ [], xjstTree ],
                                                            'topLevel');
                 }
 
