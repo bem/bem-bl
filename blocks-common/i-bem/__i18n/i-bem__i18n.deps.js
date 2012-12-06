@@ -3,6 +3,6 @@
         { block: 'i-bem', elem: 'html' }
     ],
     shouldDeps: [
-        { elem: 'i18n', mods: { 'dummy': 'yes' } }
+        { elem: 'i18n', mod: 'dummy', val:'yes' }
     ]
 })
