@@ -1,1 +1,0 @@
-<!-- boolean literal should not be parsed as object -->true
