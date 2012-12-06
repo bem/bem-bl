@@ -17,9 +17,11 @@ function unit(name) {
         };
 
     PARSER.parseXml(content.src, function(xml) {
+      /*
         console.log('\n= FILE:', name);
         console.log('\n=== XML ===\n', inspect(xml, false, 23), '\n=== END OF XML ===\n');
         console.log('\n=== JAVASCRIPT ===\n', PARSER.domToJs(xml), '\n=== END OF JAVASCRIPT ===\n');
+       */
     });
 }
 

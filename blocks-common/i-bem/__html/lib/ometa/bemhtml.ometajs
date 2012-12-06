@@ -46,7 +46,7 @@ ometa BEMHTMLParser <: XJSTParser {
                          [#xjst, this.predicates],
                          r
                        )
-                     },
+                     } | stmt:r -> [#stmt, r],
 
   applyMode :type = "apply" "(" expr:e ")"
                     { BEMHTMLParser._transMode(e) }:modded_e
@@ -211,10 +211,10 @@ ometa BEMHTMLToXJST <: XJSTIdentity {
   bhBody = [#body :b] -> b,
 
   bhTemplate = [bhPredic+:ps bhBody:b] -> [
-    #template,
-    BEMHTMLToXJST.cons(ps),
-    b
-  ],
+                #template,
+                BEMHTMLToXJST.cons(ps),
+                b
+             ] | [#stmt anything]:r -> r,
 
   topLevel = [bhTemplate+:ts] -> ts,
   topLevel = bhTemplate:t -> [t],
