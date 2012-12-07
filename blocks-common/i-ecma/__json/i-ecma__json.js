@@ -25,6 +25,7 @@ window.JSON = {
         }
         switch(_toString.call(val)) {
             case '[object String]':
+                escapable.lastIndex = 0;
                 return '"' +
                     (escapable.test(val)?
                         val.replace(escapable, function(a) {
