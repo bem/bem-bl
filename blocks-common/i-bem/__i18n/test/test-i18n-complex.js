@@ -51,6 +51,14 @@ suite('BEM.I18N Complex tests', function() {
 
         }, { "lang" : "ru" });
 
+        BEM.I18N.decl('i-date', {
+
+            "months-gen" : function(param) {
+                return param["num"];
+            }
+
+        }, { "lang" : "ru" });
+
         BEM.I18N.decl('i-locale', {
 
             "at-all-help" : 'по всей помощи ',
@@ -154,6 +162,24 @@ suite('BEM.I18N Complex tests', function() {
 
         }, { "lang" : "ru" });
 
+        BEM.I18N.decl('alert_type_date', {
+
+            "DATE" : function(params) {
+                return this.keyset('i-tanker__dynamic').key('toggle', {
+                    "condition": params["today"],
+                    "true": 'сегодня',
+                    "false": this.keyset('i-tanker__dynamic').key('toggle', {
+                        "condition": params["tomorrow"],
+                        "true": 'завтра',
+                        "false": params["day"] + ' ' + this.keyset('i-date').key('months-gen', {
+                            "num": params["month"]
+                        })
+                    })
+                })
+            }
+
+        }, { "lang" : "ru" });
+
     });
 
     test('Simple keyset', function() {
@@ -191,6 +217,17 @@ suite('BEM.I18N Complex tests', function() {
         assert.equal('<p>В разделе «<b>Лего</b>» ничего не было найдено.<br/>' +
                 'Показаны результаты поиска по всем разделам Помощи.</p>Найдено 5 страниц.',
                 BEM.I18N('i-messages_type_error', 'PAGES_FOUND', { count: 5, section: 'Лего' }));
+
+    });
+
+    test('Triple nestings keysets', function() {
+
+        assert.equal('сегодня',
+                BEM.I18N('alert_type_date', 'DATE', { today: true }));
+        assert.equal('завтра',
+                BEM.I18N('alert_type_date', 'DATE', { tomorrow: true }));
+        assert.equal('1 12',
+                BEM.I18N('alert_type_date', 'DATE', { day: 1, month: 12 }));
 
     });
 
