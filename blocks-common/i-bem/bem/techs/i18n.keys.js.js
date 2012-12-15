@@ -3,17 +3,25 @@ var BEM = require('bem'),
     PATH = require('path'),
     I18NJS = require('../../__i18n/lib/i18n-js'),
 
+    U = BEM.util,
     pjoin = PATH.join;
 
 
-exports.techMixin = BEM.util.extend({}, require('./i18n').LangsMixin, {
+exports.techMixin = U.extend({}, require('./i18n').LangsMixin, {
 
     getSuffixForLang: function(lang) {
         return pjoin('i18n', lang + '.keys.js');
     },
 
+
+    getSuffixForAll: function() {
+        return this.getSuffixForLang('all');
+    },
+
     getCreateSuffixes: function() {
-        return this.getLangs().map(this.getSuffixForLang, this);
+        return this.getLangs()
+            .map(this.getSuffixForLang, this)
+            .concat(this.getSuffixForAll());
     },
 
     getCreateResults: function(prefix, vars) {
@@ -23,7 +31,10 @@ exports.techMixin = BEM.util.extend({}, require('./i18n').LangsMixin, {
 
         return BEM.util.readJsonJs(source)
             .then(function(data) {
-                return Q.shallow(_this.getCreateResultsForLangs(prefix, data));
+                return Q.shallow([
+                        _this.getCreateResultsForLangs(prefix, data),
+                        _this.getCreateResultsForAll(prefix, data)
+                    ].reduce(function(a, b) { return U.extend(a, b) }));
             });
 
     },
@@ -46,8 +57,30 @@ exports.techMixin = BEM.util.extend({}, require('./i18n').LangsMixin, {
 
     },
 
+    getCreateResultsForAll: function(prefix, data) {
+
+        var _this = this,
+            suffix = _this.getSuffixForAll(),
+            res = {};
+
+        res[suffix] = _this.serializeI18nData(data['all']) || [];
+
+        _this.getLangs().reduce(function(res, lang) {
+
+            [].push.apply(res[suffix], _this.serializeI18nData(data[lang] || {}, lang) || []);
+            return res;
+
+        }, res);
+
+        res[suffix].push(_this.serializeI18nInit(_this.getDefaultLang()));
+
+        return res;
+
+    },
+
     getCreateResult: function(prefix, suffix, data, lang) {
-        return (data ? this.serializeI18nData(data, lang) : []).concat(this.serializeI18nInit(lang));
+        return data?
+            this.serializeI18nData(data, lang).concat(this.serializeI18nInit(lang)) : [];
     },
 
     storeCreateResult: function(path, suffix, res, force) {
