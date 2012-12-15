@@ -34,7 +34,7 @@ exports.techMixin = BEM.util.extend({}, LangsMixin, {
                 return VM.runInThisContext([
                         '(function(){',
                         // make local var BEM to prevent global assignment in i18n code
-                        'var BEM;',
+                        'var BEM = {};',
                         i18n,
                         bemhtml,
                         'return BEMHTML;',
@@ -79,9 +79,12 @@ exports.techMixin = BEM.util.extend({}, LangsMixin, {
 
     getCreateResult: function(path, suffix, vars) {
 
-        var i18n = (vars.data? this.serializeI18nData(vars.data, vars.lang) : [])
-            .concat([this.serializeI18nInit(vars.lang)])
-            .join('\n');
+        var data = vars.data,
+            i18n = data && data.lenght?
+                this.serializeI18nData(data, vars.lang)
+                    .concat([this.serializeI18nInit(vars.lang)])
+                    .join('\n')
+                : '';
 
         return this.getHtml(
             this.getBemhtml(vars.Prefix, i18n),
