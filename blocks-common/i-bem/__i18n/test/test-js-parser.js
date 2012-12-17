@@ -34,3 +34,6 @@ unit('html-01');
 unit('entity-01');
 unit('param-empty-01');
 unit('complex-01');
+unit('literal-01');
+unit('literal-02');
+unit('literal-03');
