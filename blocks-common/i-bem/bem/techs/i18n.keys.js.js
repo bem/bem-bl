@@ -79,7 +79,7 @@ exports.techMixin = U.extend({}, require('./i18n').LangsMixin, {
     },
 
     getCreateResult: function(prefix, suffix, data, lang) {
-        return data?
+        return data && !BEM.util.isEmptyObject(data)?
             this.serializeI18nData(data, lang).concat(this.serializeI18nInit(lang)) : [];
     },
 
