@@ -1,0 +1,16 @@
+<i18n:dynamic project="tanker" keyset="dynamic" key="toggle">  <!-- D1 -->
+    <i18n:condition><i18n:param>today</i18n:param></i18n:condition>
+    <i18n:true>сегодня</i18n:true>
+    <i18n:false>
+        <i18n:dynamic project="tanker" keyset="dynamic" key="toggle">  <!-- D2 -->
+            <i18n:condition><i18n:param>tomorrow</i18n:param></i18n:condition>
+            <i18n:true>завтра</i18n:true>
+            <i18n:false>
+                <i18n:param>day</i18n:param>
+                <i18n:dynamic project="d3" keyset="i-date" key="months-gen">  <!-- D3 -->
+                    <i18n:num><i18n:param>month</i18n:param></i18n:num>
+                </i18n:dynamic>
+            </i18n:false>
+        </i18n:dynamic>
+    </i18n:false>
+</i18n:dynamic>
