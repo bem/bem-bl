@@ -80,7 +80,7 @@ exports.techMixin = BEM.util.extend({}, LangsMixin, {
     getCreateResult: function(path, suffix, vars) {
 
         var data = vars.data,
-            i18n = data && data.lenght?
+            i18n = data && !BEM.util.isEmptyObject(data)?
                 this.serializeI18nData(data, vars.lang)
                     .concat([this.serializeI18nInit(vars.lang)])
                     .join('\n')
