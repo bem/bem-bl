@@ -5,19 +5,24 @@ var DOM = require('dom-js'),
 
     isArray = Array.isArray,
 
-    isSimple = function(obj) {
-        var type = typeof obj;
-        return type === 'string' || type === 'number';
-    },
-    isJson = function (obj) {
+    isJson = function(obj) {
         try {
-            return JSON.parse(obj);
+            if(isString(obj)) {
+                var jsonStart = obj.trim().charAt(0);
+                if(jsonStart === '{' || jsonStart === '[')
+                    return JSON.parse(obj);
+            }
+            return false;
         } catch(e) {
             return false;
         }
     },
     isString = function(str) {
-        return toString.call(str) === '[object String]';
+        return typeof str === 'string';
+    },
+    isSimple = function(obj) {
+        var type = typeof obj;
+        return type === 'string' || type === 'number';
     };
 
 
@@ -158,7 +163,7 @@ function toCommonNodes(nodes) {
             code.push(_node(node));
         }
         else if(node.text) {
-            var text = _text(node.text);
+            var text = _json(node.text);
             if(text) code.push(text);
         }
     });
@@ -175,15 +180,11 @@ function _text(str) {
 
     if(!isSimple(str)) return '';
 
-    try {
-        return _json(JSON.parse(str));
-    } catch(e) {
-        str = str.replace(/\n\s\s+/g, '\n ');
+    str = str.replace(/\n\s\s+/g, '\n ');
 
-        if(!str.length) return '';
+    if(!str.length) return '';
 
-        return [str, 'TEXT'];
-    }
+    return [str, 'TEXT'];
 
 }
 
@@ -242,14 +243,18 @@ function _xml(node) {
  */
 function _json(nodes) {
 
-    if(isArray(nodes)) {
+    var json;
+    if(!(json = isJson(nodes)))
+        return _text(nodes);
+
+    if(isArray(json)) {
         // FIXME: array should always produce `plural_adv`?
         // FIXME: `none` value for json
         var params = [
                 ['"count"', [ ['"count"', 'PARAM-CALL'] ], 'PARAM']
             ]
             .concat(['one', 'some', 'many'].map(function(p, i) {
-                return [quotify(p), quotify(nodes[i] || ''), 'PARAM'];
+                return [quotify(p), quotify(json[i] || ''), 'PARAM'];
             }));
 
         params.push('PARAMS');
@@ -258,7 +263,7 @@ function _json(nodes) {
         return ['i-tanker__dynamic', 'plural_adv', params, 'TANKER_DYNAMIC'];
     }
 
-    return nodes.toString();
+    return _text(nodes.toString());
 
 }
 
