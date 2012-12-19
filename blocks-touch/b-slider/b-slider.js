@@ -6,7 +6,7 @@
                 'translate3d(' + x + 'px, 0, 0)' :
                 'translate(' + x + 'px, 0)';
         },
-        biuldNamespace = function(e, i) {
+        buildNamespace = function(e, i) {
 
             var manyEvents = !!e.split(' ')[1],
                 res = [];
@@ -56,7 +56,7 @@
 
         namespaced: function(e) {
 
-            return biuldNamespace(e, this._sliderCount);
+            return buildNamespace(e, this._sliderCount);
 
         },
 
