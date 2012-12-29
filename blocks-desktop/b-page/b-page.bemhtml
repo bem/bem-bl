@@ -2,9 +2,15 @@ block b-page {
 
     doctype: this.ctx.doctype || '<!DOCTYPE html>'
 
+    xUACompatible: this.ctx['x-ua-compatible'] === false ? false : {
+        tag: 'meta',
+        attrs: { 'http-equiv': 'X-UA-Compatible', content: this.ctx['x-ua-compatible'] || 'IE=EmulateIE7, IE=edge' }
+    }
+
     default: {
         var ctx = this.ctx,
             dtype = apply('doctype'),
+            xUA = apply('xUACompatible'),
             buf = [
                 dtype,
                 {
@@ -17,10 +23,7 @@ block b-page {
                                     tag: 'meta',
                                     attrs: { charset: 'utf-8' }
                                 },
-                                {
-                                    tag: 'meta',
-                                    attrs: { 'http-equiv': 'X-UA-Compatible', content: 'IE=EmulateIE7, IE=edge' }
-                                },
+                                xUA,
                                 {
                                     tag: 'title',
                                     content: ctx.title
