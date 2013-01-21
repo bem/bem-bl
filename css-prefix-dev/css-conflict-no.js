@@ -76,10 +76,11 @@ exports.Tech = INHERIT(base.Tech, {
 	File: INHERIT(base.File, {
 		processInclude: function(path, content) {
 			content = this.__base(path, content);
-	
+				
 			return typeof BEM_CONFLICTS_NO === 'undefined' ? 
 				content : 
 				addPrefix(content, 'bem-' + process.env.BEM_CONFLICTS_NO, []);
+		}
 	})
 });
 
