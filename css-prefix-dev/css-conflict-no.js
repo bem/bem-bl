@@ -77,7 +77,7 @@ exports.Tech = INHERIT(base.Tech, {
 		processInclude: function(path, content) {
 			content = this.__base(path, content);
 				
-			return typeof BEM_CONFLICTS_NO === 'undefined' ? 
+			return typeof process.env.BEM_CONFLICTS_NO === 'undefined' ? 
 				content : 
 				addPrefix(content, 'bem-' + process.env.BEM_CONFLICTS_NO, []);
 		}
