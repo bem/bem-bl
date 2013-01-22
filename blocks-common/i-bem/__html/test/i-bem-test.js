@@ -41,6 +41,7 @@ suite('i-bem block and others', function() {
   unit('attr with empty value', 'empty-attrs');
   unit('one symbol elem', 'one-symbol-elem');
   unit('bemhtml with comments', 'comments');
+  unit('bemhtml with custom predicates', 'custom-predicates');
   unit('mix regression #232', 'gh-232');
   unit('condition regression #239', 'gh-239', true);
   unit('simple types regression #254', 'gh-254');
