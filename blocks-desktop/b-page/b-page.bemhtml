@@ -1,108 +1,82 @@
 block b-page {
-    default: {
-        this._buf.push('<!DOCTYPE html>');
-        local(
-            this._mode = '',
-            this.ctx = {
-                tag: 'html',
-                cls: 'i-ua_js_no i-ua_css_standard',
-                content: [
-                    {
-                        elem: 'head',
-                        content: [
-                            {
-                                tag: 'meta',
-                                attrs: { charset: 'utf-8' }
-                            },
-                            {
-                                tag: 'meta',
-                                attrs: { 'http-equiv': 'X-UA-Compatible', content: 'IE=EmulateIE7, IE=edge' }
-                            },
-                            {
-                                tag: 'title',
-                                content: this.ctx.title
-                            },
-                            this.ctx.favicon ? {
-                                elem: 'favicon',
-                                url: this.ctx.favicon
-                            } : '',
-                            this.ctx.meta,
-                            {
-                                block: 'i-ua'
-                            },
-                            this.ctx.head
-                        ]
-                    },
-                    {
-                        elem: 'body',
-                        mix: [this.ctx],
-                        content: [
-                            this.ctx.content
-                        ]
-                    }
-                ]
-            }) this.apply();
+
+    this._mode === 'doctype': this.ctx.doctype || '<!DOCTYPE html>'
+
+    !this.elem, !this.ctx._wrapped, default: {
+        var ctx = this.ctx,
+            dtype = apply(this._mode = 'doctype'),
+            buf = [
+                dtype,
+                {
+                    elem: 'root',
+                    content: [
+                        {
+                            elem: 'head',
+                            content: [
+                                {
+                                    tag: 'meta',
+                                    attrs: { charset: 'utf-8' }
+                                },
+                                {
+                                    tag: 'meta',
+                                    attrs: { 'http-equiv': 'X-UA-Compatible', content: 'IE=EmulateIE7, IE=edge' }
+                                },
+                                {
+                                    tag: 'title',
+                                    content: ctx.title
+                                },
+                                ctx.favicon ? {
+                                    elem: 'favicon',
+                                    url: ctx.favicon
+                                } : '',
+                                ctx.meta,
+                                {
+                                    block: 'i-ua'
+                                },
+                                ctx.head
+                            ]
+                        },
+                        ctx
+                    ]
+                }
+            ];
+
+        apply(this._mode = '', this.ctx._wrapped = true, this.ctx = buf);
+    }
+
+    tag: 'body'
+
+    mix: [{ elem: 'body' }]
+
+    elem root {
+
+        bem: false
+        tag: 'html'
+        cls: 'i-ua_js_no i-ua_css_standard'
+
     }
 
     elem head {
-        bem: false,
-        tag: 'head'
-    }
 
-    elem body, tag: 'body'
+        bem: false
+        tag: 'head'
+
+    }
 
     elem meta {
-        bem: false,
-        tag: 'meta',
-        attrs: this.ctx.attrs
-    }
 
-    elem css {
         bem: false
-        tag: 'style'
+        tag: 'meta'
+        attrs: this.ctx.attrs
 
-        default, this.ctx.hasOwnProperty('ie'), !this.ctx._ieCommented: {
-            var ie = this.ctx.ie;
-            if (ie === true) {
-                local(
-                    this._mode = '',
-                    this.ctx = [6, 7, 8, 9].map(function(v) { return { elem: 'css', url: this.ctx.url + '.ie' + v + '.css', ie: 'IE ' + v } }, this)
-                ) this.apply();
-            } else {
-                var hideRule = !ie ?
-                        ['gt IE 9', '<!-->', '<!--'] :
-                        ie == '!IE' ?
-                            [ie, '<!-->', '<!--'] :
-                            [ie, '', ''];
-                local(
-                    this._mode = '',
-                    this.ctx._ieCommented = true,
-                    this.ctx = [
-                        '<!--[if ' + hideRule[0] + ']>',
-                        hideRule[1],
-                        this.ctx,
-                        hideRule[2],
-                        '<![endif]-->'
-                    ]
-                ) this.apply();
-            }
-        },
-        this.ctx.url {
-            tag: 'link',
-            attrs: { rel: 'stylesheet', href: this.ctx.url }
-        }
-    }
-
-    elem js {
-        bem: false,
-        tag: 'script',
-        attrs, this.ctx.url: { src: this.ctx.url }
     }
 
     elem favicon {
-        bem: false,
-        tag: 'link',
+
+        bem: false
+        tag: 'link'
         attrs: { rel: 'shortcut icon', href: this.ctx.url }
+
     }
 
 }

@@ -1,30 +1,52 @@
 var DOM = require('dom-js'),
 
     QUOTE_CHAR = '"',
-    SINGLE_QUOTE_CHAR = "'";
+    SINGLE_QUOTE_CHAR = "'",
+
+    isArray = Array.isArray,
+
+    isJson = function(obj) {
+        try {
+            if(isString(obj)) {
+                var jsonStart = obj.trim().charAt(0);
+                if(jsonStart === '{' || jsonStart === '[')
+                    return JSON.parse(obj);
+            }
+            return false;
+        } catch(e) {
+            return false;
+        }
+    },
+    isString = function(str) {
+        return typeof str === 'string';
+    },
+    isSimple = function(obj) {
+        var type = typeof obj;
+        return type === 'string' || type === 'number';
+    };
+
 
 var parseXml = exports.parseXml = function(xml, cb) {
 
-    try {
-        new DOM.DomJS().parse('<root>' + xml + '</root>', function(err, dom) {
-            if(err) return;
-            cb(dom.children);
-        });
-    } catch(e) {
-        parseXml(DOM.escape(xml), cb);
-    }
+        try {
+            new DOM.DomJS().parse('<root>' + xml + '</root>', function(err, dom) {
+                if(err) return;
+                cb(dom.children);
+            });
+        } catch(e) {
+            parseXml(DOM.escape(xml), cb);
+        }
 
-};
+    },
+    domToJs = exports.domToJs = function(nodes) {
 
-var domToJs = exports.domToJs = function(nodes) {
+        var code = expandNodes(toCommonNodes(nodes), jsExpander);
 
-    var code = expandNodes(toCommonNodes(nodes), jsExpander);
+        return code.length === 1 &&
+            (code[0].charAt(0) === QUOTE_CHAR || code[0].charAt(0) === SINGLE_QUOTE_CHAR ) ?
+                code[0] : 'function(params) { return ' + code.join(' + ') + ' }';
 
-    return code.length === 1 &&
-        (code[0].charAt(0) === QUOTE_CHAR || code[0].charAt(0) === SINGLE_QUOTE_CHAR ) ?
-            code[0] : 'function(params) { return ' + code.join(' + ') + ' }';
-
-};
+    };
 
 exports.xmlToJs = function(xml, cb) {
 
@@ -48,45 +70,40 @@ function expandNodes(node, expanderFn) {
 
 }
 
-// TODO: js-quote()
-function jsQuote(s) {
-    return '' + s.replace(/([\\\/\'\r\n])/g, '\\$1');
-}
-
 /**
- * @param {Array} item
+ * @param {Array} node
  * @returns {String}
  */
-function jsExpander(item, _raw) {
+function jsExpander(node, _raw) {
 
-    typeof _raw !== 'undefined' || (_raw = false);
+    _raw == null && (_raw = false);
 
-    var currentExpander = function(item) {
-            return jsExpander(item, _raw);
+    var currentExpander = function(node) {
+            return jsExpander(node, _raw);
         },
-        rawExpander = function(item) {
-            return jsExpander(item, true);
+        rawExpander = function(node) {
+            return jsExpander(node, true);
         };
 
-    if(!item) {
+    if(!node) {
         // FIXME: should we throw?
         console.warn('[WARN]: Undefined item');
         return '';
     }
 
-    var type = item.pop(),
+    var nodeclass = node.pop(),
         code;
 
-    switch(type) {
+    switch(nodeclass) {
 
     case 'TANKER_DYNAMIC':
         // [ keyset, key, [params] ]
-        code = expandNodes(item, currentExpander);
+        code = expandNodes(node, currentExpander);
         return "this.keyset('" + code[0] + "').key('" + code[1] + "', " + (code[2] || "{}") + ")";
 
     case 'JS_DYNAMIC':
         // [ code ]
-        code = '(function(params) { ' + expandNodes(item[0], rawExpander).join('') + ' }).call(this, params);';
+        code = '(function(params) { ' + expandNodes(node[0], rawExpander).join('') + ' }).call(this, params);';
         return code;
 
     case 'XSL_DYNAMIC':
@@ -95,51 +112,47 @@ function jsExpander(item, _raw) {
 
     case 'XML':
         // [ tag, attrs, [content] ]
-        var tag = item[0],
-            attrs = item[1],
+        var tag = node[0],
+            attrs = node[1],
             prop = [],
             a;
 
         for(a in attrs) { prop.push([a, SINGLE_QUOTE_CHAR + attrs[a] + SINGLE_QUOTE_CHAR].join('=')); };
         prop = prop.length? jsQuote(' ' + prop.join(' ')) : '';
 
-        code = item[2].length?
-            ['"<' + tag + prop + '>"', expandNodes(item[2], currentExpander), '"</' + tag + '>"'].join(' + ') :
+        code = node[2].length?
+            ['"<' + tag + prop + '>"', expandNodes(node[2], currentExpander), '"</' + tag + '>"'].join(' + ') :
             '"<' + tag + prop + '/>"';
 
         return code;
 
     case 'PARAMS':
         // [ [params] ]
-        return "{ " + expandNodes(item, currentExpander).join(', ') + " } ";
+        return "{ " + expandNodes(node, currentExpander).join(', ') + " } ";
 
     case 'PARAM':
         // [ name, [code] ]
-        code = expandNodes(item[1], currentExpander);
-        return [item[0], toString.call(code) === '[object Array]' ? code.join(' + ') : code].join(': ');
+        code = expandNodes(node[1], currentExpander);
+        return [node[0], isArray(code) ? code.join(' + ') : code].join(': ');
 
     case 'PARAM-CALL':
         // [ key ]
-        return 'params[' + item[0] + ']';
+        return 'params[' + node[0] + ']';
 
     case 'TEXT':
         // [ text ]
-        return _raw ? item[0] : SINGLE_QUOTE_CHAR + jsQuote(item[0]) + SINGLE_QUOTE_CHAR;
+        return _raw ? node[0] : SINGLE_QUOTE_CHAR + jsQuote(node[0]) + SINGLE_QUOTE_CHAR;
 
     default:
-        throw new Error('Unexpected item type: ' + type);
+        throw new Error('Unexpected item type: ' + nodeclass);
 
     }
 
 }
 
-function isSimple(obj) {
-    var type = typeof obj;
-    return type === 'string' || type === 'number';
-}
-
 /**
- * @param {Array} nodes
+ * @param {Node[]} nodes
+ * @returns {AST}
  */
 function toCommonNodes(nodes) {
 
@@ -147,15 +160,11 @@ function toCommonNodes(nodes) {
 
     nodes.forEach(function(node) {
         if(node.name) {
-
             code.push(_node(node));
-
         }
         else if(node.text) {
-
-            var text = _text(node.text);
+            var text = _json(node.text);
             if(text) code.push(text);
-
         }
     });
 
@@ -163,6 +172,10 @@ function toCommonNodes(nodes) {
 
 }
 
+/**
+ * @param {Object|Node} str
+ * @returns {AST|String}
+ */
 function _text(str) {
 
     if(!isSimple(str)) return '';
@@ -175,40 +188,89 @@ function _text(str) {
 
 }
 
+/**
+ * @returns {AST}
+ */
+function _empty() {
+    return ['', 'TEXT'];
+}
+
+/**
+ * @param {Node} node
+ * @returns {AST}
+ */
 function _node(node) {
 
-    if(node.name === 'i18n:dynamic') {
+    var name = node.name;
+    switch(name) {
 
+    case 'i18n:dynamic':
         var attrs = node.attributes;
         if(attrs && attrs.key) {
-
+            // tanker dynamic
             var keyset = _keyset(attrs),
                 params = _params(node.children);
 
             return [keyset, attrs.key, params, 'TANKER_DYNAMIC'];
 
-        } else {
-            // custom
-            return _dynamic(node.children);
         }
 
-    }
-    else if(node.name === 'i18n:param') {
+        // custom
+        return _dynamic(node.children);
 
-        if(node.firstChild()) return _param(node.children[0]);
+    case 'i18n:param':
+        if(node.firstChild())
+            return _paramCall(node.children[0]);
 
     }
-    else if(node.name.indexOf(':') === -1) {
+
+    if(!~name.indexOf(':'))
         return _xml(node);
-    }
 
 }
 
+/**
+ * @param {Node} node
+ * @returns {AST}
+ */
 function _xml(node) {
     return [node.name, node.attributes, toCommonNodes(node.children), 'XML'];
 }
 
+/**
+ * @param {Array|Object} nodes
+ * @returns {AST}
+ */
+function _json(nodes) {
 
+    var json;
+    if(!(json = isJson(nodes)))
+        return _text(nodes);
+
+    if(isArray(json)) {
+        // FIXME: array should always produce `plural_adv`?
+        // FIXME: `none` value for json
+        var params = [
+                ['"count"', [ ['"count"', 'PARAM-CALL'] ], 'PARAM']
+            ]
+            .concat(['one', 'some', 'many'].map(function(p, i) {
+                return [quotify(p), quotify(json[i] || ''), 'PARAM'];
+            }));
+
+        params.push('PARAMS');
+
+        // FIXME: hardcode
+        return ['i-tanker__dynamic', 'plural_adv', params, 'TANKER_DYNAMIC'];
+    }
+
+    return _text(nodes.toString());
+
+}
+
+/**
+ * @param {Node[]} nodes
+ * @returns {AST}
+ */
 function _dynamic(nodes) {
 
     var code = [];
@@ -228,14 +290,17 @@ function _dynamic(nodes) {
 
 }
 
+/**
+ * @param {Node[]} nodes
+ * @returns {AST}
+ */
 function _params(nodes) {
 
     var params = [];
 
     nodes.forEach(function(node) {
-        if(!node.name || !node.firstChild()) return;
-
-        params.push([JSON.stringify(node.name.replace(/i18n:/, '')), toCommonNodes(node.children), 'PARAM']);
+        if(!node.name) return;
+        params.push(_param(node));
     });
 
     params.push('PARAMS');
@@ -244,11 +309,45 @@ function _params(nodes) {
 
 }
 
-function _param(params) {
-    return [JSON.stringify(params.text), 'PARAM-CALL'];
+/**
+ * @param {Node} param
+ * @returns {AST}
+ */
+function _param(param) {
+    var name = param.name.replace(/i18n:/, ''),
+        val = toCommonNodes(param.children);
+
+    val.length || val.push(_empty());
+
+    return [JSON.stringify(name), val, 'PARAM'];
 }
 
-function _keyset(params) {
+/**
+ * @param {Node} param
+ * @returns {AST}
+ */
+function _paramCall(param) {
+    return [JSON.stringify(param.text), 'PARAM-CALL'];
+}
+
+/**
+ * @param {Node} param
+ * @returns {String}
+ */
+function _keyset(param) {
     // FIXME: get rid of Yandex.Tanker specifics
-    return ((params.project && params.project === 'tanker') ? 'i-' + params.project + '__' : '') + params.keyset;
+    return ((param.project && param.project === 'tanker') ? 'i-' + param.project + '__' : '') + param.keyset;
+}
+
+
+/** Helpers **/
+
+function jsQuote(s) {
+    return '' + s.replace(/([\\\/\'\r\n])/g, '\\$1');
+}
+
+function quotify(str) {
+    if(isString(str))
+       return QUOTE_CHAR + str + QUOTE_CHAR;
+    return str;
 }

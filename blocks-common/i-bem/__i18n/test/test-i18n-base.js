@@ -5,6 +5,34 @@ var assert = require('assert'),
 require('vm').runInThisContext(
     fs.readFileSync(path.resolve(__dirname, '../i-bem__i18n.i18n/core.js')));
 
+
+suite('BEM.I18N Lang', function() {
+
+    test('Lang getter', function() {
+
+        assert.ok(BEM.I18N.lang(), 'Lang should always be defined');
+
+        assert.equal(BEM.I18N.lang(), 'ru', 'and should be "ru" by default');
+
+    });
+
+    test('Lang setter 1', function() {
+
+        BEM.I18N.lang('tr');
+
+        assert.equal(BEM.I18N.lang(), 'tr', 'Lang could be redefined');
+
+    });
+
+    test('Lang setter 2', function() {
+
+        assert.equal(BEM.I18N.lang('ua'), 'ua', 'Setting lang with value should return new value');
+
+    });
+
+});
+
+
 suite('BEM.I18N Simple test', function() {
 
     setup(function() {

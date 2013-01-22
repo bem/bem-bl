@@ -59,8 +59,9 @@ exports.techMixin = BEM.util.extend({}, LangsMixin, {
         var _this = this;
         return this.__base(prefixes, this.getBaseTechSuffix(), outputDir, outputName)
             .then(function(res) {
-                return res.concat(data? _this.serializeI18nData(data, lang) : [])
-                    .concat([_this.serializeI18nInit(lang)]);
+                return data && !BEM.util.isEmptyObject(data)? res
+                        .concat(_this.serializeI18nData(data, lang))
+                        .concat([_this.serializeI18nInit(lang)]) : res;
             });
 
     },

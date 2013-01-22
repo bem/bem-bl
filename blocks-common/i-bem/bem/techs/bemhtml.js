@@ -54,6 +54,25 @@ exports.getBuildResult = function(prefixes, suffix, outputDir, outputName) {
                         console.log(arguments);
                         throw { toString: function() { return "bemhtml to xjst compilation failed" } };
                     });
+
+                var vars = [];
+                if (process.env.BEMHTML_CACHE == 'on') {
+                  var xjstTree = XJST.XJSTParser.matchAll(xjstSources,
+                                                          'topLevel');
+
+                  var xjstCached = BEMHTML.BEMHTMLLogLocal.match(
+                    xjstTree,
+                    'topLevel');
+                  vars = xjstCached[0];
+                  xjstTree = xjstCached[1];
+
+                  xjstTree = XJST.XJSTTranslator.matchAll(xjstTree,
+                                                          'topLevel',
+                                                          [ undefined ]);
+                  var xjstSource = XJST.XJSTCompiler.match(xjstTree,
+                                                           'topLevel');
+                }
+
             } catch (e) {
                 e.errorPos != undefined &&
                     SYS.error(
@@ -78,10 +97,19 @@ exports.getBuildResult = function(prefixes, suffix, outputDir, outputName) {
                 throw new Error("xjst to js compilation failed");
             }
 
-            return 'var BEMHTML = ' + xjstJS + '\n'
-                + 'BEMHTML = (function(xjst) { return function() { return xjst.apply.call([this]); }; }(BEMHTML));\n'
-                + 'typeof exports === "undefined" || (exports.BEMHTML = BEMHTML);';
-
+            return 'var BEMHTML = function() {\n' +
+                   '  var cache,\n' +
+                   '      xjst = '  + xjstJS + ';\n' +
+                   '  return function(options) {\n' +
+                   '    if (!options) options = {};\n' +
+                   '    cache = options.cache;\n' +
+                   (vars.length > 0 ? '    var ' + vars.join(', ') +
+                        ';\n' : '') +
+                   '    return xjst.apply.call([this]);\n' +
+                   '  };\n' +
+                   '}();\n' +
+                   'typeof exports === "undefined" || ' +
+                   '(exports.BEMHTML = BEMHTML);';
         });
 
 };

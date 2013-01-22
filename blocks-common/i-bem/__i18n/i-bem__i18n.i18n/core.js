@@ -1,5 +1,6 @@
 // XXX: Support tanker-like syntax of keys in `i-bem__i18n`
 // i18n['prj']['keyset']['key'](params);
+// FIXME: Should not work, because of vars hoisting
 var i18n = i18n || {};
 
 (function(bem_, undefined) {
@@ -42,15 +43,13 @@ function bemParse(name) {
 
 function _pushStack(name) {
     if(!name) return false;
-
-    var len = stack.length;
-    return !(len && stack[len - 1] === name) && stack.push(name);
+    return stack.push(name);
 }
 
-function _popStack(name) {
-    var len = stack.length;
-    return len && stack[len - 1] !== name && stack.pop();
+function _popStack() {
+    return stack.length && stack.pop();
 }
+
 
 /**
  * @constructor
@@ -74,8 +73,8 @@ _i18n.prototype = {
         return this;
     },
 
-    keyset : function(name) {
-        _pushStack(this._keyset);
+    keyset : function(name, saveCtx) {
+        saveCtx && _pushStack(this._keyset);
 
         this._keyset = bemName(name);
         return this;
@@ -149,9 +148,23 @@ bem_.I18N = (function(base) {
         return klass.keyset(keyset).key(key, params);
     };
 
-    ['project', 'keyset'].forEach(function(p) {
-        klass[p] = function(v) { this._i18n[p](v); return this; };
-    });
+    /**
+     * @param {String} name
+     * @returns {BEM.I18N}
+     */
+    klass.project = function(name) {
+        this._i18n.project(name);
+        return this;
+    };
+
+    /**
+     * @param {String} name
+     * @returns {BEM.I18N}
+     */
+    klass.keyset = function(name) {
+        this._i18n.keyset(name, true);
+        return this;
+    };
 
     /**
      * @param {String} name Key name
@@ -160,15 +173,18 @@ bem_.I18N = (function(base) {
      */
     klass.key = function(name, params) {
         var proto = this._i18n,
-            _keyset, result;
+            result,
+            ksetRestored;
 
-        proto.lang(this._currentLang).key(name);
+        proto.lang(this._lang).key(name);
 
+        // TODO: kiss
         result = proto.val.call(proto, params, klass);
 
-        // восстанавливаем значение предыдущего кейсета, если нужно
-        _keyset = _popStack(proto._keyset);
-        _keyset && proto.keyset(_keyset);
+        // restoring keyset's context
+        // NOTE: should not save current ctx, `saveCtx = false`
+        ksetRestored = _popStack();
+        ksetRestored && proto.keyset(ksetRestored, false);
 
         return result;
     };
@@ -189,7 +205,8 @@ bem_.I18N = (function(base) {
         proto.keyset(bemitem);
 
         for(k in keysets)
-            proto.key(k).decl(keysets[k]);
+            keysets.hasOwnProperty(k) &&
+                proto.key(k).decl(keysets[k]);
 
         return this;
     };
@@ -201,19 +218,18 @@ bem_.I18N = (function(base) {
      * @return {String}
      */
     klass.lang = function(lang) {
-        typeof lang !== undefined
-            && (this._currentLang = lang);
-
-        return this._currentLang;
+        typeof lang !== 'undefined' && (this._lang = lang);
+        return this._lang;
     };
 
     klass._i18n = base;
 
-    klass._currentLang = DEFAULT_LANG;
+    klass._lang = DEFAULT_LANG;
 
     return klass;
 
 }(new _i18n()));
+
 
 /** Global */
 BEM = this.BEM = bem_;

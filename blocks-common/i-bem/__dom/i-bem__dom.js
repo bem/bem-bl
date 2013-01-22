@@ -972,12 +972,8 @@ var DOM = BEM.DOM = BEM.decl('i-bem__dom',/** @lends BEM.DOM.prototype */{
             var noLive = typeof res == 'undefined';
 
             if(noLive ^ heedLive) {
-                if($.isFunction(_this.live)) {
-                    res = _this.live() !== false;
-                    _this.live = function() {};
-                } else {
-                    res = _this.live;
-                }
+                res = _this.live() !== false;
+                _this.live = function() {};
             }
         }
 
@@ -1189,9 +1185,13 @@ var DOM = BEM.DOM = BEM.decl('i-bem__dom',/** @lends BEM.DOM.prototype */{
                 var nodeClassName = ' ' + node.className + ' ', i = 0;
                 while(className = classNames[i++]) {
                     if(nodeClassName.indexOf(' ' + className + ' ') > -1) {
-                        var j = 0, fns = storage[className].fns, fn;
-                        while(fn = fns[j++]) fn.fn.call($(node), e);
-                        if(e.isPropagationStopped()) return;
+                        var j = 0, fns = storage[className].fns, fn, stopPropagationAndPreventDefault = false;
+                        while(fn = fns[j++])
+                            if(fn.fn.call($(node), e) === false) stopPropagationAndPreventDefault = true;
+
+                        stopPropagationAndPreventDefault && e.preventDefault();
+                        if(stopPropagationAndPreventDefault || e.isPropagationStopped()) return;
+
                         classNames.splice(--i, 1);
                     }
                 }
@@ -1209,7 +1209,9 @@ var DOM = BEM.DOM = BEM.decl('i-bem__dom',/** @lends BEM.DOM.prototype */{
                     ((e.data || (e.data = {})).domElem = $(this)).closest(_this.buildSelector()),
                     true ],
                 block = initBlock.apply(null, invokeOnInit? args.concat([callback, e]) : args);
-            block && (invokeOnInit || (callback && callback.apply(block, arguments)));
+
+            if(block && !invokeOnInit && callback)
+                return callback.apply(block, arguments);
         };
 
     },

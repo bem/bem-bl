@@ -6,20 +6,40 @@
                 'translate3d(' + x + 'px, 0, 0)' :
                 'translate(' + x + 'px, 0)';
         },
+        buildNamespace = function(e, i) {
+
+            var manyEvents = !!e.split(' ')[1],
+                res = [];
+
+            if (manyEvents) {
+                e.split(' ').map(function( item ) { res.push( item + '.touchSlides_' + i ) });
+                res = res.join(' ');
+            } else {
+                res = e + '.touchSlides_' + i;
+            }
+
+            return res;
+
+        },
         ua = BEM.blocks['i-ua'],
         // реалтаймовый слайд не для всех
-        realtimeSlide= ua.ios || ua.bada || ua.opera || ua.other || false,
+        realtimeSlide= ua.ios || ua.android >= '4' ||  ua.bada || ua.opera || ua.other || false,
         // параметры по умолчанию
         defaults = {
             step: 100,
             threshold: 50
-        };
+        },
+        // уникальный идентификатор неймспейсов для каждого инстанса слайдера
+        sliderCount = 1;
+
 
     BEM.DOM.decl('b-slider', {
 
         onSetMod: {
 
             js: function() {
+
+                this._sliderCount = sliderCount++;
 
                 // инициализация слайдера по умолчанию или если autoinit == true
                 if (this.params.autoinit || !('autoinit' in this.params)) {
@@ -31,6 +51,12 @@
                 });
 
             }
+
+        },
+
+        namespaced: function(e) {
+
+            return buildNamespace(e, this._sliderCount);
 
         },
 
@@ -117,7 +143,7 @@
                 slider._calcParams();
 
                 // при поворотах пересчитываем ширину
-                $(window).bind('orientchange.touchSlides', function() {
+                $(window).bind( this.namespaced('orientchange'), function() {
                     slider._items.width(slider._elem.parent().width());
                 });
 
@@ -138,16 +164,9 @@
 
                 slider
                     // бинд на pointer-события
-                    .bindTo({
-                        'pointerdown.touchSlides': function(e) {
-                            slider._onPointerDown(e);
-                        },
-                        'pointermove.touchSlides': function(e) {
-                            slider._onPointerMove(e);
-                        },
-                        'pointerup.touchSlides': slider._onPointerUp,
-                        'pointercancel.touchSlides': slider._onPointerUp
-                    })
+                    .bindTo( this.namespaced('pointerdown'), slider._onPointerDown )
+                    .bindTo( this.namespaced('pointermove'), slider._onPointerMove )
+                    .bindTo( this.namespaced('pointerup pointercancel'), slider._onPointerUp )
                     // бинд на i-bem-события
                     .on({
                         left: slider._onLeft,
@@ -174,13 +193,13 @@
         _clearBinds: function() {
 
             this
-                .unbindFrom('.touchSlides')
+                .unbindFrom('.touchSlides_' + this._sliderCount)
                 .un('left', this._onLeft)
                 .un('right', this._onRight)
                 .un('start', this._onStart)
                 .un('end', this._onEnd);
 
-            $(window).unbind('.touchSlides');
+            $(window).unbind('.touchSlides_' + this._sliderCount);
 
         },
 
@@ -249,7 +268,7 @@
             var slider = this;
 
             // поворот
-            $(window).bind('orientchange.touchSlides', function(landscape) {
+            $(window).bind(this.namespaced('orientchange'), function(landscape) {
                 // пересчёт
                 slider._calcParams();
 
@@ -501,9 +520,11 @@
             slider.trigger('start', slider._getCurrentParams());
 
             slider._elem
-                .one('webkitTransitionEnd.touchSlides oTransitionEnd.touchSlides  otransitionend.touchSlides', function() {
-                    slider.trigger('end', slider._getCurrentParams());
-                })
+                .one(this.namespaced('webkitTransitionEnd oTransitionEnd otransitionend'),
+                    function() {
+                        slider.trigger('end', slider._getCurrentParams());
+                    }
+                )
                 .css({
                     transition: transition,
                     transform: translateX(slider._currentX)

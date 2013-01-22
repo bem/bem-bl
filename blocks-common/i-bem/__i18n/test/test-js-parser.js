@@ -17,14 +17,23 @@ function unit(name) {
         };
 
     PARSER.parseXml(content.src, function(xml) {
+        var js = PARSER.domToJs(xml);
+        /*
         console.log('\n= FILE:', name);
         console.log('\n=== XML ===\n', inspect(xml, false, 23), '\n=== END OF XML ===\n');
-        console.log('\n=== JAVASCRIPT ===\n', PARSER.domToJs(xml), '\n=== END OF JAVASCRIPT ===\n');
+        console.log('\n=== JAVASCRIPT ===\n', js, '\n=== END OF JAVASCRIPT ===\n');
+        */
     });
 }
 
 unit('dynamic-01');
 unit('dynamic-02');
+unit('dynamic-03');
 unit('param-xml-01');
 unit('html-01');
 unit('entity-01');
+unit('param-empty-01');
+unit('complex-01');
+unit('literal-01');
+unit('literal-02');
+unit('literal-03');
