@@ -140,7 +140,7 @@ ometa BEMHTMLToXJST <: XJSTCompiler {
 
     bhBody = [#body tBody:b] -> { '{ ' + b + ' }' },
 
-    bhTemplate = [bhPredic+:ps bhBody:b] -> { 'template(' + ps.join(' && ') + ') ' + b },
+    bhTemplate = [bhPredic+:ps bhBody:b] -> { 'template((' + ps.join(') && (') + ')) ' + b },
 
     topLevel = [bhTemplate+:ts] -> ts.join('\n\n'),
     topLevel = bhTemplate:t -> t,

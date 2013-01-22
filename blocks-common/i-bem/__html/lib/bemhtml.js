@@ -17,8 +17,8 @@ var BSJSIdentity = ometajs_.grammars.BSJSIdentity;
 
 var BSJSTranslator = ometajs_.grammars.BSJSTranslator;
 
-var BEMHTMLParser = function BEMHTMLParser(source) {
-    XJSTParser.call(this, source);
+var BEMHTMLParser = function BEMHTMLParser(source, opts) {
+    XJSTParser.call(this, source, opts);
 };
 
 BEMHTMLParser.grammarName = "BEMHTMLParser";
@@ -275,8 +275,8 @@ BEMHTMLParser._addElemPredic = function(ts) {
     return ts;
 };
 
-var BEMHTMLToXJST = function BEMHTMLToXJST(source) {
-    XJSTCompiler.call(this, source);
+var BEMHTMLToXJST = function BEMHTMLToXJST(source, opts) {
+    XJSTCompiler.call(this, source, opts);
 };
 
 BEMHTMLToXJST.grammarName = "BEMHTMLToXJST";
@@ -348,7 +348,7 @@ BEMHTMLToXJST.prototype["bhTemplate"] = function $bhTemplate() {
             });
         }) && (ps = this._getIntermediate(), true) && this._rule("bhBody", false, [], null, this["bhBody"]) && (b = this._getIntermediate(), true);
     }) && this._exec(function() {
-        return "template(" + ps.join(" && ") + ") " + b;
+        return "template((" + ps.join(") && (") + ")) " + b;
     }.call(this));
 };
 
@@ -369,8 +369,8 @@ BEMHTMLToXJST.prototype["topLevel"] = function $topLevel() {
     });
 };
 
-var BXJSTIdentity = function BXJSTIdentity(source) {
-    BSJSIdentity.call(this, source);
+var BXJSTIdentity = function BXJSTIdentity(source, opts) {
+    BSJSIdentity.call(this, source, opts);
 };
 
 BXJSTIdentity.grammarName = "BXJSTIdentity";
@@ -436,8 +436,8 @@ BXJSTIdentity.prototype["template"] = function $template() {
     return this._rule("trans", false, [], null, this["trans"]) && (m = this._getIntermediate(), true) && this._rule("trans", false, [], null, this["trans"]) && (b = this._getIntermediate(), true) && this._exec([ "template", m, b ]);
 };
 
-var BEMHTMLLogLocal = function BEMHTMLLogLocal(source) {
-    BXJSTIdentity.call(this, source);
+var BEMHTMLLogLocal = function BEMHTMLLogLocal(source, opts) {
+    BXJSTIdentity.call(this, source, opts);
 };
 
 BEMHTMLLogLocal.grammarName = "BEMHTMLLogLocal";
