@@ -1,7 +1,13 @@
-[{
-  "block": "a",
-  "elem": "elem2"
-}, {
-  "block": "b",
-  "elem": "elem2"
-}]
+{
+  "block": "b-test",
+  "content": {
+    "elem": "elem-1",
+    "content": [{
+      "elem": "elem-2",
+      "content": "Elem 2"
+    }, {
+      "elem": "elem-2",
+      "content": "Elem 2"
+    }]
+  }
+}
