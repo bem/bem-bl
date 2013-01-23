@@ -1066,18 +1066,6 @@ var DOM = BEM.DOM = BEM.decl('i-bem__dom',/** @lends BEM.DOM.prototype */{
     },
 
     /**
-     * Changes a fragment of the DOM tree including the context and initializes blocks.
-     * @param {jQuery} ctx Root DOM node
-     * @param {jQuery|String} content Content to be added
-     */
-    replace : function(ctx, content) {
-
-        this.destruct(true, ctx);
-        this.init($(content).replaceAll(ctx));
-
-    },
-
-    /**
      * Adds a fragment of the DOM tree at the end of the context and initializes blocks
      * @param {jQuery} ctx Root DOM node
      * @param {jQuery|String} content Content to be added

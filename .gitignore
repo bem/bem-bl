@@ -1,7 +1,5 @@
 b
 .sass-cache
-node_modules/
-npm-debug.log
 
 .*.xsl
 .*.xsl.*
@@ -11,8 +9,6 @@ sets/
 
 .idea
 *.iml
-
-.DS_Store
 
 .project
 .svn/

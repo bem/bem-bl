@@ -1,16 +1,10 @@
 block b-page {
 
-    doctype: this.ctx.doctype || '<!DOCTYPE html>'
+    this._mode === 'doctype': this.ctx.doctype || '<!DOCTYPE html>'
 
-    xUACompatible: this.ctx['x-ua-compatible'] === false ? false : {
-        tag: 'meta',
-        attrs: { 'http-equiv': 'X-UA-Compatible', content: this.ctx['x-ua-compatible'] || 'IE=EmulateIE7, IE=edge' }
-    }
-
-    default: {
+    !this.elem, !this.ctx._wrapped, default: {
         var ctx = this.ctx,
-            dtype = apply('doctype'),
-            xUA = apply('xUACompatible'),
+            dtype = apply(this._mode = 'doctype'),
             buf = [
                 dtype,
                 {
@@ -23,7 +17,10 @@ block b-page {
                                     tag: 'meta',
                                     attrs: { charset: 'utf-8' }
                                 },
-                                xUA,
+                                {
+                                    tag: 'meta',
+                                    attrs: { 'http-equiv': 'X-UA-Compatible', content: 'IE=EmulateIE7, IE=edge' }
+                                },
                                 {
                                     tag: 'title',
                                     content: ctx.title
@@ -44,7 +41,7 @@ block b-page {
                 }
             ];
 
-        applyCtx(buf);
+        apply(this._mode = '', this.ctx._wrapped = true, this.ctx = buf);
     }
 
     tag: 'body'
