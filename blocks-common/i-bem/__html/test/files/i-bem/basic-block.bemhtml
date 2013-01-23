@@ -1,0 +1,19 @@
+block b-bla, tag: 'span'
+block b-bla, mix: [{ mods: { m2: 'v2' } }]
+block b-bla, js: true
+block b-alb, attrs: { bbb: 1, title: 2 }
+block b-alb, js: { bbb: 1, title: 2 }
+
+block b-nojs, tag, !this.elem: 'table'
+block b-nojs, default, !this.elem, !this.ctx._wrap: {
+    local(
+        this.ctx._wrap = true,
+        this.ctx = { elem: 'run', content: this.ctx },
+        this._mode = '') this.apply();
+}
+
+elem elem1, default: {
+    local(
+        this.ctx = this.ctx.content,
+        this._mode = '') this.apply();
+}
