@@ -1,0 +1,11 @@
+block b1 {
+    content: BEM.I18N('ktest', 'key')
+}
+
+block b2 {
+
+    elem e2, attrs: {
+        'data-key': BEM.I18N('ktest', 'key')
+    }
+
+}
