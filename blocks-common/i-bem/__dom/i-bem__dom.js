@@ -1266,7 +1266,7 @@ var DOM = BEM.DOM = BEM.decl('i-bem__dom',/** @lends BEM.DOM.prototype */{
 
         var _this = this;
 
-        if(to.elem && to.elem.indexOf(' ') > 1) {
+        if(to.elem && to.elem.indexOf(' ') > 0) {
             to.elem.split(' ').forEach(function(elem) {
                 _this._liveClassBind(
                     buildClass(_this._name, elem, to.modName, to.modVal),
