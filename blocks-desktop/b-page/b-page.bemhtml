@@ -4,7 +4,7 @@ block b-page {
 
     xUACompatible: this.ctx['x-ua-compatible'] === false ? false : {
         tag: 'meta',
-        attrs: { 'http-equiv': 'X-UA-Compatible', content: this.ctx['x-ua-compatible'] || 'IE=EmulateIE7, IE=edge' }
+        attrs: { 'http-equiv': 'X-UA-Compatible', content: this.ctx['x-ua-compatible'] || 'IE=edge' }
     }
 
     default: {
