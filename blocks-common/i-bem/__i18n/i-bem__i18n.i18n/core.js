@@ -55,19 +55,13 @@ function _popStack() {
  * @constructor
  */
 function _i18n() {
-    this._lang = '';
+    this._declProps = {};
     this._prj = 'lego'; // FIXME: bem-bl?
     this._keyset = '';
     this._key = '';
 }
 
 _i18n.prototype = {
-
-    lang : function(name) {
-        this._lang = name;
-        return this;
-    },
-
     project : function(name) {
         this._prj = name;
         return this;
@@ -101,32 +95,83 @@ _i18n.prototype = {
         keyset[key] = typeof v === 'function' ? v : (function(p) { return (v); });
 
         // `BEM.I18N` syntax
-        var l = cache[this._lang] || (cache[this._lang] = {}),
-            k = l[this._keyset] || (l[this._keyset] = {});
+        var c = cache;
+        var _this = this;
+        Object.keys(this._declProps).forEach(function (key) {
+            c = c[key] || (c[key] = {});
+            c = c[_this._declProps[key]] || (c[_this._declProps[key]] = {});
+        });
+        var k = c[this._keyset] || (c[this._keyset] = {});
 
         k[key] = v;
     },
 
-    val : function(params, thisCtx) {
-        var value = cache[this._lang] && cache[this._lang][this._keyset];
-        if(!value) {
-            console && console.log &&
-                console.log("[Error] keyset: " + this._keyset + " key: " + this._key + " (lang: " + this._lang + ")");
-            return '';
-        }
+    val : function(params, thisCtx, props) {
+        var c = cache;
+        props = props || this._orderProps.slice(0);
+
+        for (var i = 0, length = props.length; i < length; i++) {
+            var key = props[i];
+            c = c[key] || (c[key] = {});
+            c = c[this._declProps[key]] || (c[this._declProps[key]] = {});
+        };
+
+        var value = c[this._keyset];
+        if (!value) {
+            if (props.length > 1) {
+                props.pop();
+                return this.val(params, thisCtx, props);
+            } else {
+                console && console.log &&
+                    console.log("[Error] keyset: " + this._keyset + " key: " + this._key + " (_props: " + (this._props && this._props.join(' ')) + ")");
+                return '';
+            };
+        };
 
         value = value[this._key];
-        if(!value) return '';
+        if(!value) {
+            if (props.length > 1) {
+                    props.pop();
+                    return this.val(params, thisCtx, props);
+            } else {
+                return '';
+            };
+        };
 
         try{
             return typeof value === 'string' ?
                 value : thisCtx ? value.call(thisCtx, params) : value.call(this, params);
         } catch(e) {
-            throw "[Error] keyset: " + this._keyset + " key: " + this._key + " (lang: " + this._lang + ")";
+            throw "[Error] keyset: " + this._keyset + " key: " + this._key + " (_props: " + (this._props && this._props.join(' ')) + ")";
         }
     },
 
-    _c : function() { return cache; }
+    setDeclProp: function (key, value) {
+        if (!key) {
+            console.log("[Error] setDeclProp: no key");
+            return this;
+        };
+
+        if (!value) {
+            delete this._declProps[key];
+            return this;
+        };
+
+        this._declProps[key] = value;
+        return this;
+    },
+
+    flushDeclProps: function () {
+        this._declProps = {};
+        return this;
+    },
+
+    setOrderProps: function (order) {
+        this._orderProps = order.slice(0);  
+    },
+
+    _c : function() { return cache; },
+    _orderProps: []
 
 };
 
@@ -176,10 +221,12 @@ bem_.I18N = (function(base) {
             result,
             ksetRestored;
 
-        proto.lang(this._lang).key(name);
+        proto.key(name);
+        for (var key in this._freezed) {
+            proto.setDeclProp(key, this._freezed[key]);
+        };
 
-        // TODO: kiss
-        result = proto.val.call(proto, params, klass);
+        result = proto.val(params, klass);
 
         // restoring keyset's context
         // NOTE: should not save current ctx, `saveCtx = false`
@@ -187,6 +234,19 @@ bem_.I18N = (function(base) {
         ksetRestored && proto.keyset(ksetRestored, false);
 
         return result;
+    };
+
+    /**
+     *
+     * @param {String} name
+     * @param {String} value
+     * @param {Boolean} isFreezed
+     */
+    klass.setDeclProp = function (name, value, isFreezed) {
+        if (isFreezed)
+            this._freezed[name] = value;
+
+        this._i18n.setDeclProp(name, value);
     };
 
     /**
@@ -200,14 +260,17 @@ bem_.I18N = (function(base) {
         var proto = this._i18n, k;
 
         declProps || (declProps = {});
-        declProps.lang && proto.lang(declProps.lang);
-
+        for (var key in declProps) {
+            if (Object.prototype.hasOwnProperty.call(declProps, key))
+                this.setDeclProp(key, declProps[key]);
+        };
         proto.keyset(bemitem);
 
         for(k in keysets)
             keysets.hasOwnProperty(k) &&
                 proto.key(k).decl(keysets[k]);
 
+        proto.flushDeclProps();
         return this;
     };
 
@@ -218,13 +281,22 @@ bem_.I18N = (function(base) {
      * @return {String}
      */
     klass.lang = function(lang) {
-        typeof lang !== 'undefined' && (this._lang = lang);
-        return this._lang;
+        if (typeof lang !== 'undefined') {
+            this.setDeclProp('lang', lang, true);
+        };
+        // FIXME
+        return this._i18n._declProps['lang'];
     };
 
+    klass.setOrderProps = function () {
+        this._i18n.setOrderProps(Array.prototype.slice.call(arguments, 0));
+    };
+
+    klass._freezed = {}
     klass._i18n = base;
 
-    klass._lang = DEFAULT_LANG;
+    klass.lang(DEFAULT_LANG);
+    klass.setOrderProps('lang');
 
     return klass;
 
