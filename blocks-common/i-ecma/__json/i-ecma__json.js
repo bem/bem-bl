@@ -45,6 +45,9 @@ window.JSON = {
                 }
                 return res + ']';
             case '[object Object]':
+                if(_toString.call(val.toJSON) === '[object Function]') {
+                    return stringify(val.toJSON());
+                }
                 var res = '{', i = 0, strVal;
                 for(var key in val) {
                     if(val.hasOwnProperty(key)) {
