@@ -1,4 +1,5 @@
-var borschik = require('borschik'),
+var bem = require('bem'),
+    borschik = bem.require('borschik'),
     base = borschik.require('./techs/css-fast.js'),
     cssp = borschik.require('cssp'),
     INHERIT = borschik.require('inherit');
@@ -17,7 +18,7 @@ function modifySelector(selector, prefix, topmostClasses) {
 
     var selectorType = selector.shift(),
         firstPart = [],
-        topmostTags = ['html','body'],
+        topmostTags = ['body'],
         preparationNeeded = true;
 
     //TODO: подумать что делать, когда на html реально надо повесить стиль в духе width: 100%
@@ -35,7 +36,7 @@ function modifySelector(selector, prefix, topmostClasses) {
 
     }
 
-    if(selector[0][0] != 'clazz' || selector[0][1][1] != prefix) {
+    if(selector[0] && (selector[0][0] != 'clazz' || selector[0][1][1] != prefix)) {
         if(selector.length && !(selector.length == 1 && selector[0][0] == 's'))
             selector.unshift(['s', ' ']);
 
@@ -60,7 +61,6 @@ exports.Tech = INHERIT(base.Tech, {
     File: INHERIT(base.File, {
         processInclude: function(path, content) {
             content = this.__base(path, content);
-
             return typeof process.env.BEM_CONFLICTS_NO === 'undefined' ?
                 content :
                 addPrefix(content, 'bem-' + process.env.BEM_CONFLICTS_NO, []);
