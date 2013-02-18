@@ -15,15 +15,15 @@ page.onConsoleMessage = function(msg) {
 
     switch(msg) {
         case '__SUCCESS':
-            phantom.exit();
+            return phantom.exit();
 
         case '__FAILED':
-            phantom.exit(-1);
+            return phantom.exit(-1);
 
         default:
             if(msg.indexOf('Error') > -1) {
                 console.error(msg);
-                phantom.exit(-1);
+                return phantom.exit(-1);
             }
             else {
                 console.log(msg);

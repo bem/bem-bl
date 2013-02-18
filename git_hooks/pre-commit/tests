@@ -1,0 +1,19 @@
+#!/bin/sh
+
+case "${1}" in
+    --about )
+        echo "run tests using phantomjs"
+        ;;
+    * )
+
+        TESTS_DIRS=$(git diff --cached --name-only --diff-filter=ACMR | awk '/.js$/{gsub("/[^/]+.js",""); s=s " " $0} END {print s}')
+        if [ "$TESTS_DIRS" ]; then
+            make test TESTS_DIRS="$TESTS_DIRS"
+            if [ $? -ne 0 ]; then
+                exit 1
+            fi
+        fi
+
+        exit
+
+esac
