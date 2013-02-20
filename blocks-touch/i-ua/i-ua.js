@@ -5,7 +5,8 @@
         device = {},
         support = {},
         match,
-        lastOrient = (win.innerWidth > win.innerHeight);
+        lastOrient = (win.innerWidth > win.innerHeight),
+        lastWidth = win.innerWidth;
 
     if (match = ua.match(/Android\s+([\d.]+)/)) {
         platform.android = match[1];
@@ -69,14 +70,18 @@
             height = win.innerHeight,
             landscape = (width > height);
 
-        if (landscape !== lastOrient) {
+        // http://alxgbsn.co.uk/2012/08/27/trouble-with-web-browser-orientation/
+        // check previous device width to disallow Android shrink page and change orientation on opening software keyboard
+        if (landscape !== lastOrient && width !== lastWidth) {
             $(win).trigger('orientchange', {
                 landscape: landscape,
                 width: width,
                 height: height
             });
+
+            lastOrient = landscape;
+            lastWidth = width;
         }
-        lastOrient = landscape;
     });
 
     BEM.DOM.decl('i-ua', {
