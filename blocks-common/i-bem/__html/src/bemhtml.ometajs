@@ -33,7 +33,7 @@ ometa BEMHTMLParser <: XJSTParser {
               BEMHTMLParser._concatChildren(t, [#sub, ts]))
         } | bemMatchAndSet:t ':' (asgnExpr:e -> [#return, e] | stmt):c ','? -> {
           BEMHTMLParser._applyPredicates(this.predicates, [t, [#body, c]])
-        },
+        } | stmt:r -> [#stmt, r],
 
     applyMode :type = "apply" "(" expr:e ")"
         { BEMHTMLParser._transMode(e) }:modded_e
@@ -140,7 +140,9 @@ ometa BEMHTMLToXJST <: XJSTCompiler {
 
     bhBody = [#body tBody:b] -> { '{ ' + b + ' }' },
 
-    bhTemplate = [bhPredic+:ps bhBody:b] -> { 'template((' + ps.join(') && (') + ')) ' + b },
+    bhTemplate = [bhPredic+:ps bhBody:b] -> {
+                 'template((' + ps.join(') && (') + ')) ' + b
+               } | [#stmt trans:r] -> r + ';\n',
 
     topLevel = [bhTemplate+:ts] -> ts.join('\n\n'),
     topLevel = bhTemplate:t -> t,
