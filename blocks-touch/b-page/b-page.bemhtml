@@ -4,7 +4,7 @@ block b-page {
         apply({
             _mode: '',
             ctx: {
-                tag: 'html',
+                elem: 'root',
                 content: [
                     {
                         elem: 'head',
@@ -59,6 +59,10 @@ block b-page {
                 ]
             }
         })
+    }
+
+    elem root {
+        tag: 'html'
     }
 
     elem head {
