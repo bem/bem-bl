@@ -255,13 +255,36 @@ BEMHTMLParser._dropAllSubs = function(ts) {
 };
 
 BEMHTMLParser._addElemPredic = function(ts) {
+    function isSafePredic(p) {
+        switch (p[0]) {
+          case "get":
+          case "string":
+          case "number":
+            return true;
+          case "getp":
+            return p[2][0] === "this" ? p[1][0] !== "call" && (p[1][0] !== "string" || p[1][1] !== "elem") : p[2][0] !== "call";
+          case "unop":
+            return isSafePredic(p[2]);
+          case "binop":
+            return isSafePredic(p[2]) && isSafePredic(p[3]);
+          default:
+            return false;
+        }
+    }
     ts.forEach(function(t) {
-        var isBlock = false, isElemOrCustom = false;
-        t.forEach(function(p) {
-            isBlock || (isBlock = p[0] === "block");
-            isElemOrCustom || (isElemOrCustom = p[0] == "elem" || p[0] == "xjst");
+        var isBlock, isNotElem;
+        isBlock = t.some(function(p) {
+            return p[0] === "block";
         });
-        isBlock && !isElemOrCustom && t.unshift([ "xjst", [ "unop", "!", [ "getp", [ "string", "elem" ], [ "this" ] ] ] ]);
+        if (!isBlock) return;
+        isNotElem = t.every(function(p) {
+            if (p[0] === "elem" || p[0] === "xjst" && !isSafePredic(p[1])) {
+                return false;
+            }
+            return true;
+        });
+        if (!isNotElem) return;
+        t.unshift([ "xjst", [ "unop", "!", [ "getp", [ "string", "elem" ], [ "this" ] ] ] ]);
     });
     return ts;
 };
