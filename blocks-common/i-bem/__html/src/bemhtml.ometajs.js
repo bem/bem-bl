@@ -154,6 +154,9 @@ BEMHTMLParser.prototype["listBemMatchAndSet"] = function $listBemMatchAndSet() {
         }) && this._exec(function() {
             return BEMHTMLParser._applyPredicates(this.predicates, [ t, [ "body", c ] ]);
         }.call(this));
+    }) || this._atomic(function() {
+        var r;
+        return this._rule("stmt", false, [], null, this["stmt"]) && (r = this._getIntermediate(), true) && this._exec([ "stmt", r ]);
     })) && ($l0.predicates = $l1, true) || ($l0.predicates = $l1, false));
 };
 
@@ -354,16 +357,23 @@ BEMHTMLToXJST.prototype["bhBody"] = function $bhBody() {
 };
 
 BEMHTMLToXJST.prototype["bhTemplate"] = function $bhTemplate() {
-    var ps, b;
-    return this._list(function() {
-        return this._many(function() {
-            return this._atomic(function() {
-                return this._rule("bhPredic", false, [], null, this["bhPredic"]);
-            });
-        }) && (ps = this._getIntermediate(), true) && this._rule("bhBody", false, [], null, this["bhBody"]) && (b = this._getIntermediate(), true);
-    }) && this._exec(function() {
-        return "template((" + ps.join(") && (") + ")) " + b;
-    }.call(this));
+    return this._atomic(function() {
+        var ps, b;
+        return this._list(function() {
+            return this._many(function() {
+                return this._atomic(function() {
+                    return this._rule("bhPredic", false, [], null, this["bhPredic"]);
+                });
+            }) && (ps = this._getIntermediate(), true) && this._rule("bhBody", false, [], null, this["bhBody"]) && (b = this._getIntermediate(), true);
+        }) && this._exec(function() {
+            return "template((" + ps.join(") && (") + ")) " + b;
+        }.call(this));
+    }) || this._atomic(function() {
+        var r;
+        return this._list(function() {
+            return this._match("stmt") && this._rule("trans", false, [], null, this["trans"]) && (r = this._getIntermediate(), true);
+        }) && this._exec(r + ";\n");
+    });
 };
 
 BEMHTMLToXJST.prototype["topLevel"] = function $topLevel() {
