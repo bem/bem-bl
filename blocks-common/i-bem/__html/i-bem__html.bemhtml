@@ -260,7 +260,7 @@ exports.apply = BEMContext.apply = function _apply() {
 }();
 return exports;
 
-!this._mode {
+this._mode === '' {
 
     true: {
         var vBlock = this.ctx.block,
