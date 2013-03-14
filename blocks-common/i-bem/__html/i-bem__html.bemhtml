@@ -493,7 +493,7 @@ cache && this.ctx && this.ctx.cache: {
     if (cached = cache.get(this.ctx.cache)) {
         // get new links from context
         var oldLinks = this._links;
-        if (this.ctx.links) this._links = oldLinks;
+        if (this.ctx.links) this._links = this.ctx.links;
 
         // Cache hit
         for (var i = 0; i < cached.log.length; i++) {
