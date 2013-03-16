@@ -131,9 +131,7 @@ block b-page {
                     _mode: '',
                     _notIE: true,
                     ctx: [
-                        '<!--[if !IE]><!-->',
-                        this.ctx,
-                        '<!--<![endif]-->'
+                        this.ctx
                     ]
                 })
             },
