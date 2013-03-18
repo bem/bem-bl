@@ -520,7 +520,7 @@
             slider.trigger('start', slider._getCurrentParams());
 
             slider._elem
-                .one(this.namespaced('webkitTransitionEnd oTransitionEnd otransitionend'),
+                .one(this.namespaced('webkitTransitionEnd oTransitionEnd otransitionend transitionend'),
                     function() {
                         slider.trigger('end', slider._getCurrentParams());
                     }
