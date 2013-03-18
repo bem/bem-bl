@@ -147,20 +147,24 @@
                     slider._items.width(slider._elem.parent().width());
                 });
 
-                // коррекция начального смещения при непервом начальном элементе в поэкранном слайдере
-                if (slider._index) {
-                    slider._correctPerScreenNonFirst();
-                }
-            // если обычный слайдер
-            } else {
-                // коррекция начального смещения при непервом начальном элементе в обычном слайдере
-                if (slider._index) {
-                    slider._correctPerStepNonFirst();
-                }
             }
 
             // если есть куда и что слайдить
             if (slider._width > slider._parentWidth) {
+
+                // если начальный элемент не первый
+                if (slider._index) {
+
+                    // если полноэкранный слайдер
+                    if (slider._perScreen) {
+                        // коррекция начального смещения при непервом начальном элементе в поэкранном слайдере
+                        slider._correctPerScreenNonFirst();
+                    } else {
+                        // коррекция начального смещения при непервом начальном элементе в обычном слайдере
+                        slider._correctPerStepNonFirst();
+                    }
+
+                }
 
                 slider
                     // бинд на pointer-события
