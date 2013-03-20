@@ -31,6 +31,7 @@ unit('dynamic-02');
 unit('dynamic-03');
 unit('param-xml-01');
 unit('html-01');
+unit('html-02');
 unit('entity-01');
 unit('param-empty-01');
 unit('complex-01');
