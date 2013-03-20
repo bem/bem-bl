@@ -132,7 +132,7 @@ function jsExpander(node, _raw) {
             code.push(t);
 
             c = expandNodes(node[2], currentExpander);
-            Array.isArray(c) || (c = [c]);
+            isArray(c) || (c = [c]);
             [].push.apply(code, c);
 
             code.push(t = '"</' + tag + '>"');
