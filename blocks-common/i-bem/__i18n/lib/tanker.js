@@ -115,16 +115,33 @@ function jsExpander(node, _raw) {
         var tag = node[0],
             attrs = node[1],
             prop = [],
-            a;
+            s = '', t, c;
 
-        for(a in attrs) { prop.push([a, SINGLE_QUOTE_CHAR + attrs[a] + SINGLE_QUOTE_CHAR].join('=')); };
+        code = [];
+
+        for(c in attrs) { prop.push([c, SINGLE_QUOTE_CHAR + attrs[c] + SINGLE_QUOTE_CHAR].join('=')); };
         prop = prop.length? jsQuote(' ' + prop.join(' ')) : '';
 
-        code = node[2].length?
-            ['"<' + tag + prop + '>"', expandNodes(node[2], currentExpander), '"</' + tag + '>"'].join(' + ') :
-            '"<' + tag + prop + '/>"';
+        c = '';
+        t = '"<' + tag + prop;
 
-        return code;
+        if(node[2].length) {
+            s = ' + ';
+
+            t += '>"';
+            code.push(t);
+
+            c = expandNodes(node[2], currentExpander);
+            isArray(c) || (c = [c]);
+            [].push.apply(code, c);
+
+            code.push(t = '"</' + tag + '>"');
+        } else {
+            t += '/>"';
+            code.push(t);
+        }
+
+        return code.join(s);
 
     case 'PARAMS':
         // [ [params] ]
