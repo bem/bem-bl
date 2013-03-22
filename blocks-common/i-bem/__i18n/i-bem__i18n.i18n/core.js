@@ -2,7 +2,6 @@
 // i18n['prj']['keyset']['key'](params);
 // FIXME: Should not work, because of vars hoisting
 var i18n = i18n || {};
-var BEM;
 (function(bem_, undefined) {
 
 var cache = {},
@@ -232,6 +231,6 @@ bem_.I18N = (function(base) {
 
 
 /** Global */
-BEM = bem_;
+BEM = this.BEM = bem_;
 
 })(typeof BEM === 'undefined' ? {} : BEM);
