@@ -1,4 +1,5 @@
 block b-bla, tag: 'span'
+block b-bla, mod 0-mode v2, tag: 'yay'
 block b-bla, mix: [{ mods: { m2: 'v2' } }]
 block b-bla, js: true
 block b-alb, attrs: { bbb: 1, title: 2 }
