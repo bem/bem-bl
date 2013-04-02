@@ -10,7 +10,7 @@
                         { "tag": "b", "content": "blalba" } },
                     { "block": "b2", "elem": "eee", "content":
                         { "tag": "b", "content": "blalba" } },
-                    { "block": "b-bla", "mods": { "0-mode": "v2" } },
+                    { "block": "b-bla" },
                     { "block": "b-alb" }
                     ]
             }
