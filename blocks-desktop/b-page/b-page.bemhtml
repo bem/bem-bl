@@ -55,7 +55,7 @@ block b-page {
 
         bem: false
         tag: 'html'
-        cls: 'i-ua_js_no i-ua_css_standard'
+        cls: 'i-ua_js_no i-ua_css_standart'
 
     }
 
