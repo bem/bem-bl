@@ -1,0 +1,4 @@
+block just-random-block, tag: {
+  // This was failing before:
+  return apply((((this.x) = (1))));
+}
