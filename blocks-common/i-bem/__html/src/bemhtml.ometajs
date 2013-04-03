@@ -226,7 +226,9 @@ ometa BEMHTMLLogLocal <: BXJSTIdentity {
     ]
   },
 
-  transChange = [#set [(#get :v | #getp :p :v)] :v]:e -> e,
+  transChange = [#parens transChange:r] -> r
+              | [#set [#parens :o]:g :v]:e transChange([#set, o, v]):r -> r
+              | [#set [(#get :v | #getp :p :v)] :v]:e -> e,
 
   transJsonChange = [#binding :k :v] transChange([
                       #set,
@@ -238,6 +240,7 @@ ometa BEMHTMLLogLocal <: BXJSTIdentity {
                | [#binop ',' transChanges:left transChange:right] -> {
                    left.concat([ right ]);
                  }
+               | [#parens transChanges:r] -> r
                | transChange:r -> [ r ],
 
   // Translate simple changes into one `push` call

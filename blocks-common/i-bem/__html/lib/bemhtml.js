@@ -498,18 +498,32 @@ BEMHTMLLogLocal.prototype["localExpr"] = function $localExpr() {
 };
 
 BEMHTMLLogLocal.prototype["transChange"] = function $transChange() {
-    var v, e;
-    return this._list(function() {
-        return this._match("set") && this._list(function() {
-            return this._atomic(function() {
-                var v;
-                return this._match("get") && this._skip() && (v = this._getIntermediate(), true);
-            }) || this._atomic(function() {
-                var p, v;
-                return this._match("getp") && this._skip() && (p = this._getIntermediate(), true) && this._skip() && (v = this._getIntermediate(), true);
-            });
-        }) && this._skip() && (v = this._getIntermediate(), true);
-    }) && (e = this._getIntermediate(), true) && this._exec(e);
+    return this._atomic(function() {
+        var r;
+        return this._list(function() {
+            return this._match("parens") && this._rule("transChange", false, [], null, this["transChange"]) && (r = this._getIntermediate(), true);
+        }) && this._exec(r);
+    }) || this._atomic(function() {
+        var o, g, v, e, r;
+        return this._list(function() {
+            return this._match("set") && this._list(function() {
+                return this._match("parens") && this._skip() && (o = this._getIntermediate(), true);
+            }) && (g = this._getIntermediate(), true) && this._skip() && (v = this._getIntermediate(), true);
+        }) && (e = this._getIntermediate(), true) && this._rule("transChange", false, [ [ "set", o, v ] ], null, this["transChange"]) && (r = this._getIntermediate(), true) && this._exec(r);
+    }) || this._atomic(function() {
+        var v, e;
+        return this._list(function() {
+            return this._match("set") && this._list(function() {
+                return this._atomic(function() {
+                    var v;
+                    return this._match("get") && this._skip() && (v = this._getIntermediate(), true);
+                }) || this._atomic(function() {
+                    var p, v;
+                    return this._match("getp") && this._skip() && (p = this._getIntermediate(), true) && this._skip() && (v = this._getIntermediate(), true);
+                });
+            }) && this._skip() && (v = this._getIntermediate(), true);
+        }) && (e = this._getIntermediate(), true) && this._exec(e);
+    });
 };
 
 BEMHTMLLogLocal.prototype["transJsonChange"] = function $transJsonChange() {
@@ -536,6 +550,11 @@ BEMHTMLLogLocal.prototype["transChanges"] = function $transChanges() {
         }) && this._exec(function() {
             return left.concat([ right ]);
         }.call(this));
+    }) || this._atomic(function() {
+        var r;
+        return this._list(function() {
+            return this._match("parens") && this._rule("transChanges", false, [], null, this["transChanges"]) && (r = this._getIntermediate(), true);
+        }) && this._exec(r);
     }) || this._atomic(function() {
         var r;
         return this._rule("transChange", false, [], null, this["transChange"]) && (r = this._getIntermediate(), true) && this._exec([ r ]);
