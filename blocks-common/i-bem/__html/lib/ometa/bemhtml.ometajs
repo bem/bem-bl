@@ -9,7 +9,7 @@ ometa BEMHTMLParser <: XJSTParser {
 
   bemMatch = bemBlock | bemElem | bemMod,
 
-  bemVal = (letter | digit | '-')*:xs -> [#string, xs.join('')],
+  bemVal = (letter | digit | '-')+:xs -> [#string, xs.join('')],
   bemVal = asgnExpr:e -> e,
 
   bemPredic :n = spaces seq(n):nn space+ -> nn,
