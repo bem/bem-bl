@@ -152,6 +152,9 @@
             // если есть куда и что слайдить
             slider._width > slider._parentWidth && slider._initOnDemand();
 
+            // коррекции при повороте
+            slider._correctOnOrientChange();
+
         },
 
         _initOnDemand: function() {
@@ -185,9 +188,6 @@
 
             // запрет кликов на время анимации
             slider._preventClicks();
-
-            // коррекции при повороте
-            slider._correctOnOrientChange();
 
             // триггерим событие иниализации, передавая параметры (например, для b-slider-indicator).
             // запоминаем те же параметры для случая, когда событие произойдёт раньше появления его
