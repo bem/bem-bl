@@ -272,7 +272,7 @@ function _json(nodes) {
         var params = [
                 ['"count"', [ ['"count"', 'PARAM-CALL'] ], 'PARAM']
             ]
-            .concat(['one', 'some', 'many'].map(function(p, i) {
+            .concat(['one', 'some', 'many', 'none'].map(function(p, i) {
                 return [quotify(p), quotify(json[i] || ''), 'PARAM'];
             }));
 
