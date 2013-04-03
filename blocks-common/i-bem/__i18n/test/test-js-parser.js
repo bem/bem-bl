@@ -38,3 +38,4 @@ unit('complex-01');
 unit('literal-01');
 unit('literal-02');
 unit('literal-03');
+unit('json-01');
