@@ -28,6 +28,8 @@ var DOM = require('dom-js'),
 
 var parseXml = exports.parseXml = function(xml, cb) {
 
+        isSimple(xml) || (xml = JSON.stringify(xml));
+
         try {
             new DOM.DomJS().parse('<root>' + xml + '</root>', function(err, dom) {
                 if(err) return;
@@ -270,7 +272,7 @@ function _json(nodes) {
         var params = [
                 ['"count"', [ ['"count"', 'PARAM-CALL'] ], 'PARAM']
             ]
-            .concat(['one', 'some', 'many'].map(function(p, i) {
+            .concat(['one', 'some', 'many', 'none'].map(function(p, i) {
                 return [quotify(p), quotify(json[i] || ''), 'PARAM'];
             }));
 
