@@ -28,6 +28,8 @@ var DOM = require('dom-js'),
 
 var parseXml = exports.parseXml = function(xml, cb) {
 
+        isSimple(xml) || (xml = JSON.stringify(xml));
+
         try {
             new DOM.DomJS().parse('<root>' + xml + '</root>', function(err, dom) {
                 if(err) return;
