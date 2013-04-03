@@ -51,9 +51,9 @@ BEMHTMLParser.prototype["bemMatch"] = function $bemMatch() {
 };
 
 BEMHTMLParser.prototype["bemVal"] = function $bemVal() {
-    var x, xs;
+    var xs;
     return this._atomic(function() {
-        return this._rule("letter", false, [], null, this["letter"]) && (x = this._getIntermediate(), true) && this._many(function() {
+        return this._many(function() {
             return this._atomic(function() {
                 return this._atomic(function() {
                     return this._rule("letter", false, [], null, this["letter"]);
@@ -61,7 +61,7 @@ BEMHTMLParser.prototype["bemVal"] = function $bemVal() {
                     return this._rule("digit", false, [], null, this["digit"]);
                 }) || this._match("-");
             });
-        }) && (xs = this._getIntermediate(), true) && this._exec([ "string", x + xs.join("") ]);
+        }) && (xs = this._getIntermediate(), true) && this._exec([ "string", xs.join("") ]);
     }) || this._atomic(function() {
         return this._rule("asgnExpr", false, [], null, this["asgnExpr"]);
     });
