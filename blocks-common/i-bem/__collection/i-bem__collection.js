@@ -26,12 +26,6 @@ BEM.decl('i-bem__collection', null, {
 
         return {
 
-            __constructor : function(a) {
-
-                a && this.push.apply(this, a);
-
-            },
-
             applyMethod : function(method, args) {
 
                 this.forEach(function(context) {
@@ -61,8 +55,7 @@ BEM.decl('i-bem__collection', null, {
      */
     create : function(a) {
 
-        var decl = this.getBase(),
-            Collection;
+        var decl = this.getBase();
 
         this.getMethods()
             .forEach(function(method) {
@@ -72,9 +65,18 @@ BEM.decl('i-bem__collection', null, {
                     };
                 }
             });
-        Collection = jQuery.inherit(Array, decl);
-        this.create = function(a) {
-            return new Collection(a);
+
+        /**
+         * "Inherit" Array using direct extend
+         * @see http://perfectionkills.com/how-ecmascript-5-still-does-not-allow-to-subclass-an-array/
+         */
+        this.create = function(arr) {
+
+            arr || (arr = []);
+            arr.__self = this;
+
+            return jQuery.extend(arr, decl);
+
         };
 
         return this.create(a);
