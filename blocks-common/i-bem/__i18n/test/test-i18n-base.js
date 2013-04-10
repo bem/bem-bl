@@ -88,3 +88,84 @@ suite('BEM.I18N Simple test', function() {
     });
 
 });
+
+suite('BEM.I18N._i18n public functions', function () {
+
+    test('setDeclProp', function () {
+        BEM.I18N._i18n.setDeclProp('lang', 'ru')
+        assert.equal('ru', BEM.I18N._i18n._declProps['lang']);
+
+        BEM.I18N._i18n.setDeclProp('lang', 'kz')
+        assert.equal('kz', BEM.I18N._i18n._declProps['lang']);
+
+        // deleting
+        BEM.I18N._i18n.setDeclProp('lang')
+        assert.equal(undefined, BEM.I18N._i18n._declProps['lang']);
+    });
+
+});
+
+suite('BEM.I18N multiple props', function () {
+
+    setup(function() {
+        BEM.I18N.brand = (function () {
+            var klass = function (brand) {
+                return BEM.I18N.setDeclProp('brand', brand, true);
+            };
+
+            return klass;
+        }) ();
+
+        BEM.I18N.lang('ru');
+        BEM.I18N.setOrderProps('lang', 'brand', 'version')
+
+        BEM.I18N.decl('i-keyset-0', {
+
+            "key1" : "Ключ1",
+            "key2" : "Ключ2"
+
+        }, { "lang" : "ru" });
+
+        BEM.I18N.decl('i-keyset-0', {
+
+            "key1" : "Ключ1-БрендированиеUA"
+
+        }, { "lang" : "ru", "brand" : "ua" });
+
+        BEM.I18N.decl('i-keyset-0', {
+
+            "key1" : "Ключ1-БрендированиеTR",
+            "key2" : "Ключ2-БрендированиеTR"
+
+        }, { "lang" : "ru", "brand" : "tr" });
+
+        BEM.I18N.decl('i-keyset-0', {
+
+            "key1" : "Ключ1-БрендированиеTR-Версия1",
+            "key3" : "Ключ3"
+
+        }, { "lang" : "ru", "brand" : "tr", "version" : "1.0" });
+
+    });
+
+    test('Simple', function () {
+        BEM.I18N._i18n.setDeclProp('brand', 'ua');
+
+        assert.equal('Ключ1-БрендированиеUA', BEM.I18N('i-keyset-0', 'key1'));
+        assert.equal('Ключ2', BEM.I18N('i-keyset-0', 'key2'));
+
+        BEM.I18N._i18n.setDeclProp('version', '1.0');
+
+        assert.equal('Ключ1-БрендированиеUA', BEM.I18N('i-keyset-0', 'key1'));
+
+        BEM.I18N.brand('tr');
+        assert.equal('Ключ1-БрендированиеTR-Версия1', BEM.I18N('i-keyset-0', 'key1'));
+        assert.equal('Ключ2-БрендированиеTR', BEM.I18N('i-keyset-0', 'key2'));
+        assert.equal('Ключ3', BEM.I18N('i-keyset-0', 'key3'));
+
+        BEM.I18N.brand('brand', null);
+        assert.equal('Ключ1', BEM.I18N('i-keyset-0', 'key1'));
+        assert.equal('', BEM.I18N('i-keyset-0', 'key3'));
+    });
+
+});
