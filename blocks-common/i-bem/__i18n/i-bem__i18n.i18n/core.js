@@ -2,7 +2,12 @@
 // i18n['prj']['keyset']['key'](params);
 // FIXME: Should not work, because of vars hoisting
 var i18n = i18n || {};
-(function(bem_, undefined) {
+(function(global_, bem_, undefined) {
+
+// Check if BEM.I18N was already initialized
+if(typeof bem_.I18N === 'function' && bem_.I18N._proto) {
+    return bem_.I18N;
+}
 
 var cache = {},
     // {String[]} A stack used for restoring context with dynamic keysets
@@ -147,12 +152,14 @@ bem_.I18N = (function(base) {
         return klass.keyset(keyset).key(key, params);
     };
 
+    klass._proto = base;
+
     /**
      * @param {String} name
      * @returns {BEM.I18N}
      */
     klass.project = function(name) {
-        this._i18n.project(name);
+        this._proto.project(name);
         return this;
     };
 
@@ -161,7 +168,7 @@ bem_.I18N = (function(base) {
      * @returns {BEM.I18N}
      */
     klass.keyset = function(name) {
-        this._i18n.keyset(name, true);
+        this._proto.keyset(name, true);
         return this;
     };
 
@@ -171,7 +178,7 @@ bem_.I18N = (function(base) {
      * @return {String}
      */
     klass.key = function(name, params) {
-        var proto = this._i18n,
+        var proto = this._proto,
             result,
             ksetRestored;
 
@@ -196,7 +203,7 @@ bem_.I18N = (function(base) {
      * @param {Object} [declProps] declaration params
      */
     klass.decl = function(bemitem, keysets, declProps) {
-        var proto = this._i18n, k;
+        var proto = this._proto, k;
 
         declProps || (declProps = {});
         declProps.lang && proto.lang(declProps.lang);
@@ -221,16 +228,13 @@ bem_.I18N = (function(base) {
         return this._lang;
     };
 
-    klass._i18n = base;
-
-    klass._lang = DEFAULT_LANG;
+    klass.lang(DEFAULT_LANG);
 
     return klass;
 
 }(new _i18n()));
 
-
 /** Global */
-BEM = this.BEM = bem_;
+global_.BEM = bem_;
 
-})(typeof BEM === 'undefined' ? {} : BEM);
+})(this, typeof BEM === 'undefined' ? {} : BEM);
