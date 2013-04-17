@@ -1,3 +1,5 @@
+/* global BEM */
+
 // XXX: Support tanker-like syntax of keys in `i-bem__i18n`
 // i18n['prj']['keyset']['key'](params);
 // FIXME: Should not work, because of vars hoisting
@@ -235,6 +237,6 @@ bem_.I18N = (function(base) {
 }(new _i18n()));
 
 /** Global */
-global_.BEM = bem_;
+BEM = bem_;
 
 })(this, typeof BEM === 'undefined' ? {} : BEM);
