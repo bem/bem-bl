@@ -1,0 +1,5 @@
+block i-jquery, default: applyCtx({
+    block: 'b-page',
+    elem: 'js',
+    url: this.ctx.url || '//yandex.st/jquery/' + this.mods.version + '/jquery.min.js'
+})
