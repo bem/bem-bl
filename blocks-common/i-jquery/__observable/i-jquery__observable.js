@@ -13,7 +13,7 @@
 
 (function($) {
 
-var storageExpando = '__' + +new Date + 'storage',
+var storageExpando = '__' + (+new Date) + 'storage',
     getFnId = function(fn, ctx) {
         return $.identify(fn) + (ctx? $.identify(ctx) : '');
     },
