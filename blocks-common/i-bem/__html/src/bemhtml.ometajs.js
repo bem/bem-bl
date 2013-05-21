@@ -389,7 +389,7 @@ BEMHTMLToXJST.prototype["topLevel"] = function $topLevel() {
     }) || this._atomic(function() {
         return this._rule("bhTemplate", false, [], null, this["bhTemplate"]) && (t = this._getIntermediate(), true) && this._exec(t);
     }) || this._atomic(function() {
-        return this._rule("empty", false, [], null, this["empty"]) && this._exec("template(true){}");
+        return this._rule("end", false, [], null, this["end"]) && this._exec("template(true){}");
     });
 };
 
