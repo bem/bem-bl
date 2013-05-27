@@ -72,24 +72,34 @@ exports.techMixin = U.extend({}, require('./i18n').LangsMixin, {
 
         }, res);
 
-        res[suffix].push(_this.serializeI18nInit(_this.getDefaultLang()));
+        res[suffix].length &&
+            res[suffix].push(_this.serializeI18nInit(_this.getDefaultLang()));
 
         return res;
 
     },
 
     getCreateResult: function(prefix, suffix, data, lang) {
-        return data && !BEM.util.isEmptyObject(data)?
-            this.serializeI18nData(data, lang).concat(this.serializeI18nInit(lang)) : [];
+        if(!data || BEM.util.isEmptyObject(data))
+            return [];
+
+        return this.serializeI18nData(data, lang).concat(this.serializeI18nInit(lang));
     },
 
     storeCreateResult: function(path, suffix, res, force) {
         return this.__base(path, suffix, res, true);
     },
 
-    serializeI18nInit: I18NJS.serializeInit,
+    serializeI18nInit: function(lang) {
+        return I18NJS.serializeInit(lang)
+    },
 
-    serializeI18nData: I18NJS.serializeData,
+    serializeI18nData: function(data, lang) {
+        if(!data || BEM.util.isEmptyObject(data))
+            return [];
+
+        return I18NJS.serializeData(data, lang);
+    },
 
     getDependencies: function() {
         return ['i18n'];
