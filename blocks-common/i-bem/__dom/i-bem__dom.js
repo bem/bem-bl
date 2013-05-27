@@ -451,7 +451,7 @@ var DOM = BEM.DOM = BEM.decl('i-bem__dom',/** @lends BEM.DOM.prototype */{
 
         if (event === 'resize') {
 
-            win = $(window);
+            win = this.__self.win;
 
             fn = function() {
 
