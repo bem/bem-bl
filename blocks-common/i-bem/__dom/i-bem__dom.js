@@ -465,12 +465,9 @@ var DOM = BEM.DOM = BEM.decl('i-bem__dom',/** @lends BEM.DOM.prototype */{
 
         var _fn = fn,
             currentHeight,
-            currentWidth,
-            win;
+            currentWidth;
 
         if (event === 'resize') {
-
-            win = this.__self.win;
 
             fn = function() {
 
