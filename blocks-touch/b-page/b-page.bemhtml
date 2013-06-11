@@ -19,6 +19,10 @@ block b-page {
                                 tag: 'title',
                                 content: this.ctx.title
                             },
+                            this.ctx.favicon && {
+                                elem: 'favicon',
+                                url: this.ctx.favicon
+                            },
                             {
                                 elem: 'meta',
                                 attrs: {
@@ -162,5 +166,11 @@ block b-page {
         attrs: {
             return this.ctx.url ? { src: this.ctx.url } : {};
         }
+    }
+
+    elem favicon {
+        bem: false
+        tag: 'link'
+        attrs: { rel: 'shortcut icon', href: this.ctx.url }
     }
 }
