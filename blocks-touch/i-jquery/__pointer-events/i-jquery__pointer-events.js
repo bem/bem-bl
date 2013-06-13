@@ -196,7 +196,7 @@
                         // если совсем не было move, или был, но меньше 5 пикселей, то триггерим тап
                         if (!touch.x2 || Math.abs(touch.x2 - touch.x1) < 5) {
                             // предотвращаем мышиные события
-                            if (touch.target.nodeType !== 9) {
+                            if (touch.target && touch.target.nodeType !== 9) {
                                 // при обычном превенте появляется-прачется адресный тулбар,
                                 // т.е. клик как событие происходит, просто нет действия
                                 $(document).one('click.preventClick', function(e) {
