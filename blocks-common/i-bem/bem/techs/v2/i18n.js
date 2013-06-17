@@ -61,10 +61,6 @@ var LangsMixin = exports.LangsMixin = {
 
 exports.Tech = INHERIT(BEM.TechV2, BEM.util.extend({}, LangsMixin, {
 
-    getTechName: function() {
-        return 'i18n';
-    },
-
     getSuffixForLang: function(lang) {
         return pjoin(this.getTechName(), lang + '.js');
     },
