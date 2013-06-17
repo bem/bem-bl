@@ -9,10 +9,6 @@ var BEM = require('bem'),
 
 exports.baseTech = Tech;
 
-exports.getTechName = function() {
-    return 'bemhtml';
-};
-
 exports.getBuildResultChunk = function(relPath, path, suffix) {
 
     return readFile(path)

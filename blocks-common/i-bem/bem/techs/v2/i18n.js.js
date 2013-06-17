@@ -8,10 +8,6 @@ exports.baseTechName = 'js';
 
 exports.techMixin = BEM.util.extend({}, LangsMixin, {
 
-    getTechName: function() {
-        return 'i18n.js';
-    },
-
     getBaseTechSuffix: function() {
         return 'js';
     },
@@ -23,8 +19,8 @@ exports.techMixin = BEM.util.extend({}, LangsMixin, {
         this.getLangs()
             .map(this.getBuildSuffixForLang, this).concat([this.getBaseTechSuffix()])
             .forEach(function(s) {
-                suffixes[s] = ['js'];
-            });
+                suffixes[s] = [this.getBaseTechSuffix()];
+            }, this);
 
         return suffixes;
     },
@@ -47,34 +43,6 @@ exports.techMixin = BEM.util.extend({}, LangsMixin, {
                 };
 
                 return base.call(_this, decl, levels, output, opts);
-            });
-
-        var res = {},
-            files = this.getBuildPaths(decl, levels);
-
-        return Q.all([files, BEM.util.readJsonJs(source)]).spread(
-            function(files, data) {
-
-                _this.getBuildSuffixes().forEach(function(destSuffix) {
-                    var srcSuffixes = _this.getBuildSuffixesMap()[destSuffix],
-                        filteredFiles = [],
-                        dataLang = _this.extendLangDecl({}, data['all'] || {});
-
-                    dataLang = _this.extendLangDecl(dataLang, data[destSuffix.substr(0, 2)] || {});
-
-                    srcSuffixes.forEach(function(srcSuffix) {
-                        filteredFiles = filteredFiles.concat(files[srcSuffix]||[]);
-                    });
-
-
-                    return _this.getBuildResult(filteredFiles, destSuffix, output, dataLang)//, destSuffix.substr(0, 2))
-                        .then(function(r) {
-                            res[destSuffix] = r;
-                        })
-                });
-            })
-            .then(function() {
-                return res;
             });
     },
 
