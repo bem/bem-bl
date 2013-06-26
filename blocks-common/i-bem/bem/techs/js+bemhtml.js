@@ -16,50 +16,57 @@ exports.techMixin = {
      */
     getBuildResult: function(prefixes, suffix, outputDir, outputName) {
 
-        var context = this.context,
-            opts = context.opts;
+        var _this = this;
 
         return this.__base(prefixes, suffix, outputDir, outputName)
             .then(function(res) {
 
-                return opts.declaration
-                    .then(function(decl) {
+                return _this.getConcatBemhtmlWithResult(res);
 
-                        decl = decl.depsByTechs;
+            });
 
-                        // do nothing if decl.depsByTechs.js.bemhtml doesn't exists
-                        if (!decl || !decl.js || !decl.js.bemhtml) return res;
+    },
+    getConcatBemhtmlWithResult: function(res) {
 
-                        // js+bemhtml decl
-                        decl = { deps: decl.js.bemhtml };
+        var context = this.context,
+            opts = context.opts;
 
-                        var bemhtmlTech = context.createTech('bemhtml'),
-                            output = PATH.resolve(
-                                opts.outputDir,
-                                opts.outputName
-                            ),
-                            // get `.js` build prefixes
-                            prefixes = bemhtmlTech.getBuildPrefixes(
-                                bemhtmlTech.transformBuildDecl(decl),
-                                context.getLevels()
-                            ),
-                            // and build bemhtml based on them
-                            bemhtmlResults = bemhtmlTech.getBuildResults(
-                                prefixes,
-                                PATH.dirname(output) + PATH.dirSep,
-                                PATH.basename(output)
-                            );
+        return opts.declaration
+            .then(function(decl) {
 
-                        return bemhtmlResults
-                            .then(function(r) {
+                decl = decl.depsByTechs;
 
-                                // put bemhtml templates at the top of builded js file
-                                res.unshift(r['bemhtml.js']);
+                // do nothing if decl.depsByTechs.js.bemhtml doesn't exists
+                if (!decl || !decl.js || !decl.js.bemhtml) return res;
 
-                                // and return new result
-                                return res;
+                // js+bemhtml decl
+                decl = { deps: decl.js.bemhtml };
 
-                            });
+                var bemhtmlTech = context.createTech('bemhtml'),
+                    output = PATH.resolve(
+                        opts.outputDir,
+                        opts.outputName
+                    ),
+                    // get `.js` build prefixes
+                    prefixes = bemhtmlTech.getBuildPrefixes(
+                        bemhtmlTech.transformBuildDecl(decl),
+                        context.getLevels()
+                    ),
+                    // and build bemhtml based on them
+                    bemhtmlResults = bemhtmlTech.getBuildResults(
+                        prefixes,
+                        PATH.dirname(output) + PATH.dirSep,
+                        PATH.basename(output)
+                    );
+
+                return bemhtmlResults
+                    .then(function(r) {
+
+                        // put bemhtml templates at the top of builded js file
+                        res.unshift(r['bemhtml.js']);
+
+                        // and return new result
+                        return res;
 
                     });
 
