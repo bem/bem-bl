@@ -65,29 +65,32 @@ exports.Tech = INHERIT(BEM.TechV2, BEM.util.extend({}, LangsMixin, {
         return pjoin(this.getTechName(), lang + '.js');
     },
 
-    getSuffixes: function() {
-        return this.getLangs().map(this.getSuffixForLang, this);
-    },
-
     getCreateSuffixes: function() {
         return this.getLangs().map(this.getSuffixForLang, this);
     },
 
     getBuildSuffixesMap: function() {
         var suffixes = {};
-        suffixes[this.getSuffixForLang('all')] = this.getLangs().map(this.getSuffixForLang, this);
+        suffixes[this.getSuffixForLang('all')] = this.getLangs()
+            .map(this.getSuffixForLang, this)
+            .concat(this.getSuffixForLang('all'));
 
         return suffixes;
     },
 
     getBuildResult: function(files, suffix, output, opts) {
 
-        var _this = this;
+        var _this = this,
+            src = _this.getSourceSuffix();
 
         return Q.when(
             files.reduce(function(decl, file) {
-                return Q.all([decl, _this.readLangContent(file.absPath, file.file.substr(0, 2))])
-                    .spread(_this.extendLangDecl.bind(_this));
+                var all = (file.suffix === src);
+
+                return Q.all([decl, all?
+                    _this.readContent(file.absPath, file.suffix):
+                    _this.readLangContent(file.absPath, file.file.substr(0, 2))])
+                    .spread(all? _this.extendDecl.bind(_this): _this.extendLangDecl.bind(_this));
             }, {})
         );
     },
