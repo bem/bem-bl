@@ -5,61 +5,71 @@ exports.baseTechName = 'js';
 exports.techMixin = {
 
     /**
-     * Build and return result of build of specified prefixes
-     * for specified suffix.
+     * Build and return result of build of specified prefixes.
      *
+     * @protected
      * @param {Promise * String[]} prefixes Prefixes to build from.
-     * @param {String} suffix Suffix to build result for.
-     * @param {String} outputDir Output dir name for build result.
-     * @param {String} outputName Output name of build result.
-     * @returns {Promise * String} Promise for build result.
+     * @param {String}          outputDir   Output dir name for build result.
+     * @param {String}          outputName  Output name of build result.
+     * @returns {Promise * Object}  Promise for build results object.
      */
-    getBuildResult: function(prefixes, suffix, outputDir, outputName) {
+    getBuildResults: function(prefixes, outputDir, outputName) {
+        var _this = this;
+
+        return this.__base(prefixes, outputDir, outputName)
+            .then(function(res) {
+
+                return _this.getConcatBemhtmlWithResult(res);
+
+            });
+    },
+
+    getConcatBemhtmlWithResult: function(res) {
 
         var context = this.context,
             opts = context.opts;
 
-        return this.__base(prefixes, suffix, outputDir, outputName)
-            .then(function(res) {
+        return opts.declaration
+            .then(function(decl) {
 
-                return opts.declaration
-                    .then(function(decl) {
+                decl = decl.depsByTechs;
 
-                        decl = decl.depsByTechs;
+                // do nothing if decl.depsByTechs.js.bemhtml doesn't exists
+                if (!decl || !decl.js || !decl.js.bemhtml) return res;
 
-                        // do nothing if decl.depsByTechs.js.bemhtml doesn't exists
-                        if (!decl || !decl.js || !decl.js.bemhtml) return res;
+                // js+bemhtml decl
+                decl = { deps: decl.js.bemhtml };
 
-                        // js+bemhtml decl
-                        decl = { deps: decl.js.bemhtml };
+                var bemhtmlTech = context.createTech('bemhtml'),
+                    output = PATH.resolve(
+                        opts.outputDir,
+                        opts.outputName
+                    ),
+                    // get `.js` build prefixes
+                    prefixes = bemhtmlTech.getBuildPrefixes(
+                        bemhtmlTech.transformBuildDecl(decl),
+                        context.getLevels()
+                    ),
+                    // and build bemhtml based on them
+                    bemhtmlResults = bemhtmlTech.getBuildResults(
+                        prefixes,
+                        PATH.dirname(output) + PATH.dirSep,
+                        PATH.basename(output)
+                    );
 
-                        var bemhtmlTech = context.createTech('bemhtml'),
-                            output = PATH.resolve(
-                                opts.outputDir,
-                                opts.outputName
-                            ),
-                            // get `.js` build prefixes
-                            prefixes = bemhtmlTech.getBuildPrefixes(
-                                bemhtmlTech.transformBuildDecl(decl),
-                                context.getLevels()
-                            ),
-                            // and build bemhtml based on them
-                            bemhtmlResults = bemhtmlTech.getBuildResults(
-                                prefixes,
-                                PATH.dirname(output) + PATH.dirSep,
-                                PATH.basename(output)
-                            );
+                return bemhtmlResults
+                    .then(function(r) {
 
-                        return bemhtmlResults
-                            .then(function(r) {
+                        // put bemhtml templates at the top of builded js file
+                        Object.keys(res).forEach(function(suffix) {
+                            // test for array as in i18n.js+bemhtml tech
+                            // there's hack to create symlink for default lang
+                            // so 'js' key is a string there
+                            Array.isArray(res[suffix]) && res[suffix].unshift(r['bemhtml.js']);
+                        });
 
-                                // put bemhtml templates at the top of builded js file
-                                res.unshift(r['bemhtml.js']);
-
-                                // and return new result
-                                return res;
-
-                            });
+                        // and return new result
+                        return res;
 
                     });
 
