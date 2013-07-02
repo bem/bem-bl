@@ -42,6 +42,10 @@ block b-page {
                                     content: 'yes'
                                 }
                             },
+                            {
+                                block: 'i-ua',
+                                js: true
+                            },
                             this.ctx.head
                         ]
                     },
