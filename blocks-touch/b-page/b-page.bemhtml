@@ -42,16 +42,18 @@ block b-page {
                                     content: 'yes'
                                 }
                             },
-                            {
-                                block: 'i-ua',
-                                js: true
-                            },
                             this.ctx.head
                         ]
                     },
                     {
                         elem: 'body',
-                        mix: [ this.ctx ].concat(this.ctx.mix || []),
+                        mix: [
+                            this.ctx,
+                            {
+                                block: 'i-ua',
+                                js: true
+                            }
+                        ].concat(this.ctx.mix || []),
                         content: this.ctx.content
                     }
                 ]
