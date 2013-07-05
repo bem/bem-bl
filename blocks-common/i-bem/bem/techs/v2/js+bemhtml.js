@@ -1,3 +1,6 @@
+var BEM = require('bem'),
+    Q = BEM.require('q');
+
 exports.baseTechName = 'js';
 
 exports.techMixin = {
@@ -17,7 +20,8 @@ exports.techMixin = {
     },
 
     concatBemhtml: function(res, output, opts) {
-        var context = this.context,
+        var _this = this,
+            context = this.context,
             declaration = context.opts.declaration;
 
         return declaration
@@ -29,8 +33,12 @@ exports.techMixin = {
 
                 decl = { deps: decl.js.bemhtml };
 
-                var bemhtmlTech = context.createTech('bemhtml'),
-                    bemhtmlResults = bemhtmlTech.getBuildResults(
+                var bemhtmlTech = context.createTech('bemhtml');
+
+                if (bemhtmlTech.API_VER !== 2) return Q.reject(new Error(_this.getTechName() +
+                    ' can’t use v1 bemhtml tech to concat bemhtml content. Configure level to use v2 bemhtml.'));
+
+                var bemhtmlResults = bemhtmlTech.getBuildResults(
                         decl,
                         context.getLevels(),
                         output,
