@@ -19,12 +19,15 @@ exports.techMixin = {
         return this.__base(prefixes, outputDir, outputName)
             .then(function(res) {
 
-                return _this.getConcatBemhtmlWithResult(res);
+                return _this.concatBemhtml(res)
+                    .then(function() {
+                        return res;
+                    });
 
             });
     },
 
-    getConcatBemhtmlWithResult: function(res) {
+    concatBemhtml: function(res) {
 
         var context = this.context,
             opts = context.opts;
@@ -35,16 +38,12 @@ exports.techMixin = {
                 decl = decl.depsByTechs;
 
                 // do nothing if decl.depsByTechs.js.bemhtml doesn't exists
-                if (!decl || !decl.js || !decl.js.bemhtml) return res;
+                if (!decl || !decl.js || !decl.js.bemhtml) return;
 
                 // js+bemhtml decl
                 decl = { deps: decl.js.bemhtml };
 
                 var bemhtmlTech = context.createTech('bemhtml'),
-                    output = PATH.resolve(
-                        opts.outputDir,
-                        opts.outputName
-                    ),
                     // get `.js` build prefixes
                     prefixes = bemhtmlTech.getBuildPrefixes(
                         bemhtmlTech.transformBuildDecl(decl),
@@ -53,8 +52,8 @@ exports.techMixin = {
                     // and build bemhtml based on them
                     bemhtmlResults = bemhtmlTech.getBuildResults(
                         prefixes,
-                        PATH.dirname(output) + PATH.dirSep,
-                        PATH.basename(output)
+                        opts.outputDir,
+                        opts.outputName
                     );
 
                 return bemhtmlResults
@@ -67,9 +66,6 @@ exports.techMixin = {
                             // so 'js' key is a string there
                             Array.isArray(res[suffix]) && res[suffix].unshift(r['bemhtml.js']);
                         });
-
-                        // and return new result
-                        return res;
 
                     });
 
