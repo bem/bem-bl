@@ -108,6 +108,7 @@
                         ''
                     )
                     .setMod('ios', self.ios ? self.ios.charAt(0) : '')
+                    .setMod('android', self.android ? self.android.charAt(0) : '')
                     .setMod('ios-subversion', self.ios ? self.ios.match(/(\d\.\d)/)[1].replace('.', '') : '')
                     .setMod('screen-size', self.screenSize)
                     .setMod('svg', self.svg ? 'yes' : 'no')
