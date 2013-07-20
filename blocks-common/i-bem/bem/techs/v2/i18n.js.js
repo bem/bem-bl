@@ -14,12 +14,15 @@ exports.techMixin = BEM.util.extend({}, LangsMixin, {
 
     getBuildSuffixesMap: function() {
 
-        var suffixes = {};
+        var suffixes = {},
+            baseSuffixes = this.__base()[this.getBaseTechSuffix()] || 
+                           [this.getBaseTechSuffix()];
+
 
         this.getLangs()
             .map(this.getBuildSuffixForLang, this).concat([this.getBaseTechSuffix()])
             .forEach(function(s) {
-                suffixes[s] = [this.getBaseTechSuffix()];
+                suffixes[s] = baseSuffixes;
             }, this);
 
         return suffixes;
