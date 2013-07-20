@@ -49,7 +49,7 @@ exports.techMixin = {
     },
 
     getDependencies: function() {
-        return ['bemjson.js', 'bemhtml.js'];
+        return ['bemjson.js', 'bemhtml'];
     }
 
 };
