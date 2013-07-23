@@ -1,11 +1,4 @@
-﻿/*
-    http://handjs.codeplex.com/
-
-    Hand.js: a polyfill for supporting pointer events on every browser
-    Write once, use it everywhere! Don't bother with mouse and touch events.
-    Pointer events are here for you.
- */
-(function () {
+﻿(function () {
 
     // Installing Hand.js
     var supportedEventsNames = ["PointerDown", "PointerUp", "PointerMove", "PointerOver", "PointerOut", "PointerCancel", "PointerEnter", "PointerLeave",
@@ -118,11 +111,21 @@
         else
             evObj.width = 0;
 
-        // PreventDefault
+        // preventDefault
         evObj.preventDefault = function () {
             if (sourceEvent.preventDefault !== undefined)
                 sourceEvent.preventDefault();
         };
+
+        // stopPropagation
+        if (evObj.stopPropagation !== undefined) {
+            var current = evObj.stopPropagation;
+            evObj.stopPropagation = function () {
+                if (sourceEvent.stopPropagation !== undefined)
+                    sourceEvent.stopPropagation();
+                current.call(this);
+            };
+        }
 
         // Constants
         evObj.POINTER_TYPE_TOUCH = POINTER_TYPE_TOUCH;
@@ -181,13 +184,8 @@
     };
 
     var generateTouchEventProxyIfRegistered = function (eventName, touchPoint, target, eventObject) { // Check if user registered this event
-        if (target._handjs_registeredEvents) {
-            for (var index = 0; index < target._handjs_registeredEvents.length; index++) {
-                if (target._handjs_registeredEvents[index].toLowerCase() === eventName) {
-
-                    generateTouchEventProxy(target._handjs_registeredEvents[index], touchPoint, target, eventObject);
-                }
-            }
+        if (target.__handjsGlobalRegisteredEvents && target.__handjsGlobalRegisteredEvents[eventName]) {
+            generateTouchEventProxy(eventName, touchPoint, target, eventObject);
         }
     };
 
@@ -239,10 +237,29 @@
     };
 
     var registerOrUnregisterEvent = function (item, name, func, enable) {
+        if (item.__handjsRegisteredEvents === undefined) {
+            item.__handjsRegisteredEvents = [];
+        }
+
         if (enable) {
+            if (item.__handjsRegisteredEvents[name] !== undefined) {
+                item.__handjsRegisteredEvents[name]++;
+                return;
+            }
+
+            item.__handjsRegisteredEvents[name] = 1;
             item.addEventListener(name, func, false);
         } else {
+
+            if (item.__handjsRegisteredEvents.indexOf(name) !== -1) {
+                item.__handjsRegisteredEvents[name]--;
+
+                if (item.__handjsRegisteredEvents[name] != 0) {
+                    return;
+                }
+            }
             item.removeEventListener(name, func);
+            item.__handjsRegisteredEvents[name] = 0;
         }
     };
 
@@ -264,7 +281,7 @@
 
         // Chrome, Firefox
         if (item.ontouchstart !== undefined) {
-            switch (eventName.toLowerCase()) {
+            switch (eventName) {
                 case "pointermove":
                     registerOrUnregisterEvent(item, "touchmove", function (evt) { handleOtherEvent(evt, eventName); }, enable);
                     break;
@@ -278,24 +295,30 @@
                 case "pointerleave":
                 case "pointerenter":
                     // These events will be handled by the window.ontouchmove function
-                    if (!item._handjs_registeredEvents) {
-                        item._handjs_registeredEvents = [];
+                    if (!item.__handjsGlobalRegisteredEvents) {
+                        item.__handjsGlobalRegisteredEvents = [];
                     }
-                    var index = item._handjs_registeredEvents.indexOf(eventName);
 
                     if (enable) {
-                        if (index === -1) {
-                            item._handjs_registeredEvents.push(eventName);
+                        if (item.__handjsGlobalRegisteredEvents[eventName] !== undefined) {
+                            item.__handjsGlobalRegisteredEvents[eventName]++;
+                            return;
                         }
+                        item.__handjsGlobalRegisteredEvents[eventName] = 1;
                     } else {
-                        item._handjs_registeredEvents.splice(index, 1);
+                        if (item.__handjsGlobalRegisteredEvents[eventName] !== undefined) {
+                            item.__handjsGlobalRegisteredEvents[eventName]--;
+                            if (item.__handjsGlobalRegisteredEvents[eventName] < 0) {
+                                item.__handjsGlobalRegisteredEvents[eventName] = 0;
+                            }
+                        }
                     }
                     break;
             }
         }
 
         // Fallback to mouse
-        switch (eventName.toLowerCase()) {
+        switch (eventName) {
             case "pointerdown":
                 registerOrUnregisterEvent(item, "mousedown", function (evt) { generateMouseProxy(evt, eventName); }, enable);
                 break;
@@ -376,6 +399,7 @@
     };
 
     // Hooks
+    interceptAddEventListener(HTMLElement);
     interceptAddEventListener(document);
     interceptAddEventListener(HTMLBodyElement);
     interceptAddEventListener(HTMLDivElement);
@@ -384,6 +408,7 @@
     interceptAddEventListener(HTMLUListElement);
     interceptAddEventListener(HTMLAnchorElement);
     interceptAddEventListener(HTMLLIElement);
+    interceptAddEventListener(HTMLTableElement);
     if (window.HTMLCanvasElement) {
         interceptAddEventListener(HTMLCanvasElement);
     }
@@ -391,7 +416,7 @@
         interceptAddEventListener(SVGElement);
     }
 
-
+    interceptRemoveEventListener(HTMLElement);
     interceptRemoveEventListener(document);
     interceptRemoveEventListener(HTMLBodyElement);
     interceptRemoveEventListener(HTMLDivElement);
@@ -400,6 +425,7 @@
     interceptRemoveEventListener(HTMLUListElement);
     interceptRemoveEventListener(HTMLAnchorElement);
     interceptRemoveEventListener(HTMLLIElement);
+    interceptRemoveEventListener(HTMLTableElement);
     if (window.HTMLCanvasElement) {
         interceptRemoveEventListener(HTMLCanvasElement);
     }
