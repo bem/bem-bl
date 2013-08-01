@@ -143,7 +143,7 @@ _i18n.prototype = {
         return value.call(ctx, params);
     },
 
-    _c : function() { return cache; }
+    _cache : function() { return cache; }
 
 };
 
@@ -159,7 +159,7 @@ bem_.I18N = (function(base) {
      * @param {String|Object} keyset
      * @param {String} key
      * @param {Object} [params]
-     * @return {String}
+     * @returns {String}
      */
     var klass = function(keyset, key, params) {
         return klass.keyset(keyset).key(key, params);
@@ -188,7 +188,7 @@ bem_.I18N = (function(base) {
     /**
      * @param {String} name Key name
      * @param {Object} params
-     * @return {String}
+     * @returns {String}
      */
     klass.key = function(name, params) {
         var proto = this._proto,
@@ -213,7 +213,8 @@ bem_.I18N = (function(base) {
      *
      * @param {String|Object} bemitem
      * @param {Object} keysets
-     * @param {Object} [declProps] declaration params
+     * @param {Object} [params] declaration params
+     * @returns {BEM.I18N}
      */
     klass.decl = function(bemitem, keysets, params) {
         var proto = this._proto,
@@ -237,7 +238,7 @@ bem_.I18N = (function(base) {
      * Get/set current language
      *
      * @param {String} [lang]
-     * @return {String}
+     * @returns {String}
      */
     klass.lang = function(lang) {
         typeof lang !== 'undefined' && (this._lang = lang);
