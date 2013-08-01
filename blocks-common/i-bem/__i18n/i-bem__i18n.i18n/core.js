@@ -1,9 +1,4 @@
-/* global BEM */
-
-// XXX: Support tanker-like syntax of keys in `i-bem__i18n`
-// i18n['prj']['keyset']['key'](params);
-// FIXME: Should not work, because of vars hoisting
-var i18n = i18n || {};
+/* global BEM, i18n */
 (function(global_, bem_, undefined) {
 
 // Check if BEM.I18N was already initialized
@@ -11,15 +6,28 @@ if(typeof bem_.I18N === 'function' && bem_.I18N._proto) {
     return bem_.I18N;
 }
 
-var cache = {},
-    // {String[]} A stack used for restoring context with dynamic keysets
-    stack = [],
-    /** {String} */
-    MOD_DELIM = '_',
-    /** {String} */
+/**
+ * Support tanker-like syntax of keys in `i-bem__i18n`
+ * @example
+ *  i18n['prj']['keyset']['key'](params)
+ */
+if(typeof i18n === 'undefined') {
+    /* jshint -W020 */
+    i18n = {};
+    /* jshint +W020 */
+}
+
+/* jshint -W020 */
+BEM = bem_;
+/* jshint +W020 */
+
+var MOD_DELIM = '_',
     ELEM_DELIM = '__',
-    /** {String} */
-    DEFAULT_LANG = 'ru';
+    DEFAULT_LANG = 'ru',
+    cache = {},
+    // {String[]} A stack used for restoring context of dynamic keysets
+    stack = [],
+    log = (console && console.log)? console.log : function() {};
 
 function bemName(decl) {
 
@@ -236,7 +244,5 @@ bem_.I18N = (function(base) {
 
 }(new _i18n()));
 
-/** Global */
-BEM = bem_;
-
 })(this, typeof BEM === 'undefined' ? {} : BEM);
+
