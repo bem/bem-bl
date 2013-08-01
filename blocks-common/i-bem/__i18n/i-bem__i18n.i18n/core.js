@@ -30,17 +30,14 @@ var MOD_DELIM = '_',
     log = (console && console.log)? console.log : function() {};
 
 function bemName(decl) {
-
     typeof decl === 'string' && (decl = { block: decl });
 
     return decl.block +
         (decl.elem ? (ELEM_DELIM + decl.elem) : '') +
         (decl.modName ? MOD_DELIM + decl.modName + MOD_DELIM + decl.modVal : '');
-
 }
 
 function bemParse(name) {
-
     var bemitem = {};
 
     name.split(ELEM_DELIM).forEach(function(item, i) {
@@ -52,7 +49,6 @@ function bemParse(name) {
     });
 
     return bemitem;
-
 }
 
 function _pushStack(name) {
@@ -121,23 +117,30 @@ _i18n.prototype = {
         k[key] = v;
     },
 
-    val : function(params, thisCtx) {
-        var value = cache[this._lang] && cache[this._lang][this._keyset];
+    val : function(params, ctx) {
+        var value = cache[this._lang] && cache[this._lang][this._keyset],
+            debugString = 'keyset: ' + this._keyset + ' key: ' + this._key + ' (lang: ' + this._lang + ')';
+
         if(!value) {
-            console && console.log &&
-                console.log("[Error] keyset: " + this._keyset + " key: " + this._key + " (lang: " + this._lang + ")");
+            log('[I18N_NO_KEYSET] %s', debugString);
             return '';
         }
 
         value = value[this._key];
-        if(!value) return '';
 
-        try{
-            return typeof value === 'string' ?
-                value : thisCtx ? value.call(thisCtx, params) : value.call(this, params);
-        } catch(e) {
-            throw "[Error] keyset: " + this._keyset + " key: " + this._key + " (lang: " + this._lang + ")";
+        var valtype = typeof value;
+        if(valtype === 'undefined') {
+            log("[I18N_NO_VALUE] %s", debugString);
+            return '';
         }
+
+        if(valtype === 'string') {
+            return value;
+        }
+
+        ctx || (ctx = this);
+        // TODO: try/catch
+        return value.call(ctx, params);
     },
 
     _c : function() { return cache; }
@@ -212,17 +215,20 @@ bem_.I18N = (function(base) {
      * @param {Object} keysets
      * @param {Object} [declProps] declaration params
      */
-    klass.decl = function(bemitem, keysets, declProps) {
-        var proto = this._proto, k;
+    klass.decl = function(bemitem, keysets, params) {
+        var proto = this._proto,
+            k;
 
-        declProps || (declProps = {});
-        declProps.lang && proto.lang(declProps.lang);
+        params || (params = {});
+        params.lang && proto.lang(params.lang);
 
         proto.keyset(bemitem);
 
-        for(k in keysets)
-            keysets.hasOwnProperty(k) &&
+        for(k in keysets) {
+            if(keysets.hasOwnProperty(k)) {
                 proto.key(k).decl(keysets[k]);
+            }
+        }
 
         return this;
     };
