@@ -74,7 +74,7 @@ BEM.INTERNAL = {
 
         var typeOf = typeof modName;
         if(typeOf == 'string') {
-            if(typeof modVal != 'string') {
+            if(typeof modVal != 'string' && typeof modVal != 'number') {
                 buffer = modVal;
                 modVal = modName;
                 modName = elem;
