@@ -230,7 +230,7 @@ BEMHTMLToXJST.cons = function cons(arr) {
 ometa BEMHTMLLogLocal <: XJSTIdentity {
   // local(...) ... => if (this._localLog) { log; local(...) ... } else { ... }
   localStmt trans:a trans:t logChanges(#stmt, a, t):log -> {
-    [#if, [#getp, [#string, '_localLog'], [#get, '__this']],
+    [#if, [#getp, [#string, '_localLog'], [#get, '__$ctx']],
        log,
        [ #begin, [#localStmt, a, t] ]
     ]
@@ -238,7 +238,7 @@ ometa BEMHTMLLogLocal <: XJSTIdentity {
 
   // local(...) ... => this._localLog ? (log, local(...) ... ) : ...
   localExpr trans:a trans:t logChanges(#expr, a, t):log -> {
-    [#condExpr, [#getp, [#string, '_localLog'], [#get, '__this']],
+    [#condExpr, [#getp, [#string, '_localLog'], [#get, '__$ctx']],
       log,
       [#localExpr, a, t]
     ]
@@ -250,7 +250,7 @@ ometa BEMHTMLLogLocal <: XJSTIdentity {
 
   transJsonChange = [#binding :k :v] transChange([
                       #set,
-                      [#getp, [#string, k], [#get, '__this']],
+                      [#getp, [#string, k], [#get, '__$ctx']],
                       v
                     ]):r -> r,
 
@@ -264,7 +264,7 @@ ometa BEMHTMLLogLocal <: XJSTIdentity {
   // Translate simple changes into one `push` call
   logChanges :type transChanges:changes :body -> {
     var self = this,
-        localLog = [#getp, [#string, '_localLog'], [#get, '__this']],
+        localLog = [#getp, [#string, '_localLog'], [#get, '__$ctx']],
         prelude = [],
         args = [];
 
@@ -275,7 +275,7 @@ ometa BEMHTMLLogLocal <: XJSTIdentity {
 
         while (true) {
           if (curr[0] !== 'getp' && curr[0] !== 'this' &&
-              (curr[0] !== 'get' || curr[1] !== '__this')) {
+              (curr[0] !== 'get' || curr[1] !== '__$ctx')) {
             return false;
           }
 
@@ -338,7 +338,7 @@ ometa BEMHTMLLogLocal <: XJSTIdentity {
       // Reflect property changes
       return [#set, property.reduce(function(acc, curr) {
         return [#getp, curr, acc];
-      }, [#get, '__this']), value];
+      }, [#get, '__$ctx']), value];
     });
 
     var local = [

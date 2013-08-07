@@ -42,12 +42,16 @@ api.translate = function translate(source, options) {
          '  var cache,\n' +
          '      xjst = '  + xjstJS + ';\n' +
          '  return function(options) {\n' +
+         '    var context = this;\n' +
          '    if (!options) options = {};\n' +
          '    cache = options.cache;\n' +
+         '    return function() {\n' +
+         '      if (context === this) context = undefined;\n' +
          (vars.length > 0 ? '    var ' + vars.join(', ') + ';\n' : '') +
-         '    return xjst.apply.call(\n' +
-         (options.raw ? 'this' : '[this]') + '\n' +
-         '    );\n' +
+         '      return xjst.apply.call(\n' +
+         (options.raw ? 'context' : '[context]') + '\n' +
+         '      );\n' +
+         '    }.call(null);\n' +
          '  };\n' +
          '}();\n' +
          'typeof exports === "undefined" || (exports.BEMHTML = BEMHTML);';
