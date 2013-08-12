@@ -303,7 +303,7 @@ this._mode === '' {
 
         while(i < l) {
             var newCtx = v[i++];
-            apply(this.ctx = newCtx === null ? '' : newCtx);
+            apply(this.ctx = newCtx == null ? '' : newCtx);
         }
 
         prevNotNewList || (this.position = prevPos);
