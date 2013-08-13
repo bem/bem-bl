@@ -66,22 +66,24 @@
 
     // http://stackoverflow.com/a/6603537
     $(win).bind('resize', function() {
-        var width = win.innerWidth,
-            height = win.innerHeight,
-            landscape = (width > height);
+        setTimeout(function() {
+            var width = win.innerWidth,
+                height = win.innerHeight,
+                landscape = (width > height);
 
-        // http://alxgbsn.co.uk/2012/08/27/trouble-with-web-browser-orientation/
-        // check previous device width to disallow Android shrink page and change orientation on opening software keyboard
-        if (landscape !== lastOrient && width !== lastWidth) {
-            $(win).trigger('orientchange', {
-                landscape: landscape,
-                width: width,
-                height: height
-            });
+            // http://alxgbsn.co.uk/2012/08/27/trouble-with-web-browser-orientation/
+            // check previous device width to disallow Android shrink page and change orientation on opening software keyboard
+            if (landscape !== lastOrient && width !== lastWidth) {
+                $(win).trigger('orientchange', {
+                    landscape: landscape,
+                    width: width,
+                    height: height
+                });
 
-            lastOrient = landscape;
-            lastWidth = width;
-        }
+                lastOrient = landscape;
+                lastWidth = width;
+            }
+        }, 10);
     });
 
     BEM.DOM.decl('i-ua', {
