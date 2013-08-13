@@ -83,7 +83,7 @@
                 lastOrient = landscape;
                 lastWidth = width;
             }
-        }, 10);
+        }, 400);
     });
 
     BEM.DOM.decl('i-ua', {
