@@ -91,7 +91,8 @@
             js: function() {
 
                 var that = this,
-                    self = that.__self;
+                    self = that.__self,
+                    html = document.querySelector('html');;
 
                 that
                     .setMod('platform',
@@ -113,6 +114,9 @@
                     .setMod('screen-size', self.screenSize)
                     .setMod('svg', self.svg ? 'yes' : 'no')
                     .setMod('orient', self.landscape ? 'landscape' : 'portrait');
+
+                     // Для Windows Phone ставим _inlinesvg_no. LEGO-9072.
+                     self.wp && html.setAttribute('class', html.getAttribute('class').replace('i-ua_inlinesvg_yes', 'i-ua_inlinesvg_no'));
 
                 this.bindToWin('orientchange', function(e, data) {
                     self.width = data.width;
