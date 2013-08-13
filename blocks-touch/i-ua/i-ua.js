@@ -29,8 +29,8 @@
 
     if (window.opera) {
         browser.opera = window.opera.version();
-    } else if (match = ua.match(/\sCrMo\/([\d.]+)/)) {
-        browser.chrome = match[1];
+    } else if (match = ua.match(/\s(CrMo|Chrome)\/([\d.]+)/)) {
+        browser.chrome = match[2];
     }
 
     if (navigator.connection) {
