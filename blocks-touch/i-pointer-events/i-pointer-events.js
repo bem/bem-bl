@@ -404,7 +404,7 @@
     interceptAddEventListener(HTMLBodyElement);
     interceptAddEventListener(HTMLDivElement);
     interceptAddEventListener(HTMLImageElement);
-    interceptAddEventListener(HTMLSpanElement);
+    if (typeof HTMLSpanElement != 'undefined') interceptAddEventListener(HTMLSpanElement);
     interceptAddEventListener(HTMLUListElement);
     interceptAddEventListener(HTMLAnchorElement);
     interceptAddEventListener(HTMLLIElement);
@@ -421,7 +421,7 @@
     interceptRemoveEventListener(HTMLBodyElement);
     interceptRemoveEventListener(HTMLDivElement);
     interceptRemoveEventListener(HTMLImageElement);
-    interceptRemoveEventListener(HTMLSpanElement);
+    if (typeof HTMLSpanElement != 'undefined') interceptRemoveEventListener(HTMLSpanElement);
     interceptRemoveEventListener(HTMLUListElement);
     interceptRemoveEventListener(HTMLAnchorElement);
     interceptRemoveEventListener(HTMLLIElement);
