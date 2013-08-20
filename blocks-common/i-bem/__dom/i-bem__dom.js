@@ -5,7 +5,6 @@
 
 var win = $(window),
     doc = $(document),
-    scope = $('body'),
 
 /**
  * Storage for DOM elements by unique key
@@ -982,10 +981,11 @@ var DOM = BEM.DOM = BEM.decl('i-bem__dom',/** @lends BEM.DOM.prototype */{
 
     /**
      * Scope
+     * Will be set on onDomReady to `<body>`
      * @protected
      * @type jQuery
      */
-    scope : scope,
+    scope : null,
 
     /**
      * Document shortcut
@@ -1700,6 +1700,13 @@ var DOM = BEM.DOM = BEM.decl('i-bem__dom',/** @lends BEM.DOM.prototype */{
 
     }
 
+});
+
+/**
+ * Set default scope after DOM ready
+ */
+$(function() {
+    BEM.DOM.scope = $('body');
 });
 
 })(BEM, jQuery);
