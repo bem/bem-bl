@@ -2,9 +2,9 @@ var BEM = require('bem'),
     myPath = BEM.require('./path');
 
 exports.techs = {
-    'js': '../i-bem/bem/techs/js.js',
-    'css': 'css',
-    'bemhtml': '../i-bem/bem/techs/bemhtml.js'
+    'js': '../i-bem/bem/techs/v2/js.js',
+    'css': 'v2/css',
+    'bemhtml': '../i-bem/bem/techs/v2/bemhtml.js'
 };
 
 for (var alias in exports.techs) {

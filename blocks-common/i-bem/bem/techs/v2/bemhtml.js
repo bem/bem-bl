@@ -1,13 +1,10 @@
 var BEM = require('bem'),
-    Q = BEM.require('q'),
     PATH = require('path'),
     SYS = require('util'),
 
-    Tech = require('bem/lib/tech').TechV2,
-
     readFile = BEM.require('./util').readFile;
 
-exports.baseTech = Tech;
+exports.API_VER = 2;
 
 exports.getBuildResultChunk = function(relPath, path, suffix) {
 
