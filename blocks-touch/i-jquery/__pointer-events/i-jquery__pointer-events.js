@@ -171,6 +171,9 @@
         // подписываемся
         setup: function() {
 
+            // отписываемся от событий click
+            $(this).unbind('click');
+
             // если мышь, то эмулируем тап через обычный клик
             // + костыль для Android
             if (events.type == 'mouse' || /Android/.test(navigator.userAgent)) {
