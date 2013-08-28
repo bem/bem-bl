@@ -114,7 +114,6 @@
                     .setMod('android', self.android ? self.android.charAt(0) : '')
                     .setMod('ios-subversion', self.ios ? self.ios.match(/(\d\.\d)/)[1].replace('.', '') : '')
                     .setMod('screen-size', self.screenSize)
-                    .setMod('svg', self.svg ? 'yes' : 'no')
                     .setMod('orient', self.landscape ? 'landscape' : 'portrait');
 
                      // Для Windows Phone ставим _inlinesvg_no. LEGO-9072.
