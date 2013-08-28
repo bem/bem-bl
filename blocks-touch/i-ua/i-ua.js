@@ -23,6 +23,8 @@
         platform.bada = match[1];
     } else if (match = ua.match(/Windows\sPhone.*\s([\d.]+)/)) {
         platform.wp = match[1];
+    } else if (match = ua.match(/MSIE\s9/)) {
+        platform.wp = '7.5';
     } else {
         platform.other = true;
     }
