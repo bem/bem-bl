@@ -150,47 +150,53 @@
             }
 
             // если есть куда и что слайдить
-            if (slider._width > slider._parentWidth) {
+            slider._width > slider._parentWidth && slider._initOnDemand();
 
-                // если начальный элемент не первый
-                if (slider._index) {
+        },
 
-                    // если полноэкранный слайдер
-                    if (slider._perScreen) {
-                        // коррекция начального смещения при непервом начальном элементе в поэкранном слайдере
-                        slider._correctPerScreenNonFirst();
-                    } else {
-                        // коррекция начального смещения при непервом начальном элементе в обычном слайдере
-                        slider._correctPerStepNonFirst();
-                    }
+        _initOnDemand: function() {
 
+            var slider = this;
+
+            // если начальный элемент не первый
+            if (slider._index) {
+
+                // если полноэкранный слайдер
+                if (slider._perScreen) {
+                    // коррекция начального смещения при непервом начальном элементе в поэкранном слайдере
+                    slider._correctPerScreenNonFirst();
+                } else {
+                    // коррекция начального смещения при непервом начальном элементе в обычном слайдере
+                    slider._correctPerStepNonFirst();
                 }
 
-                slider
-                    // бинд на pointer-события
-                    .bindTo( this.namespaced('pointerdown'), slider._onPointerDown )
-                    .bindTo( this.namespaced('pointermove'), slider._onPointerMove )
-                    .bindTo( this.namespaced('pointerup pointercancel'), slider._onPointerUp )
-                    // бинд на i-bem-события
-                    .on({
-                        left: slider._onLeft,
-                        right: slider._onRight
-                    });
-
-                // запрет кликов на время анимации
-                slider._preventClicks();
-
-                // коррекции при повороте
-                slider._correctOnOrientChange();
-
-                // триггерим событие иниализации, передавая параметры (например, для b-slider-indicator).
-                // запоминаем те же параметры для случая, когда событие произойдёт раньше появления его
-                // первого слушателя.
-                slider
-                    .trigger('_init', (slider._initData = slider._getCurrentParams()))
-                    .setMod('inited', 'yes');
-
             }
+
+            slider
+                // бинд на pointer-события
+                .bindTo( this.namespaced('pointerdown'), slider._onPointerDown )
+                .bindTo( this.namespaced('pointermove'), slider._onPointerMove )
+                .bindTo( this.namespaced('pointerup pointercancel'), slider._onPointerUp )
+                // бинд на i-bem-события
+                .on({
+                    left: slider._onLeft,
+                    right: slider._onRight
+                });
+
+            // запрет кликов на время анимации
+            slider._preventClicks();
+
+            // коррекции при повороте
+            slider._correctOnOrientChange();
+
+            // триггерим событие иниализации, передавая параметры (например, для b-slider-indicator).
+            // запоминаем те же параметры для случая, когда событие произойдёт раньше появления его
+            // первого слушателя.
+            slider
+                .trigger('_init', (slider._initData = slider._getCurrentParams()))
+                .setMod('inited', 'yes');
+
+            slider._onDemandInited = true;
 
         },
 
@@ -239,6 +245,8 @@
             this._step = this._perScreen ? this._parentWidth : this._options.step;
             // новый предел
             this._limitX = this._parentWidth - this._elem.outerWidth();
+            // ширина слайдера меньше ширины контейнера ?
+            this._isShort = this._parentWidth > this._width;
 
         },
 
@@ -273,8 +281,18 @@
 
             // поворот
             $(window).bind(this.namespaced('orientchange'), function(landscape) {
+                // запоминаем состояние ширины слайдера
+                var lastWidthState = slider._isShort;
+
                 // пересчёт
                 slider._calcParams();
+
+                // изменилась потребность скроллить слайдер, в зависимости от его ширины ?
+                if (lastWidthState != slider._isShort) {
+                    // инициализируем, если не был инициализированн
+                    !slider._onDemandInited && slider._initOnDemand();
+                    slider.trigger('action-state-change');
+                }
 
                 // предотвращаем дырку слева при ширине слайдера меньше ширины родителя
                 if (slider._limitX > 0) {
