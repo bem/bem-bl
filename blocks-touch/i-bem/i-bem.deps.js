@@ -1,8 +1,6 @@
 ({
-    mustDeps: {
-        block: 'i-jquery',
-        elems: [
-            'pointer-events'
-        ]
-    }
+    mustDeps: [
+        { block: 'i-fastclick' },
+        { block: 'i-pointer-events' }
+    ]
 })
