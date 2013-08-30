@@ -10,21 +10,20 @@ block b-menu-vert {
 
     elem layout, tag: 'ul'
 
-    elem item, default, !this.ctx._wrap: {
-        local(
+    elem item, default: {
+        applyNext(
             this._mode = '',
-            this.ctx._wrap = true,
             this.position = this.position - 1,
             this.ctx = {
                 elem: 'layout-unit',
                 content: [ this.ctx, this.ctx['item-content'] ]
             }
-        ) this.apply();
+        );
 
     }
 
     elem layout-unit {
-        tag: 'li',
+        tag: 'li'
         mix: {
             var mix = [];
 
@@ -40,3 +39,4 @@ block b-menu-vert {
     elem submenu, tag: 'ul'
 
 }
+

@@ -6,29 +6,26 @@ block b-logo {
 
         ctx.icon && (ctx.icon.block = 'b-logo');
 
-        if (ctx.content instanceof Array) for (var c in ctx.content) {
+        if(this._.isArray(ctx.content)) for (var c in ctx.content) {
             ctx.content[c].elem && (ctx.content[c].block = 'b-logo');
             ctx.content[c].tag = 'span';
         }
 
-        local (
-            this._mode = '',
-            ctx.elem = undefined,
-            ctx.block = 'b-link',
-            ctx.content = content,
-            ctx.mix = [ { block: 'b-logo', elem: 'link' } ]
-        ) this.apply();
+        ctx.block = 'b-link'
+        ctx.elem = undefined,
+        ctx.content = content,
+        ctx.mix = [{ block: 'b-logo', elem: 'link' }]
 
+        applyCtx(ctx);
     }
 
     elem icon, default: {
-        var ctx = this.ctx;
-
-        local (
+        applyNext(
             this._mode = '',
-            ctx.elem = undefined,
-            ctx.block = 'b-icon',
-            ctx.mix = [ { block: 'b-logo', elem: 'icon' } ]
-        ) this.apply();
+            this.ctx.elem = undefined,
+            this.ctx.block = 'b-icon',
+            this.ctx.mix = [{ block: 'b-logo', elem: 'icon' }]
+        );
     }
 }
+
