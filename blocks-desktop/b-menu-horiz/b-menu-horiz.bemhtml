@@ -1,18 +1,16 @@
 block b-menu-horiz, this.mods {
 
-    js, !this.elem, this.ctx.js === undefined: true
+    js: true
 
-    elem item, default, !this.ctx._wrap: {
-
-        local(
+    elem item, default: {
+        applyNext(
             this._mode = '',
-            this.ctx._wrap = true,
             this.position = this.position - 1,
             this.ctx = {
                 elem: 'layout-unit',
                 content: this.ctx
             }
-        ) this.apply();
+        );
     }
 
     elem layout-unit, mix: {
