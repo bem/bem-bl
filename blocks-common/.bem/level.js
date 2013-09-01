@@ -4,7 +4,8 @@ var BEM = require('bem'),
 exports.techs = {
     'js': '../i-bem/bem/techs/js.js',
     'css': 'css',
-    'bemhtml': '../i-bem/bem/techs/bemhtml.js'
+    'bemhtml': '../i-bem/bem/techs/bemhtml.js',
+    'test.js': ''
 };
 
 for (var alias in exports.techs) {
