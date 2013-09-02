@@ -5,6 +5,7 @@ exports.techs = {
     'js': '../i-bem/bem/techs/v2/js.js',
     'css': 'v2/css',
     'bemhtml': '../i-bem/bem/techs/v2/bemhtml.js'
+    'test.js': ''
 };
 
 for (var alias in exports.techs) {
