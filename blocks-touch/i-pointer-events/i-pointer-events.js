@@ -11,6 +11,13 @@
 
     var previousTargets = {};
 
+    var checkPreventDefault = function(element) {
+        while (element && element.handjs_forcePreventDefault !== true) {
+            element = element.parentElement;
+        }
+        return element != null;
+    };
+
     // Touch events
     var generateTouchClonedEvent = function (sourceEvent, newName) {
         // Considering touch events are almost like super mouse events
@@ -149,8 +156,9 @@
         }
 
         // If force preventDefault
-        if (sourceEvent.currentTarget && sourceEvent.currentTarget.handjs_forcePreventDefault === true)
+        if (sourceEvent.currentTarget && checkPreventDefault(sourceEvent.currentTarget) === true) {
             evObj.preventDefault();
+        }
 
         // Fire event
         if (sourceEvent.target) {
@@ -183,8 +191,15 @@
         generateTouchClonedEvent(touchPoint, name);
     };
 
+    var checkRegisteredEvents = function(element, eventName) {
+        while (element && !(element.__handjsGlobalRegisteredEvents && element.__handjsGlobalRegisteredEvents[eventName])) {
+            element = element.parentElement;
+        }
+        return element != null;
+    };
+
     var generateTouchEventProxyIfRegistered = function (eventName, touchPoint, target, eventObject) { // Check if user registered this event
-        if (target.__handjsGlobalRegisteredEvents && target.__handjsGlobalRegisteredEvents[eventName]) {
+        if (checkRegisteredEvents(target, eventName)) {
             generateTouchEventProxy(eventName, touchPoint, target, eventObject);
         }
     };
@@ -404,11 +419,13 @@
     interceptAddEventListener(HTMLBodyElement);
     interceptAddEventListener(HTMLDivElement);
     interceptAddEventListener(HTMLImageElement);
-    interceptAddEventListener(HTMLSpanElement);
     interceptAddEventListener(HTMLUListElement);
     interceptAddEventListener(HTMLAnchorElement);
     interceptAddEventListener(HTMLLIElement);
     interceptAddEventListener(HTMLTableElement);
+    if (window.HTMLSpanElement) {
+        interceptAddEventListener(HTMLSpanElement);
+    }
     if (window.HTMLCanvasElement) {
         interceptAddEventListener(HTMLCanvasElement);
     }
@@ -421,11 +438,13 @@
     interceptRemoveEventListener(HTMLBodyElement);
     interceptRemoveEventListener(HTMLDivElement);
     interceptRemoveEventListener(HTMLImageElement);
-    interceptRemoveEventListener(HTMLSpanElement);
     interceptRemoveEventListener(HTMLUListElement);
     interceptRemoveEventListener(HTMLAnchorElement);
     interceptRemoveEventListener(HTMLLIElement);
     interceptRemoveEventListener(HTMLTableElement);
+    if (window.HTMLSpanElement) {
+        interceptRemoveEventListener(HTMLSpanElement);
+    }
     if (window.HTMLCanvasElement) {
         interceptRemoveEventListener(HTMLCanvasElement);
     }
