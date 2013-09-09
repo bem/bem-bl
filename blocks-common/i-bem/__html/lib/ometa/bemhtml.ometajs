@@ -216,7 +216,7 @@ ometa BEMHTMLToXJST <: XJSTIdentity {
                 b
              ] | [#stmt anything]:r -> r,
 
-  topLevel = [bhTemplate+:ts] -> ts,
+  topLevel = [bhTemplate*:ts] -> ts,
   topLevel = bhTemplate:t -> [t],
   topLevel = end -> []
 }
