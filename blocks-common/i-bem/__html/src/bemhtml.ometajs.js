@@ -165,6 +165,11 @@ BEMHTMLParser.prototype["applyMode"] = function $applyMode() {
     return this._skip() && (type = this._getIntermediate(), true) && this._rule("token", true, [ "apply" ], null, this["token"]) && this._rule("token", true, [ "(" ], null, this["token"]) && this._rule("expr", false, [], null, this["expr"]) && (e = this._getIntermediate(), true) && this._rule("token", true, [ ")" ], null, this["token"]) && this._exec(BEMHTMLParser._transMode(e)) && (modded_e = this._getIntermediate(), true) && this._rule("applyFactory", false, [ [ type, modded_e ] ], null, this["applyFactory"]) && (r = this._getIntermediate(), true) && this._exec(r);
 };
 
+BEMHTMLParser.prototype["applyNext"] = function $applyNext() {
+    var type, e, modded_e, r;
+    return this._skip() && (type = this._getIntermediate(), true) && this._rule("token", true, [ "applyNext" ], null, this["token"]) && this._rule("token", true, [ "(" ], null, this["token"]) && this._rule("expr", false, [], null, this["expr"]) && (e = this._getIntermediate(), true) && this._rule("token", true, [ ")" ], null, this["token"]) && this._exec(BEMHTMLParser._transMode(e)) && (modded_e = this._getIntermediate(), true) && this._rule("applyFactory", false, [ [ type, "next", modded_e ] ], null, this["applyFactory"]) && (r = this._getIntermediate(), true) && this._exec(r);
+};
+
 BEMHTMLParser.prototype["applyCtx"] = function $applyCtx() {
     var type, ctx, modded_e, r;
     return this._skip() && (type = this._getIntermediate(), true) && this._rule("token", true, [ "applyCtx" ], null, this["token"]) && this._rule("token", true, [ "(" ], null, this["token"]) && this._rule("expr", false, [], null, this["expr"]) && (ctx = this._getIntermediate(), true) && this._rule("token", true, [ ")" ], null, this["token"]) && this._skip() && this._exec(BEMHTMLParser._transMode([ "binop", ",", [ "set", [ "getp", [ "string", "ctx" ], [ "this" ] ], ctx ], [ "string", "" ] ])) && (modded_e = this._getIntermediate(), true) && this._rule("applyFactory", false, [ [ type, "next", modded_e ] ], null, this["applyFactory"]) && (r = this._getIntermediate(), true) && this._exec(r);
@@ -174,6 +179,9 @@ BEMHTMLParser.prototype["primExprHd"] = function $primExprHd() {
     return this._atomic(function() {
         var r;
         return this._rule("applyMode", false, [ "expr" ], null, this["applyMode"]) && (r = this._getIntermediate(), true) && this._exec(r);
+    }) || this._atomic(function() {
+        var r;
+        return this._rule("applyNext", false, [ "expr" ], null, this["applyNext"]) && (r = this._getIntermediate(), true) && this._exec(r);
     }) || this._atomic(function() {
         var r;
         return this._rule("applyCtx", false, [ "expr" ], null, this["applyCtx"]) && (r = this._getIntermediate(), true) && this._exec(r);
@@ -186,6 +194,9 @@ BEMHTMLParser.prototype["stmt"] = function $stmt() {
     return this._atomic(function() {
         var r;
         return this._rule("applyMode", false, [ "stmt" ], null, this["applyMode"]) && (r = this._getIntermediate(), true) && this._exec(r);
+    }) || this._atomic(function() {
+        var r;
+        return this._rule("applyNext", false, [ "stmt" ], null, this["applyNext"]) && (r = this._getIntermediate(), true) && this._exec(r);
     }) || this._atomic(function() {
         var r;
         return this._rule("applyCtx", false, [ "stmt" ], null, this["applyCtx"]) && (r = this._getIntermediate(), true) && this._exec(r);

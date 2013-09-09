@@ -39,6 +39,10 @@ ometa BEMHTMLParser <: XJSTParser {
         { BEMHTMLParser._transMode(e) }:modded_e
         applyFactory([type, modded_e]):r -> r,
 
+    applyNext :type = "applyNext" "(" expr:e ")"
+        { BEMHTMLParser._transMode(e) }:modded_e
+        applyFactory([type, #next, modded_e]):r -> r,
+
     applyCtx :type = "applyCtx" "(" expr:ctx ")" = {
           BEMHTMLParser._transMode([
             #binop, ',',
@@ -49,10 +53,12 @@ ometa BEMHTMLParser <: XJSTParser {
         applyFactory([type, #next, modded_e]):r -> r,
 
     primExprHd = applyMode(#expr):r -> r
+               | applyNext(#expr):r -> r
                | applyCtx(#expr):r -> r
                | ^primExprHd,
 
     stmt       = applyMode(#stmt):r -> r
+               | applyNext(#stmt):r -> r
                | applyCtx(#stmt):r -> r
                | ^stmt,
 
