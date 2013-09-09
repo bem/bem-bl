@@ -1,4 +1,4 @@
-!function() {
+!function oninit() {
 
 var BEM_ = {},
     toString = Object.prototype.toString,
