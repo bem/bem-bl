@@ -23,7 +23,7 @@ ometa BEMHTMLParser <: XJSTParser {
 
     bemMatchAndSet = bemMatch | bemhtmlSet | bemCustom,
     listBemMatchAndSet %(this.predicates = [])
-        = bemMatchAndSet:t ',' listBemMatchAndSet:ts -> {
+        = bemMatchAndSet:t spaces ',' spaces listBemMatchAndSet:ts -> {
           BEMHTMLParser._applyPredicates(
               this.predicates,
               BEMHTMLParser._concatChildren(t, ts));
@@ -31,7 +31,7 @@ ometa BEMHTMLParser <: XJSTParser {
           BEMHTMLParser._applyPredicates(
               this.predicates,
               BEMHTMLParser._concatChildren(t, [#sub, ts]))
-        } | bemMatchAndSet:t ':' (asgnExpr:e -> [#return, e] | stmt):c ','? -> {
+        } | bemMatchAndSet:t spaces ':' spaces (asgnExpr:e -> [#return, e] | stmt):c ','? -> {
           BEMHTMLParser._applyPredicates(this.predicates, [t, [#body, c]])
         } | stmt:r -> [#stmt, r],
 

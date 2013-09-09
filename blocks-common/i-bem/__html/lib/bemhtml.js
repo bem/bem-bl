@@ -139,7 +139,7 @@ BEMHTMLParser.prototype["listBemMatchAndSet"] = function $listBemMatchAndSet() {
     var $l0, $l1;
     return ($l0 = this, $l1 = $l0.predicates, $l0.predicates = [], true) && ((this._atomic(function() {
         var t, ts;
-        return this._rule("bemMatchAndSet", false, [], null, this["bemMatchAndSet"]) && (t = this._getIntermediate(), true) && this._match(",") && this._rule("listBemMatchAndSet", false, [], null, this["listBemMatchAndSet"]) && (ts = this._getIntermediate(), true) && this._exec(function() {
+        return this._rule("bemMatchAndSet", false, [], null, this["bemMatchAndSet"]) && (t = this._getIntermediate(), true) && this._rule("spaces", false, [], null, this["spaces"]) && this._match(",") && this._rule("spaces", false, [], null, this["spaces"]) && this._rule("listBemMatchAndSet", false, [], null, this["listBemMatchAndSet"]) && (ts = this._getIntermediate(), true) && this._exec(function() {
             return BEMHTMLParser._applyPredicates(this.predicates, BEMHTMLParser._concatChildren(t, ts));
         }.call(this));
     }) || this._atomic(function() {
@@ -153,7 +153,7 @@ BEMHTMLParser.prototype["listBemMatchAndSet"] = function $listBemMatchAndSet() {
         }.call(this));
     }) || this._atomic(function() {
         var t, c;
-        return this._rule("bemMatchAndSet", false, [], null, this["bemMatchAndSet"]) && (t = this._getIntermediate(), true) && this._match(":") && (this._atomic(function() {
+        return this._rule("bemMatchAndSet", false, [], null, this["bemMatchAndSet"]) && (t = this._getIntermediate(), true) && this._rule("spaces", false, [], null, this["spaces"]) && this._match(":") && this._rule("spaces", false, [], null, this["spaces"]) && (this._atomic(function() {
             var e;
             return this._rule("asgnExpr", false, [], null, this["asgnExpr"]) && (e = this._getIntermediate(), true) && this._exec([ "return", e ]);
         }) || this._atomic(function() {
