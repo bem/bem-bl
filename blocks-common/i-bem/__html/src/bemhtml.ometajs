@@ -193,7 +193,7 @@ ometa BEMHTMLToXJST <: XJSTCompiler {
 
     topLevel = [bhTemplate+:ts] -> ts.join('\n\n'),
     topLevel = bhTemplate:t -> t,
-    topLevel = end -> 'template(true){}'
+    topLevel = []? end -> 'template(true){}'
 
 }
 
