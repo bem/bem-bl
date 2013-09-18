@@ -311,10 +311,13 @@
 
         _onPointerDown: function(e) {
 
+            e = e.originalEvent;
+
             // запоминаем координаты и время
-            this._touch.x1 = e.pointer.x;
-            this._touch.y1 = e.pointer.y + (ua.bada ? window.pageYOffset : 0);
+            this._touch.x1 = e.clientX;
+            this._touch.y1 = e.clientY + (ua.bada ? window.pageYOffset : 0);
             this._touch.t1 = Date.now();
+            this._touch.isPressed = true;
 
             // отключаем анимацию на время реалтаймового слайда
             this._elem.css('transition', 'none');
@@ -323,38 +326,44 @@
 
         _onPointerMove: function(e) {
 
-            // смещения
-            this._touch.shiftX = e.pointer.x - this._touch.x1;
-            this._touch.shiftY = e.pointer.y - this._touch.y1;
+            e = e.originalEvent;
 
-            // абсолютные значения смещений
-            this._touch.shiftXAbs = Math.abs(this._touch.shiftX);
-            this._touch.shiftYAbs = Math.abs(this._touch.shiftY);
+            if (this._touch.isPressed) {
 
-            // если мы ещё не определились
-            if (!this._touch.isSlide && !this._touch.isScroll) {
-                // если вертикальное смещение - скроллим пока не отпустили палец
-                if (this._touch.shiftYAbs >= 5 && this._touch.shiftYAbs > this._touch.shiftXAbs) {
-                    this._touch.isScroll = true;
+                // смещения
+                this._touch.shiftX = e.clientX - this._touch.x1;
+                this._touch.shiftY = e.clientY - this._touch.y1;
+
+                // абсолютные значения смещений
+                this._touch.shiftXAbs = Math.abs(this._touch.shiftX);
+                this._touch.shiftYAbs = Math.abs(this._touch.shiftY);
+
+                // если мы ещё не определились
+                if (!this._touch.isSlide && !this._touch.isScroll) {
+                    // если вертикальное смещение - скроллим пока не отпустили палец
+                    if (this._touch.shiftYAbs >= 5 && this._touch.shiftYAbs > this._touch.shiftXAbs) {
+                        this._touch.isScroll = true;
+                    }
+
+                    // если горизонтальное - слайдим
+                    if (this._touch.shiftXAbs >= 5 && this._touch.shiftXAbs > this._touch.shiftYAbs) {
+                        this._touch.isSlide = true;
+                    }
                 }
 
-                // если горизонтальное - слайдим
-                if (this._touch.shiftXAbs >= 5 && this._touch.shiftXAbs > this._touch.shiftYAbs) {
-                    this._touch.isSlide = true;
-                }
-            }
+                // если реалтаймовый слайд и мы слайдим
+                if (realtimeSlide && this._touch.isSlide) {
+                    // запрещаем скролл
+                    e.preventDefault();
 
-            // если реалтаймовый слайд и мы слайдим
-            if (realtimeSlide && this._touch.isSlide) {
-                // запрещаем скролл
-                e.preventDefault();
+                    // если в пределах и тянем за них, то замедлять слайд в 3 раза
+                    if ((this._currentX == 0 && this._touch.shiftX > 0) || (this._currentX == this._limitX && this._touch.shiftX < 0)) {
+                        this._touch.shiftX = this._touch.shiftX / 3;
+                    }
+                    // реалтаймловый слайд
+                    this._elem.css('transform', translateX(this._currentX + this._touch.shiftX));
 
-                // если в пределах и тянем за них, то замедлять слайд в 3 раза
-                if ((this._currentX == 0 && this._touch.shiftX > 0) || (this._currentX == this._limitX && this._touch.shiftX < 0)) {
-                    this._touch.shiftX = this._touch.shiftX / 3;
                 }
-                // реалтаймловый слайд
-                this._elem.css('transform', translateX(this._currentX + this._touch.shiftX));
 
             }
 
