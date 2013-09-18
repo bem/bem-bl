@@ -981,7 +981,7 @@ var DOM = BEM.DOM = BEM.decl('i-bem__dom',/** @lends BEM.DOM.prototype */{
 
     /**
      * Scope
-     * Will be set on onDomReady to `<body>`
+     * Will be set on onDomReady to tag `body`
      * @protected
      * @type jQuery
      */

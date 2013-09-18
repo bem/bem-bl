@@ -23,6 +23,8 @@
         platform.bada = match[1];
     } else if (match = ua.match(/Windows\sPhone.*\s([\d.]+)/)) {
         platform.wp = match[1];
+    } else if (match = ua.match(/MSIE\s9/)) {
+        platform.wp = '7.5';
     } else {
         platform.other = true;
     }
@@ -114,7 +116,6 @@
                     .setMod('android', self.android ? self.android.charAt(0) : '')
                     .setMod('ios-subversion', self.ios ? self.ios.match(/(\d\.\d)/)[1].replace('.', '') : '')
                     .setMod('screen-size', self.screenSize)
-                    .setMod('svg', self.svg ? 'yes' : 'no')
                     .setMod('orient', self.landscape ? 'landscape' : 'portrait');
 
                      // Для Windows Phone ставим _inlinesvg_no. LEGO-9072.
