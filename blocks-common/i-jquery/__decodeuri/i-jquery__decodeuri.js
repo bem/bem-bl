@@ -10,8 +10,7 @@ var map = { "%D0": "%D0%A0","%C0": "%D0%90","%C1": "%D0%91","%C2": "%D0%92","%C3
 
 function convert(str) {
     // Symbol code in cp1251 (hex) : symbol code in utf8)
-    str = str.replace(/%.{2}/g, function($0) { return map[$0] });
-    return str;
+    return str.replace(/%.{2}/g, function($0) { return map[$0] || $0; });
 }
 
 function decode(func, str) {
@@ -23,7 +22,11 @@ function decode(func, str) {
     try {
         decoded = func(str);
     } catch (e) {
-        decoded = func(convert(str));
+        try {
+            decoded = func(convert(str));
+        } catch (e) {
+            decoded = str;
+        }
     }
     return decoded;
 
