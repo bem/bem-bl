@@ -954,17 +954,11 @@ var DOM = BEM.DOM = BEM.decl('i-bem__dom',/** @lends BEM.DOM.prototype */{
             var params = getParams(domNode);
             $.each(params, function(blockName, blockParams) {
                 var block = uniqIdToBlock[blockParams.uniqId];
-                if(block) {
-                    if(!block._isDestructing) {
-                        removeDomNodeFromBlock(block, domNode);
-                        delete params[blockName];
-                    }
-                }
-                else {
+                block?
+                    block._isDestructing || removeDomNodeFromBlock(block, domNode) :
                     delete uniqIdToDomElems[blockParams.uniqId];
-                }
             });
-            $.isEmptyObject(params) && cleanupDomNode(domNode);
+            cleanupDomNode(domNode);
         });
 
         keepDOM || _this.domElem.remove();
@@ -1078,16 +1072,12 @@ var DOM = BEM.DOM = BEM.decl('i-bem__dom',/** @lends BEM.DOM.prototype */{
             $.each(params, function(blockName, blockParams) {
                 if(blockParams.uniqId) {
                     var block = uniqIdToBlock[blockParams.uniqId];
-                    if(block) {
-                        removeDomNodeFromBlock(block, domNode);
-                        delete params[blockName];
-                    }
-                    else {
+                    block?
+                        removeDomNodeFromBlock(block, domNode) :
                         delete uniqIdToDomElems[blockParams.uniqId];
-                    }
                 }
             });
-            $.isEmptyObject(params) && cleanupDomNode(this);
+            cleanupDomNode(this);
         });
         keepDOM || (excludeSelf? ctx.empty() : ctx.remove());
 
