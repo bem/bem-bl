@@ -1,21 +1,22 @@
 block b-menu-horiz, mod layout simple {
 
-    content: [
-        this.ctx.title,
-        {
-            tag: false,
-            content: this.ctx.content
-        }
-    ]
-
     default: {
         applyNext(this._separator = this.ctx.separator);
     }
 
-    elem item, default: {
-        applyCtx([ (this.isFirst()? '' : this._separator), this.ctx ]);
+    content: [
+        this.ctx.title,
+        // XXX: hack, so `isFirst()` will work as we want
+        { tag: false, content: this.ctx.content }
+    ]
+
+    elem item {
+        default: applyCtx([(this.isFirst()? '' : this._separator), this.ctx])
+
+        tag: (this.elemMods.state? 'span' : false)
     }
 
-    elem item, tag: (this.elemMods.state? 'span' : false)
+    elem layout-unit, tag: false
 
 }
+
