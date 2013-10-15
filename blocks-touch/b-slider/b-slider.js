@@ -143,7 +143,7 @@
                 slider._calcParams();
 
                 // при поворотах пересчитываем ширину
-                $(window).bind( this.namespaced('orientchange'), function() {
+                slider.bindToWin(this.namespaced('orientchange'), function() { 
                     slider._items.width(slider._elem.parent().width());
                 });
 

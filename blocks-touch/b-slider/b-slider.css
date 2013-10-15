@@ -24,6 +24,11 @@
     -webkit-transform: translateZ(0);
 }
 
+.i-ua_platform_wp .b-slider .b-menu__item
+{
+    display: inline-block;
+}
+
 .b-slider_animation_yes
 {
     pointer-events: none;
