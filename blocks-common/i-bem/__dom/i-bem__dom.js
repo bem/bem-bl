@@ -1361,6 +1361,8 @@ var DOM = BEM.DOM = BEM.decl('i-bem__dom',/** @lends BEM.DOM.prototype */{
 
         var name = this._name;
         blocks[blockName].on(event, function(e) {
+            if(!e.block.domElem) return; // if block was destructed at that moment
+
             var args = arguments,
                 blocks = e.block[findFnName](name);
 
