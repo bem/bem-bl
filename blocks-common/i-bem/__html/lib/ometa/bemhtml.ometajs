@@ -46,7 +46,9 @@ ometa BEMHTMLParser <: XJSTParser {
                          [#xjst, this.predicates],
                          r
                        )
-                     } | stmt:r -> [#stmt, r],
+                     },
+  listBemMatchAndSetTop = listBemMatchAndSet:r -> r
+                        | stmt:r -> [#stmt, r],
 
   applyMode :type = "apply" "(" expr:e ")"
                     { BEMHTMLParser._transMode(e) }:modded_e
@@ -72,7 +74,7 @@ ometa BEMHTMLParser <: XJSTParser {
              | applyCtx(#stmt):r -> r
              | ^stmt,
 
-  topLevel = listBemMatchAndSet*:ts spaces end -> {
+  topLevel = listBemMatchAndSetTop*:ts spaces end -> {
     BEMHTMLParser._addElemPredic(BEMHTMLParser._dropAllSubs(ts))
   }
 }
