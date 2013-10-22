@@ -1,20 +1,25 @@
-block b-bla, tag: 'span'
-block b-bla, mod 0-mode v2, tag: 'yay'
-block b-bla, mix: [{ mods: { m2: 'v2' } }]
-block b-bla, js: true
-block b-alb, attrs: { bbb: 1, title: 2 }
-block b-alb, js: { bbb: 1, title: 2 }
+block('b-bla')(
+  tag()('span'),
+  mod('0-mode', 'v2').tag()('yay'),
+  mix()([{ mods: { m2: 'v2' } }]),
+  js()(true)
+);
 
-block b-nojs, tag, !this.elem: 'table'
-block b-nojs, default, !this.elem, !this.ctx._wrap: {
-    local(
-        this.ctx._wrap = true,
-        this.ctx = { elem: 'run', content: this.ctx },
-        this._mode = '') this.apply();
-}
+block('b-alb')(
+  attrs()({ bbb: 1, title: 2 }),
+  js()({ bbb: 1, title: 2 })
+);
 
-elem elem1, default: {
-    local(
-        this.ctx = this.ctx.content,
-        this._mode = '') this.apply();
-}
+block('b-nojs')(
+  tag().match(!this.elem)('table'),
+  def().match(!this.elem, function() { return !this.ctx._wrap })(function() {
+    return apply('', {
+      'ctx._wrap': true,
+      ctx: { elem: 'run', content: this.ctx }
+    });
+  })
+);
+
+elem('elem1').def()(function() {
+  return apply('', { ctx: this.ctx.content });
+});

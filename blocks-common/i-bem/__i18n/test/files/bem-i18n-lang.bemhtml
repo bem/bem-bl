@@ -1,11 +1,7 @@
-block b1 {
+block('b1').content()(function() {
+    return BEM.I18N.lang();
+});
 
-    content: BEM.I18N.lang()
-
-}
-
-block b2 {
-
-    content: BEM.I18N.lang('ru')
-
-}
+block('b2').content()(function() {
+    return BEM.I18N.lang('ru');
+});

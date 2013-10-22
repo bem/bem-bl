@@ -1,4 +1,4 @@
-!function oninit() {
+oninit(function() {
   (function(global, bem_) {
 
       if(bem_.I18N) {
@@ -11,7 +11,7 @@
       /**
        * `BEM.I18N` API stub
        */
-      var i18n = bem_.I18N = function(keyset, key) {
+      var i18n = global.BEM.I18N = function(keyset, key) {
           return key;
       };
 
@@ -20,4 +20,4 @@
       i18n.lang = function() { return }
 
   })(this, typeof BEM === 'undefined' ? {} : BEM);
-}();
+});

@@ -1,7 +1,7 @@
 var assert = require('assert'),
     fs = require('fs'),
     path = require('path'),
-    bemhtml = require('../lib/bemhtml'),
+    bemhtml = require('../../../../.bem/lib/bemhtml'),
     iBem = fs.readFileSync(path.resolve(
       __dirname,
       '../i-bem__html.bemhtml'
@@ -15,19 +15,19 @@ suite('i-bem block and others', function() {
   function unit(name, file, raw) {
     test(name, function() {
       var contents = {
-        src: readFile('i-bem/' + file + '.bemhtml'),
-        data: JSON.parse(readFile('i-bem/' + file + '.json')),
-        dst: readFile('i-bem/' + file + '.html')
+        src : readFile('i-bem/' + file + '.bemhtml'),
+        data : JSON.parse(readFile('i-bem/' + file + '.json')),
+        dst : readFile('i-bem/' + file + '.html')
       };
 
       assert.equal(
-        bemhtml.compile(iBem + contents.src, { devMode: true, raw: raw })
-            .call(contents.data) + '\n',
+        bemhtml.compile(iBem + contents.src, { devMode : true, raw : raw })
+            .apply.call(contents.data) + '\n',
         contents.dst
       );
       assert.equal(
-        bemhtml.compile(iBem + contents.src, { devMode: false, raw: raw })
-            .call(contents.data) + '\n',
+        bemhtml.compile(iBem + contents.src, { devMode : false, raw : raw })
+            .apply.call(contents.data) + '\n',
         contents.dst
       );
     });
@@ -40,10 +40,9 @@ suite('i-bem block and others', function() {
   unit('blocks with local variables', 'local-var');
   unit('attr with empty value', 'empty-attrs');
   unit('one symbol elem', 'one-symbol-elem');
-  unit('bemhtml with comments', 'comments');
-  unit('bemhtml with custom predicates', 'custom-predicates');
   unit('mix regression #232', 'gh-232');
   unit('condition regression #239', 'gh-239', true);
   unit('simple types regression #254', 'gh-254');
   unit('applyNext in content regression #289', 'gh-289');
+  unit('boolean mods bem-core/169', 'boolean-mods');
 });

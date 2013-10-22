@@ -1,47 +1,49 @@
 var BEM = require('bem'),
+    Q = BEM.require('q'),
     PATH = require('path'),
-    SYS = require('util'),
-
-    readFile = BEM.require('./util').readFile;
+    compat = require('bemhtml-compat');
 
 exports.API_VER = 2;
 
-exports.getBuildResultChunk = function(relPath, path, suffix) {
+exports.techMixin = {
 
-    return readFile(path)
-        .then(function(c) {
+    getBuildSuffixesMap: function() {
+        return {
+            'bemhtml.js': ['bemhtml', 'bemhtml.xjst']
+        };
+    },
 
-            return [
-                '/* ' + path + ': start */',
-                c,
-                '/* ' + path + ': end */',
-                '\n'
-            ].join('\n');
+    getCreateSuffixes : function() {
+        return ['bemhtml'];
+    },
 
-        });
+    getBuildResultChunk : function(relPath, path, suffix) {
+        var content = this.readContent(path, suffix);
+        return (suffix !== 'bemhtml.xjst' ?
+            content.then(function(source) { return compat.transpile(source); }) :
+            content)
+                .then(function(source) {
+                    return '\n/* begin: ' + relPath + ' */\n' +
+                        source +
+                        '\n/* end: ' + relPath + ' */\n';
+                });
+    },
 
-};
+    getBuildResult : function(files, suffix, output, opts) {
+        var _t = this;
+        return this.__base(files, suffix, output, opts)
+            .then(_t.getCompiledResult.bind(_t));
+    },
 
-exports.getBuildResult = function(files, suffix, output, opts) {
+    getCompiledResult : function(sources) {
+        sources = sources.join('\n');
 
-    var _this = this;
-    return this.__base(files, suffix, output, opts)
-        .then(function(sources) {
-            sources = sources.join('\n');
-
-            var BEMHTML = require('../../../__html/lib/bemhtml');
-
-            return BEMHTML.translate(sources, {
-              devMode: process.env.BEMHTML_ENV == 'development',
-              cache: process.env.BEMHTML_CACHE == 'on'
+        var BEMHTML = require('../../../../../.bem/lib/bemhtml');
+        return BEMHTML.translate(sources, {
+                devMode : process.env.BEMHTML_ENV == 'development',
+                cache   : process.env.BEMHTML_CACHE == 'on',
+                exportName : 'BEMHTML'
             });
-
-        });
+    }
 
 };
-
-exports.getBuildSuffixesMap = function() {
-    return {
-        'bemhtml.js': ['bemhtml']
-    };
-}

@@ -1,1 +1,0 @@
-block b-test, this.elem === 'elem-2' || this.elem === 'elem-3', tag: 'span'
