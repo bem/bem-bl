@@ -1,4 +1,4 @@
-block b1 {
-  tag: 'a'
-  attrs: { invisible: undefined, x: '1' }
-}
+block('b1')(
+  tag()('a'),
+  attrs()({ invisible: undefined, x: '1' })
+);

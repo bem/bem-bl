@@ -1,10 +1,20 @@
 {
-  "name": "bemhtml",
-  "version": "0.0.0",
+  "name": "bem-bl",
+  "version": "0.3.0",
   "private": true,
+  "description": "BEM Blocks Library",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/bem/bem-bl.git"
+  },
+  "keywords": [
+    "bem",
+    "blocks"
+  ],
+  "license": "MIT",
   "dependencies": {
-    "xjst": "~0.5.1",
-    "ometajs": "~3.2.2",
+    "bem-xjst": "~0.3.1",
+    "bemhtml-compat": "~0.0.4",
     "dom-js": "~0.0.9"
   },
   "devDependencies": {

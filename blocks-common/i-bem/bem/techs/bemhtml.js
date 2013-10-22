@@ -1,24 +1,18 @@
 var BEM = require('bem'),
     Q = BEM.require('q'),
     PATH = require('path'),
-    SYS = require('util'),
-
-    readFile = BEM.require('./util').readFile;
+    compat = require('bemhtml-compat');
 
 exports.getBuildResultChunk = function(relPath, path, suffix) {
-
-    return readFile(path)
-        .then(function(c) {
-
-            return [
-                '/* ' + path + ': start */',
-                c,
-                '/* ' + path + ': end */',
-                '\n'
-            ].join('\n');
-
-        });
-
+    var content = this.readContent(path, suffix);
+    return (suffix !== 'bemhtml.xjst' ?
+        content.then(function(source) { return compat.transpile(source); }) :
+        content)
+            .then(function(source) {
+                return '\n/* begin: ' + relPath + ' */\n' +
+                    source +
+                    '\n/* end: ' + relPath + ' */\n';
+            });
 };
 
 exports.getBuildResult = function(prefixes, suffix, outputDir, outputName) {
@@ -34,11 +28,12 @@ exports.getBuildResult = function(prefixes, suffix, outputDir, outputName) {
         .then(function(sources) {
             sources = sources.join('\n');
 
-            var BEMHTML = require('../../__html/lib/bemhtml');
+            var BEMHTML = require('../../../../.bem/lib/bemhtml');
 
             return BEMHTML.translate(sources, {
-              devMode: process.env.BEMHTML_ENV == 'development',
-              cache: process.env.BEMHTML_CACHE == 'on'
+                devMode : process.env.BEMHTML_ENV == 'development',
+                cache   : process.env.BEMHTML_CACHE == 'on',
+                exportName : 'BEMHTML'
             });
         });
 
