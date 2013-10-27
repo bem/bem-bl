@@ -853,7 +853,7 @@ var DOM = BEM.DOM = BEM.decl('i-bem__dom',/** @lends BEM.DOM.prototype */{
     /**
      * Clearing the cache for elements
      * @protected
-     * @param {String} names Nested element name (or names separated by spaces)
+     * @param {String} [names] Nested element name (or names separated by spaces)
      * @param {String} [modName] Modifier name
      * @param {String} [modVal] Modifier value
      * @returns {BEM}
