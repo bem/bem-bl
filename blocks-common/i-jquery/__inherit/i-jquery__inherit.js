@@ -1,23 +1,41 @@
 /**
- * Inheritance plugin
- *
- * Copyright (c) 2010 Filatov Dmitry (dfilatov@yandex-team.ru)
- * Dual licensed under the MIT and GPL licenses:
- * http://www.opensource.org/licenses/mit-license.php
- * http://www.gnu.org/licenses/gpl.html
- *
- * @version 1.3.5
+ * @module inherit
+ * @version 2.1.0
+ * @author Filatov Dmitry <dfilatov@yandex-team.ru>
  */
 
-(function($) {
+(function(global) {
 
-var hasIntrospection = (function(){_}).toString().indexOf('_') > -1,
+var hasIntrospection = (function(){'_';}).toString().indexOf('_') > -1,
     emptyBase = function() {},
+    hasOwnProperty = Object.prototype.hasOwnProperty,
     objCreate = Object.create || function(ptp) {
         var inheritance = function() {};
         inheritance.prototype = ptp;
         return new inheritance();
     },
+    objKeys = Object.keys || function(obj) {
+        var res = [];
+        for(var i in obj) {
+            hasOwnProperty.call(obj, i) && res.push(i);
+        }
+        return res;
+    },
+    extend = function(o1, o2) {
+        for(var i in o2) {
+            hasOwnProperty.call(o2, i) && (o1[i] = o2[i]);
+        }
+
+        return o1;
+    },
+    toStr = Object.prototype.toString,
+    isArray = Array.isArray || function(obj) {
+        return toStr.call(obj) === '[object Array]';
+    },
+    isFunction = function(obj) {
+        return toStr.call(obj) === '[object Function]';
+    },
+    noOp = function() {},
     needCheckProps = true,
     testPropObj = { toString : '' };
 
@@ -27,95 +45,125 @@ for(var i in testPropObj) { // fucking ie hasn't toString, valueOf in for
 
 var specProps = needCheckProps? ['toString', 'valueOf'] : null;
 
-function override(base, result, add) {
-
-    var hasSpecProps = false;
+function getPropList(obj) {
+    var res = objKeys(obj);
     if(needCheckProps) {
-        var addList = [];
-        $.each(specProps, function() {
-            add.hasOwnProperty(this) && (hasSpecProps = true) && addList.push({
-                name : this,
-                val  : add[this]
-            });
-        });
-        if(hasSpecProps) {
-            $.each(add, function(name) {
-                addList.push({
-                    name : name,
-                    val  : this
-                });
-            });
-            add = addList;
+        var specProp, i = 0;
+        while(specProp = specProps[i++]) {
+            obj.hasOwnProperty(specProp) && res.push(specProp);
         }
     }
 
-    $.each(add, function(name, prop) {
-        if(hasSpecProps) {
-            name = prop.name;
-            prop = prop.val;
-        }
-        if($.isFunction(prop) &&
-           (!hasIntrospection || prop.toString().indexOf('.__base') > -1)) {
-
-            var baseMethod = base[name] || function() {};
-            result[name] = function() {
-                var baseSaved = this.__base;
-                this.__base = baseMethod;
-                var result = prop.apply(this, arguments);
-                this.__base = baseSaved;
-                return result;
-            };
-
-        }
-        else {
-            result[name] = prop;
-        }
-
-    });
-
+    return res;
 }
 
-$.inherit = function() {
+function override(base, res, add) {
+    var addList = getPropList(add),
+        j = 0, len = addList.length,
+        name, prop;
+    while(j < len) {
+        if((name = addList[j++]) === '__self') {
+            continue;
+        }
+        prop = add[name];
+        if(isFunction(prop) &&
+                (!hasIntrospection || prop.toString().indexOf('.__base') > -1)) {
+            res[name] = (function(name, prop) {
+                var baseMethod = base[name] || noOp;
+                return function() {
+                    var baseSaved = this.__base;
+                    this.__base = baseMethod;
+                    var res = prop.apply(this, arguments);
+                    this.__base = baseSaved;
+                    return res;
+                };
+            })(name, prop);
+        } else {
+            res[name] = prop;
+        }
+    }
+}
 
+function applyMixins(mixins, res) {
+    var i = 1, mixin;
+    while(mixin = mixins[i++]) {
+        res?
+            isFunction(mixin)?
+                inherit.self(res, mixin.prototype, mixin) :
+                inherit.self(res, mixin) :
+            res = isFunction(mixin)?
+                inherit(mixins[0], mixin.prototype, mixin) :
+                inherit(mixins[0], mixin);
+    }
+    return res || mixins[0];
+}
+
+function inherit() {
     var args = arguments,
-        hasBase = $.isFunction(args[0]),
-        base = hasBase? args[0] : emptyBase,
+        withMixins = isArray(args[0]),
+        hasBase = withMixins || isFunction(args[0]),
+        base = hasBase? withMixins? applyMixins(args[0]) : args[0] : emptyBase,
         props = args[hasBase? 1 : 0] || {},
         staticProps = args[hasBase? 2 : 1],
-        result = props.__constructor || (hasBase && base.prototype.__constructor)?
+        res = props.__constructor || (hasBase && base.prototype.__constructor)?
             function() {
                 return this.__constructor.apply(this, arguments);
-            } : function() {};
+            } :
+            function() {};
 
     if(!hasBase) {
-        result.prototype = props;
-        result.prototype.__self = result.prototype.constructor = result;
-        return $.extend(result, staticProps);
+        res.prototype = props;
+        res.prototype.__self = res.prototype.constructor = res;
+        return extend(res, staticProps);
     }
 
-    $.extend(result, base);
+    extend(res, base);
 
     var basePtp = base.prototype,
-        resultPtp = result.prototype = objCreate(basePtp);
+        resPtp = res.prototype = objCreate(basePtp);
 
-    resultPtp.__self = resultPtp.constructor = result;
+    resPtp.__self = resPtp.constructor = res;
 
-    override(basePtp, resultPtp, props);
-    staticProps && override(base, result, staticProps);
+    props && override(basePtp, resPtp, props);
+    staticProps && override(base, res, staticProps);
 
-    return result;
+    return res;
+}
 
-};
+inherit.self = function() {
+    var args = arguments,
+        withMixins = isArray(args[0]),
+        base = withMixins? applyMixins(args[0], args[0][0]) : args[0],
+        props = args[1],
+        staticProps = args[2],
+        basePtp = base.prototype;
 
-$.inheritSelf = function(base, props, staticProps) {
-
-    var basePtp = base.prototype;
-
-    override(basePtp, basePtp, props);
+    props && override(basePtp, basePtp, props);
     staticProps && override(base, base, staticProps);
 
     return base;
-
 };
 
-})(jQuery);
+var defineAsGlobal = true;
+if(typeof exports === 'object') {
+    module.exports = inherit;
+    defineAsGlobal = false;
+}
+
+if(typeof modules === 'object') {
+    modules.define('inherit', function(provide) {
+        provide(inherit);
+    });
+    defineAsGlobal = false;
+}
+
+if(typeof define === 'function') {
+    define(function(require, exports, module) {
+        module.exports = inherit;
+    });
+    defineAsGlobal = false;
+}
+
+defineAsGlobal && (global.inherit = inherit);
+
+})(this);
