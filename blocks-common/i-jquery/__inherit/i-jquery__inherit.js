@@ -11,7 +11,7 @@
 
 (function($) {
 
-var hasIntrospection = (function(){_}).toString().indexOf('_') > -1,
+var hasIntrospection = (function(){'_';}).toString().indexOf('_') > -1,
     emptyBase = function() {},
     objCreate = Object.create || function(ptp) {
         var inheritance = function() {};
