@@ -24,7 +24,7 @@ block i-jquery, elem core, default: {
         this.ctx = {
             block: 'b-page',
             elem: 'js',
-            url: '//yandex.st/jquery/1.7.2/jquery.min.js'
+            url: '//yandex.st/jquery/1.8.3/jquery.min.js'
         }
     );
 }
