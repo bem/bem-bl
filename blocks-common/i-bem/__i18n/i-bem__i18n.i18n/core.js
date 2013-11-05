@@ -31,9 +31,13 @@ var MOD_DELIM = '_',
     // @see http://whattheheadsaid.com/2011/04/internet-explorer-9s-problematic-console-object
     hasConsole = typeof console !== 'undefined' && typeof console.log === 'function';
 
-function log() {
+function log(s) {
     if(debug && hasConsole) {
-        console.log.apply(console, arguments);
+        if (console.log.apply) {
+            console.log.apply(console, arguments);
+        } else {
+            console.log(s); // in ie9 console.log doesn't have method "apply"
+        }
     }
 }
 
