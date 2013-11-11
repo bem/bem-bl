@@ -94,12 +94,44 @@ block b-page {
                         href: this.ctx.src16
                     }
                 },
+                this.ctx.src152 && {
+                    elem: 'link',
+                    attrs: {
+                        rel: 'apple-touch-icon-precomposed',
+                        sizes: '152x152',
+                        href: this.ctx.src152
+                    }
+                },
+                this.ctx.src144 && {
+                    elem: 'link',
+                    attrs: {
+                        rel: 'apple-touch-icon-precomposed',
+                        sizes: '144x144',
+                        href: this.ctx.src144
+                    }
+                },
+                this.ctx.src120 && {
+                    elem: 'link',
+                    attrs: {
+                        rel: 'apple-touch-icon-precomposed',
+                        sizes: '120x120',
+                        href: this.ctx.src120
+                    }
+                },
                 this.ctx.src114 && {
                     elem: 'link',
                     attrs: {
                         rel: 'apple-touch-icon-precomposed',
                         sizes: '114x114',
                         href: this.ctx.src114
+                    }
+                },
+                this.ctx.src76 && {
+                    elem: 'link',
+                    attrs: {
+                        rel: 'apple-touch-icon-precomposed',
+                        sizes: '76x76',
+                        href: this.ctx.src76
                     }
                 },
                 this.ctx.src72 && {
