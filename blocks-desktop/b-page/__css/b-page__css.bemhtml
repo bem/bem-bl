@@ -1,40 +1,42 @@
-block b-page, elem css {
+block('b-page').elem('css')(
 
-    bem: false
+    bem()(false),
 
-    tag: 'style'
+    tag()('style'),
 
-    default, this.ctx.hasOwnProperty('ie'), !this.ctx._ieCommented: {
+    def().match(this.ctx.hasOwnProperty('ie')).match(!this.ctx._ieCommented)(function () {
         var ie = this.ctx.ie;
         if (ie === true) {
-            apply(
-                this._mode = '',
-                this.ctx = [6, 7, 8, 9].map(function(v) {
+            apply({
+                _mode:'',
+                ctx: [6, 7, 8, 9].map(function(v) {
                     return { elem: 'css', url: this.ctx.url + '.ie' + v + '.css', ie: 'IE ' + v } }, this)
-            );
+            });
         } else {
             var hideRule = !ie ?
-                    ['gt IE 9', '<!-->', '<!--'] :
-                    ie === '!IE' ?
-                        [ie, '<!-->', '<!--'] :
-                        [ie, '', ''];
-            apply(
-                this._mode = '',
-                this.ctx._ieCommented = true,
-                this.ctx = [
+                ['gt IE 9', '<!-->', '<!--'] :
+                ie === '!IE' ?
+                    [ie, '<!-->', '<!--'] :
+                    [ie, '', ''];
+            apply({
+                _mode: '',
+                'ctx._ieCommented': true,
+                ctx: [
                     '<!--[if ' + hideRule[0] + ']>',
                     hideRule[1],
                     this.ctx,
                     hideRule[2],
                     '<![endif]-->'
                 ]
-            );
+            });
         }
-    }
+    }),
 
-    this.ctx.url {
-        tag: 'link',
-        attrs: { rel: 'stylesheet', href: this.ctx.url }
-    }
+    match()(this.ctx.url)(
 
-}
+        tag()('link'),
+        attrs()({ rel: 'stylesheet', href: this.ctx.url })
+
+    )
+
+)
