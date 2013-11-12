@@ -1,9 +1,11 @@
-block b-page, elem js {
+block('b-page').elem('js')(
 
-    bem: false
+    bem()(false),
 
-    tag: 'script'
+    tag()('script'),
 
-    attrs, this.ctx.url: { src: this.ctx.url }
+    match(this.ctx.url)(
+        attrs()({ src: this.ctx.url })
+    )
 
-}
+)
