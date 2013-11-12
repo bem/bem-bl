@@ -1,13 +1,13 @@
-block b-page {
+block('b-page')(
 
-    doctype: this.ctx.doctype || '<!DOCTYPE html>'
+    mode('doctype')(this.ctx.doctype || '<!DOCTYPE html>'),
 
-    xUACompatible: this.ctx['x-ua-compatible'] === false ? false : {
+    mode('xUACompatible')(this.ctx['x-ua-compatible'] === false ? false : {
         tag: 'meta',
         attrs: { 'http-equiv': 'X-UA-Compatible', content: this.ctx['x-ua-compatible'] || 'IE=edge' }
-    }
+    }),
 
-    default: {
+    def().match(function() { return !this.ctx._wrapped })(function () {
         var ctx = this.ctx,
             dtype = apply('doctype'),
             xUA = apply('xUACompatible'),
@@ -44,43 +44,38 @@ block b-page {
                 }
             ];
 
-        applyCtx(buf);
-    }
+        local({ 'ctx._wrapped': true })(
+            applyCtx(buf)
+        )
+    }),
 
-    tag: 'body'
+    tag()('body'),
 
-    mix: [{ elem: 'body' }]
+    mix()([
+        { elem: 'body' }
+    ]),
 
-    elem root {
+    elem('root')(
+        bem()(false),
+        tag()('html'),
+        cls()('i-ua_js_no i-ua_css_standard')
+    ),
 
-        bem: false
-        tag: 'html'
-        cls: 'i-ua_js_no i-ua_css_standard'
+    elem('head')(
+        bem()(false),
+        tag()('head')
+    ),
 
-    }
+    elem('meta')(
+        bem()(false),
+        tag()('meta'),
+        attrs()(this.ctx.attrs)
+    ),
 
-    elem head {
+    elem('favicon')(
+        bem()(false),
+        tag()('link'),
+        attrs()({ rel: 'shortcut icon', href: this.ctx.url })
+    )
 
-        bem: false
-        tag: 'head'
-
-    }
-
-    elem meta {
-
-        bem: false
-        tag: 'meta'
-        attrs: this.ctx.attrs
-
-    }
-
-    elem favicon {
-
-        bem: false
-        tag: 'link'
-        attrs: { rel: 'shortcut icon', href: this.ctx.url }
-
-    }
-
-}
-
+)
