@@ -1,1 +1,1 @@
-block b-link, elem inner, tag: 'span'
+block('b-link').elem('inner').tag()('span')
