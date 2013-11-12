@@ -1,6 +1,6 @@
-block b-logo {
+block('b-logo')(
 
-    elem link, default: {
+    elem('link').def()(function () {
         var ctx = this.ctx,
             content = ctx.content || ctx.icon;
 
@@ -13,19 +13,19 @@ block b-logo {
 
         ctx.block = 'b-link'
         ctx.elem = undefined,
-        ctx.content = content,
-        ctx.mix = [{ block: 'b-logo', elem: 'link' }]
+            ctx.content = content,
+            ctx.mix = [{ block: 'b-logo', elem: 'link' }]
 
         applyCtx(ctx);
-    }
+    }),
 
-    elem icon, default: {
-        applyNext(
-            this._mode = '',
-            this.ctx.elem = undefined,
-            this.ctx.block = 'b-icon',
-            this.ctx.mix = [{ block: 'b-logo', elem: 'icon' }]
-        );
-    }
-}
+    elem('icon').def()(
+        applyNext({
+            _mode: '',
+            'ctx.elem': undefined,
+            'ctx.block': 'b-icon',
+            'ctx.mix': [{ block: 'b-logo', elem: 'icon' }]
+        })
+    )
 
+)
