@@ -1,22 +1,19 @@
-block b-link, (this.mods && this.mods.pseudo), !this.elem {
+block('b-link').match(this.mods && this.mods.pseudo).match(!this.elem)(
 
-    tag: (this.ctx.url? 'a' : 'span')
+    tag()(this.ctx.url? 'a' : 'span'),
 
-    js: true
+    js()(true),
 
-    attrs, !this.ctx.url: {
-        return {}
-    },
+    match(!this.ctx.url)(
+        attrs()({})
+    ),
 
-    content, !this.ctx._wrap, !this.mods.inner: {
-        apply(
-            this._mode = '',
-            this.ctx = {
-                elem: 'inner',
-                content: this.ctx.content,
-                _wrap: true
-            }
-        );
-    }
-}
+    match(this.ctx._wrap && !this.mods.inner)(
+        applyCtx({
+            elem: 'inner',
+            content: this.ctx.content,
+            _wrap: true
+        })
+    )
 
+)
