@@ -1,1 +1,1 @@
-block b-menu-vert, elem trigger, tag: 'span'
+block('b-menu-vert').elem('trigger').tag()('span')
