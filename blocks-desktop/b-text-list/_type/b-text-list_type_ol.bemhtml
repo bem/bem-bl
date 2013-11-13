@@ -1,1 +1,1 @@
-block b-text-list, mod type ol, tag: 'ol'
+block('b-text-list').mod('type', 'ol').tag()('ol')
