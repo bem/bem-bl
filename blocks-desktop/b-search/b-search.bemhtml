@@ -1,57 +1,59 @@
-block b-search {
+block('b-search')(
 
-    tag: 'form'
+    tag()('form'),
 
-    content, this.ctx.input, this.ctx.button: {
-        this.ctx.input.block = 'b-search';
-        this.ctx.button.block = 'b-search';
+    match(this.ctx.input, this.ctx.button)(
+        content()(function () {
+            this.ctx.input.block = 'b-search';
+            this.ctx.button.block = 'b-search';
 
-        var c = {
-            block: 'b-layout-table',
-            mix: [ { block: 'b-search', elem: 'layout'} ],
-            content: [
+            var c = {
+                block: 'b-layout-table',
+                mix: [ { block: 'b-search', elem: 'layout'} ],
+                content: [
+                    {
+                        elem: 'row',
+                        content: [
+                            {
+                                elem: 'cell',
+                                mix: [ { block: 'b-search', elem: 'layout-input' } ],
+                                content: this.ctx.input
+                            },
+                            {
+                                elem: 'cell',
+                                mix: [ { block: 'b-search', elem: 'layout-button' } ],
+                                content: this.ctx.button
+                            }
+                        ]
+                    }
+                ]
+            }
+            this.ctx.under && c.content.push(
                 {
                     elem: 'row',
                     content: [
                         {
-                            elem: 'cell',
-                            mix: [ { block: 'b-search', elem: 'layout-input' } ],
-                            content: this.ctx.input
-                        },
-                        {
-                            elem: 'cell',
-                            mix: [ { block: 'b-search', elem: 'layout-button' } ],
-                            content: this.ctx.button
+                          elem: 'cell',
+                          mix: [ { block: 'b-search', elem: 'layout-under' } ],
+                          colspan: 2,
+                          content: this.ctx.under
                         }
                     ]
-                }
-            ]
-        }
-        this.ctx.under && c.content.push(
-            {
-                elem: 'row',
-                content: [
-                    {
-                      elem: 'cell',
-                      mix: [ { block: 'b-search', elem: 'layout-under' } ],
-                      colspan: 2,
-                      content: this.ctx.under
-                    }
-                ]
-            });
+                });
 
-        return c;
-    }
+            return c;
+        })
+    ),
 
-    elem input {
-        tag: 'input',
-        attrs: { name: 'text' }
-    }
+    elem('input')(
+        tag()('input'),
+        attrs()({ name: 'text' })
+    ),
 
-    elem button {
-        tag: 'input',
-        attrs: { type: 'submit', value: 'Search' }
-    }
+    elem('button')(
+        tag()('input'),
+        attrs()({ type: 'submit', value: 'Search' })
+    )
 
-}
+)
 
