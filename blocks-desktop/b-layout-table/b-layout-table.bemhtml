@@ -1,13 +1,12 @@
-block b-layout-table {
+block('b-layout-table')(
 
-    tag: 'table'
+    tag()('table'),
 
-    elem row, tag: 'tr'
+    elem('row').tag('tr'),
 
-    this.elem === 'cell' || this.elem === 'gap' {
-        tag: 'td'
-        attrs: {
-
+    match(this.elem === 'cell' || this.elem === 'gap')(
+        tag()('td'),
+        attrs()(function () {
             var ctx = this.ctx,
                 a = {},
                 props = ['colspan', 'rowspan'], p;
@@ -15,8 +14,8 @@ block b-layout-table {
             while(p = props.shift()) ctx[p] && (a[p] = ctx[p]);
 
             return a;
-        }
-    }
+        })
+    )
 
-}
+)
 
