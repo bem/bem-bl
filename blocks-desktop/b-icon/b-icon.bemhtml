@@ -1,8 +1,8 @@
-block b-icon {
+block('b-icon')(
 
-    tag: 'img'
-    attrs: {
+    tag()('img'),
 
+    attrs()(function () {
         var ctx = this.ctx,
             a = { src: '//yandex.st/lego/_/La6qi18Z8LwgnZdsAr1qy1GwCwo.gif', alt: '' },
             props = ['alt', 'width', 'height'], p;
@@ -11,6 +11,6 @@ block b-icon {
         while(p = props.shift()) ctx[p] && (a[p] = ctx[p]);
 
         return a;
-    }
+    })
 
-}
+)
