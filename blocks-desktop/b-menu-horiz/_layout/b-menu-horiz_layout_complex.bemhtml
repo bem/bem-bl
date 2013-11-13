@@ -1,6 +1,6 @@
-block b-menu-horiz, mod layout complex {
+block('b-menu-horiz').mod('layout', 'complex')(
 
-    content: [
+    content()([
         {
             elem: 'layout',
             tag: 'table',
@@ -9,9 +9,9 @@ block b-menu-horiz, mod layout complex {
                 tag: 'tr',
                 content: this.ctx.content
             }
-    }]
+        }
+    ]),
 
-    this.elem === 'layout-unit' ||
-    this.elem === 'separator' ||
-    this.elem === 'gap', tag: 'td'
-}
+    match(this.elem === 'layout-unit' || this.elem === 'separator' || this.elem === 'gap').tag()('td')
+
+)
