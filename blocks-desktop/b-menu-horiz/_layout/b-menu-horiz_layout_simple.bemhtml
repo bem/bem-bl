@@ -1,22 +1,24 @@
-block b-menu-horiz, mod layout simple {
+block('b-menu-horiz').mod('layout', 'simple')(
 
-    default: {
-        applyNext(this._separator = this.ctx.separator);
-    }
+    def()(
+        applyNext({_separator: this.ctx.separator})
+    ),
 
-    content: [
+    content([
         this.ctx.title,
         // XXX: hack, so `isFirst()` will work as we want
         { tag: false, content: this.ctx.content }
-    ]
+    ]),
 
-    elem item {
-        default: applyCtx([(this.isFirst()? '' : this._separator), this.ctx])
+    elem('item')(
+        def()(
+            applyCtx([(this.isFirst()? '' : this._separator), this.ctx])
+        ),
 
-        tag: (this.elemMods.state? 'span' : false)
-    }
+        tag()(this.elemMods.state? 'span' : false)
+    ),
 
-    elem layout-unit, tag: false
+    elem('layout-unit').tag()(false)
 
-}
+)
 
