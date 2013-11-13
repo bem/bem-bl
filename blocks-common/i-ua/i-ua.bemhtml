@@ -1,7 +1,7 @@
-block i-ua {
-    tag: 'script',
-    bem: false,
-    content: [
+block('i-ua')(
+    tag()('script'),
+    bem()(false),
+    content()([
         ';(function(d,e,c,r){',
             'e=d.documentElement;',
             'c="className";',
@@ -10,5 +10,5 @@ block i-ua {
             'if(d.compatMode!="CSS1Compat")',
             'e[c]=e[c][r]("i-ua_css_standart","i-ua_css_quirks")',
         '})(document);'
-    ].join('')
-}
+    ].join(''))
+)
