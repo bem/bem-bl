@@ -1,7 +1,7 @@
-block b-text {
+block('b-text').match(this.elem)(
+    tag()(this.ctx.elem),
 
-    this.elem, tag: this.ctx.elem
-
-    this.elem, this.ctx.id, attrs: { id: this.ctx.id  }
-
-}
+    match(this.ctx.id)(
+        attrs()({ id: this.ctx.id })
+    )
+)
