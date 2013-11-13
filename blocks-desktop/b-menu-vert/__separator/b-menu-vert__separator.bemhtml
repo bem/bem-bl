@@ -1,1 +1,1 @@
-block b-menu-vert, elem separator, tag: 'li'
+block('b-menu-vert').elem('separator').tag()('li')
