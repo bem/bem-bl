@@ -1,27 +1,27 @@
-block b-menu-horiz, this.mods {
+block('b-menu-horiz').match(this.mods)(
 
-    js: true
+    js()(true),
 
-    elem item, default: {
-        applyNext(
-            this._mode = '',
-            this.position = this.position - 1,
-            this.ctx = {
+    elem('item').def()(
+        applyNext({
+            _mode: '',
+            position: this.position - 1,
+            ctx: {
                 elem: 'layout-unit',
                 content: this.ctx
             }
-        );
-    }
+        })
+    ),
 
-    elem layout-unit, mix: {
+    elem('layout-unit').mix()(function () {
         var mix = [];
 
         this.isFirst() && mix.push({ elemMods: { position: 'first' } });
         this.isLast() && mix.push({ elemMods: { position: 'last' } });
 
         return mix;
-    }
+    }),
 
-    elem 'item-selector', tag: 'span'
+    elem('item-selector').tag()('span')
 
-}
+)
