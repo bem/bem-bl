@@ -1,9 +1,8 @@
-block b-text-list, !this.elem {
+block('b-text-list').match()(!this.elem)(
 
-    tag: 'ul' //по умолчанию ul
+    tag()('ul'), //по умолчанию ul
 
-    content, this._.isArray(this.ctx.items): {
-
+    content().match(this._.isArray(this.ctx.items))(function () {
         var cont = this.ctx.content = [];
 
         this.ctx.items.forEach(function(e){
@@ -11,8 +10,8 @@ block b-text-list, !this.elem {
         })
 
         return cont;
-    }
+    })
 
-}
+),
 
-block b-text-list, elem item, tag: 'li'
+block('b-text-list').elem('item').tag()('li')
