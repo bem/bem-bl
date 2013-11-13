@@ -201,6 +201,7 @@ function extractParams(domNode) {
 function cleanupDomNode(domNode) {
 
     delete domElemToParams[$.identify(domNode)];
+    domNode.onclick = null;
 
 }
 
