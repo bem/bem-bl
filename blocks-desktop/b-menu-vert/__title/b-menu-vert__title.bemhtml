@@ -1,1 +1,1 @@
-block b-menu-vert, elem title, tag: 'h3'
+block('b-menu-vert').elem('title').tag()('h3')
