@@ -25,7 +25,7 @@ BEM.DOM.decl('i-geolocation', {}, {
                 // параметры
                 {
                     // получение координат с высокой точностью при наличии полноценного GPS
-                    enableHighAccuracy: params.enableHighAccuracy || true,
+                    enableHighAccuracy: params.hasOwnProperty('enableHighAccuracy') ? params.enableHighAccuracy : true,
                     // таймаут 15 секунд
                     timeout: params.timeout * 1000 || 15000,
                     // геолокационный кэш на 15 минут
