@@ -228,7 +228,14 @@ FastClick.prototype.needsClick = function(target) {
         break;
     case 'label':
     case 'video':
+    case 'a':
         return true;
+
+        break;
+    default:
+        if($(target).parents('a').length) {
+            return true;
+        }
     }
 
     return (/\bneedsclick\b/).test(target.className);
@@ -299,7 +306,7 @@ FastClick.prototype.determineEventType = function(targetElement) {
         return 'mousedown';
     }
 
-    return 'click';
+    return 'tap';
 };
 
 
