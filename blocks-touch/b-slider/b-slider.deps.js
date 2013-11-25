@@ -10,5 +10,7 @@
             layout: 'horiz',
             'vert-align': 'top'
         }
+    }, {
+        block: 'i-ua'
     }]
 })
