@@ -213,7 +213,7 @@ FastClick.prototype.needsClick = function(target) {
     case 'button':
     case 'select':
     case 'textarea':
-        if (target.disabled) {
+        if (!target.disabled) {
             return true;
         }
 
