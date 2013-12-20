@@ -221,7 +221,7 @@ FastClick.prototype.needsClick = function(target) {
     case 'input':
 
         // File inputs need real clicks on iOS 6 due to a browser bug (issue #68)
-        if ((this.deviceIsIOS && target.type === 'file') || target.disabled) {
+        if ( target.type === 'file' || target.disabled) {
             return true;
         }
 
