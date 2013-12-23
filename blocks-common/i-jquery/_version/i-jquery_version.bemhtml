@@ -1,7 +1,7 @@
-block('i-jquery').def()(
-    applyCtx({
+block('i-jquery').def()(function() {
+    return applyCtx({
         block: 'b-page',
         elem: 'js',
         url: this.ctx.url || (this.ctx.protocol ? this.ctx.protocol + ':' : '') + '//yandex.st/jquery/' + this.mods.version + '/jquery.min.js'
-    })
-)
+    });
+});

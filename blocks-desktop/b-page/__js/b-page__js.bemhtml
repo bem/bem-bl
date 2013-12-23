@@ -4,8 +4,8 @@ block('b-page').elem('js')(
 
     tag()('script'),
 
-    match(this.ctx.url)(
-        attrs()({ src: this.ctx.url })
+    match(function() { return this.ctx.url; })(
+        attrs()(function() { return { src: this.ctx.url }; })
     )
 
 )

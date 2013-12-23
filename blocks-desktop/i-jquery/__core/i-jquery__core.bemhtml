@@ -1,7 +1,7 @@
-block('i-jquery').elem('core').def()(
-    applyCtx({
+block('i-jquery').elem('core').def()(function() {
+    return applyCtx({
         block: 'b-page',
         elem: 'js',
         url: '//yandex.st/jquery/1.8.3/jquery.min.js'
-    })
-)
+    });
+});
