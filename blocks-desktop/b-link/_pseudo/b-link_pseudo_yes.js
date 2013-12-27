@@ -5,7 +5,7 @@ BEM.DOM.decl({'name': 'b-link', 'modName': 'pseudo', 'modVal': 'yes'}, {
         e.preventDefault();
 
         this.hasMod('disabled', 'yes') || this.afterCurrentEvent(function() {
-            this.trigger('leftclick');
+            this.trigger('click');
         });
 
     }
@@ -16,7 +16,7 @@ BEM.DOM.decl({'name': 'b-link', 'modName': 'pseudo', 'modVal': 'yes'}, {
 
         this.__base.apply(this, arguments);
 
-        this.liveBindTo({ modName : 'pseudo', modVal : 'yes' }, 'leftclick', function(e) {
+        this.liveBindTo({ modName : 'pseudo', modVal : 'yes' }, 'click', function(e) {
             this._onClick(e);
         });
 
