@@ -5,7 +5,7 @@ BEM.DOM.decl({'name': 'b-link', 'modName': 'pseudo', 'modVal': 'yes'}, {
         e.preventDefault();
 
         this.hasMod('disabled', 'yes') || this.afterCurrentEvent(function() {
-            this.trigger('leftclick');
+            this.trigger('click');
         });
 
     }
