@@ -8,6 +8,10 @@ var ometajs = require('ometajs'),
 
 var api = exports;
 
+api.parse = function parse(source) {
+    return BEMHTMLParser.matchAll(source, 'topLevel');
+};
+
 //
 // ### function translate (source)
 // #### @source {String} BEMHTML Source code
@@ -15,7 +19,7 @@ var api = exports;
 // Returns source translated to javascript
 //
 api.translate = function translate(source, options) {
-  var tree = BEMHTMLParser.matchAll(source, 'topLevel'),
+  var tree = api.parse(source),
       xjstPre = BEMHTMLToXJST.match(tree, 'topLevel'),
       vars = [];
 
