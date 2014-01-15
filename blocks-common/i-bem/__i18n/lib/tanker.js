@@ -1,10 +1,7 @@
 var DOM = require('dom-js'),
-
     QUOTE_CHAR = '"',
     SINGLE_QUOTE_CHAR = "'",
-
     isArray = Array.isArray,
-
     isJson = function(obj) {
         try {
             if(isString(obj)) {
@@ -25,7 +22,6 @@ var DOM = require('dom-js'),
         return type === 'string' || type === 'number';
     };
 
-
 var parseXml = exports.parseXml = function(xml, cb) {
 
         isSimple(xml) || (xml = JSON.stringify(xml));
@@ -43,6 +39,10 @@ var parseXml = exports.parseXml = function(xml, cb) {
     domToJs = exports.domToJs = function(nodes) {
 
         var code = expandNodes(toCommonNodes(nodes), jsExpander);
+
+        if(!code.length) {
+            return '\'\'';
+        }
 
         return code.length === 1 &&
             (code[0].charAt(0) === QUOTE_CHAR || code[0].charAt(0) === SINGLE_QUOTE_CHAR ) ?

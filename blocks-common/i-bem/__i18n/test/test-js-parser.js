@@ -1,15 +1,12 @@
 var ASSERT = require('assert'),
     PATH = require('path'),
     FS = require('fs'),
-
     inspect = require('util').inspect,
-
     PARSER = require('../lib/tanker.js');
 
 function readFile(src) {
     return FS.readFileSync(PATH.resolve(__dirname, 'files', src), 'utf-8').toString();
 }
-
 
 function unit(name) {
     var content = {
@@ -39,3 +36,4 @@ unit('literal-01');
 unit('literal-02');
 unit('literal-03');
 unit('json-01');
+unit('empty-01');
