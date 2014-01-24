@@ -1,9 +1,11 @@
 ﻿(function () {
+    // If the user agent is already support Pointer Events, do nothing
+    if (window.PointerEvent)
+        return;
 
     // Installing Hand.js
-    var supportedEventsNames = ["PointerDown", "PointerUp", "PointerMove", "PointerOver", "PointerOut", "PointerCancel", "PointerEnter", "PointerLeave",
-                                "pointerdown", "pointerup", "pointermove", "pointerover", "pointerout", "pointercancel", "pointerenter", "pointerleave"
-    ];
+    var supportedEventsNames = ["pointerdown", "pointerup", "pointermove", "pointerover", "pointerout", "pointercancel", "pointerenter", "pointerleave"];
+    var upperCaseEventsNames = ["PointerDown", "PointerUp", "PointerMove", "PointerOver", "PointerOut", "PointerCancel", "PointerEnter", "PointerLeave"];
 
     var POINTER_TYPE_TOUCH = "touch";
     var POINTER_TYPE_PEN = "pen";
@@ -11,21 +13,21 @@
 
     var previousTargets = {};
 
-    var checkPreventDefault = function(element) {
-        while (element && element.handjs_forcePreventDefault !== true) {
-            element = element.parentElement;
+    var checkPreventDefault = function (node) {
+        while (node && !node.handjs_forcePreventDefault) {
+            node = node.parentNode;
         }
-        return element != null;
+        return !!node || window.handjs_forcePreventDefault;
     };
 
     // Touch events
-    var generateTouchClonedEvent = function (sourceEvent, newName) {
+    var generateTouchClonedEvent = function (sourceEvent, newName, canBubble, newtarget) {
         // Considering touch events are almost like super mouse events
         var evObj;
 
         if (document.createEvent) {
             evObj = document.createEvent('MouseEvents');
-            evObj.initMouseEvent(newName, true, true, window, 1, sourceEvent.screenX, sourceEvent.screenY,
+            evObj.initMouseEvent(newName, canBubble, true, window, 1, sourceEvent.screenX, sourceEvent.screenY,
                 sourceEvent.clientX, sourceEvent.clientY, sourceEvent.ctrlKey, sourceEvent.altKey,
                 sourceEvent.shiftKey, sourceEvent.metaKey, sourceEvent.button, null);
         }
@@ -57,6 +59,23 @@
 
                 evObj.offsetX = sourceEvent.offsetX;
                 evObj.offsetY = sourceEvent.offsetY;
+            } else if (Object && Object.defineProperty !== undefined) {
+                Object.defineProperty(evObj, "offsetX", {
+                    get: function () {
+                        if (this.currentTarget && this.currentTarget.offsetLeft) {
+                            return sourceEvent.clientX - this.currentTarget.offsetLeft;
+                        }
+                        return sourceEvent.clientX;
+                    }
+                });
+                Object.defineProperty(evObj, "offsetY", {
+                    get: function () {
+                        if (this.currentTarget && this.currentTarget.offsetTop) {
+                            return sourceEvent.clientY - this.currentTarget.offsetTop;
+                        }
+                        return sourceEvent.clientY;
+                    }
+                });
             }
             else if (sourceEvent.layerX !== undefined) {
                 evObj.offsetX = sourceEvent.layerX - sourceEvent.currentTarget.offsetLeft;
@@ -134,53 +153,44 @@
             };
         }
 
-        // Constants
-        evObj.POINTER_TYPE_TOUCH = POINTER_TYPE_TOUCH;
-        evObj.POINTER_TYPE_PEN = POINTER_TYPE_PEN;
-        evObj.POINTER_TYPE_MOUSE = POINTER_TYPE_MOUSE;
-
         // Pointer values
         evObj.pointerId = sourceEvent.pointerId;
         evObj.pointerType = sourceEvent.pointerType;
 
         switch (evObj.pointerType) {// Old spec version check
             case 2:
-                evObj.pointerType = evObj.POINTER_TYPE_TOUCH;
+                evObj.pointerType = POINTER_TYPE_TOUCH;
                 break;
             case 3:
-                evObj.pointerType = evObj.POINTER_TYPE_PEN;
+                evObj.pointerType = POINTER_TYPE_PEN;
                 break;
             case 4:
-                evObj.pointerType = evObj.POINTER_TYPE_MOUSE;
+                evObj.pointerType = POINTER_TYPE_MOUSE;
                 break;
-        }
-
-        // If force preventDefault
-        if (sourceEvent.currentTarget && checkPreventDefault(sourceEvent.currentTarget) === true) {
-            evObj.preventDefault();
         }
 
         // Fire event
-        if (sourceEvent.target) {
+        if (newtarget)
+            newtarget.dispatchEvent(evObj);
+        else if (sourceEvent.target) {
             sourceEvent.target.dispatchEvent(evObj);
         } else {
             sourceEvent.srcElement.fireEvent("on" + getMouseEquivalentEventName(newName), evObj); // We must fallback to mouse event for very old browsers
         }
     };
 
-    var generateMouseProxy = function (evt, eventName) {
+    var generateMouseProxy = function (evt, eventName, canBubble, target) {
         evt.pointerId = 1;
         evt.pointerType = POINTER_TYPE_MOUSE;
-        generateTouchClonedEvent(evt, eventName);
+        generateTouchClonedEvent(evt, eventName, canBubble, target);
     };
 
-    var generateTouchEventProxy = function (name, touchPoint, target, eventObject) {
+    var generateTouchEventProxy = function (name, touchPoint, target, eventObject, canBubble) {
         var touchPointId = touchPoint.identifier + 2; // Just to not override mouse id
 
         touchPoint.pointerId = touchPointId;
         touchPoint.pointerType = POINTER_TYPE_TOUCH;
         touchPoint.currentTarget = target;
-        touchPoint.target = target;
 
         if (eventObject.preventDefault !== undefined) {
             touchPoint.preventDefault = function () {
@@ -188,19 +198,24 @@
             };
         }
 
-        generateTouchClonedEvent(touchPoint, name);
+        generateTouchClonedEvent(touchPoint, name, canBubble, target);
     };
 
-    var checkRegisteredEvents = function(element, eventName) {
-        while (element && !(element.__handjsGlobalRegisteredEvents && element.__handjsGlobalRegisteredEvents[eventName])) {
-            element = element.parentElement;
-        }
-        return element != null;
+    var checkEventRegistration = function (node, eventName) {
+        return node.__handjsGlobalRegisteredEvents && node.__handjsGlobalRegisteredEvents[eventName];
+    }
+    var findEventRegisteredNode = function (node, eventName) {
+        while (node && !checkEventRegistration(node, eventName))
+            node = node.parentNode;
+        if (node)
+            return node;
+        else if (checkEventRegistration(window, eventName))
+            return window;
     };
 
-    var generateTouchEventProxyIfRegistered = function (eventName, touchPoint, target, eventObject) { // Check if user registered this event
-        if (checkRegisteredEvents(target, eventName)) {
-            generateTouchEventProxy(eventName, touchPoint, target, eventObject);
+    var generateTouchEventProxyIfRegistered = function (eventName, touchPoint, target, eventObject, canBubble) { // Check if user registered this event
+        if (findEventRegisteredNode(target, eventName)) {
+            generateTouchEventProxy(eventName, touchPoint, target, eventObject, canBubble);
         }
     };
 
@@ -227,26 +242,9 @@
         return eventName.toLowerCase().replace("pointer", "mouse");
     };
 
-    var getPrefixEventName = function (item, prefix, eventName) {
-        var newEventName;
-
-        if (eventName == eventName.toLowerCase()) {
-            var indexOfUpperCase = supportedEventsNames.indexOf(eventName) - (supportedEventsNames.length / 2);
-            newEventName = prefix + supportedEventsNames[indexOfUpperCase];
-        }
-        else {
-            newEventName = prefix + eventName;
-        }
-
-        // Fallback to PointerOver if PointerEnter is not currently supported
-        if (newEventName === prefix + "PointerEnter" && item["on" + prefix.toLowerCase() + "pointerenter"] === undefined) {
-            newEventName = prefix + "PointerOver";
-        }
-
-        // Fallback to PointerOut if PointerLeave is not currently supported
-        if (newEventName === prefix + "PointerLeave" && item["on" + prefix.toLowerCase() + "pointerleave"] === undefined) {
-            newEventName = prefix + "PointerOut";
-        }
+    var getPrefixEventName = function (prefix, eventName) {
+        var upperCaseIndex = supportedEventsNames.indexOf(eventName);
+        var newEventName = prefix + upperCaseEventsNames[upperCaseIndex];
 
         return newEventName;
     };
@@ -279,19 +277,23 @@
     };
 
     var setTouchAware = function (item, eventName, enable) {
-        // If item is already touch aware, do nothing
-        if (item.onpointerdown !== undefined) {
-            return;
+        // Leaving tokens
+        if (!item.__handjsGlobalRegisteredEvents) {
+            item.__handjsGlobalRegisteredEvents = [];
         }
-
-        // IE 10
-        if (item.onmspointerdown !== undefined) {
-            var msEventName = getPrefixEventName(item, "MS", eventName);
-
-            registerOrUnregisterEvent(item, msEventName, function (evt) { generateTouchClonedEvent(evt, eventName); }, enable);
-
-            // We can return because MSPointerXXX integrate mouse support
-            return;
+        if (enable) {
+            if (item.__handjsGlobalRegisteredEvents[eventName] !== undefined) {
+                item.__handjsGlobalRegisteredEvents[eventName]++;
+                return;
+            }
+            item.__handjsGlobalRegisteredEvents[eventName] = 1;
+        } else {
+            if (item.__handjsGlobalRegisteredEvents[eventName] !== undefined) {
+                item.__handjsGlobalRegisteredEvents[eventName]--;
+                if (item.__handjsGlobalRegisteredEvents[eventName] < 0) {
+                    item.__handjsGlobalRegisteredEvents[eventName] = 0;
+                }
+            }
         }
 
         // Chrome, Firefox
@@ -303,66 +305,7 @@
                 case "pointercancel":
                     registerOrUnregisterEvent(item, "touchcancel", function (evt) { handleOtherEvent(evt, eventName); }, enable);
                     break;
-                case "pointerdown":
-                case "pointerup":
-                case "pointerout":
-                case "pointerover":
-                case "pointerleave":
-                case "pointerenter":
-                    // These events will be handled by the window.ontouchmove function
-                    if (!item.__handjsGlobalRegisteredEvents) {
-                        item.__handjsGlobalRegisteredEvents = [];
-                    }
-
-                    if (enable) {
-                        if (item.__handjsGlobalRegisteredEvents[eventName] !== undefined) {
-                            item.__handjsGlobalRegisteredEvents[eventName]++;
-                            return;
-                        }
-                        item.__handjsGlobalRegisteredEvents[eventName] = 1;
-                    } else {
-                        if (item.__handjsGlobalRegisteredEvents[eventName] !== undefined) {
-                            item.__handjsGlobalRegisteredEvents[eventName]--;
-                            if (item.__handjsGlobalRegisteredEvents[eventName] < 0) {
-                                item.__handjsGlobalRegisteredEvents[eventName] = 0;
-                            }
-                        }
-                    }
-                    break;
             }
-        }
-
-        // Fallback to mouse
-        switch (eventName) {
-            case "pointerdown":
-                registerOrUnregisterEvent(item, "mousedown", function (evt) { generateMouseProxy(evt, eventName); }, enable);
-                break;
-            case "pointermove":
-                registerOrUnregisterEvent(item, "mousemove", function (evt) { generateMouseProxy(evt, eventName); }, enable);
-                break;
-            case "pointerup":
-                registerOrUnregisterEvent(item, "mouseup", function (evt) { generateMouseProxy(evt, eventName); }, enable);
-                break;
-            case "pointerover":
-                registerOrUnregisterEvent(item, "mouseover", function (evt) { generateMouseProxy(evt, eventName); }, enable);
-                break;
-            case "pointerout":
-                registerOrUnregisterEvent(item, "mouseout", function (evt) { generateMouseProxy(evt, eventName); }, enable);
-                break;
-            case "pointerenter":
-                if (item.onmouseenter === undefined) { // Fallback to mouseover
-                    registerOrUnregisterEvent(item, "mouseover", function (evt) { generateMouseProxy(evt, eventName); }, enable);
-                } else {
-                    registerOrUnregisterEvent(item, "mouseenter", function (evt) { generateMouseProxy(evt, eventName); }, enable);
-                }
-                break;
-            case "pointerleave":
-                if (item.onmouseleave === undefined) { // Fallback to mouseout
-                    registerOrUnregisterEvent(item, "mouseout", function (evt) { generateMouseProxy(evt, eventName); }, enable);
-                } else {
-                    registerOrUnregisterEvent(item, "mouseleave", function (evt) { generateMouseProxy(evt, eventName); }, enable);
-                }
-                break;
         }
     };
 
@@ -414,7 +357,8 @@
     };
 
     // Hooks
-    interceptAddEventListener(HTMLElement);
+    interceptAddEventListener(window);
+    interceptAddEventListener(typeof HTMLElement !== "undefined" ? HTMLElement : Element);
     interceptAddEventListener(document);
     interceptAddEventListener(HTMLBodyElement);
     interceptAddEventListener(HTMLDivElement);
@@ -433,7 +377,8 @@
         interceptAddEventListener(SVGElement);
     }
 
-    interceptRemoveEventListener(HTMLElement);
+    interceptRemoveEventListener(window);
+    interceptRemoveEventListener(typeof HTMLElement !== "undefined" ? HTMLElement : Element);
     interceptRemoveEventListener(document);
     interceptRemoveEventListener(HTMLBodyElement);
     interceptRemoveEventListener(HTMLDivElement);
@@ -452,63 +397,193 @@
         interceptRemoveEventListener(SVGElement);
     }
 
-    // Handling move on window to detect pointerleave/out/over
-    if (window.ontouchstart !== undefined) {
-        window.addEventListener('touchstart', function (eventObject) {
-            for (var i = 0; i < eventObject.changedTouches.length; ++i) {
-                var touchPoint = eventObject.changedTouches[i];
-                previousTargets[touchPoint.identifier] = touchPoint.target;
+    // Prevent mouse event from being dispatched after Touch Events action
+    var touching = false;
+    var touchTimer = -1;
 
-                generateTouchEventProxyIfRegistered("pointerenter", touchPoint, touchPoint.target, eventObject);
-                generateTouchEventProxyIfRegistered("pointerover", touchPoint, touchPoint.target, eventObject);
-                generateTouchEventProxyIfRegistered("pointerdown", touchPoint, touchPoint.target, eventObject);
+    function setTouchTimer() {
+        touching = true;
+        clearTimeout(touchTimer);
+        touchTimer = setTimeout(function () {
+            touching = false;
+        }, 700);
+        // 1. Mobile browsers dispatch mouse events 300ms after touchend
+        // 2. Chrome for Android dispatch mousedown for long-touch about 650ms
+        // Result: Blocking Mouse Events for 700ms.
+    }
+
+    function getDomUpperHierarchy(node) {
+        var nodes = [];
+        if (node) {
+            nodes.unshift(node);
+            while (node.parentNode) {
+                nodes.unshift(node.parentNode);
+                node = node.parentNode;
+            }
+        }
+        return nodes;
+    }
+
+    function getFirstCommonNode(node1, node2) {
+        var parents1 = getDomUpperHierarchy(node1);
+        var parents2 = getDomUpperHierarchy(node2);
+
+        var lastmatch = null
+        while (parents1.length > 0 && parents1[0] == parents2.shift())
+            lastmatch = parents1.shift();
+        return lastmatch;
+    }
+
+    //generateProxy receives a node to dispatch the event
+    function dispatchPointerEnter(currentTarget, relatedTarget, generateProxy) {
+        var commonParent = getFirstCommonNode(currentTarget, relatedTarget);
+        var node = currentTarget;
+        var nodelist = [];
+        while (node && node != commonParent) {//target range: this to the direct child of parent relatedTarget
+            if (checkEventRegistration(node, "pointerenter")) //check if any parent node has pointerenter
+                nodelist.push(node);
+            node = node.parentNode;
+        }
+        while (nodelist.length > 0)
+            generateProxy(nodelist.pop());
+    }
+
+    //generateProxy receives a node to dispatch the event
+    function dispatchPointerLeave(currentTarget, relatedTarget, generateProxy) {
+        var commonParent = getFirstCommonNode(currentTarget, relatedTarget);
+        var node = currentTarget;
+        while (node && node != commonParent) {//target range: this to the direct child of parent relatedTarget
+            if (checkEventRegistration(node, "pointerleave"))//check if any parent node has pointerleave
+                generateProxy(node);
+            node = node.parentNode;
+        }
+    }
+
+    // Handling events on window to prevent unwanted super-bubbling
+    // All mouse events are affected by touch fallback
+    function applySimpleEventTunnels(nameGenerator, eventGenerator) {
+        ["pointerdown", "pointermove", "pointerup", "pointerover", "pointerout"].map(function (eventName) {
+            window.addEventListener(nameGenerator(eventName), function (evt) {
+                if (!touching && findEventRegisteredNode(evt.target, eventName))
+                    eventGenerator(evt, eventName, true);
+            });
+        });
+        window.addEventListener(nameGenerator("pointerover"), function (evt) {
+            if (touching)
+                return;
+            var foundNode = findEventRegisteredNode(evt.target, "pointerenter");
+            if (!foundNode || foundNode === window)
+                return;
+            else if (!foundNode.contains(evt.relatedTarget)) {
+                dispatchPointerEnter(foundNode, evt.relatedTarget, function (targetNode) {
+                    eventGenerator(evt, "pointerenter", false, targetNode);
+                });
             }
         });
-
-        window.addEventListener('touchend', function (eventObject) {
-            for (var i = 0; i < eventObject.changedTouches.length; ++i) {
-                var touchPoint = eventObject.changedTouches[i];
-                var currentTarget = previousTargets[touchPoint.identifier];
-
-                generateTouchEventProxyIfRegistered("pointerup", touchPoint, currentTarget, eventObject);
-                generateTouchEventProxyIfRegistered("pointerout", touchPoint, currentTarget, eventObject);
-                generateTouchEventProxyIfRegistered("pointerleave", touchPoint, currentTarget, eventObject);
-            }
-        });
-
-        window.addEventListener('touchmove', function (eventObject) {
-            for (var i = 0; i < eventObject.changedTouches.length; ++i) {
-                var touchPoint = eventObject.changedTouches[i];
-                var newTarget = document.elementFromPoint(touchPoint.clientX, touchPoint.clientY);
-                var currentTarget = previousTargets[touchPoint.identifier];
-
-                if (currentTarget === newTarget) {
-                    continue; // We can skip this as the pointer is effectively over the current target
-                }
-
-                if (currentTarget) {
-                    // Raise out
-                    generateTouchEventProxyIfRegistered("pointerout", touchPoint, currentTarget, eventObject);
-
-                    // Raise leave
-                    if (!currentTarget.contains(newTarget)) { // Leave must be called if the new target is not a child of the current
-                        generateTouchEventProxyIfRegistered("pointerleave", touchPoint, currentTarget, eventObject);
-                    }
-                }
-
-                if (newTarget) {
-                    // Raise over
-                    generateTouchEventProxyIfRegistered("pointerover", touchPoint, newTarget, eventObject);
-
-                    // Raise enter
-                    if (!newTarget.contains(currentTarget)) { // Leave must be called if the new target is not the parent of the current
-                        generateTouchEventProxyIfRegistered("pointerenter", touchPoint, newTarget, eventObject);
-                    }
-                }
-                previousTargets[touchPoint.identifier] = newTarget;
+        window.addEventListener(nameGenerator("pointerout"), function (evt) {
+            if (touching)
+                return;
+            var foundNode = findEventRegisteredNode(evt.target, "pointerleave");
+            if (!foundNode || foundNode === window)
+                return;
+            else if (!foundNode.contains(evt.relatedTarget)) {
+                dispatchPointerLeave(foundNode, evt.relatedTarget, function (targetNode) {
+                    eventGenerator(evt, "pointerleave", false, targetNode);
+                });
             }
         });
     }
+
+    (function () {
+        if (window.MSPointerEvent) {
+            //IE 10
+            applySimpleEventTunnels(
+                function (name) { return getPrefixEventName("MS", name); },
+                generateTouchClonedEvent);
+        }
+        else {
+            applySimpleEventTunnels(getMouseEquivalentEventName, generateMouseProxy);
+
+            // Handling move on window to detect pointerleave/out/over
+            if (window.ontouchstart !== undefined) {
+                window.addEventListener('touchstart', function (eventObject) {
+                    for (var i = 0; i < eventObject.changedTouches.length; ++i) {
+                        var touchPoint = eventObject.changedTouches[i];
+                        previousTargets[touchPoint.identifier] = touchPoint.target;
+
+                        generateTouchEventProxyIfRegistered("pointerover", touchPoint, touchPoint.target, eventObject, true);
+
+                        //pointerenter should not be bubbled
+                        dispatchPointerEnter(touchPoint.target, null, function (targetNode) {
+                            generateTouchEventProxy("pointerenter", touchPoint, targetNode, eventObject, false);
+                        })
+
+                        generateTouchEventProxyIfRegistered("pointerdown", touchPoint, touchPoint.target, eventObject, true);
+                    }
+                    setTouchTimer();
+                });
+
+                window.addEventListener('touchend', function (eventObject) {
+                    for (var i = 0; i < eventObject.changedTouches.length; ++i) {
+                        var touchPoint = eventObject.changedTouches[i];
+                        var currentTarget = previousTargets[touchPoint.identifier];
+
+                        generateTouchEventProxyIfRegistered("pointerup", touchPoint, currentTarget, eventObject, true);
+                        generateTouchEventProxyIfRegistered("pointerout", touchPoint, currentTarget, eventObject, true);
+
+                        //pointerleave should not be bubbled
+                        dispatchPointerLeave(currentTarget, null, function (targetNode) {
+                            generateTouchEventProxy("pointerleave", touchPoint, targetNode, eventObject, false);
+                        })
+                    }
+                    setTouchTimer();
+                });
+
+                window.addEventListener('touchmove', function (eventObject) {
+                    for (var i = 0; i < eventObject.changedTouches.length; ++i) {
+                        var touchPoint = eventObject.changedTouches[i];
+                        var newTarget = document.elementFromPoint(touchPoint.clientX, touchPoint.clientY);
+                        var currentTarget = previousTargets[touchPoint.identifier];
+
+                        // If force preventDefault
+                        if (currentTarget && checkPreventDefault(currentTarget) === true)
+                            eventObject.preventDefault();
+
+                        if (currentTarget === newTarget) {
+                            continue; // We can skip this as the pointer is effectively over the current target
+                        }
+
+                        if (currentTarget) {
+                            // Raise out
+                            generateTouchEventProxyIfRegistered("pointerout", touchPoint, currentTarget, eventObject, true);
+
+                            // Raise leave
+                            if (!currentTarget.contains(newTarget)) { // Leave must be called if the new target is not a child of the current
+                                dispatchPointerLeave(currentTarget, newTarget, function (targetNode) {
+                                    generateTouchEventProxy("pointerleave", touchPoint, targetNode, eventObject, false);
+                                });
+                            }
+                        }
+
+                        if (newTarget) {
+                            // Raise over
+                            generateTouchEventProxyIfRegistered("pointerover", touchPoint, newTarget, eventObject, true);
+
+                            // Raise enter
+                            if (!newTarget.contains(currentTarget)) { // Leave must be called if the new target is not the parent of the current
+                                dispatchPointerEnter(newTarget, currentTarget, function (targetNode) {
+                                    generateTouchEventProxy("pointerenter", touchPoint, targetNode, eventObject, false);
+                                })
+                            }
+                        }
+                        previousTargets[touchPoint.identifier] = newTarget;
+                    }
+                    setTouchTimer();
+                });
+            }
+        }
+    })();
+
 
     // Extension to navigator
     if (navigator.pointerEnabled === undefined) {
