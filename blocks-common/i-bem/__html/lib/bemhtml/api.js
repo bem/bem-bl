@@ -42,6 +42,10 @@ api.translate = function translate(source, options) {
     throw new Error("xjst to js compilation failed:\n" + e.stack);
   }
 
+  var xjst_apply = options.async ?
+      'return xjst.applyAsync.call(' + (options.raw ? 'context' : '[context]') + ', options.callback);\n' :
+      'return xjst.apply.call(' + (options.raw ? 'context' : '[context]') + ');\n';
+
   return 'var BEMHTML = function() {\n' +
          '  var cache,\n' +
          '      xjst = '  + xjstJS + ';\n' +
@@ -52,9 +56,7 @@ api.translate = function translate(source, options) {
          '    return function() {\n' +
          '      if (context === this) context = undefined;\n' +
          (vars.length > 0 ? '    var ' + vars.join(', ') + ';\n' : '') +
-         '      return xjst.apply.call(\n' +
-         (options.raw ? 'context' : '[context]') + '\n' +
-         '      );\n' +
+         '      ' + xjst_apply +
          '    }.call(null);\n' +
          '  };\n' +
          '}();\n' +
