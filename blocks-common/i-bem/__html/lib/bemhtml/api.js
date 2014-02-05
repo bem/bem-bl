@@ -24,6 +24,7 @@ api.translate = function translate(source, options) {
       vars = [];
 
   options || (options = {});
+  options.exportName || (options.exportName = 'BEMHTML');
 
   if (options.cache === true) {
     var xjstCached = BEMHTMLLogLocal.match(xjstPre, 'topLevel');
@@ -42,8 +43,11 @@ api.translate = function translate(source, options) {
     throw new Error("xjst to js compilation failed:\n" + e.stack);
   }
 
-  return 'var BEMHTML = function() {\n' +
+  var exportName = options.exportName;
+
+  return 'var ' + exportName + ' = function() {\n' +
          '  var cache,\n' +
+         '      exports = {},\n' +
          '      xjst = '  + xjstJS + ';\n' +
          '  return function(options) {\n' +
          '    var context = this;\n' +
@@ -58,7 +62,7 @@ api.translate = function translate(source, options) {
          '    }.call(null);\n' +
          '  };\n' +
          '}();\n' +
-         'typeof exports === "undefined" || (exports.BEMHTML = BEMHTML);';
+         'typeof exports === "undefined" || (exports.' + exportName + ' = ' + exportName + ');';
 };
 
 //
