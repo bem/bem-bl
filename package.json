@@ -13,7 +13,7 @@
   ],
   "license": "MIT",
   "dependencies": {
-    "bem-xjst": "~0.3.1",
+    "bem-xjst": "0.4.0",
     "bemhtml-compat": "~0.0.4",
     "dom-js": "~0.0.9"
   },
