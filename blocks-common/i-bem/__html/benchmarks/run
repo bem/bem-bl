@@ -5,7 +5,7 @@ var fs = require('fs'),
     path = require('path'),
     benchmark = require('benchmark'),
     microtime = require('microtime'),
-    bemhtml = require('../lib/bemhtml');
+    bemhtml = require('bem-xjst/lib/bemhtml');
 
 var ibem = fs.readFileSync(path.resolve(
   __dirname,
