@@ -1,7 +1,7 @@
 var ASSERT = require('assert'),
     FS = require('fs'),
     PATH = require('path'),
-    BEMHTML = require('../../../../.bem/lib/bemhtml'),
+    BEMHTML = require('bem-xjst/lib/bemhtml'),
 
     resolve = PATH.resolve.bind(null, __dirname),
 
