@@ -231,9 +231,9 @@
             }
 
             if (checkRegistration) {
-                generateTouchEventProxyIfRegistered(name, touchPoint, previousTargets[touchPoint.identifier], eventObject);
+                generateTouchEventProxyIfRegistered(name, touchPoint, previousTargets[touchPoint.identifier], eventObject, true);
             } else {
-                generateTouchEventProxy(name, touchPoint, previousTargets[touchPoint.identifier], eventObject);
+                generateTouchEventProxy(name, touchPoint, previousTargets[touchPoint.identifier], eventObject, true);
             }
         }
     };
@@ -358,7 +358,7 @@
 
     // Hooks
     interceptAddEventListener(window);
-    interceptAddEventListener(typeof HTMLElement !== "undefined" ? HTMLElement : Element);
+    interceptAddEventListener(HTMLElement || Element);
     interceptAddEventListener(document);
     interceptAddEventListener(HTMLBodyElement);
     interceptAddEventListener(HTMLDivElement);
@@ -378,7 +378,7 @@
     }
 
     interceptRemoveEventListener(window);
-    interceptRemoveEventListener(typeof HTMLElement !== "undefined" ? HTMLElement : Element);
+    interceptRemoveEventListener(HTMLElement || Element);
     interceptRemoveEventListener(document);
     interceptRemoveEventListener(HTMLBodyElement);
     interceptRemoveEventListener(HTMLDivElement);
@@ -462,7 +462,7 @@
     // Handling events on window to prevent unwanted super-bubbling
     // All mouse events are affected by touch fallback
     function applySimpleEventTunnels(nameGenerator, eventGenerator) {
-        ["pointerdown", "pointermove", "pointerup", "pointerover", "pointerout"].map(function (eventName) {
+        ["pointerdown", "pointermove", "pointerup", "pointerover", "pointerout"].forEach(function (eventName) {
             window.addEventListener(nameGenerator(eventName), function (evt) {
                 if (!touching && findEventRegisteredNode(evt.target, eventName))
                     eventGenerator(evt, eventName, true);
