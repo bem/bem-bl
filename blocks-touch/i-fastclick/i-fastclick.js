@@ -275,7 +275,7 @@ FastClick.prototype.needsFocus = function(target) {
  */
 FastClick.prototype.sendClick = function(targetElement, event) {
     'use strict';
-    var clickEvent, touch;
+    var mousedownEvent, clickEvent, touch;
 
     // On some Android devices activeElement needs to be blurred otherwise the synthetic click will have no effect (#24)
     if (document.activeElement && document.activeElement !== targetElement) {
@@ -284,24 +284,18 @@ FastClick.prototype.sendClick = function(targetElement, event) {
 
     touch = event.changedTouches[0];
 
+    // Trigger mousedown
+    mousedownEvent = document.createEvent('MouseEvents');
+    mousedownEvent.initMouseEvent('mousedown', true, true, window, 1, touch.screenX, touch.screenY, touch.clientX, touch.clientY, false, false, false, false, 0, null);
+    mousedownEvent.forwardedTouchEvent = true;
+    targetElement.dispatchEvent(mousedownEvent);
+
     // Synthesise a click event, with an extra attribute so it can be tracked
     clickEvent = document.createEvent('MouseEvents');
-    clickEvent.initMouseEvent(this.determineEventType(targetElement), true, true, window, 1, touch.screenX, touch.screenY, touch.clientX, touch.clientY, false, false, false, false, 0, null);
+    clickEvent.initMouseEvent('click', true, true, window, 1, touch.screenX, touch.screenY, touch.clientX, touch.clientY, false, false, false, false, 0, null);
     clickEvent.forwardedTouchEvent = true;
     targetElement.dispatchEvent(clickEvent);
 };
-
-FastClick.prototype.determineEventType = function(targetElement) {
-    'use strict';
-
-    //Issue #159: Android Chrome Select Box does not open with a synthetic click event
-    if (this.deviceIsAndroid && targetElement.tagName.toLowerCase() === 'select') {
-        return 'mousedown';
-    }
-
-    return 'click';
-};
-
 
 /**
  * @param {EventTarget|Element} targetElement
