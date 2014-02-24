@@ -1,7 +1,13 @@
 var assert = require('assert'),
+    fs = require('fs'),
+    path = require('path'),
     bemhtml = require('../lib/bemhtml');
 
 suite('BEMHTML Compiler', function() {
+  function readFile(file) {
+    return fs.readFileSync(path.resolve(__dirname, 'files', file)).toString();
+  }
+
   function unit(name, src, data, dst) {
     test(name, function() {
       assert.equal(bemhtml.compile(src, { raw: true }).call(data), dst);
@@ -24,5 +30,12 @@ suite('BEMHTML Compiler', function() {
     'true: false, mode1: true, mode1: { return applyNext("mode1") }',
     { _mode: 'mode1' },
     true
+  );
+
+  unit(
+    'hash map',
+    readFile('basic/hash.bemhtml'),
+    { _mode: 'nay', block: 'yay' },
+    'ok'
   );
 });
