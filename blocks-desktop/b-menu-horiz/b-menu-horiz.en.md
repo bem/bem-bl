@@ -1,0 +1,11 @@
+﻿**b-menu-horiz** block provides horizontal menu. The block also has a functionality (implemented on JavaScript) that helps to write scripts with reaction on a menu item becoming selected.
+
+HTML markup complexity depends on a block modifier.
+
+The block has `layout` modifier with 3 following values:
+
+ * `horiz`
+ * `complex`
+ * `normal`
+
+**Attention**: This block cannot be used without `layout` modifier.

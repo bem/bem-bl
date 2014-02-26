@@ -1,0 +1,1 @@
+Page with connected JS and CSS files
