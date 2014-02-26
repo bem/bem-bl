@@ -1,0 +1,1 @@
+Shim for some ES5 methods
