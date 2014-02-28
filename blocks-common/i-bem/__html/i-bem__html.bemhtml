@@ -190,7 +190,6 @@ function BEMContext(context, apply_) {
   this._ = this;
 
   // Stub out fields that will be used later
-  $$mode = '';
   this._start = true;
   this._listLength = 0;
   this._notNewList = false;

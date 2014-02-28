@@ -77,7 +77,8 @@ api.translate = function translate(source, options) {
          '        context = undefined;\n' +
          '      } else {\n' +
                   propKeys.map(function(prop) {
-                    return properties[prop] + ' = context.' + prop + ';\n';
+                    return properties[prop] + ' = context.' + prop +
+                        ' || \'\';\n';
                   }).join('') +
          '      }\n' +
          (vars.length > 0 ? '    var ' + vars.join(', ') + ';\n' : '') +
