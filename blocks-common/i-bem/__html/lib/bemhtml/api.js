@@ -40,6 +40,7 @@ api.translate = function translate(source, options) {
 
   options || (options = {});
   options.exportName || (options.exportName = 'BEMHTML');
+  options.applyFuncName || (options.applyFuncName = 'apply');
 
   if (options.cache === true) {
     var xjstCached = BEMHTMLLogLocal.match(xjstPre, 'topLevel');
@@ -82,7 +83,7 @@ api.translate = function translate(source, options) {
                   }).join('') +
          '      }\n' +
          (vars.length > 0 ? '    var ' + vars.join(', ') + ';\n' : '') +
-         '      return xjst.apply.call(\n' +
+         '      return xjst.' + options.applyFuncName + '.call(\n' +
          (options.raw ? 'context' : '[context]') + '\n' +
          '      );\n' +
          '    }.call(null);\n' +
