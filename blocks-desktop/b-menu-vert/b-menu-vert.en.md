@@ -1,14 +1,13 @@
-﻿This block makes HTML markup for a vertical menu. It is based on
-helper block `i-menu`.
+This block makes HTML markup for a vertical menu. It is based on a helper block `i-menu`.
 
-There are 2 type of elements in this block:
+There are two types of elements in this block:
 
-##### Layout elements
+##### Layout Elements
 
  * `layout`
  * `layout-unit`
 
-##### Functional element
+##### Functional Element
 
  * `title`
  * `item`

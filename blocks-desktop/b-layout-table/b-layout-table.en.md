@@ -1,11 +1,9 @@
-﻿`b-layout-table` block — is a 100%-width table for making a layout.
+`b-layout-table` block — is a 100%-width table for making a layout.
 
-This block has a bemhtml template that gives a table, its rows and cells
-with all the attribute nodes needed.
+This block has a `bemhtml` template that gives a table, its rows and cells with all the attribute nodes needed.
 
 Cells of the block can be either `cell` or `gap` elements.
-`cell` element is to contain a content and `gap` element is to set
-some space betwen cells.
+A `cell` element is to contain a content and `gap` element is to set some space betwen cells.
 
 Let's look at **bemjson** input data of the block:
 
@@ -52,8 +50,7 @@ Let's look at **bemjson** input data of the block:
 
 There is no width for cells by default.
 
-You can extend a block by your own CSS rules. For example, set layout modifier to your block
-`mods: { layout: '58-40'}`, set position modifier to right cell `elemMods: { position: 'r'}`.
+You can extend a block by your own CSS rules. For example, set a layout modifier to your block `mods: { layout: '58-40'}`, set a position modifier to right cell `elemMods: { position: 'r'}`.
 Wrap cells' content by **inner** element to be able to set some paddings. Then, set CSS rules you
 need (via cascade):
 

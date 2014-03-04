@@ -1,1 +1,1 @@
-﻿You can make **item-content** element visible with this modificator.
+You can make **item-content** element visible using this modificator.
