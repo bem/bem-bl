@@ -1,4 +1,4 @@
-﻿Элемент `layout` миксируется с блоком `b-layout-table` в **BEMHTML** шаблоне блока `b-search`.
+Элемент `layout` миксируется с блоком `b-layout-table` в **BEMHTML**-шаблоне блока `b-search`.
 
 Свойства `input`, `button`, `under`, представляют собой элементы для раскладки `[ layout-input, layout-button, layout-under ]`, которые миксируются с элементами `cell` блока `b-layout-table`, преобразуясь в **HTML** в ячейки таблицы.
 

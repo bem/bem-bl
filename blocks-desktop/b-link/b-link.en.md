@@ -1,4 +1,4 @@
-﻿Link block is ised inside other blocks.
+**b-link** block is used inside the other blocks.
 
 For a simple like set the following bemjson:
 
@@ -12,5 +12,4 @@ For a simple like set the following bemjson:
 }
 ```
 
-An `url` property transforms info `href` attribute. `title` and
-`target` properties turn into relevant attributes.
+An `url` property transforms info a `href` attribute. The `title` and `target` properties turn into the relevant attributes.

@@ -1,2 +1,2 @@
-For a convinient usage of an icon inside a link. Позволяет добавлять в ссылку elem: 'inner'. Содержит только css,
-которые переносит подчеркивание с самой ссылки на ее внутренний элемент.
+For a convinient usage of an icon inside a link. 
+Allows you to add a link to an `{ elem: inner }`. Contains css rules, that shift underlining from the link to its `inner` element.
