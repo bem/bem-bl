@@ -1,11 +1,11 @@
 block b-icon {
     tag: 'i'
 
-    this.ctx.src {
+    this.ctx.src || this.ctx.url {
         tag: 'img'
         attrs: {
             var a = {
-                src: this.ctx.src
+                src: this.ctx.src || this.ctx.url
             };
 
             this.ctx.width && (a.width = this.ctx.width);
