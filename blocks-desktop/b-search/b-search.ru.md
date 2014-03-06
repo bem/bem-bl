@@ -1,0 +1,48 @@
+Поисковая форма, содержащая поле ввода и кнопку.
+
+Сам блок `b-search`, преобразуется в тег `<form>`, внутри которого лежит `[элемент layout](#__layout)`,
+отвечающий за раскладку блока.
+
+Рассмотрим **BEMJSON** блока:
+
+```js
+{
+    block: 'b-search',
+    attrs: { action: '/search.xml' },
+    input: {
+        elem: 'input'
+    },
+    button: {
+        elem: 'button'
+    },
+    under: {
+        block: 'b-link',
+        url: '/',
+        content: 'Advanced search'
+    }
+}
+```
+
+
+По умолчанию элемент `input` является поисковой строкой (`type: 'text'`).
+Элемент `button` — кнопкой `type: 'submit'`.
+
+Если вам необходимо добавить атрибуты этим элементам или самому блоку, достаточно в **BEMJSON** описать свойство `attrs`, и перечислить в нем все необходимые атрибуты.
+
+**BEMJSON**:
+
+```js
+{
+    block: 'b-search',
+    attrs: { action: '/search.xml', id: 'myForm' }
+    input: {
+        elem: 'input',
+        attrs: { value: 'Some text', id: 'myInput' }
+    },
+    button: {
+        elem: 'button',
+        attrs: { value: 'My search', id: 'myButton' }
+    }
+}
+```
+

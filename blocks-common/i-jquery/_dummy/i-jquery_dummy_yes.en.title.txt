@@ -1,0 +1,1 @@
+Minimal code base, for jQuery depending code. For work outside browser (node.js for instance)
