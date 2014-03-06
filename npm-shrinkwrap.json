@@ -1,5 +1,5 @@
 {
-  "name": "bemhtml",
+  "name": "bem-bl",
   "version": "0.0.0",
   "dependencies": {
     "xjst": {
@@ -96,7 +96,7 @@
         },
         "source-map": {
           "version": "0.1.33",
-          "from": "source-map@>= 0.1.2",
+          "from": "source-map@~0.1.30",
           "dependencies": {
             "amdefine": {
               "version": "0.1.0",
@@ -105,6 +105,10 @@
           }
         }
       }
+    },
+    "bem-environ": {
+      "version": "1.4.0",
+      "from": "bem-environ@~1.4.0"
     }
   }
 }
