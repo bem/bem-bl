@@ -1,11 +1,12 @@
-b
+.bem/cache
 .sass-cache
 node_modules/
 npm-debug.log
 
 .*.xsl
 .*.xsl.*
-sets/
+*.sets
+!*.sets/.bem/
 
 *.decl.js
 
