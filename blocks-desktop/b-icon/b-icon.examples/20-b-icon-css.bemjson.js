@@ -2,10 +2,10 @@
     block: 'b-page',
     title: 'b-icon',
     head: [
-        { elem: 'css', url: '_30-b-icon_sprite.css' }
+        { elem: 'css', url: '_20-b-icon-css.css' }
     ],
     content: {
         block: 'b-icon',
-        mods: { action: 'widgets' }
+        mods: { action: 'images' }
     }
 })
