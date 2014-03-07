@@ -2,7 +2,7 @@
     block: 'b-page',
     title: 'b-layout-table',
     head: [
-        { elem: 'css', url: '_10_b-layout-table.css' }
+        { elem: 'css', url: '_10-b-layout-table.css' }
     ],
     content: [
         {
