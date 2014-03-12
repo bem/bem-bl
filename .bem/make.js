@@ -75,6 +75,13 @@ MAKE.decl('BundleNode', {
         ].map(getPrjPath);
     },
 
+    'touch-phone-levels': function() {
+        return [
+            'blocks-common',
+            'blocks-touch'
+        ].map(getPrjPath);
+    },
+
     'create-i18n.js-optimizer-node': function(tech, sourceNode, bundleNode) {
         return this.createBorschikOptimizerNode('js', sourceNode, bundleNode);
     },

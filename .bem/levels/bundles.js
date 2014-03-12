@@ -1,7 +1,7 @@
 var path = require('path'),
     environ = require('bem-environ'),
     getPrjTechPath = path.join.bind(null, environ.PRJ_ROOT, '.bem/techs'),
-    getBemBlTechPath = path.join.bind(null, environ.PRJ_ROOT, 'blocks-common/i-bem/bem/techs');
+    getBemBlTechPath = path.join.bind(null, environ.PRJ_ROOT, 'blocks-common/i-bem/bem/techs/v2');
 
 exports.getTechs = function() {
 
@@ -17,12 +17,12 @@ exports.getTechs = function() {
         'ie8.css': 'v2/ie8.css',
         'ie9.css': 'v2/ie9.css',
 
-        i18n: getBemBlTechPath('v2/i18n.js'),
-        'i18n.js': getBemBlTechPath('v2/i18n.js.js'),
-        'i18n.js+bemhtml': getBemBlTechPath('v2/i18n.js+bemhtml.js'),
+        i18n: getBemBlTechPath('i18n.js'),
+        'i18n.js': getBemBlTechPath('i18n.js.js'),
+        'i18n.js+bemhtml': getBemBlTechPath('i18n.js+bemhtml.js'),
         'i18n.html': getBemBlTechPath('i18n.html.js'),
 
-        bemhtml: getBemBlTechPath('v2/bemhtml.js'),
+        bemhtml: getBemBlTechPath('bemhtml.js'),
         html: getBemBlTechPath('html.js')
     };
 
