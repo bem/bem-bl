@@ -12,3 +12,29 @@
 ```js
 block i-ua, tag: ''
 ```
+
+Блок `i-ua` с модификатором `_interaction_yes` может определять способ взаимодействия пользователя с интерфейсом.
+Если пользователь взаимодействует со страницей с помощью мыши/указателя, то модификатору `interaction` выставляется значение `pointer`, а если с помощью клавиатуры, то `keyboard`.
+
+Для подключения этой функциональности на проект необходимо на уровне `common.blocks`:
+
+* Доопределить bemhtml-шаблон блока `b-page`:
+
+```
+block b-page, mix: {
+    var mix = applyNext() || [];
+
+    mix.push({ block: 'i-ua', mods: { interaction: 'yes' }, js: true });
+    return mix;
+}
+```
+
+* Добавить зависимость `i-ua_interaction_yes` в `mustDeps` секцию блока `b-page`:
+
+```js
+({
+    mustDeps: [
+        { block: 'i-ua', mods: { interaction: 'yes' } }
+    ]
+})
+```

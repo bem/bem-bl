@@ -1,0 +1,11 @@
+block button {
+
+    tag: 'button'
+
+    content: {
+        elem: 'text',
+        tag: 'span',
+        content: applyNext()
+    }
+
+}
