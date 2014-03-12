@@ -20,6 +20,7 @@
   },
   "scripts": {
     "test": "mocha --ui tdd --growl --reporter spec blocks-common/i-bem/__html/test/*-test.js blocks-common/i-bem/__i18n/test/test-*.js",
+    "deps": "bem make libs",
     "build": "bem make sets --no-colors"
   }
 }
