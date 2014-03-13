@@ -26,7 +26,7 @@
         content: [
             {
                 block: 'b-ico',
-                src: 'http://yandex.st/lego/_/pDu9OWAQKB0s2J9IojKpiS_Eho.ico'
+                src: 'http://yastatic.net/lego/_/pDu9OWAQKB0s2J9IojKpiS_Eho.ico'
             },
             {
                 elem: 'text',
