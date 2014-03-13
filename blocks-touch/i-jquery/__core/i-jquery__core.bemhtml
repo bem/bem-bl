@@ -1,10 +1,5 @@
-block i-jquery, elem core, default: {
-    apply({
-        _mode: '',
-        ctx: {
-            block: 'b-page',
-            elem: 'js',
-            url: 'http://yandex.st/jquery/1.8.3/jquery.min.js'
-        }
-    });
-}
+block i-jquery, elem core, default: applyCtx({
+    block: 'b-page',
+    elem: 'js',
+    url: 'http://yastatic.net/jquery/1.8.3/jquery.min.js'
+})

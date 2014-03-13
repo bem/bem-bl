@@ -34,7 +34,7 @@
                             content: [
                                 {
                                     block: 'b-icon',
-                                    url: 'http://yandex.st/lego/_/Kx6F6RQnQFitm0qRxX7vpvfP0K0.png',
+                                    url: 'http://yastatic.net/lego/_/Kx6F6RQnQFitm0qRxX7vpvfP0K0.png',
                                     alt: 'Yandex favicon'
                                 },
                                 {
@@ -67,7 +67,7 @@
                             content: [
                                 {
                                     block: 'b-icon',
-                                    url: 'http://yandex.st/lego/_/Kx6F6RQnQFitm0qRxX7vpvfP0K0.png',
+                                    url: 'http://yastatic.net/lego/_/Kx6F6RQnQFitm0qRxX7vpvfP0K0.png',
                                     alt: 'Yandex favicon'
                                 },
                                 {
