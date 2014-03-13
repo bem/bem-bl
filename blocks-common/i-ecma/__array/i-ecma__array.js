@@ -6,6 +6,7 @@ var ptp = Array.prototype,
 
         /**
          * Finds the index of an element in an array
+         *
          * @param {Object} item
          * @param {Number} [fromIdx] Starting from index (length - 1 - fromIdx, if fromIdx < 0)
          * @returns {Number} Element index or -1, if not found
@@ -34,6 +35,7 @@ var ptp = Array.prototype,
 
         /**
          * Calls the callback for each element
+         *
          * @param {Function} callback Called for each element
          * @param {Object} [ctx=null] Callback context
          */

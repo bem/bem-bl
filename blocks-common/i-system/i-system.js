@@ -7,6 +7,9 @@ var timer,
     channel = BEM.channel('sys'),
     TICK_INTERVAL = 50;
 
+/**
+ * System channel for tick, idle, wakeup messages
+ */
 BEM.decl('i-system', {}, {
 
     start : function() {

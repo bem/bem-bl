@@ -510,7 +510,7 @@ this.BEM = $.inherit($.observable, /** @lends BEM.prototype */ {
      */
     destruct : function() {}
 
-}, /** @lends BEM */{
+}, {
 
     _name : 'i-bem',
 

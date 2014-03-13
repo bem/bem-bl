@@ -1,3 +1,6 @@
+/**
+ * Finding current position with Geolocation API
+ */
 BEM.DOM.decl('i-geolocation', {}, {
 
     get: function(params, callback) {

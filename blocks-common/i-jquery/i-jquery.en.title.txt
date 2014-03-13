@@ -1,1 +1,2 @@
 Block with plugins for jQuery
+jQuery plugins helpers
