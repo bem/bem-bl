@@ -18,16 +18,11 @@ block i-ua {
 
 
 /* /Users/indutny/Code/bem/bem-bl-test/bem-bl/blocks-desktop/i-jquery/__core/i-jquery__core.bemhtml: start */
-block i-jquery, elem core, default: {
-    return apply(
-        this._mode = '',
-        this.ctx = {
-            block: 'b-page',
-            elem: 'js',
-            url: '//yandex.st/jquery/1.8.3/jquery.min.js'
-        }
-    );
-}
+block i-jquery, elem core, default: applyCtx({
+    block: 'b-page',
+    elem: 'js',
+    url: '//yastatic.net/jquery/1.8.3/jquery.min.js'
+})
 
 /* /Users/indutny/Code/bem/bem-bl-test/bem-bl/blocks-desktop/i-jquery/__core/i-jquery__core.bemhtml: end */
 
