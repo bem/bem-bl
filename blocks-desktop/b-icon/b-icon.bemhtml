@@ -4,7 +4,7 @@ block b-icon {
     attrs: {
 
         var ctx = this.ctx,
-            a = { src: '//yandex.st/lego/_/La6qi18Z8LwgnZdsAr1qy1GwCwo.gif', alt: '' },
+            a = { src: '//yastatic.net/lego/_/La6qi18Z8LwgnZdsAr1qy1GwCwo.gif', alt: '' },
             props = ['alt', 'width', 'height'], p;
 
         ctx.url && (a.src = ctx.url);
