@@ -88,6 +88,9 @@
         }, 400);
     });
 
+    /**
+     * Block for gathering and providing UserAgent information
+     */
     BEM.DOM.decl('i-ua', {
 
         onSetMod: {

@@ -1,4 +1,14 @@
-BEM.DOM.decl({'name': 'b-link', 'modName': 'pseudo', 'modVal': 'yes'}, {
+/**
+ * Block b-link
+ *
+ * @block b-link
+ */
+
+/**
+ * Pseudolink
+ *
+ */
+BEM.DOM.decl({block: 'b-link', modName: 'pseudo', modVal: 'yes'}, {
 
     _onClick : function(e) {
 

@@ -240,10 +240,12 @@ $.fn.bem = function(blockName, params) {
 };
 
 /**
- * @namespace
- * @name BEM.DOM
+ * Provides methods for work with DOM tree
+ *
+ * @block i-bem
+ * @mod default
  */
-var DOM = BEM.DOM = BEM.decl('i-bem__dom',/** @lends BEM.DOM.prototype */{
+var DOM = BEM.DOM = BEM.decl('i-bem__dom', {
     /**
      * @class Base block for creating BEM blocks that have DOM representation
      * @constructs
@@ -972,7 +974,7 @@ var DOM = BEM.DOM = BEM.decl('i-bem__dom',/** @lends BEM.DOM.prototype */{
 
     }
 
-}, /** @lends BEM.DOM */{
+}, {
 
     /**
      * Scope
