@@ -1,1 +1,1 @@
-Vertical menu with trigger deep inside
+Vertical menu with a trigger inside

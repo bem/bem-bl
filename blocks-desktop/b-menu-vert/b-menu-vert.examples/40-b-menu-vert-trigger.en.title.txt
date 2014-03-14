@@ -1,1 +1,1 @@
-Vertical menu with trigger
+Vertical menu with a trigger

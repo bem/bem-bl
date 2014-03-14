@@ -1,1 +1,1 @@
-Element which toggle enclosed menu
+Element which toggles encloses menu

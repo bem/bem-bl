@@ -1,1 +1,1 @@
-Changing block modificator by click
+Changing a block modifier by click

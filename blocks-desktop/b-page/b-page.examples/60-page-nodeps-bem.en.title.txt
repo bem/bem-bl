@@ -1,1 +1,1 @@
-No more automatic initialization on domready
+Cancellation of automatic initialization on domready

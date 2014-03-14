@@ -1,1 +1,1 @@
-Sub-menu with trigger
+Sub-menu with a trigger

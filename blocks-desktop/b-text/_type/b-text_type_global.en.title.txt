@@ -1,1 +1,1 @@
-Block for work with text and global style rules
+The block for work with text and global style rules
