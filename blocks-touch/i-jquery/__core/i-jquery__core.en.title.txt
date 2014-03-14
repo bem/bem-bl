@@ -1,1 +1,1 @@
-Element which connect jQuery to the page
+Element that links jQuery to the page

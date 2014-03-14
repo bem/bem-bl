@@ -1,1 +1,1 @@
-Simple slider with other then first active element by default
+simple slider with non-first element by default

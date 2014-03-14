@@ -1,1 +1,1 @@
-Screen-by-screen slider with other then first starting element by default
+Screen-by-screen slider with non-first element by default
