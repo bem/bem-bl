@@ -1,0 +1,2674 @@
+/* ../../../../libs/romochka/blocks-desktop/i-global/_type/i-global_type_simple.css begin */
+/* ../body/i-global__body.css begin */
+/* Global definitions (begin) */ /**/
+    body
+    {
+        font: 0.8em Arial, Helvetica, sans-serif;
+
+        /* Чтобы в FF2- заработал z-index: -1 */ /**/
+        position: relative;
+        z-index: 0;
+
+        margin: 0;
+        padding: 0 0 1em 0;
+
+        color: #000;
+        background: #fff;
+    }
+/* Global definitions (end) */ /**/
+/* ../body/i-global__body.css end */
+/* ../wbr/i-global__wbr.css begin */
+/* Поддержка wbr в Opera и Safari 2/3 (begin) */ /**/
+    /* См. http://harisov.livejournal.com/97666.html */ /**/
+    wbr
+    {
+        display: inline-block;
+    }
+/* Поддержка wbr в Opera и Safari 2/3 (end) */ /**/
+
+/* ../wbr/i-global__wbr.css end */
+/* ../hover/i-global__hover.css begin */
+/* Global definitions: Links hover (begin) */ /**/
+    :link:hover,
+    :visited:hover
+    {
+        color: #f00 !important; /*!head*/
+    }
+/* Global definitions: Links hover (end) */ /**/
+
+/* ../hover/i-global__hover.css end */
+
+/* ../../../../libs/romochka/blocks-desktop/i-global/_type/i-global_type_simple.css end */
+/* ../../../../desktop.blocks/i-ua/i-ua.examples/10-i-ua.blocks/b-page/b-page.css begin */
+html
+{
+    background-color: #f5f5ea;
+}
+
+body
+{
+    background-color: #fff;
+}
+
+table
+{
+    width: 85%;
+    margin: 10px auto;
+    padding: 25px 0;
+
+    background: #fff;
+}
+
+td
+{
+    padding: 15px 25px;
+
+    vertical-align: top;
+
+    border-bottom: 1px solid rgba(83, 83, 83, .33);
+}
+
+td:not(:last-child)
+{
+    border-right: 1px solid rgba(83, 83, 83, .33);
+}
+
+/* ../../../../desktop.blocks/i-ua/i-ua.examples/10-i-ua.blocks/b-page/b-page.css end */
+/* ../../../../common.blocks/link/link.css begin */
+.link,
+.link:visited
+{
+    color: #22c;
+}
+
+.link
+{
+    text-decoration: none;
+
+    -webkit-transition: color .15s ease-out;
+       -moz-transition: color .15s ease-out;
+         -o-transition: color .15s ease-out;
+            transition: color .15s ease-out;
+}
+
+/* ../../../../common.blocks/link/link.css end */
+/* ../../../../desktop.blocks/link/link.css begin */
+.link:hover,
+.link:visited:hover
+{
+    color: #d00 !important; /* Оторвать !important после того, как оторвем .i-global__hover */
+}
+
+/* ../../../../desktop.blocks/link/link.css end */
+/* ../../../../common.blocks/button/button.css begin */
+/* button — рисует бордер кнопки */ /**/
+.button
+{
+    position: relative;
+
+    display: inline-block;
+
+    margin: 0;
+    padding: 0;
+
+    -webkit-user-select: none;
+       -moz-user-select: none;
+            user-select: none;
+    text-align: center;
+    white-space: nowrap;
+
+    outline: 0;
+}
+
+.button::-moz-focus-inner
+{
+    padding: 0;
+
+    border: 0;
+}
+
+/* Прячем стили от IE < 9 */ /**/
+@media all and (min-width:0)
+{
+    .button
+    {
+        border: 0;
+    }
+
+    a.button:link,
+    a.button:visited
+    {
+        text-decoration: none;
+
+        outline: hidden; /* hidden for Opera 12 to remove native focusing  */
+    }
+}
+
+/* ../../../../common.blocks/button/button.css end */
+/* ../../../../desktop.blocks/button/button.css begin */
+@media all and (min-width:0)
+{
+
+    .button
+    {
+        cursor: pointer;
+    }
+}
+
+a.button:hover
+{
+    cursor: default;
+    text-decoration: none;
+
+    outline: hidden; /* hidden for Opera 12 to remove native focusing  */
+}
+
+/* ../../../../desktop.blocks/button/button.css end */
+/* ../../../../common.blocks/button/__text/button__text.css begin */
+.button__text
+{
+    position: relative;
+
+    padding: 0 1em;
+
+    pointer-events: none;
+}
+
+/* ../../../../common.blocks/button/__text/button__text.css end */
+/* ../../../../desktop.blocks/button/__text/button__text.css begin */
+@media all and (min-width:0)
+{
+    /* Для FF3.6 */ /**/
+    .i-ua_inlinesvg_no button.button .button__text
+    {
+        line-height: 215.5% !important;
+    }
+}
+
+/* ../../../../desktop.blocks/button/__text/button__text.css end */
+/* ../../../../common.blocks/button/_disabled/button_disabled_yes.css begin */
+.button_disabled_yes
+{
+    opacity: .6;
+}
+
+/* ../../../../common.blocks/button/_disabled/button_disabled_yes.css end */
+/* ../../../../desktop.blocks/button/_disabled/button_disabled_yes.css begin */
+.button_disabled_yes,
+a.button_disabled_yes,
+a.button_disabled_yes .button__text
+{
+    cursor: default;
+}
+
+/* ../../../../desktop.blocks/button/_disabled/button_disabled_yes.css end */
+/* ../../../../common.blocks/button/_pressed/button_pressed_yes.css begin */
+@media all and (min-width:0)
+{
+    .button_pressed_yes .button__text
+    {
+        top: 1px;
+    }
+}
+
+/* ../../../../common.blocks/button/_pressed/button_pressed_yes.css end */
+/* ../../../../common.blocks/button/_theme/button_theme_normal.css begin */
+.button_theme_normal
+{
+    font-family: Arial, sans-serif;
+}
+
+@media all and (min-width:0)
+{
+    /* button — задает рамку у кнопки */
+    .button_theme_normal
+    {
+        border-radius: 3px;
+        background: rgba(0,0,0,.4);
+        background: -webkit-linear-gradient(top, rgba(0,0,0,.2) 0,rgba(0,0,0,.4) 100%);
+        background:    -moz-linear-gradient(top, rgba(0,0,0,.2) 0, rgba(0,0,0,.4) 100%);
+        background:      -o-linear-gradient(top, rgba(0,0,0,.2) 0,rgba(0,0,0,.4) 100%);
+        background:         linear-gradient(to bottom, rgba(0,0,0,.2) 0,rgba(0,0,0,.4) 100%);
+        -moz-box-shadow: 0 1px 0 rgba(0,0,0,.07);
+             box-shadow: 0 1px 0 rgba(0,0,0,.07);
+    }
+
+    /* :before — градиент у кнопки */
+    .button_theme_normal:before
+    {
+        position: absolute;
+        top: 1px;
+        right: 1px;
+        bottom: 1px;
+        left: 1px;
+
+        content: '';
+
+        border-radius: 2px;
+        background: #fff;
+        background: -webkit-linear-gradient(top, #fff 0,#eee 100%);
+        background:    -moz-linear-gradient(top, #fff 0, #eee 100%);
+        background:      -o-linear-gradient(top, #fff 0,#eee 100%);
+        background:         linear-gradient(to bottom, #fff 0,#eee 100%);
+    }
+
+    .button_focused_yes.button_theme_normal
+    {
+        -moz-box-shadow: 0 1px 0 rgba(0,0,0,.07), 0 0 6px 2px rgba(255,204,0,.7);
+             box-shadow: 0 1px 0 rgba(0,0,0,.07), 0 0 6px 2px rgba(255,204,0,.7);
+    }
+
+    .button_focused_yes.button_theme_normal:not(.button_pressed_yes):before
+    {
+        -moz-box-shadow: 0 0 0 1px rgba(193,154,0,.2);
+             box-shadow: 0 0 0 1px rgba(193,154,0,.2);
+    }
+
+    .i-ua_interaction_pointer .button_focused_yes.button_theme_normal
+    {
+        -moz-box-shadow: none;
+             box-shadow: none;
+    }
+
+    .i-ua_interaction_pointer .button_focused_yes.button_theme_normal:not(.button_pressed_yes):before
+    {
+        -moz-box-shadow: none;
+             box-shadow: none;
+    }
+
+    .button_pressed_yes.button_theme_normal
+    {
+        -moz-box-shadow: inset 0 2px 1px -1px rgba(0,0,0,.4), 0 1px 0 rgba(255,255,255,.2);
+             box-shadow: inset 0 2px 1px -1px rgba(0,0,0,.4), 0 1px 0 rgba(255,255,255,.2);
+    }
+
+    .button_pressed_yes.button_theme_normal:before
+    {
+        -moz-box-shadow: inset 0 1px 3px -1px rgba(0,0,0,.5);
+             box-shadow: inset 0 1px 3px -1px rgba(0,0,0,.5);
+    }
+
+    .button_theme_normal
+    {
+        color: #333 !important;
+    }
+}
+
+/* ../../../../common.blocks/button/_theme/button_theme_normal.css end */
+/* ../../../../desktop.blocks/button/_theme/button_theme_normal.css begin */
+@media all and (min-width:0)
+{
+    /* :before — при наведении меняет градиент у кнопки */
+    .button_theme_normal.button_hovered_yes:before
+    {
+        background: rgb(255,255,255);
+        background: -webkit-linear-gradient(top, rgba(255,255,255,1) 0,rgba(246,245,243,1) 100%);
+        background:    -moz-linear-gradient(top, rgba(255,255,255,1) 0,rgba(246,245,243,1) 100%);
+        background:      -o-linear-gradient(top, rgba(255,255,255,1) 0,rgba(246,245,243,1) 100%);
+        background:         linear-gradient(to bottom, rgba(255,255,255,1) 0,rgba(246,245,243,1) 100%);
+    }
+}
+
+a.button_theme_normal.button_hovered_yes
+{
+    color: #333 !important;
+}
+
+/* ../../../../desktop.blocks/button/_theme/button_theme_normal.css end */
+/* ../../../../common.blocks/button/_size/button_size_s.css begin */
+.button_size_s
+{
+    font-size: 13px;
+    line-height: 28px;
+}
+
+/* ../../../../common.blocks/button/_size/button_size_s.css end */
+/* ../../../../common.blocks/button/_theme/button_theme_action.css begin */
+.button_theme_action
+{
+    font-family: Arial, sans-serif;
+}
+
+@media all and (min-width:0)
+{
+    /* button — задает рамку у кнопки */
+    .button_theme_action
+    {
+        border-radius: 3px;
+        background: rgba(70,47,0,.54);
+        background: -webkit-linear-gradient(top, rgba(96,64,0,.4) 0%,rgba(70,47,0,.54) 100%);
+        background:    -moz-linear-gradient(top, rgba(96,64,0,.4) 0%, rgba(70,47,0,.54) 100%);
+        background:      -o-linear-gradient(top, rgba(96,64,0,.4) 0%,rgba(70,47,0,.54) 100%);
+        background:         linear-gradient(to bottom, rgba(96,64,0,.4) 0%,rgba(70,47,0,.54) 100%);
+        -moz-box-shadow: 0 1px 0 rgba(0, 0, 0, .07);
+             box-shadow: 0 1px 0 rgba(0, 0, 0, .07);
+    }
+
+    /* :before — градиент у кнопки */
+    .button_theme_action:before
+    {
+        position: absolute;
+        top: 1px;
+        right: 1px;
+        bottom: 1px;
+        left: 1px;
+
+        content: '';
+
+        border-radius: 2px;
+        background: #ffdf60;
+        background: -webkit-linear-gradient(top, #ffdf60 0,#fc0 100%);
+        background:    -moz-linear-gradient(top, #ffdf60 0, #fc0 100%);
+        background:      -o-linear-gradient(top, #ffdf60 0,#fc0 100%);
+        background:         linear-gradient(to bottom, #ffdf60 0,#fc0 100%);
+    }
+
+    .button_focused_yes.button_theme_action
+    {
+        -moz-box-shadow: 0 1px 0 rgba(0, 0, 0, .07), 0 0 6px 2px rgba(255, 204, 0, .7);
+             box-shadow: 0 1px 0 rgba(0, 0, 0, .07), 0 0 6px 2px rgba(255, 204, 0, .7);
+    }
+
+    .i-ua_interaction_pointer .button_focused_yes.button_theme_action
+    {
+        -moz-box-shadow: none;
+             box-shadow: none;
+    }
+
+    .button_focused_yes.button_theme_action:before
+    {
+        -moz-box-shadow: 0 0 0 1px rgba(193,154,0,.2);
+             box-shadow: 0 0 0 1px rgba(193,154,0,.2);
+    }
+
+    .i-ua_interaction_pointer .button_focused_yes.button_theme_action:before
+    {
+        -moz-box-shadow: none;
+             box-shadow: none;
+    }
+
+    .button_pressed_yes.button_theme_action
+    {
+        -moz-box-shadow: inset 0 2px 1px -1px rgba(0, 0, 0, .4), 0 1px 0 rgba(255, 255, 255, .2);
+             box-shadow: inset 0 2px 1px -1px rgba(0, 0, 0, .4), 0 1px 0 rgba(255, 255, 255, .2);
+    }
+
+    .button_pressed_yes.button_theme_action:before
+    {
+        -moz-box-shadow: inset 0 1px 3px -1px rgba(0,0,0,.5);
+             box-shadow: inset 0 1px 3px -1px rgba(0,0,0,.5);
+    }
+
+    .button_theme_action
+    {
+        color: #333 !important;
+    }
+}
+
+/* ../../../../common.blocks/button/_theme/button_theme_action.css end */
+/* ../../../../desktop.blocks/button/_theme/button_theme_action.css begin */
+@media all and (min-width:0)
+{
+    /* :before — при наведении меняет градиент у кнопки */
+    .button_theme_action.button_hovered_yes:before
+    {
+        background: rgb(255,230,129);
+        background: -webkit-linear-gradient(top, rgba(255,230,129,1) 0,rgba(255,212,40,1) 100%);
+        background:    -moz-linear-gradient(top, rgba(255,230,129,1) 0,rgba(255,212,40,1) 100%);
+        background:      -o-linear-gradient(top, rgba(255,230,129,1) 0,rgba(255,212,40,1) 100%);
+        background:         linear-gradient(to bottom, rgba(255,230,129,1) 0,rgba(255,212,40,1) 100%);
+    }
+}
+
+a.button_theme_action.button_hovered_yes
+{
+    color: #333 !important;
+}
+
+/* ../../../../desktop.blocks/button/_theme/button_theme_action.css end */
+/* ../../../../common.blocks/button/_round/button_round_yes.css begin */
+.button_round_yes
+{
+    width: 32px;
+    height: 32px;
+}
+
+.button_round_yes,
+.button_round_yes.button_theme_normal:before
+{
+    border-radius: 100%;
+}
+
+.button_round_yes .button__icon.b-icon
+{
+    width: 18px;
+    height: 18px;
+    margin: -9px 0 0 -9px;
+
+    background: url(data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2218%22%20height%3D%2254%22%3E%3Cpath%20fill%3D%22%23010101%22%20d%3D%22M13%2045.42c0-2.209-1.791-4-4-4s-4%201.791-4%204c0%201.631.979%203.027%202.379%203.65l.811-1.824c-.7-.31-1.19-1.012-1.19-1.826%200-1.104.896-2%202-2s2%20.896%202%202c0%20.814-.49%201.516-1.189%201.826l.811%201.824c1.399-.623%202.378-2.019%202.378-3.65zm-4-9c-4.971%200-9%204.029-9%209%200%203.67%202.199%206.82%205.349%208.223l1.217-2.74c-2.099-.936-3.566-3.038-3.566-5.483%200-3.312%202.687-6%206-6%203.312%200%206%202.688%206%206%200%202.445-1.467%204.548-3.566%205.48l1.217%202.74c3.15-1.4%205.35-4.551%205.35-8.221-.001-4.97-4.03-8.999-9.001-8.999z%22%2F%3E%3Cpolygon%20fill%3D%22%23020202%22%20points%3D%224.518%2C15.315%2015.477%2C8.988%204.518%2C2.66%22%2F%3E%3Cpath%20fill%3D%22%23010101%22%20d%3D%22M4%2033h4v-12h-4v12zm6-12v12h4v-12h-4z%22%2F%3E%3C%2Fsvg%3E) no-repeat;
+}
+
+.button_round_yes.button_state_play .b-icon
+{
+    background-position: 0 0;
+}
+
+.button_round_yes.button_state_pause .b-icon
+{
+    background-position: 0 -18px;
+}
+
+.button_round_yes.button_state_radio .b-icon
+{
+    background-position: 0 -36px;
+}
+
+.button_round_yes.button_pressed_yes .button__icon
+{
+    margin-top: -8px;
+}
+
+.button_round_yes.button_focused_yes,
+.button_round_yes.button_focused_yes:not(.button_pressed_yes)::before
+{
+    -moz-box-shadow: 0 1px 0 rgba(0,0,0,.07);
+         box-shadow: 0 1px 0 rgba(0,0,0,.07);
+}
+
+.i-ua_interaction_pointer .button_round_yes.button_focused_yes,
+.i-ua_interaction_pointer .button_round_yes.button_focused_yes:not(.button_pressed_yes)::before
+{
+    -moz-box-shadow: none;
+         box-shadow: none;
+}
+
+.button_round_yes.button_pressed_yes
+{
+    -moz-box-shadow: none;
+         box-shadow: none;
+}
+
+/* ../../../../common.blocks/button/_round/button_round_yes.css end */
+/* ../../../../libs/bem-bl/blocks-desktop/b-icon/b-icon.css begin */
+.b-icon
+{
+    font: 0/0 a;
+
+    border: 0;
+
+}
+
+/* ../../../../libs/bem-bl/blocks-desktop/b-icon/b-icon.css end */
+/* ../../../../common.blocks/button/__icon/button__icon.css begin */
+.button__icon
+{
+    width: 16px;
+    height: 16px;
+}
+
+.button__icon
+{
+    position: relative;
+    top: 3px;
+
+    margin-right: 7px;
+}
+
+/* ../../../../common.blocks/button/__icon/button__icon.css end */
+/* ../../../../common.blocks/button/_only-icon/button_only-icon_yes.css begin */
+.button_only-icon_yes .button__text
+{
+    display: inline-block;
+
+    width: 4px;
+}
+
+.button_only-icon_yes .button__icon
+{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+
+    margin: -8px 0 0 -8px;
+}
+
+/* ../../../../common.blocks/button/_only-icon/button_only-icon_yes.css end */
+/* ../../../../common.blocks/checkbox/__box/checkbox__box.css begin */
+.checkbox__box
+{
+    position: relative;
+}
+
+/* ../../../../common.blocks/checkbox/__box/checkbox__box.css end */
+/* ../../../../desktop.blocks/checkbox/__box/checkbox__box.css begin */
+@media all and (min-width:0)
+{
+
+    .checkbox__box
+    {
+        cursor: pointer;
+    }
+}
+
+/* ../../../../desktop.blocks/checkbox/__box/checkbox__box.css end */
+/* ../../../../common.blocks/checkbox/__control/checkbox__control.css begin */
+@media all and (min-width:0)
+{
+    .i-ua_js_yes .checkbox__control
+    {
+        position: absolute;
+        z-index: -1;
+        top: 0;
+        left: 0;
+
+        width: 101%;
+        height: 101%;
+        margin: 0;
+        padding: 0;
+
+        opacity: 0;
+        border: 0;
+        outline: 0;
+        background: none;
+    }
+}
+
+/* ../../../../common.blocks/checkbox/__control/checkbox__control.css end */
+/* ../../../../common.blocks/checkbox/__tick/checkbox__tick.css begin */
+.checkbox__tick
+{
+    position: relative;
+    z-index: 3;
+    top: -3px;
+    left: .1em;
+
+    display: inline-block;
+    visibility: hidden;
+
+    width: 16px;
+    height: 14px;
+    margin: 0 0 -2px;
+    padding: 0;
+
+    vertical-align: baseline;
+
+    opacity: .8;
+    background: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNi4wMzciIGhlaWdodD0iMTQuOTczIj48cGF0aCBmaWxsPSIjZmZmIiBkPSJNNi4xODctMTkuODQ1YzQuNDE4IDAgOCAzLjU4MiA4IDggMCA0LjQxOS0zLjU4MiA4LTggOHMtOC0zLjU4MS04LThjMC00LjQxOCAzLjU4Mi04IDgtOHoiLz48cGF0aCBkPSJNNi4xODctMTguODQ1Yy0zLjg2NiAwLTcgMy4xMzQtNyA3czMuMTM0IDcgNyA3IDctMy4xMzQgNy03LTMuMTM0LTctNy03ek0xMC4xNzctOS4yOGwtMS40MjYgMS40MjYtMi41NjQtMi41NjQtMi41NjUgMi41NjQtMS40MjYtMS40MjYgMi41NjQtMi41NjQtMi41NjQtMi41NjQgMS40MjYtMS40MjYgMi41NjQgMi41NjQgMi41NjQtMi41NjQgMS40MjYgMS40MjYtMi41NjQgMi41NjQgMi41NjUgMi41NjR6Ii8+PHBhdGggZD0iTTUuMjg3IDE0Ljk3MmwxMC43NS0xMi44MTYtMi4xNzctMi4xNTYtOC41NzMgMTAuNjYxLTMuMTQ0LTQuMTQ4LTIuMTQzIDIuMTIzIDUuMjg3IDYuMzM2eiIvPjwvc3ZnPg==) 0 100% no-repeat;
+    /*background: url(checkbox__tick.svg) 0 100% no-repeat;*/
+}
+
+/* ../../../../common.blocks/checkbox/__tick/checkbox__tick.css end */
+/* ../../../../desktop.blocks/checkbox/__tick/checkbox__tick.css begin */
+@media all and (min-width:0)
+{
+    /* Для FF3.6 */
+    .i-ua_inlinesvg_no .checkbox__tick
+    {
+        background: url("../../../../desktop.blocks/checkbox/__tick/checkbox__tick.png") 0 100% no-repeat;
+    }
+}
+
+/* ../../../../desktop.blocks/checkbox/__tick/checkbox__tick.css end */
+/* ../../../../common.blocks/checkbox/_theme/checkbox_theme_normal.css begin */
+.checkbox_theme_normal
+{
+    font-family: Arial, sans-serif;
+
+    color: #333;
+}
+
+@media all and (min-width:0)
+{
+    /* :before — a border input */
+    .checkbox_theme_normal .checkbox__box:before,
+    .checkbox_theme_normal .checkbox__box:after
+    {
+        position: absolute;
+        top: 0;
+        left: 0;
+
+        padding: 1px;
+
+        content: '';
+
+        border-radius: 3px;
+    }
+
+    /* :after — a background input */
+    .checkbox_theme_normal .checkbox__box:after
+    {
+        top: 1px;
+        left: 1px;
+
+        padding: 0;
+
+        border-radius: 2px;
+    }
+
+    /* :before — бордер */
+    .checkbox_theme_normal .checkbox__box:before
+    {
+        background: rgba(0,0,0,.4);
+        background: -webkit-linear-gradient(top, rgba(0,0,0,.2) 0,rgba(0,0,0,.4) 100%);
+        background:    -moz-linear-gradient(top, rgba(0,0,0,.2) 0, rgba(0,0,0,.4) 100%);
+        background:      -o-linear-gradient(top, rgba(0,0,0,.2) 0,rgba(0,0,0,.4) 100%);
+        background:         linear-gradient(to bottom, rgba(0,0,0,.2) 0,rgba(0,0,0,.4) 100%);
+        -moz-box-shadow: 0 1px 0 rgba(0,0,0,.07);
+             box-shadow: 0 1px 0 rgba(0,0,0,.07);
+    }
+
+    /* :after — градиент */
+    .checkbox_theme_normal .checkbox__box:after
+    {
+        background: #fff;
+        background: -webkit-linear-gradient(top, #fff 0,#eee 100%);
+        background:    -moz-linear-gradient(top, #fff 0, #eee 100%);
+        background:      -o-linear-gradient(top, #fff 0,#eee 100%);
+        background:         linear-gradient(to bottom, #fff 0,#eee 100%);
+    }
+
+    /* _focused */
+    /* :before — бордер */
+    .checkbox_theme_normal .checkbox__box_focused_yes:before
+    {
+        -moz-box-shadow: 0 1px 0 rgba(0,0,0,.07), 0 0 6px 2px rgba(255,204,0,.7);
+             box-shadow: 0 1px 0 rgba(0,0,0,.07), 0 0 6px 2px rgba(255,204,0,.7);
+    }
+
+    .i-ua_interaction_pointer .checkbox_theme_normal .checkbox__box_focused_yes:before
+    {
+        -moz-box-shadow: none;
+             box-shadow: none;
+    }
+
+    /* :after — градиент */
+    .checkbox_theme_normal .checkbox__box_focused_yes:after
+    {
+        -moz-box-shadow: 0 0 0 1px rgba(193,154,0,.2);
+             box-shadow: 0 0 0 1px rgba(193,154,0,.2);
+    }
+
+    .i-ua_interaction_pointer .checkbox_theme_normal .checkbox__box_focused_yes:after
+    {
+        -moz-box-shadow: none;
+             box-shadow: none;
+    }
+
+    .checkbox_theme_normal .checkbox__box_focused_yes.checkbox__box_checked_yes:before
+    {
+        -moz-box-shadow: inset 0 1px 5px rgba(30,23,0,.8), 0 0 6px 2px rgba(255,204,0,.7), 0 2px 0 -1px rgba(255,255,255,.2);
+             box-shadow: inset 0 1px 5px rgba(30,23,0,.8), 0 0 6px 2px rgba(255,204,0,.7), 0 2px 0 -1px rgba(255,255,255,.2);
+    }
+
+    .i-ua_interaction_pointer  .checkbox_theme_normal .checkbox__box_focused_yes.checkbox__box_checked_yes:before
+    {
+        -moz-box-shadow: inset 0 1px 5px rgba(30,23,0,.8), 0 2px 0 -1px rgba(255,255,255,.2);
+             box-shadow: inset 0 1px 5px rgba(30,23,0,.8), 0 2px 0 -1px rgba(255,255,255,.2);
+    }
+
+    .checkbox_theme_normal .checkbox__box_focused_yes.checkbox__box_checked_yes:after
+    {
+        -moz-box-shadow: inset 0 1px 3px -1px rgba(0,0,0,.45), 0 0 0 1px rgba(193,154,0,.2);
+             box-shadow: inset 0 1px 3px -1px rgba(0,0,0,.45), 0 0 0 1px rgba(193,154,0,.2);
+    }
+
+    /* _checked */
+    /* :before — бордер */
+    .checkbox_theme_normal .checkbox__box_checked_yes:before
+    {
+        background: #ffeca6;
+        background: -webkit-linear-gradient(top, rgba(255,236,166,.4) 0,rgba(255,246,213,.4) 100%);
+        background:    -moz-linear-gradient(top, rgba(255,236,166,.4) 0, rgba(255,246,213,.4) 100%);
+        background:      -o-linear-gradient(top, rgba(255,236,166,.4) 0,rgba(255,246,213,.4) 100%);
+        background:         linear-gradient(to bottom, rgba(255,236,166,.4) 0,rgba(255,246,213,.4) 100%);
+        -moz-box-shadow: inset 0 1px 5px rgba(30,23,0,.7), 0 1px 1px 0 rgba(255,255,255,.6);
+             box-shadow: inset 0 1px 5px rgba(30,23,0,.7), 0 1px 1px 0 rgba(255,255,255,.6);
+    }
+
+    /* :after — градиент */
+    .checkbox_theme_normal .checkbox__box_checked_yes:after
+    {
+        background: #ffeca6;
+        background: -webkit-linear-gradient(top, #ffeca6 0,#fff6d5 100%);
+        background:    -moz-linear-gradient(top, #ffeca6 0, #fff6d5 100%);
+        background:      -o-linear-gradient(top, #ffeca6 0,#fff6d5 100%);
+        background:         linear-gradient(to bottom, #ffeca6 0,#fff6d5 100%);
+        -moz-box-shadow: inset 0 1px 3px -1px rgba(0,0,0,.5);
+             box-shadow: inset 0 1px 3px -1px rgba(0,0,0,.5);
+    }
+
+    .i-ua_js_no .checkbox__box:before,
+    .i-ua_js_no .checkbox__box:after,
+    .i-ua_js_no .checkbox__tick
+    {
+        display: none;
+    }
+}
+
+/* ../../../../common.blocks/checkbox/_theme/checkbox_theme_normal.css end */
+/* ../../../../desktop.blocks/checkbox/_theme/checkbox_theme_normal.css begin */
+@media all and (min-width:0)
+{
+    /* :after — при наведении меняет градиент у checkbox */
+    .checkbox_theme_normal.checkbox_hovered_yes:not(.checkbox_checked_yes) .checkbox__box:after
+    {
+        background: rgb(255,255,255);
+        background: -webkit-linear-gradient(top, rgba(255,255,255,1) 0,rgba(246,245,243,1) 100%);
+        background:    -moz-linear-gradient(top, rgba(255,255,255,1) 0,rgba(246,245,243,1) 100%);
+        background:      -o-linear-gradient(top, rgba(255,255,255,1) 0,rgba(246,245,243,1) 100%);
+        background:         linear-gradient(to bottom, rgba(255,255,255,1) 0,rgba(246,245,243,1) 100%);
+    }
+}
+
+/* ../../../../desktop.blocks/checkbox/_theme/checkbox_theme_normal.css end */
+/* ../../../../common.blocks/checkbox/_checked/checkbox_checked_yes.css begin */
+.checkbox_checked_yes .checkbox__tick
+{
+    visibility: visible;
+}
+
+/* ../../../../common.blocks/checkbox/_checked/checkbox_checked_yes.css end */
+/* ../../../../common.blocks/checkbox/_disabled/checkbox_disabled_yes.css begin */
+.checkbox_disabled_yes
+{
+    opacity: .6;
+}
+
+/* ../../../../common.blocks/checkbox/_disabled/checkbox_disabled_yes.css end */
+/* ../../../../desktop.blocks/checkbox/_disabled/checkbox_disabled_yes.css begin */
+@media all and (min-width:0)
+{
+
+    .checkbox_disabled_yes .checkbox__box
+    {
+        cursor: default;
+    }
+}
+
+/* ../../../../desktop.blocks/checkbox/_disabled/checkbox_disabled_yes.css end */
+/* ../../../../common.blocks/checkbox/_size/checkbox_size_s.css begin */
+.checkbox_size_s
+{
+    font-size: 13px;
+}
+
+.checkbox_size_s .checkbox__box:after,
+.checkbox_size_s .checkbox__box:before
+{
+    width: 12px;
+    height: 12px;
+}
+
+.checkbox_size_s .checkbox__tick
+{
+    background-size: contain;
+}
+
+/* ../../../../common.blocks/checkbox/_size/checkbox_size_s.css end */
+/* ../../../../common.blocks/radiobox/radiobox.css begin */
+.radiobox
+{
+    display: inline-block;
+}
+
+/* ../../../../common.blocks/radiobox/radiobox.css end */
+/* ../../../../desktop.blocks/radiobox/radiobox.css begin */
+@media all and (min-width:0)
+{
+
+    .radiobox__box,
+    .radiobox__control
+    {
+        cursor: pointer;
+    }
+}
+
+/* ../../../../desktop.blocks/radiobox/radiobox.css end */
+/* ../../../../common.blocks/radiobox/_theme/radiobox_theme_normal.css begin */
+.radiobox_theme_normal
+{
+    font-family: Arial, sans-serif;
+
+    color: #333;
+}
+
+@media all and (min-width:0)
+{
+    /* :before — рисует градиент */
+    .radiobox_theme_normal .radiobox__box:before
+    {
+        position: absolute;
+        top: 1px;
+        right: 1px;
+        bottom: 1px;
+        left: 1px;
+
+        margin: 0;
+        padding: 0;
+
+        content: '';
+
+        -moz-border-radius: 100%;
+             border-radius: 100%;
+        background: white;
+    }
+
+    /* :after - рисует маркер */
+    .radiobox_theme_normal .radiobox__box:after
+    {
+        background: #333;
+    }
+
+    /* box — бордер */
+    .radiobox_theme_normal .radiobox__box
+    {
+        background: rgba(0,0,0,.4);
+        background: -webkit-linear-gradient(top, rgba(0,0,0,.2) 0,rgba(0,0,0,.4) 100%);
+        background:    -moz-linear-gradient(top, rgba(0,0,0,.2) 0, rgba(0,0,0,.4) 100%);
+        background:      -o-linear-gradient(top, rgba(0,0,0,.2) 0,rgba(0,0,0,.4) 100%);
+        background:         linear-gradient(to bottom, rgba(0,0,0,.2) 0,rgba(0,0,0,.4) 100%);
+        -moz-box-shadow: 0 1px 0 rgba(0,0,0,.07);
+             box-shadow: 0 1px 0 rgba(0,0,0,.07);
+    }
+
+    .radiobox_theme_normal .radiobox__box:before
+    {
+        background: #fff;
+        background: -webkit-linear-gradient(top, #fff 0,#eee 100%);
+        background:    -moz-linear-gradient(top, #fff 0, #eee 100%);
+        background:      -o-linear-gradient(top, #fff 0,#eee 100%);
+        background:         linear-gradient(to bottom, #fff 0,#eee 100%);
+    }
+
+    /* _focused */
+    .radiobox_theme_normal .radiobox__radio_focused_yes .radiobox__box
+    {
+        -moz-box-shadow: 0 1px 0 rgba(0,0,0,.07), 0 0 6px 2px rgba(255,204,0,.7);
+             box-shadow: 0 1px 0 rgba(0,0,0,.07), 0 0 6px 2px rgba(255,204,0,.7);
+    }
+
+    .i-ua_interaction_pointer .radiobox_theme_normal .radiobox__radio_focused_yes .radiobox__box
+    {
+        -moz-box-shadow: none;
+             box-shadow: none;
+    }
+
+    .radiobox_theme_normal .radiobox__radio_focused_yes .radiobox__box:before
+    {
+        -moz-box-shadow: 0 0 0 1px rgba(193,154,0,.2);
+             box-shadow: 0 0 0 1px rgba(193,154,0,.2);
+    }
+
+    .radiobox_theme_normal .radiobox__radio_focused_yes.radiobox__radio_checked_yes .radiobox__box
+    {
+        -moz-box-shadow: inset 0 1px 5px rgba(30,23,0,.8), 0 0 6px 2px rgba(255,204,0,.7), 0 2px 0 -1px rgba(255,255,255,.2);
+             box-shadow: inset 0 1px 5px rgba(30,23,0,.8), 0 0 6px 2px rgba(255,204,0,.7), 0 2px 0 -1px rgba(255,255,255,.2);
+    }
+
+    .i-ua_interaction_pointer .radiobox_theme_normal .radiobox__radio_focused_yes.radiobox__radio_checked_yes .radiobox__box
+    {
+        -moz-box-shadow: inset 0 1px 5px rgba(30,23,0,.8), 0 2px 0 -1px rgba(255,255,255,.2);
+             box-shadow: inset 0 1px 5px rgba(30,23,0,.8), 0 2px 0 -1px rgba(255,255,255,.2);
+    }
+
+    .radiobox_theme_normal .radiobox__radio_focused_yes.radiobox__radio_checked_yes .radiobox__box:before
+    {
+        -moz-box-shadow: inset 0 1px 3px -1px rgba(0,0,0,.45), 0 0 0 1px rgba(193,154,0,.2);
+             box-shadow: inset 0 1px 3px -1px rgba(0,0,0,.45), 0 0 0 1px rgba(193,154,0,.2);
+    }
+
+    /* _checked */
+    .radiobox_theme_normal .radiobox__radio_checked_yes .radiobox__box
+    {
+        background: #ffeca6;
+        background: -webkit-linear-gradient(top, rgba(255,236,166,.4) 0,rgba(255,246,213,.4) 100%);
+        background:    -moz-linear-gradient(top, rgba(255,236,166,.4) 0, rgba(255,246,213,.4) 100%);
+        background:      -o-linear-gradient(top, rgba(255,236,166,.4) 0,rgba(255,246,213,.4) 100%);
+        background:         linear-gradient(to bottom, rgba(255,236,166,.4) 0,rgba(255,246,213,.4) 100%);
+        -moz-box-shadow: inset 0 1px 5px rgba(30,23,0,.7), 0 1px 1px 0 rgba(255,255,255,.6);
+             box-shadow: inset 0 1px 5px rgba(30,23,0,.7), 0 1px 1px 0 rgba(255,255,255,.6);
+    }
+
+    .radiobox_theme_normal .radiobox__radio_checked_yes .radiobox__box:before
+    {
+        background: #ffeca6;
+        background: -webkit-linear-gradient(top, #ffeca6 0,#fff6d5 100%);
+        background:    -moz-linear-gradient(top, #ffeca6 0, #fff6d5 100%);
+        background:      -o-linear-gradient(top, #ffeca6 0,#fff6d5 100%);
+        background:         linear-gradient(to bottom, #ffeca6 0,#fff6d5 100%);
+        -moz-box-shadow: inset 0 1px 3px -1px rgba(0,0,0,.5);
+             box-shadow: inset 0 1px 3px -1px rgba(0,0,0,.5);
+    }
+
+    .radiobox_theme_normal .radiobox__radio_checked_yes .radiobox__box:after
+    {
+        background: #333;
+    }
+
+    .i-ua_js_no .radiobox__box:before
+    {
+        display: none;
+    }
+}
+
+/* ../../../../common.blocks/radiobox/_theme/radiobox_theme_normal.css end */
+/* ../../../../desktop.blocks/radiobox/_theme/radiobox_theme_normal.css begin */
+@media all and (min-width:0)
+{
+    /* :after — при наведении меняет градиент у radiobox__box */
+    .radiobox__radio.radiobox__radio_hovered_yes:not(.radiobox__radio_checked_yes) .radiobox__box:before
+    {
+        background: rgb(255,255,255);
+        background: -webkit-linear-gradient(top, rgba(255,255,255,1) 0,rgba(246,245,243,1) 100%);
+        background:    -moz-linear-gradient(top, rgba(255,255,255,1) 0,rgba(246,245,243,1) 100%);
+        background:      -o-linear-gradient(top, rgba(255,255,255,1) 0,rgba(246,245,243,1) 100%);
+        background:         linear-gradient(to bottom, rgba(255,255,255,1) 0,rgba(246,245,243,1) 100%);
+    }
+}
+
+/* ../../../../desktop.blocks/radiobox/_theme/radiobox_theme_normal.css end */
+/* ../../../../common.blocks/radiobox/__radio/radiobox__radio.css begin */
+.radiobox__radio
+{
+    position: relative;
+}
+
+/* ../../../../common.blocks/radiobox/__radio/radiobox__radio.css end */
+/* ../../../../common.blocks/radiobox/__radio/_checked/radiobox__radio_checked_yes.css begin */
+@media all and (min-width:0)
+{
+    /* Маркер */
+    /* Цвет (background) маркера задается в _theme */
+    .radiobox__radio_checked_yes .radiobox__box:after
+    {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+
+        width: 6px;
+        height: 6px;
+        margin: -3px 0 0 -3px;
+        padding: 0;
+
+        content: '';
+
+        -moz-border-radius: 100%;
+             border-radius: 100%;
+    }
+}
+
+/* ../../../../common.blocks/radiobox/__radio/_checked/radiobox__radio_checked_yes.css end */
+/* ../../../../common.blocks/radiobox/__radio/_disabled/radiobox__radio_disabled_yes.css begin */
+.radiobox__radio_disabled_yes
+{
+    opacity: .6;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0); /* Убираем выделение при клике в webkit-touch */
+}
+
+/* ../../../../common.blocks/radiobox/__radio/_disabled/radiobox__radio_disabled_yes.css end */
+/* ../../../../desktop.blocks/radiobox/__radio/_disabled/radiobox__radio_disabled_yes.css begin */
+@media all and (min-width:0)
+{
+
+    .radiobox__radio_disabled_yes .radiobox__box,
+    .radiobox__radio_disabled_yes .radiobox__control
+    {
+        cursor: default;
+    }
+}
+
+/* ../../../../desktop.blocks/radiobox/__radio/_disabled/radiobox__radio_disabled_yes.css end */
+/* ../../../../common.blocks/radiobox/__box/radiobox__box.css begin */
+.radiobox__box
+{
+    position: relative;
+    top: 1px;
+
+    display: inline-block;
+
+    margin-right: .5em; /* Размеры (width, height) обертки задаются в _size */
+
+    -moz-border-radius: 100%;
+         border-radius: 100%;
+}
+
+/* ../../../../common.blocks/radiobox/__box/radiobox__box.css end */
+/* ../../../../common.blocks/radiobox/__control/radiobox__control.css begin */
+@media all and (min-width:0)
+{
+    .i-ua_js_yes .radiobox__control
+    {
+        position: absolute;
+
+        opacity: 0;
+    }
+}
+
+/* ../../../../common.blocks/radiobox/__control/radiobox__control.css end */
+/* ../../../../common.blocks/radiobox/_size/radiobox_size_s.css begin */
+.radiobox_size_s
+{
+    font-size: 13px;
+    line-height: 28px;
+}
+
+@media all and (min-width:0)
+{
+    .radiobox_size_s .radiobox__box
+    {
+        width: 14px;
+        height: 14px;
+    }
+}
+
+/* ../../../../common.blocks/radiobox/_size/radiobox_size_s.css end */
+/* ../../../../common.blocks/input/input.css begin */
+.input
+{
+    position: relative;
+
+    display: inline-block;
+
+    width: 100%;
+}
+
+/* ../../../../common.blocks/input/input.css end */
+/* ../../../../common.blocks/input/__control/input__control.css begin */
+.input__control
+{
+    position: relative;
+    z-index: 3;
+
+    width: 100%;
+    margin: 0;
+
+    font-size: 100%;
+
+    color: #000;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+
+    -webkit-appearance: none;
+}
+
+@media all and (min-width:0)
+{
+    .input__control
+    {
+        -moz-box-sizing: border-box;
+             box-sizing: border-box;
+
+        border: 0;
+        outline: 0;
+        background: none;
+    }
+}
+
+/* Лишние отступы у текста */
+.input__control::-webkit-search-decoration
+{
+    -webkit-appearance: none;
+}
+
+/* Нативный крестик */
+.input__control::-webkit-search-cancel-button
+{
+    display: none;
+}
+
+/* Смещение плэйсхолдера */
+.input__control::-webkit-input-placeholder
+{
+    text-indent: 0;
+}
+
+/* Сбрасываем желтый бг у инпутов при автозаполнении */
+.input__control:-webkit-autofill
+{
+    top: 1px;
+    left: 1px;
+
+    height: 1.9em;
+
+    -webkit-box-shadow: inset 0 0 0 50px #fff;
+    -webkit-text-fill-color: #000;
+}
+
+/* Hide native cross in IE10 */
+@media screen and (-ms-high-contrast: active), (-ms-high-contrast: none)
+{
+
+    .input__control::-ms-clear
+    {
+        display: none;
+    }
+}
+
+/* ../../../../common.blocks/input/__control/input__control.css end */
+/* ../../../../desktop.blocks/input/__control/input__control.css begin */
+.input__control:-webkit-autofill
+{
+    top: .1em;
+    left: .2em;
+
+    height: 1.6em;
+
+    -webkit-box-shadow: inset 0 0 0 50px #fff;
+    -webkit-text-fill-color: #000;
+}
+
+/* ../../../../desktop.blocks/input/__control/input__control.css end */
+/* ../../../../common.blocks/input/_disabled/input_disabled_yes.css begin */
+.input_disabled_yes
+{
+    opacity: .6;
+}
+
+.input_disabled_yes .input__control
+{
+    resize: none;
+}
+
+.input_disabled_yes .input__clear
+{
+    display: none;
+}
+
+/* ../../../../common.blocks/input/_disabled/input_disabled_yes.css end */
+/* ../../../../desktop.blocks/input/_disabled/input_disabled_yes.css begin */
+.input_disabled_yes .input__box,
+.input_disabled_yes .input__control
+{
+    cursor: default;
+}
+
+/* ../../../../desktop.blocks/input/_disabled/input_disabled_yes.css end */
+/* ../../../../common.blocks/input/_focused/input_focused_yes.css begin */
+/* ::after = fade */
+.input_focused_yes .input__box::after
+{
+    /* Здесь раньше был display: none, но
+      с ним для FF не пробрасывается click после установки фокуса (LEGO-9448)
+      visibility: hidden решает эту проблему и не  и не влияет на визуальное представление компонента
+    */
+    visibility: hidden;
+}
+
+/* ../../../../common.blocks/input/_focused/input_focused_yes.css end */
+/* ../../../../common.blocks/input/_theme/input_theme_normal.css begin */
+/* __box — рисует границы текстового поля */
+.input_theme_normal,
+.input_theme_normal .input__control
+{
+    font-family: Arial, sans-serif;
+}
+
+.input_theme_normal .input__box
+{
+    -moz-box-shadow: inset 0 1px 5px rgba(0,0,0,.65), 0 1px 0 rgba(255,255,255,.2);
+         box-shadow: inset 0 1px 5px rgba(0,0,0,.65), 0 1px 0 rgba(255,255,255,.2);
+}
+
+/* :before — рисует фон и тени текстового поля */
+.input_theme_normal .input__box:before
+{
+    position: absolute;
+    top: 1px;
+    right: 1px;
+    bottom: 1px;
+    left: 1px;
+
+    content: '';
+
+    background: #fff;
+    -moz-box-shadow: inset 0 1px 0 rgba(0,0,0,.1);
+         box-shadow: inset 0 1px 0 rgba(0,0,0,.1);
+}
+
+.input_theme_normal.input_focused_yes .input__box
+{
+    -moz-box-shadow: inset 0 1px 5px rgba(0,0,0,.65), 0 1px 1px 0 rgba(255,255,255,.2), 0 0 6px 2px rgba(255,204,0,.7);
+         box-shadow: inset 0 1px 5px rgba(0,0,0,.65), 0 1px 1px 0 rgba(255,255,255,.2), 0 0 6px 2px rgba(255,204,0,.7);
+}
+
+.input_theme_normal.input_focused_yes .input__box:before
+{
+    -moz-box-shadow: inset 0 1px 0 rgba(0,0,0,.1), 0 0 0 1px rgba(193,154,0,.2);
+         box-shadow: inset 0 1px 0 rgba(0,0,0,.1), 0 0 0 1px rgba(193,154,0,.2);
+}
+
+/* ../../../../common.blocks/input/_theme/input_theme_normal.css end */
+/* ../../../../common.blocks/input/__box/input__box.css begin */
+/* elem box — a border input */
+.input__box
+{
+    position: relative;
+
+    display: block;
+}
+
+@media all and (min-width:0)
+{
+    .input__box
+    {
+        -moz-box-sizing: border-box;
+             box-sizing: border-box;
+        /* padding-right for elem clear */
+        padding-right: 29px;
+
+        cursor: text;
+    }
+}
+
+/* ::after = fade */
+.input__box::after
+{
+    position: absolute;
+    z-index: 3;
+    top: 2px;
+    right: 1px;
+    bottom: 1px;
+
+    width: 36px;
+
+    content: '';
+
+    background: -webkit-gradient(linear, left top, right top, color-stop(0,rgba(255,255,255,0)), color-stop(20%, #fff));
+    background: -moz-linear-gradient(left, rgba(255,255,255,0) 0, #fff 20%);
+    background:   -o-linear-gradient(left, rgba(255,255,255,0) 0, #fff 20%);
+    background:  -ms-linear-gradient(left, rgba(255,255,255,0) 0, #fff 20%);
+    background:      linear-gradient(to right, rgba(255,255,255,0) 0, #fff 20%);
+}
+
+/* ../../../../common.blocks/input/__box/input__box.css end */
+/* ../../../../common.blocks/input/__clear/input__clear.css begin */
+.input__clear
+{
+    position: absolute;
+    z-index: 5;
+    top: 0;
+    right: 1px;
+    bottom: 0;
+
+    visibility: hidden;
+
+    margin: 0;
+    padding: 0;
+
+    background: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiI+PHBhdGggZmlsbC1ydWxlPSJldmVub2RkIiBjbGlwLXJ1bGU9ImV2ZW5vZGQiIGQ9Ik04IDEuMjA5Yy0zLjc1MSAwLTYuNzkxIDMuMDQtNi43OTEgNi43OTEgMCAzLjc0OSAzLjA0IDYuNzg5IDYuNzkxIDYuNzg5IDMuNzQ5IDAgNi43ODktMy4wNCA2Ljc4OS02Ljc4OSAwLTMuNzUxLTMuMDQtNi43OTEtNi43ODktNi43OTF6TTExLjk5IDEwLjU2NGwtMS40MjYgMS40MjYtMi41NjQtMi41NjQtMi41NjQgMi41NjQtMS40MjYtMS40MjYgMi41NjQtMi41NjQtMi41NjQtMi41NjQgMS40MjYtMS40MjYgMi41NjQgMi41NjQgMi41NjQtMi41NjQgMS40MjYgMS40MjYtMi41NjQgMi41NjQgMi41NjQgMi41NjR6Ii8+PC9zdmc+) 50% 50% no-repeat;
+    /*background: url(input__clear.svg) 50% 50% no-repeat;*/
+}
+
+/* ../../../../common.blocks/input/__clear/input__clear.css end */
+/* ../../../../common.blocks/input/__clear/_visibility/input__clear_visibility_visible.css begin */
+.input__clear_visibility_visible
+{
+    visibility: visible;
+
+    cursor: pointer;
+
+    opacity: .2;
+}
+
+/* ../../../../common.blocks/input/__clear/_visibility/input__clear_visibility_visible.css end */
+/* ../../../../desktop.blocks/input/__clear/_visibility/input__clear_visibility_visible.css begin */
+.input__clear_visibility_visible:hover
+{
+    opacity: .8;
+}
+
+/* ../../../../desktop.blocks/input/__clear/_visibility/input__clear_visibility_visible.css end */
+/* ../../../../common.blocks/input/_size/input_size_m.css begin */
+.input_size_m
+{
+    font-size: 15px;
+    line-height: 32px;
+}
+
+.input_size_m .input__clear
+{
+    width: 31px;
+}
+
+.input_size_m .input__control
+{
+    padding-left: 10px;
+}
+
+.input_size_m .input__hint
+{
+    padding-left: 11px;
+}
+
+/* ../../../../common.blocks/input/_size/input_size_m.css end */
+/* ../../../../desktop.blocks/input/_size/input_size_m.css begin */
+/* Для ИЕ10 делаем отступ слева с помощью border, т.к. при длинном тексте в инпуте padding игнорируется
+   (если делать padding для обертки, то попап инпута с саджестом съезжает вправо)
+   https://st.yandex-team.ru/ISLCOMPONENTS-865
+*/
+@media screen and (-ms-high-contrast: active), (-ms-high-contrast: none)
+{
+    .input_size_m .input__control
+    {
+        border-left: 10px solid transparent;
+    }
+
+    .input_size_m .input__box .input__control
+    {
+        padding-left: 0;
+    }
+}
+
+/* ../../../../desktop.blocks/input/_size/input_size_m.css end */
+/* ../../../../common.blocks/input/_type/input_type_textarea.css begin */
+.input_type_textarea
+{
+    vertical-align: top;
+}
+
+@media all and (min-width:0)
+{
+    .input_type_textarea .input__control
+    {
+        display: block;
+
+        padding-top: .4em;
+        padding-right: 1px;
+        padding-bottom: 1px;
+
+        resize: vertical;
+        vertical-align: baseline;
+
+         /* Fixed bug — overflow textarea no scrolling on touch devices */
+        -webkit-overflow-scrolling: touch;
+    }
+
+    /* Only FF */
+    .input_type_textarea .input__control, x:-moz-any-link
+    {
+        padding-top: .44em;
+    }
+
+    .input_type_textarea .input__clear
+    {
+        display: none;
+    }
+}
+
+/* ::after — fade for long queries, is to the right */
+.input_type_textarea .input__box::after
+{
+    display: none;
+}
+
+.input_type_textarea .input__box
+{
+    padding: 1px 1px 1px 0;
+}
+
+/* body — increases the weight of selector to override INPUT height */
+body .input_type_textarea .input__control
+{
+    height: auto;
+    min-height: 2em;
+}
+
+/* ../../../../common.blocks/input/_type/input_type_textarea.css end */
+/* ../../../../common.blocks/button/_arrow/button_arrow_down.css begin */
+.button_arrow_down .button__text
+{
+    padding-right: 1.8em;
+}
+
+/* Стрелочка в кнопке */
+.button_arrow_down .button__text:after
+{
+    position: absolute;
+    top: 0;
+    right: .4em;
+
+    width: 1em;
+    height: 100%;
+
+    content: '';
+
+    background: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI4IiBoZWlnaHQ9IjgiPjxwb2x5Z29uIHBvaW50cz0iNy4xOTQsMiAzLjk5Niw1LjE5NSAwLjc5OSwyIDAsMi43OTkgMy45OTYsNi43OTQgNy45OTEsMi43OTkiLz48L3N2Zz4=) 0 50% no-repeat;
+}
+
+.i-ua_inlinesvg_no .button_arrow_down .button__text:after
+{
+    background: url("../../../../common.blocks/button/_arrow/button_arrow_down.png") 0 50% no-repeat;
+}
+
+/* ../../../../common.blocks/button/_arrow/button_arrow_down.css end */
+/* ../../../../common.blocks/popup/popup.css begin */
+.popup
+{
+    position: absolute;
+    z-index: 32700;
+
+    display: none;
+
+    padding: 1px;
+}
+
+/* ../../../../common.blocks/popup/popup.css end */
+/* ../../../../common.blocks/popup/__content/popup__content.css begin */
+.popup__content
+{
+    position: relative;
+    z-index: 10;
+
+    -webkit-box-sizing: border-box;
+       -moz-box-sizing: border-box;
+            box-sizing: border-box;
+    height: 100%;
+    margin: 0;
+    padding: 4px 8px;
+}
+
+/* ../../../../common.blocks/popup/__content/popup__content.css end */
+/* ../../../../common.blocks/popup/_theme/popup_theme_ffffff.css begin */
+.popup_theme_ffffff
+{
+    -webkit-box-shadow: inset 0 0 0 1px rgba(0,0,0, .15),
+                0 8px 30px -5px rgba(0,0,0, .5);
+       -moz-box-shadow: inset 1px 1px 10px #aaa;
+            box-shadow: inset 0 0 0 1px rgba(0,0,0, .15),
+                0 8px 30px -5px rgba(0,0,0, .5);
+}
+
+.popup_theme_ffffff,
+.popup_theme_ffffff .popup__tail:after
+{
+    background: #fff;
+}
+
+.popup_theme_ffffff .popup__tail
+{
+    background: rgba(0,0,0, .15);
+    background: -webkit-linear-gradient(45deg, rgba(0,0,0, .15) 50%, rgba(0,0,0, 0) 50%);
+    background:    -moz-linear-gradient(45deg, rgba(0,0,0, .15) 50%, rgba(0,0,0, 0) 50%);
+    background:      -o-linear-gradient(45deg, rgba(0,0,0, .15) 50%, rgba(0,0,0, 0) 50%);
+}
+
+/* ../../../../common.blocks/popup/_theme/popup_theme_ffffff.css end */
+/* ../../../../common.blocks/popup/_visibility/popup_visibility_visible.css begin */
+.popup_visibility_visible
+{
+    display: block;
+}
+
+/* ../../../../common.blocks/popup/_visibility/popup_visibility_visible.css end */
+/* ../../../../desktop.blocks/popup/_visibility/popup_visibility_visible.css begin */
+/* https://st.yandex-team.ru/ISLCOMPONENTS-180 */
+.popup_visibility_visible:after
+{
+    content: '';
+}
+
+/* ../../../../desktop.blocks/popup/_visibility/popup_visibility_visible.css end */
+/* ../../../../common.blocks/popup/_visibility/popup_visibility_outside.css begin */
+.popup_visibility_outside
+{
+    top: -99999px;
+    left: -99999px;
+
+    display: block;
+}
+
+/* ../../../../common.blocks/popup/_visibility/popup_visibility_outside.css end */
+/* ../../../../common.blocks/popup/__under/popup__under.css begin */
+.popup__under
+{
+    position: absolute;
+    z-index: -1;
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: 100%;
+    padding: 0;
+
+    -webkit-user-select: none;
+       -moz-user-select: none;
+        -ms-user-select: none;
+            user-select: none;
+
+    border: 0;
+}
+
+/* ../../../../common.blocks/popup/__under/popup__under.css end */
+/* ../../../../common.blocks/popup/__under/_color/popup__under_color_white.css begin */
+.popup__under_color_white
+{
+    opacity: .8;
+    background: #fff;
+}
+
+/* ../../../../common.blocks/popup/__under/_color/popup__under_color_white.css end */
+/* ../../../../common.blocks/popup/__under/_type/popup__under_type_paranja.css begin */
+.popup__under_type_paranja
+{
+    position: fixed;
+    z-index: 32000;
+    top: 0;
+    left: 0;
+
+    padding: 0;
+
+    opacity: .3;
+    background: #000;
+}
+
+/* ../../../../common.blocks/popup/__under/_type/popup__under_type_paranja.css end */
+/* ../../../../common.blocks/popup/_autosize/popup_autosize_yes.css begin */
+.popup_autosize_yes .popup__content
+{
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+
+/* ../../../../common.blocks/popup/_autosize/popup_autosize_yes.css end */
+/* ../../../../common.blocks/select/select.css begin */
+.select
+{
+    display: inline-block;
+}
+
+/* ../../../../common.blocks/select/select.css end */
+/* ../../../../common.blocks/select/__item/select__item.css begin */
+.select__item
+{
+    cursor: default;
+    white-space: nowrap;
+}
+
+.select__text
+{
+    position: relative;
+
+    display: inline-block;
+    overflow: hidden;
+
+    -webkit-box-sizing: border-box;
+       -moz-box-sizing: border-box;
+            box-sizing: border-box;
+    max-width: 100%;
+    padding: 0 2.5em 0 1em;
+
+    -webkit-user-select: none;
+       -moz-user-select: none;
+            user-select: none;
+    vertical-align: top;
+    -o-text-overflow: ellipsis;
+       text-overflow: ellipsis;
+}
+
+/* ../../../../common.blocks/select/__item/select__item.css end */
+/* ../../../../common.blocks/select/__item/_selected/select__item_selected_yes.css begin */
+/* :after – галочка */
+.select__item_selected_yes .select__text:after
+{
+    position: absolute;
+    top: .4em;
+    right: 1em;
+
+    width: 1.1em;
+    height: 1em;
+
+    content: '';
+
+    background: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNi4wMzciIGhlaWdodD0iMTQuOTczIj48cGF0aCBmaWxsPSIjZmZmIiBkPSJNNi4xODctMTkuODQ1YzQuNDE4IDAgOCAzLjU4MiA4IDggMCA0LjQxOS0zLjU4MiA4LTggOHMtOC0zLjU4MS04LThjMC00LjQxOCAzLjU4Mi04IDgtOHoiLz48cGF0aCBkPSJNNi4xODctMTguODQ1Yy0zLjg2NiAwLTcgMy4xMzQtNyA3czMuMTM0IDcgNyA3IDctMy4xMzQgNy03LTMuMTM0LTctNy03ek0xMC4xNzctOS4yOGwtMS40MjYgMS40MjYtMi41NjQtMi41NjQtMi41NjUgMi41NjQtMS40MjYtMS40MjYgMi41NjQtMi41NjQtMi41NjQtMi41NjQgMS40MjYtMS40MjYgMi41NjQgMi41NjQgMi41NjQtMi41NjQgMS40MjYgMS40MjYtMi41NjQgMi41NjQgMi41NjUgMi41NjR6Ii8+PHBhdGggZD0iTTUuMjg3IDE0Ljk3MmwxMC43NS0xMi44MTYtMi4xNzctMi4xNTYtOC41NzMgMTAuNjYxLTMuMTQ0LTQuMTQ4LTIuMTQzIDIuMTIzIDUuMjg3IDYuMzM2eiIvPjwvc3ZnPg==) 50% 50% no-repeat;
+    /*background: url(select__tick.svg) 50% 50% no-repeat;*/
+    background-size: 100%;
+}
+
+/* ../../../../common.blocks/select/__item/_selected/select__item_selected_yes.css end */
+/* ../../../../desktop.blocks/select/__item/_selected/select__item_selected_yes.css begin */
+/* :after – галочка */
+@media all and (min-width:0)
+{
+    /* Для FF3.6 */
+    .i-ua_inlinesvg_no .select__item_selected_yes .select__text:after
+    {
+        background: url("../../../../desktop.blocks/select/__item/_selected/select__tick.png") no-repeat;
+    }
+}
+
+/* ../../../../desktop.blocks/select/__item/_selected/select__item_selected_yes.css end */
+/* ../../../../common.blocks/select/__item/_inner/select__item_inner_yes.css begin */
+.select__item_inner_yes .select__text
+{
+    padding-left: 2em;
+}
+
+/* ../../../../common.blocks/select/__item/_inner/select__item_inner_yes.css end */
+/* ../../../../common.blocks/select/__item/_label/select__item_label_yes.css begin */
+.select__item_label_yes .select__text
+{
+    font-weight: bold;
+}
+
+/* ../../../../common.blocks/select/__item/_label/select__item_label_yes.css end */
+/* ../../../../common.blocks/select/__button/select__button.css begin */
+.select__button
+{
+    max-width: 100%;
+
+    text-align: left;
+    vertical-align: top;
+}
+
+.select__button .button__text
+{
+    display: block;
+    overflow: hidden;
+
+    -o-text-overflow: ellipsis;
+       text-overflow: ellipsis;
+}
+
+.i-ua_js_no .select__button
+{
+    display: none;
+}
+
+/* ../../../../common.blocks/select/__button/select__button.css end */
+/* ../../../../common.blocks/select/__control/select__control.css begin */
+@media all and (min-width:0)
+{
+    .i-ua_js_yes .select__control
+    {
+        display: none;
+    }
+}
+
+/* ../../../../common.blocks/select/__control/select__control.css end */
+/* ../../../../common.blocks/select/__list/select__list.css begin */
+.select__list
+{
+    position: relative;
+
+    overflow: hidden;
+}
+
+/* ../../../../common.blocks/select/__list/select__list.css end */
+/* ../../../../common.blocks/select/__separator/select__separator.css begin */
+.select__separator
+{
+    position: relative;
+    z-index: 3;
+
+    float: left;
+
+    width: 100%;
+    margin-top: -1px;
+
+    font: 0/0 a;
+
+    border-top: 1px solid;
+}
+
+/* ../../../../common.blocks/select/__separator/select__separator.css end */
+/* ../../../../common.blocks/select/__popup/select__popup.css begin */
+.select__popup
+{
+    width: auto;
+
+    -webkit-user-select: none;
+       -moz-user-select: none;
+            user-select: none;
+
+    -webkit-overflow-scrolling: touch; /* https://jira.yandex-team.ru/browse/LEGO-7899 */
+}
+
+/* after – в попапе не нужен */
+.select__popup:after
+{
+    content: none;
+}
+
+.select__popup .popup__content
+{
+    overflow-x: hidden;
+    overflow-y: auto;
+
+    padding: 0;
+}
+
+/* ../../../../common.blocks/select/__popup/select__popup.css end */
+/* ../../../../common.blocks/button/_size/button_size_m.css begin */
+.button_size_m
+{
+    font-size: 15px;
+    line-height: 32px;
+}
+
+/* ../../../../common.blocks/button/_size/button_size_m.css end */
+/* ../../../../common.blocks/select/_size/select_size_m.css begin */
+.select_size_m,
+.select__popup_size_m .select__item
+{
+    font-size: 15px;
+    line-height: 32px;
+}
+
+/* ../../../../common.blocks/select/_size/select_size_m.css end */
+/* ../../../../common.blocks/select/_theme/select_theme_normal.css begin */
+.select_theme_normal,
+.select__popup_theme_normal .select__item
+{
+    font-family: Arial, sans-serif;
+}
+
+/* Select */
+.select__popup_theme_normal .select__item_focused_yes
+{
+    background-color: #ffeba0;
+}
+
+.select__popup_theme_normal .select__item_disabled_yes
+{
+    color: #999;
+}
+
+.select__popup_theme_normal .select__separator
+{
+    border-color: #ddd;
+}
+
+/* ../../../../common.blocks/select/_theme/select_theme_normal.css end */
+/* ../../../../desktop.blocks/select/_theme/select_theme_normal.css begin */
+/* Select */
+.select__popup_theme_normal .select__item_hovered_yes
+{
+    background-color: #ffeba0;
+}
+
+/* ../../../../desktop.blocks/select/_theme/select_theme_normal.css end */
+/* ../../../../common.blocks/radio-button/__radio/radio-button__radio.css begin */
+.radio-button__radio
+{
+    position: relative;
+    z-index: 2;
+
+    display: inline-block;
+
+    margin: 0 -1px 0 0;
+
+    -webkit-user-select: none;
+       -moz-user-select: none;
+            user-select: none;
+    text-align: center;
+
+    outline: 0;
+}
+
+/* :before — бордер
+   :after — фон */
+.radio-button__radio:after,
+.radio-button__radio:before
+{
+    position: absolute;
+    top: 0;
+    right: 1px;
+    bottom: 0;
+    left: 0;
+
+    content: '';
+}
+
+.radio-button__radio:after
+{
+    top: 1px;
+    bottom: 1px;
+    left: 1px;
+}
+
+.radio-button__radio_side_left,
+.radio-button__radio_side_left:before
+{
+    border-top-left-radius: 3px;
+    border-bottom-left-radius: 3px;
+}
+
+.radio-button__radio_side_right,
+.radio-button__radio_side_right:before
+{
+    right: 0;
+
+    border-top-right-radius: 3px;
+    border-bottom-right-radius: 3px;
+}
+
+.radio-button__radio_side_left:after
+{
+    border-top-left-radius: 2px;
+    border-bottom-left-radius: 2px;
+}
+
+.radio-button__radio_side_right:after
+{
+    right: 1px;
+
+    border-top-right-radius: 2px;
+    border-bottom-right-radius: 2px;
+}
+
+.i-ua_js_no .radio-button__radio:after,
+.i-ua_js_no .radio-button__radio:before
+{
+    display: none;
+}
+
+/* ../../../../common.blocks/radio-button/__radio/radio-button__radio.css end */
+/* ../../../../desktop.blocks/radio-button/__radio/radio-button__radio.css begin */
+@media all and (min-width:0)
+{
+
+    .radio-button__radio
+    {
+        cursor: pointer;
+    }
+}
+
+/* ../../../../desktop.blocks/radio-button/__radio/radio-button__radio.css end */
+/* ../../../../common.blocks/radio-button/__radio/_pressed/radio-button__radio_pressed_yes.css begin */
+@media all and (min-width:0)
+{
+    .radio-button__radio_pressed_yes .radio-button__text
+    {
+        top: 1px;
+    }
+}
+
+.radio-button__radio_pressed_yes:before
+{
+    right: 0;
+}
+
+.radio-button__radio_next-for-pressed_yes:before
+{
+    left: 1px;
+}
+
+/* ../../../../common.blocks/radio-button/__radio/_pressed/radio-button__radio_pressed_yes.css end */
+/* ../../../../common.blocks/radio-button/__radio/_focused/radio-button__radio_focused_yes.css begin */
+.i-ua_js_yes .radio-button__radio_focused_yes
+{
+    z-index: 1;
+}
+
+/* ../../../../common.blocks/radio-button/__radio/_focused/radio-button__radio_focused_yes.css end */
+/* ../../../../common.blocks/radio-button/__radio/_disabled/radio-button__radio_disabled_yes.css begin */
+.radio-button__radio_disabled_yes
+{
+    opacity: .6;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0); /* убираем выделение при клике в webkit-touch */
+}
+
+/* ../../../../common.blocks/radio-button/__radio/_disabled/radio-button__radio_disabled_yes.css end */
+/* ../../../../desktop.blocks/radio-button/__radio/_disabled/radio-button__radio_disabled_yes.css begin */
+@media all and (min-width:0)
+{
+
+    .radio-button__radio_disabled_yes
+    {
+        cursor: default;
+    }
+}
+
+/* ../../../../desktop.blocks/radio-button/__radio/_disabled/radio-button__radio_disabled_yes.css end */
+/* ../../../../common.blocks/radio-button/__radio/_side/radio-button__radio_side_both.css begin */
+.radio-button__radio_side_both
+{
+    border-radius: 3px;
+}
+
+.radio-button__radio_side_both:before
+{
+    right: 0;
+
+    border-radius: 3px;
+}
+
+.radio-button__radio_side_both:after
+{
+    border-radius: 2px;
+}
+
+/* ../../../../common.blocks/radio-button/__radio/_side/radio-button__radio_side_both.css end */
+/* ../../../../common.blocks/radio-button/__control/radio-button__control.css begin */
+@media all and (min-width:0)
+{
+    .i-ua_js_yes .radio-button__control
+    {
+        position: absolute; /*left: -1000px;*/
+
+        opacity: 0;
+    }
+}
+
+/* ../../../../common.blocks/radio-button/__control/radio-button__control.css end */
+/* ../../../../common.blocks/radio-button/__text/radio-button__text.css begin */
+.radio-button__text
+{
+    position: relative;
+    z-index: 1;
+
+    padding: 0 1em;
+
+    pointer-events: none;
+}
+
+.i-ua_js_no .radio-button__text
+{
+    padding: 0 1em 0 .3em;
+}
+
+/* ../../../../common.blocks/radio-button/__text/radio-button__text.css end */
+/* ../../../../common.blocks/radio-button/radio-button.css begin */
+.radio-button
+{
+    display: inline-block;
+
+    white-space: nowrap;
+
+    border-radius: 3px;
+}
+
+/* ../../../../common.blocks/radio-button/radio-button.css end */
+/* ../../../../common.blocks/radio-button/_theme/radio-button_theme_normal.css begin */
+.i-ua_js_yes .radio-button_theme_normal
+{
+    font-family: Arial, sans-serif;
+
+    color: #333;
+}
+
+@media all and (min-width:0)
+{
+    /* :before — бордер */
+    .radio-button_theme_normal .radio-button__radio:before
+    {
+        background: rgba(0,0,0,.4);
+        background: -webkit-linear-gradient(top, rgba(0,0,0,.2) 0,rgba(0,0,0,.4) 100%);
+        background:    -moz-linear-gradient(top, rgba(0,0,0,.2) 0, rgba(0,0,0,.4) 100%);
+        background:      -o-linear-gradient(top, rgba(0,0,0,.2) 0,rgba(0,0,0,.4) 100%);
+        background:         linear-gradient(to bottom, rgba(0,0,0,.2) 0,rgba(0,0,0,.4) 100%);
+        -moz-box-shadow: 0 1px 0 rgba(0,0,0,.07);
+             box-shadow: 0 1px 0 rgba(0,0,0,.07);
+    }
+
+    /* :after — фон */
+    .radio-button_theme_normal .radio-button__radio:after
+    {
+        background: #fff;
+        background: -webkit-linear-gradient(top, #fff 0,#eee 100%);
+        background:    -moz-linear-gradient(top, #fff 0, #eee 100%);
+        background:      -o-linear-gradient(top, #fff 0,#eee 100%);
+        background:         linear-gradient(to bottom, #fff 0,#eee 100%);
+    }
+
+    /* _focused_yes */
+    .radio-button_theme_normal .radio-button__radio_focused_yes:before
+    {
+        -moz-box-shadow: 0 0 6px 2px rgba(255,204,0,.7), 0 1px 0 rgba(0,0,0,.07);
+             box-shadow: 0 0 6px 2px rgba(255,204,0,.7), 0 1px 0 rgba(0,0,0,.07);
+    }
+
+    .i-ua_interaction_pointer .radio-button_theme_normal .radio-button__radio_focused_yes:before
+    {
+        -moz-box-shadow: none;
+             box-shadow: none;
+    }
+
+    .radio-button_theme_normal .radio-button__radio_focused_yes:after
+    {
+        -moz-box-shadow: 0 0 0 1px rgba(193,154,0,.2);
+             box-shadow: 0 0 0 1px rgba(193,154,0,.2);
+    }
+
+    .radio-button_theme_normal .radio-button__radio_pressed_yes.radio-button__radio_focused_yes:before
+    {
+        -moz-box-shadow: inset 0 1px 5px rgba(30,23,0,.8), 0 0 6px 2px rgba(255,204,0,.7), 0 2px 0 -1px rgba(255,255,255,.2);
+             box-shadow: inset 0 1px 5px rgba(30,23,0,.8), 0 0 6px 2px rgba(255,204,0,.7), 0 2px 0 -1px rgba(255,255,255,.2);
+    }
+
+    .radio-button_theme_normal .radio-button__radio_pressed_yes.radio-button__radio_focused_yes:after
+    {
+        -moz-box-shadow: inset 0 1px 3px -1px rgba(0,0,0,.45), 0 0 0 1px rgba(193,154,0,.2);
+             box-shadow: inset 0 1px 3px -1px rgba(0,0,0,.45), 0 0 0 1px rgba(193,154,0,.2);
+    }
+
+    .i-ua_interaction_pointer .radio-button_theme_normal .radio-button__radio_pressed_yes.radio-button__radio_focused_yes:before
+    {
+        -moz-box-shadow: inset 0 1px 5px rgba(30,23,0,.8), 0 2px 0 -1px rgba(255,255,255,.2);
+             box-shadow: inset 0 1px 5px rgba(30,23,0,.8), 0 2px 0 -1px rgba(255,255,255,.2);
+    }
+
+    .i-ua_interaction_pointer .radio-button_theme_normal .radio-button__radio_pressed_yes.radio-button__radio_focused_yes:after
+    {
+        -moz-box-shadow: inset 0 1px 3px -1px rgba(0,0,0,.45);
+             box-shadow: inset 0 1px 3px -1px rgba(0,0,0,.45);
+    }
+
+    /* _pressed_yes */
+    .i-ua_js_yes .radio-button_theme_normal .radio-button__radio_pressed_yes
+    {
+        color: #7a7254;
+    }
+
+    /* :before — бордер */
+    .radio-button_theme_normal .radio-button__radio_pressed_yes:before
+    {
+        background: rgba(255,236,166,.4);
+        -moz-box-shadow: inset 0 1px 5px rgba(30,23,0,.8), 0 2px 0 -1px rgba(255,255,255,.2);
+             box-shadow: inset 0 1px 5px rgba(30,23,0,.8), 0 2px 0 -1px rgba(255,255,255,.2);
+    }
+
+    /* :after — фон */
+    .radio-button_theme_normal .radio-button__radio_pressed_yes:after
+    {
+        background: #ffeca6;
+        background: -webkit-linear-gradient(top, #ffeca6 0,#fff6d5 100%);
+        background:    -moz-linear-gradient(top, #ffeca6 0, #fff6d5 100%);
+        background:      -o-linear-gradient(top, #ffeca6 0,#fff6d5 100%);
+        background:         linear-gradient(to bottom, #ffeca6 0,#fff6d5 100%);
+        -moz-box-shadow: inset 0 1px 3px -1px rgba(0,0,0,.45);
+             box-shadow: inset 0 1px 3px -1px rgba(0,0,0,.45);
+    }
+}
+
+/* ../../../../common.blocks/radio-button/_theme/radio-button_theme_normal.css end */
+/* ../../../../desktop.blocks/radio-button/_theme/radio-button_theme_normal.css begin */
+@media all and (min-width:0)
+{
+    /* :after — при наведении меняет градиент у radio-button */
+    .radio-button_theme_normal .radio-button__radio_hovered_yes.radio-button__radio:not(.radio-button__radio_checked_yes):after
+    {
+        background: rgb(255,255,255);
+        background: -webkit-linear-gradient(top, rgba(255,255,255,1) 0,rgba(246,245,243,1) 100%);
+        background:    -moz-linear-gradient(top, rgba(255,255,255,1) 0,rgba(246,245,243,1) 100%);
+        background:      -o-linear-gradient(top, rgba(255,255,255,1) 0,rgba(246,245,243,1) 100%);
+        background:         linear-gradient(to bottom, rgba(255,255,255,1) 0,rgba(246,245,243,1) 100%);
+    }
+}
+
+/* ../../../../desktop.blocks/radio-button/_theme/radio-button_theme_normal.css end */
+/* ../../../../common.blocks/radio-button/_size/radio-button_size_m.css begin */
+.radio-button_size_m
+{
+    font-size: 15px;
+    line-height: 32px;
+}
+
+/* ../../../../common.blocks/radio-button/_size/radio-button_size_m.css end */
+/* ../../../../common.blocks/check-button/check-button.css begin */
+.check-button
+{
+    position: relative;
+
+    display: inline-block;
+
+    cursor: default;
+    -webkit-user-select: none;
+       -moz-user-select: none;
+            user-select: none;
+    text-align: center;
+    white-space: nowrap;
+
+    outline: 0;
+}
+
+.i-ua_js_no .check-button
+{
+    background: none;
+    box-shadow: none;
+}
+
+/* ../../../../common.blocks/check-button/check-button.css end */
+/* ../../../../common.blocks/check-button/__text/check-button__text.css begin */
+.check-button__text
+{
+    position: relative;
+
+    padding: 0 1em;
+}
+
+.i-ua_js_no .check-button__text
+{
+    padding: 0 1em 0 .3em;
+}
+
+/* ../../../../common.blocks/check-button/__text/check-button__text.css end */
+/* ../../../../common.blocks/check-button/__control/check-button__control.css begin */
+@media all and (min-width:0)
+{
+    .i-ua_js_yes .check-button__control
+    {
+        position: absolute;
+        z-index: 1;
+        top: 0;
+        left: 0;
+
+        width: 100%;
+        height: 100%;
+        margin: 0;
+        padding: 0;
+
+        opacity: 0;
+        border: 0;
+        outline: 0;
+        background: none;
+    }
+}
+
+/* ../../../../common.blocks/check-button/__control/check-button__control.css end */
+/* ../../../../desktop.blocks/check-button/__control/check-button__control.css begin */
+@media all and (min-width:0)
+{
+
+    .check-button__control
+    {
+        cursor: pointer;
+    }
+}
+
+/* ../../../../desktop.blocks/check-button/__control/check-button__control.css end */
+/* ../../../../common.blocks/check-button/_theme/check-button_theme_normal.css begin */
+@media all and (min-width:0)
+{
+    /* check-button — задает рамку у кнопки */
+    .check-button_theme_normal
+    {
+        font-family: Arial, sans-serif;
+
+        color: #333;
+        border-radius: 3px;
+        background: rgba(0,0,0,.4);
+        background: -webkit-linear-gradient(top, rgba(0,0,0,.2) 0,rgba(0,0,0,.4) 100%);
+        background:    -moz-linear-gradient(top, rgba(0,0,0,.2) 0, rgba(0,0,0,.4) 100%);
+        background:      -o-linear-gradient(top, rgba(0,0,0,.2) 0,rgba(0,0,0,.4) 100%);
+        background:         linear-gradient(to bottom, rgba(0,0,0,.2) 0,rgba(0,0,0,.4) 100%);
+        -moz-box-shadow: 0 1px 0 rgba(0,0,0,.07);
+             box-shadow: 0 1px 0 rgba(0,0,0,.07);
+    }
+
+    /* :before — градиент у кнопки */
+    .check-button_theme_normal:before
+    {
+        position: absolute;
+        top: 1px;
+        right: 1px;
+        bottom: 1px;
+        left: 1px;
+
+        content: '';
+
+        border-radius: 2px;
+        background: #fff;
+        background: -webkit-linear-gradient(top, #fff 0,#eee 100%);
+        background:    -moz-linear-gradient(top, #fff 0, #eee 100%);
+        background:      -o-linear-gradient(top, #fff 0,#eee 100%);
+        background:         linear-gradient(to bottom, #fff 0,#eee 100%);
+    }
+
+    /* _focused */
+    .check-button_focused_yes.check-button_theme_normal
+    {
+        -moz-box-shadow: 0 1px 0 rgba(0,0,0,.07), 0 0 6px 2px rgba(255,204,0,.7);
+             box-shadow: 0 1px 0 rgba(0,0,0,.07), 0 0 6px 2px rgba(255,204,0,.7);
+    }
+
+    .check-button_focused_yes.check-button_theme_normal:before
+    {
+        -moz-box-shadow: 0 0 0 1px rgba(193,154,0,.2);
+             box-shadow: 0 0 0 1px rgba(193,154,0,.2);
+    }
+
+    .i-ua_interaction_pointer .check-button_focused_yes.check-button_theme_normal
+    {
+        -moz-box-shadow: none;
+             box-shadow: none;
+    }
+
+    .i-ua_interaction_pointer .check-button_focused_yes.check-button_theme_normal:before
+    {
+        -moz-box-shadow: none;
+             box-shadow: none;
+    }
+
+    /* _pressed */
+    /* check-button — задает рамку у кнопки */
+    /* определения с i-ua_interaction_pointer для сохранения рамки */
+    .check-button_pressed_yes.check-button_theme_normal,
+    .check-button_checked_yes.check-button_theme_normal,
+    .i-ua_interaction_pointer .check-button_pressed_yes.check-button_theme_normal,
+    .i-ua_interaction_pointer .check-button_checked_yes.check-button_theme_normal
+    {
+        color: #7a7254;
+        background: rgba(255,236,166,.4);
+        -moz-box-shadow: inset 0 1px 5px rgba(30,23,0,.8), 0 2px 0 -1px rgba(255,255,255,.2);
+             box-shadow: inset 0 1px 5px rgba(30,23,0,.8), 0 2px 0 -1px rgba(255,255,255,.2);
+    }
+
+    /* :before — градиент у кнопки */
+    .check-button.check-button_pressed_yes.check-button_theme_normal:before,
+    .check-button.check-button_checked_yes.check-button_theme_normal:before
+    {
+        background: #ffeca6;
+        background: -webkit-linear-gradient(top, #ffeca6 0,#fff6d5 100%);
+        background:    -moz-linear-gradient(top, #ffeca6 0, #fff6d5 100%);
+        background:      -o-linear-gradient(top, #ffeca6 0,#fff6d5 100%);
+        background:         linear-gradient(to bottom, #ffeca6 0,#fff6d5 100%);
+        -moz-box-shadow: inset 0 1px 3px -1px rgba(0,0,0,.45);
+             box-shadow: inset 0 1px 3px -1px rgba(0,0,0,.45);
+    }
+}
+
+/* ../../../../common.blocks/check-button/_theme/check-button_theme_normal.css end */
+/* ../../../../desktop.blocks/check-button/_theme/check-button_theme_normal.css begin */
+@media all and (min-width:0)
+{
+    /* :before — при наведении меняет градиент у check-button */
+    .check-button_theme_normal.check-button_hovered_yes:before
+    {
+        background: rgb(255,255,255);
+        background: -webkit-linear-gradient(top, rgba(255,255,255,1) 0,rgba(246,245,243,1) 100%);
+        background:    -moz-linear-gradient(top, rgba(255,255,255,1) 0,rgba(246,245,243,1) 100%);
+        background:      -o-linear-gradient(top, rgba(255,255,255,1) 0,rgba(246,245,243,1) 100%);
+        background:         linear-gradient(to bottom, rgba(255,255,255,1) 0,rgba(246,245,243,1) 100%);
+    }
+}
+
+/* ../../../../desktop.blocks/check-button/_theme/check-button_theme_normal.css end */
+/* ../../../../common.blocks/check-button/_checked/check-button_checked_yes.css begin */
+@media all and (min-width:0)
+{
+    .check-button_checked_yes .check-button__text
+    {
+        top: 1px;
+    }
+}
+
+/* ../../../../common.blocks/check-button/_checked/check-button_checked_yes.css end */
+/* ../../../../common.blocks/check-button/_pressed/check-button_pressed_yes.css begin */
+@media all and (min-width:0)
+{
+    .check-button_pressed_yes .check-button__text
+    {
+        top: 1px;
+    }
+}
+
+/* ../../../../common.blocks/check-button/_pressed/check-button_pressed_yes.css end */
+/* ../../../../common.blocks/check-button/_disabled/check-button_disabled_yes.css begin */
+body .check-button_disabled_yes
+{
+    opacity: .6;
+}
+
+/* ../../../../common.blocks/check-button/_disabled/check-button_disabled_yes.css end */
+/* ../../../../desktop.blocks/check-button/_disabled/check-button_disabled_yes.css begin */
+.i-ua_js_yes .check-button_disabled_yes .check-button__control
+{
+    cursor: default;
+}
+
+/* ../../../../desktop.blocks/check-button/_disabled/check-button_disabled_yes.css end */
+/* ../../../../common.blocks/check-button/_size/check-button_size_s.css begin */
+.check-button_size_s
+{
+    font-size: 13px;
+    line-height: 28px;
+}
+
+/* ../../../../common.blocks/check-button/_size/check-button_size_s.css end */
+/* ../../../../common.blocks/tumbler/tumbler.css begin */
+.tumbler
+{
+    display: inline-block;
+}
+
+/* ../../../../common.blocks/tumbler/tumbler.css end */
+/* ../../../../common.blocks/tumbler/__box/tumbler__box.css begin */
+.tumbler__box
+{
+    position: relative;
+
+    display: inline-block;
+
+    cursor: pointer;
+    vertical-align: top;
+}
+
+.i-ua_js_no .tumbler__box
+{
+    display: none;
+}
+
+/* ../../../../common.blocks/tumbler/__box/tumbler__box.css end */
+/* ../../../../common.blocks/tumbler/__button/tumbler__button.css begin */
+.tumbler__button
+{
+    position: absolute;
+    z-index: 1;
+    left: 0;
+
+    -webkit-transition: left .2s ease;
+       -moz-transition: left .2s ease;
+         -o-transition: left .2s ease;
+            transition: left .2s ease;
+}
+
+.tumbler_pressed_yes .tumbler__button
+{
+    -webkit-transition: none;
+       -moz-transition: none;
+            transition: none;
+    -o-transition-duration: 0s;
+}
+
+.tumbler__button:focus
+{
+    outline: 0;
+}
+
+/* ../../../../common.blocks/tumbler/__button/tumbler__button.css end */
+/* ../../../../common.blocks/tumbler/__label/tumbler__label.css begin */
+.tumbler__label
+{
+    display: inline-block;
+
+    cursor: pointer;
+    -webkit-user-select: none;
+       -moz-user-select: none;
+        -ms-user-select: none;
+            user-select: none;
+}
+
+/* ../../../../common.blocks/tumbler/__label/tumbler__label.css end */
+/* ../../../../common.blocks/tumbler/__input/tumbler__input.css begin */
+.i-ua_js_yes .tumbler__input
+{
+    position: absolute;
+    left: -9999px;
+}
+
+/* ../../../../common.blocks/tumbler/__input/tumbler__input.css end */
+/* ../../../../common.blocks/tumbler/__sticker/tumbler__sticker.css begin */
+.tumbler__sticker
+{
+    position: absolute;
+
+    overflow: hidden;
+
+    -webkit-user-select: none;
+       -moz-user-select: none;
+        -ms-user-select: none;
+            user-select: none;
+    text-align: center;
+
+    border-radius: 3px;
+
+    -webkit-transition: width .2s ease;
+       -moz-transition: width .2s ease;
+         -o-transition: width .2s ease;
+            transition: width .2s ease;
+}
+
+.tumbler_pressed_yes .tumbler__sticker
+{
+    -webkit-transition: none;
+       -moz-transition: none;
+            transition: none;
+    -o-transition-duration: 0s;
+}
+
+/* .tumbler для нужного веса селектора */
+.tumbler.tumbler_checked_yes .tumbler__sticker_position_right
+{
+    width: 0;
+}
+
+/* ../../../../common.blocks/tumbler/__sticker/tumbler__sticker.css end */
+/* ../../../../common.blocks/tumbler/__sticker-label/tumbler__sticker-label.css begin */
+.tumbler__sticker-label
+{
+    position: relative;
+}
+
+.tumbler__sticker_position_left .tumbler__sticker-label
+{
+    float: right;
+}
+
+/* ../../../../common.blocks/tumbler/__sticker-label/tumbler__sticker-label.css end */
+/* ../../../../common.blocks/tumbler/_theme/tumbler_theme_normal.css begin */
+.tumbler_theme_normal
+{
+    font-family: Arial, sans-serif;
+
+    color: #333;
+}
+
+.tumbler_theme_normal .tumbler__sticker_position_left
+{
+    left: 0;
+
+    width: 0;
+
+    color: #7a7254;
+}
+
+.tumbler_theme_normal .tumbler__sticker_position_right
+{
+    right: 0;
+}
+
+@media all and (min-width:0)
+{
+    /* Рамка у тумблера */
+    .tumbler_theme_normal .tumbler__box
+    {
+        border-radius: 3px;
+    }
+
+    .tumbler_theme_normal .tumbler__box:before
+    {
+        position: absolute;
+        top: 1px;
+        right: 1px;
+        bottom: 1px;
+        left: 1px;
+
+        content: '';
+
+        border-radius: 3px;
+    }
+
+    /* Тумблер в фокусе */
+    .tumbler_theme_normal.tumbler_pressed_yes .tumbler__box,
+    .tumbler_theme_normal.tumbler_focused_yes .tumbler__box
+    {
+        -moz-box-shadow: 0 1px 0 rgba(0,0,0,.07), 0 0 6px 2px rgba(255,204,0,.7);
+             box-shadow: 0 1px 0 rgba(0,0,0,.07), 0 0 6px 2px rgba(255,204,0,.7);
+    }
+
+    .i-ua_interaction_pointer .tumbler_theme_normal.tumbler_pressed_yes .tumbler__box,
+    .i-ua_interaction_pointer .tumbler_theme_normal.tumbler_focused_yes .tumbler__box
+    {
+        -moz-box-shadow: none;
+             box-shadow: none;
+    }
+
+    /* Адаптация границы тумблера под фокус */
+    .tumbler_theme_normal.tumbler_pressed_yes .tumbler__box:before,
+    .tumbler_theme_normal.tumbler_focused_yes .tumbler__box:before
+    {
+        -moz-box-shadow: 0 0 0 1px rgba(193,154,0,.2);
+             box-shadow: 0 0 0 1px rgba(193,154,0,.2);
+    }
+
+    /* Градиент у плавающего переключателя */
+    .tumbler_theme_normal .tumbler__button
+    {
+        border-radius: 3px;
+        background: rgba(0,0,0,.4);
+        background: -webkit-linear-gradient(top, rgba(0,0,0,.2) 0,rgba(0,0,0,.4) 100%);
+        background:    -moz-linear-gradient(top, rgba(0,0,0,.2) 0, rgba(0,0,0,.4) 100%);
+        background:      -o-linear-gradient(top, rgba(0,0,0,.2) 0,rgba(0,0,0,.4) 100%);
+        background:         linear-gradient(to bottom, rgba(0,0,0,.2) 0,rgba(0,0,0,.4) 100%);
+        -moz-box-shadow: 0 1px 0 rgba(0,0,0,.07);
+             box-shadow: 0 1px 0 rgba(0,0,0,.07);
+    }
+
+    /* :before — градиент у плавающего переключателя */
+    .tumbler_theme_normal .tumbler__button:before
+    {
+        position: absolute;
+        top: 1px;
+        right: 1px;
+        bottom: 1px;
+        left: 1px;
+
+        content: '';
+
+        border-radius: 2px;
+        background: #fff;
+        background: -webkit-linear-gradient(top, #fff 0,#eee 100%);
+        background:    -moz-linear-gradient(top, #fff 0, #eee 100%);
+        background:      -o-linear-gradient(top, #fff 0,#eee 100%);
+        background:         linear-gradient(to bottom, #fff 0,#eee 100%);
+    }
+
+    .tumbler_theme_normal .tumbler__sticker:after,
+    .tumbler_theme_normal .tumbler__sticker:before
+    {
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+
+        content: '';
+
+        border-radius: 2px;
+    }
+
+    /* Лёгкая тень на стикерах */
+    .tumbler_theme_normal .tumbler__sticker:before
+    {
+        top: 1px;
+        right: 1px;
+        bottom: 1px;
+        left: 1px;
+    }
+
+    /* Рамка левого стикера */
+    .tumbler_theme_normal .tumbler__sticker_position_left
+    {
+        background: rgba(255,236,166,.4);
+        -moz-box-shadow: inset 0 1px 5px rgba(30,23,0,.8), 0 2px 0 -1px rgba(255,255,255,.2);
+             box-shadow: inset 0 1px 5px rgba(30,23,0,.8), 0 2px 0 -1px rgba(255,255,255,.2);
+    }
+
+    /* :before — фон левого стикера */
+    .tumbler_theme_normal .tumbler__sticker_position_left:before
+    {
+        background: #ffeca6;
+        background: -webkit-linear-gradient(top, #ffeca6 0,#fff6d5 100%);
+        background:    -moz-linear-gradient(top, #ffeca6 0, #fff6d5 100%);
+        background:      -o-linear-gradient(top, #ffeca6 0,#fff6d5 100%);
+        background:         linear-gradient(to bottom, #ffeca6 0,#fff6d5 100%);
+        -moz-box-shadow: inset 0 1px 3px -1px rgba(0,0,0,.45);
+             box-shadow: inset 0 1px 3px -1px rgba(0,0,0,.45);
+    }
+
+    /* Рамка правого стикера */
+    .tumbler_theme_normal .tumbler__sticker_position_right
+    {
+        background: rgba(0,0,0,.07);
+        box-shadow: inset 0 1px 3px rgba(0,0,0,.3), inset 0 0 0 1px rgba(0,0,0,.15), 0 1px 0 rgba(255,255,255,.2);
+    }
+}
+
+/* ../../../../common.blocks/tumbler/_theme/tumbler_theme_normal.css end */
+/* ../../../../desktop.blocks/tumbler/_theme/tumbler_theme_normal.css begin */
+/* :before — при наведении меняет градиент у плавающего переключателя */
+.tumbler_theme_normal.tumbler_hovered_yes .tumbler__button:before
+{
+    background: rgb(255,255,255);
+    background: -webkit-linear-gradient(top, rgba(255,255,255,1) 0,rgba(246,245,243,1) 100%);
+    background:    -moz-linear-gradient(top, rgba(255,255,255,1) 0,rgba(246,245,243,1) 100%);
+    background:      -o-linear-gradient(top, rgba(255,255,255,1) 0,rgba(246,245,243,1) 100%);
+    background:         linear-gradient(to bottom, rgba(255,255,255,1) 0,rgba(246,245,243,1) 100%);
+}
+
+/* ../../../../desktop.blocks/tumbler/_theme/tumbler_theme_normal.css end */
+/* ../../../../common.blocks/tumbler/_size/tumbler_size_s.css begin */
+.tumbler_size_s
+{
+    font-size: 13px;
+    line-height: 28px;
+}
+
+.tumbler_size_s .tumbler__box,
+.tumbler_size_s .tumbler__sticker-label,
+.tumbler_size_s .tumbler__sticker_position_right,
+.tumbler_size_s.tumbler_checked_yes .tumbler__sticker_position_left
+{
+    width: 72px;
+    height: 28px;
+}
+
+.tumbler_size_s .tumbler__button
+{
+    width: 28px;
+    height: 28px;
+}
+
+.tumbler_size_s .tumbler__sticker_position_left
+{
+    text-indent: -28px;
+}
+
+.tumbler_size_s .tumbler__sticker_position_right
+{
+    text-indent: 28px;
+}
+
+/* _checked */
+.tumbler_size_s.tumbler_checked_yes .tumbler__button
+{
+    left: 44px;
+}
+
+/* __text */
+.tumbler_size_s .tumbler__text_side_left
+{
+    padding-right: 6px;
+}
+
+.tumbler_size_s .tumbler__text_side_right
+{
+    padding-left: 6px;
+}
+
+.i-ua_js_no .tumbler_size_s .tumbler__text_side_right
+{
+    padding-left: 0;
+}
+
+.tumbler_size_s .tumbler__text_side_left:empty
+{
+    padding-right: 0;
+}
+
+.tumbler_size_s .tumbler__text_side_right:empty
+{
+    padding-left: 0;
+}
+
+/* ../../../../common.blocks/tumbler/_size/tumbler_size_s.css end */
