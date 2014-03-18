@@ -1,1 +1,1 @@
-Link which opens in new window
+Link which opens in a new window

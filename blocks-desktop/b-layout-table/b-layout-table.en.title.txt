@@ -1,1 +1,1 @@
-Layout with <table> tag
+Layout with a <table> tag

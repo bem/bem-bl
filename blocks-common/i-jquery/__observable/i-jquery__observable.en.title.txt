@@ -1,1 +1,1 @@
-Plugin, which realize events-driven model for any objects
+Plugin, which realizes events-driven model for any objects

@@ -1,1 +1,1 @@
-Horizontal menu layout with title
+Horizontal menu layout with a title

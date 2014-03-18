@@ -1,6 +1,6 @@
 # Cache
 
-You can cache parts of BEMHTML page by declaring cache keys in BEMJSON. As data will be recursively converted to the `html` representation, BEMHTML engine will find those keys and generate cache entries with generated `html` contents.
+You can cache parts of BEMHTML page by declaring the cache keys in BEMJSON. As data will be recursively converted to the `html` representation, BEMHTML engine will find those keys and generate cache entries with generated `html` contents.
 
 ## Cache API
 
@@ -25,12 +25,12 @@ BEMHTML.call({/* BEMJSON data */}, {
 });
 ```
 
-Keys are always strings, but there're no contracts on value's schema. BEMHTML engine internally decides what and why should be stored, the only purpose of cache storage is to retrieve data that was put into it before, if it hasn't
+Keys are always strings, but there're no contracts on value's schema. BEMHTML-engine internally decides what and why should be stored, the only purpose of cache storage is to retrieve data that was put into it before, if it hasn't
 expired (or considered irrelevant).
 
-## Declaring cache keys in BEMJSON
+## Declaring Cache Keys in BEMJSON
 
-Consider following BEMJSON sample:
+Consider following BEMJSON-sample:
 ```javascript
 {
   "block": "b-nojs",
@@ -62,7 +62,7 @@ Consider following BEMJSON sample:
 }
 ```
 
-Suppose we want to cache contents of block b-nojs (while having this block dynamically generated each time). This can be achieved by declaring cache keys in the corresponding BEMJSON entry.
+Suppose we want to cache contents of block `b-nojs` (while having this block dynamically generated each time). This can be achieved by declaring cache keys in the corresponding BEMJSON entry.
 
 ```javascript
 {

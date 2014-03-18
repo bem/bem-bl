@@ -1,1 +1,1 @@
-Finding current position with Geolocation API
+Current location searching using Geolocation API

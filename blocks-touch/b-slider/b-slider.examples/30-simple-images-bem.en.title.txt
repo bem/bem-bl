@@ -1,1 +1,1 @@
-Slider which waiting for included imagesloading
+Slider that is waiting for the included images loading

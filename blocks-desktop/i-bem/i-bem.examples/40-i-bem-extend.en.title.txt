@@ -1,1 +1,1 @@
-Changing/extending standart block behaviour through modificator
+Changing/extending standard block behavior using modifier.

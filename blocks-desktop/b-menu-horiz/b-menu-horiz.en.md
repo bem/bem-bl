@@ -1,4 +1,4 @@
-**b-menu-horiz** block provides horizontal menu. The block also has functionality (implemented on JavaScript) that helps to write scripts with reaction on a menu item becoming selected.
+A **b-menu-horiz** block provides a horizontal menu. The block also has functionality (implemented on JavaScript) that helps to write scripts with reaction on a menu item when becoming selected.
 
 HTML markup complexity depends on a block modifier.
 

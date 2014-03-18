@@ -1,1 +1,1 @@
-JS-menu which switch active element
+JS-menu which switches an active element

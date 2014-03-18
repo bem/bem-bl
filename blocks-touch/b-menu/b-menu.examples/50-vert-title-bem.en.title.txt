@@ -1,1 +1,1 @@
-Vertical menu layout with title
+Vertical menu layout with a title
