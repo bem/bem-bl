@@ -1,0 +1,51 @@
+block checkbox {
+
+    tag: 'span'
+
+    js: true
+
+    default, !this._checkboxAttrs: {
+        var checkboxId = (this.ctx.checkboxAttrs || {}).id,
+            id = checkboxId || this.generateId();
+        applyNext(
+            this._checkboxAttrs = checkboxId ?
+                    this.ctx.checkboxAttrs :
+                    { id: 'id' + id },
+            this._labelId = 'label' + id
+            );
+    }
+
+    content: [
+        {
+            elem: 'box',
+            tag: 'span',
+            elemMods: (this.mods.checked === 'yes') ? { checked:'yes' } : '',
+            content: [
+                { elem: 'control', attrs: this.ctx.checkboxAttrs || {} },
+                { elem: 'tick', tag: 'i' }
+            ]
+        },
+        this.ctx.content
+    ]
+
+}
+
+block checkbox, elem control {
+
+    tag: 'input'
+
+    attrs: {
+        var a = this.ctx.attrs || {};
+
+        a['id'] = this._checkboxAttrs.id;
+        a.type = 'checkbox';
+
+        this.mods.disabled && (a.disabled = 'disabled');
+        this.mods.checked == 'yes' && (a.checked = 'checked');
+
+        a['aria-labelledby'] = this._labelId;
+
+        return a;
+    }
+}
+
