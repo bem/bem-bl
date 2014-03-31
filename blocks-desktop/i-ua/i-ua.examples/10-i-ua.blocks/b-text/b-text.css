@@ -1,0 +1,29 @@
+.b-text__h3
+{
+    font-size: 1.3em;
+
+    padding: 25px;
+}
+
+.b-text__table
+{
+    width: 85%;
+    margin: 10px auto;
+    padding: 25px 0;
+
+    background: #fff;
+}
+
+.b-text__td
+{
+    padding: 15px 25px;
+
+    vertical-align: top;
+
+    border-bottom: 1px solid rgba(83, 83, 83, .33);
+}
+
+.b-text__td:not(:last-child)
+{
+    border-right: 1px solid rgba(83, 83, 83, .33);
+}
