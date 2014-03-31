@@ -1,0 +1,64 @@
+.button
+{
+    font-size: 13px;
+    line-height: 28px;
+
+    position: relative;
+
+    display: inline-block;
+
+    margin: 0;
+    padding: 0;
+
+    -webkit-user-select: none;
+       -moz-user-select: none;
+            user-select: none;
+    text-align: center;
+    white-space: nowrap;
+
+    border: 1px solid rgba(0,0,0,.2);
+    border-radius: 3px;
+    outline: 0;
+    background: #fff;
+    background: -webkit-linear-gradient(top, #fff 0,#eee 100%);
+    background:         linear-gradient(to bottom, #fff 0,#eee 100%);
+}
+
+.button__text
+{
+    position: relative;
+
+    padding: 0 1em;
+
+    pointer-events: none;
+}
+
+.button_focused_yes
+{
+    -moz-box-shadow: 0 1px 0 rgba(0,0,0,.07), 0 0 6px 2px rgba(255,204,0,.7);
+         box-shadow: 0 1px 0 rgba(0,0,0,.07), 0 0 6px 2px rgba(255,204,0,.7);
+}
+
+.button.button_pressed_yes:before
+{
+    position: absolute;
+    top: 1px;
+    right: 1px;
+    bottom: 1px;
+    left: 1px;
+
+    padding: 0;
+
+    content: '';
+
+    border-radius: 2px;
+    background-color: #f6f5f3;
+    -moz-box-shadow: 0 0 0 1px rgba(0,0,0,.3);
+         box-shadow: 0 0 0 1px rgba(0,0,0,.3);
+}
+
+.i-ua_interaction_yes[data-interaction='pointer'] .button_focused_yes
+{
+    -moz-box-shadow: none;
+         box-shadow: none;
+}

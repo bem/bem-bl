@@ -1,0 +1,6 @@
+block b-page, mix: {
+    var mix = applyNext() || [];
+
+    mix.push({ block: 'i-ua', mods: { interaction: 'yes' }, js: true });
+    return mix;
+}
