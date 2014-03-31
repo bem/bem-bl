@@ -264,13 +264,13 @@ a.button_disabled_yes .button__text
              box-shadow: 0 0 0 1px rgba(193,154,0,.2);
     }
 
-    .i-ua_interaction_pointer .button_focused_yes.button_theme_normal
+    .i-ua_interaction_yes[data-interaction='pointer'] .button_focused_yes.button_theme_normal
     {
         -moz-box-shadow: none;
              box-shadow: none;
     }
 
-    .i-ua_interaction_pointer .button_focused_yes.button_theme_normal:not(.button_pressed_yes):before
+    .i-ua_interaction_yes[data-interaction='pointer'] .button_focused_yes.button_theme_normal:not(.button_pressed_yes):before
     {
         -moz-box-shadow: none;
              box-shadow: none;
@@ -369,7 +369,7 @@ a.button_theme_normal.button_hovered_yes
              box-shadow: 0 1px 0 rgba(0, 0, 0, .07), 0 0 6px 2px rgba(255, 204, 0, .7);
     }
 
-    .i-ua_interaction_pointer .button_focused_yes.button_theme_action
+    .i-ua_interaction_yes[data-interaction='pointer'] .button_focused_yes.button_theme_action
     {
         -moz-box-shadow: none;
              box-shadow: none;
@@ -381,7 +381,7 @@ a.button_theme_normal.button_hovered_yes
              box-shadow: 0 0 0 1px rgba(193,154,0,.2);
     }
 
-    .i-ua_interaction_pointer .button_focused_yes.button_theme_action:before
+    .i-ua_interaction_yes[data-interaction='pointer'] .button_focused_yes.button_theme_action:before
     {
         -moz-box-shadow: none;
              box-shadow: none;
@@ -475,8 +475,8 @@ a.button_theme_action.button_hovered_yes
          box-shadow: 0 1px 0 rgba(0,0,0,.07);
 }
 
-.i-ua_interaction_pointer .button_round_yes.button_focused_yes,
-.i-ua_interaction_pointer .button_round_yes.button_focused_yes:not(.button_pressed_yes)::before
+.i-ua_interaction_yes[data-interaction='pointer'] .button_round_yes.button_focused_yes,
+.i-ua_interaction_yes[data-interaction='pointer'] .button_round_yes.button_focused_yes:not(.button_pressed_yes)::before
 {
     -moz-box-shadow: none;
          box-shadow: none;
@@ -675,7 +675,7 @@ a.button_theme_action.button_hovered_yes
              box-shadow: 0 1px 0 rgba(0,0,0,.07), 0 0 6px 2px rgba(255,204,0,.7);
     }
 
-    .i-ua_interaction_pointer .checkbox_theme_normal .checkbox__box_focused_yes:before
+    .i-ua_interaction_yes[data-interaction='pointer'] .checkbox_theme_normal .checkbox__box_focused_yes:before
     {
         -moz-box-shadow: none;
              box-shadow: none;
@@ -688,7 +688,7 @@ a.button_theme_action.button_hovered_yes
              box-shadow: 0 0 0 1px rgba(193,154,0,.2);
     }
 
-    .i-ua_interaction_pointer .checkbox_theme_normal .checkbox__box_focused_yes:after
+    .i-ua_interaction_yes[data-interaction='pointer'] .checkbox_theme_normal .checkbox__box_focused_yes:after
     {
         -moz-box-shadow: none;
              box-shadow: none;
@@ -700,7 +700,7 @@ a.button_theme_action.button_hovered_yes
              box-shadow: inset 0 1px 5px rgba(30,23,0,.8), 0 0 6px 2px rgba(255,204,0,.7), 0 2px 0 -1px rgba(255,255,255,.2);
     }
 
-    .i-ua_interaction_pointer  .checkbox_theme_normal .checkbox__box_focused_yes.checkbox__box_checked_yes:before
+    .i-ua_interaction_yes[data-interaction='pointer']  .checkbox_theme_normal .checkbox__box_focused_yes.checkbox__box_checked_yes:before
     {
         -moz-box-shadow: inset 0 1px 5px rgba(30,23,0,.8), 0 2px 0 -1px rgba(255,255,255,.2);
              box-shadow: inset 0 1px 5px rgba(30,23,0,.8), 0 2px 0 -1px rgba(255,255,255,.2);
@@ -887,7 +887,7 @@ a.button_theme_action.button_hovered_yes
              box-shadow: 0 1px 0 rgba(0,0,0,.07), 0 0 6px 2px rgba(255,204,0,.7);
     }
 
-    .i-ua_interaction_pointer .radiobox_theme_normal .radiobox__radio_focused_yes .radiobox__box
+    .i-ua_interaction_yes[data-interaction='pointer'] .radiobox_theme_normal .radiobox__radio_focused_yes .radiobox__box
     {
         -moz-box-shadow: none;
              box-shadow: none;
@@ -905,7 +905,7 @@ a.button_theme_action.button_hovered_yes
              box-shadow: inset 0 1px 5px rgba(30,23,0,.8), 0 0 6px 2px rgba(255,204,0,.7), 0 2px 0 -1px rgba(255,255,255,.2);
     }
 
-    .i-ua_interaction_pointer .radiobox_theme_normal .radiobox__radio_focused_yes.radiobox__radio_checked_yes .radiobox__box
+    .i-ua_interaction_yes[data-interaction='pointer'] .radiobox_theme_normal .radiobox__radio_focused_yes.radiobox__radio_checked_yes .radiobox__box
     {
         -moz-box-shadow: inset 0 1px 5px rgba(30,23,0,.8), 0 2px 0 -1px rgba(255,255,255,.2);
              box-shadow: inset 0 1px 5px rgba(30,23,0,.8), 0 2px 0 -1px rgba(255,255,255,.2);
@@ -2017,7 +2017,7 @@ body .input_type_textarea .input__control
              box-shadow: 0 0 6px 2px rgba(255,204,0,.7), 0 1px 0 rgba(0,0,0,.07);
     }
 
-    .i-ua_interaction_pointer .radio-button_theme_normal .radio-button__radio_focused_yes:before
+    .i-ua_interaction_yes[data-interaction='pointer'] .radio-button_theme_normal .radio-button__radio_focused_yes:before
     {
         -moz-box-shadow: none;
              box-shadow: none;
@@ -2041,13 +2041,13 @@ body .input_type_textarea .input__control
              box-shadow: inset 0 1px 3px -1px rgba(0,0,0,.45), 0 0 0 1px rgba(193,154,0,.2);
     }
 
-    .i-ua_interaction_pointer .radio-button_theme_normal .radio-button__radio_pressed_yes.radio-button__radio_focused_yes:before
+    .i-ua_interaction_yes[data-interaction='pointer'] .radio-button_theme_normal .radio-button__radio_pressed_yes.radio-button__radio_focused_yes:before
     {
         -moz-box-shadow: inset 0 1px 5px rgba(30,23,0,.8), 0 2px 0 -1px rgba(255,255,255,.2);
              box-shadow: inset 0 1px 5px rgba(30,23,0,.8), 0 2px 0 -1px rgba(255,255,255,.2);
     }
 
-    .i-ua_interaction_pointer .radio-button_theme_normal .radio-button__radio_pressed_yes.radio-button__radio_focused_yes:after
+    .i-ua_interaction_yes[data-interaction='pointer'] .radio-button_theme_normal .radio-button__radio_pressed_yes.radio-button__radio_focused_yes:after
     {
         -moz-box-shadow: inset 0 1px 3px -1px rgba(0,0,0,.45);
              box-shadow: inset 0 1px 3px -1px rgba(0,0,0,.45);
@@ -2227,13 +2227,13 @@ body .input_type_textarea .input__control
              box-shadow: 0 0 0 1px rgba(193,154,0,.2);
     }
 
-    .i-ua_interaction_pointer .check-button_focused_yes.check-button_theme_normal
+    .i-ua_interaction_yes[data-interaction='pointer'] .check-button_focused_yes.check-button_theme_normal
     {
         -moz-box-shadow: none;
              box-shadow: none;
     }
 
-    .i-ua_interaction_pointer .check-button_focused_yes.check-button_theme_normal:before
+    .i-ua_interaction_yes[data-interaction='pointer'] .check-button_focused_yes.check-button_theme_normal:before
     {
         -moz-box-shadow: none;
              box-shadow: none;
@@ -2244,8 +2244,8 @@ body .input_type_textarea .input__control
     /* определения с i-ua_interaction_pointer для сохранения рамки */
     .check-button_pressed_yes.check-button_theme_normal,
     .check-button_checked_yes.check-button_theme_normal,
-    .i-ua_interaction_pointer .check-button_pressed_yes.check-button_theme_normal,
-    .i-ua_interaction_pointer .check-button_checked_yes.check-button_theme_normal
+    .i-ua_interaction_yes[data-interaction='pointer'] .check-button_pressed_yes.check-button_theme_normal,
+    .i-ua_interaction_yes[data-interaction='pointer'] .check-button_checked_yes.check-button_theme_normal
     {
         color: #7a7254;
         background: rgba(255,236,166,.4);
@@ -2496,8 +2496,8 @@ body .check-button_disabled_yes
              box-shadow: 0 1px 0 rgba(0,0,0,.07), 0 0 6px 2px rgba(255,204,0,.7);
     }
 
-    .i-ua_interaction_pointer .tumbler_theme_normal.tumbler_pressed_yes .tumbler__box,
-    .i-ua_interaction_pointer .tumbler_theme_normal.tumbler_focused_yes .tumbler__box
+    .i-ua_interaction_yes[data-interaction='pointer'] .tumbler_theme_normal.tumbler_pressed_yes .tumbler__box,
+    .i-ua_interaction_yes[data-interaction='pointer'] .tumbler_theme_normal.tumbler_focused_yes .tumbler__box
     {
         -moz-box-shadow: none;
              box-shadow: none;

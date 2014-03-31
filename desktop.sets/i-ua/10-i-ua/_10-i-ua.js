@@ -2860,7 +2860,7 @@ var ptp = Array.prototype,
         },
 
         /**
-         * Creates an array containing only the elements from the source array that the callback returns true for. 
+         * Creates an array containing only the elements from the source array that the callback returns true for.
          * @param {Function} callback Called for each element
          * @param {Object} [ctx] Callback context
          * @returns {Array}
@@ -6024,10 +6024,10 @@ Lego.blockInitBinded || (Lego.blockInitBinded = !!$(document).ready(function(){ 
 ;
 /* ../../../../desktop.blocks/i-ua/i-ua.js begin */
 /*
- * Блок для определения способа взаимодействия пользователя со страницей.
- * Различает взамодействие с помощью клавиатуры или мышки-пальца.
+ * Block to determine how the user interacts with the page.
+ * Distinguishes interaction with a keyboard or mouse/finger.
  */
-BEM.DOM.decl('i-ua', {}, {
+BEM.DOM.decl({ block: 'i-ua', modName: 'interaction', modVal: 'yes' }, {}, {
 
     live: function() {
 
@@ -6042,11 +6042,13 @@ BEM.DOM.decl('i-ua', {}, {
      */
     _onPointer: function() {
         /* this – instance */
-        this.setMod('interaction', 'pointer');
+        this.domElem.attr('data-interaction', 'pointer');
 
-        this.__self
-                   .liveUnbindFrom('mousedown', this.__self._onPointer)
-                   .liveBindTo('keydown', this.__self._onKeyboard);
+        var __self = this.__self;
+
+        __self
+              .liveUnbindFrom('mousedown', __self._onPointer)
+              .liveBindTo('keydown', __self._onKeyboard);
     },
 
     /**
@@ -6054,15 +6056,16 @@ BEM.DOM.decl('i-ua', {}, {
      */
     _onKeyboard: function() {
         /* this – instance */
-        this.setMod('interaction', 'keyboard');
+        this.domElem.attr('data-interaction', 'keyboard');
 
-        this.__self
-                   .liveUnbindFrom('keydown', this.__self._onKeyboard)
-                   .liveBindTo('mousedown', this.__self._onPointer);
+        var __self = this.__self;
+
+        __self
+               .liveUnbindFrom('keydown', __self._onKeyboard)
+               .liveBindTo('mousedown', __self._onPointer);
     }
 
 });
-
 /* ../../../../desktop.blocks/i-ua/i-ua.js end */
 ;
 /* ../../../../libs/romochka/blocks-common/i-common/i-common.js begin */
@@ -10874,7 +10877,7 @@ BEM.DOM.decl('select', {
             }
         }
     }
-    
+
 });
 
 }(jQuery, BEM));
