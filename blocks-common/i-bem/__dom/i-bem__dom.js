@@ -1332,9 +1332,15 @@ var DOM = BEM.DOM = BEM.decl('i-bem__dom', {
      */
     liveUnbindFrom : function(elem, event, callback) {
 
+        if (!event || $.isFunction(event)) {
+            callback = event;
+            event = elem;
+            elem = undefined;
+        }
+
         var _this = this;
 
-        if(elem.indexOf(' ') > 1) {
+        if(elem && elem.indexOf(' ') > 1) {
             elem.split(' ').forEach(function(elem) {
                 _this._liveClassUnbind(
                     buildClass(_this._name, elem),
