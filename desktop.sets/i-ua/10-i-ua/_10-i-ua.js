@@ -6027,13 +6027,29 @@ Lego.blockInitBinded || (Lego.blockInitBinded = !!$(document).ready(function(){ 
  * Block to determine how the user interacts with the page.
  * Distinguishes interaction with a keyboard or mouse/finger.
  */
-BEM.DOM.decl({ block: 'i-ua', modName: 'interaction', modVal: 'yes' }, {}, {
+/*
+ * Block to determine how the user interacts with the page.
+ * Distinguishes interaction with a keyboard or mouse/finger.
+ */
+BEM.DOM.decl({ block: 'i-ua', modName: 'interaction', modVal: 'yes' }, {
 
-    live: function() {
+    onSetMod: {
 
-        this
-            .liveBindTo('mousedown', this._onPointer)
-            .liveBindTo('keydown', this._onKeyboard);
+        js: function() {
+            /**
+             * Key, which interact with controls
+             * @type {Array}
+             * tab: 9
+             * enter: 13
+             * space: 32
+             * left arrow: 37
+             * up arrow: 38
+             * right arrow: 39
+             * down arrow: 40
+             * @private
+             */
+            this._interactKeys = [9, 13, 32, 37, 38, 39, 40];
+        }
 
     },
 
@@ -6041,28 +6057,35 @@ BEM.DOM.decl({ block: 'i-ua', modName: 'interaction', modVal: 'yes' }, {}, {
      * @private
      */
     _onPointer: function() {
-        /* this – instance */
         this.domElem.attr('data-interaction', 'pointer');
 
-        var __self = this.__self;
-
-        __self
-              .liveUnbindFrom('mousedown', __self._onPointer)
-              .liveBindTo('keydown', __self._onKeyboard);
+        this.__self
+            .liveUnbindFrom('mousedown', this._onPointer)
+            .liveBindTo('keydown', this._onKeyboard);
     },
 
     /**
      * @private
      */
-    _onKeyboard: function() {
-        /* this – instance */
+    _onKeyboard: function(e) {
+
+        if(this._interactKeys.indexOf(e.keyCode) === -1) {
+            return;
+        }
+
         this.domElem.attr('data-interaction', 'keyboard');
 
-        var __self = this.__self;
+        this.__self
+            .liveUnbindFrom('keydown', this._onKeyboard)
+            .liveBindTo('mousedown', this._onPointer);
+    }
 
-        __self
-               .liveUnbindFrom('keydown', __self._onKeyboard)
-               .liveBindTo('mousedown', __self._onPointer);
+}, {
+
+    live: function() {
+        this
+            .liveBindTo('mousedown', this.prototype._onPointer)
+            .liveBindTo('keydown', this.prototype._onKeyboard);
     }
 
 });
