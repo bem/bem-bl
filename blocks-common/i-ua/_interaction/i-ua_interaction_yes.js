@@ -2,42 +2,75 @@
  * Block to determine how the user interacts with the page.
  * Distinguishes interaction with a keyboard or mouse/finger.
  */
-BEM.DOM.decl({ block: 'i-ua', modName: 'interaction', modVal: 'yes' }, {}, {
+(function() {
 
-    live: function() {
+    var INTERACTKEYS = {
+        9: 'tab',
+        13: 'enter',
+        32: 'space',
+        33: 'page up',
+        34: 'page down',
+        35: 'end',
+        36: 'home',
+        37: 'left arrow',
+        38: 'up arrow',
+        39: 'right arrow',
+        40: 'down arrow',
+        46: 'delete'
+    };
 
-        this
-            .liveBindTo('mousedown', this._onPointer)
-            .liveBindTo('keydown', this._onKeyboard);
+    var INTERACTDISABLEKEYS = {
+        27: 'escape'
+    };
 
-    },
+    BEM.DOM.decl({
+        block: 'i-ua',
+        modName: 'interaction',
+        modVal: 'yes' }, {
 
-    /**
-     * @private
-     */
-    _onPointer: function() {
-        /* this – instance */
-        this.domElem.attr('data-interaction', 'pointer');
+        /**
+         * @private
+         */
+        _onPointer: function() {
+            this.dataInteractionKeyboard = false;
+            this.domElem.attr('data-interaction', 'pointer');
 
-        var __self = this.__self;
+            this.__self.liveUnbindFrom('mousedown', this._onPointer);
+        },
 
-        __self
-              .liveUnbindFrom('mousedown', __self._onPointer)
-              .liveBindTo('keydown', __self._onKeyboard);
-    },
+        /**
+         * @private
+         */
+        _onKeyboard: function(e) {
 
-    /**
-     * @private
-     */
-    _onKeyboard: function() {
-        /* this – instance */
-        this.domElem.attr('data-interaction', 'keyboard');
+            var keyCode = e.keyCode;
 
-        var __self = this.__self;
+            if(INTERACTDISABLEKEYS[keyCode]) {
+                this._onPointer();
+                return;
 
-        __self
-               .liveUnbindFrom('keydown', __self._onKeyboard)
-               .liveBindTo('mousedown', __self._onPointer);
-    }
+            } else if(!INTERACTKEYS[keyCode]) {
+                return;
+            }
 
-});
+            if(this.dataInteractionKeyboard) {
+                return;
+            }
+
+            this.domElem.attr('data-interaction', 'keyboard');
+            this.dataInteractionKeyboard = true;
+
+            this.__self.liveBindTo('mousedown', this._onPointer);
+        }
+
+    }, {
+
+        live: function() {
+            this
+                .liveBindTo('mousedown', this.prototype._onPointer)
+                .liveBindTo('keydown', this.prototype._onKeyboard);
+        }
+
+    });
+
+}());
