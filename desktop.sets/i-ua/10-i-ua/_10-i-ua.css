@@ -2255,7 +2255,9 @@ body .input_type_textarea .input__control
 
     /* :before — градиент у кнопки */
     .check-button.check-button_pressed_yes.check-button_theme_normal:before,
-    .check-button.check-button_checked_yes.check-button_theme_normal:before
+    .check-button.check-button_checked_yes.check-button_theme_normal:before,
+    .i-ua_interaction_yes[data-interaction='pointer'] .check-button.check-button_pressed_yes.check-button_theme_normal:before,
+    .i-ua_interaction_yes[data-interaction='pointer'] .check-button.check-button_checked_yes.check-button_theme_normal:before
     {
         background: #ffeca6;
         background: -webkit-linear-gradient(top, #ffeca6 0,#fff6d5 100%);
