@@ -120,6 +120,27 @@ function replaceContext(src) {
       return false;
   };
 
+  function isHash(node) {
+    var val = node.init;
+    if (!val)
+      return false;
+
+    if (val.type !== 'ObjectExpression' || val.properties.length !== 3)
+      return false;
+
+    var props = val.properties;
+    return props.every(function(prop) {
+      var name = prop.key.name;
+      var val = prop.value;
+
+      if ((name === 'n' || name === 'm') && val.type === 'ObjectExpression')
+        return true;
+      if (name === 'd' && val.type === 'FunctionExpression')
+        return true;
+      return false;
+    });
+  }
+
   var applyc = null;
   var map = null;
 
@@ -135,7 +156,8 @@ function replaceContext(src) {
         applyc = node;
       } else if (applyc === null &&
                  node.type === 'VariableDeclarator' &&
-                 /^__h\d+$/.test(id)) {
+                 /^__(h|\$m)\d+$/.test(id) &&
+                 isHash(node)) {
         map = node;
       } else if (applyc === null) {
         return;
