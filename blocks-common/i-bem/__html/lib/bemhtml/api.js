@@ -5,6 +5,7 @@ var ometajs = require('ometajs'),
     xjst = require('xjst'),
     vm = require('vm'),
     bemhtml = require('../ometa/bemhtml'),
+    checks = require('./checks'),
     BEMHTMLParser = bemhtml.BEMHTMLParser,
     BEMHTMLToXJST = bemhtml.BEMHTMLToXJST,
     BEMHTMLLogLocal = bemhtml.BEMHTMLLogLocal;
@@ -53,7 +54,24 @@ api.translate = function translate(source, options) {
   try {
     var xjstJS = xjst.compile(xjstTree, '', {
       'no-opt': !!options.devMode,
-      engine: 'sort-group'
+      engine: 'sort-group',
+      afterCompile: function(tree) {
+        if (options.nochecks)
+          return;
+
+        var errors = [];
+
+        errors = errors.concat(checks.treeStructure(tree));
+
+        if (errors.length) {
+          var red = '\x1b[1;31m';
+          var rst = '\x1b[0m';
+          console.error(red + '!!! WARNING !!!!');
+          for (var i = 0; i < errors.length; i++)
+            console.error(errors[i]);
+          console.error('!!! WARNING !!!!' + rst);
+        }
+      }
     });
   } catch (e) {
     throw new Error("xjst to js compilation failed:\n" + e.stack);
