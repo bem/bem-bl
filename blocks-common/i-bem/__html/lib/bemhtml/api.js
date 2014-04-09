@@ -55,7 +55,18 @@ api.translate = function translate(source, options) {
          '    if (!options) options = {};\n' +
          '    cache = options.cache;\n' +
          '    return function() {\n' +
-         '      if (context === this) context = undefined;\n' +
+         '      if (context === this) {\n' +
+         '        context = undefined;\n' +
+         '      } else {\n' +
+                  propKeys.map(function(prop) {
+                    if (options.preinit) {
+                      return properties[prop] + ' = context.' + prop +
+                          ' || \'\';\n';
+                    } else {
+                      return properties[prop] + ' = \'\';\n';
+                    }
+                  }).join('') +
+         '      }\n' +
          (vars.length > 0 ? '    var ' + vars.join(', ') + ';\n' : '') +
          '      return xjst.' + options.applyFuncName + '.call(\n' +
          (options.raw ? 'context' : '[context]') + '\n' +
