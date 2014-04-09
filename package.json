@@ -3,7 +3,7 @@
   "version": "1.2.0",
   "private": true,
   "dependencies": {
-    "xjst": "~0.5.1",
+    "xjst": "~0.5.19",
     "ometajs": "~3.3.5",
     "dom-js": "~0.0.9"
   },

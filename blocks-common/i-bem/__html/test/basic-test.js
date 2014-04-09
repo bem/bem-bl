@@ -6,7 +6,8 @@ suite('BEMHTML Compiler', function() {
     test(name, function() {
       assert.equal(bemhtml.compile(src, {
         raw: true,
-        preinit: true
+        preinit: true,
+        nochecks: true
       }).call(data), dst);
     });
   }
