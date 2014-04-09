@@ -78,8 +78,12 @@ api.translate = function translate(source, options) {
          '        context = undefined;\n' +
          '      } else {\n' +
                   propKeys.map(function(prop) {
-                    return properties[prop] + ' = context.' + prop +
-                        ' || \'\';\n';
+                    if (options.preinit) {
+                      return properties[prop] + ' = context.' + prop +
+                          ' || \'\';\n';
+                    } else {
+                      return properties[prop] + ' = \'\';\n';
+                    }
                   }).join('') +
          '      }\n' +
          (vars.length > 0 ? '    var ' + vars.join(', ') + ';\n' : '') +
