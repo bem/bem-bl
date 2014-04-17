@@ -114,6 +114,8 @@ function initBlock(blockName, domElem, params, forceLive, callback) {
 
     var blockClass = blocks[blockName] || DOM.decl(blockName, {}, { live : true });
     if(!(blockClass._liveInitable = !!blockClass._processLive()) || forceLive || params.live === false) {
+        forceLive && domElem.addClass('i-bem');
+
         var block = new blockClass(uniqIdToDomElems[uniqId], params, !!forceLive);
         delete uniqIdToDomElems[uniqId];
         callback && callback.apply(block, Array.prototype.slice.call(arguments, 4));
