@@ -7,33 +7,33 @@ var BEMHTML = function() {
         if (__t === "default") {
             return $2(__$ctx);
         } else if (__t === "attrs") {
-            return $113(__$ctx);
+            return $122(__$ctx);
         } else if (__t === "tag") {
-            return $174(__$ctx);
+            return $189(__$ctx);
         } else if (__t === "value") {
             if (__$ctx.block === "tumbler") {
                 if (__$ctx.elem === "option") {
-                    return $224(__$ctx);
+                    return $239(__$ctx);
                 } else {
-                    return $300(__$ctx);
+                    return $315(__$ctx);
                 }
             } else {
-                return $300(__$ctx);
+                return $315(__$ctx);
             }
         } else if (__t === "content") {
-            return $229(__$ctx);
+            return $244(__$ctx);
         } else if (__t === "js") {
-            return $261(__$ctx);
+            return $276(__$ctx);
         } else if (__t === "mix") {
-            return $284(__$ctx);
+            return $299(__$ctx);
         } else {
-            return $300(__$ctx);
+            return $315(__$ctx);
         }
     }
     function $2(__$ctx) {
         var __t = __$ctx.block;
         if (__t === "i-jquery") {
-            if (!(__$ctx["__$anflg30"] !== true) === false) {
+            if (!(__$ctx["__$anflg32"] !== true) === false) {
                 if (!!__$ctx.elem === false) {
                     return $6(__$ctx);
                 } else {
@@ -47,66 +47,66 @@ var BEMHTML = function() {
         } else if (__t === "check-button") {
             return $70(__$ctx);
         } else if (__t === "radio-button") {
-            return $78(__$ctx);
+            return $87(__$ctx);
         } else if (__t === "button") {
-            return $92(__$ctx);
+            return $101(__$ctx);
         } else if (__t === "select") {
-            return $103(__$ctx);
+            return $112(__$ctx);
         } else {
-            return $300(__$ctx);
+            return $315(__$ctx);
         }
     }
     function $6(__$ctx) {
-        var __r202, __r206, __r203, __r204, __r205;
-        return "", __r202 = __$ctx["__$anflg30"], __$ctx["__$anflg30"] = true, __r206 = ("", __r203 = __$ctx.ctx, __$ctx.ctx = {
+        var __r210, __r214, __r211, __r212, __r213;
+        return "", __r210 = __$ctx["__$anflg32"], __$ctx["__$anflg32"] = true, __r214 = ("", __r211 = __$ctx.ctx, __$ctx.ctx = {
             block: "b-page",
             elem: "js",
-            url: __$ctx.ctx.url || (__$ctx.ctx.protocol ? __$ctx.ctx.protocol + ":" : "") + "//yandex.st/jquery/" + __$ctx.mods.version + "/jquery.min.js"
-        }, __r204 = __$ctx._mode, __$ctx._mode = "", __r205 = $821(__$ctx), __$ctx.ctx = __r203, __$ctx._mode = __r204, "", __r205), __$ctx["__$anflg30"] = __r202, "", __r206;
+            url: __$ctx.ctx.url || (__$ctx.ctx.protocol ? __$ctx.ctx.protocol + ":" : "") + "//yastatic.net/jquery/" + __$ctx.mods.version + "/jquery.min.js"
+        }, __r212 = __$ctx._mode, __$ctx._mode = "", __r213 = $870(__$ctx), __$ctx.ctx = __r211, __$ctx._mode = __r212, "", __r213), __$ctx["__$anflg32"] = __r210, "", __r214;
         return;
     }
     function $9(__$ctx) {
-        if (!(__$ctx["__$anflg29"] !== true) === false) {
+        if (!(__$ctx["__$anflg31"] !== true) === false) {
             if (!!__$ctx.elem === false) {
                 return $12(__$ctx);
             } else {
-                return $300(__$ctx);
+                return $315(__$ctx);
             }
         } else {
-            return $300(__$ctx);
+            return $315(__$ctx);
         }
     }
     function $12(__$ctx) {
-        var __r197, __r201, __r198, __r199, __r200;
-        return "", __r197 = __$ctx["__$anflg29"], __$ctx["__$anflg29"] = true, __r201 = ("", __r198 = __$ctx.ctx, __$ctx.ctx = {
+        var __r205, __r209, __r206, __r207, __r208;
+        return "", __r205 = __$ctx["__$anflg31"], __$ctx["__$anflg31"] = true, __r209 = ("", __r206 = __$ctx.ctx, __$ctx.ctx = {
             block: "b-page",
             elem: "js",
-            url: __$ctx.ctx.url || (__$ctx.ctx.protocol ? __$ctx.ctx.protocol + ":" : "") + "//yandex.st/jquery/" + __$ctx.mods.version + "/jquery.min.js"
-        }, __r199 = __$ctx._mode, __$ctx._mode = "", __r200 = $821(__$ctx), __$ctx.ctx = __r198, __$ctx._mode = __r199, "", __r200), __$ctx["__$anflg29"] = __r197, "", __r201;
+            url: __$ctx.ctx.url || (__$ctx.ctx.protocol ? __$ctx.ctx.protocol + ":" : "") + "//yastatic.net/jquery/" + __$ctx.mods.version + "/jquery.min.js"
+        }, __r207 = __$ctx._mode, __$ctx._mode = "", __r208 = $870(__$ctx), __$ctx.ctx = __r206, __$ctx._mode = __r207, "", __r208), __$ctx["__$anflg31"] = __r205, "", __r209;
         return;
     }
     function $17(__$ctx) {
         if (__$ctx.elem === "option") {
             if (__$ctx.ctx.side === "left") {
-                if (!(__$ctx["__$anflg26"] !== true) === false) {
+                if (!(__$ctx["__$anflg28"] !== true) === false) {
                     {
                         "";
-                        var __r190 = __$ctx["__$anflg26"];
-                        __$ctx["__$anflg26"] = true;
+                        var __r198 = __$ctx["__$anflg28"];
+                        __$ctx["__$anflg28"] = true;
                         {
                             "";
-                            var __r191 = __$ctx.ctx;
+                            var __r199 = __$ctx.ctx;
                             __$ctx.ctx = [ __$ctx.ctx, {
                                 elem: "box"
                             } ];
-                            var __r192 = __$ctx._mode;
+                            var __r200 = __$ctx._mode;
                             __$ctx._mode = "";
-                            $821(__$ctx);
-                            __$ctx.ctx = __r191;
-                            __$ctx._mode = __r192;
+                            $870(__$ctx);
+                            __$ctx.ctx = __r199;
+                            __$ctx._mode = __r200;
                             "";
                         }
-                        __$ctx["__$anflg26"] = __r190;
+                        __$ctx["__$anflg28"] = __r198;
                         "";
                     }
                     undefined;
@@ -122,7 +122,7 @@ var BEMHTML = function() {
         }
     }
     function $24(__$ctx) {
-        if (!(__$ctx["__$anflg25"] !== true) === false) {
+        if (!(__$ctx["__$anflg27"] !== true) === false) {
             if (!true === false) {
                 return $27(__$ctx);
             } else {
@@ -133,21 +133,21 @@ var BEMHTML = function() {
         }
     }
     function $27(__$ctx) {
-        var __r185, __r186;
-        var _$4lvalue = ("", __r185 = __$ctx._mode, __$ctx._mode = "value", __r186 = $224(__$ctx), __$ctx._mode = __r185, "", __r186);
+        var __r193, __r194;
+        var _$4qvalue = ("", __r193 = __$ctx._mode, __$ctx._mode = "value", __r194 = $239(__$ctx), __$ctx._mode = __r193, "", __r194);
         {
             "";
-            var __r187 = __$ctx["__$anflg25"];
-            __$ctx["__$anflg25"] = true;
+            var __r195 = __$ctx["__$anflg27"];
+            __$ctx["__$anflg27"] = true;
             {
                 "";
-                var __r188 = __$ctx.ctx;
+                var __r196 = __$ctx.ctx;
                 __$ctx.ctx = {
                     elem: "label",
                     content: [ {
                         elem: "input",
                         name: __$ctx._name,
-                        value: _$4lvalue,
+                        value: _$4qvalue,
                         disabled: __$ctx._disabled,
                         elemMods: {
                             side: __$ctx.ctx.side
@@ -161,14 +161,14 @@ var BEMHTML = function() {
                         content: __$ctx.ctx.content
                     } ]
                 };
-                var __r189 = __$ctx._mode;
+                var __r197 = __$ctx._mode;
                 __$ctx._mode = "";
-                $821(__$ctx);
-                __$ctx.ctx = __r188;
-                __$ctx._mode = __r189;
+                $870(__$ctx);
+                __$ctx.ctx = __r196;
+                __$ctx._mode = __r197;
                 "";
             }
-            __$ctx["__$anflg25"] = __r187;
+            __$ctx["__$anflg27"] = __r195;
             "";
         }
         undefined;
@@ -176,21 +176,21 @@ var BEMHTML = function() {
     }
     function $32(__$ctx) {
         if ((__$ctx.ctx.mods || {}).disabled === "yes") {
-            if (!(__$ctx["__$anflg23"] !== true) === false) {
+            if (!(__$ctx["__$anflg25"] !== true) === false) {
                 if (!!__$ctx.elem === false) {
                     {
                         "";
-                        var __r181 = __$ctx["__$anflg23"];
-                        __$ctx["__$anflg23"] = true;
+                        var __r189 = __$ctx["__$anflg25"];
+                        __$ctx["__$anflg25"] = true;
                         {
                             "";
-                            var __r182 = __$ctx._disabled;
+                            var __r190 = __$ctx._disabled;
                             __$ctx._disabled = "disabled";
                             $17(__$ctx);
-                            __$ctx._disabled = __r182;
+                            __$ctx._disabled = __r190;
                             "";
                         }
-                        __$ctx["__$anflg23"] = __r181;
+                        __$ctx["__$anflg25"] = __r189;
                         "";
                     }
                     undefined;
@@ -207,21 +207,21 @@ var BEMHTML = function() {
     }
     function $41(__$ctx) {
         if ((__$ctx.ctx.mods || {}).checked === "yes") {
-            if (!(__$ctx["__$anflg22"] !== true) === false) {
+            if (!(__$ctx["__$anflg24"] !== true) === false) {
                 if (!!__$ctx.elem === false) {
                     {
                         "";
-                        var __r179 = __$ctx["__$anflg22"];
-                        __$ctx["__$anflg22"] = true;
+                        var __r187 = __$ctx["__$anflg24"];
+                        __$ctx["__$anflg24"] = true;
                         {
                             "";
-                            var __r180 = __$ctx._checked;
+                            var __r188 = __$ctx._checked;
                             __$ctx._checked = "checked";
                             $17(__$ctx);
-                            __$ctx._checked = __r180;
+                            __$ctx._checked = __r188;
                             "";
                         }
-                        __$ctx["__$anflg22"] = __r179;
+                        __$ctx["__$anflg24"] = __r187;
                         "";
                     }
                     undefined;
@@ -237,24 +237,24 @@ var BEMHTML = function() {
         }
     }
     function $50(__$ctx) {
-        if (!(__$ctx["__$anflg21"] !== true) === false) {
+        if (!(__$ctx["__$anflg23"] !== true) === false) {
             if (!!__$ctx.elem === false) {
                 if (!!(__$ctx.ctx.mods || {}).theme === false) {
                     {
                         "";
-                        var __r176 = __$ctx["__$anflg21"];
-                        __$ctx["__$anflg21"] = true;
+                        var __r184 = __$ctx["__$anflg23"];
+                        __$ctx["__$anflg23"] = true;
                         {
                             "";
-                            var __r177 = __$ctx.ctx, __r178 = __r177.mods;
-                            __r177.mods = __$ctx._.extend(__$ctx.ctx.mods || {}, {
+                            var __r185 = __$ctx.ctx, __r186 = __r185.mods;
+                            __r185.mods = __$ctx._.extend(__$ctx.ctx.mods || {}, {
                                 theme: "normal"
                             });
                             $17(__$ctx);
-                            __r177.mods = __r178;
+                            __r185.mods = __r186;
                             "";
                         }
-                        __$ctx["__$anflg21"] = __r176;
+                        __$ctx["__$anflg23"] = __r184;
                         "";
                     }
                     undefined;
@@ -270,289 +270,308 @@ var BEMHTML = function() {
         }
     }
     function $59(__$ctx) {
-        if (!(__$ctx["__$anflg20"] !== true) === false) {
+        if (!(__$ctx["__$anflg22"] !== true) === false) {
             if (!true === false) {
                 if (!!__$ctx.elem === false) {
                     return $63(__$ctx);
                 } else {
-                    return $300(__$ctx);
+                    return $315(__$ctx);
                 }
             } else {
-                return $300(__$ctx);
+                return $315(__$ctx);
             }
         } else {
-            return $300(__$ctx);
+            return $315(__$ctx);
         }
     }
     function $63(__$ctx) {
-        var _$4bid = __$ctx.generateId(), _$4bleftId = "left" + _$4bid, _$4brightId = "right" + _$4bid, _$4bsideId = null;
+        var _$4gid = __$ctx.generateId(), _$4gleftId = "left" + _$4gid, _$4grightId = "right" + _$4gid, _$4gsideId = null;
         if (__$ctx.ctx.content) {
-            _$4bsideId = __$ctx.ctx.content[0].side === "left" ? _$4bleftId : _$4brightId;
+            _$4gsideId = __$ctx.ctx.content[0].side === "left" ? _$4gleftId : _$4grightId;
         } else {
             undefined;
         }
         {
             "";
-            var __r171 = __$ctx["__$anflg20"];
-            __$ctx["__$anflg20"] = true;
+            var __r179 = __$ctx["__$anflg22"];
+            __$ctx["__$anflg22"] = true;
             {
                 "";
-                var __r172 = __$ctx._name;
-                __$ctx._name = __$ctx.ctx.name || (__$ctx.ctx.name = _$4bid);
-                var __r173 = __$ctx._leftId;
-                __$ctx._leftId = _$4bleftId;
-                var __r174 = __$ctx._rightId;
-                __$ctx._rightId = _$4brightId;
-                var __r175 = __$ctx._sideId;
-                __$ctx._sideId = _$4bsideId;
+                var __r180 = __$ctx._name;
+                __$ctx._name = __$ctx.ctx.name || (__$ctx.ctx.name = _$4gid);
+                var __r181 = __$ctx._leftId;
+                __$ctx._leftId = _$4gleftId;
+                var __r182 = __$ctx._rightId;
+                __$ctx._rightId = _$4grightId;
+                var __r183 = __$ctx._sideId;
+                __$ctx._sideId = _$4gsideId;
                 $17(__$ctx);
-                __$ctx._name = __r172;
-                __$ctx._leftId = __r173;
-                __$ctx._rightId = __r174;
-                __$ctx._sideId = __r175;
+                __$ctx._name = __r180;
+                __$ctx._leftId = __r181;
+                __$ctx._rightId = __r182;
+                __$ctx._sideId = __r183;
                 "";
             }
-            __$ctx["__$anflg20"] = __r171;
+            __$ctx["__$anflg22"] = __r179;
             "";
         }
         return;
     }
     function $70(__$ctx) {
-        if (!(__$ctx["__$anflg19"] !== true) === false) {
+        if (!(__$ctx.mods && __$ctx.mods.pseudo === "yes") === false) {
             if (!!__$ctx.elem === false) {
-                return $73(__$ctx);
+                return $72(__$ctx);
             } else {
-                return $300(__$ctx);
+                return $79(__$ctx);
             }
         } else {
-            return $300(__$ctx);
+            return $79(__$ctx);
         }
     }
-    function $73(__$ctx) {
-        var _$41ctx = __$ctx.ctx, _$41id = (_$41ctx.controlAttrs || {}).id || __$ctx.generateId(), _$41mods = _$41ctx.mods || {};
+    function $72(__$ctx) {
+        if (!!(__$ctx.ctx.mods || {}).theme === false) {
+            {
+                "";
+                var __r175 = __$ctx.ctx, __r176 = __r175.mods;
+                __r175.mods = __$ctx._.extend(__$ctx.ctx.mods || {}, {
+                    theme: "pseudo"
+                });
+                $72(__$ctx);
+                __r175.mods = __r176;
+                "";
+            }
+            undefined;
+            return;
+        } else {
+            return $79(__$ctx);
+        }
+    }
+    function $79(__$ctx) {
+        if (!(__$ctx["__$anflg20"] !== true) === false) {
+            if (!!__$ctx.elem === false) {
+                return $82(__$ctx);
+            } else {
+                return $315(__$ctx);
+            }
+        } else {
+            return $315(__$ctx);
+        }
+    }
+    function $82(__$ctx) {
+        var _$44ctx = __$ctx.ctx, _$44id = (_$44ctx.controlAttrs || {}).id || __$ctx.generateId(), _$44mods = _$44ctx.mods || {};
+        _$44mods.theme = _$44mods.theme || "normal";
+        {
+            "";
+            var __r172 = __$ctx["__$anflg20"];
+            __$ctx["__$anflg20"] = true;
+            {
+                "";
+                var __r173 = __$ctx._control;
+                __$ctx._control = {
+                    elem: "control",
+                    attrs: _$44ctx.controlAttrs,
+                    id: _$44id,
+                    labelledby: "text" + _$44id,
+                    name: _$44ctx.name,
+                    tabindex: _$44ctx.tabindex,
+                    checked: __$ctx.mods.checked,
+                    disabled: __$ctx.mods.disabled,
+                    value: _$44ctx.value || _$44ctx.content
+                };
+                var __r174 = _$44ctx.mods;
+                _$44ctx.mods = _$44mods;
+                $70(__$ctx);
+                __$ctx._control = __r173;
+                _$44ctx.mods = __r174;
+                "";
+            }
+            __$ctx["__$anflg20"] = __r172;
+            "";
+        }
+        undefined;
+        return;
+    }
+    function $87(__$ctx) {
+        if (!(__$ctx["__$anflg19"] !== true) === false) {
+            if (!!__$ctx.elem === false) {
+                return $90(__$ctx);
+            } else {
+                return $93(__$ctx);
+            }
+        } else {
+            return $93(__$ctx);
+        }
+    }
+    function $90(__$ctx) {
+        var _$41mods = __$ctx.ctx.mods || {};
         _$41mods.theme = _$41mods.theme || "normal";
         {
             "";
-            var __r168 = __$ctx["__$anflg19"];
+            var __r165 = __$ctx["__$anflg19"];
             __$ctx["__$anflg19"] = true;
             {
                 "";
-                var __r169 = __$ctx._control;
-                __$ctx._control = {
-                    elem: "control",
-                    attrs: _$41ctx.controlAttrs,
-                    id: _$41id,
-                    labelledby: "text" + _$41id,
-                    name: _$41ctx.name,
-                    tabindex: _$41ctx.tabindex,
-                    checked: __$ctx.mods.checked,
-                    disabled: __$ctx.mods.disabled,
-                    value: _$41ctx.value || _$41ctx.content
-                };
-                var __r170 = _$41ctx.mods;
-                _$41ctx.mods = _$41mods;
-                $70(__$ctx);
-                __$ctx._control = __r169;
-                _$41ctx.mods = __r170;
-                "";
-            }
-            __$ctx["__$anflg19"] = __r168;
-            "";
-        }
-        undefined;
-        return;
-    }
-    function $78(__$ctx) {
-        if (!(__$ctx["__$anflg18"] !== true) === false) {
-            if (!!__$ctx.elem === false) {
-                return $81(__$ctx);
-            } else {
-                return $84(__$ctx);
-            }
-        } else {
-            return $84(__$ctx);
-        }
-    }
-    function $81(__$ctx) {
-        var _$3ymods = __$ctx.ctx.mods || {};
-        _$3ymods.theme = _$3ymods.theme || "normal";
-        {
-            "";
-            var __r161 = __$ctx["__$anflg18"];
-            __$ctx["__$anflg18"] = true;
-            {
-                "";
-                var __r162 = __$ctx.ctx, __r163 = __r162.mods;
-                __r162.mods = _$3ymods;
-                var __r164 = __$ctx._modsDisabled;
+                var __r166 = __$ctx.ctx, __r167 = __r166.mods;
+                __r166.mods = _$41mods;
+                var __r168 = __$ctx._modsDisabled;
                 __$ctx._modsDisabled = __$ctx.ctx.mods && __$ctx.ctx.mods.disabled;
-                var __r165 = __$ctx._name;
+                var __r169 = __$ctx._name;
                 __$ctx._name = __$ctx.ctx.name;
-                var __r166 = __$ctx._value;
+                var __r170 = __$ctx._value;
                 __$ctx._value = __$ctx.ctx.value;
-                var __r167 = __$ctx._nextForChecked;
+                var __r171 = __$ctx._nextForChecked;
                 __$ctx._nextForChecked = false;
-                $78(__$ctx);
-                __r162.mods = __r163;
-                __$ctx._modsDisabled = __r164;
-                __$ctx._name = __r165;
-                __$ctx._value = __r166;
-                __$ctx._nextForChecked = __r167;
+                $87(__$ctx);
+                __r166.mods = __r167;
+                __$ctx._modsDisabled = __r168;
+                __$ctx._name = __r169;
+                __$ctx._value = __r170;
+                __$ctx._nextForChecked = __r171;
                 "";
             }
-            __$ctx["__$anflg18"] = __r161;
+            __$ctx["__$anflg19"] = __r165;
             "";
         }
         undefined;
         return;
     }
-    function $84(__$ctx) {
+    function $93(__$ctx) {
         if (__$ctx.elem === "radio") {
-            if (!(__$ctx["__$anflg17"] !== true) === false) {
-                return $87(__$ctx);
+            if (!(__$ctx["__$anflg18"] !== true) === false) {
+                return $96(__$ctx);
             } else {
-                return $300(__$ctx);
+                return $315(__$ctx);
             }
         } else {
-            return $300(__$ctx);
-        }
-    }
-    function $87(__$ctx) {
-        var __r156, __r160, __r157, __r158, __r159;
-        var _$3rctx = __$ctx.ctx, _$3relemMods = _$3rctx.elemMods || {}, _$3rctxControlAttrs = _$3rctx.controlAttrs || {}, _$3rvaluesMatched = _$3rctxControlAttrs.value != undefined && _$3rctxControlAttrs.value == __$ctx._value, _$3rcontrolAttrs = __$ctx._.extend(_$3rctxControlAttrs, {
-            checked: (_$3rvaluesMatched || _$3relemMods.checked) && (__$ctx._nextForChecked = true),
-            disabled: __$ctx._modsDisabled || _$3relemMods.disabled
-        });
-        _$3rcontrolAttrs.id || (_$3rcontrolAttrs.id = __$ctx.generateId());
-        return "", __r156 = __$ctx["__$anflg17"], __$ctx["__$anflg17"] = true, __r160 = ("", __r157 = __$ctx._controlAttrs, __$ctx._controlAttrs = _$3rcontrolAttrs, __r158 = __$ctx._valuesMatched, __$ctx._valuesMatched = _$3rvaluesMatched, __r159 = $78(__$ctx), __$ctx._controlAttrs = __r157, __$ctx._valuesMatched = __r158, "", __r159), __$ctx["__$anflg17"] = __r156, "", __r160;
-        return;
-    }
-    function $92(__$ctx) {
-        if (!(__$ctx["__$anflg16"] !== true) === false) {
-            if (!__$ctx._formSelect === false) {
-                if (!!__$ctx.elem === false) {
-                    return $96(__$ctx);
-                } else {
-                    return $300(__$ctx);
-                }
-            } else {
-                return $300(__$ctx);
-            }
-        } else {
-            return $300(__$ctx);
+            return $315(__$ctx);
         }
     }
     function $96(__$ctx) {
-        var _$3nctx = __$ctx.ctx, _$3nselectMods = __$ctx._formSelect.mods, _$3ntabindex = __$ctx._formSelect.tabindex, _$3nm = _$3nctx.mods || {};
-        _$3nm.arrow = "down";
-        _$3nselectMods.theme && (_$3nm.theme = _$3nselectMods.theme);
-        _$3nselectMods.size && (_$3nm.size = _$3nselectMods.size);
-        _$3nselectMods.disabled === "yes" && (_$3nm.disabled = "yes");
-        _$3nctx.mods = _$3nm;
-        _$3ntabindex && (_$3nctx.tabindex = _$3ntabindex);
+        var __r160, __r164, __r161, __r162, __r163;
+        var _$3uctx = __$ctx.ctx, _$3uelemMods = _$3uctx.elemMods || {}, _$3uctxControlAttrs = _$3uctx.controlAttrs || {}, _$3uvaluesMatched = _$3uctxControlAttrs.value != undefined && _$3uctxControlAttrs.value == __$ctx._value, _$3ucontrolAttrs = __$ctx._.extend(_$3uctxControlAttrs, {
+            checked: (_$3uvaluesMatched || _$3uelemMods.checked) && (__$ctx._nextForChecked = true),
+            disabled: __$ctx._modsDisabled || _$3uelemMods.disabled
+        });
+        _$3ucontrolAttrs.id || (_$3ucontrolAttrs.id = __$ctx.generateId());
+        return "", __r160 = __$ctx["__$anflg18"], __$ctx["__$anflg18"] = true, __r164 = ("", __r161 = __$ctx._controlAttrs, __$ctx._controlAttrs = _$3ucontrolAttrs, __r162 = __$ctx._valuesMatched, __$ctx._valuesMatched = _$3uvaluesMatched, __r163 = $87(__$ctx), __$ctx._controlAttrs = __r161, __$ctx._valuesMatched = __r162, "", __r163), __$ctx["__$anflg18"] = __r160, "", __r164;
+        return;
+    }
+    function $101(__$ctx) {
+        if (!(__$ctx["__$anflg17"] !== true) === false) {
+            if (!__$ctx._formSelect === false) {
+                if (!!__$ctx.elem === false) {
+                    return $105(__$ctx);
+                } else {
+                    return $315(__$ctx);
+                }
+            } else {
+                return $315(__$ctx);
+            }
+        } else {
+            return $315(__$ctx);
+        }
+    }
+    function $105(__$ctx) {
+        var _$3qctx = __$ctx.ctx, _$3qselectMods = __$ctx._formSelect.mods, _$3qtabindex = __$ctx._formSelect.tabindex, _$3qm = _$3qctx.mods || {};
+        _$3qm.arrow = "down";
+        _$3qselectMods.theme && (_$3qm.theme = _$3qselectMods.theme);
+        _$3qselectMods.size && (_$3qm.size = _$3qselectMods.size);
+        _$3qselectMods.disabled === "yes" && (_$3qm.disabled = "yes");
+        _$3qctx.mods = _$3qm;
+        _$3qtabindex && (_$3qctx.tabindex = _$3qtabindex);
         {
             "";
-            var __r153 = __$ctx["__$anflg16"];
-            __$ctx["__$anflg16"] = true;
+            var __r157 = __$ctx["__$anflg17"];
+            __$ctx["__$anflg17"] = true;
             {
                 "";
-                var __r154 = __$ctx.ctx, __r155 = __r154._theme;
-                __r154._theme = true;
-                $92(__$ctx);
-                __r154._theme = __r155;
+                var __r158 = __$ctx.ctx, __r159 = __r158._theme;
+                __r158._theme = true;
+                $101(__$ctx);
+                __r158._theme = __r159;
                 "";
             }
-            __$ctx["__$anflg16"] = __r153;
+            __$ctx["__$anflg17"] = __r157;
             "";
         }
         undefined;
         return;
     }
-    function $103(__$ctx) {
-        if (!(__$ctx["__$anflg14"] !== true) === false) {
+    function $112(__$ctx) {
+        if (!(__$ctx["__$anflg15"] !== true) === false) {
             if (!!__$ctx.elem === false) {
-                return $106(__$ctx);
+                return $115(__$ctx);
             } else {
-                return $300(__$ctx);
+                return $315(__$ctx);
             }
         } else {
-            return $300(__$ctx);
+            return $315(__$ctx);
         }
     }
-    function $106(__$ctx) {
-        var _$3ectx = __$ctx.ctx, _$3eid = _$3ectx.id || __$ctx.generateId();
+    function $115(__$ctx) {
+        var _$3hctx = __$ctx.ctx, _$3hid = _$3hctx.id || __$ctx.generateId();
         {
             "";
-            var __r148 = __$ctx["__$anflg14"];
-            __$ctx["__$anflg14"] = true;
+            var __r152 = __$ctx["__$anflg15"];
+            __$ctx["__$anflg15"] = true;
             {
                 "";
-                var __r149 = __$ctx._controlAttrs;
+                var __r153 = __$ctx._controlAttrs;
                 __$ctx._controlAttrs = {
-                    id: _$3eid,
-                    name: _$3ectx.name || _$3eid,
-                    tabindex: _$3ectx.tabindex
+                    id: _$3hid,
+                    name: _$3hctx.name || _$3hid,
+                    tabindex: _$3hctx.tabindex
                 };
-                var __r150 = __$ctx._formSelect;
+                var __r154 = __$ctx._formSelect;
                 __$ctx._formSelect = {
                     block: __$ctx.block,
                     mods: __$ctx.mods,
-                    tabindex: _$3ectx.tabindex
+                    tabindex: _$3hctx.tabindex
                 };
-                $103(__$ctx);
-                __$ctx._controlAttrs = __r149;
-                __$ctx._formSelect = __r150;
+                $112(__$ctx);
+                __$ctx._controlAttrs = __r153;
+                __$ctx._formSelect = __r154;
                 "";
             }
-            __$ctx["__$anflg14"] = __r148;
+            __$ctx["__$anflg15"] = __r152;
             "";
         }
         undefined;
         return;
     }
-    function $113(__$ctx) {
+    function $122(__$ctx) {
         var __t = __$ctx.block;
         if (__t === "tumbler") {
             var __t = __$ctx.elem;
             if (__t === "sticker") {
-                return $115(__$ctx);
+                return $124(__$ctx);
             } else if (__t === "text") {
-                return $120(__$ctx);
+                return $129(__$ctx);
             } else if (__t === "input") {
-                var _$4pside = __$ctx.elemMods.side, _$4pchecked;
-                if (_$4pside === "left") {
-                    _$4pchecked = __$ctx._checked ? undefined : "checked";
+                var _$4uside = __$ctx.elemMods.side, _$4uchecked;
+                if (_$4uside === "left") {
+                    _$4uchecked = __$ctx._checked ? undefined : "checked";
                 } else {
-                    _$4pchecked = __$ctx._checked;
+                    _$4uchecked = __$ctx._checked;
                 }
                 return {
                     type: "radio",
                     name: __$ctx.ctx.name,
                     value: __$ctx.ctx.value,
-                    checked: _$4pchecked,
+                    checked: _$4uchecked,
                     disabled: __$ctx.ctx.disabled,
-                    "aria-labelledby": _$4pside === "left" ? __$ctx._leftId : __$ctx._rightId
+                    "aria-labelledby": _$4uside === "left" ? __$ctx._leftId : __$ctx._rightId
                 };
                 return;
             } else if (__t === "button") {
-                return $127(__$ctx);
+                return $136(__$ctx);
             } else {
-                return $300(__$ctx);
+                return $315(__$ctx);
             }
         } else if (__t === "check-button") {
             var __t = __$ctx.elem;
             if (__t === "control") {
-                var _$48ctx = __$ctx.ctx, _$48a = {
-                    type: "checkbox"
-                }, _$48props = [ "tabindex", "name", "value", "id" ], _$48p;
-                while (_$48p = _$48props.pop()) {
-                    _$48ctx[_$48p] && (_$48a[_$48p] = _$48ctx[_$48p]);
-                }
-                _$48ctx.checked && (_$48a.checked = "checked");
-                _$48ctx.disabled && (_$48a.disabled = "disabled");
-                _$48a["aria-lebelledby"] = _$48ctx.labelledby;
-                return _$48a;
-                return;
+                return $147(__$ctx);
             } else if (__t === "text") {
                 return {
                     id: __$ctx._control.labelledby
@@ -565,28 +584,28 @@ var BEMHTML = function() {
                     };
                     return;
                 } else {
-                    return $300(__$ctx);
+                    return $315(__$ctx);
                 }
             }
         } else if (__t === "radio-button") {
             var __t = __$ctx.elem;
             if (__t === "control") {
-                var _$3xa = __$ctx._controlAttrs;
-                if (!_$3xa.disabled) {
-                    delete _$3xa.disabled;
+                var _$40a = __$ctx._controlAttrs;
+                if (!_$40a.disabled) {
+                    delete _$40a.disabled;
                 } else {
-                    _$3xa.disabled = "disabled";
-                    _$3xa.tabindex = "-1";
+                    _$40a.disabled = "disabled";
+                    _$40a.tabindex = "-1";
                 }
-                if (!_$3xa.checked) {
-                    delete _$3xa.checked;
+                if (!_$40a.checked) {
+                    delete _$40a.checked;
                 } else {
-                    _$3xa.checked = "checked";
+                    _$40a.checked = "checked";
                 }
-                _$3xa.type = "radio";
-                _$3xa.name = __$ctx._name;
-                typeof _$3xa.value === "undefined" && delete _$3xa.value;
-                return _$3xa;
+                _$40a.type = "radio";
+                _$40a.name = __$ctx._name;
+                typeof _$40a.value === "undefined" && delete _$40a.value;
+                return _$40a;
                 return;
             } else if (__t === "radio") {
                 return {
@@ -594,81 +613,109 @@ var BEMHTML = function() {
                 };
                 return;
             } else {
-                return $300(__$ctx);
+                return $315(__$ctx);
             }
         } else if (__t === "select") {
             var __t = __$ctx.elem;
             if (__t === "control") {
-                var _$3qattrs = [ "id", "name", "tabindex" ], _$3qprop = {}, _$3qp;
-                while (_$3qp = _$3qattrs.pop()) {
-                    __$ctx._controlAttrs[_$3qp] && (_$3qprop[_$3qp] = __$ctx._controlAttrs[_$3qp]);
+                var _$3tattrs = [ "id", "name", "tabindex" ], _$3tprop = {}, _$3tp;
+                while (_$3tp = _$3tattrs.pop()) {
+                    __$ctx._controlAttrs[_$3tp] && (_$3tprop[_$3tp] = __$ctx._controlAttrs[_$3tp]);
                 }
-                __$ctx.mods.disabled === "yes" && (_$3qprop.disabled = "disabled");
-                _$3qprop.tabindex = -1;
-                _$3qprop["aria-hidden"] = true;
-                return __$ctx.ctx.controlAttrs || _$3qprop;
+                __$ctx.mods.disabled === "yes" && (_$3tprop.disabled = "disabled");
+                _$3tprop.tabindex = -1;
+                _$3tprop["aria-hidden"] = true;
+                return __$ctx.ctx.controlAttrs || _$3tprop;
                 return;
             } else if (__t === "item") {
-                return $157(__$ctx);
+                return $172(__$ctx);
             } else {
-                return $300(__$ctx);
+                return $315(__$ctx);
             }
         } else if (__t === "button") {
-            return $164(__$ctx);
+            return $179(__$ctx);
         } else {
-            return $300(__$ctx);
+            return $315(__$ctx);
         }
     }
-    function $115(__$ctx) {
-        if (!(__$ctx["__$anflg28"] !== true) === false) {
-            var __r195, __r196;
-            var _$4ra = ("", __r195 = __$ctx["__$anflg28"], __$ctx["__$anflg28"] = true, __r196 = $115(__$ctx), __$ctx["__$anflg28"] = __r195, "", __r196) || {};
-            _$4ra["aria-hidden"] = true;
-            return _$4ra;
+    function $124(__$ctx) {
+        if (!(__$ctx["__$anflg30"] !== true) === false) {
+            var __r203, __r204;
+            var _$4wa = ("", __r203 = __$ctx["__$anflg30"], __$ctx["__$anflg30"] = true, __r204 = $124(__$ctx), __$ctx["__$anflg30"] = __r203, "", __r204) || {};
+            _$4wa["aria-hidden"] = true;
+            return _$4wa;
             return;
         } else {
-            return $300(__$ctx);
+            return $315(__$ctx);
         }
     }
-    function $120(__$ctx) {
-        if (!(__$ctx["__$anflg27"] !== true) === false) {
-            var __r193, __r194;
-            var _$4qa = ("", __r193 = __$ctx["__$anflg27"], __$ctx["__$anflg27"] = true, __r194 = $120(__$ctx), __$ctx["__$anflg27"] = __r193, "", __r194) || {};
+    function $129(__$ctx) {
+        if (!(__$ctx["__$anflg29"] !== true) === false) {
+            var __r201, __r202;
+            var _$4va = ("", __r201 = __$ctx["__$anflg29"], __$ctx["__$anflg29"] = true, __r202 = $129(__$ctx), __$ctx["__$anflg29"] = __r201, "", __r202) || {};
             side = __$ctx.elemMods.side;
-            _$4qa.id = side === "left" ? __$ctx._leftId : __$ctx._rightId;
-            _$4qa["aria-hidden"] = true;
-            return _$4qa;
+            _$4va.id = side === "left" ? __$ctx._leftId : __$ctx._rightId;
+            _$4va["aria-hidden"] = true;
+            return _$4va;
             return;
         } else {
-            return $300(__$ctx);
+            return $315(__$ctx);
         }
     }
-    function $127(__$ctx) {
-        if (!(__$ctx["__$anflg24"] !== true) === false) {
+    function $136(__$ctx) {
+        if (!(__$ctx["__$anflg26"] !== true) === false) {
             if (!__$ctx._sideId === false) {
-                var __r183, __r184;
-                var _$4ja = ("", __r183 = __$ctx["__$anflg24"], __$ctx["__$anflg24"] = true, __r184 = $127(__$ctx), __$ctx["__$anflg24"] = __r183, "", __r184) || {};
-                _$4ja["aria-labelledby"] = __$ctx._sideId;
-                return _$4ja;
+                var __r191, __r192;
+                var _$4oa = ("", __r191 = __$ctx["__$anflg26"], __$ctx["__$anflg26"] = true, __r192 = $136(__$ctx), __$ctx["__$anflg26"] = __r191, "", __r192) || {};
+                _$4oa["aria-labelledby"] = __$ctx._sideId;
+                return _$4oa;
                 return;
             } else {
-                return $300(__$ctx);
+                return $315(__$ctx);
             }
         } else {
-            return $300(__$ctx);
+            return $315(__$ctx);
         }
     }
-    function $157(__$ctx) {
-        if (!(__$ctx["__$anflg15"] !== true) === false) {
-            var __r151, __r152;
-            var _$3la = ("", __r151 = __$ctx["__$anflg15"], __$ctx["__$anflg15"] = true, __r152 = $157(__$ctx), __$ctx["__$anflg15"] = __r151, "", __r152) || {};
+    function $147(__$ctx) {
+        if (!(__$ctx["__$anflg21"] !== true) === false) {
+            if (!(__$ctx.mods && __$ctx.mods.pseudo === "yes") === false) {
+                var __r177, __r178;
+                var _$4da = ("", __r177 = __$ctx["__$anflg21"], __$ctx["__$anflg21"] = true, __r178 = $147(__$ctx), __$ctx["__$anflg21"] = __r177, "", __r178);
+                _$4da.value = "";
+                return _$4da;
+                return;
+            } else {
+                return $154(__$ctx);
+            }
+        } else {
+            return $154(__$ctx);
+        }
+    }
+    function $154(__$ctx) {
+        var _$4bctx = __$ctx.ctx, _$4ba = {
+            type: "checkbox"
+        }, _$4bprops = [ "tabindex", "name", "value", "id" ], _$4bp;
+        while (_$4bp = _$4bprops.pop()) {
+            _$4bctx[_$4bp] && (_$4ba[_$4bp] = _$4bctx[_$4bp]);
+        }
+        _$4bctx.checked && (_$4ba.checked = "checked");
+        _$4bctx.disabled && (_$4ba.disabled = "disabled");
+        _$4ba["aria-lebelledby"] = _$4bctx.labelledby;
+        return _$4ba;
+        return;
+    }
+    function $172(__$ctx) {
+        if (!(__$ctx["__$anflg16"] !== true) === false) {
+            var __r155, __r156;
+            var _$3oa = ("", __r155 = __$ctx["__$anflg16"], __$ctx["__$anflg16"] = true, __r156 = $172(__$ctx), __$ctx["__$anflg16"] = __r155, "", __r156) || {};
             if ((__$ctx.ctx.elemMods || {}).label === "yes") {
-                _$3la.id = __$ctx._labelId;
-                _$3la["aria-hidden"] = true;
+                _$3oa.id = __$ctx._labelId;
+                _$3oa["aria-hidden"] = true;
             } else {
                 undefined;
             }
-            return _$3la;
+            return _$3oa;
             return;
         } else {
             return {
@@ -677,7 +724,7 @@ var BEMHTML = function() {
             return;
         }
     }
-    function $164(__$ctx) {
+    function $179(__$ctx) {
         if (!__$ctx._formSelect === false) {
             if (!!__$ctx.elem === false) {
                 return {
@@ -688,13 +735,13 @@ var BEMHTML = function() {
                 };
                 return;
             } else {
-                return $300(__$ctx);
+                return $315(__$ctx);
             }
         } else {
-            return $300(__$ctx);
+            return $315(__$ctx);
         }
     }
-    function $174(__$ctx) {
+    function $189(__$ctx) {
         var __t = __$ctx.block;
         if (__t === "tumbler") {
             var __t = __$ctx.elem;
@@ -712,7 +759,7 @@ var BEMHTML = function() {
                     return "span";
                     return;
                 } else {
-                    return $300(__$ctx);
+                    return $315(__$ctx);
                 }
             }
         } else if (__t === "check-button") {
@@ -724,7 +771,7 @@ var BEMHTML = function() {
                     return "label";
                     return;
                 } else {
-                    return $300(__$ctx);
+                    return $315(__$ctx);
                 }
             }
         } else if (__t === "radio-button") {
@@ -740,7 +787,7 @@ var BEMHTML = function() {
                     return "label";
                     return;
                 } else {
-                    return $300(__$ctx);
+                    return $315(__$ctx);
                 }
             }
         } else if (__t === "select") {
@@ -762,18 +809,18 @@ var BEMHTML = function() {
                     return "span";
                     return;
                 } else {
-                    return $300(__$ctx);
+                    return $315(__$ctx);
                 }
             }
         } else {
-            return $300(__$ctx);
+            return $315(__$ctx);
         }
     }
-    function $224(__$ctx) {
+    function $239(__$ctx) {
         return __$ctx.ctx.value || __$ctx.ctx.side !== "left";
         return;
     }
-    function $229(__$ctx) {
+    function $244(__$ctx) {
         var __t = __$ctx.block;
         if (__t === "tumbler") {
             if (__$ctx.elem === "box") {
@@ -811,10 +858,10 @@ var BEMHTML = function() {
                         } ];
                         return;
                     } else {
-                        return $239(__$ctx);
+                        return $254(__$ctx);
                     }
                 } else {
-                    return $239(__$ctx);
+                    return $254(__$ctx);
                 }
             }
         } else if (__t === "check-button") {
@@ -826,7 +873,7 @@ var BEMHTML = function() {
                 } ];
                 return;
             } else {
-                return $300(__$ctx);
+                return $315(__$ctx);
             }
         } else if (__t === "radio-button") {
             if (__$ctx.elem === "radio") {
@@ -839,7 +886,7 @@ var BEMHTML = function() {
                 } ];
                 return;
             } else {
-                return $300(__$ctx);
+                return $315(__$ctx);
             }
         } else if (__t === "popup") {
             if (!!__$ctx.elem === false) {
@@ -849,52 +896,52 @@ var BEMHTML = function() {
                 }, __$ctx.ctx.content ];
                 return;
             } else {
-                return $300(__$ctx);
+                return $315(__$ctx);
             }
         } else {
-            return $300(__$ctx);
+            return $315(__$ctx);
         }
     }
-    function $239(__$ctx) {
+    function $254(__$ctx) {
         if (!(__$ctx._.isArray(__$ctx.ctx.content) && __$ctx.ctx.content.length === 1) === false) {
-            var _$4fcontent = __$ctx.ctx.content;
-            if (_$4fcontent[0].side !== "left") {
+            var _$4kcontent = __$ctx.ctx.content;
+            if (_$4kcontent[0].side !== "left") {
                 return [ {
                     elem: "option",
                     side: "left"
-                }, _$4fcontent ];
+                }, _$4kcontent ];
             } else {
                 undefined;
             }
-            return [ _$4fcontent, {
+            return [ _$4kcontent, {
                 elem: "option",
                 side: "right"
             } ];
             return;
         } else {
-            return $300(__$ctx);
+            return $315(__$ctx);
         }
     }
-    function $261(__$ctx) {
+    function $276(__$ctx) {
         var __t = __$ctx.block;
         if (__t === "tumbler" || __t === "check-button" || __t === "radio-button" || __t === "select") {
             if (!!__$ctx.elem === false) {
                 return true;
                 return;
             } else {
-                return $300(__$ctx);
+                return $315(__$ctx);
             }
         } else {
-            return $300(__$ctx);
+            return $315(__$ctx);
         }
     }
-    function $284(__$ctx) {
+    function $299(__$ctx) {
         var __t = __$ctx.block;
         if (__t === "radio-button") {
             if (__$ctx.elem === "radio") {
-                return $287(__$ctx);
+                return $302(__$ctx);
             } else {
-                return $300(__$ctx);
+                return $315(__$ctx);
             }
         } else if (__t === "button") {
             if (!__$ctx._formSelect === false) {
@@ -905,48 +952,48 @@ var BEMHTML = function() {
                     } ];
                     return;
                 } else {
-                    return $300(__$ctx);
+                    return $315(__$ctx);
                 }
             } else {
-                return $300(__$ctx);
+                return $315(__$ctx);
             }
         } else {
-            return $300(__$ctx);
+            return $315(__$ctx);
         }
     }
-    function $287(__$ctx) {
-        var _$3ucontrolAttrs = __$ctx._controlAttrs, _$3uelemMods = {}, _$3uside = (__$ctx.ctx.mods || {}).side;
-        if (!_$3uside) {
-            _$3uside = __$ctx.isFirst() ? __$ctx.isLast() ? "both" : "left" : __$ctx.isLast() ? "right" : "";
+    function $302(__$ctx) {
+        var _$3xcontrolAttrs = __$ctx._controlAttrs, _$3xelemMods = {}, _$3xside = (__$ctx.ctx.mods || {}).side;
+        if (!_$3xside) {
+            _$3xside = __$ctx.isFirst() ? __$ctx.isLast() ? "both" : "left" : __$ctx.isLast() ? "right" : "";
         } else {
             undefined;
         }
-        _$3uside && (_$3uelemMods.side = _$3uside);
-        __$ctx._nextForChecked && !_$3ucontrolAttrs.checked && (__$ctx._nextForChecked = null, _$3uelemMods["next-for-pressed"] = "yes");
-        __$ctx._modsDisabled && (_$3uelemMods.disabled = "yes");
-        __$ctx._valuesMatched && (_$3uelemMods.checked = "yes");
-        _$3ucontrolAttrs.checked && (_$3uelemMods.pressed = "yes");
+        _$3xside && (_$3xelemMods.side = _$3xside);
+        __$ctx._nextForChecked && !_$3xcontrolAttrs.checked && (__$ctx._nextForChecked = null, _$3xelemMods["next-for-pressed"] = "yes");
+        __$ctx._modsDisabled && (_$3xelemMods.disabled = "yes");
+        __$ctx._valuesMatched && (_$3xelemMods.checked = "yes");
+        _$3xcontrolAttrs.checked && (_$3xelemMods.pressed = "yes");
         return [ {
-            elemMods: _$3uelemMods
+            elemMods: _$3xelemMods
         } ];
         return;
     }
-    function $300(__$ctx) {
+    function $315(__$ctx) {
         if (__$ctx.block === "popup") {
             if (!!__$ctx.ctx._defaults === false) {
                 if (!!__$ctx.elem === false) {
-                    return $304(__$ctx);
+                    return $319(__$ctx);
                 } else {
-                    return $309(__$ctx);
+                    return $324(__$ctx);
                 }
             } else {
-                return $309(__$ctx);
+                return $324(__$ctx);
             }
         } else {
-            return $309(__$ctx);
+            return $324(__$ctx);
         }
     }
-    function $304(__$ctx) {
+    function $319(__$ctx) {
         __$ctx.ctx.mods = __$ctx._.extend({
             theme: "ffffff",
             autoclosable: "yes",
@@ -954,23 +1001,23 @@ var BEMHTML = function() {
             animate: "yes"
         }, __$ctx.ctx.mods);
         if (__$ctx.ctx.zIndex) {
-            var _$3cattrs = __$ctx.ctx.attrs || (__$ctx.ctx.attrs = {});
-            _$3cattrs.style = (_$3cattrs.style || "") + ";z-index:" + __$ctx.ctx.zIndex + ";";
+            var _$3fattrs = __$ctx.ctx.attrs || (__$ctx.ctx.attrs = {});
+            _$3fattrs.style = (_$3fattrs.style || "") + ";z-index:" + __$ctx.ctx.zIndex + ";";
         } else {
             undefined;
         }
         {
             "";
-            var __r146 = __$ctx.ctx, __r147 = __r146._defaults;
-            __r146._defaults = true;
+            var __r150 = __$ctx.ctx, __r151 = __r150._defaults;
+            __r150._defaults = true;
             $1(__$ctx);
-            __r146._defaults = __r147;
+            __r150._defaults = __r151;
             "";
         }
         undefined;
         return;
     }
-    function $309(__$ctx) {
+    function $324(__$ctx) {
         var __t = __$ctx._mode;
         if (__t === "content") {
             var __t = __$ctx.block;
@@ -981,14 +1028,14 @@ var BEMHTML = function() {
                         return __$ctx._value || __$ctx.ctx.content;
                         return;
                     } else {
-                        return $370(__$ctx);
+                        return $399(__$ctx);
                     }
                 } else if (__t === "clear") {
                     if (!!__$ctx.ctx.content === false) {
                         return "";
                         return;
                     } else {
-                        return $370(__$ctx);
+                        return $399(__$ctx);
                     }
                 } else if (__t === "ahead") {
                     return [ {
@@ -998,7 +1045,7 @@ var BEMHTML = function() {
                     } ];
                     return;
                 } else {
-                    return $370(__$ctx);
+                    return $399(__$ctx);
                 }
             } else if (__t === "radiobox") {
                 if (__$ctx.elem === "radio") {
@@ -1011,7 +1058,7 @@ var BEMHTML = function() {
                     }, __$ctx.ctx.content ];
                     return;
                 } else {
-                    return $370(__$ctx);
+                    return $399(__$ctx);
                 }
             } else if (__t === "checkbox") {
                 if (!!__$ctx.elem === false) {
@@ -1031,7 +1078,7 @@ var BEMHTML = function() {
                     }, __$ctx.ctx.content ];
                     return;
                 } else {
-                    return $370(__$ctx);
+                    return $399(__$ctx);
                 }
             } else if (__t === "button") {
                 if (__$ctx.elem === "text") {
@@ -1039,10 +1086,44 @@ var BEMHTML = function() {
                         return [ "&#160;", __$ctx.ctx.content ];
                         return;
                     } else {
-                        return $342(__$ctx);
+                        return $357(__$ctx);
                     }
                 } else {
-                    return $342(__$ctx);
+                    return $357(__$ctx);
+                }
+            } else if (__t === "link") {
+                if (!(__$ctx.mods && __$ctx.mods.pseudo === "yes") === false) {
+                    if (!!__$ctx.ctx._wrap === false) {
+                        if (!!__$ctx.elem === false) {
+                            if (!!__$ctx.mods.inner === false) {
+                                {
+                                    "";
+                                    var __r98 = __$ctx._mode;
+                                    __$ctx._mode = "";
+                                    var __r99 = __$ctx.ctx;
+                                    __$ctx.ctx = {
+                                        elem: "inner",
+                                        content: __$ctx.ctx.content,
+                                        _wrap: true
+                                    };
+                                    $870(__$ctx);
+                                    __$ctx._mode = __r98;
+                                    __$ctx.ctx = __r99;
+                                    "";
+                                }
+                                undefined;
+                                return;
+                            } else {
+                                return $399(__$ctx);
+                            }
+                        } else {
+                            return $399(__$ctx);
+                        }
+                    } else {
+                        return $399(__$ctx);
+                    }
+                } else {
+                    return $399(__$ctx);
                 }
             } else if (__t === "b-page") {
                 if (!!__$ctx.elem === false) {
@@ -1052,12 +1133,12 @@ var BEMHTML = function() {
                     };
                     return;
                 } else {
-                    return $370(__$ctx);
+                    return $399(__$ctx);
                 }
             } else if (__t === "i-ua") {
-                return $358(__$ctx);
+                return $387(__$ctx);
             } else {
-                return $370(__$ctx);
+                return $399(__$ctx);
             }
         } else if (__t === "mix") {
             var __t = __$ctx.block;
@@ -1069,30 +1150,30 @@ var BEMHTML = function() {
                     } ];
                     return;
                 } else {
-                    return $698(__$ctx);
+                    return $741(__$ctx);
                 }
             } else if (__t === "radiobox") {
                 if (__$ctx.elem === "radio") {
-                    var _$2pelemMods = {};
-                    __$ctx._modsDisabled && (_$2pelemMods.disabled = "yes");
-                    __$ctx._valuesMatched && (_$2pelemMods.checked = "yes");
+                    var _$2selemMods = {};
+                    __$ctx._modsDisabled && (_$2selemMods.disabled = "yes");
+                    __$ctx._valuesMatched && (_$2selemMods.checked = "yes");
                     return [ {
-                        elemMods: _$2pelemMods
+                        elemMods: _$2selemMods
                     } ];
                     return;
                 } else {
-                    return $698(__$ctx);
+                    return $741(__$ctx);
                 }
             } else if (__t === "b-page") {
-                return $680(__$ctx);
+                return $723(__$ctx);
             } else {
-                return $698(__$ctx);
+                return $741(__$ctx);
             }
         } else if (__t === "value") {
             if (__$ctx.block === "input") {
-                return $700(__$ctx);
+                return $743(__$ctx);
             } else {
-                return $828(__$ctx);
+                return $877(__$ctx);
             }
         } else if (__t === "js") {
             var __t = __$ctx.block;
@@ -1112,26 +1193,28 @@ var BEMHTML = function() {
                     }
                     return;
                 } else {
-                    return $749(__$ctx);
+                    return $798(__$ctx);
                 }
             } else if (__t === "radiobox" || __t === "checkbox" || __t === "button") {
                 if (!!__$ctx.elem === false) {
                     return true;
                     return;
                 } else {
-                    return $749(__$ctx);
+                    return $798(__$ctx);
                 }
             } else if (__t === "link") {
-                if (!__$ctx.ctx.hasOwnProperty("tabindex") === false) {
-                    return {
-                        origTabindex: String(__$ctx.ctx.tabindex)
-                    };
-                    return;
+                if (!(__$ctx.mods && __$ctx.mods.pseudo === "yes") === false) {
+                    if (!!__$ctx.elem === false) {
+                        return true;
+                        return;
+                    } else {
+                        return $792(__$ctx);
+                    }
                 } else {
-                    return $749(__$ctx);
+                    return $792(__$ctx);
                 }
             } else {
-                return $749(__$ctx);
+                return $798(__$ctx);
             }
         } else if (__t === "bem") {
             var __t = __$ctx.block;
@@ -1141,80 +1224,78 @@ var BEMHTML = function() {
                     return false;
                     return;
                 } else {
-                    return $772(__$ctx);
+                    return $821(__$ctx);
                 }
             } else if (__t === "i-ua") {
                 if (!!__$ctx.elem === false) {
                     return false;
                     return;
                 } else {
-                    return $772(__$ctx);
+                    return $821(__$ctx);
                 }
             } else {
-                return $772(__$ctx);
+                return $821(__$ctx);
             }
         } else if (__t === "default") {
             var __t = __$ctx.block;
             if (__t === "input") {
-                return $554(__$ctx);
+                return $594(__$ctx);
             } else if (__t === "radiobox") {
-                return $571(__$ctx);
+                return $611(__$ctx);
             } else if (__t === "checkbox") {
-                return $585(__$ctx);
+                return $625(__$ctx);
             } else if (__t === "button") {
-                if (!(__$ctx["__$anflg8"] !== true) === false) {
+                if (!(__$ctx["__$anflg9"] !== true) === false) {
                     if (!(__$ctx.mods && __$ctx.mods.round === "yes") === false) {
                         if (!!__$ctx.elem === false) {
                             if (!!(__$ctx.ctx.mods || {})["only-icon"] === false) {
-                                return $598(__$ctx);
+                                return $638(__$ctx);
                             } else {
-                                return $605(__$ctx);
+                                return $645(__$ctx);
                             }
                         } else {
-                            return $605(__$ctx);
+                            return $645(__$ctx);
                         }
                     } else {
-                        return $605(__$ctx);
+                        return $645(__$ctx);
                     }
                 } else {
-                    return $605(__$ctx);
+                    return $645(__$ctx);
                 }
             } else if (__t === "b-page") {
                 if (__$ctx.elem === "css") {
                     if (!__$ctx.ctx.hasOwnProperty("ie") === false) {
                         if (!!__$ctx.ctx._ieCommented === false) {
-                            return $617(__$ctx);
+                            return $657(__$ctx);
                         } else {
-                            return $622(__$ctx);
+                            return $662(__$ctx);
                         }
                     } else {
-                        return $622(__$ctx);
+                        return $662(__$ctx);
                     }
                 } else {
-                    return $622(__$ctx);
+                    return $662(__$ctx);
                 }
             } else if (__t === "i-bem") {
                 if (__$ctx.elem === "i18n") {
-                    return $632(__$ctx);
+                    return $672(__$ctx);
                 } else {
-                    return $828(__$ctx);
+                    return $877(__$ctx);
                 }
             } else if (__t === "i-jquery") {
                 if (__$ctx.elem === "core") {
-                    var __r62, __r63, __r64;
-                    return "", __r62 = __$ctx._mode, __$ctx._mode = "", __r63 = __$ctx.ctx, __$ctx.ctx = {
-                        block: "b-page",
-                        elem: "js",
-                        url: "//yandex.st/jquery/1.8.3/jquery.min.js"
-                    }, __r64 = $821(__$ctx), __$ctx._mode = __r62, __$ctx.ctx = __r63, "", __r64;
-                    return;
+                    if (!(__$ctx["__$anflg2"] !== true) === false) {
+                        return $678(__$ctx);
+                    } else {
+                        return $877(__$ctx);
+                    }
                 } else {
-                    return $828(__$ctx);
+                    return $877(__$ctx);
                 }
             } else if (__t === "i-global") {
-                return $640(__$ctx);
+                return $683(__$ctx);
             } else {
-                return $828(__$ctx);
+                return $877(__$ctx);
             }
         } else if (__t === "cls") {
             if (__$ctx.block === "b-page") {
@@ -1222,42 +1303,42 @@ var BEMHTML = function() {
                     return "i-ua_js_no i-ua_css_standard";
                     return;
                 } else {
-                    return $788(__$ctx);
+                    return $837(__$ctx);
                 }
             } else {
-                return $788(__$ctx);
+                return $837(__$ctx);
             }
         } else if (__t === "doctype") {
             if (__$ctx.block === "b-page") {
                 if (!!__$ctx.elem === false) {
-                    return $792(__$ctx);
+                    return $841(__$ctx);
                 } else {
-                    return $828(__$ctx);
+                    return $877(__$ctx);
                 }
             } else {
-                return $828(__$ctx);
+                return $877(__$ctx);
             }
         } else if (__t === "js-params") {
             if (__$ctx.block === "b-page") {
                 if (!!__$ctx.elem === false) {
-                    return $800(__$ctx);
+                    return $849(__$ctx);
                 } else {
-                    return $828(__$ctx);
+                    return $877(__$ctx);
                 }
             } else {
-                return $828(__$ctx);
+                return $877(__$ctx);
             }
         } else if (__t === "public-params") {
             if (__$ctx.block === "i-global") {
-                return $806(__$ctx);
+                return $855(__$ctx);
             } else {
-                return $828(__$ctx);
+                return $877(__$ctx);
             }
         } else if (__t === "env") {
             if (__$ctx.block === "i-global") {
-                return $814(__$ctx);
+                return $863(__$ctx);
             } else {
-                return $828(__$ctx);
+                return $877(__$ctx);
             }
         } else if (__t === "tag") {
             var __t = __$ctx.block;
@@ -1279,7 +1360,7 @@ var BEMHTML = function() {
                         return "span";
                         return;
                     } else {
-                        return $552(__$ctx);
+                        return $592(__$ctx);
                     }
                 }
             } else if (__t === "radiobox") {
@@ -1295,11 +1376,15 @@ var BEMHTML = function() {
                         return "span";
                         return;
                     } else {
-                        return $552(__$ctx);
+                        return $592(__$ctx);
                     }
                 }
             } else if (__t === "checkbox") {
-                if (__$ctx.elem === "control") {
+                var __t = __$ctx.elem;
+                if (__t === "label") {
+                    return "label";
+                    return;
+                } else if (__t === "control") {
                     return "input";
                     return;
                 } else {
@@ -1307,15 +1392,15 @@ var BEMHTML = function() {
                         return "span";
                         return;
                     } else {
-                        return $552(__$ctx);
+                        return $592(__$ctx);
                     }
                 }
-            } else if (__t === "b-icon") {
+            } else if (__t === "image") {
                 if (!!__$ctx.elem === false) {
                     return "img";
                     return;
                 } else {
-                    return $552(__$ctx);
+                    return $592(__$ctx);
                 }
             } else if (__t === "button") {
                 if (!__$ctx.ctx.url === false) {
@@ -1323,10 +1408,10 @@ var BEMHTML = function() {
                         return "a";
                         return;
                     } else {
-                        return $510(__$ctx);
+                        return $550(__$ctx);
                     }
                 } else {
-                    return $510(__$ctx);
+                    return $550(__$ctx);
                 }
             } else if (__t === "link") {
                 if (__$ctx.elem === "inner") {
@@ -1337,7 +1422,7 @@ var BEMHTML = function() {
                         return __$ctx.ctx.url ? "a" : "span";
                         return;
                     } else {
-                        return $552(__$ctx);
+                        return $592(__$ctx);
                     }
                 }
             } else if (__t === "b-page") {
@@ -1373,7 +1458,7 @@ var BEMHTML = function() {
                         return "body";
                         return;
                     } else {
-                        return $552(__$ctx);
+                        return $592(__$ctx);
                     }
                 }
             } else if (__t === "i-ua") {
@@ -1381,22 +1466,22 @@ var BEMHTML = function() {
                     return "script";
                     return;
                 } else {
-                    return $552(__$ctx);
+                    return $592(__$ctx);
                 }
             } else {
-                return $552(__$ctx);
+                return $592(__$ctx);
             }
         } else if (__t === "") {
-            return $821(__$ctx);
+            return $870(__$ctx);
         } else if (__t === "attrs") {
             var __t = __$ctx.block;
             if (__t === "input") {
                 var __t = __$ctx.elem;
                 if (__t === "control") {
                     if (!(__$ctx.mods && __$ctx.mods.type === "textarea") === false) {
-                        return $374(__$ctx);
+                        return $403(__$ctx);
                     } else {
-                        return $380(__$ctx);
+                        return $409(__$ctx);
                     }
                 } else if (__t === "clear") {
                     return {
@@ -1404,27 +1489,27 @@ var BEMHTML = function() {
                     };
                     return;
                 } else {
-                    return $462(__$ctx);
+                    return $500(__$ctx);
                 }
             } else if (__t === "radiobox") {
                 var __t = __$ctx.elem;
                 if (__t === "control") {
-                    var _$2sa = __$ctx._controlAttrs;
-                    if (!_$2sa.disabled) {
-                        delete _$2sa.disabled;
+                    var _$2va = __$ctx._controlAttrs;
+                    if (!_$2va.disabled) {
+                        delete _$2va.disabled;
                     } else {
-                        _$2sa.disabled = "disabled";
-                        _$2sa.tabindex = "-1";
+                        _$2va.disabled = "disabled";
+                        _$2va.tabindex = "-1";
                     }
-                    if (!_$2sa.checked) {
-                        delete _$2sa.checked;
+                    if (!_$2va.checked) {
+                        delete _$2va.checked;
                     } else {
-                        _$2sa.checked = "checked";
+                        _$2va.checked = "checked";
                     }
-                    _$2sa.type = "radio";
-                    _$2sa.name = __$ctx._name;
-                    typeof _$2sa.value === "undefined" && delete _$2sa.value;
-                    return _$2sa;
+                    _$2va.type = "radio";
+                    _$2va.name = __$ctx._name;
+                    typeof _$2va.value === "undefined" && delete _$2va.value;
+                    return _$2va;
                     return;
                 } else if (__t === "radio") {
                     return {
@@ -1432,59 +1517,67 @@ var BEMHTML = function() {
                     };
                     return;
                 } else {
-                    return $462(__$ctx);
+                    return $500(__$ctx);
                 }
             } else if (__t === "checkbox") {
-                if (__$ctx.elem === "control") {
-                    var _$2ia = __$ctx.ctx.attrs || {};
-                    _$2ia.id = __$ctx._checkboxAttrs.id;
-                    _$2ia.type = "checkbox";
-                    __$ctx.mods.disabled && (_$2ia.disabled = "disabled");
-                    __$ctx.mods.checked == "yes" && (_$2ia.checked = "checked");
-                    _$2ia["aria-labelledby"] = __$ctx._labelId;
-                    return _$2ia;
+                var __t = __$ctx.elem;
+                if (__t === "label") {
+                    var _$2la = __$ctx.ctx.attrs || {};
+                    _$2la["for"] = __$ctx._checkboxAttrs.id;
+                    _$2la.id = __$ctx._labelId;
+                    _$2la["aria-hidden"] = true;
+                    return _$2la;
+                    return;
+                } else if (__t === "control") {
+                    var _$2ja = __$ctx.ctx.attrs || {};
+                    _$2ja.id = __$ctx._checkboxAttrs.id;
+                    _$2ja.type = "checkbox";
+                    __$ctx.mods.disabled && (_$2ja.disabled = "disabled");
+                    __$ctx.mods.checked == "yes" && (_$2ja.checked = "checked");
+                    _$2ja["aria-labelledby"] = __$ctx._labelId;
+                    return _$2ja;
                     return;
                 } else {
-                    return $462(__$ctx);
+                    return $500(__$ctx);
                 }
-            } else if (__t === "b-icon") {
+            } else if (__t === "image") {
                 if (!!__$ctx.elem === false) {
-                    var _$2bctx = __$ctx.ctx, _$2ba = {
-                        src: "//yandex.st/lego/_/La6qi18Z8LwgnZdsAr1qy1GwCwo.gif",
+                    var _$2cctx = __$ctx.ctx, _$2ca = {
+                        src: "//yastatic.net/lego/_/La6qi18Z8LwgnZdsAr1qy1GwCwo.gif",
                         alt: ""
-                    }, _$2bprops = [ "alt", "width", "height" ], _$2bp;
-                    _$2bctx.url && (_$2ba.src = _$2bctx.url);
-                    while (_$2bp = _$2bprops.shift()) {
-                        _$2bctx[_$2bp] && (_$2ba[_$2bp] = _$2bctx[_$2bp]);
+                    }, _$2cprops = [ "alt", "width", "height" ], _$2cp;
+                    _$2cctx.url && (_$2ca.src = _$2cctx.url);
+                    while (_$2cp = _$2cprops.shift()) {
+                        _$2cctx[_$2cp] && (_$2ca[_$2cp] = _$2cctx[_$2cp]);
                     }
-                    return _$2ba;
+                    return _$2ca;
                     return;
                 } else {
-                    return $462(__$ctx);
+                    return $500(__$ctx);
                 }
             } else if (__t === "button") {
-                if (!(__$ctx["__$anflg7"] !== true) === false) {
+                if (!(__$ctx["__$anflg8"] !== true) === false) {
                     if (!__$ctx.ctx.url === false) {
                         if (!!__$ctx.elem === false) {
-                            var __r101, __r102;
-                            var _$26ctx = __$ctx.ctx, _$26p = ("", __r101 = __$ctx["__$anflg7"], __$ctx["__$anflg7"] = true, __r102 = $164(__$ctx), __$ctx["__$anflg7"] = __r101, "", __r102), _$26a = {
-                                href: _$26ctx.url
+                            var __r105, __r106;
+                            var _$27ctx = __$ctx.ctx, _$27p = ("", __r105 = __$ctx["__$anflg8"], __$ctx["__$anflg8"] = true, __r106 = $179(__$ctx), __$ctx["__$anflg8"] = __r105, "", __r106), _$27a = {
+                                href: _$27ctx.url
                             };
-                            _$26ctx.target && (_$26a.target = _$26ctx.target);
-                            __$ctx.mods.disabled && (_$26a["aria-disabled"] = true);
-                            return __$ctx._.extend(_$26p, _$26a);
+                            _$27ctx.target && (_$27a.target = _$27ctx.target);
+                            __$ctx.mods.disabled && (_$27a["aria-disabled"] = true);
+                            return __$ctx._.extend(_$27p, _$27a);
                             return;
                         } else {
-                            return $411(__$ctx);
+                            return $442(__$ctx);
                         }
                     } else {
-                        return $411(__$ctx);
+                        return $442(__$ctx);
                     }
                 } else {
-                    return $411(__$ctx);
+                    return $442(__$ctx);
                 }
             } else if (__t === "link") {
-                return $428(__$ctx);
+                return $459(__$ctx);
             } else if (__t === "b-page") {
                 var __t = __$ctx.elem;
                 if (__t === "js") {
@@ -1494,7 +1587,7 @@ var BEMHTML = function() {
                         };
                         return;
                     } else {
-                        return $462(__$ctx);
+                        return $500(__$ctx);
                     }
                 } else if (__t === "css") {
                     if (!__$ctx.ctx.url === false) {
@@ -1504,13 +1597,8 @@ var BEMHTML = function() {
                         };
                         return;
                     } else {
-                        return $462(__$ctx);
+                        return $500(__$ctx);
                     }
-                } else if (__t === "root") {
-                    return {
-                        lang: __$ctx["i-global"].lang || "ru"
-                    };
-                    return;
                 } else if (__t === "favicon") {
                     return {
                         rel: "shortcut icon",
@@ -1521,10 +1609,10 @@ var BEMHTML = function() {
                     return __$ctx.ctx.attrs;
                     return;
                 } else {
-                    return $462(__$ctx);
+                    return $500(__$ctx);
                 }
             } else {
-                return $462(__$ctx);
+                return $500(__$ctx);
             }
         } else if (__t === "jsAttr") {
             return undefined;
@@ -1532,22 +1620,22 @@ var BEMHTML = function() {
         } else if (__t === "xUACompatible") {
             if (__$ctx.block === "b-page") {
                 if (!!__$ctx.elem === false) {
-                    return $776(__$ctx);
+                    return $825(__$ctx);
                 } else {
-                    return $828(__$ctx);
+                    return $877(__$ctx);
                 }
             } else {
-                return $828(__$ctx);
+                return $877(__$ctx);
             }
         } else {
-            return $828(__$ctx);
+            return $877(__$ctx);
         }
     }
-    function $342(__$ctx) {
+    function $357(__$ctx) {
         if (!(__$ctx.mods && __$ctx.mods.round === "yes") === false) {
             if (!!__$ctx.elem === false) {
                 return {
-                    block: "b-icon",
+                    block: "image",
                     mix: [ {
                         block: "button",
                         elem: "icon"
@@ -1556,13 +1644,13 @@ var BEMHTML = function() {
                 };
                 return;
             } else {
-                return $348(__$ctx);
+                return $363(__$ctx);
             }
         } else {
-            return $348(__$ctx);
+            return $363(__$ctx);
         }
     }
-    function $348(__$ctx) {
+    function $363(__$ctx) {
         if (!!__$ctx.elem === false) {
             return {
                 elem: "text",
@@ -1571,211 +1659,237 @@ var BEMHTML = function() {
             };
             return;
         } else {
-            return $370(__$ctx);
+            return $399(__$ctx);
         }
     }
-    function $358(__$ctx) {
+    function $387(__$ctx) {
         if (!(__$ctx["__$anflg1"] !== true) === false) {
             if (!!__$ctx.elem === false) {
                 var __r60, __r61;
-                var _$xc = ("", __r60 = __$ctx["__$anflg1"], __$ctx["__$anflg1"] = true, __r61 = $358(__$ctx), __$ctx["__$anflg1"] = __r60, "", __r61);
+                var _$xc = ("", __r60 = __$ctx["__$anflg1"], __$ctx["__$anflg1"] = true, __r61 = $387(__$ctx), __$ctx["__$anflg1"] = __r60, "", __r61);
                 _$xc += [ ";(function(d,e,c,r,n,w,v,f){", "e=d.documentElement;", 'c="className";', 'r="replace";', 'n="createElementNS";', 'f="firstChild";', 'w="http://www.w3.org/2000/svg";', 'e[c]+=" i-ua_svg_"+(!!d[n]&&!!d[n](w,"svg").createSVGRect?"yes":"no");', 'v=d.createElement("div");', 'v.innerHTML="<svg/>";', 'e[c]+=" i-ua_inlinesvg_"+((v[f]&&v[f].namespaceURI)==w?"yes":"no");', "})(document);" ].join("");
                 return _$xc;
                 return;
             } else {
-                return $364(__$ctx);
+                return $393(__$ctx);
             }
         } else {
-            return $364(__$ctx);
+            return $393(__$ctx);
         }
     }
-    function $364(__$ctx) {
+    function $393(__$ctx) {
         if (!!__$ctx.elem === false) {
             return [ ";(function(d,e,c,r){", "e=d.documentElement;", 'c="className";', 'r="replace";', 'e[c]=e[c][r]("i-ua_js_no","i-ua_js_yes");', 'if(d.compatMode!="CSS1Compat")', 'e[c]=e[c][r]("i-ua_css_standart","i-ua_css_quirks")', "})(document);" ].join("");
             return;
         } else {
-            return $370(__$ctx);
+            return $399(__$ctx);
         }
     }
-    function $370(__$ctx) {
+    function $399(__$ctx) {
         return __$ctx.ctx.content;
         return;
     }
-    function $374(__$ctx) {
+    function $403(__$ctx) {
         if (!!__$ctx._baseAttrsApplyed === false) {
-            var __r143, __r144, __r145;
-            var _$3aa = ("", __r143 = __$ctx._value, __$ctx._value = null, __r144 = __$ctx._baseAttrsApplyed, __$ctx._baseAttrsApplyed = true, __r145 = $374(__$ctx), __$ctx._value = __r143, __$ctx._baseAttrsApplyed = __r144, "", __r145);
-            return __$ctx._.extend(_$3aa, {
+            var __r147, __r148, __r149;
+            var _$3da = ("", __r147 = __$ctx._value, __$ctx._value = null, __r148 = __$ctx._baseAttrsApplyed, __$ctx._baseAttrsApplyed = true, __r149 = $403(__$ctx), __$ctx._value = __r147, __$ctx._baseAttrsApplyed = __r148, "", __r149);
+            return __$ctx._.extend(_$3da, {
                 rows: 10,
                 cols: 10
             });
             return;
         } else {
-            return $380(__$ctx);
+            return $409(__$ctx);
         }
     }
-    function $380(__$ctx) {
-        var _$34a = __$ctx._.extend({
+    function $409(__$ctx) {
+        var _$37a = __$ctx._.extend({
             id: __$ctx._inputId,
             name: __$ctx._name
         }, __$ctx.ctx.controlAttrs);
-        (__$ctx._value || __$ctx._value === 0) && (_$34a.value = __$ctx._value);
-        __$ctx.mods.disabled && (_$34a.disabled = "disabled");
-        _$34a["aria-labelledby"] = __$ctx._labelId + " " + __$ctx._hintId;
-        return _$34a;
+        (__$ctx._value || __$ctx._value === 0) && (_$37a.value = __$ctx._value);
+        __$ctx.mods.disabled && (_$37a.disabled = "disabled");
+        _$37a["aria-labelledby"] = __$ctx._labelId + " " + __$ctx._hintId;
+        return _$37a;
         return;
     }
-    function $411(__$ctx) {
-        if (!(__$ctx["__$anflg6"] !== true) === false) {
+    function $442(__$ctx) {
+        if (!(__$ctx["__$anflg7"] !== true) === false) {
             if (!!__$ctx.elem === false) {
                 if (!!__$ctx.ctx.url === false) {
-                    return $415(__$ctx);
+                    return $446(__$ctx);
                 } else {
-                    return $420(__$ctx);
+                    return $451(__$ctx);
                 }
             } else {
-                return $420(__$ctx);
+                return $451(__$ctx);
             }
         } else {
-            return $420(__$ctx);
+            return $451(__$ctx);
         }
     }
-    function $415(__$ctx) {
-        var __r99, __r100;
-        var _$25ctx = __$ctx.ctx, _$25p = ("", __r99 = __$ctx["__$anflg6"], __$ctx["__$anflg6"] = true, __r100 = $164(__$ctx), __$ctx["__$anflg6"] = __r99, "", __r100), _$25a = {
-            type: _$25ctx.type || "button"
-        }, _$25props = [ "name", "value" ], _$25i;
-        while (_$25i = _$25props.shift()) {
-            _$25ctx[_$25i] && (_$25a[_$25i] = _$25ctx[_$25i]);
+    function $446(__$ctx) {
+        var __r103, __r104;
+        var _$26ctx = __$ctx.ctx, _$26p = ("", __r103 = __$ctx["__$anflg7"], __$ctx["__$anflg7"] = true, __r104 = $179(__$ctx), __$ctx["__$anflg7"] = __r103, "", __r104), _$26a = {
+            type: _$26ctx.type || "button"
+        }, _$26props = [ "name", "value" ], _$26i;
+        while (_$26i = _$26props.shift()) {
+            _$26ctx[_$26i] && (_$26a[_$26i] = _$26ctx[_$26i]);
         }
-        __$ctx.mods.disabled && (_$25a.disabled = "disabled");
-        return __$ctx._.extend(_$25p, _$25a);
+        __$ctx.mods.disabled && (_$26a.disabled = "disabled");
+        return __$ctx._.extend(_$26p, _$26a);
         return;
     }
-    function $420(__$ctx) {
+    function $451(__$ctx) {
         if (!true === false) {
             if (!!__$ctx.elem === false) {
-                var _$24ctx = __$ctx.ctx, _$24a = {
+                var _$25ctx = __$ctx.ctx, _$25a = {
                     role: "button"
                 };
-                _$24ctx.tabindex && (_$24a.tabindex = _$24ctx.tabindex);
-                return _$24a;
+                _$25ctx.tabindex && (_$25a.tabindex = _$25ctx.tabindex);
+                return _$25a;
                 return;
             } else {
-                return $462(__$ctx);
+                return $500(__$ctx);
             }
         } else {
-            return $462(__$ctx);
+            return $500(__$ctx);
         }
     }
-    function $428(__$ctx) {
-        if (!(__$ctx["__$anflg4"] !== true) === false) {
-            if (!(__$ctx.mods && __$ctx.mods.disabled === "yes") === false) {
-                if (!!__$ctx.elem === false) {
-                    var __r94, __r95;
-                    var _$1yattrs = ("", __r94 = __$ctx["__$anflg4"], __$ctx["__$anflg4"] = true, __r95 = $428(__$ctx), __$ctx["__$anflg4"] = __r94, "", __r95) || {};
-                    _$1yattrs.tabindex = -1;
-                    _$1yattrs["aria-disabled"] = true;
-                    return _$1yattrs;
+    function $459(__$ctx) {
+        if (!(__$ctx.mods && __$ctx.mods.pseudo === "yes") === false) {
+            if (!!__$ctx.elem === false) {
+                if (!!__$ctx.ctx.url === false) {
+                    var _$1zdisabled = (__$ctx.ctx.mods || {}).disabled === "yes", _$1za = {
+                        role: "button",
+                        tabindex: 0
+                    };
+                    if (_$1zdisabled) {
+                        _$1za["aria-disabled"] = true;
+                        delete _$1za.tabindex;
+                    } else {
+                        undefined;
+                    }
+                    return _$1za;
                     return;
                 } else {
-                    return $437(__$ctx);
+                    return $468(__$ctx);
                 }
             } else {
-                return $437(__$ctx);
+                return $468(__$ctx);
             }
         } else {
-            return $437(__$ctx);
+            return $468(__$ctx);
         }
     }
-    function $437(__$ctx) {
-        if (!!__$ctx.elem === false) {
-            return $439(__$ctx);
+    function $468(__$ctx) {
+        if (!(__$ctx["__$anflg5"] !== true) === false) {
+            if (!(__$ctx.mods && __$ctx.mods.disabled === "yes") === false) {
+                if (!!__$ctx.elem === false) {
+                    var __r96, __r97;
+                    var _$1wattrs = ("", __r96 = __$ctx["__$anflg5"], __$ctx["__$anflg5"] = true, __r97 = $459(__$ctx), __$ctx["__$anflg5"] = __r96, "", __r97) || {};
+                    _$1wattrs.tabindex = -1;
+                    _$1wattrs["aria-disabled"] = true;
+                    return _$1wattrs;
+                    return;
+                } else {
+                    return $477(__$ctx);
+                }
+            } else {
+                return $477(__$ctx);
+            }
         } else {
-            return $462(__$ctx);
+            return $477(__$ctx);
         }
     }
-    function $439(__$ctx) {
-        var _$1xctx = __$ctx.ctx, _$1xattrs = {};
+    function $477(__$ctx) {
+        if (!!__$ctx.elem === false) {
+            return $479(__$ctx);
+        } else {
+            return $500(__$ctx);
+        }
+    }
+    function $479(__$ctx) {
+        var _$1vctx = __$ctx.ctx, _$1vattrs = {};
         [ "title", "target", "id", "tabindex" ].forEach(function(param) {
-            if (_$1xctx.hasOwnProperty(param)) {
-                _$1xattrs[param] = String(_$1xctx[param]);
+            if (_$1vctx.hasOwnProperty(param)) {
+                _$1vattrs[param] = String(_$1vctx[param]);
             } else {
                 undefined;
             }
         });
-        if (_$1xctx.url !== undefined) {
-            if (__$ctx.isSimple(_$1xctx.url)) {
-                _$1xattrs.href = String(_$1xctx.url);
+        if (_$1vctx.url !== null && typeof _$1vctx.url !== "undefined") {
+            if (__$ctx.isSimple(_$1vctx.url)) {
+                _$1vattrs.href = String(_$1vctx.url);
             } else {
-                var _$1xbuf = [];
+                var _$1vbuf = [];
                 {
                     "";
-                    var __r91 = __$ctx._mode;
+                    var __r93 = __$ctx._mode;
                     __$ctx._mode = "";
-                    var __r92 = __$ctx._buf;
-                    __$ctx._buf = _$1xbuf;
-                    var __r93 = __$ctx.ctx;
-                    __$ctx.ctx = _$1xctx.url;
-                    $821(__$ctx);
-                    __$ctx._mode = __r91;
-                    __$ctx._buf = __r92;
-                    __$ctx.ctx = __r93;
+                    var __r94 = __$ctx._buf;
+                    __$ctx._buf = _$1vbuf;
+                    var __r95 = __$ctx.ctx;
+                    __$ctx.ctx = _$1vctx.url;
+                    $870(__$ctx);
+                    __$ctx._mode = __r93;
+                    __$ctx._buf = __r94;
+                    __$ctx.ctx = __r95;
                     "";
                 }
                 undefined;
-                _$1xattrs.href = _$1xbuf.join("");
+                _$1vattrs.href = _$1vbuf.join("");
             }
         } else {
-            _$1xattrs.role = "button";
-            if (!_$1xattrs.tabindex) {
-                _$1xattrs.tabindex = "0";
+            _$1vattrs.role = "button";
+            if (!_$1vattrs.tabindex) {
+                _$1vattrs.tabindex = "0";
             } else {
                 undefined;
             }
         }
-        return _$1xattrs;
+        return _$1vattrs;
         return;
     }
-    function $462(__$ctx) {
+    function $500(__$ctx) {
         return undefined;
         return;
     }
-    function $510(__$ctx) {
+    function $550(__$ctx) {
         if (!!__$ctx.elem === false) {
             return "button";
             return;
         } else {
-            return $552(__$ctx);
+            return $592(__$ctx);
         }
     }
-    function $552(__$ctx) {
+    function $592(__$ctx) {
         return undefined;
         return;
     }
-    function $554(__$ctx) {
+    function $594(__$ctx) {
         if (__$ctx.elem === "control") {
-            if (!(__$ctx["__$anflg13"] !== true) === false) {
+            if (!(__$ctx["__$anflg14"] !== true) === false) {
                 if (!!__$ctx.mods.clear === false) {
-                    return $558(__$ctx);
+                    return $598(__$ctx);
                 } else {
-                    return $563(__$ctx);
+                    return $603(__$ctx);
                 }
             } else {
-                return $563(__$ctx);
+                return $603(__$ctx);
             }
         } else {
-            return $563(__$ctx);
+            return $603(__$ctx);
         }
     }
-    function $558(__$ctx) {
+    function $598(__$ctx) {
         {
             "";
-            var __r140 = __$ctx["__$anflg13"];
-            __$ctx["__$anflg13"] = true;
+            var __r144 = __$ctx["__$anflg14"];
+            __$ctx["__$anflg14"] = true;
             {
                 "";
-                var __r141 = __$ctx.ctx;
+                var __r145 = __$ctx.ctx;
                 __$ctx.ctx = {
                     elem: "box",
                     tag: "span",
@@ -1786,130 +1900,170 @@ var BEMHTML = function() {
                         } : undefined
                     } ]
                 };
-                var __r142 = __$ctx._mode;
+                var __r146 = __$ctx._mode;
                 __$ctx._mode = "";
-                $821(__$ctx);
-                __$ctx.ctx = __r141;
-                __$ctx._mode = __r142;
+                $870(__$ctx);
+                __$ctx.ctx = __r145;
+                __$ctx._mode = __r146;
                 "";
             }
-            __$ctx["__$anflg13"] = __r140;
+            __$ctx["__$anflg14"] = __r144;
             "";
         }
         undefined;
         return;
     }
-    function $563(__$ctx) {
-        if (!(__$ctx["__$anflg12"] !== true) === false) {
+    function $603(__$ctx) {
+        if (!(__$ctx["__$anflg13"] !== true) === false) {
             if (!!__$ctx.elem === false) {
-                return $566(__$ctx);
+                return $606(__$ctx);
             } else {
-                return $828(__$ctx);
+                return $877(__$ctx);
             }
         } else {
-            return $828(__$ctx);
+            return $877(__$ctx);
         }
     }
-    function $566(__$ctx) {
-        var __r125, __r126, __r127;
-        var _$2vvalue = ("", __r125 = __$ctx._mode, __$ctx._mode = "value", __r126 = __$ctx.ctx, __$ctx.ctx = __$ctx.ctx.value, __r127 = $700(__$ctx), __$ctx._mode = __r125, __$ctx.ctx = __r126, "", __r127), _$2vid = __$ctx.ctx.id || __$ctx.generateId(), _$2vmods = __$ctx.ctx.mods || {};
-        _$2vmods.theme = _$2vmods.theme || "normal";
+    function $606(__$ctx) {
+        var __r129, __r130, __r131;
+        var _$2yvalue = ("", __r129 = __$ctx._mode, __$ctx._mode = "value", __r130 = __$ctx.ctx, __$ctx.ctx = __$ctx.ctx.value, __r131 = $743(__$ctx), __$ctx._mode = __r129, __$ctx.ctx = __r130, "", __r131), _$2yid = __$ctx.ctx.id || __$ctx.generateId(), _$2ymods = __$ctx.ctx.mods || {};
+        _$2ymods.theme = _$2ymods.theme || "normal";
         {
             "";
-            var __r128 = __$ctx["__$anflg12"];
-            __$ctx["__$anflg12"] = true;
+            var __r132 = __$ctx["__$anflg13"];
+            __$ctx["__$anflg13"] = true;
             {
                 "";
-                var __r129 = __$ctx._inputId;
-                __$ctx._inputId = _$2vid;
-                var __r130 = __$ctx._labelId;
-                __$ctx._labelId = "label" + _$2vid;
-                var __r131 = __$ctx._hintId;
-                __$ctx._hintId = "hint" + _$2vid;
-                var __r132 = __$ctx._name;
+                var __r133 = __$ctx._inputId;
+                __$ctx._inputId = _$2yid;
+                var __r134 = __$ctx._labelId;
+                __$ctx._labelId = "label" + _$2yid;
+                var __r135 = __$ctx._hintId;
+                __$ctx._hintId = "hint" + _$2yid;
+                var __r136 = __$ctx._name;
                 __$ctx._name = __$ctx.ctx.name || "";
-                var __r133 = __$ctx._value;
-                __$ctx._value = _$2vvalue;
-                var __r134 = __$ctx._inputLink;
+                var __r137 = __$ctx._value;
+                __$ctx._value = _$2yvalue;
+                var __r138 = __$ctx._inputLink;
                 __$ctx._inputLink = true;
-                var __r135 = __$ctx._disabled;
+                var __r139 = __$ctx._disabled;
                 __$ctx._disabled = __$ctx.mods.disabled;
-                var __r136 = __$ctx.ctx, __r137 = __r136.mods;
-                __r136.mods = _$2vmods;
-                $554(__$ctx);
-                __$ctx._inputId = __r129;
-                __$ctx._labelId = __r130;
-                __$ctx._hintId = __r131;
-                __$ctx._name = __r132;
-                __$ctx._value = __r133;
-                __$ctx._inputLink = __r134;
-                __$ctx._disabled = __r135;
-                __r136.mods = __r137;
+                var __r140 = __$ctx.ctx, __r141 = __r140.mods;
+                __r140.mods = _$2ymods;
+                $594(__$ctx);
+                __$ctx._inputId = __r133;
+                __$ctx._labelId = __r134;
+                __$ctx._hintId = __r135;
+                __$ctx._name = __r136;
+                __$ctx._value = __r137;
+                __$ctx._inputLink = __r138;
+                __$ctx._disabled = __r139;
+                __r140.mods = __r141;
                 "";
             }
-            __$ctx["__$anflg12"] = __r128;
+            __$ctx["__$anflg13"] = __r132;
             "";
         }
         undefined;
         return;
     }
-    function $571(__$ctx) {
+    function $611(__$ctx) {
         if (__$ctx.elem === "radio") {
-            return $572(__$ctx);
+            return $612(__$ctx);
         } else {
-            return $577(__$ctx);
+            return $617(__$ctx);
         }
     }
-    function $572(__$ctx) {
-        if (!(__$ctx["__$anflg11"] !== true) === false) {
-            return $574(__$ctx);
+    function $612(__$ctx) {
+        if (!(__$ctx["__$anflg12"] !== true) === false) {
+            return $614(__$ctx);
         } else {
-            return $577(__$ctx);
+            return $617(__$ctx);
         }
     }
-    function $574(__$ctx) {
-        var __r120, __r124, __r121, __r122, __r123;
-        var _$2mctx = __$ctx.ctx, _$2melemMods = _$2mctx.elemMods || {}, _$2mctxControlAttrs = _$2mctx.controlAttrs || {}, _$2mvaluesMatched = _$2mctxControlAttrs.value != undefined && _$2mctxControlAttrs.value == __$ctx._value, _$2mcontrolAttrs = __$ctx._.extend(_$2mctxControlAttrs, {
-            checked: _$2mvaluesMatched || _$2melemMods.checked,
-            disabled: __$ctx._modsDisabled || _$2melemMods.disabled
+    function $614(__$ctx) {
+        var __r124, __r128, __r125, __r126, __r127;
+        var _$2pctx = __$ctx.ctx, _$2pelemMods = _$2pctx.elemMods || {}, _$2pctxControlAttrs = _$2pctx.controlAttrs || {}, _$2pvaluesMatched = _$2pctxControlAttrs.value != undefined && _$2pctxControlAttrs.value == __$ctx._value, _$2pcontrolAttrs = __$ctx._.extend(_$2pctxControlAttrs, {
+            checked: _$2pvaluesMatched || _$2pelemMods.checked,
+            disabled: __$ctx._modsDisabled || _$2pelemMods.disabled
         });
-        _$2mcontrolAttrs.id || (_$2mcontrolAttrs.id = __$ctx.generateId());
-        return "", __r120 = __$ctx["__$anflg11"], __$ctx["__$anflg11"] = true, __r124 = ("", __r121 = __$ctx._controlAttrs, __$ctx._controlAttrs = _$2mcontrolAttrs, __r122 = __$ctx._valuesMatched, __$ctx._valuesMatched = _$2mvaluesMatched, __r123 = $572(__$ctx), __$ctx._controlAttrs = __r121, __$ctx._valuesMatched = __r122, "", __r123), __$ctx["__$anflg11"] = __r120, "", __r124;
+        _$2pcontrolAttrs.id || (_$2pcontrolAttrs.id = __$ctx.generateId());
+        return "", __r124 = __$ctx["__$anflg12"], __$ctx["__$anflg12"] = true, __r128 = ("", __r125 = __$ctx._controlAttrs, __$ctx._controlAttrs = _$2pcontrolAttrs, __r126 = __$ctx._valuesMatched, __$ctx._valuesMatched = _$2pvaluesMatched, __r127 = $612(__$ctx), __$ctx._controlAttrs = __r125, __$ctx._valuesMatched = __r126, "", __r127), __$ctx["__$anflg12"] = __r124, "", __r128;
         return;
     }
-    function $577(__$ctx) {
-        if (!(__$ctx["__$anflg10"] !== true) === false) {
+    function $617(__$ctx) {
+        if (!(__$ctx["__$anflg11"] !== true) === false) {
             if (!!__$ctx.elem === false) {
-                return $580(__$ctx);
+                return $620(__$ctx);
             } else {
-                return $828(__$ctx);
+                return $877(__$ctx);
             }
         } else {
-            return $828(__$ctx);
+            return $877(__$ctx);
         }
     }
-    function $580(__$ctx) {
-        var _$2jmods = __$ctx.ctx.mods || {};
-        _$2jmods.theme = _$2jmods.theme || "normal";
+    function $620(__$ctx) {
+        var _$2mmods = __$ctx.ctx.mods || {};
+        _$2mmods.theme = _$2mmods.theme || "normal";
+        {
+            "";
+            var __r118 = __$ctx["__$anflg11"];
+            __$ctx["__$anflg11"] = true;
+            {
+                "";
+                var __r119 = __$ctx.ctx, __r120 = __r119.mods;
+                __r119.mods = _$2mmods;
+                var __r121 = __$ctx._modsDisabled;
+                __$ctx._modsDisabled = __$ctx.ctx.mods && __$ctx.ctx.mods.disabled;
+                var __r122 = __$ctx._name;
+                __$ctx._name = __$ctx.ctx.name;
+                var __r123 = __$ctx._value;
+                __$ctx._value = __$ctx.ctx.value;
+                $611(__$ctx);
+                __r119.mods = __r120;
+                __$ctx._modsDisabled = __r121;
+                __$ctx._name = __r122;
+                __$ctx._value = __r123;
+                "";
+            }
+            __$ctx["__$anflg11"] = __r118;
+            "";
+        }
+        undefined;
+        return;
+    }
+    function $625(__$ctx) {
+        if (!(__$ctx["__$anflg10"] !== true) === false) {
+            if (!!__$ctx.elem === false) {
+                return $628(__$ctx);
+            } else {
+                return $877(__$ctx);
+            }
+        } else {
+            return $877(__$ctx);
+        }
+    }
+    function $628(__$ctx) {
+        var _$2gctx = __$ctx.ctx, _$2gattrs = _$2gctx.checkboxAttrs || {}, _$2gid = _$2gattrs.id || __$ctx.generateId(), _$2gmods = _$2gctx.mods || {};
+        _$2gmods.theme = _$2gmods.theme || "normal";
         {
             "";
             var __r114 = __$ctx["__$anflg10"];
             __$ctx["__$anflg10"] = true;
             {
                 "";
-                var __r115 = __$ctx.ctx, __r116 = __r115.mods;
-                __r115.mods = _$2jmods;
-                var __r117 = __$ctx._modsDisabled;
-                __$ctx._modsDisabled = __$ctx.ctx.mods && __$ctx.ctx.mods.disabled;
-                var __r118 = __$ctx._name;
-                __$ctx._name = __$ctx.ctx.name;
-                var __r119 = __$ctx._value;
-                __$ctx._value = __$ctx.ctx.value;
-                $571(__$ctx);
-                __r115.mods = __r116;
-                __$ctx._modsDisabled = __r117;
-                __$ctx._name = __r118;
-                __$ctx._value = __r119;
+                var __r115 = __$ctx._checkboxAttrs;
+                __$ctx._checkboxAttrs = _$2gattrs.id ? _$2gattrs : {
+                    id: "id" + _$2gid
+                };
+                var __r116 = __$ctx._labelId;
+                __$ctx._labelId = "label" + _$2gid;
+                var __r117 = _$2gctx.mods;
+                _$2gctx.mods = _$2gmods;
+                $625(__$ctx);
+                __$ctx._checkboxAttrs = __r115;
+                __$ctx._labelId = __r116;
+                _$2gctx.mods = __r117;
                 "";
             }
             __$ctx["__$anflg10"] = __r114;
@@ -1918,88 +2072,48 @@ var BEMHTML = function() {
         undefined;
         return;
     }
-    function $585(__$ctx) {
-        if (!(__$ctx["__$anflg9"] !== true) === false) {
-            if (!!__$ctx.elem === false) {
-                return $588(__$ctx);
-            } else {
-                return $828(__$ctx);
-            }
-        } else {
-            return $828(__$ctx);
-        }
-    }
-    function $588(__$ctx) {
-        var _$2fctx = __$ctx.ctx, _$2fattrs = _$2fctx.checkboxAttrs || {}, _$2fid = _$2fattrs.id || __$ctx.generateId(), _$2fmods = _$2fctx.mods || {};
-        _$2fmods.theme = _$2fmods.theme || "normal";
-        {
-            "";
-            var __r110 = __$ctx["__$anflg9"];
-            __$ctx["__$anflg9"] = true;
-            {
-                "";
-                var __r111 = __$ctx._checkboxAttrs;
-                __$ctx._checkboxAttrs = _$2fattrs.id ? _$2fattrs : {
-                    id: "id" + _$2fid
-                };
-                var __r112 = __$ctx._labelId;
-                __$ctx._labelId = "label" + _$2fid;
-                var __r113 = _$2fctx.mods;
-                _$2fctx.mods = _$2fmods;
-                $585(__$ctx);
-                __$ctx._checkboxAttrs = __r111;
-                __$ctx._labelId = __r112;
-                _$2fctx.mods = __r113;
-                "";
-            }
-            __$ctx["__$anflg9"] = __r110;
-            "";
-        }
-        undefined;
+    function $638(__$ctx) {
+        var __r107, __r113, __r108, __r109, __r110, __r111, __r112;
+        return "", __r107 = __$ctx["__$anflg9"], __$ctx["__$anflg9"] = true, __r113 = ("", __r108 = __$ctx.ctx, __r109 = __r108.mods, __r108.mods = __$ctx.ctx.mods || {}, __r110 = __$ctx.ctx.mods, __r111 = __r110["only-icon"], __r110["only-icon"] = "yes", __r112 = $101(__$ctx), __r108.mods = __r109, __r110["only-icon"] = __r111, "", __r112), __$ctx["__$anflg9"] = __r107, "", __r113;
         return;
     }
-    function $598(__$ctx) {
-        var __r103, __r109, __r104, __r105, __r106, __r107, __r108;
-        return "", __r103 = __$ctx["__$anflg8"], __$ctx["__$anflg8"] = true, __r109 = ("", __r104 = __$ctx.ctx, __r105 = __r104.mods, __r104.mods = __$ctx.ctx.mods || {}, __r106 = __$ctx.ctx.mods, __r107 = __r106["only-icon"], __r106["only-icon"] = "yes", __r108 = $92(__$ctx), __r104.mods = __r105, __r106["only-icon"] = __r107, "", __r108), __$ctx["__$anflg8"] = __r103, "", __r109;
-        return;
-    }
-    function $605(__$ctx) {
-        if (!(__$ctx["__$anflg5"] !== true) === false) {
+    function $645(__$ctx) {
+        if (!(__$ctx["__$anflg6"] !== true) === false) {
             if (!!__$ctx.elem === false) {
-                var _$23mods = __$ctx.ctx.mods || {};
-                _$23mods.theme = _$23mods.theme || "normal";
+                var _$24mods = __$ctx.ctx.mods || {};
+                _$24mods.theme = _$24mods.theme || "normal";
                 {
                     "";
-                    var __r96 = __$ctx["__$anflg5"];
-                    __$ctx["__$anflg5"] = true;
+                    var __r100 = __$ctx["__$anflg6"];
+                    __$ctx["__$anflg6"] = true;
                     {
                         "";
-                        var __r97 = __$ctx.ctx, __r98 = __r97.mods;
-                        __r97.mods = _$23mods;
-                        $92(__$ctx);
-                        __r97.mods = __r98;
+                        var __r101 = __$ctx.ctx, __r102 = __r101.mods;
+                        __r101.mods = _$24mods;
+                        $101(__$ctx);
+                        __r101.mods = __r102;
                         "";
                     }
-                    __$ctx["__$anflg5"] = __r96;
+                    __$ctx["__$anflg6"] = __r100;
                     "";
                 }
                 undefined;
                 return;
             } else {
-                return $828(__$ctx);
+                return $877(__$ctx);
             }
         } else {
-            return $828(__$ctx);
+            return $877(__$ctx);
         }
     }
-    function $617(__$ctx) {
-        var _$1pie = __$ctx.ctx.ie;
-        if (_$1pie === true) {
+    function $657(__$ctx) {
+        var _$1nie = __$ctx.ctx.ie;
+        if (_$1nie === true) {
             {
                 "";
-                var __r85 = __$ctx._mode;
+                var __r87 = __$ctx._mode;
                 __$ctx._mode = "";
-                var __r86 = __$ctx.ctx;
+                var __r88 = __$ctx.ctx;
                 __$ctx.ctx = [ 6, 7, 8, 9 ].map(function(v) {
                     return {
                         elem: "css",
@@ -2007,46 +2121,46 @@ var BEMHTML = function() {
                         ie: "IE " + v
                     };
                 }, __$ctx);
-                $821(__$ctx);
-                __$ctx._mode = __r85;
-                __$ctx.ctx = __r86;
+                $870(__$ctx);
+                __$ctx._mode = __r87;
+                __$ctx.ctx = __r88;
                 "";
             }
             undefined;
         } else {
-            var _$1phideRule = !_$1pie ? [ "gt IE 9", "<!-->", "<!--" ] : _$1pie === "!IE" ? [ _$1pie, "<!-->", "<!--" ] : [ _$1pie, "", "" ];
+            var _$1nhideRule = !_$1nie ? [ "gt IE 9", "<!-->", "<!--" ] : _$1nie === "!IE" ? [ _$1nie, "<!-->", "<!--" ] : [ _$1nie, "", "" ];
             {
                 "";
-                var __r87 = __$ctx._mode;
+                var __r89 = __$ctx._mode;
                 __$ctx._mode = "";
-                var __r88 = __$ctx.ctx, __r89 = __r88._ieCommented;
-                __r88._ieCommented = true;
-                var __r90 = __$ctx.ctx;
-                __$ctx.ctx = [ "<!--[if " + _$1phideRule[0] + "]>", _$1phideRule[1], __$ctx.ctx, _$1phideRule[2], "<![endif]-->" ];
-                $821(__$ctx);
-                __$ctx._mode = __r87;
-                __r88._ieCommented = __r89;
-                __$ctx.ctx = __r90;
+                var __r90 = __$ctx.ctx, __r91 = __r90._ieCommented;
+                __r90._ieCommented = true;
+                var __r92 = __$ctx.ctx;
+                __$ctx.ctx = [ "<!--[if " + _$1nhideRule[0] + "]>", _$1nhideRule[1], __$ctx.ctx, _$1nhideRule[2], "<![endif]-->" ];
+                $870(__$ctx);
+                __$ctx._mode = __r89;
+                __r90._ieCommented = __r91;
+                __$ctx.ctx = __r92;
                 "";
             }
             undefined;
         }
         return;
     }
-    function $622(__$ctx) {
-        if (!(__$ctx["__$anflg2"] !== true) === false) {
+    function $662(__$ctx) {
+        if (!(__$ctx["__$anflg3"] !== true) === false) {
             if (!!__$ctx.elem === false) {
-                return $625(__$ctx);
+                return $665(__$ctx);
             } else {
-                return $828(__$ctx);
+                return $877(__$ctx);
             }
         } else {
-            return $828(__$ctx);
+            return $877(__$ctx);
         }
     }
-    function $625(__$ctx) {
-        var __r69, __r70, __r71, __r72;
-        var _$12ctx = __$ctx.ctx, _$12dtype = ("", __r69 = __$ctx._mode, __$ctx._mode = "doctype", __r70 = $792(__$ctx), __$ctx._mode = __r69, "", __r70), _$12xUA = ("", __r71 = __$ctx._mode, __$ctx._mode = "xUACompatible", __r72 = $776(__$ctx), __$ctx._mode = __r71, "", __r72), _$12buf = [ _$12dtype, {
+    function $665(__$ctx) {
+        var __r71, __r72, __r73, __r74;
+        var _$12ctx = __$ctx.ctx, _$12dtype = ("", __r71 = __$ctx._mode, __$ctx._mode = "doctype", __r72 = $841(__$ctx), __$ctx._mode = __r71, "", __r72), _$12xUA = ("", __r73 = __$ctx._mode, __$ctx._mode = "xUACompatible", __r74 = $825(__$ctx), __$ctx._mode = __r73, "", __r74), _$12buf = [ _$12dtype, {
             elem: "root",
             content: [ {
                 elem: "head",
@@ -2068,27 +2182,27 @@ var BEMHTML = function() {
         } ];
         {
             "";
-            var __r73 = __$ctx["__$anflg2"];
-            __$ctx["__$anflg2"] = true;
+            var __r75 = __$ctx["__$anflg3"];
+            __$ctx["__$anflg3"] = true;
             {
                 "";
-                var __r74 = __$ctx.ctx;
+                var __r76 = __$ctx.ctx;
                 __$ctx.ctx = _$12buf;
-                var __r75 = __$ctx._mode;
+                var __r77 = __$ctx._mode;
                 __$ctx._mode = "";
-                $821(__$ctx);
-                __$ctx.ctx = __r74;
-                __$ctx._mode = __r75;
+                $870(__$ctx);
+                __$ctx.ctx = __r76;
+                __$ctx._mode = __r77;
                 "";
             }
-            __$ctx["__$anflg2"] = __r73;
+            __$ctx["__$anflg3"] = __r75;
             "";
         }
         undefined;
         return;
     }
-    function $632(__$ctx) {
-        var __r65, __r66, __r67, __r68;
+    function $672(__$ctx) {
+        var __r67, __r68, __r69, __r70;
         if (!__$ctx.ctx) {
             return "";
         } else {
@@ -2102,17 +2216,26 @@ var BEMHTML = function() {
         }
         if (_$zctx.content) {
             var _$zcnt;
-            _$zparams.content = (_$zcnt = [], "", __r65 = __$ctx._buf, __$ctx._buf = _$zcnt, __r66 = __$ctx._mode, __$ctx._mode = "", __r67 = __$ctx.ctx, __$ctx.ctx = _$zctx.content, __r68 = $821(__$ctx), __$ctx._buf = __r65, __$ctx._mode = __r66, __$ctx.ctx = __r67, "", __r68, _$zcnt.join(""));
+            _$zparams.content = (_$zcnt = [], "", __r67 = __$ctx._buf, __$ctx._buf = _$zcnt, __r68 = __$ctx._mode, __$ctx._mode = "", __r69 = __$ctx.ctx, __$ctx.ctx = _$zctx.content, __r70 = $870(__$ctx), __$ctx._buf = __r67, __$ctx._mode = __r68, __$ctx.ctx = __r69, "", __r70, _$zcnt.join(""));
         } else {
             undefined;
         }
         __$ctx._buf.push(BEM.I18N(_$zkeyset, _$zkey, _$zparams));
         return;
     }
-    function $640(__$ctx) {
+    function $678(__$ctx) {
+        var __r62, __r66, __r63, __r64, __r65;
+        return "", __r62 = __$ctx["__$anflg2"], __$ctx["__$anflg2"] = true, __r66 = ("", __r63 = __$ctx.ctx, __$ctx.ctx = {
+            block: "b-page",
+            elem: "js",
+            url: "//yastatic.net/jquery/1.8.3/jquery.min.js"
+        }, __r64 = __$ctx._mode, __$ctx._mode = "", __r65 = $870(__$ctx), __$ctx.ctx = __r63, __$ctx._mode = __r64, "", __r65), __$ctx["__$anflg2"] = __r62, "", __r66;
+        return;
+    }
+    function $683(__$ctx) {
         var __t = __$ctx.elem;
         if (__t === "lego-static-host") {
-            return "//yandex.st/lego/2.10-137";
+            return "//yastatic.net/lego/2.10-142";
             return;
         } else if (__t === "export-host") {
             return "//export.yandex.ru";
@@ -2138,14 +2261,14 @@ var BEMHTML = function() {
                 return;
             } else {
                 if (!!__$ctx.elem === false) {
-                    return $664(__$ctx);
+                    return $707(__$ctx);
                 } else {
-                    return $828(__$ctx);
+                    return $877(__$ctx);
                 }
             }
         }
     }
-    function $664(__$ctx) {
+    function $707(__$ctx) {
         var _$hparams = __$ctx.ctx.params || {}, _$hiGlobal = __$ctx["i-global"], _$hisTldChanged = _$hparams.tld && _$hparams.tld !== _$hiGlobal.tld, _$htld, _$hxYaDomain, _$hyaDomain;
         if (_$hisTldChanged) {
             _$htld = _$hparams.tld;
@@ -2165,143 +2288,152 @@ var BEMHTML = function() {
         }
         return;
     }
-    function $680(__$ctx) {
-        if (!(__$ctx["__$anflg3"] !== true) === false) {
+    function $723(__$ctx) {
+        if (!(__$ctx["__$anflg4"] !== true) === false) {
             if (!!__$ctx.elem === false) {
-                var __r81, __r82;
-                var _$1mmix = ("", __r81 = __$ctx["__$anflg3"], __$ctx["__$anflg3"] = true, __r82 = $680(__$ctx), __$ctx["__$anflg3"] = __r81, "", __r82) || [];
-                _$1mmix.push({
+                var __r83, __r84;
+                var _$1kmix = ("", __r83 = __$ctx["__$anflg4"], __$ctx["__$anflg4"] = true, __r84 = $723(__$ctx), __$ctx["__$anflg4"] = __r83, "", __r84) || [];
+                _$1kmix.push({
                     block: "i-ua",
+                    mods: {
+                        interaction: "yes"
+                    },
                     js: true
                 });
-                return _$1mmix;
+                return _$1kmix;
                 return;
             } else {
-                return $686(__$ctx);
+                return $729(__$ctx);
             }
         } else {
-            return $686(__$ctx);
+            return $729(__$ctx);
         }
     }
-    function $686(__$ctx) {
+    function $729(__$ctx) {
         if (!!__$ctx.ctx._iGlobal === false) {
             if (!!__$ctx.elem === false) {
-                return $689(__$ctx);
+                return $732(__$ctx);
             } else {
-                return $692(__$ctx);
+                return $735(__$ctx);
             }
         } else {
-            return $692(__$ctx);
+            return $735(__$ctx);
         }
     }
-    function $689(__$ctx) {
-        var __r76, __r77, __r78, __r79, __r80;
-        var _$1imix = ("", __r76 = __$ctx.ctx, __r77 = __r76._iGlobal, __r76._iGlobal = true, __r78 = $680(__$ctx), __r76._iGlobal = __r77, "", __r78), _$1ijsParams = ("", __r79 = __$ctx._mode, __$ctx._mode = "js-params", __r80 = $800(__$ctx), __$ctx._mode = __r79, "", __r80);
+    function $732(__$ctx) {
+        var __r78, __r79, __r80, __r81, __r82;
+        var _$1imix = ("", __r78 = __$ctx.ctx, __r79 = __r78._iGlobal, __r78._iGlobal = true, __r80 = $723(__$ctx), __r78._iGlobal = __r79, "", __r80), _$1ijsParams = ("", __r81 = __$ctx._mode, __$ctx._mode = "js-params", __r82 = $849(__$ctx), __$ctx._mode = __r81, "", __r82);
         _$1imix ? _$1imix.push(_$1ijsParams) : _$1imix = [ _$1ijsParams ];
         return _$1imix;
         return;
     }
-    function $692(__$ctx) {
+    function $735(__$ctx) {
         if (!!__$ctx.elem === false) {
             return [ {
                 elem: "body"
             } ];
             return;
         } else {
-            return $698(__$ctx);
+            return $741(__$ctx);
         }
     }
-    function $698(__$ctx) {
+    function $741(__$ctx) {
         return undefined;
         return;
     }
-    function $700(__$ctx) {
+    function $743(__$ctx) {
         if (!__$ctx.isSimple(__$ctx.ctx) === false) {
             if (!!__$ctx.elem === false) {
                 return __$ctx.ctx;
                 return;
             } else {
-                return $706(__$ctx);
+                return $749(__$ctx);
             }
         } else {
-            return $706(__$ctx);
+            return $749(__$ctx);
         }
     }
-    function $706(__$ctx) {
+    function $749(__$ctx) {
         if (!__$ctx.ctx === false) {
             if (!!__$ctx.elem === false) {
-                var _$2xvalue = [];
+                var _$30value = [];
                 {
                     "";
-                    var __r138 = __$ctx._buf;
-                    __$ctx._buf = _$2xvalue;
-                    var __r139 = __$ctx._mode;
+                    var __r142 = __$ctx._buf;
+                    __$ctx._buf = _$30value;
+                    var __r143 = __$ctx._mode;
                     __$ctx._mode = "";
-                    $821(__$ctx);
-                    __$ctx._buf = __r138;
-                    __$ctx._mode = __r139;
+                    $870(__$ctx);
+                    __$ctx._buf = __r142;
+                    __$ctx._mode = __r143;
                     "";
                 }
                 undefined;
-                return _$2xvalue.join("");
+                return _$30value.join("");
                 return;
             } else {
-                return $712(__$ctx);
+                return $755(__$ctx);
             }
         } else {
-            return $712(__$ctx);
+            return $755(__$ctx);
         }
     }
-    function $712(__$ctx) {
+    function $755(__$ctx) {
         if (!true === false) {
             if (!!__$ctx.elem === false) {
                 return "";
                 return;
             } else {
-                return $828(__$ctx);
+                return $877(__$ctx);
             }
         } else {
-            return $828(__$ctx);
+            return $877(__$ctx);
         }
-    }
-    function $749(__$ctx) {
-        return undefined;
-        return;
-    }
-    function $772(__$ctx) {
-        return undefined;
-        return;
-    }
-    function $776(__$ctx) {
-        if (__$ctx.ctx["x-ua-compatible"] === false) {
-            return false;
-        } else {
-            return {
-                tag: "meta",
-                attrs: {
-                    "http-equiv": "X-UA-Compatible",
-                    content: __$ctx.ctx["x-ua-compatible"] || "IE=edge"
-                }
-            };
-        }
-        return;
-    }
-    function $788(__$ctx) {
-        return undefined;
-        return;
     }
     function $792(__$ctx) {
+        if (!__$ctx.ctx.hasOwnProperty("tabindex") === false) {
+            return {
+                origTabindex: String(__$ctx.ctx.tabindex)
+            };
+            return;
+        } else {
+            return $798(__$ctx);
+        }
+    }
+    function $798(__$ctx) {
+        return undefined;
+        return;
+    }
+    function $821(__$ctx) {
+        return undefined;
+        return;
+    }
+    function $825(__$ctx) {
+        return {
+            tag: "meta",
+            attrs: {
+                "http-equiv": "X-UA-Compatible",
+                content: "IE=EmulateIE7, IE=edge"
+            }
+        };
+        return;
+    }
+    function $837(__$ctx) {
+        return undefined;
+        return;
+    }
+    function $841(__$ctx) {
         return __$ctx.ctx.doctype || "<!DOCTYPE html>";
         return;
     }
-    function $800(__$ctx) {
+    function $849(__$ctx) {
         var __r56, __r57, __r58, __r59;
         var _$t_this = __$ctx["i-global"], _$tjs = {}, _$tblock = {
             block: "i-global",
             js: _$tjs
         }, _$te;
         for (_$te in _$t_this) {
-            if (_$t_this.hasOwnProperty(_$te) && ("", __r56 = __$ctx._mode, __$ctx._mode = "public-params", __r57 = __$ctx.block, __$ctx.block = "i-global", __r58 = __$ctx.elem, __$ctx.elem = _$te, __r59 = $806(__$ctx), __$ctx._mode = __r56, __$ctx.block = __r57, __$ctx.elem = __r58, "", __r59)) {
+            if (_$t_this.hasOwnProperty(_$te) && ("", __r56 = __$ctx._mode, __$ctx._mode = "public-params", __r57 = __$ctx.block, __$ctx.block = "i-global", __r58 = __$ctx.elem, __$ctx.elem = _$te, __r59 = $855(__$ctx), __$ctx._mode = __r56, __$ctx.block = __r57, __$ctx.elem = __r58, "", __r59)) {
                 _$tjs[_$te] = _$t_this[_$te];
             } else {
                 undefined;
@@ -2310,7 +2442,7 @@ var BEMHTML = function() {
         return _$tblock;
         return;
     }
-    function $806(__$ctx) {
+    function $855(__$ctx) {
         if (!__$ctx.elem === false) {
             return {
                 id: 1,
@@ -2340,51 +2472,51 @@ var BEMHTML = function() {
             }[__$ctx.elem] || false;
             return;
         } else {
-            return $828(__$ctx);
+            return $877(__$ctx);
         }
     }
-    function $814(__$ctx) {
+    function $863(__$ctx) {
         if (!!__$ctx.elem === false) {
             return {};
             return;
         } else {
-            return $828(__$ctx);
+            return $877(__$ctx);
         }
     }
-    function $821(__$ctx) {
+    function $870(__$ctx) {
         if (!!__$ctx["i-global"] === false) {
-            return $823(__$ctx);
+            return $872(__$ctx);
         } else {
-            return $828(__$ctx);
+            return $877(__$ctx);
         }
     }
-    function $823(__$ctx) {
+    function $872(__$ctx) {
         var __r49, __r50, __r51, __r52, __r53, __r54, __r55;
         var _$fps = {}, _$fes = [ "lang", "tld", "content-region", "click-host", "passport-host", "pass-host", "social-host", "export-host", "login", "lego-static-host" ], _$fe;
         while (_$fe = _$fes.shift()) {
-            _$fps[_$fe] = ("", __r49 = __$ctx._mode, __$ctx._mode = "default", __r50 = __$ctx.block, __$ctx.block = "i-global", __r51 = __$ctx.elem, __$ctx.elem = _$fe, __r52 = $640(__$ctx), __$ctx._mode = __r49, __$ctx.block = __r50, __$ctx.elem = __r51, "", __r52);
+            _$fps[_$fe] = ("", __r49 = __$ctx._mode, __$ctx._mode = "default", __r50 = __$ctx.block, __$ctx.block = "i-global", __r51 = __$ctx.elem, __$ctx.elem = _$fe, __r52 = $683(__$ctx), __$ctx._mode = __r49, __$ctx.block = __r50, __$ctx.elem = __r51, "", __r52);
         }
-        __$ctx["i-global"] = __$ctx._.extend(_$fps, ("", __r53 = __$ctx._mode, __$ctx._mode = "env", __r54 = __$ctx.block, __$ctx.block = "i-global", __r55 = $814(__$ctx), __$ctx._mode = __r53, __$ctx.block = __r54, "", __r55));
+        __$ctx["i-global"] = __$ctx._.extend(_$fps, ("", __r53 = __$ctx._mode, __$ctx._mode = "env", __r54 = __$ctx.block, __$ctx.block = "i-global", __r55 = $863(__$ctx), __$ctx._mode = __r53, __$ctx.block = __r54, "", __r55));
         applyc(__$ctx);
         undefined;
         return;
     }
-    function $828(__$ctx) {
+    function $877(__$ctx) {
         if (!__$ctx.ctx === false) {
             if (!__$ctx.ctx.link === false) {
                 if (!!__$ctx._.isSimple(__$ctx.ctx) === false) {
-                    return $832(__$ctx);
+                    return $881(__$ctx);
                 } else {
-                    return $837(__$ctx);
+                    return $886(__$ctx);
                 }
             } else {
-                return $837(__$ctx);
+                return $886(__$ctx);
             }
         } else {
-            return $837(__$ctx);
+            return $886(__$ctx);
         }
     }
-    function $832(__$ctx) {
+    function $881(__$ctx) {
         var __r47, __r48;
         function _$6follow() {
             if (this.ctx.link === "no-follow") {
@@ -2411,22 +2543,22 @@ var BEMHTML = function() {
         return _$6res;
         return;
     }
-    function $837(__$ctx) {
+    function $886(__$ctx) {
         if (!cache === false) {
             if (!__$ctx.ctx === false) {
                 if (!__$ctx.ctx.cache === false) {
-                    return $841(__$ctx);
+                    return $890(__$ctx);
                 } else {
-                    return $846(__$ctx);
+                    return $895(__$ctx);
                 }
             } else {
-                return $846(__$ctx);
+                return $895(__$ctx);
             }
         } else {
-            return $846(__$ctx);
+            return $895(__$ctx);
         }
     }
-    function $841(__$ctx) {
+    function $890(__$ctx) {
         var _$5cached;
         function _$5setProperty(obj, key, value) {
             if (key.length === 0) {
@@ -2529,10 +2661,10 @@ var BEMHTML = function() {
         return _$5res;
         return;
     }
-    function $846(__$ctx) {
+    function $895(__$ctx) {
         var __t = __$ctx._mode;
         if (__t === "default") {
-            return $848(__$ctx);
+            return $897(__$ctx);
         } else if (__t === "") {
             if (!__$ctx._.isSimple(__$ctx.ctx) === false) {
                 __$ctx._listLength--;
@@ -2545,10 +2677,10 @@ var BEMHTML = function() {
                     return;
                 } else {
                     if (!__$ctx._.isArray(__$ctx.ctx) === false) {
-                        return $857(__$ctx);
+                        return $906(__$ctx);
                     } else {
                         if (!true === false) {
-                            return $860(__$ctx);
+                            return $909(__$ctx);
                         } else {
                             return $e(__$ctx);
                         }
@@ -2559,32 +2691,32 @@ var BEMHTML = function() {
             return $e(__$ctx);
         }
     }
-    function $848(__$ctx) {
+    function $897(__$ctx) {
         var __r20, __r8, __r12, __r13, __r14, __r15, __r16, __r17, __r18, __r19, __r9, __r21, __r22, __r23, __r26, __r27, __r28, __r29, __r30, __r31;
         var _$4_this = __$ctx, _$4BEM_ = _$4_this.BEM, _$4v = __$ctx.ctx, _$4buf = __$ctx._buf, _$4tag;
-        _$4tag = ("", __r8 = __$ctx._mode, __$ctx._mode = "tag", __r9 = $174(__$ctx), __$ctx._mode = __r8, "", __r9);
+        _$4tag = ("", __r8 = __$ctx._mode, __$ctx._mode = "tag", __r9 = $189(__$ctx), __$ctx._mode = __r8, "", __r9);
         typeof _$4tag != "undefined" || (_$4tag = _$4v.tag);
         typeof _$4tag != "undefined" || (_$4tag = "div");
         if (_$4tag) {
             var _$4jsParams, _$4js;
             if (__$ctx.block && _$4v.js !== false) {
-                _$4js = ("", __r12 = __$ctx._mode, __$ctx._mode = "js", __r13 = $261(__$ctx), __$ctx._mode = __r12, "", __r13);
+                _$4js = ("", __r12 = __$ctx._mode, __$ctx._mode = "js", __r13 = $276(__$ctx), __$ctx._mode = __r12, "", __r13);
                 _$4js = _$4js ? __$ctx._.extend(_$4v.js, _$4js === true ? {} : _$4js) : _$4v.js === true ? {} : _$4v.js;
                 _$4js && ((_$4jsParams = {})[_$4BEM_.INTERNAL.buildClass(__$ctx.block, _$4v.elem)] = _$4js);
             } else {
                 undefined;
             }
             _$4buf.push("<", _$4tag);
-            var _$4isBEM = ("", __r14 = __$ctx._mode, __$ctx._mode = "bem", __r15 = $300(__$ctx), __$ctx._mode = __r14, "", __r15);
+            var _$4isBEM = ("", __r14 = __$ctx._mode, __$ctx._mode = "bem", __r15 = $315(__$ctx), __$ctx._mode = __r14, "", __r15);
             typeof _$4isBEM != "undefined" || (_$4isBEM = typeof _$4v.bem != "undefined" ? _$4v.bem : _$4v.block || _$4v.elem);
-            var _$4cls = ("", __r16 = __$ctx._mode, __$ctx._mode = "cls", __r17 = $300(__$ctx), __$ctx._mode = __r16, "", __r17);
+            var _$4cls = ("", __r16 = __$ctx._mode, __$ctx._mode = "cls", __r17 = $315(__$ctx), __$ctx._mode = __r16, "", __r17);
             _$4cls || (_$4cls = _$4v.cls);
             var _$4addJSInitClass = _$4v.block && _$4jsParams;
             if (_$4isBEM || _$4cls) {
                 _$4buf.push(' class="');
                 if (_$4isBEM) {
                     _$4BEM_.INTERNAL.buildClasses(__$ctx.block, _$4v.elem, _$4v.elemMods || _$4v.mods, _$4buf);
-                    var _$4mix = ("", __r18 = __$ctx._mode, __$ctx._mode = "mix", __r19 = $284(__$ctx), __$ctx._mode = __r18, "", __r19);
+                    var _$4mix = ("", __r18 = __$ctx._mode, __$ctx._mode = "mix", __r19 = $299(__$ctx), __$ctx._mode = __r18, "", __r19);
                     _$4v.mix && (_$4mix = _$4mix ? _$4mix.concat(_$4v.mix) : _$4v.mix);
                     if (_$4mix) {
                         var _$4visited = {};
@@ -2615,7 +2747,7 @@ var BEMHTML = function() {
                             }
                             if (_$4hasItem && !_$4visited[_$4visitedKey(_$4block, _$4elem)]) {
                                 _$4visited[_$4visitedKey(_$4block, _$4elem)] = true;
-                                var _$4nestedMix = ("", __r20 = __$ctx.block, __$ctx.block = _$4block, __r21 = __$ctx.elem, __$ctx.elem = _$4elem, __r22 = __$ctx._mode, __$ctx._mode = "mix", __r23 = $284(__$ctx), __$ctx.block = __r20, __$ctx.elem = __r21, __$ctx._mode = __r22, "", __r23);
+                                var _$4nestedMix = ("", __r20 = __$ctx.block, __$ctx.block = _$4block, __r21 = __$ctx.elem, __$ctx.elem = _$4elem, __r22 = __$ctx._mode, __$ctx._mode = "mix", __r23 = $299(__$ctx), __$ctx.block = __r20, __$ctx.elem = __r21, __$ctx._mode = __r22, "", __r23);
                                 if (_$4nestedMix) {
                                     for (var _$4j = 0; _$4j < _$4nestedMix.length; _$4j++) {
                                         var _$4nestedItem = _$4nestedMix[_$4j];
@@ -2647,12 +2779,12 @@ var BEMHTML = function() {
                 undefined;
             }
             if (_$4jsParams) {
-                var _$4jsAttr = ("", __r26 = __$ctx._mode, __$ctx._mode = "jsAttr", __r27 = $300(__$ctx), __$ctx._mode = __r26, "", __r27);
+                var _$4jsAttr = ("", __r26 = __$ctx._mode, __$ctx._mode = "jsAttr", __r27 = $315(__$ctx), __$ctx._mode = __r26, "", __r27);
                 _$4buf.push(" ", _$4jsAttr || "onclick", '="return ', __$ctx._.attrEscape(JSON.stringify(_$4jsParams)), '"');
             } else {
                 undefined;
             }
-            var _$4attrs = ("", __r28 = __$ctx._mode, __$ctx._mode = "attrs", __r29 = $113(__$ctx), __$ctx._mode = __r28, "", __r29);
+            var _$4attrs = ("", __r28 = __$ctx._mode, __$ctx._mode = "attrs", __r29 = $122(__$ctx), __$ctx._mode = __r28, "", __r29);
             _$4attrs = __$ctx._.extend(_$4attrs, _$4v.attrs);
             if (_$4attrs) {
                 var _$4name;
@@ -2674,7 +2806,7 @@ var BEMHTML = function() {
             _$4buf.push("/>");
         } else {
             _$4tag && _$4buf.push(">");
-            var _$4content = ("", __r30 = __$ctx._mode, __$ctx._mode = "content", __r31 = $229(__$ctx), __$ctx._mode = __r30, "", __r31);
+            var _$4content = ("", __r30 = __$ctx._mode, __$ctx._mode = "content", __r31 = $244(__$ctx), __$ctx._mode = __r30, "", __r31);
             if (_$4content || _$4content === 0) {
                 var _$4isBEM = __$ctx.block || __$ctx.elem;
                 {
@@ -2689,7 +2821,7 @@ var BEMHTML = function() {
                     __$ctx.ctx = _$4content;
                     var __r36 = __$ctx._mode;
                     __$ctx._mode = "";
-                    $300(__$ctx);
+                    $315(__$ctx);
                     __$ctx._notNewList = __r32;
                     __$ctx.position = __r33;
                     __$ctx._listLength = __r34;
@@ -2705,7 +2837,7 @@ var BEMHTML = function() {
         }
         return;
     }
-    function $857(__$ctx) {
+    function $906(__$ctx) {
         var _$1v = __$ctx.ctx, _$1l = _$1v.length, _$1i = 0, _$1prevPos = __$ctx.position, _$1prevNotNewList = __$ctx._notNewList;
         if (_$1prevNotNewList) {
             __$ctx._listLength += _$1l - 1;
@@ -2720,7 +2852,7 @@ var BEMHTML = function() {
                 "";
                 var __r7 = __$ctx.ctx;
                 __$ctx.ctx = _$1newCtx == null ? "" : _$1newCtx;
-                $300(__$ctx);
+                $315(__$ctx);
                 __$ctx.ctx = __r7;
                 "";
             }
@@ -2729,7 +2861,7 @@ var BEMHTML = function() {
         _$1prevNotNewList || (__$ctx.position = _$1prevPos);
         return;
     }
-    function $860(__$ctx) {
+    function $909(__$ctx) {
         var _$0vBlock = __$ctx.ctx.block, _$0vElem = __$ctx.ctx.elem, _$0block = __$ctx._currBlock || __$ctx.block;
         __$ctx.ctx || (__$ctx.ctx = {});
         {

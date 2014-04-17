@@ -140,6 +140,15 @@ exports.deps = [
         "val": "simple"
     },
     {
+        "block": "i-ua",
+        "mod": "interaction"
+    },
+    {
+        "block": "i-ua",
+        "mod": "interaction",
+        "val": "yes"
+    },
+    {
         "block": "b-page"
     },
     {
@@ -172,6 +181,20 @@ exports.deps = [
     {
         "block": "i-jquery",
         "elem": "tap"
+    },
+    {
+        "block": "link",
+        "mod": "pseudo"
+    },
+    {
+        "block": "link",
+        "mod": "pseudo",
+        "val": "yes"
+    },
+    {
+        "block": "link",
+        "mod": "pseudo",
+        "val": "no"
     },
     {
         "block": "button"
@@ -241,6 +264,16 @@ exports.deps = [
     },
     {
         "block": "button",
+        "mod": "theme",
+        "val": "clear"
+    },
+    {
+        "block": "button",
+        "mod": "theme",
+        "val": "pseudo"
+    },
+    {
+        "block": "button",
         "mod": "round"
     },
     {
@@ -249,7 +282,7 @@ exports.deps = [
         "val": "yes"
     },
     {
-        "block": "b-icon"
+        "block": "image"
     },
     {
         "block": "button",
@@ -290,6 +323,11 @@ exports.deps = [
     },
     {
         "block": "checkbox",
+        "mod": "theme",
+        "val": "pseudo"
+    },
+    {
+        "block": "checkbox",
         "mod": "checked"
     },
     {
@@ -314,6 +352,10 @@ exports.deps = [
         "block": "checkbox",
         "mod": "focused",
         "val": "yes"
+    },
+    {
+        "block": "checkbox",
+        "elem": "label"
     },
     {
         "block": "checkbox",
@@ -418,11 +460,12 @@ exports.deps = [
         "val": "s"
     },
     {
-        "block": "input"
+        "block": "radiobox",
+        "mod": "theme",
+        "val": "pseudo"
     },
     {
-        "block": "input",
-        "elem": "control"
+        "block": "input"
     },
     {
         "block": "i-system"
@@ -457,6 +500,10 @@ exports.deps = [
     {
         "block": "input",
         "elem": "box"
+    },
+    {
+        "block": "input",
+        "elem": "control"
     },
     {
         "block": "input",
@@ -822,6 +869,11 @@ exports.deps = [
         "val": "m"
     },
     {
+        "block": "radio-button",
+        "mod": "theme",
+        "val": "pseudo"
+    },
+    {
         "block": "check-button"
     },
     {
@@ -889,6 +941,25 @@ exports.deps = [
         "block": "check-button",
         "mod": "size",
         "val": "s"
+    },
+    {
+        "block": "check-button",
+        "mod": "pseudo"
+    },
+    {
+        "block": "check-button",
+        "mod": "pseudo",
+        "val": "yes"
+    },
+    {
+        "block": "check-button",
+        "mod": "theme",
+        "val": "pseudo"
+    },
+    {
+        "block": "check-button",
+        "mod": "theme",
+        "val": "clear"
     },
     {
         "block": "tumbler"
@@ -1106,11 +1177,6 @@ exports.depsByTechs = {
             },
             {
                 "tech": "bemhtml",
-                "block": "input",
-                "elem": "control"
-            },
-            {
-                "tech": "bemhtml",
                 "block": "i-system"
             },
             {
@@ -1150,6 +1216,11 @@ exports.depsByTechs = {
                 "tech": "bemhtml",
                 "block": "input",
                 "elem": "box"
+            },
+            {
+                "tech": "bemhtml",
+                "block": "input",
+                "elem": "control"
             },
             {
                 "tech": "bemhtml",
@@ -1666,11 +1737,6 @@ exports.depsByTechs = {
             },
             {
                 "tech": "js",
-                "block": "input",
-                "elem": "control"
-            },
-            {
-                "tech": "js",
                 "block": "i-system"
             },
             {
@@ -1714,6 +1780,11 @@ exports.depsByTechs = {
                 "tech": "js",
                 "block": "input",
                 "elem": "box"
+            },
+            {
+                "tech": "js",
+                "block": "input",
+                "elem": "control"
             },
             {
                 "tech": "js",
@@ -2289,11 +2360,6 @@ exports.depsByTechs = {
             },
             {
                 "tech": "bemhtml",
-                "block": "input",
-                "elem": "control"
-            },
-            {
-                "tech": "bemhtml",
                 "block": "i-system"
             },
             {
@@ -2337,6 +2403,11 @@ exports.depsByTechs = {
                 "tech": "bemhtml",
                 "block": "input",
                 "elem": "box"
+            },
+            {
+                "tech": "bemhtml",
+                "block": "input",
+                "elem": "control"
             },
             {
                 "tech": "bemhtml",

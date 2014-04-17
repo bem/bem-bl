@@ -766,7 +766,7 @@ var BEMHTML = function() {
     function $232(__$ctx) {
         var __t = __$ctx.elem;
         if (__t === "lego-static-host") {
-            return "//yandex.st/lego/2.10-137";
+            return "//yastatic.net/lego/2.10-142";
             return;
         } else if (__t === "export-host") {
             return "//export.yandex.ru";
@@ -1604,16 +1604,16 @@ typeof exports === "undefined" || (exports.BEMHTML = BEMHTML);/*borschik:include
 /*borschik:include:../../../../libs/romochka/blocks-common/i-counter/i-counter.js*/;
 /*borschik:include:../../../../libs/romochka/blocks-common/i-common/cookie/i-common__cookie.js*/;
 /*borschik:include:../../../../libs/romochka/blocks-common/i-common/init/i-common__init.js*/;
-/*borschik:include:../../../../desktop.blocks/i-ua/i-ua.js*/;
 /*borschik:include:../../../../libs/romochka/blocks-common/i-common/i-common.js*/;
 /*borschik:include:../../../../libs/bem-bl/blocks-common/i-bem/__dom/_init/i-bem__dom_init_auto.js*/;
+/*borschik:include:../../../../libs/bem-bl/blocks-common/i-ua/_interaction/i-ua_interaction_yes.js*/;
 /*borschik:include:../../../../libs/romochka/blocks-desktop/i-oframebust/i-oframebust.js*/;
 /*borschik:include:../../../../libs/romochka/blocks-desktop/i-oframebust/_type/i-oframebust_type_referrer.js*/;
 /*borschik:include:../../../../common.blocks/link/link.js*/;
 /*borschik:include:../../../../libs/bem-bl/blocks-desktop/i-jquery/__leftclick/i-jquery__leftclick.js*/;
+/*borschik:include:../../../../common.blocks/link/_pseudo/link_pseudo_yes.js*/;
 /*borschik:include:../../../../common.blocks/button/button.js*/;
 /*borschik:include:../../../../desktop.blocks/button/button.js*/;
-/*borschik:include:../../../../libs/romochka/blocks-desktop/b-icon/b-icon.js*/;
 /*borschik:include:../../../../common.blocks/checkbox/checkbox.js*/;
 /*borschik:include:../../../../common.blocks/radiobox/radiobox.js*/;
 /*borschik:include:../../../../common.blocks/input/input.js*/;

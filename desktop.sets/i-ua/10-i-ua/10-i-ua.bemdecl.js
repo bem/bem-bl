@@ -11,7 +11,15 @@ exports.blocks = [
         ]
     },
     {
-        "name": "link"
+        "name": "link",
+        "mods": [
+            {
+                "name": "pseudo",
+                "vals": [
+                    "yes"
+                ]
+            }
+        ]
     },
     {
         "name": "button",
@@ -25,7 +33,10 @@ exports.blocks = [
             {
                 "name": "theme",
                 "vals": [
-                    "action"
+                    "normal",
+                    "action",
+                    "clear",
+                    "pseudo"
                 ]
             },
             {
@@ -44,6 +55,17 @@ exports.blocks = [
                 "vals": [
                     "s"
                 ]
+            },
+            {
+                "name": "theme",
+                "vals": [
+                    "pseudo"
+                ]
+            }
+        ],
+        "elems": [
+            {
+                "name": "label"
             }
         ]
     },
@@ -54,6 +76,12 @@ exports.blocks = [
                 "name": "size",
                 "vals": [
                     "s"
+                ]
+            },
+            {
+                "name": "theme",
+                "vals": [
+                    "pseudo"
                 ]
             }
         ],
@@ -118,6 +146,12 @@ exports.blocks = [
                 "vals": [
                     "m"
                 ]
+            },
+            {
+                "name": "theme",
+                "vals": [
+                    "pseudo"
+                ]
             }
         ],
         "elems": [
@@ -141,6 +175,18 @@ exports.blocks = [
                 "name": "size",
                 "vals": [
                     "s"
+                ]
+            },
+            {
+                "name": "pseudo",
+                "vals": [
+                    "yes"
+                ]
+            },
+            {
+                "name": "theme",
+                "vals": [
+                    "clear"
                 ]
             }
         ]

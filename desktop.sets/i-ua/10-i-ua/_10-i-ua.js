@@ -766,7 +766,7 @@ var BEMHTML = function() {
     function $232(__$ctx) {
         var __t = __$ctx.elem;
         if (__t === "lego-static-host") {
-            return "//yandex.st/lego/2.10-137";
+            return "//yastatic.net/lego/2.10-142";
             return;
         } else if (__t === "export-host") {
             return "//export.yandex.ru";
@@ -2860,7 +2860,7 @@ var ptp = Array.prototype,
         },
 
         /**
-         * Creates an array containing only the elements from the source array that the callback returns true for.
+         * Creates an array containing only the elements from the source array that the callback returns true for. 
          * @param {Function} callback Called for each element
          * @param {Object} [ctx] Callback context
          * @returns {Array}
@@ -5308,9 +5308,15 @@ var DOM = BEM.DOM = BEM.decl('i-bem__dom',/** @lends BEM.DOM.prototype */{
      */
     liveUnbindFrom : function(elem, event, callback) {
 
+        if (!event || $.isFunction(event)) {
+            callback = event;
+            event = elem;
+            elem = undefined;
+        }
+
         var _this = this;
 
-        if(elem.indexOf(' ') > 1) {
+        if(elem && elem.indexOf(' ') > 1) {
             elem.split(' ').forEach(function(elem) {
                 _this._liveClassUnbind(
                     buildClass(_this._name, elem),
@@ -6022,10 +6028,32 @@ Lego.blockInitBinded || (Lego.blockInitBinded = !!$(document).ready(function(){ 
 
 /* ../../../../libs/romochka/blocks-common/i-common/init/i-common__init.js end */
 ;
-/* ../../../../desktop.blocks/i-ua/i-ua.js begin */
+/* ../../../../libs/romochka/blocks-common/i-common/i-common.js begin */
+(function(Lego){
+if (!Lego) Lego = window.Lego = {};
+
+Lego.messages = Lego.messages || {};
+
+Lego.message = function(id, text) {
+    return Lego.params.locale == 'ru' ? text : (Lego.messages[id] || text);
+};
+
+})(window.Lego);
+/* ../../../../libs/romochka/blocks-common/i-common/i-common.js end */
+;
+/* ../../../../libs/bem-bl/blocks-common/i-bem/__dom/_init/i-bem__dom_init_auto.js begin */
+/* дефолтная инициализация */
+$(function() {
+    BEM.DOM.init();
+});
+/* ../../../../libs/bem-bl/blocks-common/i-bem/__dom/_init/i-bem__dom_init_auto.js end */
+;
+/* ../../../../libs/bem-bl/blocks-common/i-ua/_interaction/i-ua_interaction_yes.js begin */
 /*
  * Block to determine how the user interacts with the page.
  * Distinguishes interaction with a keyboard or mouse/finger.
+ * For performance reason this code use data-attr `data-interaction` instead `setMod` (which switch css class and
+ * always trigger repaint)
  */
 (function() {
 
@@ -6099,27 +6127,8 @@ Lego.blockInitBinded || (Lego.blockInitBinded = !!$(document).ready(function(){ 
     });
 
 }());
-/* ../../../../desktop.blocks/i-ua/i-ua.js end */
-;
-/* ../../../../libs/romochka/blocks-common/i-common/i-common.js begin */
-(function(Lego){
-if (!Lego) Lego = window.Lego = {};
 
-Lego.messages = Lego.messages || {};
-
-Lego.message = function(id, text) {
-    return Lego.params.locale == 'ru' ? text : (Lego.messages[id] || text);
-};
-
-})(window.Lego);
-/* ../../../../libs/romochka/blocks-common/i-common/i-common.js end */
-;
-/* ../../../../libs/bem-bl/blocks-common/i-bem/__dom/_init/i-bem__dom_init_auto.js begin */
-/* дефолтная инициализация */
-$(function() {
-    BEM.DOM.init();
-});
-/* ../../../../libs/bem-bl/blocks-common/i-bem/__dom/_init/i-bem__dom_init_auto.js end */
+/* ../../../../libs/bem-bl/blocks-common/i-ua/_interaction/i-ua_interaction_yes.js end */
 ;
 /* ../../../../libs/romochka/blocks-desktop/i-oframebust/i-oframebust.js begin */
 (function(Lego) {
@@ -6208,22 +6217,7 @@ BEM.DOM.decl('link', {
 
         }
 
-    },
-
-    /**
-     * //TODO: Выпилить.
-     *
-     * @private
-     */
-    onBlock: function(ctx) {
-
-        ctx.tag('a').attr('href', ctx.param('url'));
-
-        ['target', 'title'].forEach(function(prop) {
-            ctx.param(prop) && ctx.attr(prop, ctx.param(prop));
-        });
     }
-
 });
 
 /* ../../../../common.blocks/link/link.js end */
@@ -6270,6 +6264,60 @@ var leftClick = $.event.special.leftclick = {
 
 })(jQuery);
 /* ../../../../libs/bem-bl/blocks-desktop/i-jquery/__leftclick/i-jquery__leftclick.js end */
+;
+/* ../../../../common.blocks/link/_pseudo/link_pseudo_yes.js begin */
+/**
+ * Псевдоссылка.
+ * Модификация ссылки, подразумевающая действие без перехода на другую страницу.
+ */
+BEM.DOM.decl({'name': 'link', 'modName': 'pseudo', 'modVal': 'yes'}, {
+
+    /**
+     * @private
+     */
+    _onClick: function(e) {
+
+        e.preventDefault();
+
+        this.hasMod('disabled', 'yes') || this.afterCurrentEvent(function() {
+            this.trigger('click');
+        });
+
+    },
+
+    /**
+     * @private
+     */
+    _onKeyUp: function(e) {
+
+        if(e.shiftKey || e.ctrlKey || e.altKey) {
+            return;
+        }
+
+        if(e.which === 13 || e.which === 32) { /* ENTER || SPACE */
+            this.hasMod('disabled', 'yes') || this.afterCurrentEvent(function() {
+                this.trigger('click');
+            });
+        }
+
+    }
+}, {
+
+    live: function() {
+
+        this.__base.apply(this, arguments);
+
+        this.liveBindTo({modName: 'pseudo', modVal: 'yes'}, 'leftclick tap', function(e) {
+            this._onClick(e);
+        }).liveBindTo({modName: 'pseudo', modVal: 'yes'}, 'keyup', function(e) {
+            this._onKeyUp(e);
+        });
+
+    }
+
+});
+
+/* ../../../../common.blocks/link/_pseudo/link_pseudo_yes.js end */
 ;
 /* ../../../../common.blocks/button/button.js begin */
 /**
@@ -6562,28 +6610,6 @@ BEM.DOM.decl('button', {
 });
 
 /* ../../../../desktop.blocks/button/button.js end */
-;
-/* ../../../../libs/romochka/blocks-desktop/b-icon/b-icon.js begin */
-BEM.HTML.decl('b-icon', {
-
-    onBlock : function(ctx) {
-
-        var a = { src: '//yandex.st/lego/_/La6qi18Z8LwgnZdsAr1qy1GwCwo.gif', alt: '' },
-            params = ctx.params(),
-            props = ['alt', 'width', 'height'], p;
-
-        params.url && (a.src = params.url);
-        while(p = props.shift()) params[p] && (a[p] = params[p]);
-
-        ctx
-           .tag('img')
-           .attrs(a);
-
-    }
-
-});
-
-/* ../../../../libs/romochka/blocks-desktop/b-icon/b-icon.js end */
 ;
 /* ../../../../common.blocks/checkbox/checkbox.js begin */
 /**
@@ -7269,19 +7295,6 @@ BEM.DOM.decl('input', {
     },
 
     /**
-     * Перезадаём текущее значение.
-     * Делается для того, чтобы не выделялся текст инпута при фокусе.
-     * Обнулить предыдущее значение нужно для FF(26.0 и меньше) и Opera(12.16 и меньше),
-     *   т.к. иначе курсор не становится в конец текста
-     *
-     * @private
-     */
-    _updateValue: function() {
-        var value = this.elem('control').val();
-        this.elem('control').focus().val('').val(value);
-    },
-
-    /**
      * Уничтожает блок.
      *
      * @public
@@ -7374,13 +7387,6 @@ BEM.DOM.decl('input', {
                         this.setMod('focused', 'yes');
                     }
                 });
-
-                // подписываемся только на клик вне инпута input__control, чтобы убрать прокликивание выше/ниже инпута
-                this.bindTo('control', 'leftclick', function(e) {
-                    e.stopPropagation();
-                });
-
-                this.bindTo('box', 'leftclick', this._updateValue);
 
             }
 
@@ -7959,7 +7965,7 @@ BEM.DOM.decl('popup',  {
         var owner;
 
         if(params instanceof BEM) {
-            owner = params.domElem;
+            owner = params.domElem.eq(0);
         } else if(params instanceof $) {
             owner = params;
         } else if(!params) {
@@ -8239,7 +8245,9 @@ BEM.DOM.decl('popup',  {
         if(dimensions){
             this._resetDefault();
             this.domElem.css(dimensions);
-            this.repaint();
+            if(this._isShown && !this._isHiding) {
+                this.repaint();
+            }
         }
         return this;
     },
@@ -10910,7 +10918,7 @@ BEM.DOM.decl('select', {
             }
         }
     }
-
+    
 });
 
 }(jQuery, BEM));
@@ -11418,8 +11426,6 @@ BEM.DOM.decl({block: 'check-button', baseBlock: 'checkbox'}, {
 
             this.__base();
 
-            this.isChecked() && this.setMod('pressed', 'yes');
-
             this._origTabindex = this.elem('control').attr('tabindex') || 0;
             this.elem('control').attr('tabindex', -1);
 
@@ -11452,7 +11458,6 @@ BEM.DOM.decl({block: 'check-button', baseBlock: 'checkbox'}, {
             }
 
             var checked = modVal === 'yes';
-            this.toggleMod('pressed', 'yes', '', checked);
             this.domElem.attr('aria-pressed', checked);
 
         },
@@ -11470,7 +11475,7 @@ BEM.DOM.decl({block: 'check-button', baseBlock: 'checkbox'}, {
         },
 
         'pressed': function(modName, modVal) {
-            if(this.isDisabled() && !this.isChecked()) {
+            if(this.isDisabled()) {
                 return false;
             }
         }

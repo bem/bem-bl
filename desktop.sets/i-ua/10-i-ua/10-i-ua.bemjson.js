@@ -1,6 +1,6 @@
 ({
     block: 'b-page',
-    title: 'Браузерные кнопки и кнопки-блоки',
+    title: 'Браузерные контролы и контролы-блоки',
     head: [
         {elem: 'css', url: '_10-i-ua.css', ie: false},
         {elem: 'css', url: '_10-i-ua', ie: true}
@@ -65,6 +65,19 @@
                                             block: 'link',
                                             url: 'http://ya.ru',
                                             content: 'Самая посещаемая страница Рунета'
+                                        },
+                                        '<br><br>',
+                                        {
+                                            block: 'link',
+                                            mods: {pseudo: 'yes'},
+                                            content: 'Псевдо-ссылка спаном'
+                                        },
+                                        '<br><br>',
+                                        {
+                                            block: 'link',
+                                            mods: {pseudo: 'yes'},
+                                            url: 'http://ya.ru',
+                                            content: 'Псевдо-ссылка ссылкой'
                                         }
                                     ]
                                 },
@@ -93,14 +106,26 @@
                                     content: [
                                         {
                                             block: 'button',
-                                            mods: {size: 's'},
-                                            content: 'button'
+                                            mods: {size: 's', theme: 'normal'},
+                                            content: 'button_theme_normal'
                                         },
                                         '<br><br>',
                                         {
                                             block: 'button',
                                             mods: {size: 's', theme: 'action'},
                                             content: 'button_theme_action'
+                                        },
+                                        '<br><br>',
+                                        {
+                                            block: 'button',
+                                            mods: {size: 's', theme: 'clear'},
+                                            content: 'button_theme_clear'
+                                        },
+                                        '<br><br>',
+                                        {
+                                            block: 'button',
+                                            mods: {size: 's', theme: 'pseudo'},
+                                            content: 'button_theme_pseudo'
                                         },
                                         '<br><br>',
                                         {
@@ -145,7 +170,13 @@
                                         {
                                             block: 'checkbox',
                                             mods: {size: 's'},
-                                            content: 'Я.Checkbox'
+                                            content: {elem: 'label', content: 'Я.Checkbox'}
+                                        },
+                                        '<br><br>',
+                                        {
+                                            block: 'checkbox',
+                                            mods: {size: 's', theme: 'pseudo'},
+                                            content: {elem: 'label', content: 'Я.Checkbox_pseudo'}
                                         }
                                     ]
                                 },
@@ -234,7 +265,32 @@
                                                     controlAttrs: {value: 'val-3'}
                                                 }
                                             ]
-                                        }
+                                        },
+                                        '<br><br>',
+                                        {
+                                        block: 'radiobox',
+                                        mods: {size: 's', theme: 'pseudo'},
+                                        name: 'bla',
+                                        content: [
+                                            {
+                                                elem: 'radio',
+                                                content: 'Радио 1_pseudo',
+                                                controlAttrs: {value: 'val-1'}
+                                            },
+                                            '&nbsp;&nbsp;&nbsp;&nbsp;',
+                                            {
+                                                elem: 'radio',
+                                                content: 'Радио 2_pseudo',
+                                                controlAttrs: {value: 'val-2'}
+                                            },
+                                            '&nbsp;&nbsp;&nbsp;&nbsp;',
+                                            {
+                                                elem: 'radio',
+                                                content: 'Радио 3_pseudo',
+                                                controlAttrs: {value: 'val-3'}
+                                            }
+                                        ]
+                                    }
                                     ]
                                 },
                                 {
@@ -408,7 +464,7 @@
                                         {
                                             block: 'radio-button',
                                             mods: {size: 'm'},
-                                            name: 'show_to',
+                                            name: 'show_to_1',
                                             value: 'friends',
                                             content: [
                                                 {
@@ -431,6 +487,36 @@
                                                     elem: 'radio',
                                                     controlAttrs: {value: 'other'},
                                                     content: 'только не мне'
+                                                }
+                                            ]
+                                        },
+                                        '<br><br>',
+                                        {
+                                            block: 'radio-button',
+                                            mods: {size: 'm', theme: 'pseudo'},
+                                            name: 'show_to_2',
+                                            value: 'friends',
+                                            content: [
+                                                {
+                                                    elem: 'radio',
+                                                    controlAttrs: {value: 'all'},
+                                                    elemMods: {disabled: 'yes'},
+                                                    content: '_pseudo'
+                                                },
+                                                {
+                                                    elem: 'radio',
+                                                    controlAttrs: {value: 'friends'},
+                                                    content: '_pseudo'
+                                                },
+                                                {
+                                                    elem: 'radio',
+                                                    controlAttrs: {value: 'me'},
+                                                    content: '_pseudo'
+                                                },
+                                                {
+                                                    elem: 'radio',
+                                                    controlAttrs: {value: 'other'},
+                                                    content: '_pseudo'
                                                 }
                                             ]
                                         }
@@ -462,6 +548,18 @@
                                             value: '1',
                                             mods: {size: 's'},
                                             content: 'Я.Check-button'
+                                        },
+                                        '<br><br>',
+                                        {
+                                            block: 'check-button',
+                                            mods: {size: 's', pseudo: 'yes'},
+                                            content: 'Я.Check-button_pseudo'
+                                        },
+                                        '<br><br>',
+                                        {
+                                            block: 'check-button',
+                                            mods: {size: 's', theme: 'clear'},
+                                            content: 'Я.Check-button_clear'
                                         }
                                     ]
                                 },
