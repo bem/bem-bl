@@ -424,7 +424,7 @@ default: {
         if(jsParams) {
             var jsAttr = apply(this._mode = 'jsAttr');
             buf.push(
-                ' ', jsAttr || 'onclick', '="return ',
+                ' ', jsAttr || 'data-bem', '="',
                 this._.attrEscape(JSON.stringify(jsParams)),
                 '"');
         }
