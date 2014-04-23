@@ -31,15 +31,15 @@
 
 Блокам, реализованным на `bem-js`, могут соответствовать ноды в `HTML`. В этом случае говорится о том, что блоки имеют `DOM`-представление.
 
-В `HTML`-блоки на `bem-js` отличаются дополнительным `CSS`-классом `i-bem` и специальным форматом записи параметров блока в `onclick`:
+В `HTML`-блоки на `bem-js` отличаются дополнительным `CSS`-классом `i-bem` и специальным форматом записи параметров блока в `data-bem`:
 
 ```html
-	<div class="b-my-block i-bem" onclick="return { 'b-my-block' : { name : 'b-my-block'}}">
+	<div class="b-my-block i-bem" data-bem="{ 'b-my-block' : { name : 'b-my-block'}}">
 ...
 </div>
 ```
 
-Ниже подробно рассказано о [формате параметров в onclick](#onclick.params).
+Ниже подробно рассказано о [формате параметров в data-bem](#data.params).
 
 <a name="abstract.blocks"></a>
 
@@ -552,19 +552,19 @@ BEM.DOM.decl('b-form-checkbox', {
 
 #### Инициализация блоков с DOM-представлением
 
-Для инициализации блоков, представленных в `DOM`, на фрагменте дерева ищутся все блоки,  помеченные классом `i-bem`, у них считываются параметры из атрибута `onclick`, и создаётся `js-объект` такого блока.
+Для инициализации блоков, представленных в `DOM`, на фрагменте дерева ищутся все блоки,  помеченные классом `i-bem`, у них считываются параметры из атрибута `data-bem`, и создаётся `js-объект` такого блока.
 
-<a name="onclick.params"></a>
-##### Формат параметров блока в onclick
+<a name="bem.params"></a>
+##### Формат параметров блока в data-bem 
 
-Параметры для блока записываются в виде возвращаемого атрибутом `onclick` хеша. Этот хеш должен содержать элементы с названиями, соответствующими названиям блоков, к которым они относятся. Значением каждого элемента должен быть вложенный хеш c параметрами.
+Параметры для блока записываются в виде возвращаемого атрибутом `data-bem` хеша. Этот хеш должен содержать элементы с названиями, соответствующими названиям блоков, к которым они относятся. Значением каждого элемента должен быть вложенный хеш c параметрами.
 
 Такая запись позволяет задавать параметры для нескольких блоков в том случае, если они представлены в `HTML` одной и той же `DOM-нодой`.
 
 Вот как выглядит `DOM-нода` произвольного блока, реализованного на `bem-js`:
 
 ```html
-<div class="b-my-block i-bem" onclick="return {
+<div class="b-my-block i-bem" data-bem="{
     'b-my-block' : {}
 }">
 ..
@@ -574,7 +574,7 @@ BEM.DOM.decl('b-form-checkbox', {
 В случае, если блоку необходим параметр, он указывается на том же уровне, что и элемент `name`. Формат параметра может быть любым: строка, число, массив, хеш, функция. Количество параметров также не ограничено.
 
 ```html
-<div class="b-my-block i-bem" onclick="return {
+<div class="b-my-block i-bem" data-bem="{
     'b-my-block' : {
         'points' : [
             [1.67, 2.5],
@@ -591,7 +591,7 @@ BEM.DOM.decl('b-form-checkbox', {
 Для нескольких блоков на одной `DOM-ноде` `HTML` представление будет аналогично следующему:
 
 ```html
-<div class="b-my-block b-my-second-block i-bem" onclick="return {
+<div class="b-my-block b-my-second-block i-bem" data-bem="{
     'b-my-block' : {
         'title' : 'Какое-то название', // Этот блок имеет опциональный параметр title
     },
@@ -613,7 +613,7 @@ BEM.DOM.decl('b-form-checkbox', {
 `DOM`-представление блока после инициализации:
 
 ```html
-<div class="b-my-block b-my-block_js_inited i-bem" onclick="return {
+<div class="b-my-block b-my-block_js_inited i-bem" data-bem="{
     'b-my-block' : {
         'name' : 'b-my-block'
     }
@@ -625,7 +625,7 @@ BEM.DOM.decl('b-form-checkbox', {
 `DOM`-представление двух блоков после инициализации:
 
 ```html
-<div class="b-my-block b-my-second-block b-my-block_js_inited b-my-second-block_js_inited i-bem" onclick="return {
+<div class="b-my-block b-my-second-block b-my-block_js_inited b-my-second-block_js_inited i-bem" data-bem="{
     'b-my-block' : {
         'name' : 'b-my-block',
     },
@@ -638,7 +638,7 @@ BEM.DOM.decl('b-form-checkbox', {
 `DOM`-представление двух блоков, но инициализован только один из них:
 
 ```html
-<div class="b-my-block b-my-second-block b-my-second-block_js_inited i-bem" onclick="return {
+<div class="b-my-block b-my-second-block b-my-second-block_js_inited i-bem" data-bem="{
     'b-my-block' : {
         'name' : 'b-my-block',
     },
