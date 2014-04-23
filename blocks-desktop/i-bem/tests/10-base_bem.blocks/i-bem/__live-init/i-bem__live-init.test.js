@@ -17,7 +17,7 @@ BEM.TEST.decl({ block : 'i-bem', elem : 'live-init' }, function() {
 
         BEM.DOM.append(
             $('#live-init-test'),
-            '<div class="b-live-init-test i-bem" id="b-live-init-test" onclick="return {\'b-live-init-test\':{}}"/>');
+            '<div class="b-live-init-test i-bem" id="b-live-init-test" data-bem="{\'b-live-init-test\':{}}"/>');
 
         expect(spy).not.toHaveBeenCalled();
 
@@ -43,7 +43,7 @@ BEM.TEST.decl({ block : 'i-bem', elem : 'live-init' }, function() {
 
         BEM.DOM.append(
             $('#live-init-test'),
-            '<div class="b-live-init-elem-test i-bem" onclick="return {\'b-live-init-elem-test\':{}}"><div id="b-live-init-elem-test__elem" class="b-live-init-elem-test__elem"/>');
+            '<div class="b-live-init-elem-test i-bem" data-bem="{\'b-live-init-elem-test\':{}}"><div id="b-live-init-elem-test__elem" class="b-live-init-elem-test__elem"/>');
 
         expect(spy).not.toHaveBeenCalled();
 
@@ -70,8 +70,8 @@ BEM.TEST.decl({ block : 'i-bem', elem : 'live-init' }, function() {
 
         BEM.DOM.append(
             $('#live-init-test'),
-            '<div class="b-bem-live-init-test i-bem" onclick="return {\'b-bem-live-init-test\':{}}">' +
-                '<div class="b-bem-live-init-test-inner i-bem" onclick="return {\'b-bem-live-init-test-inner\':{}}">' +
+            '<div class="b-bem-live-init-test i-bem" data-bem="{\'b-bem-live-init-test\':{}}">' +
+                '<div class="b-bem-live-init-test-inner i-bem" data-bem="{\'b-bem-live-init-test-inner\':{}}">' +
             '</div>');
 
         expect(spy).not.toHaveBeenCalled();
@@ -91,8 +91,8 @@ BEM.TEST.decl({ block : 'i-bem', elem : 'live-init' }, function() {
 
         BEM.DOM.append(
             $('#live-init-test'),
-            '<div class="b-bem-live-init-test-custom-data i-bem" onclick="return {\'b-bem-live-init-test-custom-data\':{}}">' +
-                '<div class="b-bem-live-init-test-custom-data-inner i-bem" onclick="return {\'b-bem-live-init-test-custom-data-inner\':{}}">' +
+            '<div class="b-bem-live-init-test-custom-data i-bem" data-bem="{\'b-bem-live-init-test-custom-data\':{}}">' +
+                '<div class="b-bem-live-init-test-custom-data-inner i-bem" data-bem="{\'b-bem-live-init-test-custom-data-inner\':{}}">' +
             '</div>');
 
         var customData = { customData : true };
@@ -117,8 +117,8 @@ BEM.TEST.decl({ block : 'i-bem', elem : 'live-init' }, function() {
 
         BEM.DOM.append(
             $('#live-init-test'),
-            '<div class="b-bem-live-init-test-return-false i-bem" onclick="return {\'b-bem-live-init-test-return-false\':{}}">' +
-                '<div id="b-bem-live-init-test-return-false-inner" class="b-bem-live-init-test-return-false-inner i-bem" onclick="return {\'b-bem-live-init-test-return-false-inner\':{}}">' +
+            '<div class="b-bem-live-init-test-return-false i-bem" data-bem="{\'b-bem-live-init-test-return-false\':{}}">' +
+                '<div id="b-bem-live-init-test-return-false-inner" class="b-bem-live-init-test-return-false-inner i-bem" data-bem="{\'b-bem-live-init-test-return-false-inner\':{}}">' +
             '</div>');
 
         $('#b-bem-live-init-test-return-false-inner').click();
@@ -137,7 +137,7 @@ BEM.TEST.decl({ block : 'i-bem', elem : 'live-init' }, function() {
 
         BEM.DOM.append(
             $('#live-init-test'),
-            '<div class="b-bem-live-init-test-replace-by-function i-bem" onclick="return {\'b-bem-live-init-test-replace-by-function\':{}}">');
+            '<div class="b-bem-live-init-test-replace-by-function i-bem" data-bem="{\'b-bem-live-init-test-replace-by-function\':{}}">');
 
         expect(base).toBeTruthy();
     });

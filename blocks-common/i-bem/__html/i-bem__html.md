@@ -838,7 +838,7 @@ file:mode-js.png
   <tr>
     <td><code>{block: 'b1'}</code></td>
     <td><code>block b1, js: {param: 'value'}</code></td>
-    <td><code>&lt;div class=&quot;b1 i-bem&quot; onclick=&quot;return { 'b1': { 'param': 'value' } }&quot;&gt;&lt;/div&gt;</code></td>
+    <td><code>&lt;div class=&quot;b1 i-bem&quot; data-bem=&quot;{ 'b1': { 'param': 'value' } }&quot;&gt;&lt;/div&gt;</code></td>
   </tr>
 </table>
 
@@ -993,35 +993,11 @@ block b4, mix: [ { block: 'b1' } ]
 
 #### jsAttr
 >Тип значения тела шаблона: `String`
->Значение по умолчанию: `onclick`
+>Значение по умолчанию: `data-bem`
 
-Мода `jsAttr` определяет имя HTML-атрибута, в значении которого будут переданы параметры клиентского JavaScript для данного блока. По умолчанию используется атрибут `onclick`. Фрагмент HTML, за генерацию которого отвечает мода `jsAttr`, выделен на рисунке:
+Мода `jsAttr` определяет имя HTML-атрибута, в значении которого будут переданы параметры клиентского JavaScript для данного блока. По умолчанию используется атрибут `data-bem`. Фрагмент HTML, за генерацию которого отвечает мода `jsAttr`, выделен на рисунке:
 
 file:mode-jsattr.png
-
-Определение шаблона по моде `jsAttr` (подпредикат `jsAttr`), необходимо в том случае, если требуется передавать параметры JavaScript в нестандартном атрибуте. Например, для тач-сайтов в этих целях используется атрибут `ondblclick`.
-
-<table>
-  <tr>
-    <td><strong>Входные данные</strong></td>
-    <td><strong>Шаблон</strong></td>
-    <td><strong>HTML-результат</strong></td>
-  </tr>
-  <tr>
-    <td>
-      <pre>
-{
-  block: 'b1',
-  js: true
-}
-      </pre>
-    </td>
-    <td>
-      <code>block b1, jsAttr: 'ondblclick'</code>
-    </td>
-    <td><code>&lt;div class=&quot;b1 i-bem&quot; ondblclick=&quot;return {'b1': {} }&quot;&gt;&lt;/div&gt;<code></td>
-  </tr>
-</table>
 
 
 #### attrs
