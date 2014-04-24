@@ -1,6 +1,9 @@
 block b1, tag: 'a'
-block b1, mix: [{ block: 'b2' }, { block: 'b3', elem: 'e3' }]
+block b1, mix: [
+  { block: 'b2', mods: { should: 'pass' } },
+  { block: 'b3', elem: 'e3' }
+]
 block b2, tag: 'b'
-block b2, mix: [{ mods: { modname: 'modval' } }]
+block b2, mod should 'pass', mix: [{ mods: { modname: 'modval' } }]
 block b3, tag: 'b'
 block b3, elem e3, mix: [{ mods: { modname: 1 } }]
