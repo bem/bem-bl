@@ -1,4 +1,4 @@
-block b1 {
+this._mode === '', block b1 {
   true: {
     var x;
     if (x !== undefined) throw new Error('x should not change');
@@ -8,7 +8,7 @@ block b1 {
   tag: 'div'
 }
 
-block b2 {
+this._mode === '', block b2 {
   true: {
     var x;
 
