@@ -372,6 +372,7 @@ var DOM = BEM.DOM = BEM.decl('i-bem__dom', {
     },
 
     _findBlocks : function(select, elem, block, onlyFirst) {
+        if(!this.domElem) return [];
 
         if(!block) {
             block = elem;
