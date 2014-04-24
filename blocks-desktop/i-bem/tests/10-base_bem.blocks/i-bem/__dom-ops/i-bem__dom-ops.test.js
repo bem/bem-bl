@@ -7,7 +7,7 @@ BEM.TEST.decl({ block : 'i-bem', elem : 'dom-ops' }, function() {
     beforeEach(function() {
         BEM.DOM.destruct(ctx, true);
         ctx.html('<div class="child"/>');
-        node = $('<div class="b-dom-ops-test i-bem" onclick="return {\'b-dom-ops-test\':{}}"/>');
+        node = $('<div class="b-dom-ops-test i-bem" data-bem="{\'b-dom-ops-test\':{}}"/>');
     });
 
     it('block should be appended and inited', function() {

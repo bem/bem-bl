@@ -2,6 +2,7 @@ var ometajs = require('ometajs'),
     xjst = require('xjst'),
     vm = require('vm'),
     bemhtml = require('../ometa/bemhtml'),
+    checks = require('./checks'),
     BEMHTMLParser = bemhtml.BEMHTMLParser,
     BEMHTMLToXJST = bemhtml.BEMHTMLToXJST,
     BEMHTMLLogLocal = bemhtml.BEMHTMLLogLocal;
@@ -36,10 +37,27 @@ api.translate = function translate(source, options) {
   var xjstTree = xjst.translate(xjstPre);
 
   try {
-    var xjstJS = options.devMode ?
-                   xjst.compile(xjstTree, '', { 'no-opt': true })
-                   :
-                   xjst.compile(xjstTree, { engine: 'sort-group' });
+    var xjstJS = xjst.compile(xjstTree, '', {
+      'no-opt': !!options.devMode,
+      engine: 'sort-group',
+      afterCompile: function(tree) {
+        if (options.nochecks)
+          return;
+
+        var errors = [];
+
+        errors = errors.concat(checks.treeStructure(tree));
+
+        if (errors.length) {
+          var red = '\x1b[1;31m';
+          var rst = '\x1b[0m';
+          console.error(red + '!!! WARNING !!!!');
+          for (var i = 0; i < errors.length; i++)
+            console.error(errors[i]);
+          console.error('!!! WARNING !!!!' + rst);
+        }
+      }
+    });
   } catch (e) {
     throw new Error("xjst to js compilation failed:\n" + e.stack);
   }
@@ -55,7 +73,18 @@ api.translate = function translate(source, options) {
          '    if (!options) options = {};\n' +
          '    cache = options.cache;\n' +
          '    return function() {\n' +
-         '      if (context === this) context = undefined;\n' +
+         '      if (context === this) {\n' +
+         '        context = undefined;\n' +
+         '      } else {\n' +
+                  propKeys.map(function(prop) {
+                    if (options.preinit) {
+                      return properties[prop] + ' = context.' + prop +
+                          ' || \'\';\n';
+                    } else {
+                      return properties[prop] + ' = \'\';\n';
+                    }
+                  }).join('') +
+         '      }\n' +
          (vars.length > 0 ? '    var ' + vars.join(', ') + ';\n' : '') +
          '      return xjst.' + options.applyFuncName + '.call(\n' +
          (options.raw ? 'context' : '[context]') + '\n' +
@@ -81,3 +110,80 @@ api.compile = function compile(source, options) {
 
   return context.BEMHTML;
 };
+
+function replaceContext(src) {
+  function translateProp(prop) {
+    if (properties.hasOwnProperty(prop))
+      return properties[prop];
+    else
+      return false;
+  };
+
+  function isHash(node) {
+    var val = node.init;
+    if (!val)
+      return false;
+
+    if (val.type !== 'ObjectExpression' || val.properties.length !== 3)
+      return false;
+
+    var props = val.properties;
+    return props.every(function(prop) {
+      var name = prop.key.name;
+      var val = prop.value;
+
+      if ((name === 'n' || name === 'm') && val.type === 'ObjectExpression')
+        return true;
+      if (name === 'd' && val.type === 'FunctionExpression')
+        return true;
+      return false;
+    });
+  }
+
+  var applyc = null;
+  var map = null;
+
+  var ast = esprima.parse(src);
+  ast = estraverse.replace(ast, {
+    enter: function(node) {
+      var isFunction = node.type === 'FunctionDeclaration' ||
+                       node.type === 'FunctionExpression';
+      var id = node.id && node.id.name;
+      if (applyc === null &&
+          isFunction &&
+          (map !== null || /^(applyc|\$\d+)$/.test(id))) {
+        applyc = node;
+      } else if (applyc === null &&
+                 node.type === 'VariableDeclarator' &&
+                 /^__(h|\$m)\d+$/.test(id) &&
+                 isHash(node)) {
+        map = node;
+      } else if (applyc === null) {
+        return;
+      }
+
+      if (applyc !== node && isFunction) {
+        this.skip();
+        return;
+      }
+
+      if (node.type === 'MemberExpression' &&
+          node.computed === false &&
+          node.object.type === 'Identifier' &&
+          node.object.name === '__$ctx') {
+        var prop = translateProp(node.property.name || node.property.value);
+        if (!prop)
+          return;
+
+        return { type: 'Identifier', name: prop };
+      }
+    },
+    leave: function(node) {
+      if (node === applyc)
+        applyc = null;
+      if (node === map)
+        applyc = null;
+    }
+  });
+  return escodegen.generate(ast);
+}

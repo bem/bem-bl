@@ -185,13 +185,8 @@ function getParams(domNode) {
  */
 function extractParams(domNode) {
 
-    var fn = domNode.onclick || domNode.ondblclick;
-    if(!fn && domNode.tagName.toLowerCase() == 'body') { // LEGO-2027 in FF onclick doesn't work on body
-        var elem = $(domNode),
-            attr = elem.attr('onclick') || elem.attr('ondblclick');
-        attr && (fn = Function(attr));
-    }
-    return fn? fn() : {};
+    var jsAttr = domNode.getAttribute('data-bem');
+    return jsAttr? JSON.parse(jsAttr) : {};
 
 }
 
@@ -203,7 +198,6 @@ function extractParams(domNode) {
 function cleanupDomNode(domNode) {
 
     delete domElemToParams[$.identify(domNode)];
-    domNode.onclick = null;
 
 }
 
@@ -376,6 +370,7 @@ var DOM = BEM.DOM = BEM.decl('i-bem__dom',/** @lends BEM.DOM.prototype */{
     },
 
     _findBlocks : function(select, elem, block, onlyFirst) {
+        if(!this.domElem) return [];
 
         if(!block) {
             block = elem;
