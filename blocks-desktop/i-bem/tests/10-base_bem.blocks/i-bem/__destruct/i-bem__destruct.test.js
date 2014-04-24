@@ -11,8 +11,8 @@ BEM.TEST.decl({ block : 'i-bem', elem : 'destruct' }, function() {
 
         var rootNode = BEM.DOM.init($(
             '<div>' +
-                '<div class="b-test-destruct i-bem" onclick="return {\'b-test-destruct\':{id:\'b-test-destruct\'}}"/>' +
-                '<div class="b-test-destruct i-bem" onclick="return {\'b-test-destruct\':{id:\'b-test-destruct\'}}"/>' +
+                '<div class="b-test-destruct i-bem" data-bem="{\'b-test-destruct\':{id:\'b-test-destruct\'}}"/>' +
+                '<div class="b-test-destruct i-bem" data-bem="{\'b-test-destruct\':{id:\'b-test-destruct\'}}"/>' +
             '</div>'));
 
         BEM.DOM.destruct(rootNode.find('.b-test-destruct:eq(0)'));
@@ -35,8 +35,8 @@ BEM.TEST.decl({ block : 'i-bem', elem : 'destruct' }, function() {
 
         var rootNode = BEM.DOM.init($(
             '<div>' +
-                '<div class="b-test-mix-destruct b-test-mix-destruct2 i-bem" onclick="return {\'b-test-mix-destruct\':{id:\'b-test-mix-destruct\'},\'b-test-mix-destruct2\':{}}"/>' +
-                '<div class="b-test-mix-destruct i-bem" onclick="return {\'b-test-mix-destruct\':{id:\'b-test-mix-destruct\'}}"/>' +
+                '<div class="b-test-mix-destruct b-test-mix-destruct2 i-bem" data-bem="{\'b-test-mix-destruct\':{id:\'b-test-mix-destruct\'},\'b-test-mix-destruct2\':{}}"/>' +
+                '<div class="b-test-mix-destruct i-bem" data-bem="{\'b-test-mix-destruct\':{id:\'b-test-mix-destruct\'}}"/>' +
             '</div>'));
 
         BEM.DOM.destruct(rootNode.find('.b-test-mix-destruct:eq(0)'));
