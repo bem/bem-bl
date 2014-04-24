@@ -1,9 +1,9 @@
 {
-  "name": "bemhtml",
-  "version": "0.0.0",
+  "name": "bem-bl",
+  "version": "1.2.0",
   "dependencies": {
     "xjst": {
-      "version": "0.5.15",
+      "version": "0.5.18",
       "from": "xjst@~0.5.1",
       "dependencies": {
         "coa": {
