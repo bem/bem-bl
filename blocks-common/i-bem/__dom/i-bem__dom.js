@@ -185,8 +185,8 @@ function getParams(domNode) {
  */
 function extractParams(domNode) {
 
-    var fn = domNode.getAttribute('data-bem');
-    return fn? JSON.parse(fn) : {};
+    var jsAttr = domNode.getAttribute('data-bem');
+    return jsAttr? JSON.parse(jsAttr) : {};
 
 }
 
