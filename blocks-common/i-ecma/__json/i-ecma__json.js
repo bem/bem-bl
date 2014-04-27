@@ -59,6 +59,10 @@ window.JSON = {
             default:
                 return undefined;
         }
+    },
+    parse : function(str) {
+        /*jshint -W061 */
+        return Function('return ' + str)();
     }
 };
 })();

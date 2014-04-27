@@ -5,6 +5,7 @@ var ometajs = require('ometajs'),
     xjst = require('xjst'),
     vm = require('vm'),
     bemhtml = require('../ometa/bemhtml'),
+    checks = require('./checks'),
     BEMHTMLParser = bemhtml.BEMHTMLParser,
     BEMHTMLToXJST = bemhtml.BEMHTMLToXJST,
     BEMHTMLLogLocal = bemhtml.BEMHTMLLogLocal;
@@ -53,7 +54,24 @@ api.translate = function translate(source, options) {
   try {
     var xjstJS = xjst.compile(xjstTree, '', {
       'no-opt': !!options.devMode,
-      engine: 'sort-group'
+      engine: 'sort-group',
+      afterCompile: function(tree) {
+        if (options.nochecks)
+          return;
+
+        var errors = [];
+
+        errors = errors.concat(checks.treeStructure(tree));
+
+        if (errors.length) {
+          var red = '\x1b[1;31m';
+          var rst = '\x1b[0m';
+          console.error(red + '!!! WARNING !!!!');
+          for (var i = 0; i < errors.length; i++)
+            console.error(errors[i]);
+          console.error('!!! WARNING !!!!' + rst);
+        }
+      }
     });
   } catch (e) {
     throw new Error("xjst to js compilation failed:\n" + e.stack);
@@ -78,8 +96,12 @@ api.translate = function translate(source, options) {
          '        context = undefined;\n' +
          '      } else {\n' +
                   propKeys.map(function(prop) {
-                    return properties[prop] + ' = context.' + prop +
-                        ' || \'\';\n';
+                    if (options.preinit) {
+                      return properties[prop] + ' = context.' + prop +
+                          ' || \'\';\n';
+                    } else {
+                      return properties[prop] + ' = \'\';\n';
+                    }
                   }).join('') +
          '      }\n' +
          (vars.length > 0 ? '    var ' + vars.join(', ') + ';\n' : '') +
@@ -116,6 +138,27 @@ function replaceContext(src) {
       return false;
   };
 
+  function isHash(node) {
+    var val = node.init;
+    if (!val)
+      return false;
+
+    if (val.type !== 'ObjectExpression' || val.properties.length !== 3)
+      return false;
+
+    var props = val.properties;
+    return props.every(function(prop) {
+      var name = prop.key.name;
+      var val = prop.value;
+
+      if ((name === 'n' || name === 'm') && val.type === 'ObjectExpression')
+        return true;
+      if (name === 'd' && val.type === 'FunctionExpression')
+        return true;
+      return false;
+    });
+  }
+
   var applyc = null;
   var map = null;
 
@@ -131,7 +174,8 @@ function replaceContext(src) {
         applyc = node;
       } else if (applyc === null &&
                  node.type === 'VariableDeclarator' &&
-                 /^__h\d+$/.test(id)) {
+                 /^__(h|\$m)\d+$/.test(id) &&
+                 isHash(node)) {
         map = node;
       } else if (applyc === null) {
         return;

@@ -9,7 +9,7 @@ BEM.TEST.decl({ block : 'i-bem', elem : 'init' }, function() {
                 }
             }
         });
-        BEM.DOM.init($('<div class="b-sync-init i-bem" onclick="return {\'b-sync-init\':{}}"/>'));
+        BEM.DOM.init($('<div class="b-sync-init i-bem" data-bem="return {\'b-sync-init\':{}}"/>'));
         expect(inited).toBeTruthy();
     });
 

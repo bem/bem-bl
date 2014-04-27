@@ -10,7 +10,11 @@ suite('BEMHTML Compiler', function() {
 
   function unit(name, src, data, dst) {
     test(name, function() {
-      assert.equal(bemhtml.compile(src, { raw: true }).call(data), dst);
+      assert.equal(bemhtml.compile(src, {
+        raw: true,
+        preinit: true,
+        nochecks: true
+      }).call(data), dst);
     });
   }
 
