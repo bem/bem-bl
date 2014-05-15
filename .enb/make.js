@@ -36,7 +36,7 @@ module.exports = function(config) {
             ],
             _targets: [
                 '?.css', '?.ie.css', '?.ie8.css', '?.ie9.css',
-                '?.js', '?.bemhtml.js', '_?.{lang}.html'
+                '?.js', '?.bemhtml.js', '_?.{lang}.html', '_?.bemjson.js'
             ],
             _optimizedTargets: [
                 '?.css',
