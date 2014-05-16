@@ -52,7 +52,10 @@ var win = $(window),
     ELEM_DELIM = INTERNAL.ELEM_DELIM,
 
     buildModPostfix = INTERNAL.buildModPostfix,
-    buildClass = INTERNAL.buildClass;
+    buildClass = INTERNAL.buildClass,
+
+    slice = Array.prototype.slice,
+    reverse = Array.prototype.reverse;
 
 /**
  * Initializes blocks on a DOM element
@@ -118,7 +121,7 @@ function initBlock(blockName, domElem, params, forceLive, callback) {
 
         var block = new blockClass(uniqIdToDomElems[uniqId], params, !!forceLive);
         delete uniqIdToDomElems[uniqId];
-        callback && callback.apply(block, Array.prototype.slice.call(arguments, 4));
+        callback && callback.apply(block, slice.call(arguments, 4));
         return block;
     }
 
@@ -1067,7 +1070,7 @@ var DOM = BEM.DOM = BEM.decl('i-bem__dom', {
             keepDOM = undefined;
         }
 
-        findDomElem(ctx, '.i-bem', excludeSelf).each(function(i, domNode) {
+        reverse.call(findDomElem(ctx, '.i-bem', excludeSelf)).each(function(i, domNode) {
             var params = getParams(this);
             $.each(params, function(blockName, blockParams) {
                 if(blockParams.uniqId) {
