@@ -94,6 +94,9 @@ api.translate = function translate(source, options) {
          '    return function() {\n' +
          '      if (context === this) {\n' +
          '        context = undefined;\n' +
+                  propKeys.map(function(prop) {
+                    return properties[prop] + ' = \'\'\n';
+                  }).join('') +
          '      } else {\n' +
                   propKeys.map(function(prop) {
                     if (options.preinit) {
