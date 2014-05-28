@@ -949,6 +949,8 @@ var DOM = BEM.DOM = BEM.decl('i-bem__dom', {
         var _this = this,
             _self = _this.__self;
 
+        if(_this._isDestructing) return;
+
         _this._isDestructing = true;
 
         _this._needSpecialUnbind && _self.doc.add(_self.win).unbind('.' + _this._uniqId);
