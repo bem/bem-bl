@@ -1,67 +1,64 @@
 block b-page {
     default: {
         this._buf.push('<!DOCTYPE html>');
-        apply({
-            _mode: '',
-            ctx: {
-                elem: 'root',
-                content: [
-                    {
-                        elem: 'head',
-                        content: [
-                            {
-                                elem: 'meta',
-                                attrs: {
-                                    charset: 'utf-8'
-                                }
-                            },
-                            {
-                                tag: 'title',
-                                content: this.ctx.title
-                            },
-                            {
-                                elem: 'meta',
-                                attrs: {
-                                    name: 'viewport',
-                                    content: this.ctx.zoom ?
-                                            'width=device-width,initial-scale=1' :
-                                            'width=device-width,maximum-scale=1,initial-scale=1,user-scalable=0'
-                                }
-                            },
-                            {
-                                elem: 'meta',
-                                attrs: {
-                                    name: 'format-detection',
-                                    content: 'telephone=no'
-                                }
-                            },
-                            {
-                                elem: 'link',
-                                attrs: {
-                                    name: 'apple-mobile-web-app-capable',
-                                    content: 'yes'
-                                }
-                            },
-                            {
-                                block: 'i-ua',
-                                js: true
-                            },
-                            this.ctx.head
-                        ]
-                    },
-                    {
-                        elem: 'body',
-                        mix: [
-                            this.ctx,
-                            {
-                                block: 'i-ua',
-                                js: true
+        applyCtx({
+            elem: 'root',
+            content: [
+                {
+                    elem: 'head',
+                    content: [
+                        {
+                            elem: 'meta',
+                            attrs: {
+                                charset: 'utf-8'
                             }
-                        ].concat(this.ctx.mix || []),
-                        content: this.ctx.content
-                    }
-                ]
-            }
+                        },
+                        {
+                            tag: 'title',
+                            content: this.ctx.title
+                        },
+                        {
+                            elem: 'meta',
+                            attrs: {
+                                name: 'viewport',
+                                content: this.ctx.zoom ?
+                                        'width=device-width,initial-scale=1' :
+                                        'width=device-width,maximum-scale=1,initial-scale=1,user-scalable=0'
+                            }
+                        },
+                        {
+                            elem: 'meta',
+                            attrs: {
+                                name: 'format-detection',
+                                content: 'telephone=no'
+                            }
+                        },
+                        {
+                            elem: 'link',
+                            attrs: {
+                                name: 'apple-mobile-web-app-capable',
+                                content: 'yes'
+                            }
+                        },
+                        {
+                            block: 'i-ua',
+                            js: true
+                        },
+                        this.ctx.head
+                    ]
+                },
+                {
+                    elem: 'body',
+                    mix: [
+                        this.ctx,
+                        {
+                            block: 'i-ua',
+                            js: true
+                        }
+                    ].concat(apply('mix') || [], this.ctx.mix || []),
+                    content: this.ctx.content
+                }
+            ]
         })
     }
 
