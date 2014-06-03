@@ -188,8 +188,19 @@ function getParams(domNode) {
  */
 function extractParams(domNode) {
 
-    var attr = domNode.getAttribute('data-bem');
-    return attr? JSON.parse(attr) : {};
+    var fn, elem,
+        attr = domNode.getAttribute('data-bem');
+
+    if (attr) return JSON.parse(attr);
+
+    fn = domNode.onclick || domNode.ondblclick;
+    if(!fn && domNode.tagName.toLowerCase() == 'body') { // LEGO-2027 in FF onclick doesn't work on body
+        elem = $(domNode);
+        attr = elem.attr('onclick') || elem.attr('ondblclick');
+        attr && (fn = Function(attr));
+    }
+
+    return fn? fn() : {};
 
 }
 
