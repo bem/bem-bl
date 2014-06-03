@@ -30,17 +30,26 @@
         modName: 'interaction',
         modVal: 'yes' }, {
 
-        /*
+        onSetMod: {
+            js: {
+                inited: function() {
+                    this.bindTo('mousedown', this._onPointer)
+                        .bindTo('keydown', this._onKeyboard);
+                }
+            }
+        },
+
+        /**
          * @private
          */
         _onPointer: function() {
             this.interaction = 'pointer';
             this.domElem.attr('data-interaction', 'pointer');
 
-            this.__self.liveUnbindFrom('mousedown', this._onPointer);
+            this.unbindFrom('mousedown');
         },
 
-        /*
+        /**
          * @private
          */
         _onKeyboard: function(e) {
@@ -62,15 +71,7 @@
             this.domElem.attr('data-interaction', 'keyboard');
             this.interaction = 'keyboard';
 
-            this.__self.liveBindTo('mousedown', this._onPointer);
-        }
-
-    }, {
-
-        live: function() {
-            this
-                .liveBindTo('mousedown', this.prototype._onPointer)
-                .liveBindTo('keydown', this.prototype._onKeyboard);
+            this.bindTo('mousedown', this._onPointer);
         }
 
     });
