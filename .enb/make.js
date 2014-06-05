@@ -26,7 +26,7 @@ module.exports = function(config) {
                 require('enb/techs/css-ie8'),
                 require('enb/techs/css-ie9'),
                 require('enb/techs/js'),
-                [ require('./techs/bemhtml'), { devMode: false } ],
+                [ require('enb-xjst/techs/bemhtml'), { devMode: false } ],
                 [ require('enb/techs/i18n-merge-keysets'), { lang: 'all' } ],
                 [ require('enb/techs/i18n-merge-keysets'), { lang: '{lang}' } ],
                 [ require('enb/techs/i18n-lang-js'), { lang: 'all'} ],
