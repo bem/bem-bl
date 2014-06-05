@@ -12,18 +12,20 @@
     "bem-environ": "~1.4.0"
   },
   "devDependencies": {
-    "bem-sets": "~0.1.3",
     "mocha": "1.2.x",
     "benchmark": "~1.0.0",
     "microtime": "~0.3.1",
-    "bem": "~0.7.8",
+    "vow": "0.4.4",
     "enb": "0.13.3",
-    "enb-bem-docs": "git://github.com/andrewblond/enb-bem-docs.git#6b1544a8f3e516eaee3303cf84131e773868eb2b",
+    "enb-bem-docs": "0.1.1",
+    "enb-bem-examples": "0.1.0",
     "enb-xjst": "1.2.0",
-    "bem-bl-xjst": "2.0.1"
+    "bem-bl-xjst": "2.0.1",
+    "enb-bem-i18n": "0.1.0",
+    "enb-borschik": "1.0.4"
   },
   "scripts": {
     "test": "mocha --ui tdd --growl --reporter spec blocks-common/i-bem/__html/test/*-test.js blocks-common/i-bem/__i18n/test/test-*.js",
-    "build": "enb make docs"
+    "build": "YENV=production enb make examples && enb make docs"
   }
 }

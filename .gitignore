@@ -8,6 +8,8 @@ npm-debug.log
 .*.xsl.*
 *.sets
 !*.sets/.bem/
+*.docs
+*.examples
 
 *.decl.js
 
