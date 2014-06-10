@@ -46,7 +46,7 @@
             this.interaction = 'pointer';
             this.domElem.attr('data-interaction', 'pointer');
 
-            this.unbindFrom('mousedown', this._onPointer);
+            this.unbindFrom('mousedown');
         },
 
         /**
