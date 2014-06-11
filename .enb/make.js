@@ -36,7 +36,8 @@ module.exports = function(config) {
 
     examples.build({
         destPath: 'desktop.examples',
-        levels: getDesktopLevels(config)
+        levels: getDesktopLevels(config),
+        inlineBemjson: true
     });
 
     docs.build({
@@ -47,7 +48,8 @@ module.exports = function(config) {
 
     examples.build({
         destPath: 'touch-pad.examples',
-        levels: getTouchPadLevels(config)
+        levels: getTouchPadLevels(config),
+        inlineBemjson: true
     });
 
     docs.build({
@@ -58,7 +60,8 @@ module.exports = function(config) {
 
     examples.build({
         destPath: 'touch-phone.examples',
-        levels: getTouchPhoneLevels(config)
+        levels: getTouchPhoneLevels(config),
+        inlineBemjson: true
     });
 
     config.nodes('desktop.examples/*/*', function (nodeConfig) {
@@ -211,7 +214,7 @@ module.exports = function(config) {
                 [borschik, { source: '?.ie.css', target: '_?.ie.css', freeze: true }],
                 [borschik, { source: '?.ie8.css', target: '_?.ie8.css', freeze: true }],
                 [borschik, { source: '?.ie9.css', target: '_?.ie9.css', freeze: true }],
-                [borschik, { source: '?.js', target: '_?.js' }]
+                [borschik, { source: '?.js', target: '_?.js', freeze: true }]
             ]);
         });
     });
