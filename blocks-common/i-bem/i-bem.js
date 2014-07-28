@@ -589,10 +589,13 @@ this.BEM = $.inherit($.observable, /** @lends BEM.prototype */ {
         }
 
         var block;
-        decl.block == baseBlock._name?
+        if(decl.block == baseBlock._name) {
             // makes a new "live" if the old one was already executed
-            (block = $.inheritSelf(baseBlock, props, staticProps))._processLive(true) :
+            (block = $.inheritSelf(baseBlock, props, staticProps))._processLive(true);
+        } else {
             (block = blocks[decl.block] = $.inherit(baseBlock, props, staticProps))._name = decl.block;
+            delete block._liveInitable;
+        }
 
         return block;
 

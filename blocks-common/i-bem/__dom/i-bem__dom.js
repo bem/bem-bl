@@ -1027,7 +1027,15 @@ var DOM = BEM.DOM = BEM.decl('i-bem__dom', {
 
             if(noLive ^ heedLive) {
                 res = _this.live() !== false;
-                _this.live = function() {};
+
+                var blockName = _this.getName(),
+                    origLive = _this.live;
+
+                _this.live = function() {
+                    return this.getName() === blockName?
+                        res :
+                        origLive.apply(this, arguments);
+                };
             }
         }
 
