@@ -204,7 +204,10 @@ FastClick.prototype.needsClick = function(target) {
     case 'input':
 
         // File inputs need real clicks on iOS 6 due to a browser bug (issue #68)
-        if ((deviceIsIOS && target.type === 'file') || target.disabled) {
+        // Android Native browser emits "change" events twice
+        if (deviceIsIOS && target.type === 'file' ||
+            deviceIsAndroid && target.type === 'checkbox' ||
+            target.disabled) {
             return true;
         }
 
