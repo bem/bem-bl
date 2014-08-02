@@ -1,6 +1,5 @@
 (function() {
-
-        // translate3d или translate
+    // translate3d или translate
     var translateX = function(x) {
             return $.cssPrefixedProp('perspective') ?
                 'translate3d(' + x + 'px, 0, 0)' :
@@ -30,7 +29,8 @@
             threshold: 50
         },
         // уникальный идентификатор неймспейсов для каждого инстанса слайдера
-        sliderCount = 1;
+        sliderCount = 1,
+        transition;
 
 
     BEM.DOM.decl('b-slider', {
@@ -133,7 +133,7 @@
             // если поэкранный слайдер
             if (slider._perScreen) {
                 // количество элементов в поэкранном слайде
-                slider._count = slider._items.length,
+                slider._count = slider._items.length;
                 // шаг
                 slider._step = slider._parentWidth;
 
@@ -143,10 +143,7 @@
                 slider._calcParams();
 
                 // при поворотах пересчитываем ширину
-                slider.bindToWin(this.namespaced('orientchange'), function() { 
-                    slider._items.width(slider._elem.parent().width());
-                });
-
+                slider.bindToWin(this.namespaced('orientchange'), this._setItemsWidth);
             }
 
             // если есть куда и что слайдить
@@ -198,6 +195,10 @@
 
             slider._onDemandInited = true;
 
+        },
+
+        _setItemsWidth: function() {
+            this._items.width(this._elem.parent().width());
         },
 
         _clearBinds: function() {
