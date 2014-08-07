@@ -343,7 +343,7 @@ default: {
         var cls = apply(this._mode = 'cls');
         cls || (cls = v.cls);
 
-        var addJSInitClass = v.block && jsParams;
+        var addJSInitClass = v.block && jsParams && !v.elem;
         if(isBEM || cls) {
             buf.push(' class="');
             if(isBEM) {
