@@ -6,7 +6,7 @@ BEM.DOM.decl('i-pressed-controller', {
 
             this
                 .bindTo('pointermove', this._onPointerMove)
-                .bindTo('pointerup pointercancel', this._onPointerUp);
+                .bindToDoc('pointerup pointercancel', this._onPointerUp);
 
         }
 
