@@ -229,6 +229,12 @@ FastClick.prototype.needsClick = function(target) {
  */
 FastClick.prototype.needsFocus = function(target) {
     'use strict';
+    // No point in attempting to focus disabled elements
+    // bem-bl https://github.com/ftlabs/fastclick/issues/285
+    if(target.disabled || target.readOnly){
+        return false;
+    };
+
     switch (target.nodeName.toLowerCase()) {
     case 'textarea':
         return true;
@@ -245,8 +251,7 @@ FastClick.prototype.needsFocus = function(target) {
             return false;
         }
 
-        // No point in attempting to focus disabled inputs
-        return !target.disabled && !target.readOnly;
+        return true;
     default:
         return (/\bneedsfocus\b/).test(target.className);
     }
