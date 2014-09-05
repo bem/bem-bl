@@ -1115,11 +1115,12 @@ var DOM = BEM.DOM = BEM.decl('i-bem__dom', {
      * @param {jQuery|String} content New content
      * @param {Function} [callback] Handler to be called after initialization
      * @param {Object} [callbackCtx] Handler's context
+     * @returns {jQuery} ctx Initialization context
      */
     update : function(ctx, content, callback, callbackCtx) {
 
         this.destruct(ctx, true);
-        this.init(ctx.html(content), callback, callbackCtx);
+        return this.init(ctx.html(content), callback, callbackCtx);
 
     },
 
@@ -1127,11 +1128,12 @@ var DOM = BEM.DOM = BEM.decl('i-bem__dom', {
      * Changes a fragment of the DOM tree including the context and initializes blocks.
      * @param {jQuery} ctx Root DOM node
      * @param {jQuery|String} content Content to be added
+     * @returns {jQuery} ctx Initialization context
      */
     replace : function(ctx, content) {
 
         this.destruct(true, ctx);
-        this.init($(content).replaceAll(ctx));
+        return this.init($(content).replaceAll(ctx));
 
     },
 
@@ -1139,10 +1141,11 @@ var DOM = BEM.DOM = BEM.decl('i-bem__dom', {
      * Adds a fragment of the DOM tree at the end of the context and initializes blocks
      * @param {jQuery} ctx Root DOM node
      * @param {jQuery|String} content Content to be added
+     * @returns {jQuery} ctx Initialization context
      */
     append : function(ctx, content) {
 
-        this.init($(content).appendTo(ctx));
+        return this.init($(content).appendTo(ctx));
 
     },
 
@@ -1150,10 +1153,11 @@ var DOM = BEM.DOM = BEM.decl('i-bem__dom', {
      * Adds a fragment of the DOM tree at the beginning of the context and initializes blocks
      * @param {jQuery} ctx Root DOM node
      * @param {jQuery|String} content Content to be added
+     * @returns {jQuery} ctx Initialization context
      */
     prepend : function(ctx, content) {
 
-        this.init($(content).prependTo(ctx));
+        return this.init($(content).prependTo(ctx));
 
     },
 
@@ -1161,10 +1165,11 @@ var DOM = BEM.DOM = BEM.decl('i-bem__dom', {
      * Adds a fragment of the DOM tree before the context and initializes blocks
      * @param {jQuery} ctx Contextual DOM node
      * @param {jQuery|String} content Content to be added
+     * @returns {jQuery} ctx Initialization context
      */
     before : function(ctx, content) {
 
-        this.init($(content).insertBefore(ctx));
+        return this.init($(content).insertBefore(ctx));
 
     },
 
@@ -1172,10 +1177,11 @@ var DOM = BEM.DOM = BEM.decl('i-bem__dom', {
      * Adds a fragment of the DOM tree after the context and initializes blocks
      * @param {jQuery} ctx Contextual DOM node
      * @param {jQuery|String} content Content to be added
+     * @returns {jQuery} ctx Initialization context
      */
     after : function(ctx, content) {
 
-        this.init($(content).insertAfter(ctx));
+        return this.init($(content).insertAfter(ctx));
 
     },
 
