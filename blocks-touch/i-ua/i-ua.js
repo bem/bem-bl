@@ -6,7 +6,8 @@
         support = {},
         match,
         lastOrient = (win.innerWidth > win.innerHeight),
-        lastWidth = win.innerWidth;
+        lastWidth = win.innerWidth,
+        devicePixelRatio = 1;
 
     if (match = ua.match(/Android\s+([\d.]+)/)) {
         platform.android = match[1];
@@ -64,6 +65,15 @@
                 }
             }
         }
+    }
+
+    // http://stackoverflow.com/questions/16383503/window-devicepixelratio-does-not-work-in-ie-10-mobile
+    if ('deviceXDPI' in screen && 'logicalXDPI' in screen) {
+        // Internet Explorer
+        devicePixelRatio = screen.deviceXDPI / screen.logicalXDPI;
+    } else if ('devicePixelRatio' in window) {
+        // Standard way
+        devicePixelRatio = window.devicePixelRatio;
     }
 
     // http://stackoverflow.com/a/6603537
@@ -148,7 +158,7 @@
         opera: browser.opera,
         chrome: browser.chrome,
         screenSize: screen.width > 320 ? 'large' : screen.width < 320 ? 'small' : 'normal',
-        dpr: win.devicePixelRatio || 1,
+        dpr: devicePixelRatio,
         connection: support.connection,
         flash: support.flash,
         video: support.video,
