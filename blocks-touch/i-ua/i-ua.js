@@ -67,6 +67,7 @@
         }
     }
 
+    // http://stackoverflow.com/questions/16383503/window-devicepixelratio-does-not-work-in-ie-10-mobile
     if ('deviceXDPI' in screen && 'logicalXDPI' in screen) {
         // Internet Explorer
         devicePixelRatio = screen.deviceXDPI / screen.logicalXDPI;
