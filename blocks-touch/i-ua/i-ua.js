@@ -99,7 +99,7 @@
 
                 var that = this,
                     self = that.__self,
-                    html = document.querySelector('html');;
+                    html = document.querySelector('html');
 
                 that
                     .setMod('platform',
