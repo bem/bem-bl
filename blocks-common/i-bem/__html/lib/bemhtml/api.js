@@ -55,6 +55,16 @@ api.translate = function translate(source, options) {
     var xjstJS = xjst.compile(xjstTree, '', {
       'no-opt': !!options.devMode,
       engine: 'sort-group',
+      scoreFilter: function(pred) {
+        if (pred[0] !== 'getp')
+          return 0;
+        if (pred[1][0] !== 'string' || pred[1][1] !== '_mode')
+          return 0;
+        if (pred[2][0] !== 'get' || pred[2][1] !== '__$ctx')
+          return 0;
+
+        return Infinity;
+      },
       afterCompile: function(tree) {
         if (options.nochecks)
           return;
