@@ -16,8 +16,7 @@ BEM.DOM.decl('b-tv', {
         js : function() {
             /*
              The setMod method allows to set a modifier with a value for a block 
-             or its element. For details on this method, see the 
-             BEM blocks reference, /i-bem/i-bem.jsdoc.wiki
+             or its element.
              */
             this.setMod('touched', 'yes');
         }

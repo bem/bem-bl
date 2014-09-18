@@ -12,8 +12,7 @@ BEM.DOM.decl('b-square', {
 
         /*
          The toggleMod method switches a block's or element's modifier 
-         between two values. You can find the method's signature
-         in the BEM reference, /blocks/i-bem/i-bem.jsdoc.wiki
+         between two values.
          */
 
         this.toggleMod('color', 'green', '');
