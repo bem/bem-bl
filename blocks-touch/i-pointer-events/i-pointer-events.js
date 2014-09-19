@@ -464,6 +464,11 @@
     function applySimpleEventTunnels(nameGenerator, eventGenerator) {
         ["pointerdown", "pointermove", "pointerup", "pointerover", "pointerout"].forEach(function (eventName) {
             window.addEventListener(nameGenerator(eventName), function (evt) {
+                // bem-bl prevent second pointerdown, because our i-fastclick triggers synthetic mousedown before click
+                if(evt.forwardedTouchEvent) {
+                    return;
+                }
+
                 if (!touching && findEventRegisteredNode(evt.target, eventName))
                     eventGenerator(evt, eventName, true);
             });
