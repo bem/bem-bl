@@ -2,7 +2,7 @@
 
 For a simple like set the following bemjson:
 
-```js
+```bemjson
 {
    block: 'b-link',
    url: 'http://company.yandex.ru',
