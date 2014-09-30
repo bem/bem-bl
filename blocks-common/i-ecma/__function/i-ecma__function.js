@@ -1,7 +1,14 @@
+/**
+ * @module i-ecma__function
+ */
 (function() {
 
 var slice = Array.prototype.slice;
 
+/**
+ * Привязывает контекст к функции
+ * @exports
+ */
 Function.prototype.bind || (Function.prototype.bind = function(ctx) {
 
     var fn = this,

@@ -1,4 +1,4 @@
-/**
+/*
  * @preserve FastClick: polyfill to remove click delays on browsers with touch UIs.
  *
  * @version 1.0.3
@@ -14,7 +14,6 @@
 /**
  * Instantiate fast-clicking listeners on the specified layer.
  *
- * @constructor
  * @param {Element} layer The layer to listen on
  * @param {Object} options The options to override the defaults
  */

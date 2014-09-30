@@ -1,8 +1,20 @@
 /**
- * Finding current position with Geolocation API
+ * @module i-geolocation
  */
-BEM.DOM.decl('i-geolocation', {}, {
 
+/**
+ * @exports
+ * @class i-geolocation
+ * @bem
+ */
+BEM.DOM.decl('i-geolocation', /** @lends i-geolocation.prototype */{}, /** @lends i-geolocation */{
+
+    /**
+     * Finding current position with Geolocation API
+     *
+     * @param {Object} [params]
+     * @param {Function} callback
+     */
     get: function(params, callback) {
 
         if (arguments.length === 1) {

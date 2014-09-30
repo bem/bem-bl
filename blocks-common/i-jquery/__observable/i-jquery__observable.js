@@ -1,4 +1,8 @@
 /**
+ * @module i-jquery__observable
+ */
+
+/**
  * Observable plugin
  *
  * Copyright (c) 2010 Filatov Dmitry (alpha@zforms.ru)
@@ -7,8 +11,6 @@
  * http://www.gnu.org/licenses/gpl.html
  *
  * @version 1.0.0
- * @requires $.identify
- * @requires $.inherit
  */
 
 (function($) {
@@ -17,7 +19,11 @@ var storageExpando = '__' + (+new Date) + 'storage',
     getFnId = function(fn, ctx) {
         return $.identify(fn) + (ctx? $.identify(ctx) : '');
     },
-    Observable = /** @lends $.observable.prototype */{
+    /**
+     * @exports
+     * @class i-jquery__observable
+     */
+    Observable = /** @lends i-jquery__observable.prototype */{
 
         /**
          * Builds full event name

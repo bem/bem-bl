@@ -1,8 +1,17 @@
+/**
+ * @module i-ecma__array
+ */
+
 (function() {
 
 var ptp = Array.prototype,
     toStr = Object.prototype.toString,
-    methods = {
+    /**
+     * @exports
+     * @class i-ecma__array
+     * @bem
+     */
+    methods = /** @lends i-ecma__array.prototype */ {
 
         /**
          * Finds the index of an element in an array
@@ -66,7 +75,7 @@ var ptp = Array.prototype,
         },
 
         /**
-         * Creates an array containing only the elements from the source array that the callback returns true for. 
+         * Creates an array containing only the elements from the source array that the callback returns true for.
          * @param {Function} callback Called for each element
          * @param {Object} [ctx] Callback context
          * @returns {Array}

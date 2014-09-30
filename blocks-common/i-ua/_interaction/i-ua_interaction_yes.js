@@ -30,7 +30,7 @@
         modName: 'interaction',
         modVal: 'yes' }, {
 
-        /**
+        /*
          * @private
          */
         _onPointer: function() {
@@ -40,7 +40,7 @@
             this.__self.liveUnbindFrom('mousedown', this._onPointer);
         },
 
-        /**
+        /*
          * @private
          */
         _onKeyboard: function(e) {

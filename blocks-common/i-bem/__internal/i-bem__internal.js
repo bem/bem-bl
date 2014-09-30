@@ -1,5 +1,7 @@
-/** @fileOverview Module for internal BEM helpers */
-/** @requires BEM */
+/**
+ * Module for internal BEM helpers
+ * @module  i-bem__internal
+ */
 
 (function(BEM, $, undefined) {
 
@@ -45,7 +47,12 @@ function buildElemClass(block, name, modName, modVal, buffer) {
 
 }
 
-BEM.INTERNAL = {
+/**
+ * @exports
+ * @class i-bem__internal
+ * @bem
+ */
+BEM.INTERNAL = /** @lends i-bem__internal.prototype */{
 
     NAME_PATTERN : NAME_PATTERN,
 

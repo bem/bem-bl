@@ -1,7 +1,6 @@
-/** @requires jquery.inherit */
-/** @requires jquery.isEmptyObject */
-/** @requires jquery.identify */
-/** @requires jquery.observable */
+/**
+ * @module i-bem
+ */
 
 (function($, undefined) {
 
@@ -21,7 +20,6 @@ var afterCurrentEventFns = [],
 
 /**
  * Communication channels
- * @static
  * @private
  * @type Object
  */
@@ -29,7 +27,6 @@ var afterCurrentEventFns = [],
 
 /**
  * Builds the name of the handler method for setting a modifier
- * @static
  * @private
  * @param {String} elemName Element name
  * @param {String} modName Modifier name
@@ -47,7 +44,6 @@ function buildModFnName(elemName, modName, modVal) {
 
 /**
  * Transforms a hash of modifier handlers to methods
- * @static
  * @private
  * @param {Object} modFns
  * @param {Object} props
@@ -87,12 +83,15 @@ function buildCheckMod(modName, modVal) {
 
 }
 
-/** @namespace */
-this.BEM = $.inherit($.observable, /** @lends BEM.prototype */ {
+/**
+ * @exports
+ * @class i-bem
+ * @bem
+ */
+this.BEM = $.inherit($.observable, /** @lends i-bem.prototype */ {
 
     /**
      * @class Base block for creating BEM blocks
-     * @constructs
      * @private
      * @param {Object} mods Block modifiers
      * @param {Object} params Block parameters
@@ -359,7 +358,7 @@ this.BEM = $.inherit($.observable, /** @lends BEM.prototype */ {
 
     /**
      * Function after successfully changing the modifier of the block/nested element
-     * @protected
+     * @private
      * @param {String} modName Modifier name
      * @param {String} modVal Modifier value
      * @param {String} oldModVal Old modifier value
@@ -510,13 +509,12 @@ this.BEM = $.inherit($.observable, /** @lends BEM.prototype */ {
      */
     destruct : function() {}
 
-}, {
+}, /** @lends i-bem */{
 
     _name : 'i-bem',
 
     /**
      * Storage for block declarations (hash by block name)
-     * @static
      * @protected
      * @type Object
      */
@@ -524,7 +522,6 @@ this.BEM = $.inherit($.observable, /** @lends BEM.prototype */ {
 
     /**
      * Declares blocks and creates a block class
-     * @static
      * @protected
      * @param {String|Object} decl Block name (simple syntax) or description
      * @param {String} decl.block|decl.name Block name
@@ -615,7 +612,6 @@ this.BEM = $.inherit($.observable, /** @lends BEM.prototype */ {
 
     /**
      * Factory method for creating an instance of the block named
-     * @static
      * @param {String|Object} block Block name or description
      * @param {Object} [params] Block parameters
      * @returns {BEM}
@@ -630,7 +626,6 @@ this.BEM = $.inherit($.observable, /** @lends BEM.prototype */ {
 
     /**
      * Returns the name of the current block
-     * @static
      * @protected
      * @returns {String}
      */
@@ -642,7 +637,6 @@ this.BEM = $.inherit($.observable, /** @lends BEM.prototype */ {
 
     /**
      * Retrieves the name of an element nested in a block
-     * @static
      * @private
      * @param {Object} elem Nested element
      * @returns {String|undefined}
@@ -651,7 +645,6 @@ this.BEM = $.inherit($.observable, /** @lends BEM.prototype */ {
 
     /**
      * Adds a function to the queue for executing after the "current event"
-     * @static
      * @protected
      * @param {Function} fn
      * @param {Object} ctx

@@ -1,3 +1,6 @@
+/**
+ * @module i-system
+ */
 (function() {
 
 var timer,
@@ -8,10 +11,15 @@ var timer,
     TICK_INTERVAL = 50;
 
 /**
- * System channel for tick, idle, wakeup messages
+ * @exports
+ * @class i-system
+ * @bem
  */
-BEM.decl('i-system', {}, {
+BEM.decl('i-system', {}, /** @lends i-system */{
 
+    /**
+     * System channel for tick, idle, wakeup messages
+     */
     start : function() {
 
         $(document).bind('mousemove keydown', function() {
