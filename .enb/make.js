@@ -2,20 +2,20 @@ var DEFAULT_LANGS = ['ru', 'en'],
     fs = require('fs'),
     path = require('path'),
     naming = require('bem-naming'),
-    levels = require('enb-bem/techs/levels'),
+    levels = require('enb-bem-techs/techs/levels'),
     provide = require('enb/techs/file-provider'),
-    bemdeclFromDepsByTech = require('enb-bem/techs/bemdecl-from-deps-by-tech'),
-    bemdecl = require('enb-bem/techs/bemdecl-from-bemjson'),
-    deps = require('enb-bem/techs/deps-old'),
-    files = require('enb-bem/techs/files'),
+    depsByTechToBemdecl = require('enb-bem-techs/techs/deps-by-tech-to-bemdecl'),
+    bemdecl = require('enb-bem-techs/techs/bemjson-to-bemdecl'),
+    deps = require('enb-bem-techs/techs/deps-old'),
+    files = require('enb-bem-techs/techs/files'),
     css = require('enb/techs/css'),
     js = require('enb/techs/js'),
     i18nBemdecl = require('./techs/i18n-bemdecl'),
     i18n = require('enb-bem-i18n/techs/i18n-lang-js'),
     mergeKeysets = require('enb-bem-i18n/techs/i18n-merge-keysets'),
-    mergeBemdecl = require('enb-bem/techs/merge-bemdecl'),
+    mergeBemdecl = require('enb-bem-techs/techs/merge-bemdecl'),
     bemhtml = require('enb-xjst/techs/bemhtml'),
-    html = require('enb-xjst/techs/html-from-bemjson-i18n'),
+    html = require('enb-xjst/techs/html-from-bemjson'),
     copyFile = require('enb/techs/file-copy'),
     mergeFiles = require('enb/techs/file-merge'),
     borschik = require('enb-borschik/techs/borschik'),
@@ -80,7 +80,7 @@ module.exports = function(config) {
 
                 // Client BEMHTML
                 nodeConfig.addTechs([
-                    [bemdeclFromDepsByTech, {
+                    [depsByTechToBemdecl, {
                         target : '?.bemhtml.bemdecl.js',
                         sourceTech : 'js',
                         destTech : 'bemhtml'
@@ -155,7 +155,7 @@ module.exports = function(config) {
             var nodeDir = nodeConfig.getNodePath(),
                 blockSublevelDir = path.join(nodeDir, '..', '.blocks'),
                 sublevelDir = path.join(nodeDir, 'blocks'),
-                extendedLevels = [].concat(getLibLevels(platform));
+                extendedLevels = [].concat(getTestLevels(platform));
 
             if(fs.existsSync(blockSublevelDir)) {
                 extendedLevels.push(blockSublevelDir);
@@ -195,6 +195,13 @@ function getLibLevels(platform) {
     return PLATFORMS[platform].map(function(level) {
         return 'blocks-' + level;
     });
+}
+
+function getTestLevels(platform) {
+    return [].concat(
+        getLibLevels(platform),
+        'test.blocks'
+    );
 }
 
 function wrapInPage(bemjson, meta) {
