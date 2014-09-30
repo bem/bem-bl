@@ -20,3 +20,7 @@ npm-debug.log
 
 .project
 .svn/
+
+/*.docs
+/*.examples
+.enb/tmp
