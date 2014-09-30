@@ -1,3 +1,6 @@
+/**
+ * @module i-ecma__json
+ */
 (function(undefined) {
 
 if(window.JSON) return;
@@ -15,7 +18,18 @@ var _toString = Object.prototype.toString,
     },
     stringify;
 
-window.JSON = {
+/**
+ * @exports
+ * @class i-ecma__json
+ * @bem
+ */
+window.JSON = /** @lends i-ecma__json.prototype */{
+    /**
+     * Преобразует значение в JSON-строку
+     *
+     * @param {Object} val
+     * @returns {String}
+     */
     stringify : stringify = function(val) {
         if(val === null) {
             return 'null';
@@ -60,6 +74,13 @@ window.JSON = {
                 return undefined;
         }
     },
+
+    /**
+     * Считывает js-значение из строки
+     *
+     * @param  {String} str
+     * @returns {Object}
+     */
     parse : function(str) {
         /*jshint -W061 */
         return Function('return ' + str)();

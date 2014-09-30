@@ -1,13 +1,14 @@
 /**
  * Block i-ecma. Shim for some ES5 methods
  *
- * @block i-ecma
+ * @module i-ecma__object
  */
 (function() {
 
 /**
  * Возвращает массив свойств объекта
  *
+ * @exports
  * @param {Object} obj объект
  * @returns {Array}
  */

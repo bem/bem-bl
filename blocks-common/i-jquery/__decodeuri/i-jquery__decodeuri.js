@@ -1,4 +1,8 @@
 /**
+ * @module i-jquery__decodeuri
+ */
+
+/**
  * Plugin for decoding URI-escaped strings in CP1251 encoding
  *
  * Copyright (c) 2011-2012 Roman Rozhdestvenskiy (sbmaxx@gmail.com)
@@ -32,12 +36,22 @@ function decode(func, str) {
 
 }
 
-$.extend({
+$.extend(/** @exports i-jquery__decodeuri */{
 
+    /**
+     * Decode URI
+     * @param  {String} str
+     * @returns {String}
+     */
     decodeURI : function(str) {
         return decode(decodeURI, str);
     },
 
+    /**
+     * Decode URI component
+     * @param  {String} str
+     * @returns {String}
+     */
     decodeURIComponent : function(str) {
         return decode(decodeURIComponent, str);
     }

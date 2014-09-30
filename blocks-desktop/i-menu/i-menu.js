@@ -1,12 +1,16 @@
-/** @requires BEM */
-/** @requires BEM */
-
+/**
+ * @module i-menu
+ */
 (function() {
 
 /**
  * Abstract menu (helper)
+ *
+ * @exports
+ * @class i-menu
+ * @bem
  */
-BEM.DOM.decl('i-menu', {
+BEM.DOM.decl('i-menu', /** @lends i-menu.prototype */{
 
     onElemSetMod : {
 
@@ -29,6 +33,12 @@ BEM.DOM.decl('i-menu', {
             }
         }
     },
+
+    /**
+     * Set 'state' mod on item-selector Click event
+     *
+     * @param {events:Event} e
+     */
     onItemSelectorClick : function(e) {
 
         var item = this._getItemByEvent(e);
@@ -40,7 +50,7 @@ BEM.DOM.decl('i-menu', {
         return e.data.domElem.closest(this.buildSelector('item'));
     }
 
-}, {
+}, /** @lends i-menu */{
 
     live : function() {
         this.liveBindTo('item-selector', 'leftclick', function(e) {

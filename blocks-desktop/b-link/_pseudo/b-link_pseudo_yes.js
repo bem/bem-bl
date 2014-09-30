@@ -1,10 +1,9 @@
-/**
+/*
  * Block b-link
  *
- * @block b-link
  */
 
-/**
+/*
  * Pseudolink
  *
  */

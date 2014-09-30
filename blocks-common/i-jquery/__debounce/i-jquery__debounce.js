@@ -1,4 +1,8 @@
 /**
+ * @module i-jquery__debounce
+ */
+
+/*
  * Debounce and throttle function's decorator plugin 1.0.6
  *
  * Copyright (c) 2009 Filatov Dmitry (alpha@zforms.ru)
@@ -10,8 +14,17 @@
 
 (function($) {
 
-$.extend({
+$.extend( /** @exports i-jquery__debounce */{
 
+    /**
+     * Организует задержку вызова функции
+     *
+     * @param {Function} fn
+     * @param {Number} timeout
+     * @param {Boolean} invokeAsap
+     * @param {Object} ctx
+     * @returns {Function}
+     */
     debounce : function(fn, timeout, invokeAsap, ctx) {
 
         if(arguments.length == 3 && typeof invokeAsap != 'boolean') {
@@ -39,6 +52,14 @@ $.extend({
 
     },
 
+    /**
+     * Ограничивает частоту вызова функции
+     *
+     * @param {Function} fn
+     * @param {Number} timeout
+     * @param {Object} ctx
+     * @returns {Function}
+     */
     throttle : function(fn, timeout, ctx) {
 
         var timer, args, needInvoke;

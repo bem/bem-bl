@@ -1,9 +1,13 @@
-/** @requires BEM */
-/** @requires BEM.DOM */
-
+/**
+ * @module b-menu-vert
+ */
 (function() {
 
-BEM.DOM.decl({ name: 'b-menu-vert', baseBlock: 'i-menu' }, {
+/**
+ * @exports
+ * @class b-menu-vert
+ */
+BEM.DOM.decl({ name: 'b-menu-vert', baseBlock: 'i-menu' }, /** @lends b-menu-vert.prototype */{
 
     onElemSetMod : {
 
@@ -44,11 +48,17 @@ BEM.DOM.decl({ name: 'b-menu-vert', baseBlock: 'i-menu' }, {
         }
 
     },
+
+    /**
+     * Toggle mod on Click event
+     *
+     * @param {events:Event} e
+     */
     onTriggerClick: function(e) {
         this.toggleMod(e.data.domElem, 'state', 'opened');
     }
 
-}, {
+}, /** @lends b-menu-vert */{
 
     live : function() {
         this.__base();

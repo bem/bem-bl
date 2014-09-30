@@ -8,7 +8,7 @@
 
 ##Объявление блока на странице
 
-```js
+```bemjson
 {
     block: 'b-search',
     attrs: { action: '/search.xml' },

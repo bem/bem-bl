@@ -11,26 +11,27 @@
 
 Декларация блока в **BEMJSON** начинается объявлением блока и указанием свойства `title`, которое превращается в тег `<title>` в **HTML**.
 
-```js
-({
-block: 'b-page',
-title: 'Page with link',
-...
-})
+```bemjson
+{
+    block: 'b-page',
+    title: 'Page with link',
+    content: 'Page'
+}
 ```
 
 Указание свойства `head` дополняет элемент `head`, соответствующий **HTML** тегу `<head>`, элементами для подключения **CSS**- и **JS**-файлов:
 
-```js
-({
-...
-head: [
-    { elem: 'css', url: 'example.css', ie: false },
-    { elem: 'css', url: 'example.ie.css', ie: 'lt IE 8' },
-    { elem: 'js', url: 'example.js' }
-],
-...
-})
+```bemjson
+{
+    block: 'b-page',
+    title: 'Page with link',
+    head: [
+        { elem: 'css', url: 'example.css', ie: false },
+        { elem: 'css', url: 'example.ie.css', ie: 'lt IE 8' },
+        { elem: 'js', url: 'example.js' }
+    ],
+    content: 'Page'
+}
 ```
 
 Элемент `css` превращается в **HTML** в тег `<link>`, подключающий как **CSS**-стиль тот файл, что указан в свойстве `url` этого элемента. Также у такого элемента может быть свойство `ie`.
@@ -38,18 +39,18 @@ head: [
 
 Также есть возможность указывать свойство `content` для содержания тега `<style>`:
 
-```js
-({
-...
-head: [
-    {
-        elem: 'css',
-        content: '.b-blah { color: #f00' }
-    },
-    ...
-],
-...
-})
+```bemjson
+{
+    block: 'b-page',
+    title: 'Page with link',
+    head: [
+        {
+            elem: 'css',
+            content: '.b-blah { color: #f00 }'
+        }
+    ],
+    content: 'Page'
+}
 ```
 
 
@@ -123,57 +124,60 @@ content: [
 
 Аналогично указанию свойства `head`, может быть задано свойство `meta`, содержащее один или несколько элементов `meta`:
 
-```js
-({
-...
-meta: {
-    elem: 'meta',
-    attrs: {
-        name: 'keywords',
-        content: 'js, css, html'
-    }
-},
-...
-})
-```
-
-```js
-({
-...
-meta: [
-    {
+```bemjson
+{
+    block: 'b-page',
+    title: 'Page with link',
+    meta: {
         elem: 'meta',
         attrs: {
             name: 'keywords',
             content: 'js, css, html'
         }
     },
-    {
-        elem: 'meta',
-        attrs: {
-            name : 'description',
-            content : 'Yet another webdev blog'
+    content: 'Page'
+}
+```
+
+```bemjson
+{
+    block: 'b-page',
+    title: 'Page with link',
+    meta: [
+        {
+            elem: 'meta',
+            attrs: {
+                name: 'keywords',
+                content: 'js, css, html'
+            }
+        },
+        {
+            elem: 'meta',
+            attrs: {
+                name : 'description',
+                content : 'Yet another webdev blog'
+            }
         }
-    }
-]
-...
-})
+    ],
+    content: 'Page'
+}
 ```
 
 Значением свойства `content` блока `b-page` может быть хеш-описание содержимого (если речь идёт лишь об одном блоке) или массив блоков, описанных хешами:
 
-```js
-({
-...
-content: {
-    block: 'b-link',
-    mods: { pseudo: 'yes', togcolor: 'yes', color: 'green' },
-    url: '#',
-    target: '_blank',
-    title: 'Кликни меня',
-    content: 'Псевдоссылка, меняющая цвет по клику'
+```bemjson
+{
+    block: 'b-page',
+    title: 'Page with link',
+    content: {
+        block: 'b-link',
+        mods: { pseudo: 'yes', togcolor: 'yes', color: 'green' },
+        url: '#',
+        target: '_blank',
+        title: 'Кликни меня',
+        content: 'Псевдоссылка, меняющая цвет по клику'
+    }
 }
-})
 ```
 
 На блоки, содержащиеся в `content`, действуют их **BEMHTML**-шаблоны.
