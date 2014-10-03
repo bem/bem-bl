@@ -357,7 +357,7 @@ default: {
                 BEM_.INTERNAL.buildClasses(this.block, v.elem, v.elemMods || v.mods, buf);
 
                 var mix = apply(this._mode = 'mix');
-                v.mix && (mix = mix? mix.concat(v.mix) : v.mix);
+                v.mix && (mix = mix? [].concat(mix, v.mix) : v.mix);
 
                 if(mix) {
                     var visited = {};
