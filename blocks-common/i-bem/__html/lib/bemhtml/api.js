@@ -80,7 +80,7 @@ api.translate = function translate(source, options) {
   var exportName = options.exportName;
 
   // Replace known context lookups with context vars
-  xjstJS = replaceContext(xjstJS);
+  xjstJS = new ContextReplacer().run(xjstJS);
 
   return 'var ' + exportName + ' = function() {\n' +
          '  var ' + propValues.join(', ') + ';\n' +
@@ -133,79 +133,106 @@ api.compile = function compile(source, options) {
   return context.BEMHTML;
 };
 
-function replaceContext(src) {
-  function translateProp(prop) {
-    if (properties.hasOwnProperty(prop))
-      return properties[prop];
-    else
-      return false;
-  };
+function ContextReplacer() {
+  // estraverse context
+  this.estraverse = null;
 
-  function isHash(node) {
-    var val = node.init;
-    if (!val)
-      return false;
+  this.applyc = null;
+  this.map = null;
+};
 
-    if (val.type !== 'ObjectExpression' || val.properties.length !== 3)
-      return false;
+ContextReplacer.prototype.translateProp = function translateProp(prop) {
+  if (properties.hasOwnProperty(prop))
+    return properties[prop];
+  else
+    return false;
+};
 
-    var props = val.properties;
-    return props.every(function(prop) {
-      var name = prop.key.name;
-      var val = prop.value;
+ContextReplacer.prototype.isHash = function isHash(node) {
+  var val = node.init;
+  if (!val)
+    return false;
 
-      if ((name === 'n' || name === 'm') && val.type === 'ObjectExpression')
-        return true;
-      if (name === 'd' && val.type === 'FunctionExpression')
-        return true;
-      return false;
-    });
-  }
+  if (val.type !== 'ObjectExpression' || val.properties.length !== 3)
+    return false;
 
-  var applyc = null;
-  var map = null;
+  var props = val.properties;
+  return props.every(function(prop) {
+    var name = prop.key.name;
+    var val = prop.value;
 
+    if ((name === 'n' || name === 'm') && val.type === 'ObjectExpression')
+      return true;
+    if (name === 'd' && val.type === 'FunctionExpression')
+      return true;
+    return false;
+  });
+};
+
+ContextReplacer.prototype.run = function run(src) {
   var ast = esprima.parse(src);
-  ast = estraverse.replace(ast, {
+
+  var self = this;
+  return escodegen.generate(estraverse.replace(ast, {
     enter: function(node) {
-      var isFunction = node.type === 'FunctionDeclaration' ||
-                       node.type === 'FunctionExpression';
-      var id = node.id && node.id.name;
-      if (applyc === null &&
-          isFunction &&
-          (map !== null || /^(applyc|\$\d+)$/.test(id))) {
-        applyc = node;
-      } else if (applyc === null &&
-                 node.type === 'VariableDeclarator' &&
-                 /^__(h|\$m)\d+$/.test(id) &&
-                 isHash(node)) {
-        map = node;
-      } else if (applyc === null) {
-        return;
-      }
-
-      if (applyc !== node && isFunction) {
-        this.skip();
-        return;
-      }
-
-      if (node.type === 'MemberExpression' &&
-          node.computed === false &&
-          node.object.type === 'Identifier' &&
-          node.object.name === '__$ctx') {
-        var prop = translateProp(node.property.name || node.property.value);
-        if (!prop)
-          return;
-
-        return { type: 'Identifier', name: prop };
-      }
+      self.estraverse = this;
+      return self.enterNode(node);
     },
     leave: function(node) {
-      if (node === applyc)
-        applyc = null;
-      if (node === map)
-        applyc = null;
+      return self.leaveNode(node);
     }
-  });
-  return escodegen.generate(ast);
-}
+  }));
+};
+
+ContextReplacer.prototype.isApplyc = function isApplyc(node) {
+  var isFunction = node.type === 'FunctionDeclaration' ||
+                   node.type === 'FunctionExpression';
+  var id = node.id && node.id.name;
+
+  return this.applyc === null &&
+         isFunction &&
+         (this.map !== null || /^(applyc|\$\d+)$/.test(id))
+};
+
+ContextReplacer.prototype.isMap = function isMap(node) {
+  return this.applyc === null &&
+         node.type === 'VariableDeclarator' &&
+         /^__(h|\$m)\d+$/.test(node.id && node.id.name) &&
+         this.isHash(node);
+};
+
+ContextReplacer.prototype.enterNode = function enterNode(node) {
+  var isFunction = node.type === 'FunctionDeclaration' ||
+                   node.type === 'FunctionExpression';
+
+  if (this.isApplyc(node)) {
+    this.applyc = node;
+  } else if (this.isMap(node)) {
+    this.map = node;
+  } else if (this.applyc === null) {
+    return;
+  }
+
+  if (this.applyc !== node && isFunction)
+    return this.estraverse.skip();
+
+  if (node.type !== 'MemberExpression' || node.computed)
+    return;
+
+  var obj = node.object;
+  if (obj.type !== 'Identifier' || obj.name !== '__$ctx')
+    return;
+
+  var prop = this.translateProp(node.property.name || node.property.value);
+  if (!prop)
+    return;
+
+  return { type: 'Identifier', name: prop };
+};
+
+ContextReplacer.prototype.leaveNode = function leaveNode(node) {
+  if (node === this.applyc)
+    this.applyc = null;
+  if (node === this.map)
+    this.applyc = null;
+};
