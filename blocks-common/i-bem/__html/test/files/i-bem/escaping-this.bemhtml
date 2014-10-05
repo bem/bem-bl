@@ -1,0 +1,5 @@
+block b1, tag: {
+  return [ this ].map(function(ctx) {
+    return this._mode + '-' + ctx.block;
+  }, this);
+}

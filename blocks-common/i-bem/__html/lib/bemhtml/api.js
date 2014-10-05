@@ -90,10 +90,12 @@ api.translate = function translate(source, options) {
   var exportName = options.exportName;
 
   // Replace known context lookups with context vars
-  xjstJS = new ContextReplacer().run(xjstJS);
+  var cr = new ContextReplacer();
+  xjstJS = cr.run(xjstJS);
 
   return 'var ' + exportName + ' = function() {\n' +
          '  var ' + propValues.join(', ') + ';\n' +
+         cr.getCallWrap() + '\n' +
          '  var cache,\n' +
          '      exports = {},\n' +
          '      xjst = '  + xjstJS + ';\n' +
@@ -149,6 +151,8 @@ function ContextReplacer() {
 
   this.applyc = null;
   this.map = null;
+
+  this.needCallWrap = false;
 };
 
 ContextReplacer.prototype.translateProp = function translateProp(prop) {
@@ -184,9 +188,9 @@ ContextReplacer.prototype.run = function run(src) {
 
   var self = this;
   return escodegen.generate(estraverse.replace(ast, {
-    enter: function(node) {
+    enter: function(node, parent) {
       self.estraverse = this;
-      return self.enterNode(node);
+      return self.enterNode(node, parent);
     },
     leave: function(node) {
       return self.leaveNode(node);
@@ -211,7 +215,7 @@ ContextReplacer.prototype.isMap = function isMap(node) {
          this.isHash(node);
 };
 
-ContextReplacer.prototype.enterNode = function enterNode(node) {
+ContextReplacer.prototype.enterNode = function enterNode(node, parent) {
   var isFunction = node.type === 'FunctionDeclaration' ||
                    node.type === 'FunctionExpression';
 
@@ -226,6 +230,18 @@ ContextReplacer.prototype.enterNode = function enterNode(node) {
   if (this.applyc !== node && isFunction)
     return this.estraverse.skip();
 
+  var res;
+
+  res = this.handleMember(node);
+  if (res)
+    return res;
+
+  res = this.handleEscapingThis(node, parent);
+  if (res)
+    return res;
+};
+
+ContextReplacer.prototype.handleMember = function handleMember(node) {
   if (node.type !== 'MemberExpression' || node.computed)
     return;
 
@@ -240,9 +256,91 @@ ContextReplacer.prototype.enterNode = function enterNode(node) {
   return { type: 'Identifier', name: prop };
 };
 
+ContextReplacer.prototype.isMapCall = function isMapCall(node) {
+  if (node.type !== 'LogicalExpression' || node.operator !== '||')
+    return false;
+
+  var match = false;
+  estraverse.traverse(node, {
+    enter: function(node) {
+      if (node.type === 'Identifier' && /^__(h|\$m)\d+$/.test(node.name)) {
+        match = true;
+        this['break']();
+      }
+    }
+  });
+
+  return match;
+};
+
+ContextReplacer.prototype.handleEscapingThis =
+    function handleEscapingThis(node, parent) {
+  if (node.type !== 'Identifier' || node.name !== '__$ctx')
+    return;
+
+  if (/Expression$/.test(parent.type)) {
+    if (parent.type === 'FunctionExpression')
+      return;
+
+    var isMember = parent.type === 'MemberExpression' &&
+                   (!parent.computed || parent.property.type === 'Literal');
+    if (isMember)
+      return;
+
+    if (parent.type === 'CallExpression') {
+      var c = parent.callee;
+
+      // Ignore $1(__$ctx) calls
+      if (c.type === 'Identifier' && /^(applyc|\$e|\$\d+)$/.test(c.name))
+        return;
+
+      // Ignore __$wrapThis(__$ctx)
+      if (c.type === 'Identifier' && c.name === '__$wrapThis')
+        return;
+
+      // Ignore (typeof x === 'number' ? __$m\.n[x] : __$m.d)(__$ctx)
+      if (this.isMapCall(c))
+        return;
+    }
+  } else if (parent.type === 'VariableDeclarator') {
+    // Internal, xjst-thing
+    if (parent.id.type === 'Identifier' && parent.id.name === '__this')
+      return;
+
+    if (parent.init !== node)
+      return;
+  } else {
+    return;
+  }
+
+  this.needCallWrap = true;
+
+  // Wrap in call
+  return {
+    type: 'CallExpression',
+    callee: {
+      type: 'Identifier',
+      name: '__$wrapThis'
+    },
+    arguments: [ node ]
+  };
+};
+
 ContextReplacer.prototype.leaveNode = function leaveNode(node) {
   if (node === this.applyc)
     this.applyc = null;
   if (node === this.map)
     this.applyc = null;
+};
+
+ContextReplacer.prototype.getCallWrap = function getCallWrap() {
+  if (!this.needCallWrap)
+    return '';
+
+  return 'function __$wrapThis(ctx) {\n' +
+      propKeys.map(function(key) {
+        return 'ctx.' + key + ' = ' + properties[key] + ';';
+      }).join('\n') + '\n' +
+      'return ctx;\n' +
+      '};'
 };
