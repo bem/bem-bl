@@ -47,4 +47,5 @@ suite('i-bem block and others', function() {
   unit('simple types regression #254', 'gh-254');
   unit('applyNext in content regression #289', 'gh-289');
   unit('mods redefinition #550', 'gh-550');
+  unit('block with escaping this', 'escaping-this');
 });
