@@ -90,10 +90,12 @@ api.translate = function translate(source, options) {
   var exportName = options.exportName;
 
   // Replace known context lookups with context vars
-  xjstJS = replaceContext(xjstJS);
+  var cr = new ContextReplacer();
+  xjstJS = cr.run(xjstJS);
 
   return 'var ' + exportName + ' = function() {\n' +
          '  var ' + propValues.join(', ') + ';\n' +
+         cr.getCallWrap() + '\n' +
          '  var cache,\n' +
          '      exports = {},\n' +
          '      xjst = '  + xjstJS + ';\n' +
@@ -143,79 +145,202 @@ api.compile = function compile(source, options) {
   return context.BEMHTML;
 };
 
-function replaceContext(src) {
-  function translateProp(prop) {
-    if (properties.hasOwnProperty(prop))
-      return properties[prop];
-    else
-      return false;
-  };
+function ContextReplacer() {
+  // estraverse context
+  this.estraverse = null;
 
-  function isHash(node) {
-    var val = node.init;
-    if (!val)
-      return false;
+  this.applyc = null;
+  this.map = null;
 
-    if (val.type !== 'ObjectExpression' || val.properties.length !== 3)
-      return false;
+  this.needCallWrap = false;
+};
 
-    var props = val.properties;
-    return props.every(function(prop) {
-      var name = prop.key.name;
-      var val = prop.value;
+ContextReplacer.prototype.translateProp = function translateProp(prop) {
+  if (properties.hasOwnProperty(prop))
+    return properties[prop];
+  else
+    return false;
+};
 
-      if ((name === 'n' || name === 'm') && val.type === 'ObjectExpression')
-        return true;
-      if (name === 'd' && val.type === 'FunctionExpression')
-        return true;
-      return false;
-    });
-  }
+ContextReplacer.prototype.isHash = function isHash(node) {
+  var val = node.init;
+  if (!val)
+    return false;
 
-  var applyc = null;
-  var map = null;
+  if (val.type !== 'ObjectExpression' || val.properties.length !== 3)
+    return false;
 
+  var props = val.properties;
+  return props.every(function(prop) {
+    var name = prop.key.name;
+    var val = prop.value;
+
+    if ((name === 'n' || name === 'm') && val.type === 'ObjectExpression')
+      return true;
+    if (name === 'd' && val.type === 'FunctionExpression')
+      return true;
+    return false;
+  });
+};
+
+ContextReplacer.prototype.run = function run(src) {
   var ast = esprima.parse(src);
-  ast = estraverse.replace(ast, {
-    enter: function(node) {
-      var isFunction = node.type === 'FunctionDeclaration' ||
-                       node.type === 'FunctionExpression';
-      var id = node.id && node.id.name;
-      if (applyc === null &&
-          isFunction &&
-          (map !== null || /^(applyc|\$\d+)$/.test(id))) {
-        applyc = node;
-      } else if (applyc === null &&
-                 node.type === 'VariableDeclarator' &&
-                 /^__(h|\$m)\d+$/.test(id) &&
-                 isHash(node)) {
-        map = node;
-      } else if (applyc === null) {
-        return;
-      }
 
-      if (applyc !== node && isFunction) {
-        this.skip();
-        return;
-      }
-
-      if (node.type === 'MemberExpression' &&
-          node.computed === false &&
-          node.object.type === 'Identifier' &&
-          node.object.name === '__$ctx') {
-        var prop = translateProp(node.property.name || node.property.value);
-        if (!prop)
-          return;
-
-        return { type: 'Identifier', name: prop };
-      }
+  var self = this;
+  return escodegen.generate(estraverse.replace(ast, {
+    enter: function(node, parent) {
+      self.estraverse = this;
+      return self.enterNode(node, parent);
     },
     leave: function(node) {
-      if (node === applyc)
-        applyc = null;
-      if (node === map)
-        applyc = null;
+      return self.leaveNode(node);
+    }
+  }));
+};
+
+ContextReplacer.prototype.isApplyc = function isApplyc(node) {
+  var isFunction = node.type === 'FunctionDeclaration' ||
+                   node.type === 'FunctionExpression';
+  var id = node.id && node.id.name;
+
+  return this.applyc === null &&
+         isFunction &&
+         (this.map !== null || /^(applyc|\$\d+)$/.test(id))
+};
+
+ContextReplacer.prototype.isMap = function isMap(node) {
+  return this.applyc === null &&
+         node.type === 'VariableDeclarator' &&
+         /^__(h|\$m)\d+$/.test(node.id && node.id.name) &&
+         this.isHash(node);
+};
+
+ContextReplacer.prototype.enterNode = function enterNode(node, parent) {
+  var isFunction = node.type === 'FunctionDeclaration' ||
+                   node.type === 'FunctionExpression';
+
+  if (this.isApplyc(node)) {
+    this.applyc = node;
+  } else if (this.isMap(node)) {
+    this.map = node;
+  } else if (this.applyc === null) {
+    return;
+  }
+
+  if (this.applyc !== node && isFunction)
+    return this.estraverse.skip();
+
+  var res;
+
+  res = this.handleMember(node);
+  if (res)
+    return res;
+
+  res = this.handleEscapingThis(node, parent);
+  if (res)
+    return res;
+};
+
+ContextReplacer.prototype.handleMember = function handleMember(node) {
+  if (node.type !== 'MemberExpression' || node.computed)
+    return;
+
+  var obj = node.object;
+  if (obj.type !== 'Identifier' || obj.name !== '__$ctx')
+    return;
+
+  var prop = this.translateProp(node.property.name || node.property.value);
+  if (!prop)
+    return;
+
+  return { type: 'Identifier', name: prop };
+};
+
+ContextReplacer.prototype.isMapCall = function isMapCall(node) {
+  if (node.type !== 'LogicalExpression' || node.operator !== '||')
+    return false;
+
+  var match = false;
+  estraverse.traverse(node, {
+    enter: function(node) {
+      if (node.type === 'Identifier' && /^__(h|\$m)\d+$/.test(node.name)) {
+        match = true;
+        this['break']();
+      }
     }
   });
-  return escodegen.generate(ast);
-}
+
+  return match;
+};
+
+ContextReplacer.prototype.handleEscapingThis =
+    function handleEscapingThis(node, parent) {
+  if (node.type !== 'Identifier' || node.name !== '__$ctx')
+    return;
+
+  if (/Expression$/.test(parent.type)) {
+    if (parent.type === 'FunctionExpression')
+      return;
+
+    var isMember = parent.type === 'MemberExpression' &&
+                   (!parent.computed || parent.property.type === 'Literal');
+    if (isMember)
+      return;
+
+    if (parent.type === 'CallExpression') {
+      var c = parent.callee;
+
+      // Ignore $1(__$ctx) calls
+      if (c.type === 'Identifier' && /^(applyc|\$e|\$\d+)$/.test(c.name))
+        return;
+
+      // Ignore __$wrapThis(__$ctx)
+      if (c.type === 'Identifier' && c.name === '__$wrapThis')
+        return;
+
+      // Ignore (typeof x === 'number' ? __$m\.n[x] : __$m.d)(__$ctx)
+      if (this.isMapCall(c))
+        return;
+    }
+  } else if (parent.type === 'VariableDeclarator') {
+    // Internal, xjst-thing
+    if (parent.id.type === 'Identifier' && parent.id.name === '__this')
+      return;
+
+    if (parent.init !== node)
+      return;
+  } else {
+    return;
+  }
+
+  this.needCallWrap = true;
+
+  // Wrap in call
+  return {
+    type: 'CallExpression',
+    callee: {
+      type: 'Identifier',
+      name: '__$wrapThis'
+    },
+    arguments: [ node ]
+  };
+};
+
+ContextReplacer.prototype.leaveNode = function leaveNode(node) {
+  if (node === this.applyc)
+    this.applyc = null;
+  if (node === this.map)
+    this.applyc = null;
+};
+
+ContextReplacer.prototype.getCallWrap = function getCallWrap() {
+  if (!this.needCallWrap)
+    return '';
+
+  return 'function __$wrapThis(ctx) {\n' +
+      propKeys.map(function(key) {
+        return 'ctx.' + key + ' = ' + properties[key] + ';';
+      }).join('\n') + '\n' +
+      'return ctx;\n' +
+      '};'
+};
