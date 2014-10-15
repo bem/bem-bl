@@ -29,7 +29,7 @@ var leftClick = $.event.special.leftclick = {
 
         if(!e.button) {
             e.type = 'leftclick';
-            $.event.handle.apply(this, arguments);
+            $.event.dispatch.apply(this, arguments);
             e.type = 'click';
         }
 
