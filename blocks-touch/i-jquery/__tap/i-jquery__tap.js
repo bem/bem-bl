@@ -24,7 +24,7 @@ var tap = $.event.special.tap = {
 
         if(!e.button) {
             e.type = 'tap';
-            $.event.handle.apply(this, arguments);
+            $.event.dispatch.apply(this, arguments);
             e.type = 'click';
         }
 

@@ -20,7 +20,7 @@ var outsideClick = $.event.special.outsideclick = {
 
             e.type = 'outsideclick';
 
-            $.event.handle.apply(this, arguments);
+            $.event.dispatch.apply(this, arguments);
 
             e.type = 'click';
 
