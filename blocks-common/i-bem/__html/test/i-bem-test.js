@@ -46,4 +46,5 @@ suite('i-bem block and others', function() {
   unit('condition regression #239', 'gh-239', true);
   unit('simple types regression #254', 'gh-254');
   unit('applyNext in content regression #289', 'gh-289');
+  unit('mods redefinition #550', 'gh-550');
 });
