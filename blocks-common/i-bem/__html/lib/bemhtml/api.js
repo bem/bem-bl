@@ -86,6 +86,7 @@ api.translate = function translate(source, options) {
   return 'var ' + exportName + ' = function() {\n' +
          '  var ' + propValues.join(', ') + ';\n' +
          cr.getCallWrap() + '\n' +
+         cr.getApplyWrap() + '\n' +
          '  var cache,\n' +
          '      exports = {},\n' +
          '      xjst = '  + xjstJS + ';\n' +
@@ -143,6 +144,7 @@ function ContextReplacer() {
   this.map = null;
 
   this.needCallWrap = false;
+  this.needApplyWrap = false;
 };
 
 ContextReplacer.prototype.translateProp = function translateProp(prop) {
@@ -217,8 +219,10 @@ ContextReplacer.prototype.enterNode = function enterNode(node, parent) {
     return;
   }
 
-  if (this.applyc !== node && isFunction)
+  if (this.applyc !== node && isFunction) {
+    this.replaceEscapingApplies(node, parent);
     return this.estraverse.skip();
+  }
 
   var res;
 
@@ -316,11 +320,46 @@ ContextReplacer.prototype.handleEscapingThis =
   };
 };
 
+ContextReplacer.prototype.replaceEscapingApplies =
+    function replaceEscapingApplies(node, parent) {
+  if (this.applyc === null)
+    return;
+
+  var self = this;
+  estraverse.replace(node, {
+    enter: function(node, parent) {
+      return self.handleEscapingApply(node, parent);
+    }
+  });
+};
+
+ContextReplacer.prototype.handleEscapingApply =
+    function handleEscapingApply(node, parent) {
+  if (node.type !== 'CallExpression')
+    return;
+
+  var callee = node.callee;
+  if (callee.type !== 'Identifier' || callee.name !== 'applyc')
+    return;
+
+  this.needApplyWrap = true;
+
+  // Wrap in call
+  return {
+    type: 'CallExpression',
+    callee: {
+      type: 'Identifier',
+      name: '__$wrapApply'
+    },
+    arguments: [ callee ].concat(node.arguments)
+  };
+};
+
 ContextReplacer.prototype.leaveNode = function leaveNode(node) {
   if (node === this.applyc)
     this.applyc = null;
   if (node === this.map)
-    this.applyc = null;
+    this.map = null;
 };
 
 ContextReplacer.prototype.getCallWrap = function getCallWrap() {
@@ -333,4 +372,24 @@ ContextReplacer.prototype.getCallWrap = function getCallWrap() {
       }).join('\n') + '\n' +
       'return ctx;\n' +
       '};'
+};
+
+ContextReplacer.prototype.getApplyWrap = function getApplyWrap() {
+  if (!this.needApplyWrap)
+    return '';
+
+  return 'function __$wrapApply(applyc, ctx) {\n' +
+      // var __t$prop = $$prop;
+      // $$prop = this.prop;
+      propKeys.map(function(key) {
+        return 'var __t$' + key + ' = ' + properties[key] + ';\n' +
+               properties[key] + ' = ctx.' + key + ';';
+      }).join('\n') + '\n' +
+      'var r = applyc(ctx);\n' +
+      // $$prop = __t$prop;
+      propKeys.map(function(key) {
+        return properties[key] + ' = __t$' + key + ';';
+      }).join('\n') + '\n' +
+     'return r;\n' +
+     '};'
 };
