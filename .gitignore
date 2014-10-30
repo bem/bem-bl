@@ -23,4 +23,5 @@ npm-debug.log
 
 /*.docs
 /*.examples
+!/common.docs
 .enb/tmp
