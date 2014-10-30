@@ -14,9 +14,11 @@
     if (typeof win.matchMedia === 'function') {
         // In fact, HiDPI begins from 1.3dppx.
         // There is a devices list for example: http://bjango.com/articles/min-device-pixel-ratio/
-        // 124dpi ~ 1.3dppx
+        // 124dpi (used for IE) ~ 1.3dppx for now,
+        // but by standard 'dpi' means dots-per-CSS-inch, not dots-per-physical-inch
         var hiDpiQuery =
             'only screen and (-webkit-min-device-pixel-ratio: 1.3), ' +
+            'only screen and (min-resolution: 1.3dppx), ' +
             'only screen and (min-resolution: 124dpi)';
         isHiDpi = win.matchMedia(hiDpiQuery).matches;
     } else {
