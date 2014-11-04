@@ -1,0 +1,6 @@
+block b1, custom: 'ok'
+block b1, tag: {
+  return [ this ].map(function(ctx) {
+    return this._mode + '-' + ctx.block + ':' + apply({ _mode: 'custom' });
+  }, this);
+}

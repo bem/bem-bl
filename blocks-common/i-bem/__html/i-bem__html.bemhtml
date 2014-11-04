@@ -270,7 +270,7 @@ this._mode === '' {
             this.block = vBlock || (vElem ? block : undefined),
             this._currBlock = vBlock || vElem ? undefined : block,
             this.elem = this.ctx.elem,
-            this.mods = (vBlock ? this.ctx.mods : this.mods) || {},
+            this.mods = vBlock? this.ctx.mods || (this.ctx.mods = {}) : this.mods,
             this.elemMods = this.ctx.elemMods || {}
         ) {
             (this.block || this.elem) ?

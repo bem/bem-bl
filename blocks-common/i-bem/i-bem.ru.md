@@ -728,10 +728,6 @@ BEM.DOM.decl('b-my-block', {
 * `findBlockOn/findBlocksOn` — поиск блока/блоков на `DOM`-элементах текущего блока или его элементов;
 * `findBlockOutside/findBlocksOutside` — поиск блока/блоков снаружи `DOM`-элементов текущего блока или его элементов.
 
-Список методов поиска блоков и их сигнатуры можно посмотреть в [референсе по BEM.DOM](/blocks/i-bem/dom/i-bem__dom.jsdoc.md).
-
-Примерами блоков, использующих методы поиска других блоков, могут быть: [b-smart-help](/blocks/b-smart-help/b-smart-help.md), [b-screenshot](blocks/b-screenshot/b-screenshot.md) и [b-dropdowna](blocks/b-dropdowna/b-dropdowna.md).
-
 #### Методы доступа к элементам
 Для поиска элементов внутри блока используется метод `elem`. Результат этого метода кэшируется.
 

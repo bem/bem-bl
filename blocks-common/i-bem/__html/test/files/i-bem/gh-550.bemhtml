@@ -1,0 +1,6 @@
+block b1, default: {
+    this.mods.foo = 'bar';
+    applyNext();
+}
+
+block b1, mod foo bar, content: 'foo bar';
