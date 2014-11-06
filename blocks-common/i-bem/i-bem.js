@@ -507,7 +507,9 @@ this.BEM = $.inherit($.observable, /** @lends i-bem.prototype */ {
     /**
      * Deletes a block
      */
-    destruct : function() {}
+    destruct : function() {
+        this.un();
+    }
 
 }, /** @lends i-bem */{
 
