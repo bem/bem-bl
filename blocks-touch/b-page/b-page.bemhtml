@@ -51,13 +51,7 @@ block b-page {
                     },
                     {
                         elem: 'body',
-                        mix: [
-                            this.ctx,
-                            {
-                                block: 'i-ua',
-                                js: true
-                            }
-                        ].concat(this.ctx.mix || []),
+                        mix: [this.ctx].concat(this.ctx.mix || []),
                         content: this.ctx.content
                     }
                 ]
