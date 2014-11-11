@@ -43,8 +43,7 @@ block b-page {
                                 }
                             },
                             {
-                                block: 'i-ua',
-                                js: true
+                                block: 'i-ua'
                             },
                             this.ctx.head
                         ]
