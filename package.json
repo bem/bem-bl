@@ -1,7 +1,11 @@
 {
   "name": "bem-bl",
-  "version": "2.6.2",
+  "version": "2.7.0",
   "private": true,
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/bem/bem-bl.git"
+  },
   "dependencies": {
     "xjst": "~0.10.0",
     "ometajs": "~3.3.5",
