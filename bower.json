@@ -1,0 +1,21 @@
+{
+  "name": "bem-bl",
+  "version": "2.4.2",
+  "homepage": "http://bem.info/",
+  "description": "Base BEM library",
+  "keywords": [
+    "BEM",
+    "bem"
+  ],
+  "ignore": [
+    "**/.*",
+    "!.bem/",
+    "node_modules",
+    "git_hooks",
+    "*-test",
+    "*.docs",
+    "npm-shrinkwrap.json",
+    "package.json",
+    "*.sets"
+  ]
+}
