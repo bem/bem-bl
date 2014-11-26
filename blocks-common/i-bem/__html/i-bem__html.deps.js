@@ -1,6 +1,5 @@
 ({
     mustDeps: [
-        { block: 'i-bem' },
-        { block: 'i-jquery' }
+        { block: 'i-bem' }
     ]
 })

@@ -1,6 +1,6 @@
 ({
     mustDeps: [
-        { block: 'i-jquery', elems: 'leftclick' }
+        { block: 'i-jquery', elem: 'leftclick' }
     ],
     shouldDeps: [
         { mods: { pseudo: ['yes', 'no']} }
