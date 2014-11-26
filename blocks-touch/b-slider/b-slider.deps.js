@@ -1,9 +1,7 @@
 ({
     mustDeps: [{
         block: 'i-jquery',
-        elems: [
-            'css-prefix'
-        ]
+        elem: 'css-prefix'
     },{
         block: 'b-menu',
         mods: {
