@@ -100,7 +100,8 @@ BEM.DOM.decl({ name : 'b-domik', modName : 'type', modVal : 'popup' }, {
             this._getSwitcher().setMod(modName, modVal);
             modVal == 'yes' && this.getPopup().hide();
         }
-    },...
+    }
+    //...
 ```
 
 Подробно [о декларации обработки модификаторов](#mods.callbacks) рассказано в пункте про создание собственного блока.
