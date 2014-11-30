@@ -1,6 +1,6 @@
 {
   "name": "bem-bl",
-  "version": "1.5.3",
+  "version": "1.5.4",
   "dependencies": {
     "xjst": "~0.5.1",
     "ometajs": "~3.3.5",
