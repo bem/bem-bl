@@ -13,7 +13,7 @@
                 title: 'logo',
                 icon: {
                     elem: 'icon',
-                    url: '../../../../blocks-desktop/b-logo/examples/20-b-logo-link.blocks/b-logo/b-logo.png',
+                    url: '../../../blocks-desktop/b-logo/b-logo.examples/20-b-logo-link.blocks/b-logo/b-logo.png',
                     alt: 'logo'
                 }
             }
