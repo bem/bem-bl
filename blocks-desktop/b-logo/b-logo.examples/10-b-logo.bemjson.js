@@ -8,7 +8,7 @@
         block: 'b-logo',
         content: {
             elem: 'icon',
-            url: '../../../blocks-desktop/b-logo/b-logo.examples/10-b-logo.blocks/b-logo/b-logo.png',
+            url: 'http://yastatic.net/web3/_/AqKE_EEVNtTWYFO92MJTqSj51DY.svg',
             alt: 'logo'
         }
     }

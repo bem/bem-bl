@@ -13,7 +13,7 @@
                 content: [
                     {
                         elem: 'icon',
-                        url: '../../../blocks-desktop/b-logo/b-logo.examples/30-b-logo-slogan.blocks/b-logo/b-logo.png'
+                        url: 'http://yastatic.net/web3/_/AqKE_EEVNtTWYFO92MJTqSj51DY.svg',
                     },
                     {
                         elem: 'slogan',
