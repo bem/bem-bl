@@ -131,12 +131,12 @@
       }
     },
     "enb-magic-factory": {
-      "version": "0.3.2",
+      "version": "0.4.1",
       "from": "enb-magic-factory@>=0.3.0 <1.0.0",
       "dependencies": {
         "vow": {
-          "version": "0.4.6",
-          "from": "vow@0.4.6"
+          "version": "0.4.7",
+          "from": "vow@0.4.7"
         },
         "minimist": {
           "version": "1.1.0",
@@ -154,7 +154,7 @@
         },
         "source-map": {
           "version": "0.1.40",
-          "from": "source-map@>=0.1.2",
+          "from": "source-map@>=0.1.30 <0.2.0",
           "dependencies": {
             "amdefine": {
               "version": "0.1.0",
@@ -178,11 +178,11 @@
       "dependencies": {
         "coa": {
           "version": "0.3.9",
-          "from": "coa@>=0.3.8 <0.4.0"
+          "from": "coa@>=0.3.0 <0.4.0"
         },
         "q": {
           "version": "0.8.12",
-          "from": "q@>=0.8.10 <0.9.0"
+          "from": "q@>=0.8.0 <0.9.0"
         },
         "uglify-js": {
           "version": "1.3.5",
@@ -191,8 +191,8 @@
       }
     },
     "xjst": {
-      "version": "0.5.25",
-      "from": "xjst@>=0.5.24 <0.6.0",
+      "version": "0.5.28",
+      "from": "xjst@>=0.5.28 <0.6.0",
       "dependencies": {
         "coa": {
           "version": "0.3.9",
