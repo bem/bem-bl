@@ -1,6 +1,6 @@
 {
   "name": "bem-bl",
-  "version": "0.0.0",
+  "version": "2.5.0",
   "dependencies": {
     "bem-environ": {
       "version": "1.4.0",
@@ -26,7 +26,7 @@
         },
         "source-map": {
           "version": "0.1.40",
-          "from": "source-map@>=0.1.30 <0.2.0",
+          "from": "source-map@>=0.1.2",
           "dependencies": {
             "amdefine": {
               "version": "0.1.0",
@@ -63,8 +63,8 @@
       }
     },
     "xjst": {
-      "version": "0.5.25",
-      "from": "xjst@>=0.5.24 <0.6.0",
+      "version": "0.5.28",
+      "from": "xjst@>=0.5.28 <0.6.0",
       "dependencies": {
         "coa": {
           "version": "0.3.9",
