@@ -174,19 +174,12 @@ BEM.INTERNAL = {
 
 })(BEM_);
 
-var buildEscape = (function() {
-    var ts = { '"': '&quot;', '&': '&amp;', '<': '&lt;', '>': '&gt;' },
-        f = function(t) { return ts[t] || t };
-    return function(r) {
-        r = new RegExp(r, 'g');
-        return function(s) { return ('' + s).replace(r, f) }
-    }
-})();
-
-function BEMContext(context, apply_) {
-  this.ctx = typeof context === null ? '' : context;
+function BEMContext(apply_) {
+  if (typeof $$registerExtensions === 'function')
+    $$registerExtensions(this);
   this.apply = apply_;
-  this._buf = [];
+  this._buf = null;
+  this.ctx = null;
   this._ = this;
 
   // Stub out fields that will be used later
@@ -196,9 +189,26 @@ function BEMContext(context, apply_) {
   this.position = 0;
 };
 
-BEMContext.prototype.isArray = function isArray(obj) {
-    return toString.call(obj) === "[object Array]";
+BEMContext.prototype.reinit = function reinit(context) {
+    this.ctx = typeof context === null ? '' : context;
+    this._buf = [];
+
+    // Stub out fields that will be used later
+    this._start = true;
+    this._listLength = 0;
+    this._notNewList = false;
+    this.position = 0;
 };
+
+if (Array.isArray) {
+  BEMContext.prototype.isArray = function isArray(obj) {
+    return Array.isArray(obj);
+  };
+} else {
+  BEMContext.prototype.isArray = function isArray(obj) {
+      return toString.call(obj) === "[object Array]";
+  };
+}
 
 BEMContext.prototype.isSimple = function isSimple(obj) {
     var t = typeof obj;
@@ -229,8 +239,18 @@ BEMContext.prototype.identify = (function() {
     };
 })();
 
-BEMContext.prototype.xmlEscape = buildEscape('[&<>]');
-BEMContext.prototype.attrEscape = buildEscape('["&<>]');
+BEMContext.prototype.xmlEscape = function xmlEscape(str) {
+    return (str + '').replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;');
+};
+
+BEMContext.prototype.attrEscape = function attrEscape(str) {
+    return (str + '').replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;');
+};
 
 BEMContext.prototype.BEM = BEM_;
 
@@ -247,8 +267,9 @@ BEMContext.prototype.generateId = function generateId() {
 };
 
 // Wrap xjst's apply and export our own
+var ctx = new BEMContext(apply);
 exports.apply = BEMContext.apply = function _apply() {
-    var ctx = new BEMContext(this, apply);
+    ctx.reinit(this);
     ctx.apply();
     return ctx._buf.join('');
 };
