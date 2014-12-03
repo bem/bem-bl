@@ -154,24 +154,33 @@ ContextReplacer.prototype.translateProp = function translateProp(prop) {
     return false;
 };
 
-ContextReplacer.prototype.isHash = function isHash(node) {
+ContextReplacer.prototype.isHash = function isHash(node, kind) {
   var val = node.init;
   if (!val)
     return false;
 
-  if (val.type !== 'ObjectExpression' || val.properties.length !== 3)
+  if (val.type !== 'ObjectExpression')
     return false;
 
   var props = val.properties;
+  if (kind === 'legacy')
+    if (props.length !== 3)
+      return false;
+
   return props.every(function(prop) {
     var name = prop.key.name;
     var val = prop.value;
 
-    if ((name === 'n' || name === 'm') && val.type === 'ObjectExpression')
-      return true;
-    if (name === 'd' && val.type === 'FunctionExpression')
-      return true;
-    return false;
+    if (kind === 'legacy') {
+      if ((name === 'n' || name === 'm') && val.type === 'ObjectExpression')
+        return true;
+      if (name === 'd' && val.type === 'FunctionExpression')
+        return true;
+      return false;
+    } else {
+      return val.type === 'FunctionExpression' ||
+             val.type === 'Identifier';
+    }
   });
 };
 
@@ -201,10 +210,16 @@ ContextReplacer.prototype.isApplyc = function isApplyc(node) {
 };
 
 ContextReplacer.prototype.isMap = function isMap(node) {
-  return this.applyc === null &&
-         node.type === 'VariableDeclarator' &&
-         /^__(h|\$m)\d+$/.test(node.id && node.id.name) &&
-         this.isHash(node);
+  if (this.applyc !== null || node.type !== 'VariableDeclarator')
+    return false;
+
+  if (/^__(h|\$m)\d+$/.test(node.id && node.id.name))
+    return this.isHash(node, 'legacy');
+
+  if (/^__h\d+_\w$/.test(node.id && node.id.name))
+    return this.isHash(node, 'new');
+
+  return false;
 };
 
 ContextReplacer.prototype.enterNode = function enterNode(node, parent) {
@@ -257,7 +272,7 @@ ContextReplacer.prototype.isMapCall = function isMapCall(node) {
   var match = false;
   estraverse.traverse(node, {
     enter: function(node) {
-      if (node.type === 'Identifier' && /^__(h|\$m)\d+$/.test(node.name)) {
+      if (node.type === 'Identifier' && /^__(h|\$m)\d+(_\w)?$/.test(node.name)) {
         match = true;
         this['break']();
       }
