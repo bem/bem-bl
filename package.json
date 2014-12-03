@@ -6,7 +6,7 @@
     "url": "git://github.com/bem/bem-bl.git"
   },
   "dependencies": {
-    "xjst": "~0.5.28",
+    "xjst": "~0.10.0",
     "ometajs": "~3.3.5",
     "dom-js": "~0.0.9",
     "estraverse": "~1.5.0",
