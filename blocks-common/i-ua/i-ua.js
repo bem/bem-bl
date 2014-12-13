@@ -1,6 +1,6 @@
 (function(win) {
     var devicePixelRatio = 1,
-        isHiDpi = false;
+        isHiDpi;
 
     // http://stackoverflow.com/questions/16383503/window-devicepixelratio-does-not-work-in-ie-10-mobile
     if ('deviceXDPI' in screen && 'logicalXDPI' in screen) {
@@ -11,18 +11,22 @@
         devicePixelRatio = win.devicePixelRatio;
     }
 
+    /*
+    In fact, HiDPI begins from 1.3dppx.
+    There is a devices list for example: http://bjango.com/articles/min-device-pixel-ratio/
+    124dpi (used for IE) ~ 1.3dppx for now,
+    but by standard 'dpi' means dots-per-CSS-inch, not dots-per-physical-inch
+    */
+    isHiDpi = devicePixelRatio >= 1.3;
     if (typeof win.matchMedia === 'function') {
-        // In fact, HiDPI begins from 1.3dppx.
-        // There is a devices list for example: http://bjango.com/articles/min-device-pixel-ratio/
-        // 124dpi (used for IE) ~ 1.3dppx for now,
-        // but by standard 'dpi' means dots-per-CSS-inch, not dots-per-physical-inch
-        var hiDpiQuery =
+        var mql = win.matchMedia(
             'only screen and (-webkit-min-device-pixel-ratio: 1.3), ' +
             'only screen and (min-resolution: 1.3dppx), ' +
-            'only screen and (min-resolution: 124dpi)';
-        isHiDpi = win.matchMedia(hiDpiQuery).matches;
-    } else {
-        isHiDpi = (devicePixelRatio >= 1.3);
+            'only screen and (min-resolution: 124dpi)'
+        );
+        if (mql) {
+            isHiDpi = mql.matches;
+        }
     }
 
     /**
