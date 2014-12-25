@@ -2,17 +2,14 @@ var DOM = require('dom-js'),
     QUOTE_CHAR = '"',
     SINGLE_QUOTE_CHAR = "'",
     isArray = Array.isArray,
-    isJson = function(obj) {
-        try {
-            if(isString(obj)) {
-                var jsonStart = obj.trim().charAt(0);
-                if(jsonStart === '{' || jsonStart === '[')
-                    return JSON.parse(obj);
+    isJson = function (obj) {
+        if (isString(obj)) {
+            var jsonStart = obj.trim().charAt(0);
+            if (jsonStart === '{' || jsonStart === '[') {
+                return true
             }
-            return false;
-        } catch(e) {
-            return false;
         }
+        return false;
     },
     isString = function(str) {
         return typeof str === 'string';
@@ -22,40 +19,102 @@ var DOM = require('dom-js'),
         return type === 'string' || type === 'number';
     };
 
-var parseXml = exports.parseXml = function(xml, cb) {
 
-        isSimple(xml) || (xml = JSON.stringify(xml));
+/**
+ * @param {String} xml
+ * @returns {Nodes[]}
+ */
+function syncParser(el, cb){
+    try {
+        new DOM.DomJS().parse('<root>' + el + '</root>', function (err, dom) {
+            if(err) {
+                cb(err, dom.children);
+            }
+            cb(null, dom.children);
+        });
+    } catch (e) {
+        syncParser(DOM.escape(el), cb);
+    }
+}
 
-        try {
-            new DOM.DomJS().parse('<root>' + xml + '</root>', function(err, dom) {
-                if(err) return;
-                cb(dom.children);
+function stringToArray(str){
+    var res;
+    try {
+        res = JSON.parse(str);
+    } catch (e) {
+        str = str.trim();
+        res = str.slice(1, str.length-1).split(',');
+    }
+    return res;
+}
+
+/**
+ * @param {String} xml
+ * @returns {Nodes[]}
+ */
+var parseXml = exports.parseXml = function (xml, cb) {
+    var result;
+    // in case of '[...]'
+    if(isJson(xml)){
+        xml = stringToArray(xml);
+    }
+    if (isSimple(xml)) {
+        syncParser(xml, function(err, data){
+            if(err) {
+                throw new Error('parse error ' + xml);
+            }
+            result = data;
+        });
+    } else {
+        // dynamic keys are parsed separately
+        if(isArray(xml)){
+            result = xml.map(function(data){
+                var res;
+                syncParser(data, function(err, data){
+                    if(err) {
+                        throw new Error('parse error ' + xml);
+                    }
+                    data.noWrap = true;
+                    res = domToJs(data);
+                });
+                return res;
             });
-        } catch(e) {
-            parseXml(DOM.escape(xml), cb);
+            result = [{json: result}];
+        } else {
+            throw new Error('unexpected type of ' + xml);
         }
+    }
+    cb(result);
+};
 
-    },
-    domToJs = exports.domToJs = function(nodes) {
-
-        var code = expandNodes(toCommonNodes(nodes), jsExpander);
-
-        if(!code.length) {
-            return '\'\'';
+/**
+ * @param {Nodes[]} node
+ * @returns {String}
+ */
+var domToJs = exports.domToJs = function (nodes) {
+    var noWrap = nodes.noWrap,
+        code = expandNodes(toCommonNodes(nodes), jsExpander);
+    if (code.length === 0) {
+        return '\'\'';
+    } else {
+        var firstLine = code[0],
+            firstChar = firstLine.charAt(0);
+        if (code.length === 1 && (firstChar === QUOTE_CHAR || firstChar === SINGLE_QUOTE_CHAR)) {
+            return firstLine;
         }
+        code = code.join(' + ');
+        return noWrap ? code : 'function (params) { return ' + code + ' }';
+    }
+};
 
-        return code.length === 1 &&
-            (code[0].charAt(0) === QUOTE_CHAR || code[0].charAt(0) === SINGLE_QUOTE_CHAR ) ?
-                code[0] : 'function(params) { return ' + code.join(' + ') + ' }';
-
-    };
-
-exports.xmlToJs = function(xml, cb) {
-
-    parseXml(xml, function(nodes) {
+/**
+ * @param {String} xml
+ * @returns {Nodes[]}
+ */
+exports.xmlToJs = function (xml, cb) {
+    parseXml(xml, function(nodes){
         cb(domToJs(nodes));
     });
-
 };
 
 /**
@@ -73,7 +132,9 @@ function expandNodes(node, expanderFn) {
 }
 
 /**
- * @param {Array} node
+ * Convert AST to js String
+ *
+ * @param {AST}
  * @returns {String}
  */
 function jsExpander(node, _raw) {
@@ -170,25 +231,26 @@ function jsExpander(node, _raw) {
 }
 
 /**
+ *  Process Node to AST
+ *  [{ name: 'i18n:param'...}, {text: 'Hello'}] => [[..., 'PARAM'], ['Hello', 'TEXT']]
+ *
  * @param {Node[]} nodes
- * @returns {AST}
+ * @returns {AST[]}
  */
 function toCommonNodes(nodes) {
-
-    var code = [];
-
-    nodes.forEach(function(node) {
-        if(node.name) {
-            code.push(_node(node));
-        }
-        else if(node.text) {
-            var text = _json(node.text);
-            if(text) code.push(text);
-        }
-    });
-
-    return code;
-
+    return nodes
+        .map(function (node) {
+            if(node.name){
+                return _node(node);
+            }
+            if(node.json){
+                return _json(node.json);
+            }
+            return _text(node.text);
+        })
+        .filter(function (node) {
+            return node;
+        });
 }
 
 /**
@@ -257,33 +319,31 @@ function _xml(node) {
 }
 
 /**
- * @param {Array|Object} nodes
+ * @param {Node[]} nodes
  * @returns {AST}
  */
 function _json(nodes) {
+    var keys = ['one', 'some', 'many', 'none'],
+        params,
+        type;
 
-    var json;
-    if(!(json = isJson(nodes)))
-        return _text(nodes);
+    params = [
+        ['"count"', [ ['"count"', 'PARAM-CALL'] ], 'PARAM']
+    ].concat(nodes.map(function (node, i) {
+        return [quotify(keys[i]), node , 'PARAM'];
+    }))
+    .concat('PARAMS');
 
-    if(isArray(json)) {
-        // FIXME: array should always produce `plural_adv`?
-        // FIXME: `none` value for json
-        var params = [
-                ['"count"', [ ['"count"', 'PARAM-CALL'] ], 'PARAM']
-            ]
-            .concat(['one', 'some', 'many', 'none'].map(function(p, i) {
-                return [quotify(p), quotify(json[i] || ''), 'PARAM'];
-            }));
-
-        params.push('PARAMS');
-
-        // FIXME: hardcode
-        return ['i-tanker__dynamic', 'plural_adv', params, 'TANKER_DYNAMIC'];
+    switch (nodes.length){
+        case 4:
+            type = 'plural_adv'; break;
+        case 3:
+            type = 'plural'; break;
+        default:
+            throw new Error('Unexpected data: ' + nodes);
     }
 
-    return _text(nodes.toString());
-
+    return ['i-tanker__dynamic', type, params, 'TANKER_DYNAMIC'];
 }
 
 /**
@@ -314,18 +374,14 @@ function _dynamic(nodes) {
  * @returns {AST}
  */
 function _params(nodes) {
-
-    var params = [];
-
-    nodes.forEach(function(node) {
-        if(!node.name) return;
-        params.push(_param(node));
-    });
-
-    params.push('PARAMS');
-
-    return params;
-
+    return nodes
+        .filter(function (node) {
+            return ('name' in node);
+        })
+        .map(function(param){
+            return _param(param);
+        })
+        .concat('PARAMS');
 }
 
 /**
@@ -367,6 +423,6 @@ function jsQuote(s) {
 
 function quotify(str) {
     if(isString(str))
-       return QUOTE_CHAR + str + QUOTE_CHAR;
+        return QUOTE_CHAR + str + QUOTE_CHAR;
     return str;
 }

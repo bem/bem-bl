@@ -1,9 +1,27 @@
 <i18n:dynamic project="tanker" keyset="dynamic" key="plural_adv">
 <i18n:count><i18n:param>count</i18n:param></i18n:count>
-<i18n:none>Ничего не найдено на страницах Помощи.</i18n:none>
-<i18n:one><p contenteditable="true" class="i-face" style="margin:0;"><i18n:dynamic project="help" keyset="i-locale" key="not-found-in-section"/></p>Найдена</i18n:one>
-<i18n:some><p><i18n:dynamic project="help" keyset="i-locale" key="not-found-in-section"/></p>Найдено</i18n:some>
-    <i18n:many><p><i18n:dynamic project="help" keyset="i-locale" key="not-found-in-section"/></p>Найдено</i18n:many>
+    <i18n:none>Ничего не найдено на страницах Помощи.</i18n:none>
+    <i18n:one>
+    <p contenteditable="true" class="i-face" style="margin:0;">
+        <i18n:dynamic project="help" keyset="i-locale" key="not-found-in-section">
+            <i18n:section><i18n:param>section</i18n:param></i18n:section>
+        </i18n:dynamic>
+    </p>Найдена
+    </i18n:one>
+    <i18n:some>
+        <p>
+            <i18n:dynamic project="help" keyset="i-locale" key="not-found-in-section">
+                <i18n:section><i18n:param>section</i18n:param></i18n:section>
+            </i18n:dynamic>
+        </p>Найдено
+    </i18n:some>
+    <i18n:many>
+        <p>
+            <i18n:dynamic project="help" keyset="i-locale" key="not-found-in-section">
+                <i18n:section><i18n:param>section</i18n:param></i18n:section>
+            </i18n:dynamic>
+        </p>Найдено
+    </i18n:many>
 </i18n:dynamic>
 <i18n:param>count</i18n:param>
 <i18n:dynamic project="tanker" keyset="dynamic" key="plural_adv">
