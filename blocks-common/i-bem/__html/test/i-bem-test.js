@@ -48,4 +48,12 @@ suite('i-bem block and others', function() {
   unit('applyNext in content regression #289', 'gh-289');
   unit('mods redefinition #550', 'gh-550');
   unit('block with escaping this', 'escaping-this');
+
+  test('re-entrance', function() {
+    var t = bemhtml.compile(iBem + readFile('i-bem/re-entrant.bemhtml'));
+    assert.throws(function() {
+      t.call({ block: 'b2' });
+    });
+    assert.equal(t.call({ block: 'b1' }), '<div class="b1">ok</div>');
+  });
 });

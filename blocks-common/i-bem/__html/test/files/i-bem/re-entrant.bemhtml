@@ -1,0 +1,9 @@
+block b1, content: {
+  return this.invalid || 'ok';
+}
+
+block b2, content: {
+  local(this.invalid = 'bye') {
+    throw new Error('Oh god');
+  }
+}

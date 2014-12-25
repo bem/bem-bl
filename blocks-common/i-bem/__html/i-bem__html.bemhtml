@@ -186,6 +186,7 @@ function BEMContext(apply_) {
   this._start = true;
   this._listLength = 0;
   this._notNewList = false;
+  this._inside = false;
   this.position = 0;
 };
 
@@ -266,11 +267,22 @@ BEMContext.prototype.generateId = function generateId() {
     return this.identify(this.ctx);
 };
 
+function slowApply() {
+    var ctx = new BEMContext(apply);
+    ctx.reinit(this);
+    ctx.apply();
+    return ctx._buf.join('');
+};
+
 // Wrap xjst's apply and export our own
 var ctx = new BEMContext(apply);
 exports.apply = BEMContext.apply = function _apply() {
+    if (ctx._inside) return slowApply.call(this);
+
+    ctx._inside = true;
     ctx.reinit(this);
     ctx.apply();
+    ctx._inside = false;
     return ctx._buf.join('');
 };
 }();
