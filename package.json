@@ -1,6 +1,6 @@
 {
   "name": "bem-bl",
-  "version": "2.5.1",
+  "version": "2.5.2",
   "private": true,
   "dependencies": {
     "xjst": "~0.10.0",
