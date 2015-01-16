@@ -175,8 +175,6 @@ BEM.INTERNAL = {
 })(BEM_);
 
 function BEMContext(apply_) {
-  if (typeof $$registerExtensions === 'function')
-    $$registerExtensions(this);
   this.apply = apply_;
   this._buf = null;
   this.ctx = null;
@@ -267,22 +265,11 @@ BEMContext.prototype.generateId = function generateId() {
     return this.identify(this.ctx);
 };
 
-function slowApply() {
+// Wrap xjst's apply and export our own
+exports.apply = BEMContext.apply = function _apply() {
     var ctx = new BEMContext(apply);
     ctx.reinit(this);
     ctx.apply();
-    return ctx._buf.join('');
-};
-
-// Wrap xjst's apply and export our own
-var ctx = new BEMContext(apply);
-exports.apply = BEMContext.apply = function _apply() {
-    if (ctx._inside) return slowApply.call(this);
-
-    ctx._inside = true;
-    ctx.reinit(this);
-    ctx.apply();
-    ctx._inside = false;
     return ctx._buf.join('');
 };
 }();
