@@ -173,7 +173,7 @@
                 // бинд на pointer-события
                 .bindTo( this.namespaced('pointerdown'), slider._onPointerDown )
                 .bindTo( this.namespaced('pointermove'), slider._onPointerMove )
-                .bindTo( this.namespaced('pointerup pointercancel'), slider._onPointerUp )
+                .bindTo( this.namespaced('pointerup pointerleave pointercancel'), slider._onPointerUp )
                 // бинд на i-bem-события
                 .on({
                     left: slider._onLeft,
