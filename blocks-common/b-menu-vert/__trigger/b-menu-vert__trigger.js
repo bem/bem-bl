@@ -63,7 +63,7 @@ BEM.DOM.decl({ name: 'b-menu-vert', baseBlock: 'i-menu' }, /** @lends b-menu-ver
     live : function() {
         this.__base();
         this
-            .liveBindTo('trigger', 'leftclick', function(e) {
+            .liveBindTo('trigger', 'leftclick tap', function(e) {
                 this.onTriggerClick(e);
             })
     }
