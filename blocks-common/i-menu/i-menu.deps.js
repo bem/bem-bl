@@ -8,7 +8,7 @@
     shouldDeps: [
         {
             block: 'i-jquery',
-            elem: 'leftclick'
+            elems: ['leftclick', 'tap']
         }
     ]
 })
