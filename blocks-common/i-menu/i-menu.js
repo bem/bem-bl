@@ -53,7 +53,7 @@ BEM.DOM.decl('i-menu', /** @lends i-menu.prototype */{
 }, /** @lends i-menu */{
 
     live : function() {
-        this.liveBindTo('item-selector', 'leftclick', function(e) {
+        this.liveBindTo('item-selector', 'leftclick tap', function(e) {
             this.onItemSelectorClick(e);
         });
     }
