@@ -378,6 +378,18 @@ this.BEM = $.inherit($.observable, /** @lends BEM.prototype */ {
      * @param {String} modVal1 First modifier value
      * @param {String} [modVal2] Second modifier value
      * @param {Boolean} [condition] Condition
+     * @example
+     * // before: <div class='icon'>
+     * icon.toggleMod('size', 'big', 'small');
+     * // after: <div class='icon icon_size_big'>
+     * @example
+     * // before: <div class='icon'>
+     * icon.toggleMod('size', 'big', 'small', isNeedBig === false);
+     * // after: <div class='icon icon_size_small'>
+     * @example
+     * // before: <div class='icon icon_size_small'>
+     * icon.toggleMod('size', 'big', 'small');
+     * // after: <div class='icon icon_size_big'>
      * @returns {BEM}
      */
     toggleMod : function(elem, modName, modVal1, modVal2, condition) {
@@ -389,6 +401,7 @@ this.BEM = $.inherit($.observable, /** @lends BEM.prototype */ {
             modName = elem;
             elem = undefined;
         }
+
         if(typeof modVal2 == 'undefined') {
             modVal2 = '';
         } else if(typeof modVal2 == 'boolean') {
@@ -397,13 +410,15 @@ this.BEM = $.inherit($.observable, /** @lends BEM.prototype */ {
         }
 
         var modVal = this.getMod(elem, modName);
-        (modVal == modVal1 || modVal == modVal2) &&
-            this.setMod(
-                elem,
-                modName,
-                typeof condition === 'boolean'?
-                    (condition? modVal1 : modVal2) :
-                    this.hasMod(elem, modName, modVal1)? modVal2 : modVal1);
+
+        this.setMod(
+            elem,
+            modName,
+            // если есть condition, тогда не важно текущее значение
+            typeof condition === 'boolean' ? ( condition ? modVal1 : modVal2 )
+                // иначе, если текущее значение "modVal1", значит ставим значение "modVal2"
+                // и во всех остальных случаях "modVal1"
+                : ( modVal === modVal1 ) ? modVal2 : modVal1 );
 
         return this;
 
