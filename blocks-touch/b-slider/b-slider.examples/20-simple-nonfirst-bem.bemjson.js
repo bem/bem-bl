@@ -17,7 +17,7 @@
         },
         {
             elem: 'js',
-            url: '_20-simple-nonfirst-bem.pub.js'
+            url: '_20-simple-nonfirst-bem.js'
         }
     ],
     content: {

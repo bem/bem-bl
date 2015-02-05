@@ -17,7 +17,7 @@
         },
         {
             elem: 'js',
-            url: '_60-simple-two-bem.pub.js'
+            url: '_60-simple-two-bem.js'
         }
     ],
     content: [{

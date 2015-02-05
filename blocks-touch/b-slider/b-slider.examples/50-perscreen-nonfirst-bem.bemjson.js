@@ -17,7 +17,7 @@
         },
         {
             elem: 'js',
-            url: '_50-perscreen-nonfirst-bem.pub.js'
+            url: '_50-perscreen-nonfirst-bem.js'
         }
     ],
     content: {
