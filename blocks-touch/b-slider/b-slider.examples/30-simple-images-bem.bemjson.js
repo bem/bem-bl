@@ -17,7 +17,7 @@
         },
         {
             elem: 'js',
-            url: '_30-simple-images-bem.pub.js'
+            url: '_30-simple-images-bem.js'
         }
     ],
     content: {

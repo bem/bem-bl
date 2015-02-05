@@ -17,7 +17,7 @@
         },
         {
             elem: 'js',
-            url: '_30-horiz-simple-bem.pub.js'
+            url: '_30-horiz-simple-bem.js'
         }
     ],
     content: {
