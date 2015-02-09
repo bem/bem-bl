@@ -171,9 +171,7 @@
 
             slider
                 // бинд на pointer-события
-                .bindTo( this.namespaced('pointerdown'), slider._onPointerDown )
-                .bindTo( this.namespaced('pointermove'), slider._onPointerMove )
-                .bindTo( this.namespaced('pointerup pointercancel'), slider._onPointerUp )
+                .bindTo(this.namespaced('pointerdown'), slider._onPointerDown)
                 // бинд на i-bem-события
                 .on({
                     left: slider._onLeft,
@@ -332,6 +330,11 @@
 
             e = e.originalEvent;
 
+            // каскадная подписка на move / up
+            this
+                .bindToWin('pointermove', this._onPointerMove)
+                .bindToWin('pointerup pointercancel', this._onPointerUp);
+
             // запоминаем координаты и время
             this._touch.x1 = e.clientX;
             this._touch.y1 = e.clientY + (ua.bada ? window.pageYOffset : 0);
@@ -394,6 +397,11 @@
             if (realtimeSlide && this._touch.isSlide) {
                 this._slideMove();
             }
+
+            // по окончанию драга - отписываемся
+            this
+                .unbindFromWin('pointermove')
+                .unbindFromWin('pointerup pointercancel');
 
             this._touch = {};
 
