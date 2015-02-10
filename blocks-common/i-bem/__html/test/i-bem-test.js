@@ -48,6 +48,7 @@ suite('i-bem block and others', function() {
   unit('applyNext in content regression #289', 'gh-289');
   unit('mods redefinition #550', 'gh-550');
   unit('block with escaping this', 'escaping-this');
+  unit('mix with same block bem-core/804', 'gh-core-804');
 
   test('re-entrance', function() {
     var t = bemhtml.compile(iBem + readFile('i-bem/re-entrant.bemhtml'));
