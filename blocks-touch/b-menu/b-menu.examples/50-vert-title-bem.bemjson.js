@@ -17,7 +17,7 @@
         },
         {
             elem: 'js',
-            url: '_50-vert-title-bem.pub.js'
+            url: '_50-vert-title-bem.js'
         }
     ],
     content: {

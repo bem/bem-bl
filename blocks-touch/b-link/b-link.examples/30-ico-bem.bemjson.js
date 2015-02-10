@@ -17,7 +17,7 @@
         },
         {
             elem: 'js',
-            url: '_30-ico-bem.pub.js'
+            url: '_30-ico-bem.js'
         }
     ],
     content: {
