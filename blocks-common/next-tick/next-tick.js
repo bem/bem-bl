@@ -1,29 +1,29 @@
 /**
  * @module next-tick
- * Realization from bem-core#2.5.0
+ * Implementation from bem-core#2.5.0
  */
 
 (typeof modules === 'object') && modules.define('next-tick', function(provide) {
 
-/**
- * Executes given function on next tick.
- * @exports
- * @type Function
- * @param {Function} fn
- */
+    /**
+     * Executes given function on next tick.
+     * @exports
+     * @type Function
+     * @param {Function} fn
+     */
 
-var global = this.global,
-    fns = [],
-    enqueueFn = function(fn) {
-        return fns.push(fn) === 1;
-    },
-    callFns = function() {
-        var fnsToCall = fns, i = 0, len = fns.length;
-        fns = [];
-        while(i < len) {
-            fnsToCall[i++]();
-        }
-    };
+    var global = this.global,
+        fns = [],
+        enqueueFn = function(fn) {
+            return fns.push(fn) === 1;
+        },
+        callFns = function() {
+            var fnsToCall = fns, i = 0, len = fns.length;
+            fns = [];
+            while(i < len) {
+                fnsToCall[i++]();
+            }
+        };
 
     /* global process */
     if(typeof process === 'object' && process.nextTick) { // nodejs
