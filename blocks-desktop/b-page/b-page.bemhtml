@@ -34,7 +34,8 @@ block b-page {
                                 } : '',
                                 ctx.meta,
                                 {
-                                    block: 'i-ua'
+                                    block: 'i-ua',
+                                    attrs: { nonce: ctx.nonce }
                                 },
                                 ctx.head
                             ]
