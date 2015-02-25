@@ -1,1 +1,0 @@
-Plugin, which realizes $.isEmptyObject для jQuery < 1.4

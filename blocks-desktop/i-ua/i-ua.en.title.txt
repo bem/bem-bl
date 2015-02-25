@@ -1,1 +1,0 @@
-Block for gathering and providing information about a UserAgent
