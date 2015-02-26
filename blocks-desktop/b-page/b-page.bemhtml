@@ -35,6 +35,7 @@ block b-page {
                                 ctx.meta,
                                 {
                                     block: 'i-ua',
+                                    //WTF: /* special node.js magic: https://github.com/joyent/node/issues/8040 */
                                     attrs: { nonce: ctx.nonce }
                                 },
                                 ctx.head
