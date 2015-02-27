@@ -118,7 +118,7 @@
             // переопределяем параметры по умолчанию заданными-конкретными
             slider._options = $.extend({}, defaults, slider.params);
             // jQ-объект
-            slider._elem = slider._menu.domElem;
+            slider._menuElem = slider._menu.domElem;
             // поэкранный слайд
             slider._perScreen = slider.hasMod('type', 'per-screen');
             // индекс текущего элемента
@@ -198,7 +198,7 @@
         },
 
         _setItemsWidth: function() {
-            this._items.width(this._elem.parent().width());
+            this._items.width(this._menuElem.parent().width());
         },
 
         _clearBinds: function() {
@@ -239,13 +239,13 @@
         _calcParams: function() {
 
             // ширина слайдера
-            this._width = this._elem.outerWidth();
+            this._width = this._menuElem.outerWidth();
             // новая ширина родителя
-            this._parentWidth = this._elem.parent().width();
+            this._parentWidth = this._menuElem.parent().width();
             // новый шаг
             this._step = this._perScreen ? this._parentWidth : this._options.step;
             // новый предел
-            this._limitX = this._parentWidth - this._elem.outerWidth();
+            this._limitX = this._parentWidth - this._menuElem.outerWidth();
             // ширина слайдера меньше ширины контейнера ?
             this._isShort = this._parentWidth > this._width;
 
@@ -321,7 +321,7 @@
 
         _correct: function() {
 
-            this._elem.css({
+            this._menuElem.css({
                 transition: 'none',
                 transform: translateX(this._currentX)
             });
@@ -339,7 +339,7 @@
             this._touch.isPressed = true;
 
             // отключаем анимацию на время реалтаймового слайда
-            this._elem.css('transition', 'none');
+            this._menuElem.css('transition', 'none');
 
         },
 
@@ -380,7 +380,7 @@
                         this._touch.shiftX = this._touch.shiftX / 3;
                     }
                     // реалтаймловый слайд
-                    this._elem.css('transform', translateX(this._currentX + this._touch.shiftX));
+                    this._menuElem.css('transform', translateX(this._currentX + this._touch.shiftX));
 
                 }
 
@@ -551,7 +551,7 @@
 
             slider.trigger('start', slider._getCurrentParams());
 
-            slider._elem
+            slider._menuElem
                 .one(this.namespaced('webkitTransitionEnd oTransitionEnd otransitionend transitionend'),
                     function() {
                         slider.trigger('end', slider._getCurrentParams());
