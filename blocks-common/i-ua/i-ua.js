@@ -1,4 +1,4 @@
-(function(win) {
+(function(win, ua) {
     var devicePixelRatio = 1,
         isHiDpi = false;
 
@@ -25,6 +25,14 @@
         isHiDpi = (devicePixelRatio >= 1.3);
     }
 
+    var browser = {};
+
+    if(/msie|trident/i.test(ua)) {
+        browser.ie = parseInt(ua.split(/msie|rv:/i)[1], 10);
+    } else if (win.opera) {
+        browser.opera = parseInt(win.opera.version(), 10);
+    }
+
     /**
      * Block for gathering and providing UserAgent information
      */
@@ -38,10 +46,12 @@
                 self.hiDpi && _this.setMod('hi-dpi', 'yes');
             }
         }
-
     }, {
         dpr: devicePixelRatio,
-        hiDpi: isHiDpi
+        hiDpi: isHiDpi,
+        ua: ua,
+        ie: browser.ie,
+        opera: browser.opera
     });
 
-})(window);
+})(window, navigator.userAgent);
