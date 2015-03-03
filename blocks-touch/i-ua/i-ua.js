@@ -29,9 +29,7 @@
         platform.other = true;
     }
 
-    if (window.opera) {
-        browser.opera = window.opera.version();
-    } else if (match = ua.match(/\s(CrMo|Chrome)\/([\d.]+)/)) {
+    if (match = ua.match(/\s(CrMo|Chrome)\/([\d.]+)/)) {
         browser.chrome = match[2];
     }
 
@@ -138,8 +136,6 @@
         }
 
     },{
-
-        ua: ua,
         ios: platform.ios,
         iphone: device.iphone,
         ipad: device.ipad,
@@ -147,7 +143,6 @@
         bada: platform.bada,
         wp: platform.wp,
         other: platform.other,
-        opera: browser.opera,
         chrome: browser.chrome,
         screenSize: screen.width > 320 ? 'large' : screen.width < 320 ? 'small' : 'normal',
         connection: support.connection,
@@ -157,7 +152,6 @@
         width: win.innerWidth,
         height: win.innerHeight,
         landscape: lastOrient
-
     });
 
 })(window, navigator.userAgent);
