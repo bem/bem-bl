@@ -1,1 +1,0 @@
-Plugin for decoration URI-escaped string into CP1251

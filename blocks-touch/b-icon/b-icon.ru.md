@@ -2,16 +2,16 @@
 
 ```
 {
-	block: 'b-icon'
+	block: 'b-icon',
+	url: '/url'
 }
 ```
 
 Представление блока в HTML, после BEMHTML-преобразования:
 
 ```
-<img class="b-icon" src="//yandex.st/lego/_/La6qi18Z8LwgnZdsAr1qy1GwCwo.gif" alt=""/>
+<img class="b-icon" src="/url"/></div>
 ```
-По умолчанию тег `<img>` выводит картинку с однопиксельным прозрачным .gif и пустым атрибутом `alt`.
 
 Использовать блок можно двумя способами:
 

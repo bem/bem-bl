@@ -1,1 +1,0 @@
-Provides methods for work with DOM tree

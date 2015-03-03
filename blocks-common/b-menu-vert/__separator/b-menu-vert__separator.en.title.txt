@@ -1,1 +1,0 @@
-Visual separator between the menu items

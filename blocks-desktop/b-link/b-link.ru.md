@@ -28,11 +28,9 @@
 В результате BEMHTML-преобразований свойство `url` трансформируется в атрибут `href`. Свойства `title` и `target` — в соответствующие атрибуты.
 
 ```
-<!DOCTYPE html>
-	<body class="b-page b-page__body">
-      <div class="b-page__body-i"><a class="b-link" href="http://company.yandex.ru" target="_blank" title="Click here to learn more">The best company all over the world</a></div>
-   </body>
-</html>
+<a class="b-link" href="http://company.yandex.ru" target="_blank" title="Click here to learn more">
+   The best company all over the world
+</a>
 ```
 ##Элементы блока
 

@@ -1,1 +1,0 @@
-Connect jQuery library to the page

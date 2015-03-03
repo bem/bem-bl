@@ -1,1 +1,0 @@
-The block for work with text and global style rules
