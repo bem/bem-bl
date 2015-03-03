@@ -2,30 +2,30 @@
 
 ```
 {
-	block: 'b-icon'
+	block: 'b-icon',
+	url: '/url'
 }
 ```
 
 Представление блока в HTML, после BEMHTML-преобразования:
 
 ```
-<img class="b-icon" src="//yandex.st/lego/_/La6qi18Z8LwgnZdsAr1qy1GwCwo.gif" alt=""/>
+<img class="b-icon" src="/url"/></div>
 ```
-По умолчанию тег `<img>` выводит картинку с однопиксельным прозрачным .gif и пустым атрибутом `alt`.
 
 Использовать блок можно двумя способами:
 
-* через url  
+* через url
 * через модификатор
 
 ###Использование блока через url
 
 Задаем в атрибуте url свой путь к изображению, BEMJSON:
 
-```
+```bemjson
 {
 	block: 'b-icon',
-	url: 'my-icon.png',
+	url: 'http://yastatic.net/lego/_/ExOJSanIrX2IAis4l5gO2uX6M1E.png',
 	alt: 'My icon'
 }
 ```
@@ -35,7 +35,7 @@
 
 Добавляем блоку модификатор, BEMJSON:
 
-```
+```bemjson
 {
 	block: 'b-icon',
 	mods: { type: 'simple' },
@@ -59,5 +59,5 @@
 
 ##Модификаторы
 
-###_size-*  
+###_size-*
 Позволяют отображать специконки различных размеров.
