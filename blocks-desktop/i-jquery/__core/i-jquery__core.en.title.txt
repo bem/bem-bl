@@ -1,1 +1,0 @@
-Element, which includes jQuery library on a page
