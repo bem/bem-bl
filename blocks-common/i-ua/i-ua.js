@@ -37,6 +37,14 @@
         browser.opera = parseInt(win.opera.version(), 10);
     }
 
+    var browser = {};
+
+    if(/msie|trident/i.test(ua)) {
+        browser.ie = parseInt(ua.split(/msie|rv:/i)[1], 10);
+    } else if (win.opera) {
+        browser.opera = parseInt(win.opera.version(), 10);
+    }
+
     /**
      * Block for gathering and providing UserAgent information
      */

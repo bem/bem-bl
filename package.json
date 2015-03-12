@@ -1,10 +1,7 @@
 {
   "name": "bem-bl",
-  "version": "0.0.0",
-  "repository": {
-    "type": "git",
-    "url": "git://github.com/bem/bem-bl.git"
-  },
+  "version": "2.7.0",
+  "private": true,
   "dependencies": {
     "xjst": "~0.10.0",
     "ometajs": "~3.3.5",
@@ -15,23 +12,15 @@
     "bem-environ": "~1.4.0"
   },
   "devDependencies": {
+    "bem-sets": "~0.2.2",
     "mocha": "1.2.x",
     "benchmark": "~1.0.0",
     "microtime": "~0.3.1",
-    "vow": "0.4.4",
-    "bem-naming": "0.3.0",
-    "enb": "0.13.9",
-    "enb-bem-techs": "0.1.0-rc",
-    "enb-bem-i18n": "0.1.1",
-    "enb-bem-docs": "0.6.3",
-    "enb-bem-examples": "0.5.2",
-    "enb-xjst": "1.2.0",
-    "bem-bl-xjst": "2.0.3",
-    "enb-borschik": "1.1.1",
-    "borschik-tech-cleancss": "1.0.3"
+    "bem": "0.8.x"
   },
   "scripts": {
     "test": "mocha --ui tdd --growl --reporter spec blocks-common/i-bem/__html/test/*-test.js blocks-common/i-bem/__i18n/test/test-*.js",
-    "build": "enb make __magic__ desktop.examples desktop.docs touch-pad.examples touch-pad.docs touch-phone.examples touch-phone.docs"
+    "deps": "bem make libs",
+    "build": "bem make sets --no-colors"
   }
 }
