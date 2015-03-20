@@ -936,7 +936,7 @@ applyCtx(newctx)
     <th>Действие</th>
 </tr>
 <tr>
-    <td><b>БЭМ-сущность</b>(блок или элемент)</td>
+    <td><b>БЭМ-сущность</b> (блок или элемент)</td>
     <td>Выставление значений в служебных полях контекста (<code>block elem mods elemMods ctx position</code>)
     и вызов шаблонов по моде <code>default</code>.</td>
 </tr>
@@ -2111,9 +2111,6 @@ block input {
 <a id="sources"></a>
 
 ### Источники
-
-Сборник видео:
-[http://clubs.ya.ru/bem/posts.xml?tag=64664080](http://clubs.ya.ru/bem/posts.xml?tag=64664080)
 
 Рассказ на пЯТЬнице про BEMHTML:
 [http://clubs.ya.ru/bem/replies.xml?item_no=898](http://clubs.ya.ru/bem/replies.xml?item_no=898)
