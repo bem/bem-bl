@@ -1996,26 +1996,3 @@ block input {
 ### References
 
 bem-bl: [http://bem.github.io/bem-bl/index.en.html](http://bem.github.io/bem-bl/index.en.html)
-
-**Russian only:**
-
-Collection of video:
-[http://clubs.ya.ru/bem/posts.xml?tag=64664079](http://clubs.ya.ru/bem/posts.xml?tag=64664080)
-
-A talk about BEMHTML:
-[http://clubs.ya.ru/bem/replies.xml?item_no=898](http://clubs.ya.ru/bem/replies.xml?item_no=898)
-
-A talk about XJST:
-[http://clubs.ya.ru/bem/replies.xml?item_no=899](http://clubs.ya.ru/bem/replies.xml?item_no=899)
-
-"BEMHTML. Not yet another templating engine".
-What makes BEMHTML different from hundreds of other templating engines, and why we are using it
-[http://clubs.ya.ru/bem/replies.xml?item_no=1153](http://clubs.ya.ru/bem/replies.xml?item_no=1153)
-[http://clubs.ya.ru/bem/replies.xml?item_no=1172](http://clubs.ya.ru/bem/replies.xml?item_no=1172)
-
-A templating engine that works with multiple levels
-[http://clubs.ya.ru/bem/replies.xml?item_no=1391](http://clubs.ya.ru/bem/replies.xml?item_no=1391)
-
-Preliminary documentation
-[http://clubs.ya.ru/bem/replies.xml?item_no=992](http://clubs.ya.ru/bem/replies.xml?item_no=992)
-[http://bem.github.com/bem-bl/pages/bemhtml-syntax/bemhtml-syntax.ru.html](http://bem.github.com/bem-bl/pages/bemhtml-syntax/bemhtml-syntax.ru.html)
