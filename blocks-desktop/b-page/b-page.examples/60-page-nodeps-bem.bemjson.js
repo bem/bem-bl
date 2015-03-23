@@ -3,7 +3,7 @@
     title: 'noDeps',
     head: [
         { elem: 'css', url: '_60-page-nodeps-bem.css' },
-        { block: 'i-jquery', elem: 'core' },
+        { block: 'i-jquery', mods: {version: '1.8.3'} },
         { elem: 'js', url: '_60-page-nodeps-bem.js' }
     ],
     content: [

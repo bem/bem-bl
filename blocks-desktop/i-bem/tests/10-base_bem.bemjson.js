@@ -3,7 +3,7 @@
     head: [
         { elem: 'css', url: '_10-base_bem.css', ie: false },
         { elem: 'css', url: '_10-base_bem.ie.css', ie: 'lt IE 8' },
-        { block: 'i-jquery', elem: 'core' },
+        { block: 'i-jquery', mods: {version: '1.8.3'} },
         { elem: 'js', url: '_10-base_bem.js' },
         { elem: 'js', url: '_10-base_bem.test.js' }
     ],

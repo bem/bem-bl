@@ -4,7 +4,7 @@
     head: [
         { elem: 'css', url: '_10-i-ua.css' },
         { elem: 'css', url: '_10-i-ua.ie.css', ie: 'lt IE 8' },
-        { block: 'i-jquery', elem: 'core' },
+        { block: 'i-jquery', mods: {version: '1.8.3'} },
         { elem: 'js', url: '_10-i-ua.js' }
     ],
     content: [

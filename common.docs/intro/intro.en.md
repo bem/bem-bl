@@ -67,7 +67,7 @@ Let's take a look at the source code for the page (`desktop.bundles/test/test.be
         head: [
             { elem: 'css', url: '_test.css', ie: false},
             { elem: 'css', url: '_test', ie: true },
-            { block: 'i-jquery', elem: 'core'},
+            { block: 'i-jquery', mods: {version: '1.8.3'}},
             { elem: 'js', url:'_test.js'},
         ],
         content: [
@@ -101,7 +101,7 @@ Edit the source BEMJSON: `desktop.bundles/test/test.bemjson.js`
         head: [
             { elem: 'css', url: '_test.css', ie: false},
             { elem: 'css', url: '_test', ie: true },
-            { block: 'i-jquery', elem: 'core'},
+            { block: 'i-jquery', mods: {version: '1.8.3'}},
             { elem: 'js', url:'_test.js'},
         ],
         content: [

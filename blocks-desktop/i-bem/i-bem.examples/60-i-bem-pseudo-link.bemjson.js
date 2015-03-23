@@ -4,7 +4,7 @@
     head: [
         { elem: 'css', url: '_60-i-bem-pseudo-link.css', ie: false },
         { elem: 'css', url: '_60-i-bem-pseudo-link.ie.css', ie: 'lt IE 8' },
-        { block: 'i-jquery', elem: 'core' },
+        { block: 'i-jquery', mods: {version: '1.8.3'} },
         { elem: 'js', url: '_60-i-bem-pseudo-link.js' }
     ],
     content: {

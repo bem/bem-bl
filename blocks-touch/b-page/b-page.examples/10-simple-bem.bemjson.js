@@ -17,7 +17,7 @@
         },
         {
             block: 'i-jquery',
-            elem: 'core'
+            mods: {version: '1.8.3'}
         },
         {
             elem: 'js',

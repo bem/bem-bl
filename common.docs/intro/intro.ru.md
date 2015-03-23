@@ -59,7 +59,7 @@
         head: [
             { elem: 'css', url: '_test.css', ie: false},
             { elem: 'css', url: '_test', ie: true },
-            { block: 'i-jquery', elem: 'core'},
+            { block: 'i-jquery', mods: {version: '1.8.3'}},
             { elem: 'js', url:'_test.js'},
         ],
         content: [
@@ -93,7 +93,7 @@
         head: [
             { elem: 'css', url: '_test.css', ie: false},
             { elem: 'css', url: '_test', ie: true },
-            { block: 'i-jquery', elem: 'core'},
+            { block: 'i-jquery', mods: {version: '1.8.3'}},
             { elem: 'js', url:'_test.js'},
         ],
         content: [

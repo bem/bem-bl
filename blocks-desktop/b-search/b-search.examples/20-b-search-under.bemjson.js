@@ -3,7 +3,7 @@
     title: 'b-search with under row',
     head: [
         { elem: 'css', url: '_20-b-search-under.css' },
-        { block: 'i-jquery', elem: 'core' },
+        { block: 'i-jquery', mods: {version: '1.8.3'} },
         { elem: 'js', url: '_20-b-search-under.js' }
     ],
     content: {

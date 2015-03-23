@@ -5,7 +5,7 @@
     head: [
         { elem: 'css', url: '_40-b-link-dynamic-pseudo.css', ie: false  },
         { elem: 'css', url: '_40-b-link-dynamic-pseudo.ie.css', ie: 'lt IE 8' },
-        { block: 'i-jquery', elem: 'core'},
+        { block: 'i-jquery', mods: {version: '1.8.3'}},
         { elem: 'js', url: '_40-b-link-dynamic-pseudo.js' }
     ],
     content: [

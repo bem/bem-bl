@@ -4,7 +4,7 @@
     head: [
         { elem: 'css', url: '_30-b-link-inner.css' },
         { elem: 'css', url: '_30-b-link-inner.ie.css', ie: true },
-        { block: 'i-jquery', elem: 'core' },
+        { block: 'i-jquery', mods: {version: '1.8.3'} },
         { elem: 'js', url: '_30-b-link-inner.js' }
     ],
     content: [
