@@ -1,5 +1,3 @@
-(function(){
-
 /**
  * The block's BEM declaration can state which block (a block with a modifier or a block with a specific modifier value) 
  * a given JavaScript component refers to. 
@@ -40,5 +38,3 @@ BEM.DOM.decl('b-square', {
     }
 
 });
-
-}());
