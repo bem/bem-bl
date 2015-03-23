@@ -1,4 +1,3 @@
-
 (function(w) {
     if (w.requestAnimationFrame) return;
     if ((w.requestAnimationFrame = w.webkitRequestAnimationFrame) &&
