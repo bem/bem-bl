@@ -1,8 +1,6 @@
 /** @requires BEM */
 /** @requires BEM.DOM */
 
-(function(){
-
 BEM.DOM.decl('b-square', {
 
     onSetMod : {
@@ -25,5 +23,3 @@ BEM.DOM.decl('b-square', {
     }
 
 });
-
-}());

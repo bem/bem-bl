@@ -1,9 +1,4 @@
 /**
- * @module b-menu-vert
- */
-(function() {
-
-/**
  * @exports
  * @class b-menu-vert
  */
@@ -69,5 +64,3 @@ BEM.DOM.decl({ name: 'b-menu-vert', baseBlock: 'i-menu' }, /** @lends b-menu-ver
     }
 
 });
-
-})();

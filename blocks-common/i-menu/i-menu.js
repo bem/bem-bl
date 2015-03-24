@@ -1,9 +1,4 @@
 /**
- * @module i-menu
- */
-(function() {
-
-/**
  * Abstract menu (helper)
  *
  * @exports
@@ -59,5 +54,3 @@ BEM.DOM.decl('i-menu', /** @lends i-menu.prototype */{
     }
 
 });
-
-})();
