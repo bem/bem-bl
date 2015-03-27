@@ -81,7 +81,7 @@ Here we are using the block `b-page` form the library `bem-bl`.
 the project.  After the first `build process` is complete these libraries are cloned 
 to the project directory and we can use and modify its blocks.**
 
-To see the result browse to: (http://localhost:8080/desktop.bundles/test/test.html)
+To see the result browse to: `http://localhost:8080/desktop.bundles/test/test.html`
 
 ## More information:
   * [Library bem-bl](http://bem.github.com/bem-bl/index.en.html);
