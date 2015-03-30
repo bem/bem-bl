@@ -388,13 +388,13 @@ default: {
                         var mixItem = mix[i];
 
                         if (!mixItem) continue;
-
-                        var hasItem = (mixItem.block && (this.block !== v.block || mixItem.block !== this.block)) || this.elem || mixItem.elem,
+                        var hasItem = (mixItem.block && (this.block !== v.block || mixItem.block !== this.block))
+                                || (this.elem && (!mixItem.elemMods && !mixItem.mods))
+                                || mixItem.elem ,
                             block = mixItem.block || mixItem._block || this.block,
                             elem = mixItem.elem || mixItem._elem || this.elem,
                             mods = mixItem.mods || this.mods,
                             elemMods = mixItem.elemMods || {};
-
                         hasItem && buf.push(' ');
                         BEM_.INTERNAL[hasItem? 'buildClasses' : 'buildModsClasses'](
                             block,
