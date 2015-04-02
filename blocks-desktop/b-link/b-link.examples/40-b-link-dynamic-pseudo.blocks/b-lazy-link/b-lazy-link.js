@@ -1,8 +1,6 @@
 /** @requires BEM */
 /** @requires BEM.DOM */
 
-(function() {
-
 BEM.DOM.decl('b-lazy-link', {
 
     onSetMod : {
@@ -21,5 +19,3 @@ BEM.DOM.decl('b-lazy-link', {
     live : false
 
 });
-
-})();

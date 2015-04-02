@@ -1,8 +1,3 @@
-/** @requires BEM */
-/** @requires BEM */
-
-(function() {
-
 /**
  * Abstract menu (helper)
  */
@@ -49,5 +44,3 @@ BEM.DOM.decl('i-menu', {
     }
 
 });
-
-})();
