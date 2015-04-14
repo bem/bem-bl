@@ -12,13 +12,19 @@
     "bem-environ": "~1.4.0"
   },
   "devDependencies": {
+    "bem": "0.8.x",
     "bem-sets": "~0.2.2",
-    "mocha": "1.2.x",
     "benchmark": "~1.0.0",
+    "csscomb": "^3.0.4",
+    "git-hooks": "0.0.10",
+    "jscs": "^1.12.0",
+    "jscs-jsdoc": "^0.4.6",
+    "jshint": "^2.7.0",
     "microtime": "~0.3.1",
-    "bem": "0.8.x"
+    "mocha": "1.2.x"
   },
   "scripts": {
+    "lint": "jshint . && jscs .",
     "test": "mocha --ui tdd --growl --reporter spec blocks-common/i-bem/__html/test/*-test.js blocks-common/i-bem/__i18n/test/test-*.js",
     "deps": "bem make libs",
     "build": "bem make sets --no-colors"

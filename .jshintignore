@@ -1,0 +1,7 @@
+.*
+*.blocks/**/*.i18n/**
+*.examples/**
+*.tests/**
+*.*specs/**
+libs/**
+node_modules/**
