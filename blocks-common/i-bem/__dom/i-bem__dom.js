@@ -51,7 +51,6 @@ var win = $(window),
     MOD_DELIM = INTERNAL.MOD_DELIM,
     ELEM_DELIM = INTERNAL.ELEM_DELIM,
 
-    buildModPostfix = INTERNAL.buildModPostfix,
     buildClass = INTERNAL.buildClass,
 
     slice = Array.prototype.slice,
@@ -806,12 +805,24 @@ var DOM = BEM.DOM = BEM.decl('i-bem__dom', {
             ctx = this.findElem(ctx);
         }
 
-        var _self = this.__self,
-            selector = '.' +
-                names.split(' ').map(function(name) {
-                    return buildClass(_self._name, name, modName, modVal);
-                }).join(',.');
-        return findDomElem(ctx, selector);
+        names = names.split(' ');
+
+        var blockName = this.__self.getName(),
+            keys = names.map(function(name) {
+                return buildClass(blockName, name, modName, modVal);
+            }),
+            isSingleName = keys.length === 1,
+            selector = '.' + (isSingleName? keys[0] : keys.join(',.')),
+            res = findDomElem(ctx, selector);
+
+        // caching results if possible
+        (ctx.length === 1 && this.domElem && this.domElem.length === 1 && ctx[0] === this.domElem[0]) &&
+            keys.forEach(function(key, i) {
+                (this._elemCache[key] = isSingleName? res : res.filter('.' + key))
+                    .__bemElemName = names[i];
+            }, this);
+
+        return res;
 
     },
 
@@ -825,15 +836,8 @@ var DOM = BEM.DOM = BEM.decl('i-bem__dom', {
      */
     _elem : function(name, modName, modVal) {
 
-        var key = name + buildModPostfix(modName, modVal),
-            res;
-
-        if(!(res = this._elemCache[key])) {
-            res = this._elemCache[key] = this.findElem(name, modName, modVal);
-            res.__bemElemName = name;
-        }
-
-        return res;
+        return this._elemCache[buildClass(this.__self.getName(), name, modName, modVal)] ||
+            this.findElem(name, modName, modVal);
 
     },
 
@@ -876,13 +880,10 @@ var DOM = BEM.DOM = BEM.decl('i-bem__dom', {
     dropElemCache : function(names, modName, modVal) {
 
         if(names) {
-            var _this = this,
-                modPostfix = buildModPostfix(modName, modVal);
-            names.indexOf(' ') < 0?
-                delete _this._elemCache[names + modPostfix] :
-                names.split(' ').forEach(function(name) {
-                    delete _this._elemCache[name + modPostfix];
-                });
+            var blockName = this.__self.getName();
+            names.split(' ').forEach(function(name) {
+                delete this._elemCache[buildClass(blockName, name, modName, modVal)];
+            }, this);
         } else {
             this._elemCache = {};
         }
