@@ -2,3 +2,8 @@ block just-random-block, tag: {
   // This was failing before:
   return apply((((this.x) = (1))));
 }
+
+block just-random-block-2, tag: {
+  // This was failing before:
+  return apply('mode', { wtf: true });
+}
