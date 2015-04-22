@@ -1,5 +1,6 @@
 ({
     mustDeps: [
-        { block: 'i-bem', elems: 'dom' }
+        { block: 'i-bem', elems: 'dom' },
+        { block: 'i-ecma', elems: ['array'] }
     ]
 })
