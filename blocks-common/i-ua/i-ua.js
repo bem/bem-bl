@@ -70,7 +70,7 @@
 
                 ['ios', 'android', 'bada', 'wp', 'opera'].some(function(pl) {
                     return self[pl] && (platformName = pl);
-                })
+                });
                 
                 this.setMod('platform', platformName);
 
