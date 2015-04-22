@@ -257,8 +257,8 @@ ometa BEMHTMLLogLocal <: XJSTIdentity {
                     ]):r -> r,
 
   transChanges = [#json transJsonChange*:pairs] -> pairs
-               | [#binop ',' transChanges:left transChange:right] -> {
-                   left.concat([ right ]);
+               | [#binop ',' transChanges:left transChanges:right] -> {
+                   left.concat(right);
                  }
                | [#parens transChanges:r] -> r
                | transChange:r -> [ r ],
