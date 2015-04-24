@@ -189,6 +189,12 @@ var deviceIsIOS = /iP(ad|hone|od)/.test(navigator.userAgent);
  */
 var deviceIsIOS4 = deviceIsIOS && (/OS 4_\d(_\d)?/).test(navigator.userAgent);
 
+/**
+ * ios 7,8 requires native click for links.
+ *
+ * @type boolean
+ */
+var deviceIsIOSWithDoubleTap = deviceIsIOS && (/OS (7|8)_\d/).test(navigator.userAgent);
 
 /**
  * iOS 6.0(+?) requires the target element to be manually derived
@@ -213,6 +219,12 @@ var deviceIsBlackBerry10 = navigator.userAgent.indexOf('BB10') > 0;
 FastClick.prototype.needsClick = function(target) {
     'use strict';
     switch (target.nodeName.toLowerCase()) {
+        case 'a':
+            if(deviceIsIOSWithDoubleTap) {
+                // bem-bl - Prevent opening double tabs
+                return true;
+            }
+        break;
 
         // Don't send a synthetic click to disabled inputs (issue #62)
         case 'button':
