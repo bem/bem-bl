@@ -1,0 +1,8 @@
+{
+  "name": "bem-bl",
+  "version": "2.7.0",
+  "private": true,
+  "homepage": "https://github.com/bem/bem-bl",
+  "description": "Base BEM library",
+  "main": ""
+}
