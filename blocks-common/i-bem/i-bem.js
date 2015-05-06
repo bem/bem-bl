@@ -281,7 +281,7 @@ this.BEM = $.inherit($.observable, /** @lends i-bem.prototype */ {
      * Returns values of modifiers of the block/nested element
      * @protected
      * @param {Object} [elem] Nested element
-     * @param {String} [modName1, ..., modNameN] Modifier names
+     * @param {String} [modName1,...,modNameN] Modifier names
      * @returns {Object} Hash of modifier values
      */
     getMods : function(elem) {
