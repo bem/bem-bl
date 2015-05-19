@@ -764,6 +764,7 @@ var DOM = BEM.DOM = BEM.decl('i-bem__dom', {
      * @param {String} [elemName] Element name
      */
     _afterSetMod : function(modName, modVal, oldModVal, elem, elemName) {
+        if (this._isDestructing) return;
 
         var _self = this.__self,
             classPrefix = _self._buildModClassPrefix(modName, elemName),
