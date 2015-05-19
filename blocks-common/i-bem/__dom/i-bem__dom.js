@@ -191,7 +191,7 @@ function extractParams(domNode) {
     var fn, elem,
         attr = domNode.getAttribute('data-bem');
 
-    if (attr) return JSON.parse(attr);
+    if(attr) return JSON.parse(attr);
 
     fn = domNode.onclick || domNode.ondblclick;
     if(!fn && domNode.tagName.toLowerCase() == 'body') { // LEGO-2027 in FF onclick doesn't work on body
@@ -481,14 +481,14 @@ var DOM = BEM.DOM = BEM.decl('i-bem__dom', {
             currentHeight,
             currentWidth;
 
-        if (event === 'resize') {
+        if(event === 'resize') {
 
             fn = function() {
 
                 var height = win.height(),
                     width = win.width();
 
-                if (currentHeight !== height || currentWidth !== width) {
+                if(currentHeight !== height || currentWidth !== width) {
 
                     currentHeight = height;
                     currentWidth = width;
@@ -764,6 +764,7 @@ var DOM = BEM.DOM = BEM.decl('i-bem__dom', {
      * @param {String} [elemName] Element name
      */
     _afterSetMod : function(modName, modVal, oldModVal, elem, elemName) {
+        if(this._isDestructing) { return; }
 
         var _self = this.__self,
             classPrefix = _self._buildModClassPrefix(modName, elemName),
@@ -1359,7 +1360,7 @@ var DOM = BEM.DOM = BEM.decl('i-bem__dom', {
      */
     liveUnbindFrom : function(elem, event, callback) {
 
-        if (!event || $.isFunction(event)) {
+        if(!event || $.isFunction(event)) {
             callback = event;
             event = elem;
             elem = undefined;
