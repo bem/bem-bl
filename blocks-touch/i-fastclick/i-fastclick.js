@@ -194,7 +194,7 @@ var deviceIsIOS4 = deviceIsIOS && (/OS 4_\d(_\d)?/).test(navigator.userAgent);
  *
  * @type boolean
  */
-var deviceIsIOSWithTargetBlankBug = deviceIsIOS && (/OS (7|8)_\d/).test(navigator.userAgent);
+var deviceIsIOSWithDoubleTap = deviceIsIOS && (/OS (7|8)_\d/).test(navigator.userAgent);
 
 /**
  * iOS 6.0(+?) requires the target element to be manually derived
@@ -220,9 +220,8 @@ FastClick.prototype.needsClick = function(target) {
     'use strict';
     switch (target.nodeName.toLowerCase()) {
         case 'a':
-            if(deviceIsIOSWithTargetBlankBug && target.target === '_blank') {
+            if(deviceIsIOSWithDoubleTap) {
                 // bem-bl - Prevent opening double tabs
-                // https://github.com/ftlabs/fastclick/issues/391
                 return true;
             }
         break;
