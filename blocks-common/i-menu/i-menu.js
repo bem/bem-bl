@@ -1,3 +1,5 @@
+/** @module menu */
+
 /**
  * Abstract menu (helper)
  *

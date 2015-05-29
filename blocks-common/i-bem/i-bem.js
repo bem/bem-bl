@@ -1,27 +1,23 @@
-/**
- * @module i-bem
- */
-
 (function($, undefined) {
 
 /**
  * Storage for deferred functions
  * @private
- * @type Array
+ * @type {Array}
  */
 var afterCurrentEventFns = [],
 
 /**
  * Storage for block declarations (hash by block name)
  * @private
- * @type Object
+ * @type {Object}
  */
     blocks = {},
 
 /**
  * Communication channels
  * @private
- * @type Object
+ * @type {Object}
  */
     channels = {};
 
@@ -84,14 +80,13 @@ function buildCheckMod(modName, modVal) {
 }
 
 /**
- * @exports
- * @class i-bem
+ * @desc Base block for creating BEM blocks
+ * @class BEM
  * @bem
  */
-this.BEM = $.inherit($.observable, /** @lends i-bem.prototype */ {
-
+this.BEM = $.inherit($.observable, /** @lends BEM.prototype */ {
     /**
-     * @class Base block for creating BEM blocks
+     * @constructs
      * @private
      * @param {Object} mods Block modifiers
      * @param {Object} params Block parameters
@@ -134,6 +129,7 @@ this.BEM = $.inherit($.observable, /** @lends i-bem.prototype */ {
     /**
      * Initializes the block
      * @private
+     * @returns {BEM}
      */
     _init : function() {
 
@@ -268,7 +264,7 @@ this.BEM = $.inherit($.observable, /** @lends i-bem.prototype */ {
      * @private
      * @param {String} modName Modifier name
      * @param {Object} elem Nested element
-     * @param {Object} [elem] Nested element name
+     * @param {Object} [elemName] Nested element name
      * @returns {String} Modifier value
      */
     _getElemMod : function(modName, elem, elemName) {
@@ -281,7 +277,7 @@ this.BEM = $.inherit($.observable, /** @lends i-bem.prototype */ {
      * Returns values of modifiers of the block/nested element
      * @protected
      * @param {Object} [elem] Nested element
-     * @param {String} [modName1, ..., modNameN] Modifier names
+     * @param {...String} [modName] Modifier names
      * @returns {Object} Hash of modifier values
      */
     getMods : function(elem) {
@@ -433,6 +429,7 @@ this.BEM = $.inherit($.observable, /** @lends i-bem.prototype */ {
      * @param {String} modName Modifier name
      * @param {String} modVal Modifier value
      * @param {Array} modFnParams Handler parameters
+     * @returns {*|undefined}
      */
     _callModFn : function(elemName, modName, modVal, modFnParams) {
 
@@ -494,6 +491,7 @@ this.BEM = $.inherit($.observable, /** @lends i-bem.prototype */ {
     /**
      * Helper for cleaning up block properties
      * @param {Object} [obj=this]
+     * @returns {BEM}
      */
     del : function(obj) {
 
@@ -509,7 +507,7 @@ this.BEM = $.inherit($.observable, /** @lends i-bem.prototype */ {
      */
     destruct : function() {}
 
-}, /** @lends i-bem */{
+}, /** @lends BEM */ {
 
     _name : 'i-bem',
 
@@ -530,6 +528,7 @@ this.BEM = $.inherit($.observable, /** @lends i-bem.prototype */ {
      * @param {String} [decl.modVal] Modifier value
      * @param {Object} [props] Methods
      * @param {Object} [staticProps] Static methods
+     * @returns {Function}
      */
     decl : function(decl, props, staticProps) {
 
@@ -658,7 +657,7 @@ this.BEM = $.inherit($.observable, /** @lends i-bem.prototype */ {
 
     /**
      * Executes the queue
-     * @private
+     * @protected
      */
     _runAfterCurrentEventFns : function() {
 
@@ -688,6 +687,7 @@ this.BEM = $.inherit($.observable, /** @lends i-bem.prototype */ {
     /**
      * Helper for cleaning out properties
      * @param {Object} [obj=this]
+     * @returns {BEM}
      */
     del : function(obj) {
 
