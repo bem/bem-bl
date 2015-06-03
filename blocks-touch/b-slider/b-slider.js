@@ -64,7 +64,12 @@
         _delayedInit: function() {
 
             var slider = this,
-                images = slider.findBlocksInside('b-icon');
+                bIcons = slider.findBlocksInside('b-icon'),
+                icons = slider.findBlocksInside('icon'),
+                images = slider.findBlocksInside('image');
+
+            // объединяем все возможные блоки-картинки
+            images = images.concat(icons, bIcons);
 
             // если внутри есть картинки (b-icon),
             // то отложить инициализацию  до момента их полной загрузки,
