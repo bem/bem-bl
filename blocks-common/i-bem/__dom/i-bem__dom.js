@@ -1723,3 +1723,30 @@ $(function() {
 });
 
 })(BEM, jQuery);
+
+
+/**
+ * Support for YModules
+ */
+if (typeof modules === 'object') {
+
+    modules.define('i-bem__dom', function(provide) {
+        provide(BEM.DOM);
+    });
+
+    // Implementation from bem-core#2.5.0
+    (function() {
+        var origDefine = modules.define;
+
+        modules.define = function(name, deps, decl) {
+            origDefine.apply(modules, arguments);
+
+            if (name !== 'i-bem__dom_init' && arguments.length > 2 && ~deps.indexOf('i-bem__dom')) {
+                modules.define('i-bem__dom_init', [name], function(provide, _, prev) {
+                    provide(prev);
+                });
+            }
+        };
+    })();
+
+}
