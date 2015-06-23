@@ -19,6 +19,7 @@ block b-page {
                         {
                             elem: 'head',
                             content: [
+                                ctx.csp && this.extend(ctx.csp, { elem: 'csp' }),
                                 {
                                     tag: 'meta',
                                     attrs: { charset: 'utf-8' }
@@ -35,7 +36,6 @@ block b-page {
                                 ctx.meta,
                                 {
                                     block: 'i-ua',
-                                    //WTF: /* special node.js magic: https://github.com/joyent/node/issues/8040 */
                                     attrs: { nonce: ctx.nonce }
                                 },
                                 ctx.head
@@ -45,6 +45,9 @@ block b-page {
                     ]
                 }
             ];
+
+            // For css and js elements and i-jquery, i-ua blocks
+            this._nonce = this.ctx.nonce;
 
         applyCtx(buf);
     }

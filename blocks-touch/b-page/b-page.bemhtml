@@ -1,12 +1,17 @@
 block b-page {
     default: {
         this._buf.push('<!DOCTYPE html>');
+
+        // For css and js elements and i-jquery, i-ua blocks
+        this._nonce = this.ctx.nonce;
+
         applyCtx({
             elem: 'root',
             content: [
                 {
                     elem: 'head',
                     content: [
+                        this.ctx.csp && this.extend(this.ctx.csp, { elem: 'csp', nonce: this.ctx.nonce }),
                         {
                             elem: 'meta',
                             attrs: {
@@ -159,6 +164,9 @@ block b-page {
     elem css {
         bem: false,
         tag: 'style',
+        attrs: {
+            nonce: this.ctx.nonce || this._nonce
+        },
 
         this.ctx.url {
             !this.ctx.ie, !this._notIE, default: {

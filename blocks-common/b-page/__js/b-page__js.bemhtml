@@ -4,6 +4,8 @@ block b-page, elem js {
 
     tag: 'script'
 
-    attrs, this.ctx.url: { src: this.ctx.url }
-
+    attrs: {
+        src: this.ctx.url,
+        nonce: this.ctx.nonce || this._nonce
+    }
 }
