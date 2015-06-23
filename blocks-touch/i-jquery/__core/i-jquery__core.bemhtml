@@ -1,5 +1,6 @@
 block i-jquery, elem core, default: applyCtx({
     block: 'b-page',
     elem: 'js',
+    nonce: this.ctx.nonce || this._nonce,
     url: '//yastatic.net/jquery/1.8.3/jquery.min.js'
 })
