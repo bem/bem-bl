@@ -1,0 +1,37 @@
+block b-page, elem csp {
+
+    bem: false
+
+    tag: 'meta'
+
+    attrs: {
+        'http-equiv': 'Content-Security-Policy',
+        'content': Object.keys(this.ctx.policies).map(function(name) {
+            return name + ' ' + this.ctx.policies[name].join(' ') + ';';
+        }, this).join(' ')
+    }
+
+    default: {
+        var ctx = this.ctx,
+            nonce = this._nonce,
+            defaultPolicies = {
+                'default-src': [ "'self'"]
+            },
+            noncePolicyFields,
+            policies;
+
+        policies = this.extend(defaultPolicies, ctx.policies);
+
+        // Nonce works only with <script> and <style>.
+        // http://www.w3.org/TR/CSP/#script-src-the-nonce-attribute
+        if(nonce) {
+            noncePolicyFields = ['script-src', 'style-src'];
+
+            noncePolicyFields.forEach(function(policy) {
+                policies[policy] = (policies[policy] || []).concat("'nonce-" + nonce + "'");
+            });
+        }
+
+        return applyNext(ctx.policies = policies);
+    }
+}

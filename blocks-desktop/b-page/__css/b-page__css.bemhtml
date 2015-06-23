@@ -4,6 +4,10 @@ block b-page, elem css {
 
     tag: 'style'
 
+    attrs: {
+        nonce: this.ctx.nonce || this._nonce
+    }
+
     default, this.ctx.hasOwnProperty('ie'), !this.ctx._ieCommented: {
         var ie = this.ctx.ie;
         if (ie === true) {
