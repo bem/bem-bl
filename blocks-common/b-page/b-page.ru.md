@@ -287,7 +287,7 @@ module.exports = function(bh) {
 
 В поле `csp` BEMJSON блока. Значение каждой директивы – массив разрешенных источников. Рекомендуемый способ.
 
-```javacsript
+```javascript
 ({
     block: 'b-page',
     csp: {
@@ -296,7 +296,7 @@ module.exports = function(bh) {
                 'from-bemjson.net',
                 'example.com'
             ],
-            style-src': [
+            'style-src': [
                 'mystyle.net'
             ]
         }
@@ -306,7 +306,7 @@ module.exports = function(bh) {
 
 Список источников в каждой директиве можно гибко настроить:
 
-```javacsript
+```javascript
 ({
     block: 'b-page',
     csp: {
@@ -315,7 +315,7 @@ module.exports = function(bh) {
                 'from-bemjson.net',
                 'example.com'
             ],
-            style-src': [
+            'style-src': [
                 'self',
                 'data: example.com'
             ]
@@ -379,10 +379,11 @@ module.exports = function(bh) {
 Передать свое значение `nonce` можно в поле элемента `csp` BEMJSON блока:
 
 ```js
-// TODO: https://st.yandex-team.ru/ISLROMOCHKA-229
 ({
     block: 'b-page',
-    nonce: 'EDNnf03nceIOfn39fn3e9h3sdfa'
+    csp: {
+        nonce: 'EDNnf03nceIOfn39fn3e9h3sdfa'
+    }
 });
 ```
 
