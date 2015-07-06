@@ -7,49 +7,51 @@ block b-page {
         attrs: { 'http-equiv': 'X-UA-Compatible', content: this.ctx['x-ua-compatible'] || 'IE=edge' }
     }
 
-    default: {
-        var ctx = this.ctx,
-            dtype = apply('doctype'),
-            xUA = apply('xUACompatible'),
-            buf = [
-                dtype,
-                {
-                    elem: 'root',
-                    content: [
-                        {
-                            elem: 'head',
-                            content: [
-                                ctx.csp && this.extend(ctx.csp, { elem: 'csp' }),
-                                {
-                                    tag: 'meta',
-                                    attrs: { charset: 'utf-8' }
-                                },
-                                xUA,
-                                {
-                                    tag: 'title',
-                                    content: ctx.title
-                                },
-                                ctx.favicon ? {
-                                    elem: 'favicon',
-                                    url: ctx.favicon
-                                } : '',
-                                ctx.meta,
-                                {
-                                    block: 'i-ua',
-                                    attrs: { nonce: ctx.nonce }
-                                },
-                                ctx.head
-                            ]
-                        },
-                        ctx
-                    ]
-                }
-            ];
+    default, !this._pageInit: {
+        return local({ _pageInit: true })(function() {
+            var ctx = this.ctx,
+                dtype = apply('doctype'),
+                xUA = apply('xUACompatible'),
+                buf = [
+                    dtype,
+                    {
+                        elem: 'root',
+                        content: [
+                            {
+                                elem: 'head',
+                                content: [
+                                    ctx.csp && this.extend(ctx.csp, { elem: 'csp' }),
+                                    {
+                                        tag: 'meta',
+                                        attrs: { charset: 'utf-8' }
+                                    },
+                                    xUA,
+                                    {
+                                        tag: 'title',
+                                        content: ctx.title
+                                    },
+                                    ctx.favicon ? {
+                                        elem: 'favicon',
+                                        url: ctx.favicon
+                                    } : '',
+                                    ctx.meta,
+                                    {
+                                        block: 'i-ua',
+                                        attrs: { nonce: ctx.nonce }
+                                    },
+                                    ctx.head
+                                ]
+                            },
+                            ctx
+                        ]
+                    }
+                ];
 
-            // For css and js elements and i-jquery, i-ua blocks
-            this._nonce = this.ctx.nonce;
+                // For css and js elements and i-jquery, i-ua blocks
+                this._nonce = this.ctx.nonce;
 
-        applyCtx(buf);
+            applyCtx(buf);
+        });
     }
 
     tag: 'body'
