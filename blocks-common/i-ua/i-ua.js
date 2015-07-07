@@ -37,7 +37,9 @@
         device = {},
         match;
 
-    if (match = ua.match(/Android\s+([\d.]+)/)) {
+    if (match = ua.match(/Windows\sPhone[^\d]*\s([\d.]+)/)) {
+        platform.wp = match[1];
+    } else if (match = ua.match(/Android\s+([\d.]+)/)) {
         platform.android = match[1];
     } else if (ua.match(/\sHTC[\s_].*AppleWebKit/)) {
         // фэйковый десктопный UA по умолчанию у некоторых HTC (например, HTC Sensation)
@@ -50,8 +52,6 @@
         device.ipad = true;
     } else if (match = ua.match(/Bada\/([\d.]+)/)) {
         platform.bada = match[1];
-    } else if (match = ua.match(/Windows\sPhone[^\d]*\s([\d.]+)/)) {
-        platform.wp = match[1];
     } else if (match = ua.match(/MSIE\s9/)) {
         platform.wp = '7.5';
     } else {
