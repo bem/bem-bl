@@ -57,14 +57,18 @@ function override(base, result, add) {
         if($.isFunction(prop) &&
            (!hasIntrospection || prop.toString().indexOf('.__base') > -1)) {
 
-            var baseMethod = base[name] || function() {};
-            result[name] = function() {
-                var baseSaved = this.__base;
-                this.__base = baseMethod;
-                var result = prop.apply(this, arguments);
-                this.__base = baseSaved;
-                return result;
-            };
+            var baseMethod = base[name] || function() {},
+                wrapper = function() {
+                    var baseSaved = this.__base;
+                    this.__base = baseMethod;
+                    var result = prop.apply(this, arguments);
+                    this.__base = baseSaved;
+                    return result;
+                };
+
+            for (var functionProperty in prop) {
+                wrapper[functionProperty] = prop[functionProperty];
+            }
 
         }
         else {
