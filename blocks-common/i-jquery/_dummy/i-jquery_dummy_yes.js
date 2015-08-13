@@ -1,5 +1,8 @@
 (function( window, undefined ) {
-
+/**
+ * @deprecated Will be removed in the next major version.
+ * If you need this code, please copy it to your project level.
+ */
 if(window.jQuery) return;
 
 // Define a local copy of jQuery
