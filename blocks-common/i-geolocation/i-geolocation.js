@@ -10,6 +10,16 @@ BEM.DOM.decl('i-geolocation', {}, {
             params = {};
         }
 
+        params = $.extend({
+            enableHighAccuracy: true, // получение координат с высокой точностью при наличии полноценного GPS
+            timeout: 15, // таймаут 15 секунд
+            cacheTime: 15 // геолокационный кэш на 15 минут
+        }, params);
+
+        params.timeout *= 1000;
+        params.maximumAge = params.cacheTime * 1000 * 60;
+        delete params.cacheTime;
+
         if ('geolocation' in navigator) {
             navigator.geolocation.getCurrentPosition(
                 function(data) {
@@ -25,15 +35,7 @@ BEM.DOM.decl('i-geolocation', {}, {
                         error: error.code + 1
                     });
                 },
-                // параметры
-                {
-                    // получение координат с высокой точностью при наличии полноценного GPS
-                    enableHighAccuracy: params.hasOwnProperty('enableHighAccuracy') ? params.enableHighAccuracy : true,
-                    // таймаут 15 секунд
-                    timeout: params.timeout * 1000 || 15000,
-                    // геолокационный кэш на 15 минут
-                    maximumAge: params.cacheTime * 60000 || 900000
-                }
+                params
             );
         } else {
             callback({
