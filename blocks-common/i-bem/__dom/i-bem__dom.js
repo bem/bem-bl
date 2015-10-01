@@ -241,7 +241,7 @@ function getClientNode() {
 /**
  * Returns a block on a DOM element and initializes it if necessary
  * @param {String} blockName Block name
- * @param {Object} params Block parameters
+ * @param {Object} [params] Block parameters
  * @returns {BEM}
  */
 $.fn.bem = function(blockName, params) {
