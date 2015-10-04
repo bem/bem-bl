@@ -1,0 +1,68 @@
+{
+    "plugins": [
+        "jscs-jsdoc"
+    ],
+    "excludeFiles": [
+        ".*",
+        "*.blocks/**/*.i18n/**",
+        "*.examples/**",
+        "*.bundles/**",
+        "*.sets/**",
+        "*.docs/**",
+        "*.tests",
+        "*.*specs/**",
+        "libs/**",
+        "node_modules"
+    ],
+    "requireCurlyBraces": ["if", "else", "for", "while", "do"],
+    "requireSpaceAfterKeywords": ["do", "else"],
+    "disallowSpaceAfterKeywords": ["if", "for", "while", "switch"],
+    "disallowSpacesInFunction": {
+        "beforeOpeningRoundBrace": true
+    },
+    "requireParenthesesAroundIIFE": true,
+    "disallowSpacesInsideArrayBrackets": true,
+    "disallowSpacesInsideObjectBrackets": true,
+    "disallowSpaceAfterObjectKeys": true,
+    "requireSpaceBeforeObjectValues": true,
+    "disallowSpaceAfterPrefixUnaryOperators": ["++", "--", "+", "-", "~", "!"],
+    "disallowSpaceBeforePostfixUnaryOperators": ["++", "--"],
+    "disallowSpaceBeforeBinaryOperators": [","],
+    "requireSpaceBeforeBinaryOperators": ["+", "-", "/", "*", "=", "==", "===", "!=", "!==", ">", ">=", "<", "<=", "&&", "||"],
+    "requireSpaceAfterBinaryOperators": [",", "+", "-", "/", "*", "=", "==", "===", "!=", "!==", ">", ">=", "<", "<=", "&&", "||"],
+    "requireSpaceBeforeBlockStatements": true,
+    "disallowKeywords": ["with"],
+    "disallowMultipleLineBreaks": true,
+    "disallowKeywordsOnNewLine": ["else"],
+    "requireCapitalizedConstructors": true,
+    "requireLineFeedAtFileEnd": true,
+    "disallowTrailingWhitespace": true,
+    "disallowTrailingComma": true,
+    "requireSpacesInConditionalExpression": {
+        "afterTest": true,
+        "beforeConsequent": true,
+        "afterConsequent": true,
+        "beforeAlternate": true
+    },
+    "requireSpaceAfterLineComment": { "allExcept": ["#", "="] },
+    "jsDoc": {
+        "checkAnnotations": {
+            "preset": "jsdoc3",
+            "extra": {
+                "block": true,
+                "mod": true,
+                "val": true,
+                "final": false,
+                "override": false // temporary
+            }
+        },
+        "checkParamNames": true,
+        "requireParamTypes": true,
+        "checkRedundantParams": true,
+        "checkReturnTypes": true,
+        "checkRedundantReturns": true,
+        "requireReturnTypes": true,
+        "checkTypes": "capitalizedNativeCase",
+        "leadingUnderscoreAccess": true
+    }
+}
