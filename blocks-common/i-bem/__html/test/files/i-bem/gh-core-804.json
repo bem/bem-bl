@@ -1,0 +1,60 @@
+[
+{
+  "block": "b1",
+  "mix": {
+    "block": "b1",
+    "mods": { "m1": "v1" }
+  }
+},
+{
+  "block": "b1",
+  "mix": {"mods": {"m1": "v1"}}
+},
+{
+  "block": "b1",
+  "mix": {
+    "block": "b2",
+    "mods": { "m1": "v1" }
+  }
+},
+{
+  "block": "b1",
+  "elem": "e1",
+  "mix": [{ "block": "b1" }]
+},
+{
+  "block": "b2",
+  "mix": [{ "block": "b1", "elem": "e1" }]
+},
+{
+  "block": "b1",
+  "mix": {"elem": "e1"}
+},
+{
+  "block": "b1",
+  "elem": "e1",
+  "mix": {"elemMods": {"m1": "v1"}}
+},
+{
+  "block": "b1",
+  "elem": "e1",
+  "mix": {"mods": {"m1": "v1"}}
+},
+{
+  "block": "b1",
+  "elem": "e1",
+  "mix": {"elem": "e2", "elemMods": {"m2": "v2"}}
+},
+{
+  "block": "b1",
+  "elem": "e1",
+  "elemMods": {"m1": "v1"},
+  "mix": {"elem": "e2", "elemMods": {"m2": "v2"}}
+},
+{
+  "block": "b1",
+  "elem": "e1",
+  "elemMods": {"m1": "v1"},
+  "mix": {"elem": "e2"}
+}
+]
