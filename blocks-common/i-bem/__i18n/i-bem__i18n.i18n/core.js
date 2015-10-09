@@ -139,7 +139,7 @@ _i18n.prototype = {
         var valtype = typeof value;
         if(valtype === 'undefined') {
             log("[I18N_NO_VALUE] %s", debugString);
-            return '';
+            return this._key;
         }
 
         if(valtype === 'string') {
