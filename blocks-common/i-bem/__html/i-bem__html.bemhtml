@@ -472,6 +472,7 @@ default: {
         var content = apply(this._mode = 'content');
         if(content || content === 0) {
             var isBEM = this.block || this.elem;
+            resetApplyNext();
             apply(
                 this._notNewList = false,
                 this.position = isBEM ? 1 : this.position,
