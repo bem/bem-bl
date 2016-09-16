@@ -61,10 +61,17 @@ var win = $(window),
  * @private
  * @param {jQuery} domElem DOM element
  * @param {String} uniqInitId ID of the "initialization wave"
+ * @param {Array} [blocksForInit] Specify subset of blocks for initialization
  */
-function init(domElem, uniqInitId) {
+function init(domElem, uniqInitId, blocksForInit) {
+
+    blocksForInit && (blocksForInit = blocksForInit.reduce(function(res, blockName) {
+        res[blockName] = blockName;
+        return res;
+    }, {}));
 
     var domNode = domElem[0];
+
     $.each(getParams(domNode), function(blockName, params) {
         processParams(params, domNode, blockName, uniqInitId);
         var block = uniqIdToBlock[params.uniqId];
@@ -74,7 +81,8 @@ function init(domElem, uniqInitId) {
                 $.extend(block._params, params);
             }
         } else {
-            initBlock(blockName, domElem, params);
+            (!blocksForInit || blocksForInit.hasOwnProperty(blockName))
+                && initBlock(blockName, domElem, params);
         }
     });
 
@@ -1050,19 +1058,35 @@ var DOM = BEM.DOM = BEM.decl('i-bem__dom', {
      * @static
      * @protected
      * @param {jQuery} [ctx=document] Root DOM node
+     * @param {Array} [blocksForInit] Specify subset of blocks for initialization
+     * @param {Function} [callback] Callback
+     * @param {Object} [callbackCtx] Callback context
      * @returns {jQuery} ctx Initialization context
      */
-    init : function(ctx, callback, callbackCtx) {
+    init : function(ctx, blocksForInit, callback, callbackCtx) {
 
-        if(!ctx || $.isFunction(ctx)) {
-            callbackCtx = callback;
-            callback = ctx;
+        if(!ctx || $.isFunction(ctx) || Array.isArray(ctx)) {
+            if(Array.isArray(ctx)) {
+                callbackCtx = callback;
+                callback = blocksForInit;
+                blocksForInit = ctx;
+            } else if($.isFunction(ctx)) {
+                callback = ctx;
+                callbackCtx = blocksForInit;
+                blocksForInit = undefined;
+            }
             ctx = doc;
+        }
+
+        if($.isFunction(blocksForInit)) {
+            callbackCtx = callback;
+            callback = blocksForInit;
+            blocksForInit = undefined;
         }
 
         var uniqInitId = $.identify();
         findDomElem(ctx, '.i-bem').each(function() {
-            init($(this), uniqInitId);
+            init($(this), uniqInitId, blocksForInit);
         });
 
         callback && this.afterCurrentEvent(
