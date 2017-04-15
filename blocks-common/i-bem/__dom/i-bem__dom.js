@@ -449,6 +449,34 @@ var DOM = BEM.DOM = BEM.decl('i-bem__dom',/** @lends BEM.DOM.prototype */{
      */
     bindToDoc : function(event, fn) {
 
+        var _fn = fn,
+            currentHeight,
+            currentWidth,
+            win;
+
+        if (event === 'resize') {
+
+            win = $(window);
+
+            fn = function() {
+
+                var height = win.height(),
+                    width = win.width();
+
+                if (currentHeight !== height || currentWidth !== width) {
+
+                    currentHeight = height;
+                    currentWidth = width;
+
+                    _fn.apply(this, arguments);
+
+                }
+
+
+            }
+
+        }
+
         this._needSpecialUnbind = true;
         return this.bindToDomElem(doc, event, fn);
 
