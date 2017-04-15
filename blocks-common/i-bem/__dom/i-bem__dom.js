@@ -402,7 +402,13 @@ var DOM = BEM.DOM = BEM.decl('i-bem__dom',  /** @lends BEM.DOM.prototype */ {
                     buildClass(blockName) :
                     buildClass(blockName, block.modName, block.modVal)) +
                 (onlyFirst? ':first' : ''),
-            domElems = ctxElem.filter(selector);
+        domElems;
+
+        if (!ctxElem) {
+            return [];
+        }
+
+        domElems = ctxElem.filter(selector);
 
         select && (domElems = domElems.add(ctxElem[select](selector)));
 
