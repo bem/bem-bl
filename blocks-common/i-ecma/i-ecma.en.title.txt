@@ -1,0 +1,1 @@
+Some of ES5 methods realization

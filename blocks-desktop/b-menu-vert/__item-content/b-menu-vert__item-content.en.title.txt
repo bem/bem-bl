@@ -1,0 +1,1 @@
+Element, toggled by clicks
