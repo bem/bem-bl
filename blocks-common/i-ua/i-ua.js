@@ -37,6 +37,31 @@
         browser.opera = parseInt(win.opera.version(), 10);
     }
 
+    var platform = {},
+        device = {},
+        match;
+
+    if (match = ua.match(/Android\s+([\d.]+)/)) {
+        platform.android = match[1];
+    } else if (ua.match(/\sHTC[\s_].*AppleWebKit/)) {
+        // фэйковый десктопный UA по умолчанию у некоторых HTC (например, HTC Sensation)
+        platform.android = '2.3';
+    } else if (match = ua.match(/iPhone\sOS\s([\d_]+)/)) {
+        platform.ios = match[1].replace(/_/g, '.');
+        device.iphone = true;
+    } else if (match = ua.match(/iPad.*OS\s([\d_]+)/)) {
+        platform.ios = match[1].replace(/_/g, '.');
+        device.ipad = true;
+    } else if (match = ua.match(/Bada\/([\d.]+)/)) {
+        platform.bada = match[1];
+    } else if (match = ua.match(/Windows\sPhone[^\d]*\s([\d.]+)/)) {
+        platform.wp = match[1];
+    } else if (match = ua.match(/MSIE\s9/)) {
+        platform.wp = '7.5';
+    } else {
+        platform.other = true;
+    }
+
     /**
      * Block for gathering and providing UserAgent information
      */
@@ -44,13 +69,28 @@
 
         onSetMod: {
             js: function() {
-                var _this = this,
-                    self = _this.__self;
+                var self = this.__self;
 
-                self.hiDpi && _this.setMod('hi-dpi', 'yes');
+                this.setMod('platform',
+                    self.ios ? 'ios' :
+                    self.android ? 'android' :
+                    self.bada ? 'bada' :
+                    self.wp ? 'wp' :
+                    self.opera ? 'opera' :
+                    'other'
+                );
+
+                self.hiDpi && this.setMod('hi-dpi', 'yes');
             }
         }
     }, {
+        ios: platform.ios,
+        iphone: device.iphone,
+        ipad: device.ipad,
+        android: platform.android,
+        bada: platform.bada,
+        wp: platform.wp,
+        other: platform.other,
         dpr: devicePixelRatio,
         hiDpi: isHiDpi,
         ua: ua,

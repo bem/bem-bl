@@ -1,33 +1,10 @@
 (function(win, ua) {
 
-    var platform = {},
-        browser = {},
-        device = {},
+    var browser = {},
         support = {},
         match,
         lastOrient = (win.innerWidth > win.innerHeight),
         lastWidth = win.innerWidth;
-
-    if (match = ua.match(/Android\s+([\d.]+)/)) {
-        platform.android = match[1];
-    } else if (ua.match(/\sHTC[\s_].*AppleWebKit/)) {
-        // фэйковый десктопный UA по умолчанию у некоторых HTC (например, HTC Sensation)
-        platform.android = '2.3';
-    } else if (match = ua.match(/iPhone\sOS\s([\d_]+)/)) {
-        platform.ios = match[1].replace(/_/g, '.');
-        device.iphone = true;
-    } else if (match = ua.match(/iPad.*OS\s([\d_]+)/)) {
-        platform.ios = match[1].replace(/_/g, '.');
-        device.ipad = true;
-    } else if (match = ua.match(/Bada\/([\d.]+)/)) {
-        platform.bada = match[1];
-    } else if (match = ua.match(/Windows\sPhone[^\d]*\s([\d.]+)/)) {
-        platform.wp = match[1];
-    } else if (match = ua.match(/MSIE\s9/)) {
-        platform.wp = '7.5';
-    } else {
-        platform.other = true;
-    }
 
     if (match = ua.match(/\s(CrMo|Chrome)\/([\d.]+)/)) {
         browser.chrome = match[2];
@@ -102,14 +79,6 @@
                     html = document.querySelector('html');
 
                 that
-                    .setMod('platform',
-                        self.ios ? 'ios' :
-                        self.android ? 'android' :
-                        self.bada ? 'bada' :
-                        self.wp ? 'wp' :
-                        self.opera ? 'opera' :
-                        'other'
-                    )
                     .setMod('browser',
                         self.opera ? 'opera' :
                         self.chrome ? 'chrome' :
@@ -136,13 +105,6 @@
         }
 
     },{
-        ios: platform.ios,
-        iphone: device.iphone,
-        ipad: device.ipad,
-        android: platform.android,
-        bada: platform.bada,
-        wp: platform.wp,
-        other: platform.other,
         chrome: browser.chrome,
         screenSize: screen.width > 320 ? 'large' : screen.width < 320 ? 'small' : 'normal',
         connection: support.connection,
