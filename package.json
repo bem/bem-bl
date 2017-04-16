@@ -1,6 +1,7 @@
 {
   "name": "bem-bl",
   "version": "0.0.0",
+  "private": true,
   "repository": {
     "type": "git",
     "url": "git://github.com/bem/bem-bl.git"
