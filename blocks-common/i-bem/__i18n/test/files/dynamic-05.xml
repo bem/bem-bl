@@ -1,0 +1,3 @@
+У вас <i18n:param>count</i18n:param> <i18n:dynamic keyset="user" key="letter">
+<i18n:count><i18n:param>count</i18n:param></i18n:count>
+</i18n:dynamic> и это здорово
