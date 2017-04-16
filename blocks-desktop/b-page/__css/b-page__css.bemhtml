@@ -6,10 +6,13 @@ block b-page, elem css {
 
     default, this.ctx.hasOwnProperty('ie'), !this.ctx._ieCommented: {
         var ie = this.ctx.ie;
-        if (ie === true) {
+        if (ie) {
+            if (ie === true || !Array.isArray(ie)) {
+                ie = [6, 7, 8, 9];
+            }
             apply(
                 this._mode = '',
-                this.ctx = [6, 7, 8, 9].map(function(v) {
+                this.ctx = ie.map(function(v) {
                     return { elem: 'css', url: this.ctx.url + '.ie' + v + '.css', ie: 'IE ' + v } }, this)
             );
         } else {
