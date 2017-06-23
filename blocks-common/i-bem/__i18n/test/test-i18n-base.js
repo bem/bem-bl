@@ -69,6 +69,13 @@ suite('BEM.I18N Simple test', function() {
 
         }, { "lang" : "ru" });
 
+
+        BEM.I18N.decl('i-keyset-0', {
+
+            "key1" : "Ключ1Кастом"
+
+        }, { "lang" : "custom" });
+
     });
 
     test('Simple', function() {
@@ -85,6 +92,16 @@ suite('BEM.I18N Simple test', function() {
 
     test('Complect dynamic with dynamic value as param', function() {
         assert.equal('Ключ1 : Ключ1', BEM.I18N('i-keyset-2', 'key', { }));
+    });
+
+    test('Simple language redeclaration', function() {
+        BEM.I18N.lang('custom');
+        assert.equal('Ключ1Кастом', BEM.I18N('i-keyset-0', 'key1'));
+    });
+
+    test('Simple as a fallback language in the default', function() {
+        BEM.I18N.lang('custom');
+        assert.equal('Ключ2', BEM.I18N('i-keyset-0', 'key2'));
     });
 
 });
