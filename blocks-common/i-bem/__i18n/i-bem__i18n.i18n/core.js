@@ -201,12 +201,22 @@ bem_.I18N = (function(base) {
     klass.key = function(name, params) {
         var proto = this._proto,
             result,
-            ksetRestored;
+            ksetRestored,
+            langRestored;
 
         proto.lang(this._lang).key(name);
 
         // TODO: kiss
         result = proto.val.call(proto, params, klass);
+
+        // DEFAULT_LANG if not found translation
+        // instead of an empty string
+        if (result === '') {
+            langRestored = proto._lang;
+            proto.lang(DEFAULT_LANG);
+            result = proto.val.call(proto, params, klass);
+            proto.lang(langRestored);
+        }
 
         // restoring keyset's context
         // NOTE: should not save current ctx, `saveCtx = false`
